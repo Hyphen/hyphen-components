@@ -1,8 +1,9 @@
 {
-  "name": "hyphen-components",
+  "name": "@hyphen/hyphen-components",
   "version": "0.0.0-development",
   "license": "MIT",
-  "author": "Hyphen AI",
+  "author": "@hyphen",
+  "description": "A React component library to power all Hyphen UI.",
   "main": "dist/index.js",
   "module": "dist/hyphen-components.esm.js",
   "typings": "dist/index.d.ts",
