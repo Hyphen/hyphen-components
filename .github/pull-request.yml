@@ -1,0 +1,99 @@
+name: Pull Request
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - "**"
+
+# Cancel any jobs in-progress for the current branch
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  id-token: "write"
+  contents: "read"
+  packages: "read"
+  repository-projects: "read"
+env:
+  GH_PACKAGES_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  lint-js:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore node_modules
+        id: cache-node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - if: steps.cache-node_modules.outputs.cache-hit != 'true'
+        name: Install dependencies
+        run: npm install
+      - name: lint
+        run: npm run lint
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore node_modules
+        id: cache-node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - if: steps.cache-node_modules.outputs.cache-hit != 'true'
+        name: Install dependencies
+        run: npm install
+      - name: build
+        run: npm run build
+  build-storybook:
+    name: Build Storybook
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore node_modules
+        id: cache-node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - if: steps.cache-node_modules.outputs.cache-hit != 'true'
+        name: Install dependencies
+        run: npm install
+      - name: build
+        run: npm run build-storybook
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore node_modules
+        id: cache-node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - if: steps.cache-node_modules.outputs.cache-hit != 'true'
+        name: Install dependencies
+        run: npm install
+      - name: build
+        run: npm run test
