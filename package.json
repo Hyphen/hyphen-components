@@ -102,6 +102,9 @@
     "webpack-cli": "^5.1.4",
     "webpack-fix-style-only-entries": "^0.6.1"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.9.6"
+  },
   "dependencies": {
     "@hyphen/hyphen-design-tokens": "^1.2.0",
     "classnames": "^2.5.1",

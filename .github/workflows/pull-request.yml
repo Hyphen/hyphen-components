@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - "**"
+      - '**'
 
 # Cancel any jobs in-progress for the current branch
 concurrency:
@@ -13,10 +13,10 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  id-token: "write"
-  contents: "read"
-  packages: "read"
-  repository-projects: "read"
+  id-token: 'write'
+  contents: 'read'
+  packages: 'read'
+  repository-projects: 'read'
 env:
   GH_PACKAGES_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -38,7 +38,7 @@ jobs:
       - if: steps.cache-node_modules.outputs.cache-hit != 'true'
         name: Install dependencies
         run: npm install
-      - name: lint
+      - name: Lint
         run: npm run lint
   build:
     name: Build
@@ -57,7 +57,7 @@ jobs:
       - if: steps.cache-node_modules.outputs.cache-hit != 'true'
         name: Install dependencies
         run: npm install
-      - name: build
+      - name: Build
         run: npm run build
   build-storybook:
     name: Build Storybook
@@ -76,7 +76,7 @@ jobs:
       - if: steps.cache-node_modules.outputs.cache-hit != 'true'
         name: Install dependencies
         run: npm install
-      - name: build
+      - name: Build Storybook
         run: npm run build-storybook
   test:
     name: Test
@@ -95,5 +95,5 @@ jobs:
       - if: steps.cache-node_modules.outputs.cache-hit != 'true'
         name: Install dependencies
         run: npm install
-      - name: build
+      - name: Test
         run: npm run test
