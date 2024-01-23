@@ -21,7 +21,8 @@
     "start": "dts watch",
     "storybook": "storybook dev -p 6006",
     "test": "dts test --passWithNoTests",
-    "test-watch": "dts test --watch"
+    "test-watch": "dts test --watch",
+    "semantic-release": "semantic-release"
   },
   "husky": {
     "hooks": {
