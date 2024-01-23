@@ -1,0 +1,111 @@
+{
+  "name": "hyphen-components",
+  "version": "1.0.0-beta.1",
+  "license": "MIT",
+  "author": "Hyphen AI",
+  "main": "dist/index.js",
+  "module": "dist/hyphen-components.esm.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "cross-env BABEL_ENV=build IS_PUBLISHING=true \"dts build && webpack --config webpack.config.js\"",
+    "rollup": "cross-env BABEL_ENV=build IS_PUBLISHING=true \"dts build\"",
+    "build-storybook": "storybook build",
+    "storybook-docs": "storybook dev --docs",
+    "lint": "dts lint",
+    "lint-fix": "dts lint --fix",
+    "prepare": "dts build",
+    "size": "size-limit",
+    "start": "dts watch",
+    "storybook": "storybook dev -p 6006",
+    "test": "dts test --passWithNoTests",
+    "test-watch": "dts test --watch"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "dts lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "size-limit": [
+    {
+      "path": "dist/hyphen-components.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/hyphen-components.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.23.7",
+    "@size-limit/preset-small-lib": "^11.0.1",
+    "@storybook/addon-docs": "^8.0.0-alpha.8",
+    "@storybook/addon-essentials": "^8.0.0-alpha.8",
+    "@storybook/addon-info": "^6.0.0-alpha.2",
+    "@storybook/addon-links": "^8.0.0-alpha.8",
+    "@storybook/addons": "^7.6.0-beta.2",
+    "@storybook/manager-api": "^8.0.0-alpha.8",
+    "@storybook/react": "^8.0.0-alpha.8",
+    "@storybook/react-vite": "^8.0.0-alpha.8",
+    "@storybook/theming": "^8.0.0-alpha.8",
+    "@testing-library/jest-dom": "^6.2.1",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/user-event": "^14.5.2",
+    "@tsconfig/recommended": "^1.0.3",
+    "@tsconfig/vite-react": "^3.0.0",
+    "@types/react": "^18.2.47",
+    "@types/react-dom": "^18.2.18",
+    "autoprefixer": "^10.4.16",
+    "babel-loader": "^9.1.3",
+    "clean-webpack-plugin": "^4.0.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.9.0",
+    "css-minimizer-webpack-plugin": "^5.0.1",
+    "cssnano": "^6.0.3",
+    "csstype": "^3.1.3",
+    "dts-cli": "^2.0.4",
+    "husky": "^8.0.3",
+    "identity-obj-proxy": "^3.0.0",
+    "mini-css-extract-plugin": "^2.7.7",
+    "postcss-loader": "^7.3.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-scss": "^4.0.0",
+    "sass": "^1.69.7",
+    "sass-loader": "^13.3.3",
+    "size-limit": "^11.0.1",
+    "storybook": "^8.0.0-alpha.8",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3",
+    "url-loader": "^4.1.1",
+    "vite": "^5.0.11",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-fix-style-only-entries": "^0.6.1"
+  },
+  "dependencies": {
+    "@hyphen/hyphen-design-tokens": "^1.2.0",
+    "classnames": "^2.5.1",
+    "react-select": "^5.8.0"
+  }
+}

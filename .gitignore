@@ -1,0 +1,14 @@
+*.log
+.DS_Store
+node_modules
+.cache
+dist
+
+# testing
+/coverage
+
+# production
+/coverage
+/dist
+/build
+/storybook-static

@@ -1,0 +1,301 @@
+import { Meta, Canvas, ArgsTable, Story} from '@storybook/addon-docs';
+import { Box } from './Box';
+import * as Stories from './Box.stories';
+
+import {
+  FONT_SIZE_OPTIONS,
+  FONT_FAMILY_OPTIONS,
+  FONT_FAMILY_VALUES,
+  FONT_COLOR_OPTIONS,
+  BRAND_COLOR_NAMES,
+  SPACING_OPTIONS,
+} from '../../lib/tokens';
+
+<Meta of={Stories}/>
+
+# Overview
+
+A `<Box>` is a layout component to build UIs with consistent padding and spacing between elements.
+
+- Its content is arranged in a specified `direction`, with 'column' being the default
+- Renders a `<div />` element by default, but can be changed using `as`
+- Allows you to specify the spacing between child elements using `gap`
+- Many props accept `ResponsiveProp` that take an object with keys that correspond to [breakpoint tokens](?path=/story/design-tokens-design-tokens--page#breakpoints).
+
+<Canvas of={Stories.Overview}/>
+
+## Props
+
+<ArgsTable of={Box} />
+
+## Background Color
+
+Use the `background` prop to set the color of the background
+
+<Canvas of={Stories.Background}/>
+
+## Border
+
+Use the `borderColor` prop to set the color of the border and the borderWidth to set the width. `borderWidth` also accepts css shorthand values that correspond to top, right, bottom, left.
+
+<Canvas of={Stories.Border} />
+
+## Gap
+
+Use `gap` to set the spacing between children of a Box (for display grid and flex).
+
+<Canvas of={Stories.Gap} />
+
+### Controlling row and column gaps independently
+
+Use `rowGap` and `columnGap` to set the spacing between children of a Box (for display grid and flex) in the row and column directions independently. You can also use shorthand `gap` to set both at once (e.g. `gap="row col"`).
+
+<Canvas of={Stories.GapShorthand} />
+
+<Canvas of={Stories.GapRowAndColumn} />
+
+### Child Gap
+
+For block layouts, you can use `childGap` to set the spacing between children of a Box. For flex or grid layouts, use `gap` instead.
+
+<Canvas of={Stories.ChildGap}/>
+
+## Flex Properties
+
+### Flex
+
+The most common use case is to set children of a `<Box />` to `flex="auto"`.
+The item is sized according to its width and height properties, but grows to absorb any extra free space in the parent, and shrinks to its minimum size to fit the container.
+This is equivalent to setting "flex: 1 1 auto".
+
+If you need more granular flex control for properties such as `flex-grow`, `flex-shrink`, `flex-basis`, we recommend
+passing using a standard `style` object with the `flex` shorthand you need.
+
+<Canvas of={Stories.FlexAuto}/>
+
+### Flex Direction
+
+Set direction of child elements in a flex container.
+
+<Canvas of={Stories.FlexDirection}/>
+
+<Canvas of={Stories.FlexShrinkGrow}/>
+
+### Justify Content
+
+Set content alignment along the main axis
+
+<Canvas of={Stories.FlexJustify}/>
+
+### Align Items
+
+Set content alignment along the cross axis.
+
+<Canvas of={Stories.FlexAlign}/>
+
+### Align Content
+
+Set the Box's lines within where there is extra space in the cross-axis.
+This property has no effect when there is only one line of flex items.
+
+<Canvas of={Stories.FlexAlignContent}/>
+
+## Font Color
+
+Use the `color` prop to set the color of the text
+
+<Canvas of={Stories.FontColor}/>
+
+## Font Size
+
+Set the `fontSize` prop with a [font size](?path=/story/design-tokens-design-tokens--page#font-size) token to set the size of the text in the Box.
+
+<Canvas of={Stories.FontSize}/>
+
+
+### Font Family
+
+<Canvas of={Stories.FontFamily}/>
+
+## Font Weight
+
+Set the `fontWeight` prop with a [font weight](?path=/story/design-tokens-design-tokens--page#font-weight) token to set the size of the text in the Box.
+
+
+<Canvas of={Stories.FontWeight}/>
+
+
+## Text Align
+
+Set the `textAlign` prop to set the alignment of the text in the Box.
+
+<Canvas of={Stories.TextAlign}/>
+
+## Margin
+
+The `margin` prop accepts a single [spacing](?path=/story/design-tokens-design-tokens--page#spacing) value or a set of spacing values that correspond with css shorthand syntax. Margin values can be set on the horizontal or vertical axis, or the top, right, bottom and left sides of a Box.
+
+<Canvas of={Stories.Margin}/>
+
+## Padding
+
+The `padding` prop accepts a single [spacing](?path=/story/design-tokens-design-tokens--page#spacing) value or a set of spacing values that correspond with css shorthand syntax. Padding values can be set on the horizontal or vertical axis, or the top, right, bottom and left sides of a Box.
+
+<Canvas of={Stories.Padding}/>
+
+## Radius
+
+Set the `radius` prop with a [radius token](?path=/story/design-tokens-design-tokens--page#border-radius) to set the corner radius of the box.
+
+<Canvas of={Stories.Radius}/>
+
+## Shadow
+
+Set the `shadow` prop with a [shadow token](?path=/story/design-tokens-design-tokens--page#box-shadow) to set the outer shadow of the box.
+
+<Canvas of={Stories.Shadow}/>
+
+## Width
+
+Width can be set to any CSS unit value (px, rem, em, %).
+
+<Canvas of={Stories.Width}/>
+
+[Width tokens](?path=/story/design-tokens-design-tokens--page#width) may be used to set widths as well.
+
+<Canvas of={Stories.WidthTokens}/>
+
+Set the width to a common percentage of the Box's parent.
+
+<Canvas of={Stories.WidthPercentages}/>
+
+## Max Width
+
+Set the maximum width of the Box by setting `maxWidth` to a [width token](?path=/story/design-tokens-design-tokens--page#width) or any valid css unit.
+
+<Canvas of={Stories.WidthMax}/>
+
+## Min Width
+
+Set the minimum width of the Box by setting `minWidth` to a [width token](?path=/story/design-tokens-design-tokens--page#width) or any valid css unit.
+
+<Canvas of={Stories.WidthMin}/>
+
+## Height
+
+Height can be set to any CSS unit value (px, rem, em, %).
+
+<Canvas of={Stories.Height}/>
+
+[Width tokens](?path=/story/design-tokens-design-tokens--page#height) may be used to set height as well.
+
+<Canvas of={Stories.HeightTokens}/>
+
+Set the height to a common percentage of the Box's parent.
+
+<Canvas of={Stories.HeightPercentages}/>
+
+## Max Height
+
+Set the maximum width of the Box by setting `maxHeight` to a [height token](?path=/story/design-tokens-design-tokens--page#height) or any valid css unit.
+
+<Canvas of={Stories.HeightMax}/>
+
+## Min Height
+
+Set the minimum width of the Box by setting `minHeight` to a [height token](?path=/story/design-tokens-design-tokens--page#height) or any valid css unit.
+
+<Canvas of={Stories.HeightMin}/>
+
+## Overflow
+
+Set the overflow behavior of the Box with `overflow`
+
+<Canvas of={Stories.Overflow}/>
+
+## Cursor
+
+Set the cursor for value for the element in question. Use any valid [CSS cursor value](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor#values).
+
+<Canvas of={Stories.Cursor}/>
+
+## Position
+
+Set the CSS position for the element in question. Use any valid [CSS position value](https://developer.mozilla.org/en-US/docs/Web/CSS/position#values) or a
+responsive object prop with said values. Example with `fixed` position not included. Scroll the container to see these in action.
+
+<Canvas of={Stories.Position}/>
+
+## Hover States
+
+You can control the styles for the box on hover using the `hover` prop and passing token values for the relevant property.
+Hover on the elements below to see these in action.
+
+Currently our library supports hover states for:
+
+- `background`
+- `borderColor`
+- `borderWidth`
+- `color`
+- `fontSize`
+- `shadow`
+
+<Canvas of={Stories.Hover}/>
+
+## Focus States
+
+You can control the styles for the box on hover using the `focus` prop and passing token values for the relevant property.
+Focus on the elements below to the these in action.
+
+Currently our library supports hover states for:
+
+- `background`
+- `borderColor`
+- `borderWidth`
+- `color`
+- `shadow`
+
+<Canvas of={Stories.Focus}/>
+
+## Responsive Props
+
+Any props that accept a `ResponsiveProp` will take an object with the following shape:
+
+```
+{
+  base?: prop, // breakpoint starting at 0 pixels, not scoped by media query.
+  tablet?: prop, // 608px and higher.
+  desktop?: prop, // 992px and higher.
+  hd?: prop, // 1280px and higher.
+}
+```
+
+These props will create classes that are scoped to the specific breakpoint they are assigned to. Not all breakpoints
+are required in this shape, you can pick and choose which breakpoints require different layout attributes based on a
+mobile first approach.
+
+Props that are responsive-enabled follow a mobile-first approach, which means that styles are applied first to smaller viewports (i.e. mobile devices).
+As the viewport size increases, new styles may be applied (styles are overridden for larger viewports).
+Responsive enabled props take a keyed object that specifies at which [breakpoints](?path=/story/design-tokens-design-tokens--page#breakpoints) to apply certain properties.
+
+```
+<Box
+  width={{
+    base: '100px' // box width is 100px
+    tablet: '200px' // box width is 200px when viewport width is greater than size-breakpoint-tablet
+    desktop: '300px' // box width is 600px when viewport width is greater than size-breakpoint-desktop
+    hd: '600px' // box width is 600px when viewport width is greater than size-breakpoint-hd
+  }}
+>
+```
+
+Try resizing the browser to see the responsive properties in action.
+
+<Canvas of={Stories.Responsive}/>
+
+#### Omitting Keys
+
+When passing an object, omitting a key is the same as not applying any styles.
+For example the following has padding at the `desktop` breakpoint and wider.
+
+<Canvas of={Stories.Omit}/>

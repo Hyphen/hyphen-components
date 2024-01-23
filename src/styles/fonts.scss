@@ -1,0 +1,39 @@
+@font-face {
+  font-family: avenir;
+  src:
+    url('../fonts/AvenirRegular.otf') format('opentype'),
+    url('../fonts/AvenirRegular.woff') format('woff'),
+    url('../fonts/AvenirRegular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: avenir;
+  src:
+    url('../fonts/AvenirLight.otf') format('opentype'),
+    url('../fonts/AvenirLight.woff') format('woff'),
+    url('../fonts/AvenirLight.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: avenir;
+  src:
+    url('../fonts/AvenirBold.otf') format('opentype'),
+    url('../fonts/AvenirBold.woff') format('woff'),
+    url('../fonts/AvenirBold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: avenir;
+  src:
+    url('../fonts/AvenirBold.otf') format('opentype'),
+    url('../fonts/AvenirBold.woff') format('woff'),
+    url('../fonts/AvenirBold.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
