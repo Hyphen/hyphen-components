@@ -15,6 +15,7 @@
     "build": "cross-env-shell BABEL_ENV=build IS_PUBLISHING=true \"dts build && webpack --config webpack.config.js\"",
     "rollup": "cross-env-shell BABEL_ENV=build IS_PUBLISHING=true \"dts build\"",
     "build-storybook": "storybook build",
+    "build-storybook-docs": "storybook build --docs",
     "storybook-docs": "storybook dev --docs",
     "lint": "dts lint",
     "lint-fix": "dts lint --fix",
