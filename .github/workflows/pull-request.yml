@@ -58,7 +58,7 @@ jobs:
         name: Install dependencies
         run: npm install
       - name: Build
-        run: npm run rollup
+        run: npm run build
   build-storybook:
     name: Build Storybook
     runs-on: ubuntu-latest
