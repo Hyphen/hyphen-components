@@ -1,9 +1,4 @@
-import {
-  FontColor,
-  FontSize,
-  IconName,
-  ResponsiveProp,
-} from '../../types';
+import { FontColor, FontSize, IconName, ResponsiveProp } from '../../types';
 import React, { FC, forwardRef } from 'react';
 
 import { Box } from '../Box/Box';
@@ -32,9 +27,7 @@ export interface IconProps {
 }
 
 export const Icon: FC<IconProps> = forwardRef<SVGSVGElement, IconProps>(
-  ({
-    className = undefined, name, color, size, ...restProps
-  }, ref) => {
+  ({ className = undefined, name, color, size, ...restProps }, ref) => {
     const IconComponent = icons[name];
 
     if (!IconComponent) console.error(`Icon '${name}' not found`); // eslint-disable-line no-console
@@ -42,7 +35,7 @@ export const Icon: FC<IconProps> = forwardRef<SVGSVGElement, IconProps>(
     const iconClasses = classNames(
       className,
       generateResponsiveClasses('font-color', color),
-      generateResponsiveClasses('font-size', size),
+      generateResponsiveClasses('font-size', size)
     );
 
     return IconComponent ? (
@@ -64,5 +57,5 @@ export const Icon: FC<IconProps> = forwardRef<SVGSVGElement, IconProps>(
         ???
       </Box>
     );
-  },
+  }
 );

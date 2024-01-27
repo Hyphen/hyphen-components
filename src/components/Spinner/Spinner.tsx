@@ -19,8 +19,16 @@ export interface SpinnerProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
-export const Spinner: FC<SpinnerProps> = ({ variant = 'dark', className, size = 'md' }) => {
-  const classes = classNames(className, styles.spinner, `font-color-${variant}`);
+export const Spinner: FC<SpinnerProps> = ({
+  variant = 'dark',
+  className,
+  size = 'md',
+}) => {
+  const classes = classNames(
+    className,
+    styles.spinner,
+    `font-color-${variant}`
+  );
 
   const sizeInPixels = () => {
     let pixels;

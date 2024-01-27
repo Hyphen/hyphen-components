@@ -11,9 +11,7 @@ const meta: Meta<typeof Icon> = {
 
 export default meta;
 
-export const Default = () => (
-  <Icon name="star" />
-);
+export const Default = () => <Icon name="star" />;
 
 export const Sizes = () => (
   <>
@@ -42,7 +40,7 @@ export const Colors = () => (
 );
 
 export const UnknownIcon = () => (
-  <Icon name={"does-not-exist" as any} className="font-size-2xl" />
+  <Icon name={'does-not-exist' as any} className="font-size-2xl" />
 );
 
 export const AvailableIcons = () => (
@@ -54,7 +52,7 @@ export const AvailableIcons = () => (
       gap: '1rem',
     }}
   >
-    {ICON_NAMES.map(name => (
+    {ICON_NAMES.map((name) => (
       <Box
         key={name}
         fontSize="lg"

@@ -153,17 +153,17 @@ export const Button = forwardRef<
       variant = 'primary-neutral',
       ...restProps
     },
-    ref,
+    ref
   ) => {
     const disabled = isLoading || isDisabled;
 
     const responsiveClasses = generateResponsiveClasses('size', size).map(
-      c => styles[c],
+      (c) => styles[c]
     );
 
     const buttonClasses = classNames(
-      'palmetto-components__variables__button',
-      'palmetto-components__variables__form-control',
+      'hyphen-components__variables__button',
+      'hyphen-components__variables__form-control',
       styles.button,
       className,
       responsiveClasses,
@@ -171,19 +171,19 @@ export const Button = forwardRef<
         [styles.loading]: isLoading,
         [styles[variant]]: variant,
         [styles['full-width']]: fullWidth,
-      },
+      }
     );
 
     const handleClick = handleReactRouterClick;
 
     const handleFocus = (
-      event: FocusEvent<HTMLButtonElement | HTMLAnchorElement>,
+      event: FocusEvent<HTMLButtonElement | HTMLAnchorElement>
     ) => {
       if (onFocus) onFocus(event);
     };
 
     const handleBlur = (
-      event: FocusEvent<HTMLButtonElement | HTMLAnchorElement>,
+      event: FocusEvent<HTMLButtonElement | HTMLAnchorElement>
     ) => {
       if (onBlur) onBlur(event);
     };
@@ -196,7 +196,12 @@ export const Button = forwardRef<
 
     const buttonContent =
       iconPrefix || iconSuffix ? (
-        <Box display="inline-flex" direction="row" alignItems="center" childGap={size === 'xs' ? '2xs' : 'xs'}>
+        <Box
+          display="inline-flex"
+          direction="row"
+          alignItems="center"
+          childGap={size === 'xs' ? '2xs' : 'xs'}
+        >
           {isLoading && (
             <Spinner
               variant={getSpinnerVariant()}
@@ -204,9 +209,7 @@ export const Button = forwardRef<
             />
           )}
           {iconPrefix && (
-            <Box
-              display="block"
-            >
+            <Box display="block">
               <Icon
                 className={styles.label}
                 name={iconPrefix}
@@ -219,9 +222,7 @@ export const Button = forwardRef<
           )}
           {children && <span className={styles.label}>{children}</span>}
           {iconSuffix && (
-            <Box
-              display="block"
-            >
+            <Box display="block">
               <Icon
                 className={styles.label}
                 name={iconSuffix}
@@ -269,7 +270,7 @@ export const Button = forwardRef<
         tabIndex,
         ...restProps,
       },
-      buttonContent,
+      buttonContent
     );
-  },
+  }
 );

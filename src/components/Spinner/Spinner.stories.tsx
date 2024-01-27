@@ -11,13 +11,11 @@ const meta: Meta<typeof Spinner> = {
 
 export default meta;
 
-export const Default = () => (
-  <Spinner />
-);
+export const Default = () => <Spinner />;
 
 export const Variants = () => (
   <Box display="block" childGap="md">
-    {BRAND_COLOR_NAMES.map(color => (
+    {BRAND_COLOR_NAMES.map((color) => (
       <Box direction="row" childGap="sm">
         <Spinner variant={color} />
         <div>{color}</div>
