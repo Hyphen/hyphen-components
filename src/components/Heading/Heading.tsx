@@ -1,6 +1,9 @@
 import { FC, ReactNode, createElement } from 'react';
 import { FontColor, FontSize, ResponsiveProp } from '../../types';
-import { HEADING_DEFAULT_SIZE_MAP, HEADING_LEVELS_TYPE } from './Heading.constants';
+import {
+  HEADING_DEFAULT_SIZE_MAP,
+  HEADING_LEVELS_TYPE,
+} from './Heading.constants';
 
 import classNames from 'classnames';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
@@ -57,7 +60,7 @@ export const Heading: FC<HeadingProps> = ({
     generateResponsiveClasses('font-size', headingSize),
     {
       [`font-color-${variant}`]: variant,
-    },
+    }
   );
 
   return createElement(element, { className: classes, ...restProps }, children);

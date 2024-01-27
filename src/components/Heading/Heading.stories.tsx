@@ -12,7 +12,9 @@ const meta: Meta<typeof Heading> = {
 
 export default meta;
 
-export const Basic = () => <Heading as="h1">New Developer Operations Platform</Heading>;
+export const Basic = () => (
+  <Heading as="h1">New Developer Operations Platform</Heading>
+);
 
 export const AllLevels = () => (
   <>
@@ -27,7 +29,7 @@ export const AllLevels = () => (
 
 export const Sizes = () => (
   <>
-    {[...FONT_SIZE_OPTIONS].reverse().map(fontSize => (
+    {[...FONT_SIZE_OPTIONS].reverse().map((fontSize) => (
       <Heading as="h3" size={fontSize} key={uuid()}>
         {`Size ${fontSize}`}
       </Heading>
@@ -48,7 +50,7 @@ export const ResponsiveSizes = () => (
 
 export const Colors = () => (
   <>
-    {FONT_COLOR_OPTIONS.map(variant => (
+    {FONT_COLOR_OPTIONS.map((variant) => (
       <Heading as="h3" variant={variant} key={uuid()}>
         {variant}
       </Heading>

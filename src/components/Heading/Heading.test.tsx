@@ -8,29 +8,23 @@ import { Heading } from './Heading';
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 
-const headingComponentLevels = (
-  HEADING_LEVELS.map(level => (
-    <Heading as={level} key={uuid()}>
-      {level}
-    </Heading>
-  ))
-);
+const headingComponentLevels = HEADING_LEVELS.map((level) => (
+  <Heading as={level} key={uuid()}>
+    {level}
+  </Heading>
+));
 
-const headingComponentSizes = (
-  FONT_SIZE_OPTIONS.map(fontSize => (
-    <Heading size={fontSize} key={uuid()}>
-      {fontSize}
-    </Heading>
-  ))
-);
+const headingComponentSizes = FONT_SIZE_OPTIONS.map((fontSize) => (
+  <Heading size={fontSize} key={uuid()}>
+    {fontSize}
+  </Heading>
+));
 
-const headingComponentColors = (
-  FONT_COLOR_OPTIONS.map(variant => (
-    <Heading variant={variant} key={uuid()}>
-      {variant}
-    </Heading>
-  ))
-);
+const headingComponentColors = FONT_COLOR_OPTIONS.map((variant) => (
+  <Heading variant={variant} key={uuid()}>
+    {variant}
+  </Heading>
+));
 
 describe('Heading', () => {
   test('it adds className', () => {
@@ -42,7 +36,9 @@ describe('Heading', () => {
     headingComponentLevels.forEach((headingComponent, index) => {
       test(`it renders the specified html heading ${HEADING_LEVELS[index]}`, () => {
         render(headingComponent);
-        expect(document.getElementsByTagName(HEADING_LEVELS[index])[0]).toBeInTheDocument();
+        expect(
+          document.getElementsByTagName(HEADING_LEVELS[index])[0]
+        ).toBeInTheDocument();
       });
     });
   });
@@ -51,8 +47,9 @@ describe('Heading', () => {
     headingComponentSizes.forEach((headingComponent, index) => {
       test(`it renders the specified size ${FONT_SIZE_OPTIONS[index]}`, () => {
         render(headingComponent);
-        expect(screen.getByText(FONT_SIZE_OPTIONS[index]).classList)
-          .toContain(`font-size-${FONT_SIZE_OPTIONS[index]}`);
+        expect(screen.getByText(FONT_SIZE_OPTIONS[index]).classList).toContain(
+          `font-size-${FONT_SIZE_OPTIONS[index]}`
+        );
       });
     });
   });
@@ -61,8 +58,9 @@ describe('Heading', () => {
     headingComponentColors.forEach((headingComponent, index) => {
       test(`it renders the specified variant ${FONT_COLOR_OPTIONS[index]}`, () => {
         render(headingComponent);
-        expect(screen.getByText(FONT_COLOR_OPTIONS[index]).classList)
-          .toContain(`font-color-${FONT_COLOR_OPTIONS[index]}`);
+        expect(screen.getByText(FONT_COLOR_OPTIONS[index]).classList).toContain(
+          `font-color-${FONT_COLOR_OPTIONS[index]}`
+        );
       });
     });
   });
