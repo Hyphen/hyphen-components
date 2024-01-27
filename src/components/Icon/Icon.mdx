@@ -1,0 +1,46 @@
+import { Icon } from './Icon';
+import { action } from '@storybook/addon-actions';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
+import {
+  FONT_SIZE_OPTIONS,
+  FONT_COLOR_OPTIONS,
+  ICON_NAMES,
+} from '../../lib/tokens';
+
+import * as Stories from './Icon.stories';
+
+<Meta of={Stories}/>
+
+# Icon
+
+Icons are used to visually communicate product functionality and actions.
+Use an icon only when it provides additional clarity or is necessary to draw attention to an element.
+
+<Canvas isExpanded of={Stories.Default}/>
+
+## Props
+
+<ArgsTable of={Icon} />
+
+## Size
+
+The size of the icon can be set on the Icon itself, or inherited from its parent's `fontSize`.
+This allows for easy placement inside of other components.
+
+<Canvas of={Stories.Sizes}/>
+
+## Color
+
+Similar to sizing, the color of the icon can be set on the Icon itself, or inherited from its parent.
+
+<Canvas of={Stories.Colors}/>
+
+## Unknown Icon
+
+If a given icon name is not found in the dictionary, a red box with question marks will be displayed, as well as log an error to the console.
+
+<Canvas of={Stories.UnknownIcon}/>
+
+## Available Icons
+
+<Canvas of={Stories.AvailableIcons}/>

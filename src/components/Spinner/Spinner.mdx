@@ -1,0 +1,30 @@
+import { Spinner } from './Spinner';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { BRAND_COLOR_NAMES } from '../../lib/tokens';
+import * as Stories from './Spinner.stories';
+
+<Meta of={Stories}/>
+
+# Spinner
+
+Spinners are used to communicate a loading state to the user.
+They may be used in buttons, forms, containers, pages,
+and anywhere else a loading state is necessary.
+
+<Canvas isExpanded of={Stories.Default}/>
+
+## Props
+
+<ArgsTable of={Spinner} />
+
+## Variants
+
+Set the color variations of the spinner
+
+<Canvas of={Stories.Variants}/>
+
+## Sizes
+
+Use the `size` prop on your Spinner based on what's a best fit for your layout
+
+<Canvas of={Stories.Sizes}/>
