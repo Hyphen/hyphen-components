@@ -5,13 +5,15 @@
   //   "allowImportingTsExtensions": false,
   //   "allowSyntheticDefaultImports": true,
   // },
-
   "compilerOptions": {
     "allowImportingTsExtensions": false,
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".", // This must be specified if "paths" is.
     "module": "esnext",
-    "lib": ["dom", "esnext"],
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     "importHelpers": true,
     // output .d.ts declaration files for consumers
     "declaration": true,
@@ -48,6 +50,13 @@
     // of how modern JavaScript iterates through new concepts in older JavaScript runtimes.
     "downlevelIteration": true,
     "target": "es5",
+    "types": [
+      "@testing-library/jest-dom"
+    ],
   },
-  "include": ["src", "types", "index.d.ts"]
+  "include": [
+    "src",
+    "types",
+    "index.d.ts"
+  ],
 }

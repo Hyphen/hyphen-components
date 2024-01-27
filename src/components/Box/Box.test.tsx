@@ -1,17 +1,17 @@
+import {
+  BORDER_SIZE_OPTIONS,
+  BOX_SHADOW_OPTIONS,
+  BRAND_COLOR_OPTIONS,
+  FONT_COLOR_OPTIONS,
+  FONT_SIZE_OPTIONS,
+  SPACING_OPTIONS,
+} from '../../lib/tokens';
+import { CssDisplayValue, CssOverflowValue } from 'src/types';
+
+import { Box } from './Box';
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { render } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import {
-  FONT_COLOR_OPTIONS,
-  FONT_SIZE_OPTIONS,
-  BRAND_COLOR_OPTIONS,
-  SPACING_OPTIONS,
-  BORDER_SIZE_OPTIONS,
-  BOX_SHADOW_OPTIONS,
-} from '../../lib/tokens';
-import { Box } from './Box';
-import { CssDisplayValue, CssOverflowValue } from 'src/types';
 
 describe('Box', () => {
   test('aria-label is applied if set', () => {

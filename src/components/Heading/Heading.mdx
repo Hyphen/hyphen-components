@@ -1,0 +1,72 @@
+import { Heading } from './Heading';
+
+import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
+
+import * as Stories from './Heading.stories';
+
+<Meta of={Stories} />
+
+# Heading
+
+Use `Headings` as labels for pages or sections of a page that make up an interface. `Headings` can label an entire page, or sections of related content.
+The `Heading` component allows you to specify an appropriate semantic element (h1-h6) and independently set its size so that it is appropriate for the surrounding content.
+If no size is specified, a default size will be applied.
+
+<Canvas of={Stories.Basic}/>
+
+## Props
+
+<ArgsTable of={Heading} />
+
+## All Levels
+
+Each Heading level has a default size.
+
+<Canvas of={Stories.AllLevels}/>
+
+## Sizes
+
+The default size of the Heading can overridden as xs-5xl so that it's appropriate for its surrounding context.
+
+<Canvas of={Stories.Sizes}/>
+
+The `size` prop accepts an object where the properties correspond to [breakpoint tokens](?path=/story/design-tokens-design-tokens--page#breakpoints).
+
+<Canvas of={Stories.ResponsiveSizes}/>
+
+## Colors
+
+The variant of the heading is inherited from its parent, but can be set to brand variant as well.
+
+<Canvas of={Stories.Colors}/>
+
+## Component Design Tokens
+
+<table>
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>default value</th>
+    </tr>
+  </thead>
+  <tbody>
+    {(() => {
+      const tokens = {
+      '--heading-font-family': '--asset-fonts-brand',
+      '--heading-font-weight': '--size-font-weight-black',
+      '--heading-line-height': '--size-line-height-heading',
+      };
+      return Object.entries(tokens).map(([name, entry], i) => (
+        <tr key={i}>
+          <td>
+            <code>{name}</code>
+          </td>
+          <td>
+            <code>{entry}</code>
+          </td>
+        </tr>
+      ));
+    })()}
+
+  </tbody>
+</table>
