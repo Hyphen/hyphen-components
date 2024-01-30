@@ -1,11 +1,10 @@
-import { useState } from 'react';
-
-import type { Meta } from '@storybook/react';
-import { Heading } from '../Heading/Heading';
-import { Button } from '../Button/Button';
 import { Alert } from './Alert';
 import { AlertVariant } from './Alert.types';
+import { Button } from '../Button/Button';
+import { Heading } from '../Heading/Heading';
+import type { Meta } from '@storybook/react';
 import React from 'react';
+import { useState } from 'react';
 
 const meta: Meta<typeof Alert> = {
   title: 'Components/Alert',
@@ -145,7 +144,7 @@ export const CustomTheme = () => (
         '--color-brand-info-50': '#CFC5E9',
         '--color-brand-info-500': '#603FB5',
         '--alert-border-width': '0',
-      }}
+      } as any}
     >
       <Alert
         message="Here we've overwritten base token values so that the alert inherits new values."
@@ -162,7 +161,7 @@ export const CustomTheme = () => (
         '--alert-info-icon-color': '#603FB5',
         '--alert-border-width': 'var(--size-border-xs)',
         '--alert-info-border-color': 'var(--alert-info-icon-color)',
-      }}
+      } as any}
     >
       <Alert
         message="Here we've overwritten ONLY the values for the 'info' alert variant so other components will be unaffected"
