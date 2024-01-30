@@ -23,79 +23,68 @@ export const Overview = () => (
     hasIcon
   />
 );
-export const Variants = () => (
-  <>
-    {(() => {
-      const variants: AlertVariant[] = [
-        'default',
-        'info',
-        'success',
-        'warning',
-        'danger',
-      ];
-      const message = (variant: AlertVariant) => `
+export const Variants = () =>
+  (() => {
+    const variants: AlertVariant[] = [
+      'default',
+      'info',
+      'success',
+      'warning',
+      'danger',
+    ];
+    const message = (variant: AlertVariant) => `
         This is a ${variant} alert. It also has longer text to see what these alerts
         can look like when broken into multiple lines. This one will definitely
         break into multiple lines in most standard screen resolutions.
       `;
-      return (
-        <>
-          {variants.map((variant: AlertVariant) => (
-            <Alert
-              message={message(variant)}
-              key={variant}
-              title={variant.charAt(0).toUpperCase() + variant.slice(1)}
-              variant={variant}
-              hasIcon
-              className="m-bottom-md"
-            />
-          ))}
-        </>
-      );
-    })()}
-  </>
-);
+    return (
+      <>
+        {variants.map((variant: AlertVariant) => (
+          <Alert
+            message={message(variant)}
+            key={variant}
+            title={variant.charAt(0).toUpperCase() + variant.slice(1)}
+            variant={variant}
+            hasIcon
+            className="m-bottom-md"
+          />
+        ))}
+      </>
+    );
+  })();
 
-export const CustomJSX = () => (
-  <>
-    {(() => {
-      const myMessage = (
-        <>
-          <Heading as="h3" size="xl">
-            Oops!
-          </Heading>
-          <p>Looks like something went wrong.</p>
+export const CustomJSX = () =>
+  (() => {
+    const myMessage = (
+      <>
+        <Heading as="h3" size="xl">
+          Oops!
+        </Heading>
+        <p>Looks like something went wrong.</p>
 
-          <Button size="sm" className="m-top-sm">
-            Click this button to fix it!
-          </Button>
-        </>
-      );
-      return <Alert message={myMessage} variant="danger" />;
-    })()}
-  </>
-);
+        <Button size="sm" className="m-top-sm">
+          Click this button to fix it!
+        </Button>
+      </>
+    );
+    return <Alert message={myMessage} variant="danger" />;
+  })();
 
-export const RenderProp = () => (
-  <>
-    {(() => {
-      const renderMyMessage = () => (
-        <>
-          <Heading as="h3" size="xl">
-            Oops!
-          </Heading>
-          <p>
-            Looks like something went wrong. But I'm using a render function.
-          </p>
-          <Button size="sm" className="m-top-sm">
-            Click this button to fix it!
-          </Button>
-        </>
-      );
-      return <Alert render={renderMyMessage} variant="danger" />;
-    })()}
-  </>
-);
+export const RenderProp = () =>
+  (() => {
+    const renderMyMessage = () => (
+      <>
+        <Heading as="h3" size="xl">
+          Oops!
+        </Heading>
+        <p>Looks like something went wrong. But I'm using a render function.</p>
+        <Button size="sm" className="m-top-sm">
+          Click this button to fix it!
+        </Button>
+      </>
+    );
+    return <Alert render={renderMyMessage} variant="danger" />;
+  })();
 
 export const Closable = () => {
   const [isAlertTwoShowing, setAlertTwoShowing] = useState(true);
