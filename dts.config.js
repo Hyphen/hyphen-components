@@ -13,6 +13,11 @@ module.exports = {
             preset: 'default',
           }),
         ],
+        use: [
+          ['sass', {
+            includePaths: [path.resolve('node_modules')]
+          }]
+        ],
         inject: false,
         extract: path.resolve('dist/css/index.css'),
       })
