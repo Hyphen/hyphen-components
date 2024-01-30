@@ -1,0 +1,115 @@
+import { Meta, Canvas, ArgsTable, Story} from '@storybook/addon-docs';
+import { Alert } from './Alert';
+import * as Stories from './Alert.stories';
+
+import {
+  FONT_SIZE_OPTIONS,
+  FONT_FAMILY_OPTIONS,
+  FONT_FAMILY_VALUES,
+  FONT_COLOR_OPTIONS,
+  BRAND_COLOR_NAMES,
+  SPACING_OPTIONS,
+} from '../../lib/tokens';
+
+<Meta of={Stories}/>
+
+# Overview
+
+Use alerts to display feedback for users about specific actions, or states of an application.
+
+<Canvas of={Stories.Overview}/>
+
+## Props
+
+<ArgsTable of={Alert} />
+
+## Variants
+
+Alerts come in different variants based on the kind of feedback being delivered to the user. Additionally, a combination of icon, title, and message can be used depending on your content needs.
+
+<Canvas of={Stories.Variants}/>
+
+
+## With Custom JSX in the message
+
+The alert can display any custom JSX that is passed into the `message` prop, not just a string variant.
+
+<Canvas of={Stories.CustomJSX} />
+
+If you prefer to pass a render function to the alert rather than a static `ReactNode`, you can pass a function
+that returns a `ReactNode` to the `render` prop.
+
+IMPORTANT: The `render` prop, will supersede the `message` prop, if both are present.
+
+<Canvas of={Stories.RenderProp} />
+
+
+## Closable
+
+The alert can be made closable by passing the `isClosable` prop. Note that this only controls the presence of
+the close icon, but closing actually happens programmatically with a callback passed to the `onClose` prop.
+If you need custom close text, pass it in the `closeText` prop.
+
+<Canvas of={Stories.Closable} />
+
+## Compact
+
+Renders a version of the banner with less padding.
+
+<Canvas of={Stories.Compact} />
+
+## Custom Theme
+
+The Alert component can be themed by base tokens, or component specific tokens.
+
+<Canvas of={Stories.CustomTheme} />
+
+## Component Design Tokens
+
+<table>
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>default value</th>
+    </tr>
+  </thead>
+  <tbody>
+    {(() => {
+      const tokens = {
+        '--alert-default-background-color': '--color-brand-grey-100',
+        '--alert-default-font-color': '--color-brand-grey-600',
+        '--alert-default-icon-color': '--color-brand-grey-600',
+        '--alert-default-border-color': '--color-brand-grey-200',
+        '--alert-info-background-color': '--color-brand-info-50',
+        '--alert-info-font-color': '--color-brand-grey-600',
+        '--alert-info-icon-color': '--color-brand-info-500',
+        '--alert-info-border-color': '--color-brand-info-200',
+        '--alert-success-background-color': '--color-brand-success-50',
+        '--alert-success-font-color': '--color-brand-grey-600',
+        '--alert-success-icon-color': '--color-brand-success-500',
+        '--alert-success-border-color': '--color-brand-success-200',
+        '--alert-warning-background-color': '--color-brand-warning-50',
+        '--alert-warning-font-color': '--color-brand-grey-600',
+        '--alert-warning-icon-color': '--color-brand-warning-500',
+        '--alert-warning-border-color': '--color-brand-warning-200',
+        '--alert-danger-background-color': '--color-brand-danger-50',
+        '--alert-danger-font-color': '--color-brand-grey-600',
+        '--alert-danger-icon-color': '--color-brand-danger-500',
+        '--alert-danger-border-color': '--color-brand-danger-200',
+        '--alert-border-width': '--size-border-xs',
+        '--alert-border-color': 'transparent',
+        '--alert-box-shadow': '--size-box-shadow-0',
+      };
+      return Object.entries(tokens).map(([name, entry], i) => (
+        <tr key={i}>
+          <td>
+            <code>{name}</code>
+          </td>
+          <td>
+            <code>{entry}</code>
+          </td>
+        </tr>
+      ));
+    })()}
+  </tbody>
+</table>
