@@ -327,7 +327,7 @@ describe('Box', () => {
           </Box>
         );
         expect(queryAllByText('Test Box')[i].classList).toContain(
-          `hover\:background-color-${brandColorOption}`
+          `hover:background-color-${brandColorOption}`
         );
       });
     });
@@ -340,7 +340,7 @@ describe('Box', () => {
           </Box>
         );
         expect(queryAllByText('Test Box')[i].classList).toContain(
-          `hover\:border-color-${brandColorOption}`
+          `hover:border-color-${brandColorOption}`
         );
       });
     });
@@ -353,7 +353,7 @@ describe('Box', () => {
           </Box>
         );
         expect(queryAllByText('Test Box')[i].classList).toContain(
-          `hover\:border-width-${borderSizeOption}`
+          `hover:border-width-${borderSizeOption}`
         );
       });
     });
@@ -366,7 +366,7 @@ describe('Box', () => {
           </Box>
         );
         expect(queryAllByText('Test Box')[i].classList).toContain(
-          `hover\:font-size-${fontSizeOption}`
+          `hover:font-size-${fontSizeOption}`
         );
       });
     });
@@ -379,7 +379,7 @@ describe('Box', () => {
           </Box>
         );
         expect(queryAllByText('Test Box')[i].classList).toContain(
-          `hover\:font-color-${fontColorOption}`
+          `hover:font-color-${fontColorOption}`
         );
       });
     });
@@ -392,7 +392,7 @@ describe('Box', () => {
           </Box>
         );
         expect(queryAllByText('Test Box')[i].classList).toContain(
-          `hover\:shadow-${boxShadowOption}`
+          `hover:shadow-${boxShadowOption}`
         );
       });
     });
@@ -407,7 +407,7 @@ describe('Box', () => {
           </Box>
         );
         expect(queryAllByText('Test Box')[i].classList).toContain(
-          `focus\:background-color-${brandColorOption}`
+          `focus:background-color-${brandColorOption}`
         );
       });
     });
@@ -420,7 +420,7 @@ describe('Box', () => {
           </Box>
         );
         expect(queryAllByText('Test Box')[i].classList).toContain(
-          `focus\:border-color-${brandColorOption}`
+          `focus:border-color-${brandColorOption}`
         );
       });
     });
@@ -433,7 +433,7 @@ describe('Box', () => {
           </Box>
         );
         expect(queryAllByText('Test Box')[i].classList).toContain(
-          `focus\:border-width-${borderSizeOption}`
+          `focus:border-width-${borderSizeOption}`
         );
       });
     });
@@ -446,7 +446,7 @@ describe('Box', () => {
           </Box>
         );
         expect(queryAllByText('Test Box')[i].classList).toContain(
-          `focus\:font-color-${fontColorOption}`
+          `focus:font-color-${fontColorOption}`
         );
       });
     });
@@ -459,7 +459,7 @@ describe('Box', () => {
           </Box>
         );
         expect(queryAllByText('Test Box')[i].classList).toContain(
-          `focus\:shadow-${boxShadowOption}`
+          `focus:shadow-${boxShadowOption}`
         );
       });
     });

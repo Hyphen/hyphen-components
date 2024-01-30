@@ -6,7 +6,6 @@ import { Button } from '../Button/Button';
 import { Alert } from './Alert';
 import { AlertVariant } from './Alert.types';
 import React from 'react';
-import { FONT_FAMILY_VALUES, FONT_SIZE_OPTIONS } from '../../lib/tokens';
 
 const meta: Meta<typeof Alert> = {
   title: 'Components/Alert',
