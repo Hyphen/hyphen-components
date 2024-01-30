@@ -140,11 +140,13 @@ export const Compact = () => (
 export const CustomTheme = () => (
   <>
     <div
-      style={{
-        '--color-brand-info-50': '#CFC5E9',
-        '--color-brand-info-500': '#603FB5',
-        '--alert-border-width': '0',
-      } as any}
+      style={
+        {
+          '--color-brand-info-50': '#CFC5E9',
+          '--color-brand-info-500': '#603FB5',
+          '--alert-border-width': '0',
+        } as any
+      }
     >
       <Alert
         message="Here we've overwritten base token values so that the alert inherits new values."
@@ -155,13 +157,15 @@ export const CustomTheme = () => (
       />
     </div>
     <div
-      style={{
-        '--alert-info-font-color': '#603FB5',
-        '--alert-info-background-color': 'white',
-        '--alert-info-icon-color': '#603FB5',
-        '--alert-border-width': 'var(--size-border-xs)',
-        '--alert-info-border-color': 'var(--alert-info-icon-color)',
-      } as any}
+      style={
+        {
+          '--alert-info-font-color': '#603FB5',
+          '--alert-info-background-color': 'white',
+          '--alert-info-icon-color': '#603FB5',
+          '--alert-border-width': 'var(--size-border-xs)',
+          '--alert-info-border-color': 'var(--alert-info-icon-color)',
+        } as any
+      }
     >
       <Alert
         message="Here we've overwritten ONLY the values for the 'info' alert variant so other components will be unaffected"
