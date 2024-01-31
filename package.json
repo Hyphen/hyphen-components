@@ -65,7 +65,6 @@
     "@storybook/addon-info": "^6.0.0-alpha.2",
     "@storybook/addon-links": "^8.0.0-alpha.8",
     "@storybook/addons": "^7.6.0-beta.2",
-    "@types/cleave.js": "^1.4.3",
     "@storybook/manager-api": "^8.0.0-alpha.8",
     "@storybook/react": "^8.0.0-alpha.8",
     "@storybook/react-vite": "^8.0.0-alpha.8",
@@ -113,7 +112,6 @@
   },
   "dependencies": {
     "@hyphen/hyphen-design-tokens": "^1.2.0",
-    "cleave.js": "^1.6.0",
     "classnames": "^2.5.1",
     "react-select": "^5.8.0"
   }
