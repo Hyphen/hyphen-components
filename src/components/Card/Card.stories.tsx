@@ -21,7 +21,10 @@ export const Overview = () => (
         </Box>
       </Card.Header>
       <Box overflow="hidden" height="130px">
-        <img src="https://images.unsplash.com/photo-1555412654-72a95a495858?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80" />
+        <img
+          src="https://images.unsplash.com/photo-1555412654-72a95a495858?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
+          alt=""
+        />
       </Box>
       <Card.Section title="profile">
         <Box direction="row" gap="lg">
@@ -204,7 +207,7 @@ export const ExampleSignUpForm = () => (
           <Box alignItems="center" fontSize="sm" color="grey">
             <p>
               Already have an account?{' '}
-              <a href="#" className="font-color-primary">
+              <a href="/#" className="font-color-primary">
                 Log in
               </a>
               .
@@ -216,7 +219,7 @@ export const ExampleSignUpForm = () => (
   </Box>
 );
 
-export const ExampleCardWithTable = () => () => {
+export const ExampleCardWithTable = () => {
   const columnConfig = [
     { heading: 'ID', dataKey: 'id' },
     { heading: 'Color', dataKey: 'color' },
