@@ -1,5 +1,4 @@
 require('@testing-library/jest-dom');
-require('@testing-library/jest-dom/extend-expect');
 
 beforeEach(() => {
   jest.spyOn(console, 'error').mockImplementation();
