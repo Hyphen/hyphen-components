@@ -1,0 +1,27 @@
+{
+  "env": {
+    "test": {
+      "presets": [
+        ["@babel/preset-env", { "modules": "cjs" }],
+        "@babel/preset-react",
+        "@babel/preset-typescript"
+      ],
+      "plugins": [
+        "@babel/plugin-transform-regenerator",
+        "@babel/plugin-transform-runtime",
+        "@babel/plugin-proposal-class-properties"
+      ]
+    },
+    "build": {
+      "plugins": [
+        "babel-plugin-typescript-to-proptypes",
+        // Due to the DTS build process, some aspects of the tsconfig don't match the
+        // actual build result, specifically --downlevelIteration. This is due to their use of babel
+        // over vanilla tsc. Due to this non-array iterators aren't properly transpiled when using
+        // spread syntax. This plugin allows the use of spread syntax on non-array iterators.
+        // E.G: [...new Set(myArray)]
+        "@babel/plugin-transform-spread"
+      ]
+    },
+  }
+}
