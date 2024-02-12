@@ -22,6 +22,7 @@ export const Overview = () => (
     hasIcon
   />
 );
+
 export const Variants = () =>
   (() => {
     const variants: AlertVariant[] = [
