@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, fireEvent, screen, within } from '@testing-library/react';
-import { Cell } from '../../types';
 import { Button } from '../Button/Button';
 import { Table } from './Table';
 
@@ -301,7 +300,7 @@ describe('Table', () => {
           {
             heading: 'Flavor',
             dataKey: 'flavor',
-            render: (cell?: Cell) => <button type="submit">{cell}</button>,
+            render: (cell: any) => <button type="submit">{cell}</button>,
           },
         ];
 

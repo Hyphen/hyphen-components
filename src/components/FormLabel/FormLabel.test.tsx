@@ -7,7 +7,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  console.error.mockRestore(); // eslint-disable-line no-console
+  (console.error as jest.Mock).mockRestore(); // eslint-disable-line no-console
 });
 
 describe('FormLabel', () => {

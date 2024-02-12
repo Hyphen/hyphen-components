@@ -272,13 +272,15 @@ export const ExampleSingleInstancePhotos = () => (
     </Card>
     <Box
       gap="xl"
-      style={{
-        '--card-background-color': 'var(--color-brand-tertiary-50)',
-        '--card-footer-background-color': 'var(--color-brand-tertiary-900)',
-        '--card-border-radius': 'var(--size-border-radius-lg)',
-        '--card-section-border-color': 'var(--color-brand-tertiary-100)',
-        '--card-box-shadow': '0',
-      }}
+      style={
+        {
+          '--card-background-color': 'var(--color-brand-tertiary-50)',
+          '--card-footer-background-color': 'var(--color-brand-tertiary-900)',
+          '--card-border-radius': 'var(--size-border-radius-lg)',
+          '--card-section-border-color': 'var(--color-brand-tertiary-100)',
+          '--card-box-shadow': '0',
+        } as React.CSSProperties
+      }
     >
       <Card>
         <Card.Section>Themed card using component design tokens</Card.Section>

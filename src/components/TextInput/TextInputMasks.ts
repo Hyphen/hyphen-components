@@ -38,9 +38,9 @@ const availableInputMaskTypes = {
   date: dateMask,
 };
 
-export const getInputMaskType: PhoneMask | CreditCardMask | DateMask | { [key: string]: any; } = ( // eslint-disable-line
+export const getInputMaskType = (
   mask: InputMaskType
-) => {
+): PhoneMask | CreditCardMask | DateMask | { [key: string]: any } => {
   if (typeof mask === 'string') {
     return availableInputMaskTypes[mask];
   }

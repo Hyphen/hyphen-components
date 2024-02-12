@@ -14,7 +14,7 @@ const baseProps = {
 function getByTextWithMarkup(text: string) {
   // eslint-disable-next-line
   // @ts-ignore
-  return (content, element) => {
+  return (content, element: Element) => {
     const hasText = (node: Element) => node.textContent === text;
     const elementHasText = hasText(element);
     // eslint-disable-next-line
@@ -212,7 +212,7 @@ describe('TextInput', () => {
         render(<TextInput {...baseProps} isRequired />);
 
         const labelElement = screen.getByText(
-          getByTextWithMarkup(`${baseProps.label} *`)
+          getByTextWithMarkup(`${baseProps.label} *`) as any
         );
 
         expect(labelElement).toBeInTheDocument();

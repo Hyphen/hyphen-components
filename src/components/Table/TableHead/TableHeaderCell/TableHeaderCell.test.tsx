@@ -20,9 +20,7 @@ describe('TableHeaderCell', () => {
       test('onSort event fires callback function on click', () => {
         const mockHandleSort = jest.fn();
         render(
-          <TableHeaderCell column={column} onSort={mockHandleSort} isSortable>
-            ID
-          </TableHeaderCell>
+          <TableHeaderCell column={column} onSort={mockHandleSort} isSortable />
         );
 
         const tableHeaderCell = screen.getByText('ID');
@@ -34,9 +32,7 @@ describe('TableHeaderCell', () => {
       test('onSort event fires callback function on Enter keydown', () => {
         const mockHandleSort = jest.fn();
         render(
-          <TableHeaderCell column={column} isSortable onSort={mockHandleSort}>
-            ID
-          </TableHeaderCell>
+          <TableHeaderCell column={column} isSortable onSort={mockHandleSort} />
         );
 
         const tableHeaderCell = screen.getByText('ID');
@@ -48,9 +44,7 @@ describe('TableHeaderCell', () => {
       test('onSort event fires callback function on Space keydown', () => {
         const mockHandleSort = jest.fn();
         render(
-          <TableHeaderCell column={column} isSortable onSort={mockHandleSort}>
-            ID
-          </TableHeaderCell>
+          <TableHeaderCell column={column} isSortable onSort={mockHandleSort} />
         );
 
         const tableHeaderCell = screen.getByText('ID');
@@ -62,9 +56,7 @@ describe('TableHeaderCell', () => {
       test('onSort does NOT fire callback function on keydown that is not ENTER or SPACE', () => {
         const mockHandleSort = jest.fn();
         render(
-          <TableHeaderCell column={column} isSortable onSort={mockHandleSort}>
-            ID
-          </TableHeaderCell>
+          <TableHeaderCell column={column} isSortable onSort={mockHandleSort} />
         );
 
         const tableHeaderCell = screen.getByText('ID');
@@ -75,11 +67,7 @@ describe('TableHeaderCell', () => {
 
       test('onSort does NOT fire callback when keyed unless both onSort and isSortable props are provided', () => {
         const mockHandleSort = jest.fn();
-        render(
-          <TableHeaderCell column={column} onSort={mockHandleSort}>
-            ID
-          </TableHeaderCell>
-        );
+        render(<TableHeaderCell column={column} onSort={mockHandleSort} />);
 
         const tableHeaderCell = screen.getByText('ID');
 
@@ -90,11 +78,7 @@ describe('TableHeaderCell', () => {
 
     test('onSort does NOT fire callback when clicked unless both onSort and isSortable props are provided', () => {
       const mockHandleSort = jest.fn();
-      render(
-        <TableHeaderCell column={column} onSort={mockHandleSort}>
-          ID
-        </TableHeaderCell>
-      );
+      render(<TableHeaderCell column={column} onSort={mockHandleSort} />);
 
       const tableHeaderCell = screen.getByText('ID');
 
@@ -159,11 +143,7 @@ describe('TableHeaderCell', () => {
     });
 
     test('th element is rendered with specific width style attribute based on width prop', () => {
-      render(
-        <TableHeaderCell column={column} width={200}>
-          ID
-        </TableHeaderCell>
-      );
+      render(<TableHeaderCell column={column} width={200} />);
 
       const tableHeaderCell = screen.getByText('ID').closest('th');
 
