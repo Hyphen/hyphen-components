@@ -1,0 +1,19 @@
+.table-body {
+  &.striped {
+    tr:nth-of-type(odd) {
+      th,
+      td {
+        background-color: var(--table-row-striped-background, var(--INTERNAL_table-row-striped-background));
+      }
+    }
+  }
+
+  &.hover {
+    tr:hover {
+      th,
+      td {
+        background-color: var(--table-row-hover-background);
+      }
+    }
+  }
+}

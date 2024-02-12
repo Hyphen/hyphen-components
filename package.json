@@ -74,6 +74,7 @@
     "@testing-library/user-event": "^14.5.2",
     "@tsconfig/recommended": "^1.0.3",
     "@tsconfig/vite-react": "^3.0.0",
+    "@types/cleave.js": "^1.4.3",
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
     "autoprefixer": "^10.4.16",
@@ -113,6 +114,7 @@
   "dependencies": {
     "@hyphen/hyphen-design-tokens": "^1.2.0",
     "classnames": "^2.5.1",
+    "cleave.js": "^1.6.0",
     "react-select": "^5.8.0"
   }
 }
