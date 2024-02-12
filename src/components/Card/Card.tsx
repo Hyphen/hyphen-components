@@ -1,13 +1,14 @@
-import React, { ReactNode } from 'react';
-import classNames from 'classnames';
-import { Box, BoxProps } from '../Box/Box';
 import {
   BorderRadiusSize,
   BoxShadowSize,
   BrandColor,
   ResponsiveProp,
 } from '../../types';
+import { Box, BoxProps } from '../Box/Box';
 import { CardFooter, CardHeader, CardSection } from './components';
+import React, { ReactNode } from 'react';
+
+import classNames from 'classnames';
 import styles from './Card.module.scss';
 
 export interface CardProps extends BoxProps {
@@ -36,7 +37,7 @@ export interface CardProps extends BoxProps {
   shadow?: BoxShadowSize | ResponsiveProp<BoxShadowSize>;
 }
 
-const CardBaseComponent: React.FC<CardProps> = React.forwardRef(
+export const CardBaseComponent: React.FC<CardProps> = React.forwardRef(
   (
     {
       background = undefined,
