@@ -20,7 +20,7 @@ A `<Box>` is a layout component to build UIs with consistent padding and spacing
 - Its content is arranged in a specified `direction`, with 'column' being the default
 - Renders a `<div />` element by default, but can be changed using `as`
 - Allows you to specify the spacing between child elements using `gap`
-- Many props accept `ResponsiveProp` that take an object with keys that correspond to [breakpoint tokens](?path=/story/design-tokens-design-tokens--page#breakpoints).
+- Many props accept `ResponsiveProp` that take an object with keys that correspond to [breakpoint tokens](?path=/docs/foundation-design-tokens--docs#breakpoints).
 
 <Canvas of={Stories.Overview}/>
 
@@ -108,7 +108,7 @@ Use the `color` prop to set the color of the text
 
 ## Font Size
 
-Set the `fontSize` prop with a [font size](?path=/story/design-tokens-design-tokens--page#font-size) token to set the size of the text in the Box.
+Set the `fontSize` prop with a [font size](?path=/docs/foundation-design-tokens--docs#font-size) token to set the size of the text in the Box.
 
 <Canvas of={Stories.FontSize}/>
 
@@ -119,7 +119,7 @@ Set the `fontSize` prop with a [font size](?path=/story/design-tokens-design-tok
 
 ## Font Weight
 
-Set the `fontWeight` prop with a [font weight](?path=/story/design-tokens-design-tokens--page#font-weight) token to set the size of the text in the Box.
+Set the `fontWeight` prop with a [font weight](?path=/docs/foundation-design-tokens--docs#font-weight) token to set the size of the text in the Box.
 
 
 <Canvas of={Stories.FontWeight}/>
@@ -133,25 +133,25 @@ Set the `textAlign` prop to set the alignment of the text in the Box.
 
 ## Margin
 
-The `margin` prop accepts a single [spacing](?path=/story/design-tokens-design-tokens--page#spacing) value or a set of spacing values that correspond with css shorthand syntax. Margin values can be set on the horizontal or vertical axis, or the top, right, bottom and left sides of a Box.
+The `margin` prop accepts a single [spacing](?path=/docs/foundation-design-tokens--docs#spacing) value or a set of spacing values that correspond with css shorthand syntax. Margin values can be set on the horizontal or vertical axis, or the top, right, bottom and left sides of a Box.
 
 <Canvas of={Stories.Margin}/>
 
 ## Padding
 
-The `padding` prop accepts a single [spacing](?path=/story/design-tokens-design-tokens--page#spacing) value or a set of spacing values that correspond with css shorthand syntax. Padding values can be set on the horizontal or vertical axis, or the top, right, bottom and left sides of a Box.
+The `padding` prop accepts a single [spacing](?path=/docs/foundation-design-tokens--docs#spacing) value or a set of spacing values that correspond with css shorthand syntax. Padding values can be set on the horizontal or vertical axis, or the top, right, bottom and left sides of a Box.
 
 <Canvas of={Stories.Padding}/>
 
 ## Radius
 
-Set the `radius` prop with a [radius token](?path=/story/design-tokens-design-tokens--page#border-radius) to set the corner radius of the box.
+Set the `radius` prop with a [radius token](?path=/docs/foundation-design-tokens--docs#border-radius) to set the corner radius of the box.
 
 <Canvas of={Stories.Radius}/>
 
 ## Shadow
 
-Set the `shadow` prop with a [shadow token](?path=/story/design-tokens-design-tokens--page#box-shadow) to set the outer shadow of the box.
+Set the `shadow` prop with a [shadow token](?path=/docs/foundation-design-tokens--docs#box-shadow) to set the outer shadow of the box.
 
 <Canvas of={Stories.Shadow}/>
 
@@ -161,7 +161,7 @@ Width can be set to any CSS unit value (px, rem, em, %).
 
 <Canvas of={Stories.Width}/>
 
-[Width tokens](?path=/story/design-tokens-design-tokens--page#width) may be used to set widths as well.
+[Width tokens](?path=/docs/foundation-design-tokens--docs#width) may be used to set widths as well.
 
 <Canvas of={Stories.WidthTokens}/>
 
@@ -171,13 +171,13 @@ Set the width to a common percentage of the Box's parent.
 
 ## Max Width
 
-Set the maximum width of the Box by setting `maxWidth` to a [width token](?path=/story/design-tokens-design-tokens--page#width) or any valid css unit.
+Set the maximum width of the Box by setting `maxWidth` to a [width token](?path=/docs/foundation-design-tokens--docs#width) or any valid css unit.
 
 <Canvas of={Stories.WidthMax}/>
 
 ## Min Width
 
-Set the minimum width of the Box by setting `minWidth` to a [width token](?path=/story/design-tokens-design-tokens--page#width) or any valid css unit.
+Set the minimum width of the Box by setting `minWidth` to a [width token](?path=/docs/foundation-design-tokens--docs#width) or any valid css unit.
 
 <Canvas of={Stories.WidthMin}/>
 
@@ -187,7 +187,7 @@ Height can be set to any CSS unit value (px, rem, em, %).
 
 <Canvas of={Stories.Height}/>
 
-[Width tokens](?path=/story/design-tokens-design-tokens--page#height) may be used to set height as well.
+[Width tokens](?path=/docs/foundation-design-tokens--docs#height) may be used to set height as well.
 
 <Canvas of={Stories.HeightTokens}/>
 
@@ -197,13 +197,13 @@ Set the height to a common percentage of the Box's parent.
 
 ## Max Height
 
-Set the maximum width of the Box by setting `maxHeight` to a [height token](?path=/story/design-tokens-design-tokens--page#height) or any valid css unit.
+Set the maximum width of the Box by setting `maxHeight` to a [height token](?path=/docs/foundation-design-tokens--docs#height) or any valid css unit.
 
 <Canvas of={Stories.HeightMax}/>
 
 ## Min Height
 
-Set the minimum width of the Box by setting `minHeight` to a [height token](?path=/story/design-tokens-design-tokens--page#height) or any valid css unit.
+Set the minimum width of the Box by setting `minHeight` to a [height token](?path=/docs/foundation-design-tokens--docs#height) or any valid css unit.
 
 <Canvas of={Stories.HeightMin}/>
 
@@ -276,7 +276,7 @@ mobile first approach.
 
 Props that are responsive-enabled follow a mobile-first approach, which means that styles are applied first to smaller viewports (i.e. mobile devices).
 As the viewport size increases, new styles may be applied (styles are overridden for larger viewports).
-Responsive enabled props take a keyed object that specifies at which [breakpoints](?path=/story/design-tokens-design-tokens--page#breakpoints) to apply certain properties.
+Responsive enabled props take a keyed object that specifies at which [breakpoints](?path=/docs/foundation-design-tokens--docs#breakpoints) to apply certain properties.
 
 ```
 <Box
