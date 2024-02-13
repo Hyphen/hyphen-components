@@ -182,8 +182,8 @@ export interface BoxProps {
    * How space between and around content items is distributed along the main-axis a flex Box
    */
   justifyContent?:
-  | CssJustifyContentValue
-  | ResponsiveProp<CssJustifyContentValue>;
+    | CssJustifyContentValue
+    | ResponsiveProp<CssJustifyContentValue>;
   /**
    * Amount of space around the element.
    * Can be a single [spacing value](/?path=/docs/foundation-design-tokens--docs#spacing).
@@ -336,8 +336,8 @@ export const Box: FC<BoxProps> = forwardRef(
       [key: string]: {
         classPrefix: string;
         transformer:
-        | typeof generateResponsiveClasses
-        | typeof cssShorthandToClasses;
+          | typeof generateResponsiveClasses
+          | typeof cssShorthandToClasses;
       };
     } = {
       color: {
@@ -364,16 +364,17 @@ export const Box: FC<BoxProps> = forwardRef(
     };
 
     const getStatefulClasses = (stateKey: 'hover' | 'focus', values: BoxProps['hover' | 'hover']) => values // eslint-disable-line
-      ? Object.entries(values).map(
-        ([key, value]) =>
-          cssPropertyMap[key].transformer(
-            `${stateKey}:${cssPropertyMap[key as keyof BoxProps['focus' | 'hover']]
-              .classPrefix
-            }`,
-            value
-          ) // eslint-disable-line max-len
-      )
-      : undefined;
+        ? Object.entries(values).map(
+            ([key, value]) =>
+              cssPropertyMap[key].transformer(
+                `${stateKey}:${
+                  cssPropertyMap[key as keyof BoxProps['focus' | 'hover']]
+                    .classPrefix
+                }`,
+                value
+              ) // eslint-disable-line max-len
+          )
+        : undefined;
 
     const hoverClasses = getStatefulClasses('hover', hover);
     const focusClasses = getStatefulClasses('focus', focus);
