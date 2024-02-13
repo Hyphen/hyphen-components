@@ -1,15 +1,5 @@
-import {
-  createElement,
-  cloneElement,
-  FC,
-  forwardRef,
-  ReactNode,
-  ReactElement,
-  CSSProperties,
-  Children,
-} from 'react';
 import * as CSS from 'csstype';
-import classNames from 'classnames';
+
 import {
   BaseSpacing,
   BorderRadiusSize,
@@ -34,11 +24,23 @@ import {
   SpacingSize,
   ZIndexSize,
 } from '../../types';
+import {
+  CSSProperties,
+  Children,
+  FC,
+  ReactElement,
+  ReactNode,
+  cloneElement,
+  createElement,
+  forwardRef,
+} from 'react';
+
 import { KnownKeys } from '../../types/lib.types';
-import { getDimensionCss } from '../../lib/getDimensionCss';
+import classNames from 'classnames';
 import { cssShorthandToClasses } from '../../lib/cssShorthandToClasses';
-import { getElementType } from '../../lib/getElementType';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
+import { getDimensionCss } from '../../lib/getDimensionCss';
+import { getElementType } from '../../lib/getElementType';
 import styles from './Box.module.scss';
 
 export type HoverableBoxProperties =
@@ -66,18 +68,18 @@ export interface BoxProps {
    */
   alignSelf?: CssAlignItemsValue | ResponsiveProp<CssAlignItemsValue>;
   /**
-   * Any valid [brand color token](/?path=/story/design-tokens-design-tokens--page#color), or a `url()` for an image
+   * Any valid [brand color token](/?path=/docs/foundation-design-tokens--docs#color), or a `url()` for an image
    */
   background?: BrandColor;
   /**
-   * Any valid [brand color token](/?path=/story/design-tokens-design-tokens--page#color) for the border color
+   * Any valid [brand color token](/?path=/docs/foundation-design-tokens--docs#color) for the border color
    * Or a responsive prop with BrandColor for each breakpoint.
    */
   borderColor?: BrandColor;
   /**
    * Width of the Box's border
-   * Can be a single [border width token](/?path=/story/design-tokens-design-tokens--page#border-width).
-   * Can also be a string of [border width tokens](/?path=/story/design-tokens-design-tokens--page#border-width)
+   * Can be a single [border width token](/?path=/docs/foundation-design-tokens--docs#border-width).
+   * Can also be a string of [border width tokens](/?path=/docs/foundation-design-tokens--docs#border-width)
    * that models itself after the css shorthand property,
    * where you can set the border width on all four sides of an element.
    * e.g: "0 sm xs 0" --> top: 0, right: sm, bottom: xs, left: 0;
@@ -89,7 +91,7 @@ export interface BoxProps {
   className?: string;
   /**
    * The amount of spacing (implemented as margin) between child elements.
-   * Can be a single [spacing value](/?path=/story/design-tokens-design-tokens--page#spacing).
+   * Can be a single [spacing value](/?path=/docs/foundation-design-tokens--docs#spacing).
    * NOTE: this prop is incompatible with reverse flex direction values (row-reverse, column-reverse).
    * For grid and flex layouts, use 'gap' instead.
    */
@@ -139,11 +141,11 @@ export interface BoxProps {
     shadow?: BoxProps['shadow'];
   };
   /**
-   * The [font family token](/?path=/story/design-tokens-design-tokens--page#font-family) identifier for the Box's text
+   * The [font family token](/?path=/docs/foundation-design-tokens--docs#font-family) identifier for the Box's text
    */
   fontFamily?: FontFamily | ResponsiveProp<FontFamily>;
   /**
-   * The [font size token](/?path=/story/design-tokens-design-tokens--page#font-size) identifier for the Box's text
+   * The [font size token](/?path=/docs/foundation-design-tokens--docs#font-size) identifier for the Box's text
    */
   fontSize?: FontSize | ResponsiveProp<FontSize>;
   /**
@@ -152,7 +154,7 @@ export interface BoxProps {
   fontWeight?: FontWeight | ResponsiveProp<FontWeight>;
   /**
    * The height of the element. Can be given a standard css value (px, rem, em, %),
-   * or a [height token](/?path=/story/design-tokens-design-tokens--page#height)
+   * or a [height token](/?path=/docs/foundation-design-tokens--docs#height)
    */
   height?: DimensionSize | ResponsiveProp<DimensionSize> | string;
   /**
@@ -184,30 +186,30 @@ export interface BoxProps {
     | ResponsiveProp<CssJustifyContentValue>;
   /**
    * Amount of space around the element.
-   * Can be a single [spacing value](/?path=/story/design-tokens-design-tokens--page#spacing).
-   * Can also be a string of [spacing value](/?path=/story/design-tokens-design-tokens--page#spacing)
+   * Can be a single [spacing value](/?path=/docs/foundation-design-tokens--docs#spacing).
+   * Can also be a string of [spacing value](/?path=/docs/foundation-design-tokens--docs#spacing)
    * that models itself after the css shorthand property,
    * where you can set the margin area on all four sides of an element. It is shorthand for top, right, bottom, left.
    */
   margin?: BaseSpacing | ResponsiveProp<BaseSpacing>;
   /**
    * The maximum height of the element. Can be given a standard css value (px, rem, em, %),
-   * or a [height token](/?path=/story/design-tokens-design-tokens--page#height)
+   * or a [height token](/?path=/docs/foundation-design-tokens--docs#height)
    */
   maxHeight?: DimensionSize | ResponsiveProp<DimensionSize> | string;
   /**
    * The minimum height of the element. Can be given a standard css value (px, rem, em, %),
-   * or a [height token](/?path=/story/design-tokens-design-tokens--page#height)
+   * or a [height token](/?path=/docs/foundation-design-tokens--docs#height)
    */
   minHeight?: DimensionSize | ResponsiveProp<DimensionSize> | string;
   /**
    * The maximum width of the element. Can be given a standard css value (px, rem, em, %),
-   * or a [width token](/?path=/story/design-tokens-design-tokens--page#width)
+   * or a [width token](/?path=/docs/foundation-design-tokens--docs#width)
    */
   maxWidth?: DimensionSize | ResponsiveProp<DimensionSize> | string;
   /**
    * The minimum width of the element. Can be given a standard css value (px, rem, em, %),
-   * or a [width token](/?path=/story/design-tokens-design-tokens--page#width)
+   * or a [width token](/?path=/docs/foundation-design-tokens--docs#width)
    */
   minWidth?: DimensionSize | ResponsiveProp<DimensionSize> | string;
   /**
@@ -216,8 +218,8 @@ export interface BoxProps {
   overflow?: CssOverflowValue | ResponsiveProp<CssOverflowValue>;
   /**
    * Amount of space within the element around the Box contents.
-   * Can be a single [spacing value](/?path=/story/design-tokens-design-tokens--page#spacing).
-   * Can also be a string of [spacing value](/?path=/story/design-tokens-design-tokens--page#spacing)
+   * Can be a single [spacing value](/?path=/docs/foundation-design-tokens--docs#spacing).
+   * Can also be a string of [spacing value](/?path=/docs/foundation-design-tokens--docs#spacing)
    * that models itself after the css shorthand property,
    * where you can set the margin area on all four sides of an element. It is shorthand for top, right, bottom, left.
    */
@@ -253,7 +255,7 @@ export interface BoxProps {
   wrap?: boolean | ResponsiveProp<boolean>;
   /**
    * The width of the element. Can be given a standard css value (px, rem, em, %),
-   * or a [width token](/?path=/story/design-tokens-design-tokens--page#width)
+   * or a [width token](/?path=/docs/foundation-design-tokens--docs#width)
    */
   width?: DimensionSize | ResponsiveProp<DimensionSize> | string;
   /**
@@ -361,7 +363,7 @@ export const Box: FC<BoxProps> = forwardRef(
       },
     };
 
-  const getStatefulClasses = (stateKey: 'hover' | 'focus', values: BoxProps['hover' | 'hover']) => values // eslint-disable-line
+    const getStatefulClasses = (stateKey: 'hover' | 'focus', values: BoxProps['hover' | 'hover']) => values // eslint-disable-line
         ? Object.entries(values).map(
             ([key, value]) =>
               cssPropertyMap[key].transformer(
