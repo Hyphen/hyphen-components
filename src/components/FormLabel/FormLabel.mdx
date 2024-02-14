@@ -1,0 +1,46 @@
+import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { FormLabel } from './FormLabel';
+import * as Stories from './FormLabel.stories';
+
+<Meta of={Stories}/>
+
+# FormLabel
+
+FormLabel is a sub component of many of our inputs, and is meant to be paired with a form input. In most cases, the label will have already been built into another component as a prop. However, you can use it on its own or with another component.
+
+<Canvas isExpanded>
+  <FormLabel>Form Label</FormLabel>
+</Canvas>
+
+## Props
+
+<ArgsTable of={FormLabel} />
+
+## Accessibility
+
+- Each label requires the `inputId` prop that equals the id of the associated input so that the `htmlFor` property can be set.
+- Don't use placeholder text as a replacement for labels. It can be used to provide an example to users, but will disappear from the field when a user enters text. It's also not broadly supported by assistive technologies and won't display in older browsers.
+- Use one of 3 ways to label a form field in order of most preferred:
+  1. Visible label with Label
+  2. Visible label that's associated to the input with aria-labelledby
+  3. Label directly using aria-label
+
+## Examples
+
+<Canvas of={Stories.DefaultFormLabel}/>
+
+
+### Help Text
+
+Use `helpText` to add additional context for the FormLabel's input.
+This can help keep checkbox label concise.
+
+<Canvas of={Stories.HelpTextFormLabel}/>
+
+
+### Interactive Label
+
+FormLabels support the ability to for its text to be interactive or link to another page.
+
+<Canvas of={Stories.InteractiveFormLabel}/>
+
