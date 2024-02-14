@@ -12,3 +12,8 @@ dist
 /dist
 /build
 /storybook-static
+
+# IDEs
+.vscode
+.fleet
+.idea
