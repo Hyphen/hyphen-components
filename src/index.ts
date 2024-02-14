@@ -11,3 +11,4 @@ export * from './components/Pagination/Pagination';
 export * from './components/Spinner/Spinner';
 export * from './components/Table/Table';
 export * from './components/TextInput/TextInput';
+export * from './components/Toggle/Toggle';
