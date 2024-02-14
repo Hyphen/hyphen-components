@@ -11,9 +11,9 @@ export const HEADING_LEVELS: HEADING_LEVELS_TYPE[] = [
 
 export const HEADING_DEFAULT_SIZE_MAP = {
   h1: '4xl',
-  h2: '2xl',
-  h3: 'xl',
-  h4: 'lg',
-  h5: 'md',
+  h2: '3xl',
+  h3: '1xl',
+  h4: 'xl',
+  h5: 'lg',
   h6: 'sm',
 };
