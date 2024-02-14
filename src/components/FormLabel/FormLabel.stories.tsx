@@ -17,6 +17,10 @@ export const DefaultFormLabel = () => (
   <FormLabel inputId="inputId">Default Label</FormLabel>
 );
 
+export const OverviewFormLabel = () => (
+  <FormLabel inputId="inputId">Form Label</FormLabel>
+);
+
 export const InteractiveFormLabel = () => (
   <FormLabel inputId="customText">
     This label has a span with
