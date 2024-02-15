@@ -183,24 +183,6 @@ The following breakpoints are used in utility classes, but you can use them to m
 />
 
 <ColorItem
-  title="color-brand-light"
-  subtitle="Light"
-  colors={Object.keys(color.brand.light).reduce((acc, item, i) => {
-    acc[item] = Object.keys(color.brand.light).map(g => color.brand.light[g].value)[i];
-    return acc;
-  }, {})}
-/>
-
-<ColorItem
-  title="color-brand-dark"
-  subtitle="Dark"
-  colors={Object.keys(color.brand.dark).reduce((acc, item, i) => {
-    acc[item] = Object.keys(color.brand.dark).map(g => color.brand.dark[g].value)[i];
-    return acc;
-  }, {})}
-/>
-
-<ColorItem
   title="color-brand-grey"
   subtitle="All greys"
   colors={Object.keys(color.brand.grey).reduce((acc, item, i) => {

@@ -191,7 +191,7 @@ export const Button = forwardRef<
     const getSpinnerVariant = () => {
       if (variant === 'primary' || variant === 'primary-danger') return 'white';
 
-      return 'dark';
+      return 'grey';
     };
 
     const buttonContent =

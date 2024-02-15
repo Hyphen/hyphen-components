@@ -59,10 +59,6 @@ export const BRAND_COLOR_OPTIONS = (Object.keys(color.brand) as ColorName[])
 
 export const BRAND_COLOR_NAMES = Object.keys(color.brand) as ColorName[];
 export const BRAND_COLOR_VALUES = Object.values(color.brand);
-export const BASE_BRAND_COLORS = Object.entries({ ...color.brand }).reduce(
-  (acc, [key, value]) => ({ ...acc, [key]: value?.base }),
-  {}
-) as { [c in ColorName]: string };
 
 export const FONT_COLOR_OPTIONS = [...BRAND_COLOR_OPTIONS] as FontColor[];
 export const FONT_COLOR_VALUES = color.brand;
