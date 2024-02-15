@@ -297,7 +297,7 @@ describe('Button', () => {
         render(<Button isLoading>Button is loading</Button>);
         const spinnerElement = document.getElementsByClassName('spinner')[0];
         expect(spinnerElement).toBeInTheDocument();
-        expect(spinnerElement).toHaveClass('font-color-dark');
+        expect(spinnerElement).toHaveClass('font-color-grey');
       });
 
       test('it renders the grey spinning indicator if button variant is secondary-neutral', () => {
@@ -308,7 +308,7 @@ describe('Button', () => {
         );
         const spinnerElement = document.getElementsByClassName('spinner')[0];
         expect(spinnerElement).toBeInTheDocument();
-        expect(spinnerElement).toHaveClass('font-color-dark');
+        expect(spinnerElement).toHaveClass('font-color-grey');
       });
 
       test('it keeps the button text in the dom so the button width does not change', () => {
@@ -318,7 +318,7 @@ describe('Button', () => {
 
       test('it renders white spinning indicator when button is primary', () => {
         render(
-          <Button variant="primary" isLoading>
+          <Button variant="primary-500" isLoading>
             Button is loading
           </Button>
         );

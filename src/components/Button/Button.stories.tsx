@@ -18,7 +18,7 @@ export const Default = () => (
 export const Variants = () => (
   <Box childGap="md" style={{ backgroundColor: 'var(--background-primary)' }}>
     <Box childGap="sm" direction="row" alignItems="flex-start">
-      <Button variant="primary">Primary</Button>
+      <Button variant="primary-500">Primary</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="tertiary">Tertiary</Button>
     </Box>
@@ -142,16 +142,16 @@ export const CustomTheme = () => (
       } as any
     }
   >
-    <Button variant="primary" size="xs">
+    <Button variant="primary-500" size="xs">
       Get Solar
     </Button>
-    <Button variant="primary" size="sm">
+    <Button variant="primary-500" size="sm">
       Get Solar
     </Button>
-    <Button variant="primary" size="md">
+    <Button variant="primary-500" size="md">
       Get Solar
     </Button>
-    <Button variant="primary" size="lg">
+    <Button variant="primary-500" size="lg">
       Get Solar
     </Button>
   </Box>

@@ -16,7 +16,7 @@ export const Overview = () => (
   <Box background="grey-50" padding="2xl">
     <Card>
       <Card.Header title="Profile Card Example">
-        <Box as="p" color="grey" fontSize="sm">
+        <Box as="p" color="grey-500" fontSize="sm">
           Personal and Contact Details
         </Box>
       </Card.Header>
@@ -30,19 +30,19 @@ export const Overview = () => (
         <Box direction="row" gap="lg">
           <Box flex="auto" gap="lg">
             <Box gap="2xs">
-              <Box fontSize="sm" color="grey">
+              <Box fontSize="sm" color="grey-500">
                 Full Name
               </Box>
               <Box>Jessica Ramirez</Box>
             </Box>
             <Box gap="2xs">
-              <Box fontSize="sm" color="grey">
+              <Box fontSize="sm" color="grey-500">
                 Email
               </Box>
               <Box>jw1416@palmetto.com</Box>
             </Box>
             <Box gap="2xs">
-              <Box fontSize="sm" color="grey">
+              <Box fontSize="sm" color="grey-500">
                 Phone
               </Box>
               <Box>(123) 555-5555</Box>
@@ -50,13 +50,13 @@ export const Overview = () => (
           </Box>
           <Box flex="auto" gap="lg">
             <Box gap="2xs">
-              <Box fontSize="sm" color="grey">
+              <Box fontSize="sm" color="grey-500">
                 Preferred Language
               </Box>
               <Box>English</Box>
             </Box>
             <Box gap="2xs">
-              <Box fontSize="sm" color="grey">
+              <Box fontSize="sm" color="grey-500">
                 Country
               </Box>
               <Box>United States</Box>
@@ -79,10 +79,10 @@ export const Overview = () => (
           gap="md"
         >
           <Box direction="row" gap="sm">
-            <Button size="sm" variant="primary">
+            <Button size="sm" variant="primary-500">
               Edit
             </Button>
-            <Button size="sm" variant="primary">
+            <Button size="sm" variant="primary-500">
               Remove
             </Button>
           </Box>
@@ -163,7 +163,7 @@ export const CardFooter = () => (
   <Card>
     <Card.Section>content</Card.Section>
     <Card.Footer>
-      <Button variant="primary">Publish</Button>
+      <Button variant="primary-500">Publish</Button>
     </Card.Footer>
   </Card>
 );
@@ -182,7 +182,7 @@ export const ExampleSignUpForm = () => (
             <Heading as="h1" size="xl">
               Sign Up
             </Heading>
-            <Box as="p" color="grey" fontSize="sm">
+            <Box as="p" color="grey-500" fontSize="sm">
               Create your account to create leads and proposals
             </Box>
           </Box>
@@ -200,11 +200,11 @@ export const ExampleSignUpForm = () => (
               label="Password"
               onChange={() => null}
             />
-            <Button fullWidth variant="primary">
+            <Button fullWidth variant="primary-500">
               Sign Up
             </Button>
           </Box>
-          <Box alignItems="center" fontSize="sm" color="grey">
+          <Box alignItems="center" fontSize="sm" color="grey-500">
             <p>
               Already have an account?{' '}
               <a href="/#" className="font-color-primary">
@@ -285,7 +285,7 @@ export const ExampleSingleInstancePhotos = () => (
       <Card>
         <Card.Section>Themed card using component design tokens</Card.Section>
         <Card.Section>Themed card using component design tokens</Card.Section>
-        <Card.Footer color="white">footer</Card.Footer>
+        <Card.Footer color="white-500">footer</Card.Footer>
       </Card>
       <Card shadow="xl" radius="sm" background="secondary-50">
         <Card.Section>BoxProps are used instead of tokens</Card.Section>

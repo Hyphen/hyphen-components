@@ -41,7 +41,7 @@ export const Background = () => (
     <Box background="danger-50" margin="xs" padding="xs">
       danger-50
     </Box>
-    <Box background="primary" margin="xs" padding="xs">
+    <Box background="primary-500" margin="xs" padding="xs">
       primary
     </Box>
   </>
@@ -52,7 +52,7 @@ export const Border = () => (
     <Box borderColor="grey-200" borderWidth="xs md" padding="xs">
       grey-100, xs md
     </Box>
-    <Box borderColor="danger" borderWidth="0 sm md xs" padding="xs">
+    <Box borderColor="danger-500" borderWidth="0 sm md xs" padding="xs">
       danger, 0 sm md xs
     </Box>
     <Box borderColor="primary-700" borderWidth="md" padding="xs">
@@ -396,9 +396,9 @@ export const FlexJustify = () => (
         direction="row"
         gap="md"
       >
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
       </Box>
     </Box>
     <Box direction="row" alignItems="center" gap="md">
@@ -410,9 +410,9 @@ export const FlexJustify = () => (
         direction="row"
         gap="md"
       >
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
       </Box>
     </Box>
     <Box direction="row" alignItems="center" gap="md">
@@ -424,9 +424,9 @@ export const FlexJustify = () => (
         direction="row"
         gap="md"
       >
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
       </Box>
     </Box>
     <Box direction="row" alignItems="center" gap="md">
@@ -438,9 +438,9 @@ export const FlexJustify = () => (
         direction="row"
         gap="md"
       >
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
       </Box>
     </Box>
     <Box direction="row" alignItems="center" gap="md">
@@ -452,9 +452,9 @@ export const FlexJustify = () => (
         direction="row"
         gap="md"
       >
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
       </Box>
     </Box>
     <Box direction="row" alignItems="center" gap="md">
@@ -466,9 +466,9 @@ export const FlexJustify = () => (
         direction="row"
         gap="md"
       >
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
       </Box>
     </Box>
   </Box>
@@ -486,9 +486,9 @@ export const FlexAlign = () => (
         direction="row"
         gap="md"
       >
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
       </Box>
     </Box>
     <Box direction="row" alignItems="center" gap="md">
@@ -501,9 +501,9 @@ export const FlexAlign = () => (
         direction="row"
         gap="md"
       >
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
       </Box>
     </Box>
     <Box direction="row" alignItems="center" gap="md">
@@ -516,9 +516,9 @@ export const FlexAlign = () => (
         direction="row"
         gap="md"
       >
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
       </Box>
     </Box>
     <Box direction="row" alignItems="center" gap="md">
@@ -531,9 +531,9 @@ export const FlexAlign = () => (
         direction="row"
         gap="md"
       >
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
-        <Box width="md" height="md" background="primary" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
+        <Box width="md" height="md" background="primary-500" />
       </Box>
     </Box>
     <Box direction="row" alignItems="center" gap="md">
@@ -546,9 +546,9 @@ export const FlexAlign = () => (
         direction="row"
         gap="md"
       >
-        <Box width="md" background="primary" />
-        <Box width="md" background="primary" />
-        <Box width="md" background="primary" />
+        <Box width="md" background="primary-500" />
+        <Box width="md" background="primary-500" />
+        <Box width="md" background="primary-500" />
       </Box>
     </Box>
   </Box>
@@ -569,11 +569,11 @@ export const FlexAlignContent = () => (
         background="primary-100"
         direction="row"
       >
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
       </Box>
     </Box>
     <Box direction="row" alignItems="center" gap="md">
@@ -589,11 +589,11 @@ export const FlexAlignContent = () => (
         background="primary-100"
         direction="row"
       >
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
       </Box>
     </Box>
     <Box direction="row" alignItems="center" gap="md">
@@ -609,11 +609,11 @@ export const FlexAlignContent = () => (
         background="primary-100"
         direction="row"
       >
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
       </Box>
     </Box>
     <Box direction="row" alignItems="center" gap="md">
@@ -629,11 +629,11 @@ export const FlexAlignContent = () => (
         background="primary-100"
         direction="row"
       >
-        <Box width="2xl" background="primary" />
-        <Box width="2xl" background="primary" />
-        <Box width="2xl" background="primary" />
-        <Box width="2xl" background="primary" />
-        <Box width="2xl" background="primary" />
+        <Box width="2xl" background="primary-500" />
+        <Box width="2xl" background="primary-500" />
+        <Box width="2xl" background="primary-500" />
+        <Box width="2xl" background="primary-500" />
+        <Box width="2xl" background="primary-500" />
       </Box>
     </Box>
     <Box direction="row" alignItems="center" gap="md">
@@ -649,11 +649,11 @@ export const FlexAlignContent = () => (
         background="primary-100"
         direction="row"
       >
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
       </Box>
     </Box>
     <Box direction="row" alignItems="center" gap="md">
@@ -669,11 +669,11 @@ export const FlexAlignContent = () => (
         background="primary-100"
         direction="row"
       >
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
-        <Box width="2xl" height="md" background="primary" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
+        <Box width="2xl" height="md" background="primary-500" />
       </Box>
     </Box>
   </Box>
@@ -828,7 +828,7 @@ export const Shadow = () => (
       shadow="0"
       alignItems="center"
       justifyContent="center"
-      background="white"
+      background="white-500"
       radius="md"
       padding="sm"
       height="lg"
@@ -839,7 +839,7 @@ export const Shadow = () => (
       shadow="2xs"
       alignItems="center"
       justifyContent="center"
-      background="white"
+      background="white-500"
       radius="md"
       padding="sm"
       height="lg"
@@ -850,7 +850,7 @@ export const Shadow = () => (
       shadow="xs"
       alignItems="center"
       justifyContent="center"
-      background="white"
+      background="white-500"
       radius="md"
       padding="sm"
       height="lg"
@@ -861,7 +861,7 @@ export const Shadow = () => (
       shadow="sm"
       alignItems="center"
       justifyContent="center"
-      background="white"
+      background="white-500"
       radius="md"
       padding="sm"
       height="lg"
@@ -872,7 +872,7 @@ export const Shadow = () => (
       shadow="md"
       alignItems="center"
       justifyContent="center"
-      background="white"
+      background="white-500"
       radius="md"
       padding="sm"
       height="lg"
@@ -883,7 +883,7 @@ export const Shadow = () => (
       shadow="lg"
       alignItems="center"
       justifyContent="center"
-      background="white"
+      background="white-500"
       radius="md"
       padding="sm"
       height="lg"
@@ -894,7 +894,7 @@ export const Shadow = () => (
       shadow="xl"
       alignItems="center"
       justifyContent="center"
-      background="white"
+      background="white-500"
       radius="md"
       padding="sm"
       height="lg"
@@ -905,7 +905,7 @@ export const Shadow = () => (
       shadow="2xl"
       alignItems="center"
       justifyContent="center"
-      background="white"
+      background="white-500"
       radius="md"
       padding="sm"
       height="lg"
@@ -1359,7 +1359,7 @@ export const Overflow = () => (
     gap="md"
     flex="auto"
     background="primary-100"
-    borderColor="grey"
+    borderColor="grey-500"
     height="100px"
   >
     <p>
@@ -1451,7 +1451,7 @@ export const Position = () => (
       padding="md"
       background="tertiary-300"
       height="50px"
-      color="white"
+      color="white-500"
       style={{ top: 0, zIndex: 2 }}
     >
       sticky
@@ -1471,8 +1471,8 @@ export const Hover = () => (
   <Box gap="md">
     <Box
       padding="md"
-      background="primary"
-      color="white"
+      background="primary-500"
+      color="white-500"
       shadow="xs"
       hover={{
         background: 'primary-600',
@@ -1483,17 +1483,17 @@ export const Hover = () => (
     </Box>
     <Box
       padding="md"
-      background="white"
-      color="primary"
+      background="white-500"
+      color="primary-500"
       radius="md"
       borderWidth="xs"
-      borderColor="primary"
+      borderColor="primary-500"
       fontWeight="bold"
       direction="row"
       justifyContent="center"
       hover={{
-        background: 'primary',
-        color: 'white',
+        background: 'primary-500',
+        color: 'white-500',
       }}
       cursor="pointer"
     >
@@ -1502,7 +1502,7 @@ export const Hover = () => (
     <Box
       padding="md"
       radius="md"
-      background="white"
+      background="white-500"
       shadow="sm"
       borderWidth="xs"
       borderColor="grey-50"
@@ -1515,7 +1515,7 @@ export const Hover = () => (
     </Box>
     <Box
       padding="md"
-      background="white"
+      background="white-500"
       hover={{
         fontSize: 'xl',
       }}
@@ -1524,7 +1524,7 @@ export const Hover = () => (
     </Box>
     <Box
       padding="md"
-      background="white"
+      background="white-500"
       borderWidth="xs"
       borderColor="transparent"
       hover={{
@@ -1536,7 +1536,7 @@ export const Hover = () => (
     </Box>
     <Box
       padding="md"
-      background="white"
+      background="white-500"
       borderColor="grey-300"
       borderWidth="xs"
       hover={{
@@ -1554,15 +1554,15 @@ export const Focus = () => (
       as="input"
       type="text"
       padding="md"
-      background="white"
-      color="dark"
+      background="white-500"
+      color="grey-600"
       shadow="xs"
       borderWidth="xs"
       borderColor="grey-100"
       radius="md"
       style={{ outline: 'none' }}
       focus={{
-        borderColor: 'grey',
+        borderColor: 'grey-500',
       }}
       placeholder="useful for form inputs..."
     />
