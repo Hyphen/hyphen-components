@@ -1,17 +1,17 @@
 .spinner {
-  --spinner-primary-color: var(--color-brand-primary-base);
-  --spinner-secondary-color: var(--color-brand-secondary-base);
-  --spinner-tertiary-color: var(--color-brand-tertiary-base);
-  --spinner-white-color: var(--color-brand-white-base);
-  --spinner-black-color: var(--color-brand-black-base);
-  --spinner-grey-color: var(--color-brand-grey-base);
-  --spinner-light-color: var(--color-brand-light-base);
-  --spinner-dark-color: var(--color-brand-dark-base);
-  --spinner-info-color: var(--color-brand-info-base);
-  --spinner-danger-color: var(--color-brand-danger-base);
-  --spinner-warning-color: var(--color-brand-warning-base);
-  --spinner-success-color: var(--color-brand-success-base);
-  --spinner-transparent-color: var(--color-brand-transparent-base);
+  --spinner-primary-color: var(--color-brand-primary-500);
+  --spinner-secondary-color: var(--color-brand-secondary-500);
+  --spinner-tertiary-color: var(--color-brand-tertiary-500);
+  --spinner-white-color: var(--color-brand-white-500);
+  --spinner-black-color: var(--color-brand-black-500);
+  --spinner-grey-color: var(--color-brand-grey-500);
+  --spinner-light-color: var(--color-brand-light-500);
+  --spinner-dark-color: var(--color-brand-dark-500);
+  --spinner-info-color: var(--color-brand-info-500);
+  --spinner-danger-color: var(--color-brand-danger-500);
+  --spinner-warning-color: var(--color-brand-warning-500);
+  --spinner-success-color: var(--color-brand-success-500);
+  --spinner-transparent-color: var(--color-brand-transparent-500);
 
   svg {
     display: inherit;

@@ -13,7 +13,7 @@ const meta: Meta<typeof Card> = {
 export default meta;
 
 export const Overview = () => (
-  <Box background="grey-lightest" padding="2xl">
+  <Box background="grey-50" padding="2xl">
     <Card>
       <Card.Header title="Profile Card Example">
         <Box as="p" color="grey" fontSize="sm">
@@ -173,7 +173,7 @@ export const ExampleSignUpForm = () => (
     alignItems="center"
     alignContent="center"
     padding="2xl"
-    background="grey-lightest"
+    background="grey-50"
   >
     <Card maxWidth="4xl">
       <Card.Section padding="3xl">
@@ -245,7 +245,7 @@ export const ExampleFullBleedPhotos = () => (
     alignItems="center"
     alignContent="center"
     padding="2xl"
-    background="grey-lightest"
+    background="grey-50"
   >
     <Card width="300px">
       <Card.Section padding="0" overflow="hidden" height="300px">

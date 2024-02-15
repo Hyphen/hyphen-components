@@ -1,6 +1,6 @@
 .label {
   font-family: var(--form-control-font-family, var(--INTERNAL_form-control-font-family));
-  color: var(--color-brand-dark-base);
+  color: var(--color-brand-grey-600);
   font-size: var(--form-control-size-md-label-size, var(--INTERNAL_form-control-size-md-label-size));
   font-weight: var(--form-control-label-font-weight, var(--INTERNAL_form-control-label-font-weight));
 
@@ -9,7 +9,7 @@
   }
 
   &.disabled {
-    color: var(--color-brand-grey-light);
+    color: var(--color-brand-grey-300);
   }
 
   .help-text {
