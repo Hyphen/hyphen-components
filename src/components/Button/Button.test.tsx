@@ -28,7 +28,7 @@ describe('Button', () => {
 
     test('is not set if "as" prop is an anchor tag', () => {
       render(
-        <Button as="a" href="https://www.palmetto.com">
+        <Button as="a" href="https://www.hyphen.ai">
           link button
         </Button>
       );
@@ -318,7 +318,7 @@ describe('Button', () => {
 
       test('it renders white spinning indicator when button is primary', () => {
         render(
-          <Button variant="primary-500" isLoading>
+          <Button variant="primary" isLoading>
             Button is loading
           </Button>
         );
@@ -382,7 +382,7 @@ describe('Button', () => {
     describe('Anchor', () => {
       test('it renders an anchor tag if as prop `a` is passed', () => {
         render(
-          <Button href="http://palmetto.com" as="a">
+          <Button href="http://hyphen.ai" as="a">
             hey there
           </Button>
         );
@@ -393,7 +393,7 @@ describe('Button', () => {
 
       test('it does not have a button type attribute if as prop `a` is passed', () => {
         render(
-          <Button href="http://palmetto.com" as="a">
+          <Button href="http://hyphen.ai" as="a">
             hey there
           </Button>
         );
@@ -404,7 +404,7 @@ describe('Button', () => {
 
       test('it renders a target attribute if one is passed, the element is an anchor, and there is a href', () => {
         render(
-          <Button href="http://palmetto.com" as="a" target="_blank">
+          <Button href="http://hyphen.ai" as="a" target="_blank">
             hey there
           </Button>
         );
@@ -416,7 +416,7 @@ describe('Button', () => {
 
       test('it does not render a target attribute if the element is not an anchor', () => {
         render(
-          <Button href="http://palmetto.com" target="_blank">
+          <Button href="http://hyphen.ai" target="_blank">
             hey there
           </Button>
         );

@@ -39,7 +39,7 @@ export const Overview = () => (
               <Box fontSize="sm" color="grey-500">
                 Email
               </Box>
-              <Box>jw1416@palmetto.com</Box>
+              <Box>jw1416@hyphen.ai</Box>
             </Box>
             <Box gap="2xs">
               <Box fontSize="sm" color="grey-500">
@@ -79,10 +79,10 @@ export const Overview = () => (
           gap="md"
         >
           <Box direction="row" gap="sm">
-            <Button size="sm" variant="primary-500">
+            <Button size="sm" variant="primary">
               Edit
             </Button>
-            <Button size="sm" variant="primary-500">
+            <Button size="sm" variant="primary">
               Remove
             </Button>
           </Box>
@@ -163,7 +163,7 @@ export const CardFooter = () => (
   <Card>
     <Card.Section>content</Card.Section>
     <Card.Footer>
-      <Button variant="primary-500">Publish</Button>
+      <Button variant="primary">Publish</Button>
     </Card.Footer>
   </Card>
 );
@@ -200,7 +200,7 @@ export const ExampleSignUpForm = () => (
               label="Password"
               onChange={() => null}
             />
-            <Button fullWidth variant="primary-500">
+            <Button fullWidth variant="primary">
               Sign Up
             </Button>
           </Box>

@@ -18,7 +18,7 @@ export const Default = () => (
 export const Variants = () => (
   <Box childGap="md" style={{ backgroundColor: 'var(--background-primary)' }}>
     <Box childGap="sm" direction="row" alignItems="flex-start">
-      <Button variant="primary-500">Primary</Button>
+      <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="tertiary">Tertiary</Button>
     </Box>
@@ -121,7 +121,7 @@ export const EventCallbacks = () => (
 );
 
 export const Anchor = () => (
-  <Button as="a" href="https://ux.palmetto.com" target="_blank">
+  <Button as="a" href="https://ux.hypen.ai" target="_blank">
     I'm an anchor tag
   </Button>
 );
@@ -142,16 +142,16 @@ export const CustomTheme = () => (
       } as any
     }
   >
-    <Button variant="primary-500" size="xs">
+    <Button variant="primary" size="xs">
       Get Solar
     </Button>
-    <Button variant="primary-500" size="sm">
+    <Button variant="primary" size="sm">
       Get Solar
     </Button>
-    <Button variant="primary-500" size="md">
+    <Button variant="primary" size="md">
       Get Solar
     </Button>
-    <Button variant="primary-500" size="lg">
+    <Button variant="primary" size="lg">
       Get Solar
     </Button>
   </Box>

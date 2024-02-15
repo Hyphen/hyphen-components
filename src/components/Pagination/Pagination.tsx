@@ -109,7 +109,7 @@ export const Pagination: FC<PaginationProps> = ({
         gap={isCompact ? 'xs' : 'sm'}
       >
         <Button
-          variant="primary-500"
+          variant="primary"
           size={isCompact ? 'sm' : 'md'}
           isDisabled={activePage === 1}
           onClick={() => onChange(activePage - 1)}
@@ -137,7 +137,7 @@ export const Pagination: FC<PaginationProps> = ({
           </Box>
         )}
         <Button
-          variant="primary-500"
+          variant="primary"
           size={isCompact ? 'sm' : 'md'}
           isDisabled={activePage === pageTotal}
           onClick={() => onChange(activePage + 1)}

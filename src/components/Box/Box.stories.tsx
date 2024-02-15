@@ -257,36 +257,16 @@ export const FlexDirection = () => (
       <Box width="20%" background="primary-300" padding="sm">
         1
       </Box>
-      <Box
-        width="20%"
-        background="primary-300"
-        padding="sm"
-        margin="0 md 0 0"
-      >
+      <Box width="20%" background="primary-300" padding="sm" margin="0 md 0 0">
         2
       </Box>
-      <Box
-        width="20%"
-        background="primary-300"
-        padding="sm"
-        margin="0 md 0 0"
-      >
+      <Box width="20%" background="primary-300" padding="sm" margin="0 md 0 0">
         3
       </Box>
-      <Box
-        width="20%"
-        background="primary-300"
-        padding="sm"
-        margin="0 md 0 0"
-      >
+      <Box width="20%" background="primary-300" padding="sm" margin="0 md 0 0">
         4
       </Box>
-      <Box
-        width="20%"
-        background="primary-300"
-        padding="sm"
-        margin="0 md 0 0"
-      >
+      <Box width="20%" background="primary-300" padding="sm" margin="0 md 0 0">
         5
       </Box>
     </Box>
@@ -297,36 +277,16 @@ export const FlexDirection = () => (
       <Box width="20%" background="primary-300" padding="sm">
         1
       </Box>
-      <Box
-        width="20%"
-        background="primary-300"
-        padding="sm"
-        margin="0 0 md 0"
-      >
+      <Box width="20%" background="primary-300" padding="sm" margin="0 0 md 0">
         2
       </Box>
-      <Box
-        width="20%"
-        background="primary-300"
-        padding="sm"
-        margin="0 0 md 0"
-      >
+      <Box width="20%" background="primary-300" padding="sm" margin="0 0 md 0">
         3
       </Box>
-      <Box
-        width="20%"
-        background="primary-300"
-        padding="sm"
-        margin="0 0 md 0"
-      >
+      <Box width="20%" background="primary-300" padding="sm" margin="0 0 md 0">
         4
       </Box>
-      <Box
-        width="20%"
-        background="primary-300"
-        padding="sm"
-        margin="0 0 md 0"
-      >
+      <Box width="20%" background="primary-300" padding="sm" margin="0 0 md 0">
         5
       </Box>
     </Box>
@@ -1456,12 +1416,7 @@ export const Position = () => (
     >
       sticky
     </Box>
-    <Box
-      position="static"
-      padding="md"
-      background="primary-300"
-      height="400px"
-    >
+    <Box position="static" padding="md" background="primary-300" height="400px">
       static
     </Box>
   </Box>
@@ -1526,7 +1481,7 @@ export const Hover = () => (
       padding="md"
       background="white-500"
       borderWidth="xs"
-      borderColor="transparent"
+      borderColor="transparent-500"
       hover={{
         borderWidth: 'xs',
         borderColor: 'primary-500',
