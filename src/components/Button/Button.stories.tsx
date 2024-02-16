@@ -121,7 +121,7 @@ export const EventCallbacks = () => (
 );
 
 export const Anchor = () => (
-  <Button as="a" href="https://ux.palmetto.com" target="_blank">
+  <Button as="a" href="https://ux.hypen.ai" target="_blank">
     I'm an anchor tag
   </Button>
 );
