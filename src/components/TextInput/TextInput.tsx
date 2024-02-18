@@ -1,29 +1,24 @@
+import { Box, BoxProps } from '../Box/Box';
 import React, {
   ChangeEvent,
-  forwardRef,
-  MouseEvent,
-  KeyboardEvent,
   FocusEvent,
   ForwardRefExoticComponent,
-  ReactNode,
   HTMLProps,
   InputHTMLAttributes,
+  KeyboardEvent,
+  MouseEvent,
+  ReactNode,
+  forwardRef,
 } from 'react';
-import classNames from 'classnames';
-import Cleave from 'cleave.js/react';
-import { ChangeEvent as CleaveChangeEvent } from 'cleave.js/react/props';
-import { ResponsiveProp, UnknownPropertiesObjType } from '../../types';
-import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
-import { getInputMaskType } from './TextInputMasks'; // eslint-disable-line import/no-cycle
-import { Box, BoxProps } from '../Box/Box';
-import { Icon } from '../Icon/Icon';
+
 import { FormControl } from '../FormControl/FormControl';
+import { Icon } from '../Icon/Icon';
+import { ResponsiveProp } from '../../types';
+import classNames from 'classnames';
+import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
 import { getAutoCompleteValue } from '../../lib/getAutoCompleteValue';
 import styles from './TextInput.module.scss';
 
-export type InputMaskType =
-  | ('phone' | 'creditCard' | 'date')
-  | UnknownPropertiesObjType;
 export type TextInputSize = 'sm' | 'md' | 'lg';
 export interface TextInputProps {
   /**
@@ -37,9 +32,7 @@ export interface TextInputProps {
   /**
    * Callback function to call on change event.
    */
-  onChange: (
-    event: ChangeEvent<HTMLInputElement> | CleaveChangeEvent<HTMLInputElement>
-  ) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   /**
    * The text value of the input. Required since our Input is a controlled component.
    */
@@ -65,12 +58,6 @@ export interface TextInputProps {
    * Additional clarifying text to help describe the input
    */
   helpText?: ReactNode;
-  /**
-   * Pass a value to apply a mask to the input value.
-   * Can be one of the existing present strings, or a custom object with options.
-   * For options object formats See https://github.com/nosir/cleave.js.
-   */
-  inputMask?: InputMaskType;
   /**
    * Props passed directly to the input element of the component
    */
@@ -152,7 +139,6 @@ export const TextInput: ForwardRefExoticComponent<TextInputProps> = forwardRef<
       error = false,
       helpText,
       hideLabel = false,
-      inputMask = undefined,
       inputProps = {},
       isDisabled = false,
       isRequired = false,
@@ -255,16 +241,7 @@ export const TextInput: ForwardRefExoticComponent<TextInputProps> = forwardRef<
               {prefix}
             </Box>
           )}
-          {!inputMask ? (
-            <Box as="input" {...computedInputProps} />
-          ) : (
-            // eslint-disable-next-line
-            // @ts-ignore
-            <Cleave
-              {...computedInputProps}
-              options={getInputMaskType(inputMask)}
-            />
-          )}
+          <Box as="input" {...computedInputProps} />
           {!!onClear && !!value && renderClearIcon()}
           {suffix && (
             <Box
