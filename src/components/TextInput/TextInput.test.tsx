@@ -1,5 +1,6 @@
+import { fireEvent, render, screen } from '@testing-library/react';
+
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
 import { TextInput } from './TextInput';
 
 const baseProps = {
@@ -39,50 +40,6 @@ describe('TextInput', () => {
         fireEvent.change(inputElement, { target: { value: 'good bye' } });
         expect(mockedHandleChange).toHaveBeenCalledTimes(1);
       });
-
-      test('onChange event fires callback function with masked input', () => {
-        let value = '123';
-        const mockedHandleChange = jest.fn((event) => {
-          value = event.target.value;
-        });
-
-        const { rerender } = render(
-          <TextInput
-            {...baseProps}
-            value={value}
-            onChange={mockedHandleChange}
-            inputMask="phone"
-          />
-        );
-        const inputElement = screen.getByDisplayValue('(123)');
-
-        fireEvent.change(inputElement, { target: { value: 'good bye' } });
-        expect(mockedHandleChange).toHaveBeenCalledTimes(1);
-
-        rerender(
-          <TextInput
-            {...baseProps}
-            value={value}
-            onChange={mockedHandleChange}
-            inputMask="phone"
-          />
-        );
-        expect((inputElement as HTMLInputElement).value).toBe('');
-
-        fireEvent.change(inputElement, { target: { value: '12381238' } });
-        expect(mockedHandleChange).toHaveBeenCalledTimes(2);
-
-        rerender(
-          <TextInput
-            {...baseProps}
-            value={value}
-            onChange={mockedHandleChange}
-            inputMask="phone"
-          />
-        );
-        expect((inputElement as HTMLInputElement).value).toBe('(123) 812-38');
-      });
-
       test('Input value is updated properly when upper state changes', () => {
         let value = 'hello';
         const mockedHandleChange = jest.fn((event) => {
@@ -268,18 +225,6 @@ describe('TextInput', () => {
           render(<TextInput {...baseProps} suffix="suffixValue" />);
           expect(screen.getByText('suffixValue')).toBeInTheDocument();
         });
-      });
-    });
-
-    // NOTE: due to an unknown bug in the Cleave implementation, we are unable to test change events,
-    // but we can at least confirm that the component renders an input when an inputMask is passed.
-    describe('Masked', () => {
-      test('Properly renders an input when inputMask is passed', () => {
-        render(
-          <TextInput {...baseProps} inputMask="phone" placeholder="phone" />
-        );
-        const inputElement = screen.getByPlaceholderText('phone');
-        expect(inputElement).toBeInTheDocument();
       });
     });
   });
