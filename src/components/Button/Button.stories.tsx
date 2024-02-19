@@ -37,10 +37,17 @@ export const Variants = () => (
 
 export const Sizes = () => (
   <Box gap="sm" direction="row" alignItems="flex-start">
-    <Button variant="primary" size="sm">Label</Button>
-    <Button variant="primary" size="md">Label</Button>
-    <Button variant="primary" size="lg">Label</Button>
-    <Button variant="primary"
+    <Button variant="primary" size="sm">
+      Label
+    </Button>
+    <Button variant="primary" size="md">
+      Label
+    </Button>
+    <Button variant="primary" size="lg">
+      Label
+    </Button>
+    <Button
+      variant="primary"
       size={{
         base: 'sm',
         tablet: 'md',

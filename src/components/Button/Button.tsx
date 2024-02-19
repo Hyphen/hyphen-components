@@ -196,12 +196,7 @@ export const Button = forwardRef<
 
     const buttonContent =
       iconPrefix || iconSuffix ? (
-        <Box
-          display="inline-flex"
-          direction="row"
-          alignItems="center"
-          gap='xs'
-        >
+        <Box display="inline-flex" direction="row" alignItems="center" gap="xs">
           {isLoading && (
             <Spinner
               variant={getSpinnerVariant()}
