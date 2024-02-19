@@ -29,7 +29,7 @@ export type ButtonVariant =
   | 'secondary-danger'
   | 'tertiary-danger';
 
-export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg';
+export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface BaseButtonProps {
   /**
@@ -200,7 +200,7 @@ export const Button = forwardRef<
           display="inline-flex"
           direction="row"
           alignItems="center"
-          childGap={size === 'xs' ? '2xs' : 'xs'}
+          gap='xs'
         >
           {isLoading && (
             <Spinner

@@ -57,17 +57,6 @@ describe('Button', () => {
       expect(screen.getByTestId('prefixIcon')).toBeInTheDocument();
       expect(screen.getByTestId('suffixIcon')).toBeInTheDocument();
     });
-
-    test('Renders smaller gap between icon and text for xs sized buttons', () => {
-      render(
-        <Button size="xs" iconSuffix="alarm">
-          Alarm Button
-        </Button>
-      );
-      expect(screen.getByText('Alarm Button').classList).toContain(
-        'm-right-2xs'
-      );
-    });
   });
 
   describe('Sizes', () => {
@@ -85,14 +74,14 @@ describe('Button', () => {
 
     test('It applies responsive classes', () => {
       render(
-        <Button size={{ base: 'xs', tablet: 'sm', desktop: 'md', hd: 'lg' }}>
+        <Button size={{ base: 'lg', tablet: 'sm', desktop: 'md', hd: 'lg' }}>
           button
         </Button>
       );
 
       const btn = screen.getByText('button').closest('button');
 
-      expect(btn?.getAttribute('class')).toContain('size-xs');
+      expect(btn?.getAttribute('class')).toContain('size-lg');
       expect(btn?.getAttribute('class')).toContain('size-sm-tablet');
       expect(btn?.getAttribute('class')).toContain('size-md-desktop');
       expect(btn?.getAttribute('class')).toContain('size-lg-hd');

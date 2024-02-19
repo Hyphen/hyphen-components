@@ -12,4 +12,4 @@ export const BUTTON_VARIANTS: ButtonVariant[] = [
   'tertiary-danger',
 ];
 
-export const BUTTON_SIZES: ButtonSize[] = ['xs', 'sm', 'md', 'lg'];
+export const BUTTON_SIZES: ButtonSize[] = ['sm', 'md', 'lg'];
