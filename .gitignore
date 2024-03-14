@@ -12,3 +12,6 @@ dist
 /dist
 /build
 /storybook-static
+
+# IDEs
+.idea/
