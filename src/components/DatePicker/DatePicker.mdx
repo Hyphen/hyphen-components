@@ -1,0 +1,103 @@
+import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { DatePicker } from './DatePicker';
+import * as Stories from './DatePicker.stories';
+
+<Meta of={Stories} />
+
+# DatePicker
+
+The Datepicker lets users select a date by showing them a calendar.
+
+It is also used in combination with an input and popover by the [DateInput component](/?path=/docs/components-dateinput-overview--basic-usage).
+
+### It can be used for:
+
+- selecting a single date
+- selecting a start and end date
+
+## Props
+
+<ArgsTable of={DatePicker} />
+
+## Basic Example
+
+<Canvas of={Stories.BasicExample}/>
+
+## Date Range
+
+<Canvas of={Stories.DateRange}/>
+
+## Min/Max Dates
+
+<Canvas of={Stories.MinAndMaxDates}/>
+
+## Month Picker
+
+<Canvas of={Stories.MonthPicker}/>
+
+## Show Multiple Months
+
+<Canvas of ={Stories.ShowMultipleMonths}/>
+
+## With Time Picker
+
+<Canvas of={Stories.WithTimePicker}/>
+
+## Open by default on a specific date
+
+<Canvas of={Stories.OpenByDefaultOnASpecificDate}/>
+
+## With Children
+
+<Canvas of={Stories.WithChildren}/>
+
+## Custom Day ClassName
+
+<Canvas of={Stories.CustomDayClassName}/>
+
+
+## Custom Theme
+
+The DatePicker component can be themed by base tokens, or component specific tokens.
+
+<Canvas of={Stories.CustomTheme}/>
+
+## Component Design Tokens
+
+<table>
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>default value</th>
+    </tr>
+  </thead>
+  <tbody>
+    {(() => {
+      const tokens = {
+        '--date-picker-font-color': '--color-brand-dark-500',
+        '--date-picker-font-size': '--size-font-sm',
+        '--date-picker-background-color': '--color-brand-white-500',
+        '--date-picker-border-radius': '--size-border-radius-sm',
+        '--date-picker-item-background-color-selected': '--color-brand-primary-500',
+        '--date-picker-item-background-color-selected-hover': '--color-brand-primary-600',
+        '--date-picker-item-background-color-hover': '--color-brand-primary-50',
+        '--date-picker-navigation-icon-color': '--color-brand-grey-300',
+        '--date-picker-navigation-icon-color-hover': '--color-brand-grey-500',
+        '--date-picker-navigation-icon-color-disabled-hover': '--color-brand-grey-50',
+        '--date-picker-item-border-radius': '--size-border-radius-lg',
+        '--date-picker-item-background-color-in-range': '--color-brand-primary-500',
+        '--date-picker-item-font-color-disabled': '--color-brand-grey-100',
+      };
+      return Object.entries(tokens).map(([name, entry], i) => (
+        <tr key={i}>
+          <td>
+            <code>{name}</code>
+          </td>
+          <td>
+            <code>{entry}</code>
+          </td>
+        </tr>
+      ));
+    })()}
+  </tbody>
+</table>

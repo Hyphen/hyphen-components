@@ -1,0 +1,114 @@
+import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { TextInput } from './TextInput';
+import * as Stories from './TextInput.stories';
+
+<Meta of={Stories} />
+
+# TextInput
+
+Use TextInput to render a single-line text input. Masks can also be applied to custom format the input; currently supported masks include Credit Card and Phone.
+
+<Canvas isExpanded of={Stories.Basic} />
+
+## Props
+
+<ArgsTable of={TextInput} />
+
+## Examples
+
+All that is required to render a basic version of the TextInput is a unique `id`, `label`, `value`, and an onchange event handler passed to the `onChange` prop.
+
+<Canvas of={Stories.Examples} />
+
+## Required
+
+Use the `isRequired` prop to set the `required` and `aria-required` on the underlying input element.
+
+<Canvas of={Stories.Required} />
+
+You can remove or customize the required indicator using the `requiredIndicator` prop.
+
+<Canvas of={Stories.CustomRequiredIndicator} />
+
+## With Help Text
+
+Use the `helpText` prop to add clarifying text beneath the input label.
+
+<Canvas of={Stories.WithHelpText} />
+
+## Placeholder
+
+Use the `placeholder` prop to add a custom placeholder.
+
+<Canvas of={Stories.Placeholder} />
+
+## Autofocus
+
+Use the `autoFocus` prop to autofocus the input.
+
+<Canvas of={Stories.Autofocus} />
+
+## Hidden Label
+
+Use the `hideLabel` prop to not render the label.
+
+<Canvas of={Stories.HiddenLabel} />
+
+## Prefix and Suffix
+
+All that is required to render a basic version of the TextInput is a unique `id`, `label`, `value`, and an onchange event handler passed to the `onChange` prop.
+
+<Canvas of={Stories.PrefixAndSuffix}/>
+
+## Disabled
+
+Use the `isDisabled` prop to mark the input as disabled.
+
+<Canvas of={Stories.Disabled} />
+
+## Clearable
+
+Use the `onClear` prop to display a clear icon (x) when the input has a value. `onClear` will fire
+a callback function when the clear icon is clicked, which can then be handled to clear the value.
+
+<Canvas of={Stories.Clearable} />
+
+## Sizes
+
+Set the `size` of the input to `sm`, `md` or `lg`. The `size` prop is also a `ResponsiveProp`, so it can be sized differently at each [breakpoint](?path=/docs/design-tokens-design-tokens--page#breakpoints) by passing an object.
+
+<Canvas of={Stories.Sizes} />
+
+## With Phone Mask
+
+Use the `type` prop to mark the input type as "tel". Use the `inputMask` prop to set the mask as "phone".
+
+<Canvas of={Stories.WithPhoneMask} />
+
+## With Credit Card Mask
+
+Use the `type` prop to mark the input type as "tel". Use the `inputMask` prop to set the mask as "creditCard".
+
+<Canvas of={Stories.WithCreditCardMask} />
+
+## With Date Mask
+
+Use the `type` prop to mark the input type as "tel". Use the `inputMask` prop to set the mask as "date".
+
+<Canvas of={Stories.WithDateMask} />
+
+## Max Length
+
+Use the `maxLength` prop to limit the number of characters that can be entered into an input.
+
+<Canvas of={Stories.MaxLength} />
+
+## Validation Error
+
+Use the `error` prop to mark the input as invalid. `error` accepts a `boolean`, `string`, or `node`.
+
+<Canvas of={Stories.ValidationError} />
+
+## Component Design Tokens
+
+This component shares component design tokens with all form controls. For a complete list of tokens, see the [Theming Form Controls documentation](/docs/theming-form-controls--custom-theme-form).

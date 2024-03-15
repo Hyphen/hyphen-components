@@ -1,0 +1,82 @@
+import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { RadioGroup } from './RadioGroup';
+import * as Stories from './RadioGroup.stories';
+
+
+<Meta of={Stories} />
+
+# RadioGroup
+
+Use a RadioGroup when a user is required to select one of five or fewer options. It is ideal for this scenario because the options are displayed without having to interact. If there are more than five options, use the [SelectInput](?path=/docs/components-selectinput-overview--default-story) instead.
+
+## Props
+
+<ArgsTable of={RadioGroup} />
+
+## Default
+
+All that is required to render a basic version of the RadioGroup is the group's `name`, an onchange event handler passed to the `onChange` prop, and a list of options passed to the `options` prop. Each option must include a unique `id`, a `value`, and a `label`.
+
+<Canvas isExpanded of={Stories.Default}/>
+
+## Title
+
+Use the `title` prop to add a title.
+
+<Canvas of={Stories.Title}/>
+
+## Title and Description
+
+Use the `title` and `description` props to add a title and description.
+
+<Canvas of={Stories.TitleAndDescription}/>
+
+## Required
+
+Use the `isRequired` prop to mark the group as requiring at least one selection. To avoid confusion as to whether a radio button group is required or not, authors are encouraged to specify the attribute on all the radio buttons in a group. We recommend to avoid having radio button groups that do not have any initially checked controls in the first place, because this is a state that the user cannot return to.
+
+<Canvas of={Stories.Required}/>
+
+You can remove or customize the required indicator using the `requiredIndicator` prop.
+
+<Canvas of={Stories.CustomRequiredIndicator}/>
+
+## Pre-Selected Option
+
+Use the `value` prop to pre-select an option.
+
+<Canvas of={Stories.PreSelectedOption}/>
+
+## Disabled Option
+
+An individual option, or multiple options can be disabled by marking them as disabled in the list of options.
+
+<Canvas of={Stories.DisabledOption}/>
+
+## Disabled Group
+
+A group can be fully disabled by using the `isDisabled` prop.
+
+<Canvas of={Stories.DisabledGroup}/>
+
+## Error
+
+Use the `error` prop to mark the input as invalid. `error` accepts a `boolean`, `string`, or `node`. If either a `string` or `node` is passed, a validation message is displayed below it.
+
+<Canvas of={Stories.Error}/>
+
+## Sizes
+
+Use the `size` prop to render differently sized radio icons.
+
+<Canvas of={Stories.Sizes}/>
+
+## Horizontally Aligned
+
+Use the `direction` prop change the alignment of the radio inputs.
+
+<Canvas of={Stories.HorizontallyAligned}/>
+
+## Component Design Tokens
+
+This component shares component design tokens with all form controls. For a complete list of tokens, see the [Theming Form Controls documentation](/docs/theming-form-controls--custom-theme-form).

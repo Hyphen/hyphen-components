@@ -1,0 +1,117 @@
+import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { TextareaInput } from './TextareaInput';
+import * as Stories from './TextareaInput.stories';
+
+<Meta of={Stories} />
+
+# TextareaInput
+
+Use TextareaInput to render a multi-line text input.
+
+<Canvas isExpanded of={Stories.Basic}/>
+
+## Props
+
+<ArgsTable of={TextareaInput} />
+
+## Examples
+
+All that is required to render a basic version of the TextareaInput is a unique `id`, `label`, `value`, and an onchange event handler passed to the `onChange` prop.
+The input is vertically resizable by default.
+
+<Canvas of={Stories.Default}/>
+
+## Required
+
+Use the `isRequired` prop to set the `required` and `aria-required` on the underlying input element.
+
+<Canvas of={Stories.Required}/>
+
+You can remove or customize the required indicator using the `requiredIndicator` prop.
+
+<Canvas of={Stories.CustomRequiredIndicator}/>
+
+## Help Text
+
+Use the `helpText` prop to add clarifying text beneath the input label.
+
+<Canvas of={Stories.HelpText}/>
+## Resize
+
+The `resize` prop accepts `horizontal`, `vertical`, `both` or `none` to control the users ability to resize the input.
+
+<Canvas of={Stories.Resize}/>
+
+## Sizes
+
+Set the `size` of the input to `sm`, `md` or `lg`. The `size` prop is also a `ResponsiveProp`, so it can be sized differently at each [breakpoint](?path=/docs/design-tokens-design-tokens--page#breakpoints) by passing an object.
+
+<Canvas of={Stories.Sizes}/>
+
+## Placeholder
+
+Use the `placeholder` prop to add a custom placeholder.
+
+<Canvas of={Stories.Placeholder}/>
+
+## Autofocus
+
+Use the `autoFocus` prop to autofocus the input.
+
+<Canvas of={Stories.Autofocus}/>
+
+## Hidden Label
+
+Use the `hideLabel` prop to not render the label.
+
+<Canvas of={Stories.HiddenLabel}/>
+
+## Disabled
+
+Use the `isDisabled` prop to mark the input as disabled.
+
+<Canvas of={Stories.Disabled}/>
+
+## Disabled with Value
+
+Use the `isDisabled` prop to mark the input as disabled. Disabled inputs can have values that are either preset, or entered by users.
+
+<Canvas of={Stories.DisabledWithValue}/>
+
+## Disabled with Placeholder
+
+Use the `isDisabled` prop to mark the input as disabled. Disabled inputs can have placeholders.
+
+<Canvas of={Stories.DisabledWithPlaceholder}/>
+
+## Max Length
+
+Use the `maxLength` prop to limit the number of characters that can be entered into an input.
+
+<Canvas of={Stories.MaxLength}/>
+
+## Required with Error
+
+Use the `error` prop to mark the input as invalid. `error` accepts a `boolean`, `string`, or `node`. A `boolean` is passed in this example.
+
+<Canvas of={Stories.RequiredWithError}/>
+
+## Required with Error and Validation Message
+
+Pass a `string` or `node` to the `error` prop to render a validation message.
+
+<Canvas of={Stories.RequiredWithErrorAndValidationMessage}/>
+
+## Not Required with Error and Validation Message
+
+An input does not need to be marked as required to render a validation message.
+
+<Canvas of={Stories.NotRequiredWithErrorAndValidationMessage}/>
+
+## Error with Hidden Label
+
+<Canvas of={Stories.ErrorWithHiddenLabel}/>
+
+## Component Design Tokens
+
+This component shares component design tokens with all form controls. For a complete list of tokens, see the [Theming Form Controls documentation](/docs/theming-form-controls--custom-theme-form).
