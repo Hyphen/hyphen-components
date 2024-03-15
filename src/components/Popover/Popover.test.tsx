@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  render,
-  screen,
-  waitFor,
-  fireEvent,
-} from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { Placement } from '@popperjs/core';
 import { Popover } from './Popover';
 
@@ -13,7 +8,11 @@ describe('Popover', () => {
     it('Renders a popover with default props', async () => {
       // NOTE: popperJS is throwing a warning due to missing act, but it is unclear how to fix these.
       // https://github.com/popperjs/react-popper/issues/368
-      render(<Popover isOpen content={<>hello</>}><p>trigger</p></Popover>);
+      render(
+        <Popover isOpen content={<>hello</>}>
+          <p>trigger</p>
+        </Popover>
+      );
 
       const popoverContent = screen.getByText('hello');
       const popoverContainer = screen.getByRole('dialog');
@@ -26,7 +25,12 @@ describe('Popover', () => {
       expect(popoverContainer).toHaveAttribute('aria-hidden', 'false');
       expect(popoverContainer).toHaveClass('background-color-white');
       expect(popoverContainer).toHaveClass('p-sm');
-      await waitFor(() => expect(popoverContainer).toHaveAttribute('data-popper-placement', 'right'));
+      await waitFor(() =>
+        expect(popoverContainer).toHaveAttribute(
+          'data-popper-placement',
+          'right'
+        )
+      );
     });
   });
 
@@ -40,7 +44,7 @@ describe('Popover', () => {
           onClickOutside={mockedOnClickOutside}
         >
           <p>trigger</p>
-        </Popover>,
+        </Popover>
       );
 
       const popover = screen.getByText('hello');
@@ -71,12 +75,21 @@ describe('Popover', () => {
       'left-end',
     ];
 
-    positions.forEach(position => {
+    positions.forEach((position) => {
       it(`Places the tooltop correctly in position: ${position} when prop is passed`, async () => {
-        render(<Popover isOpen content={<>hello</>} placement={position}><p>trigger</p></Popover>);
+        render(
+          <Popover isOpen content={<>hello</>} placement={position}>
+            <p>trigger</p>
+          </Popover>
+        );
 
         const popoverContainer = screen.getByRole('dialog');
-        await waitFor(() => expect(popoverContainer).toHaveAttribute('data-popper-placement', position));
+        await waitFor(() =>
+          expect(popoverContainer).toHaveAttribute(
+            'data-popper-placement',
+            position
+          )
+        );
       });
     });
   });
@@ -89,7 +102,11 @@ describe('Popover', () => {
             <div id="nest2">
               <Popover
                 isOpen
-                content={<button type="button" id="inside-button">hello</button>}
+                content={
+                  <button type="button" id="inside-button">
+                    hello
+                  </button>
+                }
                 withPortal
                 portalTarget={document.body}
               >
@@ -97,10 +114,15 @@ describe('Popover', () => {
               </Popover>
             </div>
           </div>
-        </>,
+        </>
       );
 
-      await waitFor(() => { expect(document.body.children[1]).toHaveAttribute('data-popper-placement', 'right'); });
+      await waitFor(() => {
+        expect(document.body.children[1]).toHaveAttribute(
+          'data-popper-placement',
+          'right'
+        );
+      });
     });
   });
 });

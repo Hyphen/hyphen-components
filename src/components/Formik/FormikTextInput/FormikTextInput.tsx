@@ -17,21 +17,14 @@ export interface FormikTextInputProps extends Omit<TextInputProps, 'onChange'> {
   onChange?: TextInputProps['onChange'];
 }
 
-export const FormikTextInput: React.FC<FormikTextInputProps> = (
-  {
-    field: {
-      name,
-      onBlur,
-      onChange: formikOnChange,
-      value,
-    },
-    form: { touched, errors },
-    onChange,
-    id,
-    label,
-    ...props
-  },
-) => (
+export const FormikTextInput: React.FC<FormikTextInputProps> = ({
+  field: { name, onBlur, onChange: formikOnChange, value },
+  form: { touched, errors },
+  onChange,
+  id,
+  label,
+  ...props
+}) => (
   <TextInput
     {...props}
     id={id}

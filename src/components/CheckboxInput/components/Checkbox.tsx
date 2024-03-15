@@ -9,7 +9,8 @@ import styles from './Checkbox.module.scss';
 type BaseSize = 'sm' | 'md' | 'lg';
 export type CheckboxSize = BaseSize | ResponsiveProp<BaseSize>;
 
-export interface CheckboxProps extends Omit<BoxProps, 'radius' | 'background' | 'as' | 'height'> {
+export interface CheckboxProps
+  extends Omit<BoxProps, 'radius' | 'background' | 'as' | 'height'> {
   /**
    * The id attribute of the input.
    */
@@ -95,7 +96,7 @@ export const Checkbox: React.FC<CheckboxProps> = React.forwardRef(
       value = undefined,
       ...restProps
     },
-    ref,
+    ref
   ) => {
     const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -131,7 +132,7 @@ export const Checkbox: React.FC<CheckboxProps> = React.forwardRef(
       required: isRequired,
       type: 'checkbox',
       ref: inputRef,
-      ...value && { value },
+      ...(value && { value }),
     };
 
     const responsiveClasses = generateResponsiveClasses('size', size);
@@ -139,11 +140,11 @@ export const Checkbox: React.FC<CheckboxProps> = React.forwardRef(
     const containerClasses = classNames(
       styles.checkbox,
       className,
-      ...responsiveClasses.map(c => (styles[c])),
-      { [styles.hidden]: isHidden },
+      ...responsiveClasses.map((c) => styles[c]),
+      { [styles.hidden]: isHidden }
     );
 
-    const iconClasses = classNames(...responsiveClasses.map(c => (styles[c])));
+    const iconClasses = classNames(...responsiveClasses.map((c) => styles[c]));
 
     return (
       <Box
@@ -171,5 +172,5 @@ export const Checkbox: React.FC<CheckboxProps> = React.forwardRef(
         )}
       </Box>
     );
-  },
+  }
 );

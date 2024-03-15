@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  fireEvent,
-  render,
-  screen,
-} from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { DatePicker } from './DatePicker';
 
 describe('DatePicker', () => {
@@ -20,12 +16,7 @@ describe('DatePicker', () => {
     it('Fires the expected callback when date is selected', () => {
       const openToDate = new Date('1995, 11, 14');
       const mockedOnChange = jest.fn();
-      render(
-        <DatePicker
-          onChange={mockedOnChange}
-          openToDate={openToDate}
-        />,
-      );
+      render(<DatePicker onChange={mockedOnChange} openToDate={openToDate} />);
       const fourteenth = screen.getByText('14');
       expect(fourteenth).toBeInTheDocument();
       fireEvent.click(fourteenth);

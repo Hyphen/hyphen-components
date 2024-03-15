@@ -6,31 +6,34 @@ import {
   waitFor,
   act,
 } from '@testing-library/react';
-import {
-  Formik, Form, Field, getIn, setIn,
-} from 'formik';
+import { Formik, Form, Field, getIn, setIn } from 'formik';
 import { FormikRadioGroup } from './FormikRadioGroup';
 
 const testGroupName = 'colors';
 
-const groupOptions = [{
-  id: 'purple',
-  value: 'purple',
-  label: 'Purple',
-},
-{
-  id: 'green',
-  value: 'green',
-  label: 'Green',
-},
-{
-  id: 'blue',
-  value: 'blue',
-  label: 'Blue',
-  disabled: true,
-}];
+const groupOptions = [
+  {
+    id: 'purple',
+    value: 'purple',
+    label: 'Purple',
+  },
+  {
+    id: 'green',
+    value: 'green',
+    label: 'Green',
+  },
+  {
+    id: 'blue',
+    value: 'blue',
+    label: 'Blue',
+    disabled: true,
+  },
+];
 
-const handleValidation = testValueKey => values => (getIn(values, testValueKey) ? {} : setIn({}, testValueKey, 'selection is required'));
+const handleValidation = (testValueKey) => (values) =>
+  getIn(values, testValueKey)
+    ? {}
+    : setIn({}, testValueKey, 'selection is required');
 
 const renderForm = (initialValue, props, testValueKey = testGroupName) => (
   <Formik
@@ -59,31 +62,45 @@ const renderForm = (initialValue, props, testValueKey = testGroupName) => (
 describe('FormikRadioGroup', () => {
   describe('Callback Handling', () => {
     describe('onChange', () => {
-      test('Custom onChange event fires callback function, overwriting Formik\'s onChange', () => {
+      test("Custom onChange event fires callback function, overwriting Formik's onChange", () => {
         let value = null;
-        const mockedHandleChange = jest.fn(event => { value = event.target.value; });
+        const mockedHandleChange = jest.fn((event) => {
+          value = event.target.value;
+        });
 
-        const { getByLabelText } = render(renderForm(value, { onChange: mockedHandleChange }));
+        const { getByLabelText } = render(
+          renderForm(value, { onChange: mockedHandleChange })
+        );
         const blueRadioInput = getByLabelText('Blue');
 
-        act(() => { fireEvent.click(blueRadioInput); });
+        act(() => {
+          fireEvent.click(blueRadioInput);
+        });
 
         expect(mockedHandleChange).toHaveBeenCalledTimes(1);
         expect(value).toBe('blue');
       });
 
       test('Standard Formik onChange modifies the target value', async () => {
-        const { getByLabelText, getByText, queryByText } = render(renderForm(null, { isRequired: true }));
+        const { getByLabelText, getByText, queryByText } = render(
+          renderForm(null, { isRequired: true })
+        );
         const submitButton = getByText('submit');
         const blueRadioInput = getByLabelText('Blue');
         expect(blueRadioInput.checked).toBe(false);
 
         fireEvent.click(submitButton);
-        await waitFor(() => expect(getByText('selection is required')).toBeInTheDocument());
+        await waitFor(() =>
+          expect(getByText('selection is required')).toBeInTheDocument()
+        );
 
-        act(() => { fireEvent.click(blueRadioInput); });
+        act(() => {
+          fireEvent.click(blueRadioInput);
+        });
         expect(blueRadioInput.checked).toBe(true);
-        await waitFor(() => expect(queryByText('selection is required')).not.toBeInTheDocument());
+        await waitFor(() =>
+          expect(queryByText('selection is required')).not.toBeInTheDocument()
+        );
       });
     });
   });
@@ -109,7 +126,12 @@ describe('FormikRadioGroup', () => {
 
     describe('With Title and Description', () => {
       test('it renders the title and description', () => {
-        render(renderForm(null, { title: 'Mock Title', description: 'Mock Description' }));
+        render(
+          renderForm(null, {
+            title: 'Mock Title',
+            description: 'Mock Description',
+          })
+        );
 
         const title = screen.getByText('Mock Title');
         const description = screen.getByText('Mock Description');
@@ -155,14 +177,24 @@ describe('FormikRadioGroup', () => {
 
         fireEvent.click(submitButton);
 
-        await waitFor(() => expect(getByText('selection is required')).toBeInTheDocument());
+        await waitFor(() =>
+          expect(getByText('selection is required')).toBeInTheDocument()
+        );
       });
 
       test('it renders a validation message with nested value', async () => {
-        const { getByText } = render(renderForm({ outer: { nested: null } }, { isRequired: true }, `${testGroupName}.outer.nested`));
+        const { getByText } = render(
+          renderForm(
+            { outer: { nested: null } },
+            { isRequired: true },
+            `${testGroupName}.outer.nested`
+          )
+        );
         const submitButton = getByText('submit');
         fireEvent.click(submitButton);
-        await waitFor(() => expect(getByText('selection is required')).toBeInTheDocument());
+        await waitFor(() =>
+          expect(getByText('selection is required')).toBeInTheDocument()
+        );
       });
     });
   });

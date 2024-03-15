@@ -17,15 +17,28 @@ export interface BreakpointState {
 export const useBreakpoint = (): BreakpointState => {
   const windowSize = useWindowSize();
 
-  const [breakpoint, setBreakpoint] = useState<Breakpoint>({ ...defaultBreakpoint });
+  const [breakpoint, setBreakpoint] = useState<Breakpoint>({
+    ...defaultBreakpoint,
+  });
 
   useIsomorphicLayoutEffect(() => {
-    const sortedBreakpoints = [...BREAKPOINTS].sort((a, b) => b.minWidth - a.minWidth);
-    const activeBreakpoint = windowSize && sortedBreakpoints.find(b => b.minWidth <= (windowSize.innerWidth as number));
+    const sortedBreakpoints = [...BREAKPOINTS].sort(
+      (a, b) => b.minWidth - a.minWidth
+    );
+    const activeBreakpoint =
+      windowSize &&
+      sortedBreakpoints.find(
+        (b) => b.minWidth <= (windowSize.innerWidth as number)
+      );
 
     setBreakpoint(activeBreakpoint || { ...defaultBreakpoint });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [windowSize.innerWidth, windowSize.innerHeight, windowSize.outerWidth, windowSize.outerHeight]);
+  }, [
+    windowSize.innerWidth,
+    windowSize.innerHeight,
+    windowSize.outerWidth,
+    windowSize.outerHeight,
+  ]);
 
   return {
     isPhone: breakpoint.name === 'base',

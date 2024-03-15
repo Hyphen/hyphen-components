@@ -11,12 +11,14 @@ describe('Checkbox', () => {
           label="test checkbox"
           onChange={jest.fn(() => null)}
           isChecked={false}
-        />,
+        />
       );
 
       const input = screen.getByLabelText('test checkbox');
       expect(input).toBeInTheDocument();
-      expect(screen.getByTestId('icon-testid--checkbox-btn')).toBeInTheDocument();
+      expect(
+        screen.getByTestId('icon-testid--checkbox-btn')
+      ).toBeInTheDocument();
     });
   });
 
@@ -28,12 +30,14 @@ describe('Checkbox', () => {
           label="test checkbox"
           onChange={jest.fn(() => null)}
           isChecked
-        />,
+        />
       );
 
       const input = screen.getByLabelText('test checkbox');
       expect(input).toHaveAttribute('checked');
-      expect(screen.getByTestId('icon-testid--checkbox-btn-checked')).toBeInTheDocument();
+      expect(
+        screen.getByTestId('icon-testid--checkbox-btn-checked')
+      ).toBeInTheDocument();
     });
   });
 
@@ -46,12 +50,14 @@ describe('Checkbox', () => {
           onChange={jest.fn(() => null)}
           isChecked
           isIndeterminate
-        />,
+        />
       );
 
       const input = screen.getByLabelText('test checkbox');
       expect(input).toHaveAttribute('checked');
-      expect(screen.getByTestId('icon-testid--checkbox-btn-indeterminate')).toBeInTheDocument();
+      expect(
+        screen.getByTestId('icon-testid--checkbox-btn-indeterminate')
+      ).toBeInTheDocument();
     });
 
     test('It renders an indeterminate icon if isIndeterminate is true and checkbox is unchecked', () => {
@@ -62,10 +68,12 @@ describe('Checkbox', () => {
           onChange={jest.fn(() => null)}
           isChecked={false}
           isIndeterminate
-        />,
+        />
       );
 
-      expect(screen.getByTestId('icon-testid--checkbox-btn-indeterminate')).toBeInTheDocument();
+      expect(
+        screen.getByTestId('icon-testid--checkbox-btn-indeterminate')
+      ).toBeInTheDocument();
     });
   });
 
@@ -78,7 +86,7 @@ describe('Checkbox', () => {
           label="test checkbox"
           onChange={jest.fn(() => null)}
           isDisabled
-        />,
+        />
       );
 
       const input = screen.getByLabelText('test checkbox');
@@ -96,7 +104,7 @@ describe('Checkbox', () => {
           label="test checkbox"
           isChecked={false}
           onChange={mockedHandleChange}
-        />,
+        />
       );
       const checkbox = getByLabelText('test checkbox');
       fireEvent.click(checkbox);
@@ -105,7 +113,7 @@ describe('Checkbox', () => {
 
     test('calls onChange and passes checked value in event', () => {
       let value = true;
-      const mockedHandleChange = jest.fn(event => {
+      const mockedHandleChange = jest.fn((event) => {
         value = event.target.checked;
       });
 
@@ -115,7 +123,7 @@ describe('Checkbox', () => {
           label="test checkbox"
           onChange={mockedHandleChange}
           isChecked={value}
-        />,
+        />
       );
       const checkbox = getByLabelText('test checkbox');
       fireEvent.click(checkbox);
@@ -139,7 +147,7 @@ describe('Checkbox', () => {
             onFocus={mockedHandleFocus}
             onBlur={undefined}
           />
-        </div>,
+        </div>
       );
       getByLabelText('test checkbox').focus();
       getByText('focus').focus();
@@ -161,7 +169,7 @@ describe('Checkbox', () => {
             onChange={() => null}
             onBlur={mockedHandleBlur}
           />
-        </div>,
+        </div>
       );
       getByLabelText('test checkbox').focus();
       getByText('focus').focus();
@@ -181,10 +189,12 @@ describe('Checkbox', () => {
           isHidden
           isChecked
           label="mockLabel"
-        />,
+        />
       );
 
-      const checkboxInputContainer = screen.getByRole('checkbox').closest('div');
+      const checkboxInputContainer = screen
+        .getByRole('checkbox')
+        .closest('div');
       expect(checkboxInputContainer).toHaveClass('hidden');
     });
   });

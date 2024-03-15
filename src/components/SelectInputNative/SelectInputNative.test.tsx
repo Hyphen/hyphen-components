@@ -17,7 +17,9 @@ function getByTextWithMarkup(text: string) {
     const elementHasText = hasText(element);
     // eslint-disable-next-line
     // @ts-ignore
-    const childrenDontHaveText = Array.from(element.children).every(child => !hasText(child));
+    const childrenDontHaveText = Array.from(element.children).every(
+      (child) => !hasText(child)
+    );
 
     return elementHasText && childrenDontHaveText;
   };
@@ -36,7 +38,7 @@ describe('SelectInputNative', () => {
           label="onchange test"
           options={selectOptions}
           value={null}
-        />,
+        />
       );
 
       await fireEvent.change(getByLabelText('onchange test'));
@@ -57,7 +59,7 @@ describe('SelectInputNative', () => {
           options={selectOptions}
           value={null}
           label="onfocus test"
-        />,
+        />
       );
       const select = screen.getByLabelText('onfocus test');
       fireEvent.focus(select);
@@ -78,7 +80,7 @@ describe('SelectInputNative', () => {
           options={selectOptions}
           value={null}
           label="onblur test"
-        />,
+        />
       );
 
       const select = screen.getByLabelText('onblur test');
@@ -102,7 +104,7 @@ describe('SelectInputNative', () => {
             placeholder="Test Placeholder"
             options={selectOptions}
             value={null}
-          />,
+          />
         );
         expect(screen.queryByText('hidden label')).toBeNull();
         expect(screen.getByText('Test Placeholder')).toBeInTheDocument();
@@ -120,7 +122,7 @@ describe('SelectInputNative', () => {
           onChange={mockedHandleChange}
           options={selectOptions}
           value={null}
-        />,
+        />
       );
       const inputElement = screen.getByLabelText('hidden label');
       expect(inputElement).not.toHaveAttribute('aria-labelledby');
@@ -137,7 +139,7 @@ describe('SelectInputNative', () => {
             label="Select Label"
             options={selectOptions}
             value={selectOptions[1].value}
-          />,
+          />
         );
 
         expect(screen.getByLabelText('Select Label')).toBeInTheDocument();
@@ -152,10 +154,13 @@ describe('SelectInputNative', () => {
             options={selectOptions}
             value={null}
             onChange={() => null}
-          />,
+          />
         );
         const inputElement = screen.getByLabelText('test label');
-        expect(inputElement).toHaveAttribute('aria-labelledby', 'testInputLabel');
+        expect(inputElement).toHaveAttribute(
+          'aria-labelledby',
+          'testInputLabel'
+        );
         expect(document.getElementById('testInputLabel')).toBeInTheDocument();
       });
     });
@@ -196,7 +201,7 @@ describe('SelectInputNative', () => {
             options={selectOptions}
             isRequired
             value={selectOptions[0].value}
-          />,
+          />
         );
 
         const inputElement = screen.getByLabelText('Required Select');
@@ -215,10 +220,12 @@ describe('SelectInputNative', () => {
             options={selectOptions}
             isRequired
             value={selectOptions[0].value}
-          />,
+          />
         );
 
-        expect(screen.getByText(getByTextWithMarkup('Select Label *'))).toBeInTheDocument();
+        expect(
+          screen.getByText(getByTextWithMarkup('Select Label *'))
+        ).toBeInTheDocument();
       });
     });
 
@@ -234,7 +241,7 @@ describe('SelectInputNative', () => {
             options={selectOptions}
             isDisabled
             value={null}
-          />,
+          />
         );
         const select = screen.getByLabelText('disabled test');
         expect(select).toBeDisabled();
@@ -253,7 +260,7 @@ describe('SelectInputNative', () => {
             options={selectOptions}
             error="Helpful message"
             value={null}
-          />,
+          />
         );
 
         expect(screen.getByText('Helpful message')).toBeInTheDocument();
@@ -263,15 +270,11 @@ describe('SelectInputNative', () => {
 
   describe('Sizes', () => {
     const mockedHandleChange = jest.fn();
-    const sizes = [
-      'sm',
-      'md',
-      'lg',
-    ] as ('sm' | 'md' | 'lg')[];
+    const sizes = ['sm', 'md', 'lg'] as ('sm' | 'md' | 'lg')[];
 
     const breakpoints: BreakpointSize[] = ['tablet', 'desktop', 'hd'];
 
-    sizes.forEach(size => {
+    sizes.forEach((size) => {
       test(`it has a ${size} class applied to it`, () => {
         render(
           <SelectInputNative
@@ -281,14 +284,14 @@ describe('SelectInputNative', () => {
             value={selectOptions[0].value}
             size={size}
             label="size test"
-          />,
+          />
         );
         const select = screen.getByLabelText('size test');
         const selectParent = select.closest('div');
         expect(selectParent?.getAttribute('class')).toContain(size);
       });
 
-      breakpoints.forEach(breakpoint => {
+      breakpoints.forEach((breakpoint) => {
         test(`it applies responsive classes for breakpoint: ${breakpoint} and size: ${size}`, () => {
           render(
             <SelectInputNative
@@ -298,12 +301,14 @@ describe('SelectInputNative', () => {
               value={selectOptions[0].value}
               size={{ [breakpoint]: size }}
               label="size test"
-            />,
+            />
           );
           const select = screen.getByLabelText('size test');
           const selectParent = select.closest('div');
 
-          expect(selectParent?.getAttribute('class')).toContain(`size-${size}-${breakpoint}`);
+          expect(selectParent?.getAttribute('class')).toContain(
+            `size-${size}-${breakpoint}`
+          );
         });
       });
     });
@@ -322,7 +327,7 @@ describe('SelectInputNative', () => {
             hd: 'sm',
           }}
           label="size test"
-        />,
+        />
       );
       const select = screen.getByLabelText('size test');
       const selectParent = select.closest('div');

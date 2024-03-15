@@ -37,7 +37,10 @@ export const CheckboxIcon: React.FC<CheckboxIconProps> = ({
   ...restProps
 }) => {
   let color: FontColor = 'grey-500';
-  let name: 'checkbox-btn' | 'checkbox-btn-checked' | 'checkbox-btn-indeterminate' = 'checkbox-btn';
+  let name:
+    | 'checkbox-btn'
+    | 'checkbox-btn-checked'
+    | 'checkbox-btn-indeterminate' = 'checkbox-btn';
 
   if (isChecked) name = 'checkbox-btn-checked';
   else name = 'checkbox-btn';
@@ -56,7 +59,12 @@ export const CheckboxIcon: React.FC<CheckboxIconProps> = ({
   if (isDisabled && error) color = 'danger-200';
 
   return (
-    <Box className={className} display="inline-block" color={color} {...restProps}>
+    <Box
+      className={className}
+      display="inline-block"
+      color={color}
+      {...restProps}
+    >
       <Icon name={name} />
     </Box>
   );

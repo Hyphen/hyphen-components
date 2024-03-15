@@ -41,7 +41,7 @@ export interface UseOpenCloseState {
 }
 
 export const useOpenClose = (
-  props: UseOpenCloseProps = {},
+  props: UseOpenCloseProps = {}
 ): UseOpenCloseState => {
   const {
     defaultIsOpen,

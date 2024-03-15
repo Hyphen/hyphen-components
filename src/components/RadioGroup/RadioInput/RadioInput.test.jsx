@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  render,
-  fireEvent,
-  screen,
-} from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import { RadioInput } from './RadioInput';
 
 const mockOption = {
@@ -23,7 +19,7 @@ describe('RadioInput', () => {
             name="mockName"
             onChange={mockedHandleChange}
             option={mockOption}
-          />,
+          />
         );
 
         const radioInput = screen.getByLabelText('Chocolate');
@@ -33,14 +29,16 @@ describe('RadioInput', () => {
 
       test('calls onChange and passes checked value in event', () => {
         let value = null;
-        const mockedHandleChangeWithValue = jest.fn(event => { value = event.target.value; });
+        const mockedHandleChangeWithValue = jest.fn((event) => {
+          value = event.target.value;
+        });
 
         render(
           <RadioInput
             name="mockName"
             onChange={mockedHandleChangeWithValue}
             option={mockOption}
-          />,
+          />
         );
         const radioInput = screen.getByLabelText('Chocolate');
         fireEvent.click(radioInput);
@@ -59,7 +57,7 @@ describe('RadioInput', () => {
             onChange={mockedHandleChange}
             option={mockOption}
             onFocus={mockedHandleFocus}
-          />,
+          />
         );
         const radioInput = screen.getByLabelText('Chocolate');
         fireEvent.focus(radioInput);
@@ -77,7 +75,7 @@ describe('RadioInput', () => {
             onChange={mockedHandleChange}
             option={mockOption}
             onBlur={mockedHandleBlur}
-          />,
+          />
         );
         const radioInput = screen.getByLabelText('Chocolate');
         fireEvent.blur(radioInput);
@@ -94,7 +92,7 @@ describe('RadioInput', () => {
             name="mockName"
             onChange={mockedHandleChange}
             option={mockOption}
-          />,
+          />
         );
 
         const radioInputElement = screen.getByRole('radio');
@@ -107,7 +105,7 @@ describe('RadioInput', () => {
             name="mockName"
             onChange={mockedHandleChange}
             option={mockOption}
-          />,
+          />
         );
 
         const radioInputLabel = screen.getByLabelText('Chocolate');
@@ -123,7 +121,7 @@ describe('RadioInput', () => {
             onChange={mockedHandleChange}
             option={mockOption}
             isDisabled
-          />,
+          />
         );
 
         const radioInputElement = screen.getByRole('radio');
@@ -139,7 +137,7 @@ describe('RadioInput', () => {
             onChange={mockedHandleChange}
             option={mockOption}
             isHidden
-          />,
+          />
         );
 
         const radioInputContainer = screen.getByRole('radio').closest('div');

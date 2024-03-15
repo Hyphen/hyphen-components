@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  screen,
-  render,
-  fireEvent,
-} from '@testing-library/react';
+import { screen, render, fireEvent } from '@testing-library/react';
 import { TimePickerNative } from './TimePickerNative';
 
 describe('TimePickerNative', () => {
@@ -16,7 +12,7 @@ describe('TimePickerNative', () => {
           onChange={() => null}
           value={null}
           label="Select Time"
-        />,
+        />
       );
 
       const timePicker = screen.getByLabelText('Select Time');
@@ -30,7 +26,7 @@ describe('TimePickerNative', () => {
         '01:15 AM',
       ];
       expect(timePicker).toBeInTheDocument();
-      expectedTimes.forEach(time => {
+      expectedTimes.forEach((time) => {
         expect(screen.queryByText(time)).toBeInTheDocument();
       });
     });
@@ -48,29 +44,20 @@ describe('TimePickerNative', () => {
           interval={3600}
           startTime={{ hour: 9, minute: 0 }}
           endTime={{ hour: 12, minute: 0 }}
-        />,
+        />
       );
 
       const timePicker = screen.getByLabelText('Select Time');
 
-      const expectedTimes = [
-        '09:00 AM',
-        '10:00 AM',
-        '11:00 AM',
-      ];
+      const expectedTimes = ['09:00 AM', '10:00 AM', '11:00 AM'];
 
-      const notExpected = [
-        '12:00 PM',
-        '12:45 AM',
-        '01:00 AM',
-        '01:15 AM',
-      ];
+      const notExpected = ['12:00 PM', '12:45 AM', '01:00 AM', '01:15 AM'];
       expect(timePicker).toBeInTheDocument();
-      expectedTimes.forEach(time => {
+      expectedTimes.forEach((time) => {
         expect(screen.queryByText(time)).toBeInTheDocument();
       });
 
-      notExpected.forEach(time => {
+      notExpected.forEach((time) => {
         expect(screen.queryByText(time)).toBe(null);
       });
     });
@@ -89,18 +76,14 @@ describe('TimePickerNative', () => {
           startTime={{ hour: 13, minute: 0 }}
           endTime={{ hour: 15, minute: 1 }}
           interval={3600}
-        />,
+        />
       );
 
       const timePicker = screen.getByLabelText('Select Time');
 
-      const expectedTimes = [
-        '13:00:00',
-        '14:00:00',
-        '15:00:00',
-      ];
+      const expectedTimes = ['13:00:00', '14:00:00', '15:00:00'];
       expect(timePicker).toBeInTheDocument();
-      expectedTimes.forEach(time => {
+      expectedTimes.forEach((time) => {
         expect(screen.queryByText(time)).toBeInTheDocument();
       });
     });
@@ -121,7 +104,7 @@ describe('TimePickerNative', () => {
           startTime={{ hour: 13, minute: 0 }}
           endTime={{ hour: 15, minute: 1 }}
           interval={3600}
-        />,
+        />
       );
 
       const timePicker = screen.getByLabelText('Select Time');

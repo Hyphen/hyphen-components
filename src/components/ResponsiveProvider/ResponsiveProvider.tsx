@@ -9,7 +9,9 @@ export interface ResponsiveContextShape {
   outerHeight?: number;
 }
 
-export const ResponsiveContext = createContext<ResponsiveContextShape>({ isCreated: false });
+export const ResponsiveContext = createContext<ResponsiveContextShape>({
+  isCreated: false,
+});
 
 export interface ResponsiveProviderProps {
   children?: React.ReactNode;
@@ -19,7 +21,10 @@ export interface ResponsiveProviderProps {
   throttle?: number;
 }
 
-export const ResponsiveProvider: React.FC<ResponsiveProviderProps> = ({ children = null, throttle = 50 }) => {
+export const ResponsiveProvider: React.FC<ResponsiveProviderProps> = ({
+  children = null,
+  throttle = 50,
+}) => {
   const [innerWidth, setInnerWidth] = useState(0);
   const [innerHeight, setInnerHeight] = useState(0);
   const [outerWidth, setOuterWidth] = useState(0);
@@ -32,7 +37,8 @@ export const ResponsiveProvider: React.FC<ResponsiveProviderProps> = ({ children
     setOuterHeight(window?.outerHeight ?? 0);
   };
 
-  useIsomorphicLayoutEffect(() => { // eslint-disable-line consistent-return
+  useIsomorphicLayoutEffect(() => {
+    // eslint-disable-line consistent-return
     if (typeof window !== 'undefined') {
       // Set values on render if window wasn't available for useState initialization.
       handleWindowResize();

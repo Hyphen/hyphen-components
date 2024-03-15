@@ -11,20 +11,14 @@ export interface DetailsProps extends BoxProps {
   isOpen: boolean;
 }
 
-export const DetailsBaseComponent: React.FC<DetailsProps> = React.forwardRef<HTMLDetailsElement, DetailsProps>((
-  {
-    children,
-    className,
-    display = 'block',
-    isOpen,
-    ...restProps
-  },
-  ref,
-) => {
+export const DetailsBaseComponent: React.FC<DetailsProps> = React.forwardRef<
+  HTMLDetailsElement,
+  DetailsProps
+>(({ children, className, display = 'block', isOpen, ...restProps }, ref) => {
   const detailsClasses = classNames(
     className,
     styles['details-reset'],
-    styles.details,
+    styles.details
   );
 
   return (
@@ -45,7 +39,8 @@ export interface DetailsStatic {
   Summary: typeof DetailsSummary;
 }
 
-export type DetailsWithStaticComponents = typeof DetailsBaseComponent & DetailsStatic;
+export type DetailsWithStaticComponents = typeof DetailsBaseComponent &
+  DetailsStatic;
 
 // Actual component is wrapped in an IIFE for the export
 // To allow tree-shaking even with static properties (subcomponents in this case).

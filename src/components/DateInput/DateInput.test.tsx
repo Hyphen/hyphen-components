@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  render,
-  screen,
-  fireEvent,
-  waitFor,
-} from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { DateInput } from './DateInput';
 
 describe('DateInput', () => {
@@ -19,7 +14,7 @@ describe('DateInput', () => {
           datePickerProps={{
             onChange: () => null,
           }}
-        />,
+        />
       );
 
       const input = screen.getByLabelText('Select Date');
@@ -39,7 +34,7 @@ describe('DateInput', () => {
           datePickerProps={{
             onChange: () => null,
           }}
-        />,
+        />
       );
 
       const input = screen.getByLabelText('Select Date');
@@ -48,7 +43,12 @@ describe('DateInput', () => {
       fireEvent.click(input);
 
       const popoverContainer = screen.getByRole('dialog');
-      await waitFor(() => expect(popoverContainer).toHaveAttribute('data-popper-placement', 'bottom'));
+      await waitFor(() =>
+        expect(popoverContainer).toHaveAttribute(
+          'data-popper-placement',
+          'bottom'
+        )
+      );
     });
 
     it('closes popover when user clicks outside', async () => {
@@ -62,14 +62,19 @@ describe('DateInput', () => {
           datePickerProps={{
             onChange: () => null,
           }}
-        />,
+        />
       );
 
       const input = screen.getByLabelText('Select Date');
       fireEvent.click(input);
 
       const popoverContainer = screen.getByRole('dialog');
-      await waitFor(() => expect(popoverContainer).toHaveAttribute('data-popper-placement', 'bottom'));
+      await waitFor(() =>
+        expect(popoverContainer).toHaveAttribute(
+          'data-popper-placement',
+          'bottom'
+        )
+      );
 
       fireEvent.click(container);
       const popover = screen.queryByRole('dialog');
@@ -91,19 +96,28 @@ describe('DateInput', () => {
             selected: null,
             onChange: () => null,
           }}
-        />,
+        />
       );
 
       const input = screen.getByLabelText('Select Date');
       fireEvent.click(input);
 
       const popoverContainer = screen.getByRole('dialog');
-      await waitFor(() => expect(popoverContainer).toHaveAttribute('data-popper-placement', 'bottom'));
+      await waitFor(() =>
+        expect(popoverContainer).toHaveAttribute(
+          'data-popper-placement',
+          'bottom'
+        )
+      );
       const dateButton = screen.getByText('14');
-      await waitFor(() => { fireEvent.click(dateButton); });
+      await waitFor(() => {
+        fireEvent.click(dateButton);
+      });
 
       const popover = screen.queryByRole('dialog');
-      await waitFor(() => { expect(popover).toBeNull(); });
+      await waitFor(() => {
+        expect(popover).toBeNull();
+      });
     });
 
     it('keeps popover open while user is selecting a Date range', async () => {
@@ -122,19 +136,28 @@ describe('DateInput', () => {
             onChange: () => null,
             selectsRange: true,
           }}
-        />,
+        />
       );
 
       const input = screen.getByLabelText('Select Date');
       fireEvent.click(input);
 
       const popoverContainer = screen.getByRole('dialog');
-      await waitFor(() => expect(popoverContainer).toHaveAttribute('data-popper-placement', 'bottom'));
+      await waitFor(() =>
+        expect(popoverContainer).toHaveAttribute(
+          'data-popper-placement',
+          'bottom'
+        )
+      );
       const dateButton = screen.getByText('14');
-      await waitFor(() => { fireEvent.click(dateButton); });
+      await waitFor(() => {
+        fireEvent.click(dateButton);
+      });
 
       const popover = screen.queryByRole('dialog');
-      await waitFor(() => { expect(popover).toHaveAttribute('data-popper-placement', 'bottom'); });
+      await waitFor(() => {
+        expect(popover).toHaveAttribute('data-popper-placement', 'bottom');
+      });
     });
   });
 
@@ -153,7 +176,7 @@ describe('DateInput', () => {
             openToDate: date,
             selected: date,
           }}
-        />,
+        />
       );
 
       const input = screen.getByLabelText('Select Date');
@@ -178,7 +201,7 @@ describe('DateInput', () => {
             endDate: dateTwo,
             selectsRange: true,
           }}
-        />,
+        />
       );
 
       const input = screen.getByLabelText('Select Date');
@@ -203,7 +226,7 @@ describe('DateInput', () => {
             endDate: dateTwo,
             selectsRange: true,
           }}
-        />,
+        />
       );
 
       const input = screen.getByLabelText('Select Date');
@@ -224,7 +247,7 @@ describe('DateInput', () => {
             endDate: dateOne,
             selectsRange: true,
           }}
-        />,
+        />
       );
 
       const inputTwo = screen.getByLabelText('Select Date');

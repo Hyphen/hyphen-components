@@ -12,7 +12,7 @@ import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
 import { Placement } from '@popperjs/core';
 import FocusTrap from 'focus-trap-react';
-import {mergeRefs} from 'react-merge-refs';
+import { mergeRefs } from 'react-merge-refs';
 import classNames from 'classnames';
 import { BrandColor } from '../../types';
 import styles from './Popover.module.scss';
@@ -75,24 +75,27 @@ export type PopoverProps = {
    * Additional props to be spread to rendered element
    */
   [x: string]: any; // eslint-disable-line
-} & ({
-  /**
-   * Whether the element should be rendered outside its DOM structure
-   * for reasons of placement. Use this when the element is being cut-off or
-   * re-positioned due to lack of space in the parent container.
-   * NOTE: `portalTarget` is required if this is true.
-   */
-  withPortal: true;
-   /**
-   * The target element where the Popover will be portaled to, when `withPortal === true`.
-   * `document.body` will work for many cases, but you can also use a custom container for this.
-   * Only required if withPortal is true.
-   */
-  portalTarget: HTMLElement;
-} | {
-  withPortal?: false;
-  portalTarget?: never;
-})
+} & (
+  | {
+      /**
+       * Whether the element should be rendered outside its DOM structure
+       * for reasons of placement. Use this when the element is being cut-off or
+       * re-positioned due to lack of space in the parent container.
+       * NOTE: `portalTarget` is required if this is true.
+       */
+      withPortal: true;
+      /**
+       * The target element where the Popover will be portaled to, when `withPortal === true`.
+       * `document.body` will work for many cases, but you can also use a custom container for this.
+       * Only required if withPortal is true.
+       */
+      portalTarget: HTMLElement;
+    }
+  | {
+      withPortal?: false;
+      portalTarget?: never;
+    }
+);
 
 const contentContainerDefaults: BoxProps = {
   background: 'white-500',
@@ -134,7 +137,10 @@ export const Popover: FC<PopoverProps> = ({
         return;
       }
 
-      if (event.target !== popover && !popover?.contains(event.target as Node)) {
+      if (
+        event.target !== popover &&
+        !popover?.contains(event.target as Node)
+      ) {
         if (onClickOutside) onClickOutside(event);
       }
     };
@@ -175,7 +181,7 @@ export const Popover: FC<PopoverProps> = ({
           },
         },
       ],
-    },
+    }
   );
 
   const containerBoxProps = {
@@ -190,7 +196,7 @@ export const Popover: FC<PopoverProps> = ({
     `background-color-${computedArrowColor}`,
     {
       'display-none': !hasArrow,
-    },
+    }
   );
 
   const renderPopperContent = () => {
@@ -229,7 +235,7 @@ export const Popover: FC<PopoverProps> = ({
     );
   };
 
-  const childrenWithRef = React.Children.map(children, child => {
+  const childrenWithRef = React.Children.map(children, (child) => {
     const childProps = {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ref: triggerRef as RefObject<HTMLElement> | ((instance: any) => void),
@@ -241,9 +247,13 @@ export const Popover: FC<PopoverProps> = ({
     // Merge local ref with any ref passed originally to child component.
     // We have to cast with `as` so TS compiler doesn't complain since ReactNode/ReactChild types don't
     // explicitly declare ref as a property in the object.
-    if ((child as ReactNode & { ref: any; })?.ref) { // eslint-disable-line @typescript-eslint/no-explicit-any
+    if ((child as ReactNode & { ref: any })?.ref) {
+      // eslint-disable-line @typescript-eslint/no-explicit-any
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      childProps.ref = mergeRefs([(child as ReactNode & { ref: any; })?.ref, childProps.ref]);
+      childProps.ref = mergeRefs([
+        (child as ReactNode & { ref: any })?.ref,
+        childProps.ref,
+      ]);
     }
 
     if (isValidElement(child)) {
@@ -256,10 +266,11 @@ export const Popover: FC<PopoverProps> = ({
   return (
     <>
       {childrenWithRef}
-      {isOpen && (
+      {isOpen &&
         // portalTarget should always be defined if withPortal is true, but better safe than sorry here!
-        withPortal && portalTarget ? createPortal(renderPopperContent(), portalTarget) : renderPopperContent()
-      )}
+        (withPortal && portalTarget
+          ? createPortal(renderPopperContent(), portalTarget)
+          : renderPopperContent())}
     </>
   );
 };

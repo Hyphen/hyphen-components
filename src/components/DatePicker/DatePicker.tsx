@@ -16,12 +16,17 @@ export interface DatePickerProps extends ReactDatePickerProps<any, any> {
    * Callback that fires when a date is changed/selected.
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onChange: (date: Date | [Date, Date] | null, event: React.SyntheticEvent<any> | undefined) => void;
+  onChange: (
+    date: Date | [Date, Date] | null,
+    event: React.SyntheticEvent<any> | undefined
+  ) => void;
   /**
    * Callback that fires when a date is clicked.
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onSelect?: ((date: Date, event: SyntheticEvent<any, Event> | undefined) => void) | undefined;
+  onSelect?:
+    | ((date: Date, event: SyntheticEvent<any, Event> | undefined) => void)
+    | undefined;
   /**
    * Custom Class to be applied to a single day element based on a date.
    */
@@ -102,13 +107,10 @@ export const DatePicker: FC<DatePickerProps> = ({
   showFullMonthYearPicker = false,
   showMonthYearPicker = false,
   className = undefined,
-  formatWeekDay = formattedDate => formattedDate[0], // Make days show as 1 character.
+  formatWeekDay = (formattedDate) => formattedDate[0], // Make days show as 1 character.
   ...restProps
 }) => {
-  const datePickerClasses = classNames(
-    styles['react-datepicker'],
-    className,
-  );
+  const datePickerClasses = classNames(styles['react-datepicker'], className);
 
   return (
     <ReactDatePicker

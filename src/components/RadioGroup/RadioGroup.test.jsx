@@ -31,7 +31,7 @@ describe('RadioGroup', () => {
             name="testName"
             onChange={mockHandleChange}
             options={groupOptions}
-          />,
+          />
         );
 
         const radioInput = screen.getByLabelText('Blue');
@@ -41,7 +41,7 @@ describe('RadioGroup', () => {
 
       test('calls onChange and passes checked value in event', () => {
         let value = null;
-        const mockedHandleChangeWithValue = jest.fn(event => {
+        const mockedHandleChangeWithValue = jest.fn((event) => {
           value = event.target.value;
         });
 
@@ -50,7 +50,7 @@ describe('RadioGroup', () => {
             name="testName"
             onChange={mockedHandleChangeWithValue}
             options={groupOptions}
-          />,
+          />
         );
         const radioInput = screen.getByLabelText('Blue');
         fireEvent.click(radioInput);
@@ -69,7 +69,7 @@ describe('RadioGroup', () => {
             onChange={jest.fn()}
             options={groupOptions}
             onFocus={mockedHandleFocus}
-          />,
+          />
         );
         const radioInput = screen.getByLabelText('Blue');
         fireEvent.focus(radioInput);
@@ -87,7 +87,7 @@ describe('RadioGroup', () => {
             onChange={jest.fn()}
             options={groupOptions}
             onBlur={mockedHandleBlur}
-          />,
+          />
         );
         const radioInput = screen.getByLabelText('Blue');
         fireEvent.blur(radioInput);
@@ -104,7 +104,7 @@ describe('RadioGroup', () => {
             name="testName"
             onChange={jest.fn()}
             options={groupOptions}
-          />,
+          />
         );
 
         const radioInputElements = screen.getAllByRole('radio');
@@ -117,7 +117,7 @@ describe('RadioGroup', () => {
             name="mockName"
             onChange={jest.fn()}
             options={groupOptions}
-          />,
+          />
         );
 
         const purpleRadioInputLabel = screen.getByLabelText('Purple');
@@ -138,7 +138,7 @@ describe('RadioGroup', () => {
             onChange={jest.fn()}
             options={groupOptions}
             title="Mock Title"
-          />,
+          />
         );
 
         const title = screen.getByText('Mock Title');
@@ -155,7 +155,7 @@ describe('RadioGroup', () => {
             options={groupOptions}
             title="Mock Title"
             description="Mock Description"
-          />,
+          />
         );
 
         const title = screen.getByText('Mock Title');
@@ -174,7 +174,7 @@ describe('RadioGroup', () => {
             options={groupOptions}
             title="Mock Title"
             isRequired
-          />,
+          />
         );
 
         const purpleRadioInputLabel = screen.getByLabelText('Purple');
@@ -197,7 +197,7 @@ describe('RadioGroup', () => {
             options={groupOptions}
             title="Mock Title"
             isRequired
-          />,
+          />
         );
 
         const requiredIndicator = screen.getByText('*');
@@ -213,7 +213,7 @@ describe('RadioGroup', () => {
             onChange={jest.fn()}
             options={groupOptions}
             value="green"
-          />,
+          />
         );
 
         const greenRadioInput = screen.getByLabelText('Green');
@@ -235,7 +235,7 @@ describe('RadioGroup', () => {
             name="testName"
             onChange={jest.fn()}
             options={[...groupOptions, disabledOption]}
-          />,
+          />
         );
 
         const disabledRadioInputElements = screen.getAllByRole('radio');
@@ -251,7 +251,7 @@ describe('RadioGroup', () => {
             onChange={jest.fn()}
             options={groupOptions}
             isDisabled
-          />,
+          />
         );
 
         const disabledRadioInputElements = screen.getAllByRole('radio');
@@ -269,11 +269,11 @@ describe('RadioGroup', () => {
             onChange={jest.fn()}
             options={groupOptions}
             error="Helpful Validation Message"
-          />,
+          />
         );
 
         const validationMessage = screen.getByText(
-          'Helpful Validation Message',
+          'Helpful Validation Message'
         );
         expect(validationMessage).toBeInTheDocument();
       });

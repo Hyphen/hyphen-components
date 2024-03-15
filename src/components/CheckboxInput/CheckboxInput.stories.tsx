@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import type { Meta } from '@storybook/react';
 import { CheckboxInput } from './CheckboxInput';
 import { Box } from '../Box/Box';
@@ -241,6 +241,7 @@ export const CustomLabel = () =>
               href="https://palmetto.com"
               onClick={() => alert('hey you clicked me!')}
               target="_blank"
+              rel="noreferrer"
             >
               Link
             </a>

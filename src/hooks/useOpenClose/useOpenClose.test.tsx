@@ -83,7 +83,7 @@ describe('useOpenClose', () => {
           isOpen
           onOpen={mockedOnOpen}
           onClose={mockedOnClose}
-        />,
+        />
       );
 
       fireEvent.click(screen.getByText('Details Summary'));
@@ -105,7 +105,7 @@ describe('useOpenClose', () => {
           isOpen={false}
           onOpen={mockedOnOpen}
           onClose={mockedOnClose}
-        />,
+        />
       );
 
       fireEvent.click(screen.getByText('Details Summary'));

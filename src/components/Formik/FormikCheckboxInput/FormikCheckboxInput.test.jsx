@@ -6,14 +6,15 @@ import {
   waitFor,
   act,
 } from '@testing-library/react';
-import {
-  Formik, Form, Field, getIn, setIn,
-} from 'formik';
+import { Formik, Form, Field, getIn, setIn } from 'formik';
 import { FormikCheckboxInput } from './FormikCheckboxInput';
 
 const testLabelName = 'test checkbox';
 
-const handleValidation = testValueKey => values => (getIn(values, testValueKey) ? {} : setIn({}, testValueKey, 'Checkbox is required'));
+const handleValidation = (testValueKey) => (values) =>
+  getIn(values, testValueKey)
+    ? {}
+    : setIn({}, testValueKey, 'Checkbox is required');
 
 const renderForm = (initialValue, props, testValueKey = testLabelName) => (
   <Formik
@@ -69,7 +70,9 @@ describe('FormikCheckboxInput', () => {
 
     describe('Disabled', () => {
       test('input is rendered with the disabled attrbute when isDisabled is true', () => {
-        const { getByLabelText } = render(renderForm(false, { isDisabled: true }));
+        const { getByLabelText } = render(
+          renderForm(false, { isDisabled: true })
+        );
         const checkbox = getByLabelText(testLabelName);
         expect(checkbox).toBeDisabled();
       });
@@ -78,8 +81,13 @@ describe('FormikCheckboxInput', () => {
     describe('Correctly supplies aria-labelledby', () => {
       test('assigns the "aria-labelledby" attribute and renders label with correct id, when label is provided', () => {
         const { getByLabelText } = render(renderForm(false, {}));
-        expect(getByLabelText(testLabelName)).toHaveAttribute('aria-labelledby', `${testLabelName}Label`);
-        expect(document.getElementById(`${testLabelName}Label`)).toBeInTheDocument();
+        expect(getByLabelText(testLabelName)).toHaveAttribute(
+          'aria-labelledby',
+          `${testLabelName}Label`
+        );
+        expect(
+          document.getElementById(`${testLabelName}Label`)
+        ).toBeInTheDocument();
       });
     });
 
@@ -89,47 +97,71 @@ describe('FormikCheckboxInput', () => {
         const submitButton = getByText('submit');
 
         fireEvent.click(submitButton);
-        await waitFor(() => expect(screen.getByText('Checkbox is required')).toBeInTheDocument());
+        await waitFor(() =>
+          expect(screen.getByText('Checkbox is required')).toBeInTheDocument()
+        );
       });
 
       test('correctly renders the checkbox with an error message in nested object', async () => {
-        const { getByText } = render(renderForm({ outer: { nested: false } }, { isRequired: true }, `${testLabelName}.outer.nested`));
+        const { getByText } = render(
+          renderForm(
+            { outer: { nested: false } },
+            { isRequired: true },
+            `${testLabelName}.outer.nested`
+          )
+        );
         const submitButton = getByText('submit');
 
         fireEvent.click(submitButton);
-        await waitFor(() => expect(screen.getByText('Checkbox is required')).toBeInTheDocument());
+        await waitFor(() =>
+          expect(screen.getByText('Checkbox is required')).toBeInTheDocument()
+        );
       });
     });
   });
 
   describe('Callback Handling', () => {
     describe('onChange', () => {
-      test('Custom onChange event fires callback function, overwriting Formik\'s onChange', () => {
+      test("Custom onChange event fires callback function, overwriting Formik's onChange", () => {
         let value = false;
-        const mockedHandleChange = jest.fn(event => { value = event.target.checked; });
+        const mockedHandleChange = jest.fn((event) => {
+          value = event.target.checked;
+        });
 
-        const { getByLabelText } = render(renderForm(value, { onChange: mockedHandleChange }));
+        const { getByLabelText } = render(
+          renderForm(value, { onChange: mockedHandleChange })
+        );
         const checkbox = getByLabelText(testLabelName);
 
-        act(() => { fireEvent.click(checkbox); });
+        act(() => {
+          fireEvent.click(checkbox);
+        });
 
         expect(mockedHandleChange).toHaveBeenCalledTimes(1);
         expect(value).toBe(true);
       });
 
       test('Standard Formik onChange modifies the target value', async () => {
-        const { getByLabelText, getByText, queryByText } = render(renderForm(false, { isRequired: true }));
+        const { getByLabelText, getByText, queryByText } = render(
+          renderForm(false, { isRequired: true })
+        );
         const submitButton = getByText('submit');
         const checkbox = getByLabelText(testLabelName);
         expect(checkbox.checked).toBe(false);
 
         fireEvent.click(submitButton);
         // expect(mockedHandleSubmit).toHaveBeenCalledTimes(0);
-        await waitFor(() => expect(getByText('Checkbox is required')).toBeInTheDocument());
+        await waitFor(() =>
+          expect(getByText('Checkbox is required')).toBeInTheDocument()
+        );
 
-        act(() => { fireEvent.click(checkbox); });
+        act(() => {
+          fireEvent.click(checkbox);
+        });
         expect(checkbox.checked).toBe(true);
-        await waitFor(() => expect(queryByText('Checkbox is required')).not.toBeInTheDocument());
+        await waitFor(() =>
+          expect(queryByText('Checkbox is required')).not.toBeInTheDocument()
+        );
       });
     });
   });

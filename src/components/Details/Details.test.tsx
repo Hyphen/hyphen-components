@@ -7,10 +7,8 @@ describe('Details', () => {
     test('It renders a default details HTML element and summary', () => {
       render(
         <Details isOpen={false}>
-          <Details.Summary isDetailsOpen={false}>
-            summary
-          </Details.Summary>
-        </Details>,
+          <Details.Summary isDetailsOpen={false}>summary</Details.Summary>
+        </Details>
       );
 
       const details = screen.getByRole('group');
@@ -24,13 +22,9 @@ describe('Details', () => {
     test('It renders a default details HTML element and summary', () => {
       render(
         <Details isOpen>
-          <Details.Summary isDetailsOpen>
-            summary
-          </Details.Summary>
-          <div>
-            details
-          </div>
-        </Details>,
+          <Details.Summary isDetailsOpen>summary</Details.Summary>
+          <div>details</div>
+        </Details>
       );
 
       const details = screen.getByRole('group');
@@ -46,10 +40,8 @@ describe('Details', () => {
     test('It renders the summary with the correct "button" role', () => {
       render(
         <Details isOpen={false}>
-          <Details.Summary isDetailsOpen={false}>
-            summary
-          </Details.Summary>
-        </Details>,
+          <Details.Summary isDetailsOpen={false}>summary</Details.Summary>
+        </Details>
       );
 
       const summary = screen.getByRole('button');
@@ -60,10 +52,8 @@ describe('Details', () => {
     test('It notes whether the underlying element is expanded', () => {
       const { rerender } = render(
         <Details isOpen={false}>
-          <Details.Summary isDetailsOpen={false}>
-            summary
-          </Details.Summary>
-        </Details>,
+          <Details.Summary isDetailsOpen={false}>summary</Details.Summary>
+        </Details>
       );
 
       const summary = screen.getByText('summary');
@@ -72,10 +62,8 @@ describe('Details', () => {
 
       rerender(
         <Details isOpen>
-          <Details.Summary isDetailsOpen>
-            summary2
-          </Details.Summary>
-        </Details>,
+          <Details.Summary isDetailsOpen>summary2</Details.Summary>
+        </Details>
       );
 
       const summaryTwo = screen.getByText('summary2');
@@ -86,10 +74,8 @@ describe('Details', () => {
     test('The summary is tabbable', () => {
       render(
         <Details isOpen={false}>
-          <Details.Summary isDetailsOpen={false}>
-            summary
-          </Details.Summary>
-        </Details>,
+          <Details.Summary isDetailsOpen={false}>summary</Details.Summary>
+        </Details>
       );
 
       const summary = screen.getByRole('button');
@@ -107,7 +93,7 @@ describe('Details', () => {
           <Details.Summary isDetailsOpen={false} onToggle={mockedOnToggle}>
             summary
           </Details.Summary>
-        </Details>,
+        </Details>
       );
 
       const summary = screen.getByRole('button');
@@ -123,7 +109,7 @@ describe('Details', () => {
           <Details.Summary isDetailsOpen={false} onToggle={mockedOnToggle}>
             summary
           </Details.Summary>
-        </Details>,
+        </Details>
       );
 
       const summary = screen.getByRole('button');
@@ -138,10 +124,8 @@ describe('Details', () => {
 
       render(
         <Details isOpen={false}>
-          <Details.Summary isDetailsOpen={false}>
-            summary
-          </Details.Summary>
-        </Details>,
+          <Details.Summary isDetailsOpen={false}>summary</Details.Summary>
+        </Details>
       );
 
       const summary = screen.getByRole('button');
@@ -159,7 +143,7 @@ describe('Details', () => {
           <Details.Summary isDetailsOpen={false} onClick={mockedOnToggle}>
             summary
           </Details.Summary>
-        </Details>,
+        </Details>
       );
 
       const summary = screen.getByRole('button');
@@ -175,7 +159,7 @@ describe('Details', () => {
           <Details.Summary isDetailsOpen={false} onKeyDown={mockedOnToggle}>
             summary
           </Details.Summary>
-        </Details>,
+        </Details>
       );
 
       const summary = screen.getByRole('button');
@@ -192,7 +176,7 @@ describe('Details', () => {
           <Details.Summary isDetailsOpen={false} className="m-top-lg">
             summary
           </Details.Summary>
-        </Details>,
+        </Details>
       );
 
       const details = screen.getByRole('group');

@@ -9,9 +9,15 @@ describe('Default', () => {
     const mockEventListener = jest.spyOn(window, 'addEventListener');
     mockEventListener.mockImplementation(() => {}); // eslint-disable-line
 
-    render(<ResponsiveProvider><div /></ResponsiveProvider>);
+    render(
+      <ResponsiveProvider>
+        <div />
+      </ResponsiveProvider>
+    );
 
-    expect(mockEventListener.mock.calls.filter(call => call[0] === 'resize').length).toEqual(1);
+    expect(
+      mockEventListener.mock.calls.filter((call) => call[0] === 'resize').length
+    ).toEqual(1);
   });
 });
 
@@ -32,9 +38,11 @@ describe('Responsive hooks', () => {
         <Component />
         <Component />
         <Component />
-      </ResponsiveProvider>,
+      </ResponsiveProvider>
     );
-    expect(mockEventListener.mock.calls.filter(call => call[0] === 'resize').length).toEqual(1);
+    expect(
+      mockEventListener.mock.calls.filter((call) => call[0] === 'resize').length
+    ).toEqual(1);
   });
 
   it('registers one resize handler with useBreakpoint', () => {
@@ -53,8 +61,10 @@ describe('Responsive hooks', () => {
         <Component />
         <Component />
         <Component />
-      </ResponsiveProvider>,
+      </ResponsiveProvider>
     );
-    expect(mockEventListener.mock.calls.filter(call => call[0] === 'resize').length).toEqual(1);
+    expect(
+      mockEventListener.mock.calls.filter((call) => call[0] === 'resize').length
+    ).toEqual(1);
   });
 });

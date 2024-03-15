@@ -21,7 +21,7 @@ describe('CheckboxInput', () => {
         label="test checkbox"
         isChecked={false}
         onChange={() => null}
-      />,
+      />
     );
     const checkbox = getByLabelText('test checkbox');
 
@@ -38,7 +38,7 @@ describe('CheckboxInput', () => {
         onChange={() => null}
         isChecked={false}
         helpText="i am help text"
-      />,
+      />
     );
     expect(getByLabelText('test checkbox')).toBeDefined();
     expect(FormLabel).toHaveBeenCalledTimes(1);
@@ -52,7 +52,7 @@ describe('CheckboxInput', () => {
         isFieldRequired: false,
         requiredIndicator: ' *',
       },
-      {},
+      {}
     );
   });
 
@@ -64,7 +64,7 @@ describe('CheckboxInput', () => {
         onChange={() => null}
         isChecked={false}
         isRequired
-      />,
+      />
     );
     expect(getByLabelText('test checkbox')).toBeDefined();
     expect(FormLabel).toHaveBeenCalledTimes(1);
@@ -78,13 +78,18 @@ describe('CheckboxInput', () => {
         isFieldRequired: true,
         requiredIndicator: ' *',
       },
-      {},
+      {}
     );
   });
 
   test('input is checked when isChecked is true', () => {
     const { getByLabelText } = render(
-      <CheckboxInput id="testCheckbox" label="test checkbox" onChange={() => null} isChecked />,
+      <CheckboxInput
+        id="testCheckbox"
+        label="test checkbox"
+        onChange={() => null}
+        isChecked
+      />
     );
     const checkbox = getByLabelText('test checkbox');
     expect(checkbox.checked).toEqual(true);
@@ -97,7 +102,7 @@ describe('CheckboxInput', () => {
         label="test checkbox"
         isChecked={false}
         onChange={() => null}
-      />,
+      />
     );
     const checkbox = getByLabelText('test checkbox');
     expect(checkbox.checked).toEqual(false);
@@ -105,16 +110,33 @@ describe('CheckboxInput', () => {
 
   test('assigns the "aria-labelledby" attribute and calls FormLabel with expected props', () => {
     const { getByLabelText } = render(
-      <CheckboxInput id="testInput" label="test label" value="hello" onChange={() => null} />,
+      <CheckboxInput
+        id="testInput"
+        label="test label"
+        value="hello"
+        onChange={() => null}
+      />
     );
-    expect(getByLabelText('test label')).toHaveAttribute('aria-labelledby', 'testInputLabel');
+    expect(getByLabelText('test label')).toHaveAttribute(
+      'aria-labelledby',
+      'testInputLabel'
+    );
   });
 
   test('sets required properties when isRequired is true', () => {
     const { getByLabelText } = render(
-      <CheckboxInput id="testInput" label="test label" value="hello" onChange={() => null} isRequired />,
+      <CheckboxInput
+        id="testInput"
+        label="test label"
+        value="hello"
+        onChange={() => null}
+        isRequired
+      />
     );
-    expect(getByLabelText('test label')).toHaveAttribute('aria-required', 'true');
+    expect(getByLabelText('test label')).toHaveAttribute(
+      'aria-required',
+      'true'
+    );
     expect(getByLabelText('test label')).toHaveAttribute('required');
   });
 
@@ -127,7 +149,7 @@ describe('CheckboxInput', () => {
           isChecked={false}
           onChange={() => null}
           error="This is the error message"
-        />,
+        />
       );
       expect(getByText('This is the error message')).toBeInTheDocument();
     });
@@ -140,7 +162,7 @@ describe('CheckboxInput', () => {
           isChecked={false}
           onChange={() => null}
           error="This is the error message"
-        />,
+        />
       );
       expect(FormLabel).toHaveBeenCalledTimes(1);
       expect(FormLabel).toHaveBeenCalledWith(
@@ -153,7 +175,7 @@ describe('CheckboxInput', () => {
           isFieldRequired: false,
           requiredIndicator: ' *',
         },
-        {},
+        {}
       );
     });
 
@@ -165,7 +187,7 @@ describe('CheckboxInput', () => {
           isChecked={false}
           onChange={() => null}
           error
-        />,
+        />
       );
       expect(FormLabel).toHaveBeenCalledTimes(1);
       expect(FormLabel).toHaveBeenCalledWith(
@@ -178,7 +200,7 @@ describe('CheckboxInput', () => {
           isFieldRequired: false,
           requiredIndicator: ' *',
         },
-        {},
+        {}
       );
     });
   });
@@ -191,7 +213,7 @@ describe('CheckboxInput', () => {
         isChecked={false}
         onChange={() => null}
         isDisabled
-      />,
+      />
     );
     expect(FormLabel).toHaveBeenCalledTimes(1);
     expect(FormLabel).toHaveBeenCalledWith(
@@ -204,7 +226,7 @@ describe('CheckboxInput', () => {
         isFieldRequired: false,
         requiredIndicator: ' *',
       },
-      {},
+      {}
     );
   });
 
@@ -217,7 +239,7 @@ describe('CheckboxInput', () => {
           isChecked={false}
           onChange={() => null}
           size="sm"
-        />,
+        />
       );
       expect(FormLabel).toHaveBeenCalledTimes(1);
       expect(FormLabel).toHaveBeenCalledWith(
@@ -230,7 +252,7 @@ describe('CheckboxInput', () => {
           isFieldRequired: false,
           requiredIndicator: ' *',
         },
-        {},
+        {}
       );
     });
     test('calls FormLabel with the correct properties when size is large', () => {
@@ -241,7 +263,7 @@ describe('CheckboxInput', () => {
           isChecked={false}
           onChange={() => null}
           size="lg"
-        />,
+        />
       );
       expect(FormLabel).toHaveBeenCalledTimes(1);
       expect(FormLabel).toHaveBeenCalledWith(
@@ -254,20 +276,16 @@ describe('CheckboxInput', () => {
           isFieldRequired: false,
           requiredIndicator: ' *',
         },
-        {},
+        {}
       );
     });
 
     const mockedHandleChange = jest.fn();
-    const sizes = [
-      'sm',
-      'md',
-      'lg',
-    ];
+    const sizes = ['sm', 'md', 'lg'];
 
     const breakpoints = ['tablet', 'desktop', 'hd'];
 
-    sizes.forEach(size => {
+    sizes.forEach((size) => {
       test(`it has a ${size} class applied to it`, () => {
         render(
           <CheckboxInput
@@ -275,14 +293,14 @@ describe('CheckboxInput', () => {
             onChange={mockedHandleChange}
             size={size}
             label="size test"
-          />,
+          />
         );
         const checkbox = screen.getByLabelText('size test');
         const checkboxParent = checkbox.closest('div');
         expect(checkboxParent?.getAttribute('class')).toContain(size);
       });
 
-      breakpoints.forEach(breakpoint => {
+      breakpoints.forEach((breakpoint) => {
         test(`it applies responsive classes for breakpoint: ${breakpoint} and size: ${size}`, () => {
           render(
             <CheckboxInput
@@ -290,12 +308,14 @@ describe('CheckboxInput', () => {
               onChange={mockedHandleChange}
               size={{ [breakpoint]: size }}
               label="size test"
-            />,
+            />
           );
           const checkbox = screen.getByLabelText('size test');
           const checkboxParent = checkbox.closest('div');
 
-          expect(checkboxParent?.getAttribute('class')).toContain(`size-${size}-${breakpoint}`);
+          expect(checkboxParent?.getAttribute('class')).toContain(
+            `size-${size}-${breakpoint}`
+          );
         });
       });
     });
@@ -312,14 +332,16 @@ describe('CheckboxInput', () => {
             hd: 'sm',
           }}
           label="size test"
-        />,
+        />
       );
       const checkbox = screen.getByLabelText('size test');
       const checkboxParent = checkbox.closest('div');
 
       expect(checkboxParent?.getAttribute('class')).toContain('size-sm');
       expect(checkboxParent?.getAttribute('class')).toContain('size-md-tablet');
-      expect(checkboxParent?.getAttribute('class')).toContain('size-lg-desktop');
+      expect(checkboxParent?.getAttribute('class')).toContain(
+        'size-lg-desktop'
+      );
       expect(checkboxParent?.getAttribute('class')).toContain('size-sm-hd');
     });
   });
@@ -334,7 +356,7 @@ describe('CheckboxInput', () => {
           label="test checkbox"
           isChecked={false}
           onChange={mockedHandleChange}
-        />,
+        />
       );
       const checkbox = getByLabelText('test checkbox');
       fireEvent.click(checkbox);
@@ -343,7 +365,7 @@ describe('CheckboxInput', () => {
 
     test('calls onChange and passes checked value in event', () => {
       let value = true;
-      const mockedHandleChange = jest.fn(event => {
+      const mockedHandleChange = jest.fn((event) => {
         value = event.target.checked;
       });
 
@@ -353,7 +375,7 @@ describe('CheckboxInput', () => {
           label="test checkbox"
           onChange={mockedHandleChange}
           isChecked={value}
-        />,
+        />
       );
       const checkbox = getByLabelText('test checkbox');
       fireEvent.click(checkbox);
@@ -377,7 +399,7 @@ describe('CheckboxInput', () => {
             onFocus={mockedHandleFocus}
             onBlur={undefined}
           />
-        </div>,
+        </div>
       );
       getByLabelText('test checkbox').focus();
       getByText('focus').focus();
@@ -399,7 +421,7 @@ describe('CheckboxInput', () => {
             onChange={() => null}
             onBlur={mockedHandleBlur}
           />
-        </div>,
+        </div>
       );
       getByLabelText('test checkbox').focus();
       getByText('focus').focus();

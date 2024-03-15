@@ -1,25 +1,14 @@
 import React from 'react';
-import {
-  render,
-  fireEvent,
-  screen,
-  waitFor,
-} from '@testing-library/react';
-import {
-  Formik,
-  Field,
-  Form,
-  FormikValues,
-  getIn,
-  setIn,
-} from 'formik';
+import { render, fireEvent, screen, waitFor } from '@testing-library/react';
+import { Formik, Field, Form, FormikValues, getIn, setIn } from 'formik';
 import { FormikTextareaInput } from './FormikTextareaInput';
 
 const testLabelName = 'textInput';
 
-const handleValidation = (testValueKey: string) => (values: FormikValues) => (
-  getIn(values, testValueKey)?.length > 1 ? {} : setIn({}, testValueKey, 'input is required')
-);
+const handleValidation = (testValueKey: string) => (values: FormikValues) =>
+  getIn(values, testValueKey)?.length > 1
+    ? {}
+    : setIn({}, testValueKey, 'input is required');
 
 type FormProps = {
   isRequired?: boolean;
@@ -58,13 +47,17 @@ describe('FormikTextareaInput', () => {
   describe('States', () => {
     describe('Autofocused', () => {
       test('Input autofocuses if "autoFocus" prop is set to true', () => {
-        const { getByDisplayValue } = render(renderForm('hello', { autoFocus: true }));
+        const { getByDisplayValue } = render(
+          renderForm('hello', { autoFocus: true })
+        );
         const inputElement = getByDisplayValue('hello');
         expect(document.activeElement).toEqual(inputElement);
       });
 
       test('Input correctly assigns autocomplete value of "on" when bool true is provided', () => {
-        const { getByDisplayValue } = render(renderForm('hello', { autoComplete: true }));
+        const { getByDisplayValue } = render(
+          renderForm('hello', { autoComplete: true })
+        );
         const inputElement = getByDisplayValue('hello');
         expect(inputElement).toHaveAttribute('autocomplete', 'on');
       });
@@ -72,14 +65,16 @@ describe('FormikTextareaInput', () => {
 
     describe('With Autocomplete', () => {
       test('Input correctly assigns autocomplete value of "off" when bool false is provided', () => {
-        const { getByDisplayValue } = render(renderForm('hello', { autoComplete: false }));
+        const { getByDisplayValue } = render(
+          renderForm('hello', { autoComplete: false })
+        );
         const inputElement = getByDisplayValue('hello');
         expect(inputElement).toHaveAttribute('autocomplete', 'off');
       });
 
       test('Input correctly assigns autocomplete value of "off" when incorrect type is provided', () => {
         const { getByDisplayValue } = render(
-          renderForm('hello', { autoComplete: ['a', 'random', 'array'] }),
+          renderForm('hello', { autoComplete: ['a', 'random', 'array'] })
         );
         const inputElement = getByDisplayValue('hello');
         expect(inputElement).toHaveAttribute('autocomplete', 'off');
@@ -88,7 +83,9 @@ describe('FormikTextareaInput', () => {
 
     describe('Required', () => {
       test('Input correctly assigns the "aria-required" attribute when "isRequired" prop is true', () => {
-        const { getByDisplayValue } = render(renderForm('hello', { isRequired: true }));
+        const { getByDisplayValue } = render(
+          renderForm('hello', { isRequired: true })
+        );
         const inputElement = getByDisplayValue('hello');
         expect(inputElement).toHaveAttribute('aria-required', 'true');
       });
@@ -100,17 +97,25 @@ describe('FormikTextareaInput', () => {
         const submitButton = getByText('submit');
 
         fireEvent.click(submitButton);
-        await waitFor(() => expect(screen.getByText('input is required')).toBeInTheDocument());
+        await waitFor(() =>
+          expect(screen.getByText('input is required')).toBeInTheDocument()
+        );
       });
 
       test('Input correctly displays error message from nested object', async () => {
         const { getByText } = render(
-          renderForm({ outer: { nested: '' } }, { isRequired: true }, `${testLabelName}.outer.nested`),
+          renderForm(
+            { outer: { nested: '' } },
+            { isRequired: true },
+            `${testLabelName}.outer.nested`
+          )
         );
         const submitButton = getByText('submit');
 
         fireEvent.click(submitButton);
-        await waitFor(() => expect(screen.getByText('input is required')).toBeInTheDocument());
+        await waitFor(() =>
+          expect(screen.getByText('input is required')).toBeInTheDocument()
+        );
       });
     });
 
@@ -127,8 +132,13 @@ describe('FormikTextareaInput', () => {
       test('assigns the "aria-labelledby" attribute and renders label with correct id, when label is provided', () => {
         const { getByLabelText } = render(renderForm('', {}));
         const inputElement = getByLabelText(testLabelName);
-        expect(inputElement).toHaveAttribute('aria-labelledby', `${testLabelName}Label`);
-        expect(document.getElementById(`${testLabelName}Label`)).toBeInTheDocument();
+        expect(inputElement).toHaveAttribute(
+          'aria-labelledby',
+          `${testLabelName}Label`
+        );
+        expect(
+          document.getElementById(`${testLabelName}Label`)
+        ).toBeInTheDocument();
       });
 
       test('does not assign "aria-labelledby" attribute when a label is hidden', () => {
@@ -143,11 +153,13 @@ describe('FormikTextareaInput', () => {
     describe('onChange', () => {
       test("Custom onChange event fires callback function, overwriting Formik's onChange", () => {
         let value = '';
-        const mockedHandleChange = jest.fn(event => {
+        const mockedHandleChange = jest.fn((event) => {
           value = event.target.value;
         });
 
-        const { getByLabelText } = render(renderForm(value, { onChange: mockedHandleChange }));
+        const { getByLabelText } = render(
+          renderForm(value, { onChange: mockedHandleChange })
+        );
         const input = getByLabelText(testLabelName);
 
         fireEvent.change(input, { target: { value: 'hello' } });

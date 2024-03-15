@@ -11,10 +11,10 @@ const selectOptions = [
 
 function getByTextWithMarkup(text) {
   return (content, element) => {
-    const hasText = node => node.textContent === text;
+    const hasText = (node) => node.textContent === text;
     const elementHasText = hasText(element);
     const childrenDontHaveText = Array.from(element.children).every(
-      child => !hasText(child),
+      (child) => !hasText(child)
     );
 
     return elementHasText && childrenDontHaveText;
@@ -33,7 +33,7 @@ describe('SelectInput', () => {
           placeholder="Test Placeholder"
           label="onchange test"
           options={selectOptions}
-        />,
+        />
       );
 
       await selectEvent.select(getByLabelText('onchange test'), 'Vanilla');
@@ -52,7 +52,7 @@ describe('SelectInput', () => {
           onFocus={mockedHandleFocus}
           placeholder="Test Placeholder"
           options={selectOptions}
-        />,
+        />
       );
 
       fireEvent.focus(screen.getByRole('textbox'));
@@ -71,7 +71,7 @@ describe('SelectInput', () => {
           onBlur={mockedHandleBlur}
           placeholder="Test Placeholder"
           options={selectOptions}
-        />,
+        />
       );
 
       fireEvent.blur(screen.getByRole('textbox'));
@@ -93,7 +93,7 @@ describe('SelectInput', () => {
             onChange={mockedHandleChange}
             placeholder="Test Placeholder"
             options={selectOptions}
-          />,
+          />
         );
         expect(screen.queryByText('hidden label')).toBeNull();
         expect(screen.getByText('Test Placeholder')).toBeInTheDocument();
@@ -109,7 +109,7 @@ describe('SelectInput', () => {
           label="hidden label"
           hideLabel
           onChange={mockedHandleChange}
-        />,
+        />
       );
       const inputElement = screen.getByLabelText('hidden label');
       expect(inputElement).not.toHaveAttribute('aria-labelledby');
@@ -125,7 +125,7 @@ describe('SelectInput', () => {
             onChange={mockedHandleChange}
             label="Select Label"
             options={selectOptions}
-          />,
+          />
         );
 
         expect(screen.getByLabelText('Select Label')).toBeInTheDocument();
@@ -137,7 +137,7 @@ describe('SelectInput', () => {
         const inputElement = screen.getByLabelText('test label');
         expect(inputElement).toHaveAttribute(
           'aria-labelledby',
-          'testInputLabel',
+          'testInputLabel'
         );
         expect(document.getElementById('testInputLabel')).toBeInTheDocument();
       });
@@ -154,7 +154,7 @@ describe('SelectInput', () => {
             label="Select Label"
             options={selectOptions}
             value={selectOptions[2]}
-          />,
+          />
         );
 
         expect(screen.getByText('Vanilla')).toBeInTheDocument();
@@ -172,7 +172,7 @@ describe('SelectInput', () => {
             label="Select Label"
             options={selectOptions}
             isMulti
-          />,
+          />
         );
 
         expect(screen.getByLabelText('Select Label')).toBeInTheDocument();
@@ -192,7 +192,7 @@ describe('SelectInput', () => {
             options={selectOptions}
             isMulti
             value={[selectOptions[0], selectOptions[2]]}
-          />,
+          />
         );
 
         expect(screen.getByLabelText('Select Label')).toBeInTheDocument();
@@ -213,11 +213,11 @@ describe('SelectInput', () => {
             label="Select Label"
             options={selectOptions}
             isRequired
-          />,
+          />
         );
 
         expect(
-          screen.getByText(getByTextWithMarkup('Select Label *')),
+          screen.getByText(getByTextWithMarkup('Select Label *'))
         ).toBeInTheDocument();
       });
     });
@@ -233,7 +233,7 @@ describe('SelectInput', () => {
             label="Select Label"
             options={selectOptions}
             isDisabled
-          />,
+          />
         );
 
         expect(screen.getByRole('textbox')).toBeDisabled();
@@ -251,7 +251,7 @@ describe('SelectInput', () => {
             label="Select Label"
             options={selectOptions}
             error="Helpful message"
-          />,
+          />
         );
 
         expect(screen.getByText('Helpful message')).toBeInTheDocument();
@@ -270,11 +270,11 @@ describe('SelectInput', () => {
             options={selectOptions}
             value={selectOptions[0]}
             isClearable={false}
-          />,
+          />
         );
 
         expect(
-          container.querySelector('.react-select__clear-indicator'),
+          container.querySelector('.react-select__clear-indicator')
         ).not.toBeInTheDocument();
       });
 
@@ -289,11 +289,11 @@ describe('SelectInput', () => {
             options={selectOptions}
             value={selectOptions[0]}
             isClearable
-          />,
+          />
         );
 
         expect(
-          container.querySelector('.react-select__clear-indicator'),
+          container.querySelector('.react-select__clear-indicator')
         ).toBeInTheDocument();
       });
     });
@@ -305,7 +305,7 @@ describe('SelectInput', () => {
 
     const breakpoints = ['tablet', 'desktop', 'hd'];
 
-    sizes.forEach(size => {
+    sizes.forEach((size) => {
       test(`it has a ${size} class applied to it`, () => {
         const { container } = render(
           <SelectInput
@@ -315,13 +315,13 @@ describe('SelectInput', () => {
             value={selectOptions[0].value}
             size={size}
             label="size test"
-          />,
+          />
         );
 
         expect(container.children[0].getAttribute('class')).toContain(size);
       });
 
-      breakpoints.forEach(breakpoint => {
+      breakpoints.forEach((breakpoint) => {
         test(`it applies responsive classes for breakpoint: ${breakpoint} and size: ${size}`, () => {
           const { container } = render(
             <SelectInput
@@ -331,11 +331,11 @@ describe('SelectInput', () => {
               value={selectOptions[0].value}
               size={{ [breakpoint]: size }}
               label="size test"
-            />,
+            />
           );
 
           expect(container.children[0].getAttribute('class')).toContain(
-            `size-${size}-${breakpoint}`,
+            `size-${size}-${breakpoint}`
           );
         });
       });
@@ -355,18 +355,18 @@ describe('SelectInput', () => {
             hd: 'sm',
           }}
           label="size test"
-        />,
+        />
       );
 
       expect(container.children[0].getAttribute('class')).toContain('size-sm');
       expect(container.children[0].getAttribute('class')).toContain(
-        'size-md-tablet',
+        'size-md-tablet'
       );
       expect(container.children[0].getAttribute('class')).toContain(
-        'size-lg-desktop',
+        'size-lg-desktop'
       );
       expect(container.children[0].getAttribute('class')).toContain(
-        'size-sm-hd',
+        'size-sm-hd'
       );
     });
   });

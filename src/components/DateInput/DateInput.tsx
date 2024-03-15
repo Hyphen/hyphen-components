@@ -60,7 +60,10 @@ const defaultDatePickerProps: Omit<DatePickerProps, 'onChange'> = {
   selectsRange: false,
 };
 
-const defaultPopoverProps: Omit<PopoverProps, 'children' | 'content' | 'isOpen'> = {
+const defaultPopoverProps: Omit<
+  PopoverProps,
+  'children' | 'content' | 'isOpen'
+> = {
   placement: 'bottom',
 };
 
@@ -92,19 +95,23 @@ export const DateInput: FC<DateInputProps> = ({
   };
 
   const getTextInputValue = () => {
-    const {
-      selectsRange,
-      startDate,
-      endDate,
-      selected,
-    } = mergedDatePickerProps;
+    const { selectsRange, startDate, endDate, selected } =
+      mergedDatePickerProps;
 
-    const formattedStartDate = startDate ? format(startDate, dateFormat, dateOptions) : '';
-    const formattedEndDate = endDate ? format(endDate, dateFormat, dateOptions) : '';
-    const formattedSelectedDate = selected ? format(selected, dateFormat, dateOptions) : '';
+    const formattedStartDate = startDate
+      ? format(startDate, dateFormat, dateOptions)
+      : '';
+    const formattedEndDate = endDate
+      ? format(endDate, dateFormat, dateOptions)
+      : '';
+    const formattedSelectedDate = selected
+      ? format(selected, dateFormat, dateOptions)
+      : '';
 
     if (selectsRange) {
-      return `${formattedStartDate}${formattedStartDate || formattedEndDate ? ' - ' : ''}${formattedEndDate}`;
+      return `${formattedStartDate}${
+        formattedStartDate || formattedEndDate ? ' - ' : ''
+      }${formattedEndDate}`;
     }
 
     return formattedSelectedDate;
@@ -118,7 +125,7 @@ export const DateInput: FC<DateInputProps> = ({
 
   const handleDatePickerChange = (
     date: Date | [Date, Date] | null,
-    event: React.SyntheticEvent<any, Event> | undefined, // eslint-disable-line @typescript-eslint/no-explicit-any
+    event: React.SyntheticEvent<any, Event> | undefined // eslint-disable-line @typescript-eslint/no-explicit-any
   ) => {
     mergedDatePickerProps.onChange(date, event);
 
@@ -170,7 +177,9 @@ export const DateInput: FC<DateInputProps> = ({
         name={mergedTextInputProps.name}
         label={mergedTextInputProps.label}
         value={getTextInputValue()}
-        onChange={() => null} /* Empty function since we hijack the onChange event */
+        onChange={() =>
+          null
+        } /* Empty function since we hijack the onChange event */
         onClick={() => handleTogglePopover(true)}
         readOnly
         {...restProps}

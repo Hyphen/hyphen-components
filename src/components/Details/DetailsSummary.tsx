@@ -4,7 +4,9 @@ import { Box, BoxProps } from '../Box/Box';
 
 export interface DetailsSummaryProps extends BoxProps {
   isDetailsOpen: boolean;
-  onToggle?: (event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>) => void;
+  onToggle?: (
+    event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>
+  ) => void;
 }
 
 export const DetailsSummary: React.FC<DetailsSummaryProps> = ({

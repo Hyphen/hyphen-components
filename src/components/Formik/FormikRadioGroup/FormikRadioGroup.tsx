@@ -3,11 +3,13 @@ import {
   FormikTouched,
   FormikErrors,
   FieldAttributes,
-  FormikValues, getIn,
+  FormikValues,
+  getIn,
 } from 'formik';
 import { RadioGroup, RadioGroupProps } from '../../RadioGroup/RadioGroup';
 
-export interface FormikRadioGroupProps extends Omit<RadioGroupProps, 'onChange'> {
+export interface FormikRadioGroupProps
+  extends Omit<RadioGroupProps, 'onChange'> {
   field: FieldAttributes<HTMLInputElement>;
   form: {
     touched: FormikTouched<FormikValues>;
@@ -16,20 +18,13 @@ export interface FormikRadioGroupProps extends Omit<RadioGroupProps, 'onChange'>
   onChange?: RadioGroupProps['onChange'];
 }
 
-export const FormikRadioGroup: React.FC<FormikRadioGroupProps> = (
-  {
-    field: {
-      name,
-      onBlur,
-      onChange: formikOnChange,
-      value,
-    },
-    form: { touched, errors },
-    onChange,
-    options,
-    ...props
-  },
-) => (
+export const FormikRadioGroup: React.FC<FormikRadioGroupProps> = ({
+  field: { name, onBlur, onChange: formikOnChange, value },
+  form: { touched, errors },
+  onChange,
+  options,
+  ...props
+}) => (
   <RadioGroup
     {...props}
     options={options}

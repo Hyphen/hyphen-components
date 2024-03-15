@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-  render,
-  fireEvent,
-  screen,
-  waitFor,
-} from '@testing-library/react';
-import {
-  Formik, Form, Field, getIn, setIn,
-} from 'formik';
+import { render, fireEvent, screen, waitFor } from '@testing-library/react';
+import { Formik, Form, Field, getIn, setIn } from 'formik';
 import { FormikSelectInputNative } from './FormikSelectInputNative';
 
 const testLabelName = 'test select';
@@ -18,7 +11,10 @@ const selectOptions = [
   { value: 'vanilla', label: 'Vanilla' },
 ];
 
-const handleValidation = testValueKey => values => (getIn(values, testValueKey)?.length > 1 ? {} : setIn({}, testValueKey, 'input is required'));
+const handleValidation = (testValueKey) => (values) =>
+  getIn(values, testValueKey)?.length > 1
+    ? {}
+    : setIn({}, testValueKey, 'input is required');
 
 const renderForm = (initialValue, props, testValueKey = testLabelName) => (
   <Formik
@@ -45,9 +41,11 @@ const renderForm = (initialValue, props, testValueKey = testLabelName) => (
 
 function getByTextWithMarkup(text) {
   return (content, element) => {
-    const hasText = node => node.textContent === text;
+    const hasText = (node) => node.textContent === text;
     const elementHasText = hasText(element);
-    const childrenDontHaveText = Array.from(element.children).every(child => !hasText(child));
+    const childrenDontHaveText = Array.from(element.children).every(
+      (child) => !hasText(child)
+    );
 
     return elementHasText && childrenDontHaveText;
   };
@@ -57,7 +55,9 @@ describe('SelectInputNative', () => {
   describe('States', () => {
     describe('Hidden label, with a placeholder', () => {
       test('it renders input without a visual label, and with a placeholder', () => {
-        render(renderForm(null, { placeholder: 'Test Placeholder', hideLabel: true }));
+        render(
+          renderForm(null, { placeholder: 'Test Placeholder', hideLabel: true })
+        );
         expect(screen.queryByText(testLabelName)).toBeNull();
         expect(screen.getByText('Test Placeholder')).toBeInTheDocument();
       });
@@ -82,8 +82,13 @@ describe('SelectInputNative', () => {
       test('assigns the "aria-labelledby" attribute and renders label with correct id, when label is provided', () => {
         render(renderForm(null, {}));
         const inputElement = screen.getByLabelText(testLabelName);
-        expect(inputElement).toHaveAttribute('aria-labelledby', `${testLabelName}Label`);
-        expect(document.getElementById(`${testLabelName}Label`)).toBeInTheDocument();
+        expect(inputElement).toHaveAttribute(
+          'aria-labelledby',
+          `${testLabelName}Label`
+        );
+        expect(
+          document.getElementById(`${testLabelName}Label`)
+        ).toBeInTheDocument();
       });
     });
 
@@ -118,27 +123,41 @@ describe('SelectInputNative', () => {
         // const submitButton = getByText('submit').closest('button');
 
         fireEvent.submit(form);
-        await waitFor(() => expect(screen.getByText('input is required')).toBeInTheDocument());
+        await waitFor(() =>
+          expect(screen.getByText('input is required')).toBeInTheDocument()
+        );
       });
 
       test('it renders the error message from nested object', async () => {
-        render(renderForm({ outer: { nested: null } }, { isRequired: true }, `${testLabelName}.outer.nested`));
+        render(
+          renderForm(
+            { outer: { nested: null } },
+            { isRequired: true },
+            `${testLabelName}.outer.nested`
+          )
+        );
         const form = screen.getByTestId('form');
         // const submitButton = getByText('submit').closest('button');
 
         fireEvent.submit(form);
-        await waitFor(() => expect(screen.getByText('input is required')).toBeInTheDocument());
+        await waitFor(() =>
+          expect(screen.getByText('input is required')).toBeInTheDocument()
+        );
       });
     });
   });
 
   describe('Callback Handling', () => {
     describe('onChange', () => {
-      test('Custom onChange event fires callback function, overwriting Formik\'s onChange', async () => {
+      test("Custom onChange event fires callback function, overwriting Formik's onChange", async () => {
         let value = null;
-        const mockedHandleChange = jest.fn(event => { value = event.target.value; });
+        const mockedHandleChange = jest.fn((event) => {
+          value = event.target.value;
+        });
 
-        const { getByLabelText } = render(renderForm(value, { onChange: mockedHandleChange }));
+        const { getByLabelText } = render(
+          renderForm(value, { onChange: mockedHandleChange })
+        );
         const selectInput = getByLabelText(testLabelName);
 
         fireEvent.change(selectInput);

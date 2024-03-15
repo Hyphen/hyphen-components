@@ -1,7 +1,11 @@
 import React, { FC } from 'react';
-import { SelectInputNative, SelectInputNativeProps } from '../SelectInputNative/SelectInputNative';
+import {
+  SelectInputNative,
+  SelectInputNativeProps,
+} from '../SelectInputNative/SelectInputNative';
 
-export interface TimePickerNativeProps extends Omit<SelectInputNativeProps, 'options'> {
+export interface TimePickerNativeProps
+  extends Omit<SelectInputNativeProps, 'options'> {
   /**
    * Options to govern the display of the option labels in the select.
    * This is a direct passthrough to the second argument of JS `toLocaleTimeString`.
@@ -11,7 +15,7 @@ export interface TimePickerNativeProps extends Omit<SelectInputNativeProps, 'opt
   /**
    * End hour and minute
    */
-  endTime?: { hour: number; minute: number; };
+  endTime?: { hour: number; minute: number };
   /**
    * Interval of displayed times (in seconds). Defaults to 900 seconds (15 minutes).
    */
@@ -25,7 +29,7 @@ export interface TimePickerNativeProps extends Omit<SelectInputNativeProps, 'opt
   /**
    * Start hour and minute
    */
-  startTime?: { hour: number; minute: number; };
+  startTime?: { hour: number; minute: number };
   /**
    *  Should be ISO timestamp as returned by `onChange`, and matching value of option object.
    */
@@ -51,7 +55,12 @@ export const TimePickerNative: FC<TimePickerNativeProps> = ({
     first.setHours(startTime?.hour || 0, startTime?.minute || 0, 0, 0);
 
     const last = new Date();
-    last.setHours(endTime?.hour || first.getHours() + 24, endTime?.minute || 0, 0, 0);
+    last.setHours(
+      endTime?.hour || first.getHours() + 24,
+      endTime?.minute || 0,
+      0,
+      0
+    );
 
     const timeOptions = [];
     const currentTime: Date = new Date(first);

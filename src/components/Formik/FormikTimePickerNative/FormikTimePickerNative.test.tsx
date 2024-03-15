@@ -1,20 +1,14 @@
 import React from 'react';
-import {
-  render,
-  fireEvent,
-  screen,
-  waitFor,
-} from '@testing-library/react';
-import {
-  Formik, Form, Field, FormikValues, getIn, setIn,
-} from 'formik';
+import { render, fireEvent, screen, waitFor } from '@testing-library/react';
+import { Formik, Form, Field, FormikValues, getIn, setIn } from 'formik';
 import { FormikTimePickerNative } from './FormikTimePickerNative';
 
 const testLabelName = 'test select';
 
-const handleValidation = (testValueKey:string) => (values:FormikValues) => (
-  getIn(values, testValueKey)?.length > 1 ? {} : setIn({}, testValueKey, 'input is required')
-);
+const handleValidation = (testValueKey: string) => (values: FormikValues) =>
+  getIn(values, testValueKey)?.length > 1
+    ? {}
+    : setIn({}, testValueKey, 'input is required');
 
 const renderForm = (
   initialValue: any, // eslint-disable-line
@@ -26,7 +20,7 @@ const renderForm = (
     onChange?: jest.Mock<void, [React.ChangeEvent<HTMLSelectElement>]>; // eslint-disable-line
     interval?: number;
   },
-  testValueKey = testLabelName,
+  testValueKey = testLabelName
 ) => (
   <Formik
     initialValues={{
@@ -54,7 +48,12 @@ describe('FormikTimePickerNative', () => {
   describe('States', () => {
     describe('Hidden label, with a placeholder', () => {
       test('it renders input without a visual label, and with a placeholder', () => {
-        render(renderForm(undefined, { placeholder: 'Test Placeholder', hideLabel: true }));
+        render(
+          renderForm(undefined, {
+            placeholder: 'Test Placeholder',
+            hideLabel: true,
+          })
+        );
         expect(screen.queryByText(testLabelName)).toBeNull();
         expect(screen.getByText('Test Placeholder')).toBeInTheDocument();
       });
@@ -79,8 +78,13 @@ describe('FormikTimePickerNative', () => {
       test('assigns the "aria-labelledby" attribute and renders label with correct id, when label is provided', () => {
         render(renderForm(undefined, {}));
         const inputElement = screen.getByLabelText(testLabelName);
-        expect(inputElement).toHaveAttribute('aria-labelledby', `${testLabelName}Label`);
-        expect(document.getElementById(`${testLabelName}Label`)).toBeInTheDocument();
+        expect(inputElement).toHaveAttribute(
+          'aria-labelledby',
+          `${testLabelName}Label`
+        );
+        expect(
+          document.getElementById(`${testLabelName}Label`)
+        ).toBeInTheDocument();
       });
     });
 
@@ -110,32 +114,46 @@ describe('FormikTimePickerNative', () => {
 
     describe('Is Invalid, with a helpful message', () => {
       test('it renders the helpful message', async () => {
-        const { getByText } = render(renderForm(undefined, { isRequired: true }));
-        const submitButton = getByText('submit');
-
-        fireEvent.click(submitButton);
-        await waitFor(() => expect(screen.getByText('input is required')).toBeInTheDocument());
-      });
-
-      test('it renders the error message from nested object', async () => {
         const { getByText } = render(
-          renderForm({ outer: { nested: [] } }, { isRequired: true }, `${testLabelName}.outer.nested`),
+          renderForm(undefined, { isRequired: true })
         );
         const submitButton = getByText('submit');
 
         fireEvent.click(submitButton);
-        await waitFor(() => expect(screen.getByText('input is required')).toBeInTheDocument());
+        await waitFor(() =>
+          expect(screen.getByText('input is required')).toBeInTheDocument()
+        );
+      });
+
+      test('it renders the error message from nested object', async () => {
+        const { getByText } = render(
+          renderForm(
+            { outer: { nested: [] } },
+            { isRequired: true },
+            `${testLabelName}.outer.nested`
+          )
+        );
+        const submitButton = getByText('submit');
+
+        fireEvent.click(submitButton);
+        await waitFor(() =>
+          expect(screen.getByText('input is required')).toBeInTheDocument()
+        );
       });
     });
   });
 
   describe('Callback Handling', () => {
     describe('onChange', () => {
-      test('Custom onChange event fires callback function, overwriting Formik\'s onChange', async () => {
+      test("Custom onChange event fires callback function, overwriting Formik's onChange", async () => {
         let value: string | undefined;
-        const mockedHandleChange = jest.fn(event => { event.persist(); });
+        const mockedHandleChange = jest.fn((event) => {
+          event.persist();
+        });
 
-        const { getByLabelText } = render(renderForm(value, { onChange: mockedHandleChange }));
+        const { getByLabelText } = render(
+          renderForm(value, { onChange: mockedHandleChange })
+        );
         const selectInput = getByLabelText(testLabelName);
         fireEvent.change(selectInput, { target: { value: 'hello' } });
         expect(mockedHandleChange).toHaveBeenCalledTimes(1);
@@ -144,7 +162,9 @@ describe('FormikTimePickerNative', () => {
       test('it fires onChange callback on change', async () => {
         const mockedHandleChange = jest.fn();
 
-        const { getByLabelText } = render(renderForm(undefined, { onChange: mockedHandleChange }));
+        const { getByLabelText } = render(
+          renderForm(undefined, { onChange: mockedHandleChange })
+        );
 
         await fireEvent.change(getByLabelText(testLabelName));
 

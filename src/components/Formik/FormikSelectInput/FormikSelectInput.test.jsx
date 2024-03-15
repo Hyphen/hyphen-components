@@ -1,14 +1,7 @@
 import React from 'react';
-import {
-  render,
-  fireEvent,
-  screen,
-  waitFor,
-} from '@testing-library/react';
+import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import selectEvent from 'react-select-event';
-import {
-  Formik, Form, Field, getIn, setIn,
-} from 'formik';
+import { Formik, Form, Field, getIn, setIn } from 'formik';
 import { FormikSelectInput } from './FormikSelectInput';
 import { SelectInput } from '../../SelectInput/SelectInput';
 
@@ -20,7 +13,10 @@ const selectOptions = [
   { value: 'vanilla', label: 'Vanilla' },
 ];
 
-const handleValidation = testValueKey => values => (getIn(values, testValueKey)?.length > 1 ? {} : setIn({}, testValueKey, 'input is required'));
+const handleValidation = (testValueKey) => (values) =>
+  getIn(values, testValueKey)?.length > 1
+    ? {}
+    : setIn({}, testValueKey, 'input is required');
 
 const renderForm = (initialValue, props, testValueKey = testLabelName) => (
   <Formik
@@ -47,9 +43,11 @@ const renderForm = (initialValue, props, testValueKey = testLabelName) => (
 
 function getByTextWithMarkup(text) {
   return (content, element) => {
-    const hasText = node => node.textContent === text;
+    const hasText = (node) => node.textContent === text;
     const elementHasText = hasText(element);
-    const childrenDontHaveText = Array.from(element.children).every(child => !hasText(child));
+    const childrenDontHaveText = Array.from(element.children).every(
+      (child) => !hasText(child)
+    );
 
     return elementHasText && childrenDontHaveText;
   };
@@ -59,7 +57,9 @@ describe('FormikSelectInput', () => {
   describe('States', () => {
     describe('Hidden label, with a placeholder', () => {
       test('it renders input without a visual label, and with a placeholder', () => {
-        render(renderForm([], { placeholder: 'Test Placeholder', hideLabel: true }));
+        render(
+          renderForm([], { placeholder: 'Test Placeholder', hideLabel: true })
+        );
         expect(screen.queryByText(testLabelName)).toBeNull();
         expect(screen.getByText('Test Placeholder')).toBeInTheDocument();
       });
@@ -84,8 +84,13 @@ describe('FormikSelectInput', () => {
       test('assigns the "aria-labelledby" attribute and renders label with correct id, when label is provided', () => {
         render(renderForm([], {}));
         const inputElement = screen.getByLabelText(testLabelName);
-        expect(inputElement).toHaveAttribute('aria-labelledby', `${testLabelName}Label`);
-        expect(document.getElementById(`${testLabelName}Label`)).toBeInTheDocument();
+        expect(inputElement).toHaveAttribute(
+          'aria-labelledby',
+          `${testLabelName}Label`
+        );
+        expect(
+          document.getElementById(`${testLabelName}Label`)
+        ).toBeInTheDocument();
       });
     });
 
@@ -108,7 +113,9 @@ describe('FormikSelectInput', () => {
 
     describe('Multi select, with multiple items selected', () => {
       test('it renders input with a label, and with two items selected', () => {
-        render(renderForm([selectOptions[0], selectOptions[2]], { isMulti: true }));
+        render(
+          renderForm([selectOptions[0], selectOptions[2]], { isMulti: true })
+        );
 
         expect(screen.getByLabelText(testLabelName)).toBeInTheDocument();
         expect(screen.queryByText('Select...')).toBeNull();
@@ -131,33 +138,49 @@ describe('FormikSelectInput', () => {
         const submitButton = getByText('submit');
 
         fireEvent.click(submitButton);
-        await waitFor(() => expect(screen.getByText('input is required')).toBeInTheDocument());
+        await waitFor(() =>
+          expect(screen.getByText('input is required')).toBeInTheDocument()
+        );
       });
 
       test('it renders errors from nested objects', async () => {
-        const { getByText } = render(renderForm({ outer: { nested: [] } }, { isRequired: true }, `${testLabelName}.outer.nested`));
+        const { getByText } = render(
+          renderForm(
+            { outer: { nested: [] } },
+            { isRequired: true },
+            `${testLabelName}.outer.nested`
+          )
+        );
         const submitButton = getByText('submit');
 
         fireEvent.click(submitButton);
-        await waitFor(() => expect(screen.getByText('input is required')).toBeInTheDocument());
+        await waitFor(() =>
+          expect(screen.getByText('input is required')).toBeInTheDocument()
+        );
       });
     });
   });
 
   describe('Callback Handling', () => {
     describe('onChange', () => {
-      test('Custom onChange event fires callback function, overwriting Formik\'s onChange', async () => {
+      test("Custom onChange event fires callback function, overwriting Formik's onChange", async () => {
         let value = [];
-        const mockedHandleChange = jest.fn(event => { value = event.target.value; });
+        const mockedHandleChange = jest.fn((event) => {
+          value = event.target.value;
+        });
 
-        const { getByLabelText, container, getByText } = render(renderForm(value, { onChange: mockedHandleChange }));
+        const { getByLabelText, container, getByText } = render(
+          renderForm(value, { onChange: mockedHandleChange })
+        );
         const selectInput = getByLabelText(testLabelName);
         /**
          * This class is specific to react-select, combined with our custom classNamePrefix prop.
          * While this is an implementation detail there appears to be
          * no clearer path to test our own component which depends on react-select
-        */
-        const selectInputWrapper = container.querySelector('.react-select__control');
+         */
+        const selectInputWrapper = container.querySelector(
+          '.react-select__control'
+        );
 
         fireEvent.focus(selectInput);
         fireEvent.mouseDown(selectInputWrapper);
@@ -177,7 +200,7 @@ describe('FormikSelectInput', () => {
             placeholder="Test Placeholder"
             label="onchange test"
             options={selectOptions}
-          />,
+          />
         );
 
         await selectEvent.select(getByLabelText('onchange test'), 'Vanilla');

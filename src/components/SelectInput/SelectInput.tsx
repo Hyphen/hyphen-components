@@ -14,11 +14,14 @@ import { Icon } from '../Icon/Icon';
 import { FormLabel } from '../FormLabel/FormLabel';
 import { InputValidationMessage } from '../InputValidationMessage/InputValidationMessage';
 import styles from './SelectInput.module.scss';
-import {GroupBase} from "react-select/dist/declarations/src/types";
+import { GroupBase } from 'react-select/dist/declarations/src/types';
 
 type SelectOptions = any;
 type SelectGroupOptions = GroupBase<SelectOptions>;
-export type SelectInputOptions = OptionsOrGroups<SelectOptions, SelectGroupOptions>;
+export type SelectInputOptions = OptionsOrGroups<
+  SelectOptions,
+  SelectGroupOptions
+>;
 
 export type SimulatedEventPayloadType = {
   target: {
@@ -157,11 +160,11 @@ export const SelectInput: FC<SelectInputProps> = ({
     onChange(simulatedEventPayloadType);
   };
 
-  const handleFocus: FocusEventHandler<HTMLInputElement> = e => {
+  const handleFocus: FocusEventHandler<HTMLInputElement> = (e) => {
     if (onFocus) onFocus(e);
   };
 
-  const handleBlur: FocusEventHandler<HTMLInputElement> = e => {
+  const handleBlur: FocusEventHandler<HTMLInputElement> = (e) => {
     if (onBlur) onBlur(e);
   };
 
@@ -171,10 +174,10 @@ export const SelectInput: FC<SelectInputProps> = ({
     'palmetto-components__variables__form-control',
     'select-input-wrapper',
     className,
-    ...responsiveClasses.map(c => (styles[c])),
+    ...responsiveClasses.map((c) => styles[c]),
     {
       [styles.disabled]: isDisabled,
-    },
+    }
   );
 
   const inputClasses = classNames('react-select', { [styles.error]: error });
@@ -188,7 +191,11 @@ export const SelectInput: FC<SelectInputProps> = ({
     requiredIndicator,
   };
 
-  const ClearIndicator = (props: ClearIndicatorProps<OptionsOrGroups<SelectOptions, SelectGroupOptions>>) => (
+  const ClearIndicator = (
+    props: ClearIndicatorProps<
+      OptionsOrGroups<SelectOptions, SelectGroupOptions>
+    >
+  ) => (
     <components.ClearIndicator {...props}>
       <Icon name="remove" />
     </components.ClearIndicator>
@@ -216,7 +223,12 @@ export const SelectInput: FC<SelectInputProps> = ({
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        styles={{ menuPortal: base => ({ ...base, zIndex: Number(Z_INDEX_VALUES.popover) }) }}
+        styles={{
+          menuPortal: (base) => ({
+            ...base,
+            zIndex: Number(Z_INDEX_VALUES.popover),
+          }),
+        }}
         value={value}
       />
       {error && typeof error !== 'boolean' && (

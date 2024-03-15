@@ -12,12 +12,18 @@ const labelMarginSizeMap = {
   lg: 'xs 0 0 0',
 };
 
-const computedResponsiveSize = ( // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
-  size: CheckboxInputProps['size'],
+const computedResponsiveSize = (
+  // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
+  size: CheckboxInputProps['size']
 ) => {
   if (size && !(typeof size === 'string') && typeof size === 'object') {
-    return Object.entries(size)
-      .reduce((acc, [key, value]) => ({ ...acc, [key]: labelMarginSizeMap[value || 'md'] }), {});
+    return Object.entries(size).reduce(
+      (acc, [key, value]) => ({
+        ...acc,
+        [key]: labelMarginSizeMap[value || 'md'],
+      }),
+      {}
+    );
   }
 
   return labelMarginSizeMap[size || 'md'] as string;
@@ -133,7 +139,10 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
     isRequired,
     size,
     label,
-    className: classNames('palmetto-components__variables__form-control', 'm-right-xs'),
+    className: classNames(
+      'palmetto-components__variables__form-control',
+      'm-right-xs'
+    ),
     error,
   };
 
@@ -143,19 +152,20 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
     isDisabled,
     isFieldRequired: isRequired,
     requiredIndicator,
-    className: classNames(...cssShorthandToClasses('m', computedResponsiveSize(size))),
+    className: classNames(
+      ...cssShorthandToClasses('m', computedResponsiveSize(size))
+    ),
   };
 
   return (
     <Box className={className} {...restProps}>
-      <Box
-        alignItems="flex-start"
-        direction="row"
-      >
+      <Box alignItems="flex-start" direction="row">
         <Checkbox {...checkboxProps} labelledby={`${id}Label`} />
         {label && !hideLabel && <FormLabel {...labelProps}>{label}</FormLabel>}
       </Box>
-      {error && error !== true && <InputValidationMessage>{error}</InputValidationMessage>}
+      {error && error !== true && (
+        <InputValidationMessage>{error}</InputValidationMessage>
+      )}
     </Box>
   );
 };

@@ -1,6 +1,4 @@
-import React, {
-  FC, ChangeEvent, FocusEvent, ReactNode,
-} from 'react';
+import React, { FC, ChangeEvent, FocusEvent, ReactNode } from 'react';
 import classNames from 'classnames';
 import { Box } from '../Box/Box';
 import { InputValidationMessage } from '../InputValidationMessage/InputValidationMessage';
@@ -103,22 +101,27 @@ export const RadioGroup: FC<RadioGroupProps> = ({
     className,
     {
       [styles.loading]: error,
-    },
+    }
   );
 
   return (
-    <div className={classNames(styles['radio-group'], groupClasses)} {...restProps}>
+    <div
+      className={classNames(styles['radio-group'], groupClasses)}
+      {...restProps}
+    >
       <fieldset className={styles.fieldset}>
         {(title || description) && (
           <legend className={styles.legend}>
             {title}
             {isRequired && <span>{requiredIndicator}</span>}
-            {description && <div className={styles.description}>{description}</div>}
+            {description && (
+              <div className={styles.description}>{description}</div>
+            )}
           </legend>
         )}
         <Box direction={direction} gap="sm" className={styles.options}>
-          {options
-            && options.map(option => (
+          {options &&
+            options.map((option) => (
               <RadioInput
                 key={option.id}
                 name={name}

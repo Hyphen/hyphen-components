@@ -18,7 +18,9 @@ function getByTextWithMarkup(text: string) {
     const elementHasText = hasText(element);
     // eslint-disable-next-line
     // @ts-ignore
-    const childrenDontHaveText = Array.from(element.children).every(child => !hasText(child));
+    const childrenDontHaveText = Array.from(element.children).every(
+      (child) => !hasText(child)
+    );
 
     return elementHasText && childrenDontHaveText;
   };
@@ -39,20 +41,32 @@ describe('TextareaInput', () => {
 
       test('Input value is updated properly when upper state changes', () => {
         let value = 'hello';
-        const mockedHandleChange = jest.fn(event => {
+        const mockedHandleChange = jest.fn((event) => {
           value = event.target.value;
         });
         const { rerender } = render(
-          <TextareaInput {...baseProps} value={value} onChange={mockedHandleChange} />,
+          <TextareaInput
+            {...baseProps}
+            value={value}
+            onChange={mockedHandleChange}
+          />
         );
 
-        const inputElement = screen.getByDisplayValue('hello') as HTMLInputElement;
+        const inputElement = screen.getByDisplayValue(
+          'hello'
+        ) as HTMLInputElement;
         expect(inputElement.value).toBe('hello');
 
         fireEvent.change(inputElement, { target: { value: 'good bye' } });
         expect(mockedHandleChange).toHaveBeenCalledTimes(1);
 
-        rerender(<TextareaInput {...baseProps} value={value} onChange={mockedHandleChange} />);
+        rerender(
+          <TextareaInput
+            {...baseProps}
+            value={value}
+            onChange={mockedHandleChange}
+          />
+        );
         expect(inputElement.value).toBe('good bye');
       });
     });
@@ -130,7 +144,9 @@ describe('TextareaInput', () => {
       test("it's label renders an asterisk indicating that it's required", () => {
         render(<TextareaInput {...baseProps} isRequired />);
 
-        const labelElement = screen.getByText(getByTextWithMarkup(`${baseProps.label} *`));
+        const labelElement = screen.getByText(
+          getByTextWithMarkup(`${baseProps.label} *`)
+        );
 
         expect(labelElement).toBeInTheDocument();
       });
@@ -162,7 +178,10 @@ describe('TextareaInput', () => {
       test('assigns the "aria-labelledby" attribute and renders label with correct id, when label is provided', () => {
         render(<TextareaInput {...baseProps} />);
         const inputElement = screen.getByDisplayValue(baseProps.value);
-        expect(inputElement).toHaveAttribute('aria-labelledby', `${baseProps.id}Label`);
+        expect(inputElement).toHaveAttribute(
+          'aria-labelledby',
+          `${baseProps.id}Label`
+        );
         expect(document.getElementById(baseProps.id)).toBeInTheDocument();
       });
 
