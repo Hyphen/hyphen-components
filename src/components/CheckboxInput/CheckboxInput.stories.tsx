@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import type { Meta } from '@storybook/react';
 import { CheckboxInput } from './CheckboxInput';
 import { Box } from '../Box/Box';
@@ -61,7 +61,7 @@ export const IndeterminateCheckboxes = () =>
   (() => {
     const [exampleOneChildOne, setExampleOneChildOne] = useState(false);
     const [exampleOneChildTwo, setExampleOneChildTwo] = useState(true);
-    const handleParentChange = (event) => {
+    const handleParentChange = (event: ChangeEvent<HTMLInputElement>) => {
       setExampleOneChildOne(event.target.checked);
       setExampleOneChildTwo(event.target.checked);
     };

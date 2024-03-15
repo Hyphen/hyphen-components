@@ -6,7 +6,7 @@ import { useBreakpoint } from '../../hooks/useBreakpoint/useBreakpoint';
 import { Box } from '../Box/Box';
 
 const meta: Meta<typeof ResponsiveProvider> = {
-  title: 'Components/ResponsiveProvider',
+  title: 'Providers/ResponsiveProvider',
   component: ResponsiveProvider,
 };
 

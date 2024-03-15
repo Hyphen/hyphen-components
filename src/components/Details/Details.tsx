@@ -11,7 +11,7 @@ export interface DetailsProps extends BoxProps {
   isOpen: boolean;
 }
 
-const DetailsBaseComponent: React.FC<DetailsProps> = React.forwardRef<HTMLDetailsElement, DetailsProps>((
+export const DetailsBaseComponent: React.FC<DetailsProps> = React.forwardRef<HTMLDetailsElement, DetailsProps>((
   {
     children,
     className,
