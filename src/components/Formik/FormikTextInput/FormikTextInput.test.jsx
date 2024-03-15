@@ -32,18 +32,6 @@ const renderForm = (initialValue, props, testValueKey = testLabelName) => (
   </Formik>
 );
 
-function getByTextWithMarkup(text) {
-  return (content, element) => {
-    const hasText = (node) => node.textContent === text;
-    const elementHasText = hasText(element);
-    const childrenDontHaveText = Array.from(element.children).every(
-      (child) => !hasText(child)
-    );
-
-    return elementHasText && childrenDontHaveText;
-  };
-}
-
 describe('FormikTextInput', () => {
   describe('States', () => {
     describe('Autofocused', () => {

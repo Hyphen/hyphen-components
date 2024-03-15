@@ -15,32 +15,31 @@ const meta: Meta<typeof useOpenClose> = {
 
 export default meta;
 
-export const BasicUsage: React.FC<UseOpenCloseProps> = () =>
-  (() => {
-    const { isOpen, handleOpen, handleClose } = useOpenClose({
-      onOpen: action('onOpen'),
-      onClose: action('onClose'),
-    });
-    const popoverContent = (
-      <>
-        <Box padding="lg" gap="md">
-          <Box as="p">Hello!</Box>
-        </Box>
-      </>
-    );
-    return (
-      <Popover
-        placement="right-end"
-        content={popoverContent}
-        isOpen={isOpen}
-        onClickOutside={handleClose}
-        contentContainerProps={{
-          padding: 'sm',
-        }}
-      >
-        <Button variant="primary" type="button" onClick={handleOpen}>
-          Open Popover
-        </Button>
-      </Popover>
-    );
-  })();
+export const BasicUsage: React.FC<UseOpenCloseProps> = () => {
+  const { isOpen, handleOpen, handleClose } = useOpenClose({
+    onOpen: action('onOpen'),
+    onClose: action('onClose'),
+  });
+  const popoverContent = (
+    <>
+      <Box padding="lg" gap="md">
+        <Box as="p">Hello!</Box>
+      </Box>
+    </>
+  );
+  return (
+    <Popover
+      placement="right-end"
+      content={popoverContent}
+      isOpen={isOpen}
+      onClickOutside={handleClose}
+      contentContainerProps={{
+        padding: 'sm',
+      }}
+    >
+      <Button variant="primary" type="button" onClick={handleOpen}>
+        Open Popover
+      </Button>
+    </Popover>
+  );
+};
