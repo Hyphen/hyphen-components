@@ -18,13 +18,18 @@ const handleValidation = (testValueKey: string | string[]) => (values: any) =>
     ? {}
     : setIn({}, testValueKey as string, 'input is required');
 
-const renderForm = (initialValue: any, props: any, testValueKey = testLabelName) => (
+const renderForm = (
+  initialValue: any,
+  props: any,
+  testValueKey = testLabelName
+) => (
   <Formik
     initialValues={{
       [testLabelName]: initialValue,
     }}
     validate={props.isRequired ? handleValidation(testValueKey) : undefined} // eslint-disable-line
-   onSubmit={async () => null }>
+    onSubmit={async () => null}
+  >
     {() => (
       <Form>
         <Field

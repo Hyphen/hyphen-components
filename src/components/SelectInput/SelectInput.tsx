@@ -30,7 +30,11 @@ export type SimulatedEventPayloadType = {
   };
 };
 
-export type TextInputSize = 'sm' | 'md' | 'lg' | ResponsiveProp<'sm' | 'md' | 'lg'>;
+export type TextInputSize =
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | ResponsiveProp<'sm' | 'md' | 'lg'>;
 
 export interface SelectInputProps {
   /**

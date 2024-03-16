@@ -1,7 +1,7 @@
 import React from 'react';
-import {render, fireEvent, screen, Matcher} from '@testing-library/react';
+import { render, fireEvent, screen, Matcher } from '@testing-library/react';
 import selectEvent from 'react-select-event';
-import {SelectInput, TextInputSize} from './SelectInput';
+import { SelectInput, TextInputSize } from './SelectInput';
 
 const selectOptions = [
   { value: 'chocolate', label: 'Chocolate' },
@@ -9,7 +9,9 @@ const selectOptions = [
   { value: 'vanilla', label: 'Vanilla' },
 ];
 
-function getByTextWithMarkup(text: string): (_content: any, element: Element) => boolean {
+function getByTextWithMarkup(
+  text: string
+): (_content: any, element: Element) => boolean {
   return (_content: any, element: Element) => {
     const hasText = (node: Element) => node.textContent === text;
     const elementHasText = hasText(element);
@@ -237,7 +239,9 @@ describe('SelectInput', () => {
         );
 
         expect(
-          screen.getByText(getByTextWithMarkup('Select Label *') as unknown as Matcher)
+          screen.getByText(
+            getByTextWithMarkup('Select Label *') as unknown as Matcher
+          )
         ).toBeInTheDocument();
       });
     });

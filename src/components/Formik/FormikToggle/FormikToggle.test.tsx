@@ -16,7 +16,11 @@ const handleValidation = (testValueKey: string) => (values: FormikValues) =>
     ? {}
     : setIn({}, testValueKey, 'Checkbox is required');
 
-const renderForm = (initialValue: any, props: any, testValueKey = testLabelName) => (
+const renderForm = (
+  initialValue: any,
+  props: any,
+  testValueKey = testLabelName
+) => (
   <Formik
     initialValues={{
       [testLabelName]: initialValue,
