@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import { CheckboxInput } from './CheckboxInput';
 import { FormLabel } from '../FormLabel/FormLabel';
-
+import { CheckboxSize } from './components/Checkbox';
 jest.mock('../FormLabel/FormLabel');
 
 describe('CheckboxInput', () => {
@@ -23,7 +23,7 @@ describe('CheckboxInput', () => {
         onChange={() => null}
       />
     );
-    const checkbox = getByLabelText('test checkbox');
+    const checkbox = getByLabelText('test checkbox') as HTMLInputElement;
 
     expect(checkbox.checked).toBe(false);
     expect(checkbox.disabled).toBe(false);
@@ -91,7 +91,7 @@ describe('CheckboxInput', () => {
         isChecked
       />
     );
-    const checkbox = getByLabelText('test checkbox');
+    const checkbox = getByLabelText('test checkbox') as HTMLInputElement;
     expect(checkbox.checked).toEqual(true);
   });
 
@@ -104,13 +104,14 @@ describe('CheckboxInput', () => {
         onChange={() => null}
       />
     );
-    const checkbox = getByLabelText('test checkbox');
+    const checkbox = getByLabelText('test checkbox') as HTMLInputElement;
     expect(checkbox.checked).toEqual(false);
   });
 
   test('assigns the "aria-labelledby" attribute and calls FormLabel with expected props', () => {
     const { getByLabelText } = render(
       <CheckboxInput
+        isChecked={false}
         id="testInput"
         label="test label"
         value="hello"
@@ -126,6 +127,7 @@ describe('CheckboxInput', () => {
   test('sets required properties when isRequired is true', () => {
     const { getByLabelText } = render(
       <CheckboxInput
+        isChecked={false}
         id="testInput"
         label="test label"
         value="hello"
@@ -281,7 +283,7 @@ describe('CheckboxInput', () => {
     });
 
     const mockedHandleChange = jest.fn();
-    const sizes = ['sm', 'md', 'lg'];
+    const sizes: CheckboxSize[] = ['sm', 'md', 'lg'];
 
     const breakpoints = ['tablet', 'desktop', 'hd'];
 
@@ -289,6 +291,7 @@ describe('CheckboxInput', () => {
       test(`it has a ${size} class applied to it`, () => {
         render(
           <CheckboxInput
+            isChecked={false}
             id="testId"
             onChange={mockedHandleChange}
             size={size}
@@ -304,6 +307,7 @@ describe('CheckboxInput', () => {
         test(`it applies responsive classes for breakpoint: ${breakpoint} and size: ${size}`, () => {
           render(
             <CheckboxInput
+              isChecked={false}
               id="testId"
               onChange={mockedHandleChange}
               size={{ [breakpoint]: size }}
@@ -323,6 +327,7 @@ describe('CheckboxInput', () => {
     test('It applies responsive classes when multiple are applied', () => {
       render(
         <CheckboxInput
+          isChecked={false}
           id="testId"
           onChange={mockedHandleChange}
           size={{

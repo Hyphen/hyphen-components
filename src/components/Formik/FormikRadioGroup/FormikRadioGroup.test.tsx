@@ -6,7 +6,7 @@ import {
   waitFor,
   act,
 } from '@testing-library/react';
-import { Formik, Form, Field, getIn, setIn } from 'formik';
+import { Formik, Form, Field, getIn, setIn, FormikValues } from 'formik';
 import { FormikRadioGroup } from './FormikRadioGroup';
 
 const testGroupName = 'colors';
@@ -30,7 +30,7 @@ const groupOptions = [
   },
 ];
 
-const handleValidation = (testValueKey) => (values) =>
+const handleValidation = (testValueKey: string) => (values: FormikValues) =>
   getIn(values, testValueKey)
     ? {}
     : setIn({}, testValueKey, 'selection is required');
@@ -86,7 +86,7 @@ describe('FormikRadioGroup', () => {
           renderForm(null, { isRequired: true })
         );
         const submitButton = getByText('submit');
-        const blueRadioInput = getByLabelText('Blue');
+        const blueRadioInput = getByLabelText('Blue') as HTMLInputElement;
         expect(blueRadioInput.checked).toBe(false);
 
         fireEvent.click(submitButton);

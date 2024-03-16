@@ -6,12 +6,12 @@ import {
   waitFor,
   act,
 } from '@testing-library/react';
-import { Formik, Form, Field, getIn, setIn } from 'formik';
-import { FormikToggle } from './FormikToggle';
+import { Formik, Form, Field, getIn, setIn, FormikValues } from 'formik';
+import { FormikCheckboxInput } from './FormikCheckboxInput';
 
 const testLabelName = 'test checkbox';
 
-const handleValidation = (testValueKey) => (values) =>
+const handleValidation = (testValueKey: string) => (values: FormikValues) =>
   getIn(values, testValueKey)
     ? {}
     : setIn({}, testValueKey, 'Checkbox is required');
@@ -30,7 +30,7 @@ const renderForm = (initialValue, props, testValueKey = testLabelName) => (
           label={testValueKey}
           name={testValueKey}
           id={testValueKey}
-          component={FormikToggle}
+          component={FormikCheckboxInput}
           {...props}
         />
         <button type="submit">submit</button>
@@ -39,12 +39,12 @@ const renderForm = (initialValue, props, testValueKey = testLabelName) => (
   </Formik>
 );
 
-describe('CheckboxInput', () => {
+describe('FormikCheckboxInput', () => {
   describe('States', () => {
     describe('With default props', () => {
       test('renders not disabled, checked, or invalid by default', () => {
         const { getByLabelText } = render(renderForm(false, {}));
-        const checkbox = getByLabelText(testLabelName);
+        const checkbox = getByLabelText(testLabelName) as HTMLInputElement;
 
         expect(checkbox.checked).toBe(false);
         expect(checkbox.disabled).toBe(false);
@@ -55,7 +55,7 @@ describe('CheckboxInput', () => {
     describe('With initial value true', () => {
       test('input is rendered checked when instantiated with isChecked true', () => {
         const { getByLabelText } = render(renderForm(true, {}));
-        const checkbox = getByLabelText(testLabelName);
+        const checkbox = getByLabelText(testLabelName) as HTMLInputElement;
         expect(checkbox.checked).toEqual(true);
       });
     });
@@ -63,7 +63,7 @@ describe('CheckboxInput', () => {
     describe('With initial value false', () => {
       test('input is rendered unchecked when instantiated with isChecked false', () => {
         const { getByLabelText } = render(renderForm(false, {}));
-        const checkbox = getByLabelText(testLabelName);
+        const checkbox = getByLabelText(testLabelName) as HTMLInputElement;
         expect(checkbox.checked).toEqual(false);
       });
     });
@@ -102,7 +102,7 @@ describe('CheckboxInput', () => {
         );
       });
 
-      test('correctly renders the toggle with an error message from nested object', async () => {
+      test('correctly renders the checkbox with an error message in nested object', async () => {
         const { getByText } = render(
           renderForm(
             { outer: { nested: false } },
@@ -146,7 +146,7 @@ describe('CheckboxInput', () => {
           renderForm(false, { isRequired: true })
         );
         const submitButton = getByText('submit');
-        const checkbox = getByLabelText(testLabelName);
+        const checkbox = getByLabelText(testLabelName) as HTMLInputElement;
         expect(checkbox.checked).toBe(false);
 
         fireEvent.click(submitButton);

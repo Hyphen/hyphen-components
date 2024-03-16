@@ -1,11 +1,11 @@
 import React from 'react';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
-import { Formik, Field, Form, setIn, getIn } from 'formik';
+import { Formik, Field, Form, setIn, getIn, FormikValues } from 'formik';
 import { FormikTextInput } from './FormikTextInput';
 
 const testLabelName = 'textInput';
 
-const handleValidation = (testValueKey) => (values) =>
+const handleValidation = (testValueKey: string) => (values: FormikValues) =>
   getIn(values, testValueKey)
     ? {}
     : setIn({}, testValueKey, 'input is required');
@@ -16,6 +16,7 @@ const renderForm = (initialValue, props, testValueKey = testLabelName) => (
       [testLabelName]: initialValue,
     }}
     validate={props.isRequired ? handleValidation(testValueKey) : undefined} // eslint-disable-line
+    onSubmit={() => {}}
   >
     {() => (
       <Form>

@@ -28,6 +28,7 @@ describe('SelectInput', () => {
 
       const { getByLabelText } = render(
         <SelectInput
+          value="chocolate"
           id="testId"
           onChange={mockedHandleChange}
           placeholder="Test Placeholder"
@@ -48,6 +49,8 @@ describe('SelectInput', () => {
       render(
         <SelectInput
           id="testId"
+          label="Test"
+          value="chocolate"
           onChange={mockedHandleChange}
           onFocus={mockedHandleFocus}
           placeholder="Test Placeholder"
@@ -67,6 +70,8 @@ describe('SelectInput', () => {
       render(
         <SelectInput
           id="testId"
+          label="Test"
+          value="chocolate"
           onChange={mockedHandleChange}
           onBlur={mockedHandleBlur}
           placeholder="Test Placeholder"
@@ -89,6 +94,7 @@ describe('SelectInput', () => {
           <SelectInput
             id="testId"
             label="hidden label"
+            value="chocolate"
             hideLabel
             onChange={mockedHandleChange}
             placeholder="Test Placeholder"
@@ -109,6 +115,8 @@ describe('SelectInput', () => {
           label="hidden label"
           hideLabel
           onChange={mockedHandleChange}
+          options={selectOptions}
+          value="chocolate"
         />
       );
       const inputElement = screen.getByLabelText('hidden label');
@@ -125,6 +133,7 @@ describe('SelectInput', () => {
             onChange={mockedHandleChange}
             label="Select Label"
             options={selectOptions}
+            value="chocolate"
           />
         );
 
@@ -133,7 +142,16 @@ describe('SelectInput', () => {
       });
 
       test('assigns the "aria-labelledby" attribute and renders label correct id, when a label is provided', () => {
-        render(<SelectInput id="testInput" label="test label" />);
+        const mockedHandleChange = jest.fn();
+        render(
+          <SelectInput
+            id="testInput"
+            label="test label"
+            options={selectOptions}
+            value="chocolate"
+            onChange={mockedHandleChange}
+          />
+        );
         const inputElement = screen.getByLabelText('test label');
         expect(inputElement).toHaveAttribute(
           'aria-labelledby',
@@ -172,6 +190,7 @@ describe('SelectInput', () => {
             label="Select Label"
             options={selectOptions}
             isMulti
+            value={['chocolate']}
           />
         );
 
@@ -212,6 +231,7 @@ describe('SelectInput', () => {
             onChange={mockedHandleChange}
             label="Select Label"
             options={selectOptions}
+            value="chocolate"
             isRequired
           />
         );
@@ -232,6 +252,7 @@ describe('SelectInput', () => {
             onChange={mockedHandleChange}
             label="Select Label"
             options={selectOptions}
+            value="chocolate"
             isDisabled
           />
         );
@@ -251,6 +272,7 @@ describe('SelectInput', () => {
             label="Select Label"
             options={selectOptions}
             error="Helpful message"
+            value="chocolate"
           />
         );
 
