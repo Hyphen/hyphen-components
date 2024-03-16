@@ -19,7 +19,7 @@ function getByTextWithMarkup(text: string) {
     // eslint-disable-next-line
     // @ts-ignore
     const childrenDontHaveText = Array.from(element.children).every(
-      (child) => !hasText(child)
+      (child) => !hasText(child as Element)
     );
 
     return elementHasText && childrenDontHaveText;

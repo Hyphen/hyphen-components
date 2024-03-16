@@ -30,6 +30,8 @@ export type SimulatedEventPayloadType = {
   };
 };
 
+export type TextInputSize = 'sm' | 'md' | 'lg' | ResponsiveProp<'sm' | 'md' | 'lg'>;
+
 export interface SelectInputProps {
   /**
    * The id attribute of the input.
@@ -116,7 +118,7 @@ export interface SelectInputProps {
   /**
    * The size of the text input.
    */
-  size?: 'sm' | 'md' | 'lg' | ResponsiveProp<'sm' | 'md' | 'lg'>;
+  size?: TextInputSize;
   /**
    * Additional props to be spread. These will be applied specifically to
    * the `react-select` component that powers the select. For full docs on

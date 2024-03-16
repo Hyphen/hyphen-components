@@ -7,7 +7,7 @@ jest.mock('../FormLabel/FormLabel');
 
 describe('CheckboxInput', () => {
   beforeEach(() => {
-    FormLabel.mockReturnValue(<div />);
+    (FormLabel as jest.Mock).mockReturnValue(<div />);
   });
 
   afterEach(() => {

@@ -1,7 +1,7 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import {render, fireEvent, screen, Matcher} from '@testing-library/react';
 import selectEvent from 'react-select-event';
-import { SelectInput } from './SelectInput';
+import {SelectInput, TextInputSize} from './SelectInput';
 
 const selectOptions = [
   { value: 'chocolate', label: 'Chocolate' },
@@ -9,9 +9,9 @@ const selectOptions = [
   { value: 'vanilla', label: 'Vanilla' },
 ];
 
-function getByTextWithMarkup(text) {
-  return (content, element) => {
-    const hasText = (node) => node.textContent === text;
+function getByTextWithMarkup(text: string): Element {
+  return (_content: any, element: Element) => {
+    const hasText = (node: Element) => node.textContent === text;
     const elementHasText = hasText(element);
     const childrenDontHaveText = Array.from(element.children).every(
       (child) => !hasText(child)
@@ -237,7 +237,7 @@ describe('SelectInput', () => {
         );
 
         expect(
-          screen.getByText(getByTextWithMarkup('Select Label *'))
+          screen.getByText(getByTextWithMarkup('Select Label *') as unknown as Matcher)
         ).toBeInTheDocument();
       });
     });
@@ -323,7 +323,7 @@ describe('SelectInput', () => {
 
   describe('Sizes', () => {
     const mockedHandleChange = jest.fn();
-    const sizes = ['sm', 'md', 'lg'];
+    const sizes: TextInputSize[] = ['sm', 'md', 'lg'];
 
     const breakpoints = ['tablet', 'desktop', 'hd'];
 

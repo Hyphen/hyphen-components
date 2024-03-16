@@ -10,7 +10,7 @@ const handleValidation = (testValueKey: string) => (values: FormikValues) =>
     ? {}
     : setIn({}, testValueKey, 'input is required');
 
-const renderForm = (initialValue, props, testValueKey = testLabelName) => (
+const renderForm = (initialValue: any, props: any, testValueKey = testLabelName) => (
   <Formik
     initialValues={{
       [testLabelName]: initialValue,
