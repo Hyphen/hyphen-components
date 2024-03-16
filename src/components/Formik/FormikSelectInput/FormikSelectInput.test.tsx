@@ -13,18 +13,18 @@ const selectOptions = [
   { value: 'vanilla', label: 'Vanilla' },
 ];
 
-const handleValidation = (testValueKey) => (values) =>
+const handleValidation = (testValueKey: string | string[]) => (values: any) =>
   getIn(values, testValueKey)?.length > 1
     ? {}
-    : setIn({}, testValueKey, 'input is required');
+    : setIn({}, testValueKey as string, 'input is required');
 
-const renderForm = (initialValue, props, testValueKey = testLabelName) => (
+const renderForm = (initialValue: any, props: any, testValueKey = testLabelName) => (
   <Formik
     initialValues={{
       [testLabelName]: initialValue,
     }}
     validate={props.isRequired ? handleValidation(testValueKey) : undefined} // eslint-disable-line
-  >
+   onSubmit={async () => null }>
     {() => (
       <Form>
         <Field
@@ -152,7 +152,7 @@ describe('FormikSelectInput', () => {
   describe('Callback Handling', () => {
     describe('onChange', () => {
       test("Custom onChange event fires callback function, overwriting Formik's onChange", async () => {
-        let value = [];
+        let value: any[] = [];
         const mockedHandleChange = jest.fn((event) => {
           value = event.target.value;
         });
@@ -171,7 +171,7 @@ describe('FormikSelectInput', () => {
         );
 
         fireEvent.focus(selectInput);
-        fireEvent.mouseDown(selectInputWrapper);
+        fireEvent.mouseDown(selectInputWrapper!);
         const option = await waitFor(() => getByText('Vanilla'), { container });
         fireEvent.click(option);
         expect(mockedHandleChange).toHaveBeenCalledTimes(1);
@@ -188,6 +188,7 @@ describe('FormikSelectInput', () => {
             placeholder="Test Placeholder"
             label="onchange test"
             options={selectOptions}
+            value={null}
           />
         );
 

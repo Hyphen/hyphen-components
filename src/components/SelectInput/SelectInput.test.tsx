@@ -9,7 +9,7 @@ const selectOptions = [
   { value: 'vanilla', label: 'Vanilla' },
 ];
 
-function getByTextWithMarkup(text: string): Element {
+function getByTextWithMarkup(text: string): (_content: any, element: Element) => boolean {
   return (_content: any, element: Element) => {
     const hasText = (node: Element) => node.textContent === text;
     const elementHasText = hasText(element);

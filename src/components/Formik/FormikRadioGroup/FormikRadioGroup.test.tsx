@@ -35,7 +35,7 @@ const handleValidation = (testValueKey: string) => (values: FormikValues) =>
     ? {}
     : setIn({}, testValueKey, 'selection is required');
 
-const renderForm = (initialValue, props, testValueKey = testGroupName) => (
+const renderForm = (initialValue: any, props: any, testValueKey = testGroupName) => (
   <Formik
     initialValues={{
       [testGroupName]: initialValue,
