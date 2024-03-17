@@ -18,7 +18,7 @@ export interface DatePickerProps extends ReactDatePickerProps<any, any> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onChange: (
     date: Date | [Date, Date] | null,
-    event: React.SyntheticEvent<any> | undefined
+    event?: React.SyntheticEvent<any> | undefined
   ) => void;
   /**
    * Callback that fires when a date is clicked.

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import { RadioGroup } from './RadioGroup';
 import type { Meta } from '@storybook/react';
 import { Box } from '../Box/Box';
@@ -125,8 +125,8 @@ export const Required = () => {
 };
 
 export const CustomRequiredIndicator = () => {
-  const [value, setValue] = useState(false);
-  const [value2, setValue2] = useState(false);
+  const [value, setValue] = useState<string>('');
+  const [value2, setValue2] = useState<string>('');
   const options = [
     {
       id: 'cat',
@@ -296,11 +296,11 @@ export const Sizes = () => {
     lg: undefined,
     responsive: undefined,
   });
-  const options = (id) => [
+  const options = (id: string) => [
     { id: `purple__${id}`, value: 'purple', label: 'Purple' },
     { id: `green__${id}`, value: 'green', label: 'Green' },
   ];
-  const handleChange = (event, key) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>, key: string) => {
     const value = event.target.value;
     setState((prevState) => ({ ...prevState, [key]: value }));
   };

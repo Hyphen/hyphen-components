@@ -25,6 +25,7 @@ export const Default = () => {
       <SelectInput
         id="singleSelectWithLabel"
         label="Label"
+        // @ts-ignore - TS is not recognizing the value as a valid option
         onChange={(event) => setValue(event.target.value)}
         options={options}
         value={value}
@@ -45,6 +46,7 @@ export const PreSelected = () => {
       <SelectInput
         id="preSelected"
         label="Label"
+        // @ts-ignore - TS is not recognizing the value as a valid option
         onChange={(event) => setValue(event.target.value)}
         options={options}
         value={value}
@@ -66,6 +68,7 @@ export const HelpText = () => {
         id="helpText"
         label="Flavor"
         helpText="Choose your favorite flavor"
+        // @ts-ignore - TS is not recognizing the value as a valid option
         onChange={(event) => setValue(event.target.value)}
         options={options}
         value={value}
@@ -87,6 +90,7 @@ export const Placeholder = () => {
       <SelectInput
         id="customPlaceholder"
         label="Label"
+        // @ts-ignore - TS is not recognizing the value as a valid option
         onChange={(event) => setValue(event.target.value)}
         options={options}
         value={value}
@@ -108,6 +112,7 @@ export const HiddenLabel = () => {
       <SelectInput
         id="labelHidden"
         label="My label is hidden"
+        // @ts-ignore - TS is not recognizing the value as a valid option
         onChange={(event) => setValue(event.target.value)}
         options={options}
         value={value}
@@ -130,6 +135,7 @@ export const MultiSelect = () => {
         id="multiSelect"
         label="Label"
         value={value}
+        // @ts-ignore - TS is not recognizing the value as a valid option
         onChange={(event) => setValue(event.target.value)}
         options={options}
         isMulti
@@ -151,6 +157,7 @@ export const MultiSelectAndPreSelected = () => {
         id="preSelectMultiSelect"
         label="Label"
         value={value}
+        // @ts-ignore - TS is not recognizing the value as a valid option
         onChange={(event) => setValue(event.target.value)}
         options={options}
         isMulti
@@ -172,6 +179,7 @@ export const Autofocus = () => {
         id="autoFocus"
         label="Label"
         value={value}
+        // @ts-ignore - TS is not recognizing the value as a valid option
         onChange={(event) => setValue(event.target.value)}
         options={options}
         autoFocus
@@ -193,6 +201,7 @@ export const Required = () => {
         id="required"
         label="Label"
         value={value}
+        // @ts-ignore - TS is not recognizing the value as a valid option
         onChange={(event) => setValue(event.target.value)}
         options={options}
         isRequired
@@ -214,6 +223,7 @@ export const Disabled = () => {
         id="disabled"
         label="Label"
         value={value}
+        // @ts-ignore - TS is not recognizing the value as a valid option
         onChange={(event) => setValue(event.target.value)}
         options={options}
         isDisabled
@@ -236,6 +246,7 @@ export const Clearable = () => {
         label="Label"
         value={value}
         name="myClearableSelect"
+        // @ts-ignore - TS is not recognizing the value as a valid option
         onChange={(event) => setValue(event.target.value)}
         options={options}
         isClearable
@@ -257,6 +268,7 @@ export const Error = () => {
         id="error"
         label="Label"
         value={value}
+        // @ts-ignore - TS is not recognizing the value as a valid option
         onChange={(event) => setValue(event.target.value)}
         options={options}
         isRequired
@@ -281,6 +293,7 @@ export const Sizes = () => {
       <SelectInput
         id="smallSelect"
         label="Small"
+        // @ts-ignore - TS is not recognizing the value as a valid option
         onChange={(event) => setValue(event.target.value)}
         options={options}
         value={value}
@@ -289,6 +302,7 @@ export const Sizes = () => {
       <SelectInput
         id="mediumSelect"
         label="Medium"
+        // @ts-ignore - TS is not recognizing the value as a valid option
         onChange={(event) => setValue1(event.target.value)}
         options={options}
         value={value1}
@@ -297,6 +311,7 @@ export const Sizes = () => {
       <SelectInput
         id="largeSelect"
         label="Large"
+        // @ts-ignore - TS is not recognizing the value as a valid option
         onChange={(event) => setValue2(event.target.value)}
         options={options}
         value={value2}
@@ -305,6 +320,7 @@ export const Sizes = () => {
       <SelectInput
         id="responsiveSelect"
         label="Responsive"
+        // @ts-ignore - TS is not recognizing the value as a valid option
         onChange={(event) => setValue3(event.target.value)}
         options={options}
         value={value3}
@@ -326,6 +342,7 @@ export const WithPortal = () => {
       id="portal"
       label="Flavors"
       value={value}
+      // @ts-ignore - TS is not recognizing the value as a valid option
       onChange={(event) => setValue(event.target.value)}
       options={options}
       menuPortalTarget={document.body}
@@ -346,6 +363,7 @@ export const CustomClasses = () => {
         id="customClasses"
         label="Label"
         value={value}
+        // @ts-ignore - TS is not recognizing the value as a valid option
         onChange={(event) => setValue(event.target.value)}
         options={options}
         className="background-color-primary"

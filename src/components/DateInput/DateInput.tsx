@@ -125,7 +125,7 @@ export const DateInput: FC<DateInputProps> = ({
 
   const handleDatePickerChange = (
     date: Date | [Date, Date] | null,
-    event: React.SyntheticEvent<any, Event> | undefined // eslint-disable-line @typescript-eslint/no-explicit-any
+    event?: React.SyntheticEvent<any, Event> // eslint-disable-line @typescript-eslint/no-explicit-any
   ) => {
     mergedDatePickerProps.onChange(date, event);
 

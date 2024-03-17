@@ -25,7 +25,7 @@ export const Basic = () => (
 );
 
 export const Default = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null | [Date, Date]>(null);
   const handleClear = () => {
     setSelectedDate(null);
   };
@@ -33,7 +33,7 @@ export const Default = () => {
   return (
     <DateInput
       datePickerProps={{
-        selected: selectedDate,
+        selected: selectedDate as Date,
         onChange: setSelectedDate,
       }}
       textInputProps={{
@@ -48,9 +48,9 @@ export const Default = () => {
 };
 
 export const DateRange = () => {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const setDate = ([startDate, endDate]) => {
+  const [startDate, setStartDate] = useState<Date | [Date, Date] | null>(null);
+  const [endDate, setEndDate] = useState<Date | [Date, Date] | null>(null);
+  const setDate = ([startDate, endDate]: [Date, Date]) => {
     setStartDate(startDate);
     setEndDate(endDate);
   };
@@ -58,14 +58,16 @@ export const DateRange = () => {
     setStartDate(null);
     setEndDate(null);
   };
+
   return (
     <DateInput
       datePickerProps={{
+        // @ts-ignore - Type compatibility with onChange.
         onChange: setDate,
-        selected: startDate,
+        selected: startDate as Date,
         selectsRange: true,
-        startDate,
-        endDate,
+        startDate: startDate as Date,
+        endDate: endDate as Date,
       }}
       textInputProps={{
         onClear: handleClear,
@@ -78,7 +80,7 @@ export const DateRange = () => {
 };
 
 export const WithMinAndMaxDates = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState<Date | [Date, Date] | null>(null);
   const handleClear = () => {
     setSelectedDate(null);
   };
@@ -89,7 +91,7 @@ export const WithMinAndMaxDates = () => {
   return (
     <DateInput
       datePickerProps={{
-        selected: selectedDate,
+        selected: selectedDate as Date,
         maxDate: max,
         minDate: min,
         onChange: setSelectedDate,
@@ -106,7 +108,7 @@ export const WithMinAndMaxDates = () => {
 };
 
 export const CustomDateFormat = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date('2020, 11, 3'));
+  const [selectedDate, setSelectedDate] = useState<Date | null | [Date, Date]>(new Date('2020, 11, 3'));
   const handleClear = () => {
     setSelectedDate(null);
   };
@@ -115,7 +117,7 @@ export const CustomDateFormat = () => {
       <DateInput
         dateFormat={'MMMM dd, yyyy'}
         datePickerProps={{
-          selected: selectedDate,
+          selected: selectedDate as Date,
           onChange: setSelectedDate,
         }}
         textInputProps={{
@@ -128,7 +130,7 @@ export const CustomDateFormat = () => {
       <Box>
         <p>
           Selected Date (as ISO String):{' '}
-          {selectedDate ? selectedDate.toISOString() : null}
+          {selectedDate ? (selectedDate as Date).toISOString() : null}
         </p>
       </Box>
     </Box>
@@ -136,7 +138,7 @@ export const CustomDateFormat = () => {
 };
 
 export const InputBlurEvent = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date('2020, 11, 3'));
+  const [selectedDate, setSelectedDate] = useState<Date | [Date, Date] | null>(new Date('2020, 11, 3'));
   const handleTextInputBlur = () => {
     alert('TextInput Blur Event');
   };
@@ -145,7 +147,7 @@ export const InputBlurEvent = () => {
       <DateInput
         dateFormat={'MMMM dd, yyyy'}
         datePickerProps={{
-          selected: selectedDate,
+          selected: selectedDate as Date,
           onChange: setSelectedDate,
         }}
         textInputProps={{

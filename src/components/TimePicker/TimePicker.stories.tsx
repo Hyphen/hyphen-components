@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import React, { useState } from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import { TimePicker } from './TimePicker';
 import { Box } from '../Box/Box';
 
@@ -14,13 +14,13 @@ const meta: Meta<typeof TimePicker> = {
 export default meta;
 
 export const Default = () => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string | null>(null);
   return (
     <Box height="360px">
       <TimePicker
         id="defaultTimePicker"
         name="defaultTimePicker"
-        onChange={(event) => {
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setValue(event.target.value);
         }}
         label="Pick a Time"
@@ -70,13 +70,13 @@ export const WithCustomDateDisplay = () => (
 );
 
 export const WithOpenMenu = () => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string | null>(null);
   return (
     <Box height="260px">
       <TimePicker
         id="openMenu"
         name="openMenu"
-        onChange={(event) => {
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setValue(event.target.value);
         }}
         label="Pick a Time"
@@ -91,13 +91,13 @@ export const WithOpenMenu = () => {
 };
 
 export const HelpText = () => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string>('');
   return (
     <Box height="360px">
       <TimePicker
         id="helpText"
         name="helpText"
-        onChange={(event) => {
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setValue(event.target.value);
         }}
         label="Pick a Time"
@@ -109,15 +109,15 @@ export const HelpText = () => {
 };
 
 export const Sizes = () => {
-  const [value, setValue] = useState();
-  const [value1, setValue1] = useState();
-  const [value2, setValue2] = useState();
+  const [value, setValue] = useState<string>();
+  const [value1, setValue1] = useState<string>();
+  const [value2, setValue2] = useState<string>();
   return (
     <Box gap="md" height="360px">
       <TimePicker
         id="smTimePicker"
         name="smTimePicker"
-        onChange={(event) => {
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setValue(event.target.value);
         }}
         label="Small"
@@ -127,7 +127,7 @@ export const Sizes = () => {
       <TimePicker
         id="mdTimePicker"
         name="mdTimePicker"
-        onChange={(event) => {
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setValue1(event.target.value);
         }}
         label="Medium"
@@ -137,7 +137,7 @@ export const Sizes = () => {
       <TimePicker
         id="lgTimePicker"
         name="lgTimePicker"
-        onChange={(event) => {
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setValue2(event.target.value);
         }}
         label="Large"

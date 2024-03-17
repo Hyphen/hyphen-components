@@ -12,26 +12,26 @@ const meta: Meta<typeof DatePicker> = {
 export default meta;
 
 export const BasicExample = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date(2019, 11, 3));
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date(2019, 11, 3));
   return (
     <Box gap="md">
-      <DatePicker onChange={setSelectedDate} selected={selectedDate} />
+      <DatePicker onChange={(date) => setSelectedDate(date as Date)} selected={selectedDate} />
       <p>Selected Date: {selectedDate.toISOString()}</p>
     </Box>
   );
 };
 
 export const DateRange = () => {
-  const [startDate, setStartDate] = useState(new Date(2019, 11, 3));
-  const [endDate, setEndDate] = useState(new Date(2019, 11, 28));
-  const setDate = ([startDate, endDate]) => {
+  const [startDate, setStartDate] = useState<Date>(new Date(2019, 11, 3));
+  const [endDate, setEndDate] = useState<Date>(new Date(2019, 11, 28));
+  const setDate = ([startDate, endDate]: [Date, Date]) => {
     setStartDate(startDate);
     setEndDate(endDate);
   };
   return (
     <Box gap="md">
       <DatePicker
-        onChange={setDate}
+        onChange={(date) => setDate(date as [Date, Date])}
         selected={startDate}
         startDate={startDate}
         endDate={endDate}
@@ -47,7 +47,7 @@ export const DateRange = () => {
 };
 
 export const MinAndMaxDates = () => {
-  const [startDate, setStartDate] = useState(new Date(2019, 11, 18));
+  const [startDate, setStartDate] = useState<Date>(new Date(2019, 11, 18));
   const min = new Date(2019, 11, 18);
   min.setDate(min.getDate() - 5);
   const max = new Date(2019, 11, 18);
@@ -56,7 +56,7 @@ export const MinAndMaxDates = () => {
     <Box gap="md">
       <DatePicker
         selected={startDate}
-        onChange={setStartDate}
+        onChange={(date) => setStartDate(date as Date)}
         minDate={min}
         maxDate={max}
       />
@@ -66,9 +66,9 @@ export const MinAndMaxDates = () => {
 };
 
 export const MonthPicker = () => {
-  const [startDateOne, setStartDateOne] = useState(new Date(2019, 10));
-  const [startDateTwo, setStartDateTwo] = useState(new Date(2019, 10));
-  const [startDateThree, setStartDateThree] = useState(new Date(2019, 10));
+  const [startDateOne, setStartDateOne] = useState<Date>(new Date(2019, 10));
+  const [startDateTwo, setStartDateTwo] = useState<Date>(new Date(2019, 10));
+  const [startDateThree, setStartDateThree] = useState<Date>(new Date(2019, 10));
   return (
     <Box display="flex" direction="row" gap="md">
       <Box
@@ -81,7 +81,7 @@ export const MonthPicker = () => {
         <Heading size="md">Default</Heading>
         <DatePicker
           selected={startDateOne}
-          onChange={setStartDateOne}
+          onChange={(date) => setStartDateOne(date as Date)}
           showMonthYearPicker
         />
         <p>{startDateOne.toISOString()}</p>
@@ -96,7 +96,7 @@ export const MonthPicker = () => {
         <Heading size="md">With full month name</Heading>
         <DatePicker
           selected={startDateTwo}
-          onChange={setStartDateTwo}
+          onChange={(date) => setStartDateTwo(date as Date)}
           showMonthYearPicker
           showFullMonthYearPicker
         />
@@ -112,7 +112,7 @@ export const MonthPicker = () => {
         <Heading size="md">With Two-column layout</Heading>
         <DatePicker
           selected={startDateThree}
-          onChange={setStartDateThree}
+          onChange={(date) => setStartDateThree(date as Date)}
           showMonthYearPicker
           showFullMonthYearPicker
           showTwoColumnMonthYearPicker
@@ -124,17 +124,16 @@ export const MonthPicker = () => {
 };
 
 export const ShowMultipleMonths = () => {
-  const [startDate, setStartDate] = useState(new Date(2019, 11, 3));
-  const [endDate, setEndDate] = useState(new Date(2019, 12, 20));
-  const setDate = ([startDate, endDate]) => {
-    console.log(startDate, endDate);
+  const [startDate, setStartDate] = useState<Date>(new Date(2019, 11, 3));
+  const [endDate, setEndDate] = useState<Date>(new Date(2019, 12, 20));
+  const setDate = ([startDate, endDate]: [Date, Date]) => {
     setStartDate(startDate);
     setEndDate(endDate);
   };
   return (
     <Box gap="md">
       <DatePicker
-        onChange={setDate}
+        onChange={(date) => setDate(date as [Date, Date])}
         selected={startDate}
         startDate={startDate}
         endDate={endDate}
@@ -148,12 +147,12 @@ export const ShowMultipleMonths = () => {
 };
 
 export const WithTimePicker = () => {
-  const [startDate, setStartDate] = useState(new Date('1993/09/28'));
+  const [startDate, setStartDate] = useState<Date>(new Date('1993/09/28'));
   return (
     <Box gap="md">
       <DatePicker
         selected={startDate}
-        onChange={(date) => setStartDate(date)}
+        onChange={(date) => setStartDate(date as Date)}
         showTimeSelect
         timeIntervals={15}
         timeCaption="Time"
@@ -164,11 +163,11 @@ export const WithTimePicker = () => {
 };
 
 export const OpenByDefaultOnASpecificDate = () => {
-  const [startDate, setStartDate] = useState(new Date('1993/09/28'));
+  const [startDate, setStartDate] = useState<Date>(new Date('1993/09/28'));
   return (
     <Box gap="md">
       <DatePicker
-        onChange={setStartDate}
+        onChange={(date) => setStartDate(date as Date)}
         selected={startDate}
         openToDate={new Date('1993/09/28')}
       />
@@ -178,11 +177,11 @@ export const OpenByDefaultOnASpecificDate = () => {
 };
 
 export const WithChildren = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date(2019, 11, 3));
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date(2019, 11, 3));
   return (
     <Box gap="md">
-      <DatePicker onChange={setSelectedDate} selected={selectedDate}>
-        <Box display="block" style={{ textAlign: 'center' }} color="primary">
+      <DatePicker onChange={(date) => setSelectedDate(date as Date)} selected={selectedDate}>
+        <Box display="block" style={{ textAlign: 'center' }} color="primary-500">
           It will be sunny out today!
         </Box>
       </DatePicker>
@@ -192,14 +191,14 @@ export const WithChildren = () => {
 };
 
 export const CustomDayClassName = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date(2019, 11, 3));
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date(2019, 11, 3));
   return (
     <Box gap="md">
       <DatePicker
-        onChange={setSelectedDate}
+        onChange={(date) => setSelectedDate(date as Date)}
         selected={selectedDate}
         dayClassName={(date) =>
-          date.getDay() < 3 ? 'font-color-danger' : undefined
+          date.getDay() < 3 ? 'font-color-danger' : null
         }
       />
       <p>Selected Date: {selectedDate.toISOString()}</p>
@@ -211,7 +210,7 @@ export const CustomTheme = () => {
   const [selectedDate, setSelectedDate] = useState(new Date(2019, 11, 3));
   const [startDate, setStartDate] = useState(new Date(2019, 11, 3));
   const [endDate, setEndDate] = useState(new Date(2019, 11, 28));
-  const setDate = ([startDate, endDate]) => {
+  const setDate = ([startDate, endDate]: [Date, Date]) => {
     setStartDate(startDate);
     setEndDate(endDate);
   };
@@ -222,10 +221,12 @@ export const CustomTheme = () => {
   min.setDate(min.getDate() - 5);
   const max = new Date(2019, 11, 18);
   max.setDate(max.getDate() + 5);
+
   return (
     <Box gap="md">
       <div
         style={{
+          // @ts-ignore
           '--color-brand-primary-50': '#CFC5E9',
           '--color-brand-primary-400': '#785CC0',
           '--color-brand-primary-500': '#603FB5',
@@ -236,10 +237,11 @@ export const CustomTheme = () => {
           Here we've overwritten base token values so that the DatePicker
           inherits new values.
         </Box>
-        <DatePicker onChange={setSelectedDate} selected={selectedDate} />
+        <DatePicker onChange={(date) => setSelectedDate(date as Date)} selected={selectedDate} />
       </div>
       <div
         style={{
+          // @ts-ignore
           '--date-picker-font-color': 'var(--color-brand-white-500)',
           '--date-picker-background-color': 'var(--color-brand-grey-800)',
           '--date-picker-border-radius': 'var(--size-border-radius-lg)',
@@ -259,9 +261,9 @@ export const CustomTheme = () => {
           Here we've overwritten ONLY the values for the DatePicker component
         </Box>
         <Box direction="row" gap="md" wrap>
-          <DatePicker onChange={setSelectedDate} selected={selectedDate} />
+          <DatePicker onChange={(date) => setSelectedDate(date as Date)} selected={selectedDate} />
           <DatePicker
-            onChange={setDate}
+            onChange={(date) => setDate(date as [Date, Date])}
             selected={startDate}
             startDate={startDate}
             endDate={endDate}
@@ -270,7 +272,7 @@ export const CustomTheme = () => {
           />
           <DatePicker
             selected={minMaxStartDate}
-            onChange={setMinMaxStartDate}
+            onChange={(date) => setMinMaxStartDate(date as Date)}
             minDate={min}
             maxDate={max}
           />

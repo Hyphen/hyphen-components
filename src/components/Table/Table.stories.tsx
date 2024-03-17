@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Table } from './Table';
 import { Button } from '../Button/Button';
 import { Badge } from '../Badge/Badge';
+import type {Column as ColumnType} from "../../types";
 
 const meta: Meta<typeof Table> = {
   title: 'Components/Table',
@@ -93,7 +94,7 @@ export const Column = () =>
       {
         heading: 'Type',
         dataKey: 'type',
-        render: (cell) => <code style={codePreviewStyle}>{cell}</code>,
+        render: (cell: any) => <code style={codePreviewStyle}>{cell}</code>,
       },
       { heading: 'Description', dataKey: 'description' },
     ];
@@ -108,7 +109,7 @@ export const CommonExample = () =>
       {
         heading: 'Customer',
         dataKey: 'customerInfo',
-        render: (cell, row) => (
+        render: (_cell: any, row: any) => (
           <div>
             <div>{row.name}</div>
             <div className="font-color-grey">{row.email}</div>
@@ -163,11 +164,13 @@ export const Loading = () =>
   })();
 
 export const Sortable = () => {
+  // @ts-ignore
   const sortDescending = (arrOfObj, key) =>
     [...arrOfObj].sort((a, b) => (b[key] > a[key] ? 1 : -1));
+  // @ts-ignore
   const sortAscending = (arrOfObj, key) =>
     [...arrOfObj].sort((a, b) => (a[key] > b[key] ? 1 : -1));
-  const getNewSortDirection = (event, currentSortedColumn) => {
+  const getNewSortDirection = (event: any, currentSortedColumn: any) => {
     if (
       event.sortedKey === currentSortedColumn.dataKey &&
       currentSortedColumn.sortDirection === 'ascending'
@@ -180,9 +183,9 @@ export const Sortable = () => {
     { id: 2, color: 'green', flavor: 'strawberry' },
     { id: 3, color: 'blue', flavor: 'chocolate' },
   ];
-  const [sortedColumn, setSortedColumn] = useState({});
+  const [sortedColumn, setSortedColumn] = useState<any>({});
   const [tableData, setTableData] = useState(initialData);
-  const handleSort = (event) => {
+  const handleSort = (event: any) => {
     const newSortDirection = getNewSortDirection(event, sortedColumn);
     setSortedColumn({
       dataKey: event.sortedKey,
@@ -215,11 +218,13 @@ export const Sortable = () => {
 };
 
 export const SortablewithDefaultSortedColumn = () => {
+  // @ts-ignore
   const sortDescending = (arrOfObj, key) =>
     [...arrOfObj].sort((a, b) => (b[key] > a[key] ? 1 : -1));
+  // @ts-ignore
   const sortAscending = (arrOfObj, key) =>
     [...arrOfObj].sort((a, b) => (a[key] > b[key] ? 1 : -1));
-  const getNewSortDirection = (event, currentSortedColumn) => {
+  const getNewSortDirection = (event: any, currentSortedColumn: any) => {
     if (
       event.sortedKey === currentSortedColumn.dataKey &&
       currentSortedColumn.sortDirection === 'ascending'
@@ -232,7 +237,7 @@ export const SortablewithDefaultSortedColumn = () => {
     { id: 2, color: 'green', flavor: 'strawberry' },
     { id: 3, color: 'blue', flavor: 'chocolate' },
   ];
-  const [sortedColumn, setSortedColumn] = useState({
+  const [sortedColumn, setSortedColumn] = useState<any>({
     dataKey: 'color',
     sortDirection: 'descending',
   });
@@ -241,7 +246,7 @@ export const SortablewithDefaultSortedColumn = () => {
       ? sortAscending(initialData, sortedColumn.dataKey)
       : sortDescending(initialData, sortedColumn.dataKey)),
   ]);
-  const handleSort = (event) => {
+  const handleSort = (event: any) => {
     const newSortDirection = getNewSortDirection(event, sortedColumn);
     setSortedColumn({
       dataKey: event.sortedKey,
@@ -274,11 +279,13 @@ export const SortablewithDefaultSortedColumn = () => {
 };
 
 export const SortableAndLoading = () => {
+  // @ts-ignore
   const sortDescending = (arrOfObj, key) =>
     [...arrOfObj].sort((a, b) => (b[key] > a[key] ? 1 : -1));
+  // @ts-ignore
   const sortAscending = (arrOfObj, key) =>
     [...arrOfObj].sort((a, b) => (a[key] > b[key] ? 1 : -1));
-  const getNewSortDirection = (event, currentSortedColumn) => {
+  const getNewSortDirection = (event: any, currentSortedColumn: any) => {
     if (
       event.sortedKey === currentSortedColumn.dataKey &&
       currentSortedColumn.sortDirection === 'ascending'
@@ -291,9 +298,9 @@ export const SortableAndLoading = () => {
     { id: 2, color: 'green', flavor: 'strawberry' },
     { id: 3, color: 'blue', flavor: 'chocolate' },
   ];
-  const [sortedColumn, setSortedColumn] = useState({});
+  const [sortedColumn, setSortedColumn] = useState<any>({});
   const [tableData, setTableData] = useState(initialData);
-  const handleSort = (event) => {
+  const handleSort = (event: any) => {
     const newSortDirection = getNewSortDirection(event, sortedColumn);
     setSortedColumn({
       dataKey: event.sortedKey,
@@ -406,7 +413,7 @@ export const ScrollablewithFirstColumnStuckToLeft = () =>
       width: '300px',
       height: '300px',
     };
-    const columnConfig = [
+    const columnConfig: Column[] = [
       { heading: 'ID', dataKey: 'id', sticky: 'left' },
       { heading: 'Color', dataKey: 'color', width: 300 },
       { heading: 'Flavor', dataKey: 'flavor', width: 100 },
@@ -441,7 +448,7 @@ export const ScrollablewithStickyHeaderAndNthColumnStuckToLeft = () =>
       width: '300px',
       height: '300px',
     };
-    const columnConfig = [
+    const columnConfig: Column[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color', width: 50, sticky: 'left' },
       { heading: 'Flavor', dataKey: 'flavor', width: 100 },
@@ -477,7 +484,7 @@ export const ScrollableWithLastColumnStuckToRight = () =>
       width: '300px',
       height: '300px',
     };
-    const columnConfig = [
+    const columnConfig: Column[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color', width: 300 },
       { heading: 'Flavor', dataKey: 'flavor', width: 100 },
@@ -517,7 +524,7 @@ export const ScrollableWithStickyHeaderAndFirstColumnStuckToLeft = () =>
       width: '300px',
       height: '300px',
     };
-    const columnConfig = [
+    const columnConfig: Column[] = [
       { heading: 'ID', dataKey: 'id', sticky: 'left' },
       { heading: 'Color', dataKey: 'color', width: 300 },
       { heading: 'Flavor', dataKey: 'flavor', width: 100 },
@@ -556,7 +563,7 @@ export const ScrollableAndLoading = () =>
       width: '300px',
       height: '300px',
     };
-    const columnConfig = [
+    const columnConfig: Column[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color', width: 300 },
       { heading: 'Flavor', dataKey: 'flavor' },
@@ -586,7 +593,7 @@ export const ScrollableAndLoading = () =>
 
 export const FixedWidthColumns = () =>
   (() => {
-    const columnConfig = [
+    const columnConfig: Column[] = [
       { heading: 'ID', dataKey: 'id', width: 150 },
       { heading: 'Color', dataKey: 'color' },
       { heading: 'Flavor', dataKey: 'flavor' },
@@ -601,7 +608,7 @@ export const FixedWidthColumns = () =>
 
 export const FixedTableLayout = () =>
   (() => {
-    const columnConfig = [
+    const columnConfig: Column[] = [
       { heading: 'ID', dataKey: 'id', width: 150 },
       { heading: 'Color', dataKey: 'color' },
       { heading: 'Flavor', dataKey: 'flavor' },
@@ -623,7 +630,7 @@ export const FixedTableLayout = () =>
 
 export const TruncateOverflow = () =>
   (() => {
-    const columnConfig = [
+    const columnConfig: Column[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color', width: 100 },
       { heading: 'Flavor', dataKey: 'flavor' },
@@ -645,13 +652,13 @@ export const TruncateOverflow = () =>
 
 export const CustomActions = () =>
   (() => {
-    const renderFlavor = (cell, row, index) => {
+    const renderFlavor = (cell: any, row: any, index: number) => {
       const rows = [{ href: cell.href, name: cell.name, id: row.id, index }];
       const columns = [
         {
           heading: 'Url',
           dataKey: 'href',
-          render: (cell) => <a href={cell}>{cell}</a>,
+          render: (cell: any) => <a href={cell}>{cell}</a>,
         },
         { heading: 'Name', dataKey: 'name' },
         { heading: 'ID', dataKey: 'id' },
@@ -659,12 +666,13 @@ export const CustomActions = () =>
       ];
       return <Table columns={columns} rows={rows} rowKey="id" isCompact />;
     };
-    const columnConfig = [
+    const columnConfig: Column[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color' },
       {
         heading: 'Based on the cell/row',
         dataKey: 'flavor',
+        // @ts-ignore
         render: renderFlavor,
       },
       { heading: 'Any custom JSX', render: () => <Button>Do anything</Button> },
@@ -698,7 +706,7 @@ export const EmptyCellPlaceholder = () =>
       {
         heading: 'Price',
         dataKey: 'price',
-        render: (cell) => (cell ? `$${cell}` : null),
+        render: (cell: any) => (cell ? `$${cell}` : null),
         emptyCellPlaceholder: '$0.00',
       },
     ];
@@ -713,7 +721,7 @@ export const EmptyCellPlaceholder = () =>
 
 export const Borderless = () =>
   (() => {
-    const columnConfig = [
+    const columnConfig: Column[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color' },
       { heading: 'Flavor', dataKey: 'flavor' },
@@ -730,7 +738,7 @@ export const Borderless = () =>
 
 export const Compact = () =>
   (() => {
-    const columnConfig = [
+    const columnConfig: Column[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color' },
       { heading: 'Flavor', dataKey: 'flavor' },
@@ -747,7 +755,7 @@ export const Compact = () =>
 
 export const Striped = () =>
   (() => {
-    const columnConfig = [
+    const columnConfig: Column[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color' },
       { heading: 'Flavor', dataKey: 'flavor' },
@@ -768,7 +776,7 @@ export const Striped = () =>
 
 export const Hoverable = () =>
   (() => {
-    const columnConfig = [
+    const columnConfig: Column[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color' },
       { heading: 'Flavor', dataKey: 'flavor' },
@@ -790,7 +798,7 @@ export const Hoverable = () =>
 
 export const StripedAndHoverable = () =>
   (() => {
-    const columnConfig = [
+    const columnConfig: Column[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color' },
       { heading: 'Flavor', dataKey: 'flavor' },
@@ -813,7 +821,7 @@ export const StripedAndHoverable = () =>
 
 export const AligningCellText = () =>
   (() => {
-    const columnConfig = [
+    const columnConfig: Column[] = [
       { heading: 'Right aligned', dataKey: 'id', align: 'right' },
       { heading: 'Center aligned', dataKey: 'color', align: 'center' },
       { heading: 'Left aligned (default)', dataKey: 'flavor' },
@@ -828,7 +836,7 @@ export const AligningCellText = () =>
 
 export const GlobalAlign = () =>
   (() => {
-    const columnConfig = [
+    const columnConfig: Column[] = [
       {
         heading: 'Center Aligned via Column Config',
         dataKey: 'id',
@@ -854,7 +862,7 @@ export const GlobalAlign = () =>
 
 export const ComponentAsColumnHeader = () =>
   (() => {
-    const columnConfig = [
+    const columnConfig: Column[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color' },
       { heading: <Badge message="Status" />, dataKey: 'status' },
@@ -877,11 +885,11 @@ export const ComponentAsColumnHeader = () =>
 
 export const ThemedTable = () =>
   (() => {
-    const columnConfig = [
+    const columnConfig: Column[] = [
       {
         heading: 'Customer',
         dataKey: 'customerInfo',
-        render: (cell, row) => (
+        render: (_cell: any, row: any) => (
           <div>
             <div>{row.name}</div>
             <div className="font-color-grey">{row.email}</div>
@@ -918,6 +926,7 @@ export const ThemedTable = () =>
     return (
       <div
         style={{
+          // @ts-ignore
           '--table-border-color': 'var(--color-brand-grey-700)',
           '--table-border-width': 'var(--size-border-md)',
           '--table-background-color': 'var(--color-brand-grey-900)',
@@ -936,7 +945,7 @@ export const ThemedTable = () =>
 
 export const CustomColumnClasses = () =>
   (() => {
-    const columnConfig = [
+    const columnConfig: Column[] = [
       {
         heading: 'with cellClassName',
         dataKey: 'id',

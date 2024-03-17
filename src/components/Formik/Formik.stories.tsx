@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import { Field, Form, Formik } from 'formik';
 import { FormikTextInput } from './FormikTextInput/FormikTextInput';
 import { FormikCheckboxInput } from './FormikCheckboxInput/FormikCheckboxInput';
@@ -39,8 +39,8 @@ export const FormikForm = () =>
       { id: 'medium', value: 'medium', label: 'Medium' },
       { id: 'large', value: 'large', label: 'Large' },
     ];
-    const handleValidation = (values) => {
-      const errors = {};
+    const handleValidation = (values: Record<string, any>) => {
+      const errors: Record<string, string> = {};
       if (!values.firstName) {
         errors.firstName = 'required';
       }
@@ -74,7 +74,7 @@ export const FormikForm = () =>
       }
       return errors;
     };
-    const handleSubmit = (values, { setSubmitting }) => {
+    const handleSubmit = (values: Record<string, any>, { setSubmitting }: any) => {
       // Make API calls here
       setTimeout(() => {
         setSubmitting(false);
@@ -84,7 +84,7 @@ export const FormikForm = () =>
         );
       }, 2000);
     };
-    const formatOutput = (values, isSubmitting) => {
+    const formatOutput = (values: Record<string, any>, isSubmitting?: boolean) => {
       return { ...values, isSubmitting };
     };
     return (
@@ -121,7 +121,7 @@ export const FormikForm = () =>
                   component={FormikTextInput}
                   // With a custom onChange.
                   // We preserve Formik's convention and relegate state form management back to the user.
-                  onChange={(event) => {
+                  onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     setFieldValue('firstName', event.target.value);
                   }}
                   isRequired
@@ -156,7 +156,7 @@ export const FormikForm = () =>
                   component={FormikTextInput}
                   inputMask="phone"
                   type="tel"
-                  onChange={(event) => {
+                  onChange={(event: ChangeEvent<any>) => {
                     setFieldValue(
                       'phoneInputMaskWithUnformattedValue',
                       event.target.rawValue
@@ -171,7 +171,7 @@ export const FormikForm = () =>
                   component={FormikSelectInputNative}
                   // With a custom onChange.
                   // We preserve Formik's convention and relegate form state management back to the user.
-                  onChange={(event) => {
+                  onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     setFieldValue('flavor', event.target.value);
                   }}
                   isRequired
@@ -229,9 +229,9 @@ export const FormikForm = () =>
                 <DateInput
                   datePickerProps={{
                     onChange: (date) => {
-                      setFieldValue('dateInput', date);
+                      setFieldValue('dateInput', date as Date);
                     },
-                    selected: values.dateInput,
+                    selected: values.dateInput as unknown as Date,
                   }}
                   textInputProps={{
                     label: 'Date Input',
@@ -259,7 +259,7 @@ export const FormikForm = () =>
                     2
                   )}
                 </pre>
-                <pre>{JSON.stringify(formatOutput(errors), undefined, 2)}</pre>
+                <pre>{JSON.stringify(formatOutput(errors, undefined), undefined, 2)}</pre>
               </Box>
             </Form>
           )}

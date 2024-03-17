@@ -1,6 +1,6 @@
 import { Popover } from './Popover';
 import type { Meta } from '@storybook/react';
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import { useState } from 'react';
 import { Button } from '../Button/Button';
 import { Box } from '../Box/Box';
@@ -8,6 +8,7 @@ import { SelectInput } from '../SelectInput/SelectInput';
 import { TextInput } from '../TextInput/TextInput';
 import { Heading } from '../Heading/Heading';
 import { useOpenClose } from '../../hooks/useOpenClose/useOpenClose';
+import {FontColor} from "@hyphen/hyphen-design-tokens/build/types";
 
 const meta: Meta<typeof Popover> = {
   title: 'Components/Popover',
@@ -69,17 +70,22 @@ export const CustomClass = () => {
   );
 };
 
+type PopoverStylingType = {
+  value: string;
+  label: string;
+} | null;
+
 export const PopoverStyling = () => {
   const { isOpen: isPopoverOpen, handleToggle: togglePopover } = useOpenClose();
-  const [popoverBackground, setPopoverBackground] = useState({
+  const [popoverBackground, setPopoverBackground] = useState<PopoverStylingType>({
     value: 'primary-500',
     label: 'Primary 500',
   });
-  const [popoverFontColor, setPopoverFontColor] = useState({
+  const [popoverFontColor, setPopoverFontColor] = useState<PopoverStylingType>({
     value: 'black-500',
     label: 'Black 500',
   });
-  const [popoverRadius, setPopoverRadius] = useState({
+  const [popoverRadius, setPopoverRadius] = useState<PopoverStylingType>({
     value: 'sm',
     label: 'Small',
   });
@@ -114,9 +120,9 @@ export const PopoverStyling = () => {
           placement={'right'}
           contentContainerProps={{
             padding: 'sm',
-            background: popoverBackground.value,
-            color: popoverFontColor.value,
-            radius: popoverRadius.value,
+            background: popoverBackground!.value as FontColor,
+            color: popoverFontColor!.value as FontColor,
+            radius: popoverRadius!.value,
           }}
         >
           <Button onClick={togglePopover} variant="tertiary">
@@ -130,6 +136,7 @@ export const PopoverStyling = () => {
             id="backgroundOptions"
             options={backgroundOptions}
             onChange={(event) => {
+              // @ts-ignore
               setPopoverBackground(event.target.value);
             }}
             value={popoverBackground}
@@ -141,6 +148,7 @@ export const PopoverStyling = () => {
             id="fontColorOptions"
             options={fontColorOptions}
             onChange={(event) => {
+              // @ts-ignore
               setPopoverFontColor(event.target.value);
             }}
             value={popoverFontColor}
@@ -152,7 +160,8 @@ export const PopoverStyling = () => {
             id="borderRadiusOptions"
             options={borderRadiusOptions}
             onChange={(event) => {
-              setPopoverRadius(event.target.value);
+              // @ts-ignore
+              setPopoverRadius(event.target.value );
             }}
             value={popoverRadius}
             label="Border Radius"
@@ -181,7 +190,8 @@ export const Placement = () => {
     'left-start': false,
     'left-end': false,
   });
-  const handleOpenPopover = (key) => {
+  const handleOpenPopover = (key: string) => {
+    // @ts-ignore
     setPopoverOpen({ ...isPopoverOpen, [key]: !isPopoverOpen[key] });
   };
   const positions = [
@@ -201,13 +211,16 @@ export const Placement = () => {
     'left-start',
     'left-end',
   ];
+
   return (
     <Box direction="row" gap="md" wrap>
       {positions.map((position) => (
         <Box height="100px" padding="5xl" display="inline-block" key={position}>
           <Popover
             content={<>{position}</>}
+            // @ts-ignore
             isOpen={isPopoverOpen[position]}
+            // @ts-ignore
             placement={position}
             contentContainerProps={{
               padding: 'sm',
@@ -342,13 +355,13 @@ export const RespondToOutsideClicks = () => {
 };
 
 export const TrappingFocus = () => {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState<string>('');
   const {
     isOpen: isPopoverOpen,
     handleClose: closePopover,
     handleToggle: togglePopover,
   } = useOpenClose();
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
   const popoverContent = (
@@ -423,7 +436,7 @@ export const WithoutAnArrow = () => {
 };
 
 export const OffsetDistance = () => {
-  const [offset, setOffset] = useState(12);
+  const [offset, setOffset] = useState<number>(12);
   const { isOpen: isPopoverOpen, handleToggle: togglePopover } = useOpenClose();
 
   const popoverContent = (
@@ -471,7 +484,7 @@ export const OffsetDistance = () => {
           step="1"
           value={offset}
           onChange={(event) => {
-            setOffset(event.target.value);
+            setOffset(event.target.value as unknown as number);
           }}
           style={{ marginBottom: '0.25rem' }}
         />

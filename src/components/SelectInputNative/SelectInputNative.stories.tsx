@@ -14,7 +14,7 @@ const meta: Meta<typeof SelectInputNative> = {
 export default meta;
 
 export const Default = () => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string | null>(null);
   const options = [
     { value: 'chocolate', label: 'Chocolate' },
     { value: 'strawberry', label: 'Strawberry' },
@@ -56,7 +56,7 @@ export const PreSelected = () => {
 };
 
 export const HelpText = () => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string | null>(null);
   const options = [
     { value: 'chocolate', label: 'Chocolate' },
     { value: 'strawberry', label: 'Strawberry' },
@@ -77,7 +77,7 @@ export const HelpText = () => {
 };
 
 export const Placeholder = () => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string | null>(null);
   const options = [
     { value: 'chocolate', label: 'Chocolate' },
     { value: 'strawberry', label: 'Strawberry' },
@@ -98,7 +98,7 @@ export const Placeholder = () => {
 };
 
 export const HiddenLabel = () => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string | null>(null);
   const options = [
     { value: 'chocolate', label: 'Chocolate' },
     { value: 'strawberry', label: 'Strawberry' },
@@ -124,7 +124,7 @@ export const Autofocus = () => {
     { value: 'strawberry', label: 'Strawberry' },
     { value: 'vanilla', label: 'Vanilla' },
   ];
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string | null>(null);
   return (
     <div>
       <SelectInputNative
@@ -145,7 +145,7 @@ export const Required = () => {
     { value: 'strawberry', label: 'Strawberry' },
     { value: 'vanilla', label: 'Vanilla' },
   ];
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string | null>(null);
   return (
     <SelectInputNative
       id="required"
@@ -196,7 +196,7 @@ export const Disabled = () => {
     { value: 'strawberry', label: 'Strawberry' },
     { value: 'vanilla', label: 'Vanilla' },
   ];
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string | null>(null);
   return (
     <div style={{ height: '85px' }}>
       <SelectInputNative
@@ -217,7 +217,7 @@ export const Error = () => {
     { value: 'strawberry', label: 'Strawberry' },
     { value: 'vanilla', label: 'Vanilla' },
   ];
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string | null>(null);
   return (
     <div style={{ height: '200px' }}>
       <SelectInputNative

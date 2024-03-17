@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import React, { useState } from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import { TimePickerNative } from './TimePickerNative';
 import { Box } from '../Box/Box';
 
@@ -14,13 +14,13 @@ const meta: Meta<typeof TimePickerNative> = {
 export default meta;
 
 export const Default = () => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string | null>(null);
   return (
     <Box>
       <TimePickerNative
         id="defaultTimePickerNative"
         name="defaultTimePickerNative"
-        onChange={(event) => {
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
           console.log(event.target.value);
           setValue(event.target.value);
         }}
@@ -32,13 +32,13 @@ export const Default = () => {
 };
 
 export const WithASpecificInterval = () => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string | null>(null);
   return (
     <Box>
       <TimePickerNative
         id="intervalTimePickerNative"
         name="intervalTimePickerNative"
-        onChange={(event) => setValue(event.target.value)}
+        onChange={(event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
         value={value}
         label="Pick a Time"
         interval={3600}
@@ -48,13 +48,13 @@ export const WithASpecificInterval = () => {
 };
 
 export const WithMinAndMaxTimes = () => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string | null>(null);
   return (
     <Box>
       <TimePickerNative
         id="startEnd"
         name="startEnd"
-        onChange={(event) => setValue(event.target.value)}
+        onChange={(event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
         value={value}
         label="Pick a Time"
         startTime={{ hour: 9, minute: 0 }}
@@ -65,13 +65,13 @@ export const WithMinAndMaxTimes = () => {
 };
 
 export const WithCustomDateDisplay = () => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string | null>(null);
   return (
     <Box>
       <TimePickerNative
         id="customDate"
         name="customDate"
-        onChange={(event) => setValue(event.target.value)}
+        onChange={(event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
         value={value}
         label="Pick a Time"
         startTime={{ hour: 9, minute: 0 }}
@@ -87,13 +87,13 @@ export const WithCustomDateDisplay = () => {
 };
 
 export const HelpText = () => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string | null>(null);
   return (
     <Box>
       <TimePickerNative
         id="helpText"
         name="helpText"
-        onChange={(event) => {
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setValue(event.target.value);
         }}
         label="Pick a Time"
@@ -105,15 +105,15 @@ export const HelpText = () => {
 };
 
 export const Sizes = () => {
-  const [value, setValue] = useState(null);
-  const [value1, setValue1] = useState(null);
-  const [value2, setValue2] = useState(null);
+  const [value, setValue] = useState<string | null>(null);
+  const [value1, setValue1] = useState<string | null>(null);
+  const [value2, setValue2] = useState<string | null>(null);
   return (
     <Box gap="md">
       <TimePickerNative
         id="smTimePickerNative"
         name="smTimePickerNative"
-        onChange={(event) => {
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setValue(event.target.value);
         }}
         label="Small"
@@ -123,7 +123,7 @@ export const Sizes = () => {
       <TimePickerNative
         id="mdTimePickerNative"
         name="mdTimePickerNative"
-        onChange={(event) => {
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setValue1(event.target.value);
         }}
         label="Medium"
@@ -133,7 +133,7 @@ export const Sizes = () => {
       <TimePickerNative
         id="lgTimePickerNative"
         name="lgTimePickerNative"
-        onChange={(event) => {
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setValue2(event.target.value);
         }}
         label="Large"
