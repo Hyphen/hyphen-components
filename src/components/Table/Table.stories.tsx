@@ -413,7 +413,7 @@ export const ScrollablewithFirstColumnStuckToLeft = () =>
       width: '300px',
       height: '300px',
     };
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       { heading: 'ID', dataKey: 'id', sticky: 'left' },
       { heading: 'Color', dataKey: 'color', width: 300 },
       { heading: 'Flavor', dataKey: 'flavor', width: 100 },
@@ -448,7 +448,7 @@ export const ScrollablewithStickyHeaderAndNthColumnStuckToLeft = () =>
       width: '300px',
       height: '300px',
     };
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color', width: 50, sticky: 'left' },
       { heading: 'Flavor', dataKey: 'flavor', width: 100 },
@@ -484,7 +484,7 @@ export const ScrollableWithLastColumnStuckToRight = () =>
       width: '300px',
       height: '300px',
     };
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color', width: 300 },
       { heading: 'Flavor', dataKey: 'flavor', width: 100 },
@@ -524,7 +524,7 @@ export const ScrollableWithStickyHeaderAndFirstColumnStuckToLeft = () =>
       width: '300px',
       height: '300px',
     };
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       { heading: 'ID', dataKey: 'id', sticky: 'left' },
       { heading: 'Color', dataKey: 'color', width: 300 },
       { heading: 'Flavor', dataKey: 'flavor', width: 100 },
@@ -563,7 +563,7 @@ export const ScrollableAndLoading = () =>
       width: '300px',
       height: '300px',
     };
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color', width: 300 },
       { heading: 'Flavor', dataKey: 'flavor' },
@@ -593,7 +593,7 @@ export const ScrollableAndLoading = () =>
 
 export const FixedWidthColumns = () =>
   (() => {
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       { heading: 'ID', dataKey: 'id', width: 150 },
       { heading: 'Color', dataKey: 'color' },
       { heading: 'Flavor', dataKey: 'flavor' },
@@ -608,7 +608,7 @@ export const FixedWidthColumns = () =>
 
 export const FixedTableLayout = () =>
   (() => {
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       { heading: 'ID', dataKey: 'id', width: 150 },
       { heading: 'Color', dataKey: 'color' },
       { heading: 'Flavor', dataKey: 'flavor' },
@@ -630,7 +630,7 @@ export const FixedTableLayout = () =>
 
 export const TruncateOverflow = () =>
   (() => {
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color', width: 100 },
       { heading: 'Flavor', dataKey: 'flavor' },
@@ -666,7 +666,7 @@ export const CustomActions = () =>
       ];
       return <Table columns={columns} rows={rows} rowKey="id" isCompact />;
     };
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color' },
       {
@@ -721,7 +721,7 @@ export const EmptyCellPlaceholder = () =>
 
 export const Borderless = () =>
   (() => {
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color' },
       { heading: 'Flavor', dataKey: 'flavor' },
@@ -738,7 +738,7 @@ export const Borderless = () =>
 
 export const Compact = () =>
   (() => {
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color' },
       { heading: 'Flavor', dataKey: 'flavor' },
@@ -755,7 +755,7 @@ export const Compact = () =>
 
 export const Striped = () =>
   (() => {
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color' },
       { heading: 'Flavor', dataKey: 'flavor' },
@@ -776,7 +776,7 @@ export const Striped = () =>
 
 export const Hoverable = () =>
   (() => {
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color' },
       { heading: 'Flavor', dataKey: 'flavor' },
@@ -798,7 +798,7 @@ export const Hoverable = () =>
 
 export const StripedAndHoverable = () =>
   (() => {
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color' },
       { heading: 'Flavor', dataKey: 'flavor' },
@@ -821,7 +821,7 @@ export const StripedAndHoverable = () =>
 
 export const AligningCellText = () =>
   (() => {
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       { heading: 'Right aligned', dataKey: 'id', align: 'right' },
       { heading: 'Center aligned', dataKey: 'color', align: 'center' },
       { heading: 'Left aligned (default)', dataKey: 'flavor' },
@@ -836,7 +836,7 @@ export const AligningCellText = () =>
 
 export const GlobalAlign = () =>
   (() => {
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       {
         heading: 'Center Aligned via Column Config',
         dataKey: 'id',
@@ -862,7 +862,7 @@ export const GlobalAlign = () =>
 
 export const ComponentAsColumnHeader = () =>
   (() => {
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color' },
       { heading: <Badge message="Status" />, dataKey: 'status' },
@@ -885,7 +885,7 @@ export const ComponentAsColumnHeader = () =>
 
 export const ThemedTable = () =>
   (() => {
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       {
         heading: 'Customer',
         dataKey: 'customerInfo',
@@ -945,7 +945,7 @@ export const ThemedTable = () =>
 
 export const CustomColumnClasses = () =>
   (() => {
-    const columnConfig: Column[] = [
+    const columnConfig: ColumnType[] = [
       {
         heading: 'with cellClassName',
         dataKey: 'id',
