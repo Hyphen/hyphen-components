@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import React, {ChangeEvent, useState} from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { TimePickerNative } from './TimePickerNative';
 import { Box } from '../Box/Box';
 
@@ -38,7 +38,9 @@ export const WithASpecificInterval = () => {
       <TimePickerNative
         id="intervalTimePickerNative"
         name="intervalTimePickerNative"
-        onChange={(event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
+        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          setValue(event.target.value)
+        }
         value={value}
         label="Pick a Time"
         interval={3600}
@@ -54,7 +56,9 @@ export const WithMinAndMaxTimes = () => {
       <TimePickerNative
         id="startEnd"
         name="startEnd"
-        onChange={(event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
+        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          setValue(event.target.value)
+        }
         value={value}
         label="Pick a Time"
         startTime={{ hour: 9, minute: 0 }}
@@ -71,7 +75,9 @@ export const WithCustomDateDisplay = () => {
       <TimePickerNative
         id="customDate"
         name="customDate"
-        onChange={(event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
+        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          setValue(event.target.value)
+        }
         value={value}
         label="Pick a Time"
         startTime={{ hour: 9, minute: 0 }}

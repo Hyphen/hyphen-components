@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { RadioGroup } from './RadioGroup';
 import type { Meta } from '@storybook/react';
 import { Box } from '../Box/Box';

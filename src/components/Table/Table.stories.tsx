@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Table } from './Table';
 import { Button } from '../Button/Button';
 import { Badge } from '../Badge/Badge';
-import type {Column as ColumnType} from "../../types";
+import type { Column as ColumnType } from '../../types';
 
 const meta: Meta<typeof Table> = {
   title: 'Components/Table',

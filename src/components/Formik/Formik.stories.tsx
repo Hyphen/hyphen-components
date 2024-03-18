@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, { ChangeEvent } from 'react';
 import { Field, Form, Formik } from 'formik';
 import { FormikTextInput } from './FormikTextInput/FormikTextInput';
 import { FormikCheckboxInput } from './FormikCheckboxInput/FormikCheckboxInput';
@@ -74,7 +74,10 @@ export const FormikForm = () =>
       }
       return errors;
     };
-    const handleSubmit = (values: Record<string, any>, { setSubmitting }: any) => {
+    const handleSubmit = (
+      values: Record<string, any>,
+      { setSubmitting }: any
+    ) => {
       // Make API calls here
       setTimeout(() => {
         setSubmitting(false);
@@ -84,7 +87,10 @@ export const FormikForm = () =>
         );
       }, 2000);
     };
-    const formatOutput = (values: Record<string, any>, isSubmitting?: boolean) => {
+    const formatOutput = (
+      values: Record<string, any>,
+      isSubmitting?: boolean
+    ) => {
       return { ...values, isSubmitting };
     };
     return (
@@ -259,7 +265,13 @@ export const FormikForm = () =>
                     2
                   )}
                 </pre>
-                <pre>{JSON.stringify(formatOutput(errors, undefined), undefined, 2)}</pre>
+                <pre>
+                  {JSON.stringify(
+                    formatOutput(errors, undefined),
+                    undefined,
+                    2
+                  )}
+                </pre>
               </Box>
             </Form>
           )}

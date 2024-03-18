@@ -15,7 +15,10 @@ export const BasicExample = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date(2019, 11, 3));
   return (
     <Box gap="md">
-      <DatePicker onChange={(date) => setSelectedDate(date as Date)} selected={selectedDate} />
+      <DatePicker
+        onChange={(date) => setSelectedDate(date as Date)}
+        selected={selectedDate}
+      />
       <p>Selected Date: {selectedDate.toISOString()}</p>
     </Box>
   );
@@ -68,7 +71,9 @@ export const MinAndMaxDates = () => {
 export const MonthPicker = () => {
   const [startDateOne, setStartDateOne] = useState<Date>(new Date(2019, 10));
   const [startDateTwo, setStartDateTwo] = useState<Date>(new Date(2019, 10));
-  const [startDateThree, setStartDateThree] = useState<Date>(new Date(2019, 10));
+  const [startDateThree, setStartDateThree] = useState<Date>(
+    new Date(2019, 10)
+  );
   return (
     <Box display="flex" direction="row" gap="md">
       <Box
@@ -180,8 +185,15 @@ export const WithChildren = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date(2019, 11, 3));
   return (
     <Box gap="md">
-      <DatePicker onChange={(date) => setSelectedDate(date as Date)} selected={selectedDate}>
-        <Box display="block" style={{ textAlign: 'center' }} color="primary-500">
+      <DatePicker
+        onChange={(date) => setSelectedDate(date as Date)}
+        selected={selectedDate}
+      >
+        <Box
+          display="block"
+          style={{ textAlign: 'center' }}
+          color="primary-500"
+        >
           It will be sunny out today!
         </Box>
       </DatePicker>
@@ -237,7 +249,10 @@ export const CustomTheme = () => {
           Here we've overwritten base token values so that the DatePicker
           inherits new values.
         </Box>
-        <DatePicker onChange={(date) => setSelectedDate(date as Date)} selected={selectedDate} />
+        <DatePicker
+          onChange={(date) => setSelectedDate(date as Date)}
+          selected={selectedDate}
+        />
       </div>
       <div
         style={{
@@ -261,7 +276,10 @@ export const CustomTheme = () => {
           Here we've overwritten ONLY the values for the DatePicker component
         </Box>
         <Box direction="row" gap="md" wrap>
-          <DatePicker onChange={(date) => setSelectedDate(date as Date)} selected={selectedDate} />
+          <DatePicker
+            onChange={(date) => setSelectedDate(date as Date)}
+            selected={selectedDate}
+          />
           <DatePicker
             onChange={(date) => setDate(date as [Date, Date])}
             selected={startDate}

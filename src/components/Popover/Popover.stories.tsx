@@ -1,6 +1,6 @@
 import { Popover } from './Popover';
 import type { Meta } from '@storybook/react';
-import React, {ChangeEvent} from 'react';
+import React, { ChangeEvent } from 'react';
 import { useState } from 'react';
 import { Button } from '../Button/Button';
 import { Box } from '../Box/Box';
@@ -8,7 +8,7 @@ import { SelectInput } from '../SelectInput/SelectInput';
 import { TextInput } from '../TextInput/TextInput';
 import { Heading } from '../Heading/Heading';
 import { useOpenClose } from '../../hooks/useOpenClose/useOpenClose';
-import {FontColor} from "@hyphen/hyphen-design-tokens/build/types";
+import { FontColor } from '@hyphen/hyphen-design-tokens/build/types';
 
 const meta: Meta<typeof Popover> = {
   title: 'Components/Popover',
@@ -77,10 +77,11 @@ type PopoverStylingType = {
 
 export const PopoverStyling = () => {
   const { isOpen: isPopoverOpen, handleToggle: togglePopover } = useOpenClose();
-  const [popoverBackground, setPopoverBackground] = useState<PopoverStylingType>({
-    value: 'primary-500',
-    label: 'Primary 500',
-  });
+  const [popoverBackground, setPopoverBackground] =
+    useState<PopoverStylingType>({
+      value: 'primary-500',
+      label: 'Primary 500',
+    });
   const [popoverFontColor, setPopoverFontColor] = useState<PopoverStylingType>({
     value: 'black-500',
     label: 'Black 500',
@@ -161,7 +162,7 @@ export const PopoverStyling = () => {
             options={borderRadiusOptions}
             onChange={(event) => {
               // @ts-ignore
-              setPopoverRadius(event.target.value );
+              setPopoverRadius(event.target.value);
             }}
             value={popoverRadius}
             label="Border Radius"

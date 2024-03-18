@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import React, {ChangeEvent, useState} from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { TimePicker } from './TimePicker';
 import { Box } from '../Box/Box';
 

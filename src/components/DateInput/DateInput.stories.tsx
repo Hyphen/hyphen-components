@@ -25,7 +25,9 @@ export const Basic = () => (
 );
 
 export const Default = () => {
-  const [selectedDate, setSelectedDate] = useState<Date | null | [Date, Date]>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null | [Date, Date]>(
+    null
+  );
   const handleClear = () => {
     setSelectedDate(null);
   };
@@ -80,7 +82,9 @@ export const DateRange = () => {
 };
 
 export const WithMinAndMaxDates = () => {
-  const [selectedDate, setSelectedDate] = useState<Date | [Date, Date] | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | [Date, Date] | null>(
+    null
+  );
   const handleClear = () => {
     setSelectedDate(null);
   };
@@ -108,7 +112,9 @@ export const WithMinAndMaxDates = () => {
 };
 
 export const CustomDateFormat = () => {
-  const [selectedDate, setSelectedDate] = useState<Date | null | [Date, Date]>(new Date('2020, 11, 3'));
+  const [selectedDate, setSelectedDate] = useState<Date | null | [Date, Date]>(
+    new Date('2020, 11, 3')
+  );
   const handleClear = () => {
     setSelectedDate(null);
   };
@@ -138,7 +144,9 @@ export const CustomDateFormat = () => {
 };
 
 export const InputBlurEvent = () => {
-  const [selectedDate, setSelectedDate] = useState<Date | [Date, Date] | null>(new Date('2020, 11, 3'));
+  const [selectedDate, setSelectedDate] = useState<Date | [Date, Date] | null>(
+    new Date('2020, 11, 3')
+  );
   const handleTextInputBlur = () => {
     alert('TextInput Blur Event');
   };
