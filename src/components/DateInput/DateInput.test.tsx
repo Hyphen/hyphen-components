@@ -42,7 +42,7 @@ describe('DateInput', () => {
 
       fireEvent.click(input);
 
-      const popoverContainer = screen.getByRole('dialog');
+      const popoverContainer = screen.getByLabelText('Popover');
       await waitFor(() =>
         expect(popoverContainer).toHaveAttribute(
           'data-popper-placement',
@@ -68,7 +68,7 @@ describe('DateInput', () => {
       const input = screen.getByLabelText('Select Date');
       fireEvent.click(input);
 
-      const popoverContainer = screen.getByRole('dialog');
+      const popoverContainer = screen.getByLabelText('Popover');
       await waitFor(() =>
         expect(popoverContainer).toHaveAttribute(
           'data-popper-placement',
@@ -102,7 +102,7 @@ describe('DateInput', () => {
       const input = screen.getByLabelText('Select Date');
       fireEvent.click(input);
 
-      const popoverContainer = screen.getByRole('dialog');
+      const popoverContainer = screen.getByLabelText('Popover');
       await waitFor(() =>
         expect(popoverContainer).toHaveAttribute(
           'data-popper-placement',
@@ -142,7 +142,7 @@ describe('DateInput', () => {
       const input = screen.getByLabelText('Select Date');
       fireEvent.click(input);
 
-      const popoverContainer = screen.getByRole('dialog');
+      const popoverContainer = screen.getByLabelText('Popover');
       await waitFor(() =>
         expect(popoverContainer).toHaveAttribute(
           'data-popper-placement',
@@ -154,7 +154,7 @@ describe('DateInput', () => {
         fireEvent.click(dateButton);
       });
 
-      const popover = screen.queryByRole('dialog');
+      const popover = screen.getByLabelText('Popover');
       await waitFor(() => {
         expect(popover).toHaveAttribute('data-popper-placement', 'bottom');
       });
