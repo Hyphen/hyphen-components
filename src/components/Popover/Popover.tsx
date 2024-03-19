@@ -16,7 +16,7 @@ import classNames from 'classnames';
 import { BrandColor } from '../../types';
 import styles from './Popover.module.scss';
 import { Box, BoxProps } from '../Box/Box';
-import {mergeRefs} from "../../lib";
+import { mergeRefs } from '../../lib';
 
 export type PopoverProps = {
   /**
@@ -206,6 +206,7 @@ export const Popover: FC<PopoverProps> = ({
         className={classNames(styles.popover, className)}
         style={popperStyles.popper}
         role="dialog"
+        aria-label="Popover"
         aria-hidden={!isOpen}
         {...containerBoxProps}
         {...attributes.popper}
