@@ -151,7 +151,7 @@ export const TableHeaderCell: FC<TableHeaderCellProps> = ({
   };
 
   const tableHeaderClasses = classNames(
-    'palmetto-components__variables__table',
+    'hyphen-components__variables__table',
     styles['table-header-cell'],
     {
       [styles.sortable]: isSortable,

@@ -160,7 +160,7 @@ export const TextInput: ForwardRefExoticComponent<TextInputProps> = forwardRef<
     const responsiveClasses = generateResponsiveClasses('size', size);
 
     const inputWrapperClasses = classNames(
-      'palmetto-components__variables__form-control',
+      'hyphen-components__variables__form-control',
       styles['text-input-wrapper'],
       ...responsiveClasses.map((c) => styles[c]),
       {

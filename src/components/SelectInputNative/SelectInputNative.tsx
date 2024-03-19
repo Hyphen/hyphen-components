@@ -66,7 +66,7 @@ export const SelectInputNative: React.FC<SelectInputNativeProps> = ({
   const responsiveClasses = generateResponsiveClasses('size', size);
 
   const selectWrapperClasses = classNames(
-    'palmetto-components__variables__form-control',
+    'hyphen-components__variables__form-control',
     styles['select-input-native-wrapper'],
     ...responsiveClasses.map((className) => styles[className]),
     {

@@ -97,7 +97,7 @@ export const RadioGroup: FC<RadioGroupProps> = ({
   ...restProps
 }) => {
   const groupClasses = classNames(
-    'palmetto-components__variables__form-control',
+    'hyphen-components__variables__form-control',
     className,
     {
       [styles.loading]: error,

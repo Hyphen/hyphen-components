@@ -177,7 +177,7 @@ export const SelectInput: FC<SelectInputProps> = ({
   const responsiveClasses = generateResponsiveClasses('size', size);
 
   const wrapperClasses = classNames(
-    'palmetto-components__variables__form-control',
+    'hyphen-components__variables__form-control',
     'select-input-wrapper',
     className,
     ...responsiveClasses.map((c) => styles[c]),

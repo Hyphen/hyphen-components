@@ -129,7 +129,7 @@ export const TextareaInput: FC<TextareaInputProps> = ({
   const responsiveClasses = generateResponsiveClasses('size', size);
 
   const inputWrapperClasses = classNames(
-    'palmetto-components__variables__form-control',
+    'hyphen-components__variables__form-control',
     styles['textarea-input-wrapper'],
     ...responsiveClasses.map((c) => styles[c]),
     {

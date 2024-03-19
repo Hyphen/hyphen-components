@@ -140,7 +140,7 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
     size,
     label,
     className: classNames(
-      'palmetto-components__variables__form-control',
+      'hyphen-components__variables__form-control',
       'm-right-xs'
     ),
     error,

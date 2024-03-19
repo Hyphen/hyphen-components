@@ -57,7 +57,7 @@ export const FormLabel: FC<FormLabelProps> = ({
   ...restProps
 }) => {
   const labelClasses = classNames(
-    'palmetto-components__variables__form-control',
+    'hyphen-components__variables__form-control',
     styles.label,
     className,
     {
