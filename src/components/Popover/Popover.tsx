@@ -12,11 +12,11 @@ import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
 import { Placement } from '@popperjs/core';
 import FocusTrap from 'focus-trap-react';
-import { mergeRefs } from 'react-merge-refs';
 import classNames from 'classnames';
 import { BrandColor } from '../../types';
 import styles from './Popover.module.scss';
 import { Box, BoxProps } from '../Box/Box';
+import {mergeRefs} from "../../lib";
 
 export type PopoverProps = {
   /**
