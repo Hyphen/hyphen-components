@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, screen, Matcher } from '@testing-library/react';
+import {render, fireEvent, screen, Matcher} from '@testing-library/react';
 import selectEvent from 'react-select-event';
 import { SelectInput, TextInputSize } from './SelectInput';
 
@@ -60,7 +60,7 @@ describe('SelectInput', () => {
         />
       );
 
-      fireEvent.focus(screen.getByRole('textbox'));
+      fireEvent.focus(screen.getByRole('combobox'));
 
       expect(mockedHandleFocus).toBeCalledTimes(1);
     });
@@ -81,7 +81,7 @@ describe('SelectInput', () => {
         />
       );
 
-      fireEvent.blur(screen.getByRole('textbox'));
+      fireEvent.blur(screen.getByRole('combobox'));
 
       expect(mockedHandleBlur).toBeCalledTimes(1);
     });
@@ -192,7 +192,7 @@ describe('SelectInput', () => {
             label="Select Label"
             options={selectOptions}
             isMulti
-            value={['chocolate']}
+            value={[]}
           />
         );
 
@@ -250,7 +250,7 @@ describe('SelectInput', () => {
       test('it disables the input', () => {
         const mockedHandleChange = jest.fn();
 
-        render(
+        const {container} = render(
           <SelectInput
             id="testId"
             onChange={mockedHandleChange}
@@ -261,7 +261,9 @@ describe('SelectInput', () => {
           />
         );
 
-        expect(screen.getByRole('textbox')).toBeDisabled();
+        const combobox = container.querySelector('.react-select__control[aria-disabled="true"]');
+
+        expect(combobox).toBeInTheDocument();
       });
     });
 

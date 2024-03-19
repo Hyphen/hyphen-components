@@ -16,6 +16,7 @@ describe('RadioInput', () => {
       test('onChange event fires callback function', () => {
         render(
           <RadioInput
+            size="sm"
             name="mockName"
             onChange={mockedHandleChange}
             option={mockOption}
@@ -35,6 +36,7 @@ describe('RadioInput', () => {
 
         render(
           <RadioInput
+            size="sm"
             name="mockName"
             onChange={mockedHandleChangeWithValue}
             option={mockOption}
@@ -53,6 +55,7 @@ describe('RadioInput', () => {
 
         render(
           <RadioInput
+            size="sm"
             name="mockName"
             onChange={mockedHandleChange}
             option={mockOption}
@@ -71,6 +74,7 @@ describe('RadioInput', () => {
 
         render(
           <RadioInput
+            size="sm"
             name="mockName"
             onChange={mockedHandleChange}
             option={mockOption}
@@ -89,6 +93,7 @@ describe('RadioInput', () => {
       test('it renders a radio input', () => {
         render(
           <RadioInput
+            size="sm"
             name="mockName"
             onChange={mockedHandleChange}
             option={mockOption}
@@ -102,6 +107,7 @@ describe('RadioInput', () => {
       test('it renders a label', () => {
         render(
           <RadioInput
+            size="sm"
             name="mockName"
             onChange={mockedHandleChange}
             option={mockOption}
@@ -117,6 +123,7 @@ describe('RadioInput', () => {
       test('the radio input is disabled', () => {
         render(
           <RadioInput
+            size="sm"
             name="mockName"
             onChange={mockedHandleChange}
             option={mockOption}
@@ -133,6 +140,7 @@ describe('RadioInput', () => {
       test('the radio input is hidden', () => {
         render(
           <RadioInput
+            size="sm"
             name="mockName"
             onChange={mockedHandleChange}
             option={mockOption}

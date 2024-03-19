@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
-import { Formik, Form, Field, getIn, setIn } from 'formik';
+import { Formik, Form, Field, getIn, setIn, FormikValues } from 'formik';
 import { FormikSelectInputNative } from './FormikSelectInputNative';
 
 const testLabelName = 'test select';
@@ -11,17 +11,22 @@ const selectOptions = [
   { value: 'vanilla', label: 'Vanilla' },
 ];
 
-const handleValidation = (testValueKey) => (values) =>
+const handleValidation = (testValueKey: string) => (values: FormikValues) =>
   getIn(values, testValueKey)?.length > 1
     ? {}
     : setIn({}, testValueKey, 'input is required');
 
-const renderForm = (initialValue, props, testValueKey = testLabelName) => (
+const renderForm = (
+  initialValue: any,
+  props: any,
+  testValueKey = testLabelName
+) => (
   <Formik
     initialValues={{
       [testLabelName]: initialValue,
     }}
     validate={props.isRequired ? handleValidation(testValueKey) : undefined}
+    onSubmit={() => {}}
   >
     {() => (
       <Form data-testid="form">

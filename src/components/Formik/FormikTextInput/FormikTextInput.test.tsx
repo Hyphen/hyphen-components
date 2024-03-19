@@ -23,7 +23,7 @@ const renderForm = (
     onSubmit={() => {}}
   >
     {() => (
-      <Form>
+      <Form noValidate>
         <Field
           label={testValueKey}
           name={testValueKey}

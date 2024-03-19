@@ -20,7 +20,11 @@ type FormProps = {
 };
 
 // eslint-disable-next-line
-const renderForm = (initialValue: any, props: FormProps, testValueKey = testLabelName) => (
+const renderForm = (
+  initialValue: any,
+  props: FormProps,
+  testValueKey = testLabelName
+) => (
   <Formik
     initialValues={{
       [testLabelName]: initialValue,
@@ -29,7 +33,7 @@ const renderForm = (initialValue: any, props: FormProps, testValueKey = testLabe
     onSubmit={() => {}} // eslint-disable-line
   >
     {() => (
-      <Form>
+      <Form noValidate>
         <Field
           label={testValueKey}
           name={testValueKey}

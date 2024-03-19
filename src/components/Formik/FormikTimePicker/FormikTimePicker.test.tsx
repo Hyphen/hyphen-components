@@ -134,9 +134,11 @@ describe('FormikTimePicker', () => {
 
     describe('Is Disabled', () => {
       test('it disables the input', () => {
-        render(renderForm([], { isDisabled: true }));
+        const { container } = render(renderForm(undefined, { isDisabled: true }));
 
-        expect(screen.getByRole('textbox')).toBeDisabled();
+        const disabledInput = container.querySelector('.react-select__control[aria-disabled="true"]');
+
+        expect(disabledInput).toBeInTheDocument();
       });
     });
 

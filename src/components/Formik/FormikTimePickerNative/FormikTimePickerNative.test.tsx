@@ -30,7 +30,7 @@ const renderForm = (
     onSubmit={() => {}} // eslint-disable-line
   >
     {() => (
-      <Form>
+      <Form noValidate>
         <Field
           label={testValueKey}
           name={testValueKey}

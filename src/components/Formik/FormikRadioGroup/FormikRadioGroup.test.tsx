@@ -48,7 +48,7 @@ const renderForm = (
     validate={props.isRequired ? handleValidation(testValueKey) : undefined} // eslint-disable-line
   >
     {() => (
-      <Form>
+      <Form noValidate>
         <Field
           label={testValueKey}
           name={testValueKey}

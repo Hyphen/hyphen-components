@@ -119,9 +119,11 @@ describe('FormikSelectInput', () => {
 
     describe('Is Disabled', () => {
       test('it disables the input', () => {
-        render(renderForm([], { isDisabled: true }));
+        const { container }  = render(renderForm([], { isDisabled: true }));
 
-        expect(screen.getByRole('textbox')).toBeDisabled();
+        const combobox = container.querySelector('.react-select__control[aria-disabled="true"]');
+
+        expect(combobox).toBeInTheDocument();
       });
     });
 
