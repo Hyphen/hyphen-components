@@ -7,4 +7,7 @@ module.exports = {
   },
   setupFilesAfterEnv: ['./jest.setup.js'],
   restoreMocks: true,
+  "transform": {
+    "^.+\\.(ts|tsx)$": "ts-jest"
+  },
 };
