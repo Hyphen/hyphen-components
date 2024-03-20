@@ -13,11 +13,18 @@ import React, {
 
 import { FormControl } from '../FormControl/FormControl';
 import { Icon } from '../Icon/Icon';
-import { ResponsiveProp } from '../../types';
+import { ResponsiveProp, UnknownPropertiesObjType } from '../../types';
 import classNames from 'classnames';
+import Cleave from 'cleave.js/react';
+import { ChangeEvent as CleaveChangeEvent } from 'cleave.js/react/props';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
+import { getInputMaskType } from './TextInputMasks'; // eslint-disable-line import/no-cycle
 import { getAutoCompleteValue } from '../../lib/getAutoCompleteValue';
 import styles from './TextInput.module.scss';
+
+export type InputMaskType =
+  | ('phone' | 'creditCard' | 'date')
+  | UnknownPropertiesObjType;
 
 export type TextInputSizeType = 'sm' | 'md' | 'lg';
 export interface TextInputProps {
@@ -32,7 +39,9 @@ export interface TextInputProps {
   /**
    * Callback function to call on change event.
    */
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (
+    event: ChangeEvent<HTMLInputElement> | CleaveChangeEvent<HTMLInputElement>
+  ) => void;
   /**
    * The text value of the input. Required since our Input is a controlled component.
    */
@@ -139,6 +148,7 @@ export const TextInput: ForwardRefExoticComponent<TextInputProps> = forwardRef<
       error = false,
       helpText,
       hideLabel = false,
+      inputMask = undefined,
       inputProps = {},
       isDisabled = false,
       isRequired = false,
@@ -241,7 +251,18 @@ export const TextInput: ForwardRefExoticComponent<TextInputProps> = forwardRef<
               {prefix}
             </Box>
           )}
-          <Box as="input" {...computedInputProps} />
+
+          {!inputMask ? (
+            <Box as="input" {...computedInputProps} />
+          ) : (
+            // eslint-disable-next-line
+            // @ts-ignore
+            <Cleave
+              {...computedInputProps}
+              options={getInputMaskType(inputMask)}
+            />
+          )}
+
           {!!onClear && !!value && renderClearIcon()}
           {suffix && (
             <Box
