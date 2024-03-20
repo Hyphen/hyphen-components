@@ -112,7 +112,7 @@
     "@rollup/rollup-linux-x64-gnu": "^4.9.6"
   },
   "dependencies": {
-    "@hyphen/hyphen-design-tokens": "^2.0.0",
+    "@hyphen/hyphen-design-tokens": "^2.0.2",
     "classnames": "^2.5.1",
     "react-select": "^5.8.0"
   }
