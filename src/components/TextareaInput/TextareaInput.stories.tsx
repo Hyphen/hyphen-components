@@ -76,7 +76,7 @@ export const HelpText = () => {
       id="helpText"
       value={value}
       label="Design Notes"
-      helpText="Add any design requirements or aesthetic choices that the solar system designer should know"
+      helpText="Add any additional comments that should be brought to the employees' attention"
       onChange={(event) => setValue(event.target.value)}
     />
   );
