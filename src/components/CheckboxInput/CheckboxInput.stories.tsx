@@ -229,7 +229,7 @@ export const CustomLabel = () => {
         <Box display="block" fontSize="xl" color="secondary-500">
           This is custom, look at this{' '}
           <a
-            href="https://palmetto.com"
+            href="https://hyphen.ai"
             onClick={() => alert('hey you clicked me!')}
             target="_blank"
             rel="noreferrer"

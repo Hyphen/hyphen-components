@@ -20,7 +20,7 @@ export const BasicUsage = () => {
         onToggle={handleToggle}
         display="inline"
       >
-        What is Palmetto's Mission?
+        What is Hyphen's Mission?
       </Details.Summary>
       <Box padding="md 0" gap="sm">
         <Box fontSize="lg" as="h4">
