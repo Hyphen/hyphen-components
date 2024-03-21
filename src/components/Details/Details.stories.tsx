@@ -24,14 +24,13 @@ export const BasicUsage = () => {
       </Details.Summary>
       <Box padding="md 0" gap="sm">
         <Box fontSize="lg" as="h4">
-          Leading the World Towards a Clean Energy Future
+          Empowering Teams with Streamlined DevOps
         </Box>
         <Box as="p">
-          We are on a mission to stop climate change before we reach an
-          irreversible tipping point. Yes, this requires large shifts by entire
-          nations and entire populations. It requires urgency and change on a
-          massive scale. But technological advancements have put it within
-          reach.
+          Our mission is to streamline DevOps for software teams. By automating
+          access management and integrating essential tools, we empower teams to
+          focus on innovation and deliver seamless software solutions
+          efficiently.
         </Box>
       </Box>
     </Details>
