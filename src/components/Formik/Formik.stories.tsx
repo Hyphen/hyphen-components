@@ -100,8 +100,8 @@ export const FormikForm = () =>
             firstName: '',
             lastName: '',
             email: '',
-            phoneInputMask: '',
-            phoneInputMaskWithUnformattedValue: '',
+            phone: '',
+            phoneWithUnformattedValue: '',
             areTermsChecked: false,
             areTermsChecked2: false,
             flavor: null,
@@ -148,23 +148,21 @@ export const FormikForm = () =>
                   isRequired
                 />
                 <Field
-                  label="Phone Input Mask Returning a Formatted Value"
-                  name="phoneInputMask"
-                  id="phoneInputMask"
+                  label="Phone Returning a Formatted Value"
+                  name="phone"
+                  id="phone"
                   component={FormikTextInput}
-                  inputMask="phone"
                   type="tel"
                 />
                 <Field
-                  label="Phone Input Mask Returning an Unformatted Value"
-                  name="phoneInputMaskWithUnformattedValue"
-                  id="phoneInputMaskWithUnformattedValue"
+                  label="Phone Returning an Unformatted Value"
+                  name="phoneWithUnformattedValue"
+                  id="phoneWithUnformattedValue"
                   component={FormikTextInput}
-                  inputMask="phone"
                   type="tel"
                   onChange={(event: ChangeEvent<any>) => {
                     setFieldValue(
-                      'phoneInputMaskWithUnformattedValue',
+                      'phoneWithUnformattedValue',
                       event.target.rawValue
                     );
                   }}

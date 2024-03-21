@@ -239,49 +239,6 @@ export const Sizes = () => {
   );
 };
 
-export const WithPhoneMask = () => {
-  const [value, setValue] = useState('');
-  return (
-    <TextInput
-      id="withPhoneMask"
-      value={value}
-      label="Label"
-      onChange={(event) => setValue(event.target.value)}
-      type="tel"
-      inputMask="phone"
-    />
-  );
-};
-
-export const WithCreditCardMask = () => {
-  const [value, setValue] = useState('');
-  return (
-    <TextInput
-      id="withCreditCardMask"
-      value={value}
-      label="Label"
-      onChange={(event) => setValue(event.target.value)}
-      type="tel"
-      inputMask="creditCard"
-    />
-  );
-};
-
-export const WithDateMask = () => {
-  const [value, setValue] = useState('');
-  return (
-    <TextInput
-      id="withDateMask"
-      value={value}
-      label="Date of Birth"
-      onChange={(event) => setValue(event.target.value)}
-      inputMask="date"
-      type="tel"
-      placeholder="MM-DD-YYYY"
-    />
-  );
-};
-
 export const MaxLength = () => {
   const [value, setValue] = useState('');
   return (
