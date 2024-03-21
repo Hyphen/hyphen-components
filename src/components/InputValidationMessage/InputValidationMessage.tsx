@@ -16,7 +16,7 @@ export const InputValidationMessage: FC<InputValidationMessageProps> = ({
   size = 'sm',
 }) => {
   const classes = classNames(
-    'palmetto-components__variables__form-control',
+    'hyphen-components__variables__form-control',
     styles['input-validation-message'],
     'font-color-danger',
     `font-size-${size}`,

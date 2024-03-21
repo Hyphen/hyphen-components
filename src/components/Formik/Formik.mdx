@@ -1,0 +1,10 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import * as Stories from './Formik.stories';
+
+<Meta of={Stories} />
+
+# Formik Form
+
+Formik Form demonstrates a pattern for integrating the input elements found in Hyphen Components with [Formik](https://formik.org/). The form is fully functional and even mock submits. Manipulate the inputs in the form and watch the state object below it update with the new values in real-time. Attempt to submit the form without filling out required inputs, and observe the error states for these inputs.
+
+<Canvas of={Stories.FormikForm} />

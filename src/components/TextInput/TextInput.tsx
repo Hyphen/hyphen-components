@@ -15,11 +15,12 @@ import { FormControl } from '../FormControl/FormControl';
 import { Icon } from '../Icon/Icon';
 import { ResponsiveProp } from '../../types';
 import classNames from 'classnames';
+
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
 import { getAutoCompleteValue } from '../../lib/getAutoCompleteValue';
 import styles from './TextInput.module.scss';
 
-export type TextInputSize = 'sm' | 'md' | 'lg';
+export type TextInputSizeType = 'sm' | 'md' | 'lg';
 export interface TextInputProps {
   /**
    * The input's id attribute. Used to programmatically tie the input with its label.
@@ -109,7 +110,7 @@ export interface TextInputProps {
   /**
    * The size of the text input.
    */
-  size?: TextInputSize | ResponsiveProp<TextInputSize>;
+  size?: TextInputSizeType | ResponsiveProp<TextInputSizeType>;
   /**
    * An input helper rendered after the input field value
    */
@@ -160,7 +161,7 @@ export const TextInput: ForwardRefExoticComponent<TextInputProps> = forwardRef<
     const responsiveClasses = generateResponsiveClasses('size', size);
 
     const inputWrapperClasses = classNames(
-      'palmetto-components__variables__form-control',
+      'hyphen-components__variables__form-control',
       styles['text-input-wrapper'],
       ...responsiveClasses.map((c) => styles[c]),
       {
@@ -241,7 +242,9 @@ export const TextInput: ForwardRefExoticComponent<TextInputProps> = forwardRef<
               {prefix}
             </Box>
           )}
+
           <Box as="input" {...computedInputProps} />
+
           {!!onClear && !!value && renderClearIcon()}
           {suffix && (
             <Box

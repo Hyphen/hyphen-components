@@ -1,7 +1,5 @@
 import { Key, KeyboardEvent, MouseEvent, ReactNode } from 'react';
 
-// import { OptionTypeBase, ValueType } from 'react-select';
-
 import {
   BorderRadiusSize as BorderRadius,
   HeightSize,
@@ -194,13 +192,6 @@ export type EventWithColumnKey = (
   | MouseEvent<HTMLTableHeaderCellElement>
   | KeyboardEvent<HTMLTableHeaderCellElement>
 ) & { sortedKey: Key | undefined };
-
-// export type SimulatedEventPayloadType = {
-//   target: {
-//     name: string;
-//     value: ValueType<OptionTypeBase, boolean>;
-//   };
-// };
 
 export type ValueFunction<TValue, TArg> = (arg: TArg) => TValue;
 export type ValueOrFunction<TValue, TArg> =

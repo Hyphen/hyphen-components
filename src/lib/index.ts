@@ -7,6 +7,7 @@ export * from './getDimensionCss';
 export * from './getElementType';
 export * from './getFlexCss';
 export * from './isFunction';
+export * from './mergeRefs';
 export * from './prefersReducedMotion';
 export * from './reactRouterClickHandler';
 export * from './resolveValue';

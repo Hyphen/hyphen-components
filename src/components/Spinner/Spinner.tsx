@@ -10,7 +10,7 @@ export interface SpinnerProps {
    */
   className?: string;
   /**
-   * Spinner variant (color), pass down one of the options from the Palmetto 'brand' palette.
+   * Spinner variant (color), pass down one of the options from the Hyphen 'brand' palette.
    */
   variant?: ColorName;
   /**

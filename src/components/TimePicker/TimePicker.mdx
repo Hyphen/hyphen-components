@@ -1,0 +1,75 @@
+import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { TimePicker } from './TimePicker';
+import * as Stories from './TimePicker.stories';
+
+<Meta of={Stories} />
+
+# TimePicker
+
+Use a TimePicker when you want users to select from a list of a available times agnostic of date.
+
+_NOTE:_ This component is abstracted from the [SelectInput](?path=/docs/components-selectinput-overview--default-story)
+and as such includes the same underlying props interface with an added method for generating the time options automatically.
+
+_ABOUT TIME FORMAT:_ While the `value` prop technically returns `{ label: string; value: string; }` the value returned will always
+be a JS ISO date string, like this: `2016-07-13T18:46:01.933Z`.
+
+## Props
+
+<ArgsTable of={TimePicker} />
+
+## Default
+
+<Canvas of={Stories.Default}/>
+
+## With A Specific Interval
+
+Pass an `interval` (seconds) value to determine how many times get generated as options.
+The example below uses `3600` --> 1 Hour Intervals
+
+<Canvas of={Stories.WithASpecificInterval}/>
+
+## With Min and Max Times
+
+You can determine the range of times to be shown by capping the start and end times.
+Use `startTime` and `endTime` for this. The expected values for `hour` and `minute` properties
+are `0-24` and `0-60` respectively.
+
+IMPORTANT: `startTime` is inclusive, and `endTime` is exclusive. This is to avoid
+the options showing the startTime twice when using a 24-hour cycle.
+
+See example below where we want to show 15 minute increments starting at 9:00AM and ending at 3:30PM.
+
+<Canvas of={Stories.WithMinAndMaxTimes}/>
+
+## With Custom Date Display
+
+The labels for the dropdwon options are governed by JS `toLocaleTimeString`, and as such
+options are available to customize these.
+
+NOTE: that the option values are always returned as ISO strings regardless of the label display option.
+
+The example below is shown in military (24-hour) time.
+
+<Canvas of={Stories.WithCustomDateDisplay}/>
+
+## With Open Menu
+
+The menu can be rendered open with the `menuIsOpen` prop. We do this here to confirm option generation
+via our UI visual snapshot testing (Chromatic).
+
+<Canvas of={Stories.WithOpenMenu}/>
+
+## Help Text
+
+<Canvas of={Stories.HelpText}/>
+
+## Sizes
+
+Set the size of the input to `sm`, `md` or `lg`. `md` is the default size.
+
+<Canvas of={Stories.Sizes}/>
+
+## Component Design Tokens
+
+This component shares component design tokens with all form controls. For a complete list of tokens, see the [Theming Form Controls documentation](/docs/theming-form-controls--custom-theme-form).
