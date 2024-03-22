@@ -11,6 +11,9 @@ import { FormikToggle } from './FormikToggle/FormikToggle';
 import { Button } from '../Button/Button';
 import { Box } from '../Box/Box';
 import { FormikTimePickerNative } from './FormikTimePickerNative/FormikTimePickerNative';
+import { FormikSelectInputInset } from './FormikSelectInputInset/FormikSelectInputInset';
+import { FormikTextareaInputInset } from './FormikTextareaInputInset/FormikTextareaInputInset';
+import { FormikTextInputInset } from './FormikTextInputInset/FormikTextInputInset';
 
 const meta = {
   title: 'Patterns/Formik Form',
@@ -72,6 +75,15 @@ export const FormikForm = () =>
       if (!values.dateInput) {
         errors.dateInput = 'required';
       }
+      if (!values.colors2) {
+        errors.colors2 = 'required';
+      }
+      if (!values.message) {
+        errors.message = 'required';
+      }
+      if (!values.country) {
+        errors.country = 'required';
+      }
       return errors;
     };
     const handleSubmit = (
@@ -107,17 +119,20 @@ export const FormikForm = () =>
             flavor: null,
             flavor2: null,
             colors: [],
+            colors2: '',
             sizes: null,
             timePicker: null,
             timePickerNative: null,
             dateInput: '',
+            message: '',
+            country: '',
           }}
           validate={handleValidation}
           validateOnChange={false}
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, values, setFieldValue, handleBlur, errors }) => (
-            <Form>
+            <Form noValidate>
               <Box gap="lg">
                 <Field
                   type="text"
@@ -228,6 +243,28 @@ export const FormikForm = () =>
                   name="areTermsChecked2"
                   id="areTermsChecked2"
                   component={FormikToggle}
+                  isRequired
+                />
+                <Field
+                  label="Colors"
+                  name="colors2"
+                  id="colors2"
+                  options={colorOptions}
+                  component={FormikSelectInputInset}
+                  isRequired
+                />
+                <Field
+                  label="Message"
+                  name="message"
+                  id="message"
+                  component={FormikTextareaInputInset}
+                  isRequired
+                />
+                <Field
+                  label="Country"
+                  name="country"
+                  id="country"
+                  component={FormikTextInputInset}
                   isRequired
                 />
                 <DateInput
