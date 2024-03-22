@@ -204,7 +204,7 @@ export const TextareaInputInset: ForwardRefExoticComponent<TextareaInputInsetPro
             </label>
           </Box>
           {helpText && <HelpText>{helpText}</HelpText>}
-          {error && !error && (
+          {error && error !== true && (
             <InputValidationMessage>{error}</InputValidationMessage>
           )}
         </Box>

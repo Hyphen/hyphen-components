@@ -226,7 +226,7 @@ export const SelectInputInset: ForwardRefExoticComponent<SelectInputInsetProps> 
             </label>
           </Box>
           {helpText && <HelpText>{helpText}</HelpText>}
-          {error && !error && (
+          {error && error !== true && (
             <InputValidationMessage>{error}</InputValidationMessage>
           )}
         </div>
