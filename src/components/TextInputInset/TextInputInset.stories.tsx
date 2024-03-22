@@ -14,7 +14,7 @@ const meta: Meta<typeof TextInputInset> = {
 
 export default meta;
 
-export const Open = () => {
+export const Default = () => {
   const [value, setValue] = useState('');
   const [valuePw, setValuePw] = useState('');
   return (

@@ -70,15 +70,15 @@ export const Required = () => {
 export const HelpText = () => {
   const [value, setValue] = useState('');
   const options = [
-    { value: 'Enphase', label: 'Enphase' },
-    { value: 'SolarEdge', label: 'SolarEdge' },
-    { value: 'Tesla', label: 'Tesla' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'vanilla', label: 'Vanilla' },
   ];
   return (
     <SelectInputInset
       id="helpTextSelect"
-      label="Inverter Manufacturer"
-      helpText="Must be from the approved vendor list"
+      label="Flavor"
+      helpText="Select your favorite flavor"
       onChange={(event) => {
         setValue(event.target.value);
       }}
@@ -91,15 +91,15 @@ export const HelpText = () => {
 export const ValidationError = () => {
   const [value, setValue] = useState('');
   const options = [
-    { value: 'Enphase', label: 'Enphase' },
-    { value: 'SolarEdge', label: 'SolarEdge' },
-    { value: 'Tesla', label: 'Tesla' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'vanilla', label: 'Vanilla' },
   ];
   return (
     <SelectInputInset
       id="errorSelect"
-      label="Inverter Manufacturer"
-      helpText="Must be from the approved vendor list"
+      label="Flavor"
+      helpText="Select your favorite flavor"
       onChange={(event) => {
         setValue(event.target.value);
       }}
@@ -113,9 +113,9 @@ export const ValidationError = () => {
 export const Disabled = () => {
   const [value, setValue] = useState('');
   const options = [
-    { value: 'Enphase', label: 'Enphase' },
-    { value: 'SolarEdge', label: 'SolarEdge' },
-    { value: 'Tesla', label: 'Tesla' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'vanilla', label: 'Vanilla' },
   ];
   return (
     <SelectInputInset
