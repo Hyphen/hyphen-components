@@ -1,0 +1,56 @@
+import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { SelectInputInset } from './SelectInputInset';
+import * as Stories from './SelectInputInset.stories';
+
+<Meta of={Stories} />
+
+# SelectInputInset
+
+Use `SelectInputInset` to create a floating label input field, but unlike `TextInputInset` they always show the `label` in the floated state. It is a controlled component, which means that you need to provide a value and an `onChange` handler to update the value.
+
+<Canvas withSource="open" of={Stories.Default} />
+
+## Props
+
+<ArgsTable of={SelectInputInset} />
+
+### Required
+
+Use the `isRequired` prop to display an `*` after the label and set the `required` and `aria-required` on the underlying input element. You can also use the `requiredIndicator` prop to customize the indicator that appears next to the label.
+
+<Canvas of={Stories.Required} />
+
+### Help Text
+
+Use `helpText` to provide additional information about the input field.
+
+<Canvas of={Stories.HelpText} />
+
+### Validation Error
+
+Use the `error` prop to mark the input as invalid. `error` accepts a `boolean`, `string`, or `node`.
+
+<Canvas of={Stories.ValidationError} />
+
+### Disabled
+
+Add `isDisabled`to give it a grayed out appearance, remove pointer events, and prevent focusing.
+
+<Canvas of={Stories.Disabled} />
+
+### Clearable
+
+Use the `onClear` prop to display a clear icon (x) when the input has a value. `onClear` will fire
+a callback function when the clear icon is clicked, which can then be handled to clear the value.
+
+<Canvas of={Stories.Clearable} />
+
+### Sizes
+
+Two sizes, `md` and `lg` are available, with `md` being the default.
+
+<Canvas of={Stories.Sizes} />
+
+## Component Design Tokens
+
+This component shares component design tokens with all form controls. For a complete list of tokens, see the [Theming Form Controls documentation](/docs/theming-form-controls--custom-theme-form).

@@ -1,0 +1,55 @@
+import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { TextareaInputInset } from './TextareaInputInset';
+import * as Stories from './TextareaInputInset.stories';
+
+<Meta of={Stories} />
+
+# TextareaInputInset
+
+Use `TextareaInputInset` to create a floating label input field. It is a controlled component, which means that you need to provide a value and an `onChange` handler to update the value.
+
+<Canvas withSource="open" of={Stories.Default} />
+
+## Props
+
+<ArgsTable of={TextareaInputInset} />
+
+### Required
+
+Use the `isRequired` prop to display an `*` after the label and set the `required` and `aria-required` on the underlying input element. You can also use the `requiredIndicator` prop to customize the indicator that appears next to the label.
+
+<Canvas of={Stories.Required} />
+
+### Help Text
+
+Use `helpText` to provide additional information about the input field.
+
+<Canvas of={Stories.HelpText} />
+
+### Validation Error
+
+Use the `error` prop to mark the input as invalid. `error` accepts a `boolean`, `string`, or `node`.
+
+<Canvas of={Stories.ValidationError} />
+
+### Disabled
+
+Add `isDisabled`to give it a grayed out appearance, remove pointer events, and prevent focusing.
+
+<Canvas of={Stories.Disabled} />
+
+### Sizes
+
+Two sizes, `md` and `lg` are available, with `md` being the default.
+
+<Canvas of={Stories.Sizes} />
+
+## Resize
+
+The `resize` prop accepts `horizontal`, `vertical`, `both` or `none` to control the users ability to resize the input.
+
+<Canvas of={Stories.Resize} />
+
+## Component Design Tokens
+
+This component shares component design tokens with all form controls. For a complete list of tokens, see the [Theming Form Controls documentation](/docs/theming-form-controls--custom-theme-form).
