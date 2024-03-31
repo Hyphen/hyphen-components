@@ -181,7 +181,7 @@ export const TextInputInset: ForwardRefExoticComponent<TextInputInsetProps> =
             data-testid="text-input-clear-button"
             aria-label="clear input"
           >
-            <Icon name="remove-light" className="display-block" />
+            <Icon name="remove" className="display-block" />
           </button>
         );
       };
