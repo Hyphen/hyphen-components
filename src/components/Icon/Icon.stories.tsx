@@ -33,7 +33,7 @@ export const Colors = () => (
       <Box>Color is set at the Icon level</Box>
     </Box>
     <Box direction="row" childGap="sm" color="secondary-400">
-      <Icon name="book" />
+      <Icon name="add" />
       <Box>Color is set by the Icon's parent</Box>
     </Box>
   </>

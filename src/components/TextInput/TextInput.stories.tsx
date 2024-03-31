@@ -161,7 +161,7 @@ export const PrefixAndSuffix = () => {
         label="Suffix"
         placeholder="Contact name"
         onChange={(event) => setPrefixValue3(event.target.value)}
-        suffix={<Icon name="book" />}
+        suffix={<Icon name="user" />}
       />
       <TextInput
         id="prefixSuffix4"
