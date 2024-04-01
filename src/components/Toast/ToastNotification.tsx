@@ -112,7 +112,7 @@ const renderDismissIcon = (
       onClick={onDismiss}
       aria-label="dismiss notification"
     >
-      <Icon name="remove-light" />
+      <Icon name="remove" />
     </Box>
   );
 };
