@@ -366,7 +366,7 @@ describe('Toast', () => {
       toast('dismissing toast');
     });
 
-    const closeIcon = await screen.getByTestId('icon-testid--remove-light');
+    const closeIcon = await screen.getByTestId('icon-testid--remove');
     const closeButton = closeIcon.closest('button');
     expect(closeButton).toBeInTheDocument();
 
