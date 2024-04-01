@@ -11,6 +11,14 @@ const meta: Meta<typeof ToastContainer> = {
   parameters: {
     controls: { hideNoControlsWarning: true },
   },
+  decorators: [
+    (Story, { args, viewMode }) => (
+      <>
+        {viewMode === 'story' && <ToastContainer />}
+        <Story args={{ ...args }} />
+      </>
+    ),
+  ],
 };
 
 export default meta;
