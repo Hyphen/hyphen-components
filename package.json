@@ -114,7 +114,7 @@
     "@rollup/rollup-linux-x64-gnu": "^4.9.6"
   },
   "dependencies": {
-    "@hyphen/hyphen-design-tokens": "^2.0.4",
+    "@hyphen/hyphen-design-tokens": "^2.1.0",
     "@popperjs/core": "^2.11.8",
     "classnames": "^2.5.1",
     "date-fns": "^2.16.1",

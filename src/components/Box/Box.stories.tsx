@@ -665,7 +665,6 @@ export const FontWeight = () => (
     <Box fontWeight="regular">regular</Box>
     <Box fontWeight="medium">medium</Box>
     <Box fontWeight="bold">bold</Box>
-    <Box fontWeight="black">black</Box>
   </Box>
 );
 
