@@ -12,7 +12,7 @@ Use `Headings` as labels for pages or sections of a page that make up an interfa
 The `Heading` component allows you to specify an appropriate semantic element (h1-h6) and independently set its size so that it is appropriate for the surrounding content.
 If no size is specified, a default size will be applied.
 
-<Canvas of={Stories.Basic}/>
+<Canvas of={Stories.Basic} />
 
 ## Props
 
@@ -22,23 +22,23 @@ If no size is specified, a default size will be applied.
 
 Each Heading level has a default size.
 
-<Canvas of={Stories.AllLevels}/>
+<Canvas of={Stories.AllLevels} />
 
 ## Sizes
 
 The default size of the Heading can overridden as xs-5xl so that it's appropriate for its surrounding context.
 
-<Canvas of={Stories.Sizes}/>
+<Canvas of={Stories.Sizes} />
 
 The `size` prop accepts an object where the properties correspond to [breakpoint tokens](?path=/docs/foundation-design-tokens--docs#breakpoints).
 
-<Canvas of={Stories.ResponsiveSizes}/>
+<Canvas of={Stories.ResponsiveSizes} />
 
 ## Colors
 
 The variant of the heading is inherited from its parent, but can be set to brand variant as well.
 
-<Canvas of={Stories.Colors}/>
+<Canvas of={Stories.Colors} />
 
 ## Component Design Tokens
 
@@ -53,7 +53,7 @@ The variant of the heading is inherited from its parent, but can be set to brand
     {(() => {
       const tokens = {
       '--heading-font-family': '--asset-fonts-brand',
-      '--heading-font-weight': '--size-font-weight-black',
+      '--heading-font-weight': '--size-font-weight-bold',
       '--heading-line-height': '--size-line-height-heading',
       };
       return Object.entries(tokens).map(([name, entry], i) => (
