@@ -40,5 +40,6 @@ export * from './components/TextInput/TextInput';
 export * from './components/TextInputInset/TextInputInset';
 export * from './components/TimePicker/TimePicker';
 export * from './components/TimePickerNative/TimePickerNative';
+export * from './components/Toast';
 export * from './components/Toggle/Toggle';
 export * from './hooks';
