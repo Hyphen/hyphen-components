@@ -9,6 +9,7 @@ export * from './components/DateInput/DateInput';
 export * from './components/DatePicker/DatePicker';
 export * from './components/Details/Details';
 export * from './components/Details/DetailsSummary';
+export * from './components/Drawer/Drawer';
 export * from './components/FormControl/FormControl';
 export * from './components/Formik/FormikCheckboxInput/FormikCheckboxInput';
 export * from './components/Formik/FormikRadioGroup/FormikRadioGroup';
