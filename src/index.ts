@@ -26,6 +26,7 @@ export * from './components/Formik/FormikToggle/FormikToggle';
 export * from './components/FormLabel/FormLabel';
 export * from './components/Heading/Heading';
 export * from './components/Icon/Icon';
+export * from './components/Modal/Modal';
 export * from './components/Pagination/Pagination';
 export * from './components/Popover/Popover';
 export * from './components/RadioGroup/RadioGroup';
