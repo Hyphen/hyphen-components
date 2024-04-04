@@ -204,7 +204,7 @@ export const Width = () => {
     setWidth(newWidth);
     openDrawer();
   };
-  const widths = ['3xl', '6xl', '7xl'];
+  const widths = ['3xl', '6xl', '100%'];
   return (
     <>
       <Box gap="sm" direction="row">
