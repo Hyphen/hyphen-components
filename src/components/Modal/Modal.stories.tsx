@@ -34,7 +34,7 @@ export const BasicUsage = () => {
         />
         <Modal.Body>Modal content</Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={closeModal}>
+          <Button variant="secondary-neutral" onClick={closeModal}>
             Cancel
           </Button>
           <Button variant="primary">Primary Action</Button>
@@ -113,7 +113,7 @@ export const WithoutHeader = () => {
       >
         <Modal.Body>Modal content</Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={closeModal}>
+          <Button variant="secondary-neutral" onClick={closeModal}>
             Cancel
           </Button>
           <Button variant="primary">Primary Action</Button>
@@ -147,7 +147,7 @@ export const FullscreenMobile = () => {
         />
         <Modal.Body>Modal content</Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={closeModal}>
+          <Button variant="secondary-neutral" onClick={closeModal}>
             Cancel
           </Button>
           <Button variant="primary">Primary Action</Button>
@@ -185,7 +185,7 @@ export const MaxWidth = () => {
         <Modal.Body>Modal body content</Modal.Body>
         <Modal.Footer>
           This is content in the modal footer
-          <Button ref={ref} onClick={closeModal}>
+          <Button variant="secondary-neutral" ref={ref} onClick={closeModal}>
             Cancel
           </Button>
         </Modal.Footer>
