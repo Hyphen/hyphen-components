@@ -1,0 +1,165 @@
+import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { Drawer } from './Drawer';
+import { Alert } from '../Alert/Alert';
+import * as Stories from './Drawer.stories';
+
+<Meta of={Stories} />
+
+# Drawer
+
+A Drawer is a panel that slides in from one edge of the viewport and overlays content on top of the page. It contains information or actions without leaving the context of the original page.
+
+<Canvas withSource="open" of={Stories.BasicUsage} />
+
+## Usage Guidelines
+
+- Use the drawer as way to achieve progressive disclosure, to reveal relevant information at the appropriate time.
+- The Drawer visibility is controlled via the `isOpen` prop, and is hidden by default. To handle closing the Drawer, provide an `onDismiss` callback that will be called when the user clicks the Overlay or Esc keyboard key.
+- When a Drawer is open, the main body is scroll-locked by default.
+- Avoid nesting Drawers to prevent usability issues.
+- The button that triggers the drawer opening should be in close proximity to the Drawer itself.
+- Drawers are appropriate for supplemental information, filters, or subtasks where it's important to keep the subtasks in the context of the main task
+
+### When not to use
+
+- To force users to complete an action before continuing. Use a [Modal](/docs/components-modal--docs) instead.
+- For small content or a few options near the original content, use a [Popover](/docs/components-popover--docs).
+
+## Content Guidelines
+
+Drawers are good for short pieces of content that are related to the main screen but not a part of it. Examples include:
+
+- Contextual help
+- Notifications or activity log
+- Simple forms or settings
+- Navigation or page table of contents
+
+## Accessibility
+
+- Use the `ariaLabel` or `ariaLabelledBy` props to properly label a drawer to provide context for users with assistive technology such as screen readers. If a drawer is announced to the user without a label, it can be confusing and difficult to navigate.
+- When the Drawer is opened, focus is trapped inside the Drawer.
+- The 'Esc' key will close the Drawer.
+- After the drawer closes, focus is returned to the element that triggered it.
+
+## Props
+
+<ArgsTable of={Drawer} />
+
+## Placement
+
+The Drawer can appear from the right (default), left, top, or bottom of the screen. When appearing from the left or right of the screen, the close Icon Button is positioned on the same side where the Drawer originates from. When appearing from the top or bottom of the screen, the close Icon Button is positioned on the right as default.
+
+<Canvas withSource="open" of={Stories.Placement} />
+
+## Drawer Header
+
+A header will be added to the drawer content if `title` is defined, or `closeButton` is `true`. If the content of the drawer is taller than the drawer height, then the content will scroll while the header remains fixed to the top.
+
+<Canvas withSource="open" of={Stories.DrawerHeader} />
+
+## Title and Close Button
+
+<Canvas withSource="open" of={Stories.TitleAndCloseButton} />
+
+## Close Button Only
+
+<Canvas withSource="open" of={Stories.CloseButtonOnly} />
+
+## Width
+
+Set the width of a Drawer to specific value for a `left` or `right` placement via `width`. The Drawer height will be 100% of the viewport, or if `containerRef` is used, 100% of the container.
+
+When `placement` is set to `top` or `bottom`, the `width` prop is ignored and the drawer will be 100% of the viewport or container.
+
+<Canvas withSource="open" of={Stories.Width} />
+
+## Height
+
+The height of Drawers with a `top` or `bottom` placement is determined by Drawer's contents. The width will be set to 100%.
+
+<Canvas withSource="open" of={Stories.Height} />
+
+## Hidden Overlay
+
+In cases where content in the drawer is supplemental to content on the main area of the page, use `hideOverlay` to allow for interaction between the areas (e.g. copy-and-paste text from main area into a form in the drawer).
+
+<Alert
+  variant="warning"
+  title="Focus Management"
+  hasIcon
+  message="If you decide to use `hideOverlay`, then you must also manage focus. Focus and page scrolling will not be locked if `hideOverlay` is true. Also, the 'Esc' key button will no longer automatically close the Drawer."
+/>
+
+<Canvas withSource="open" of={Stories.HiddenOverlay} />
+
+## Initial Focus Ref
+
+By default the first focusable element will receive focus when the drawer opens, but you can provide a ref to focus instead.
+
+<Alert
+  hasIcon
+  message="Without the initialFocusRef prop, the drawer will automatically focus on the first focusable element in it's children."
+  variant="info"
+/>
+
+<Canvas withSource="open" of={Stories.InitialFocusRef} />
+
+## Contained Drawer
+
+Render the Drawer within a containing div using `containerRef`.
+
+<Alert
+  hasIcon
+  message="When choosing to use a Drawer within a containing div, use dangerouslyBypassScrollLock to allow the content outside of the containing div to remain interactive."
+  variant="info"
+/>
+
+<Canvas withSource="open" of={Stories.ContainedDrawer} />
+
+## Theme Example
+
+The appearance of a Drawer can be customized via component design tokens.
+
+<Alert
+  hasIcon
+  message="In the example below, the containerRef prop is used to place the Drawer portal inside the container with the customized tokens"
+  variant="info"
+/>
+
+<Canvas withSource="open" of={Stories.ThemeExample} />
+
+## Component Design Tokens
+
+<table>
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>default value</th>
+    </tr>
+  </thead>
+  <tbody>
+    {(() => {
+      const tokens = {
+        '--drawer-background-color': '--color-brand-white-500',
+        '--drawer-box-shadow': '--size-box-shadow-xl',
+        '--drawer-font-color': '--color-brand-grey-100',
+        '--drawer-header-border-color': '--color-brand-grey-100',
+        '--drawer-width': '--size-width-4xl',
+        '--drawer-close-button-color': '--color-brand-grey-500',
+        '--drawer-close-button-color-hover': '--color-brand-grey-600',
+        '--drawer-close-button-box-shadow-focus': '--color-brand-grey-200',
+      };
+      return Object.entries(tokens).map(([name, entry], i) => (
+        <tr key={i}>
+          <td>
+            <code>{name}</code>
+          </td>
+          <td>
+            <code>{entry}</code>
+          </td>
+        </tr>
+      ));
+    })()}
+
+  </tbody>
+</table>
