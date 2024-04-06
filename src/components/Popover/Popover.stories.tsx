@@ -43,33 +43,6 @@ export const BasicUsage = () => {
   );
 };
 
-export const CustomClass = () => {
-  const {
-    isOpen: isPopoverOpen,
-    handleToggle: togglePopover,
-    handleClose: closePopover,
-  } = useOpenClose();
-  const popoverContent = <>Hello!</>;
-  return (
-    <div>
-      <Popover
-        content={popoverContent}
-        isOpen={isPopoverOpen}
-        placement="right"
-        contentContainerProps={{
-          padding: 'sm',
-        }}
-        className="font-color-danger"
-        onClickOutside={closePopover}
-      >
-        <Button onClick={togglePopover} variant="tertiary">
-          Toggle Popover
-        </Button>
-      </Popover>
-    </div>
-  );
-};
-
 type PopoverStylingType = {
   value: string;
   label: string;
@@ -92,11 +65,11 @@ export const PopoverStyling = () => {
   });
   const backgroundOptions = [
     { value: 'primary-500', label: 'Primary 500' },
-    { value: 'secondary-500', label: 'Secondary 500' },
-    { value: 'tertiary-500', label: 'Tertiary 500' },
-    { value: 'warning-500', label: 'Warning 500' },
-    { value: 'info-500', label: 'Info 500' },
-    { value: 'danger-500', label: 'Danger 500' },
+    { value: 'grey-500', label: 'Grey 500' },
+    { value: 'purple-500', label: 'Purple 500' },
+    { value: 'yellow-500', label: 'Yellow 500' },
+    { value: 'blue-500', label: 'Blue 500' },
+    { value: 'red-500', label: 'Red 500' },
   ];
   const fontColorOptions = [
     { value: 'black-500', label: 'Black 500' },
@@ -126,7 +99,7 @@ export const PopoverStyling = () => {
             radius: popoverRadius!.value,
           }}
         >
-          <Button onClick={togglePopover} variant="tertiary">
+          <Button onClick={togglePopover} variant="secondary">
             Toggle Popover
           </Button>
         </Popover>
@@ -225,13 +198,13 @@ export const Placement = () => {
             placement={position}
             contentContainerProps={{
               padding: 'sm',
-              background: 'secondary-200',
+              background: 'blue-200',
               color: 'white-500',
             }}
           >
             <Button
               onClick={() => handleOpenPopover(position)}
-              variant="tertiary"
+              variant="secondary"
             >
               {position}
             </Button>
@@ -264,7 +237,7 @@ export const WithAPortal = () => {
         placement="right-start"
         contentContainerProps={{
           padding: 'md',
-          background: 'danger-200',
+          background: 'red-200',
           color: 'primary-500',
         }}
         withPortal
@@ -304,13 +277,13 @@ export const HoverTrigger = () => {
         placement="right-start"
         contentContainerProps={{
           padding: 'md',
-          background: 'tertiary-500',
+          background: 'blue-500',
         }}
       >
         <Button
           onMouseOver={openPopover}
           onMouseOut={closePopover}
-          variant="tertiary"
+          variant="secondary"
         >
           Hover Me
         </Button>
@@ -344,10 +317,10 @@ export const RespondToOutsideClicks = () => {
         onClickOutside={closePopover}
         contentContainerProps={{
           padding: 'md',
-          background: 'success-500',
+          background: 'green-500',
         }}
       >
-        <Button onClick={togglePopover} variant="tertiary">
+        <Button onClick={togglePopover} variant="secondary">
           Toggle Popover
         </Button>
       </Popover>
@@ -394,7 +367,7 @@ export const TrappingFocus = () => {
         onClickOutside={closePopover}
         trapFocus
       >
-        <Button onClick={togglePopover} variant="tertiary">
+        <Button onClick={togglePopover} variant="secondary">
           Toggle Popover
         </Button>
       </Popover>
@@ -428,7 +401,7 @@ export const WithoutAnArrow = () => {
         onClickOutside={closePopover}
         hasArrow={false}
       >
-        <Button onClick={togglePopover} variant="tertiary">
+        <Button onClick={togglePopover} variant="secondary">
           Toggle Popover
         </Button>
       </Popover>
@@ -464,7 +437,7 @@ export const OffsetDistance = () => {
           hasArrow={false}
           offsetFromTarget={offset}
         >
-          <Button onClick={togglePopover} variant="tertiary">
+          <Button onClick={togglePopover} variant="secondary">
             Toggle Popover
           </Button>
         </Popover>

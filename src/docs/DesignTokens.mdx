@@ -34,7 +34,7 @@ Alias tokens relate to a specific context or abstraction. Aliases help communica
 
 ```css
 --color-brand-primary-base: #008433; /* alias */
---form-control-background-color: --color-brand-white-base; /* common */
+--form-control-background-color: --color-brand-white-500; /* common */
 ```
 
 ### Component Specific Tokens
@@ -163,81 +163,96 @@ The following breakpoints are used in utility classes, but you can use them to m
 ## Color
 
 <ColorPalette>
-
-<ColorItem
-  title="color-brand-white"
-  subtitle="All whites"
-  colors={Object.keys(color.brand.white).reduce((acc, item, i) => {
-    acc[item] = Object.keys(color.brand.white).map(g => color.brand.white[g].value)[i];
-    return acc;
-  }, {})}
-/>
-
-<ColorItem
-  title="color-brand-black"
-  subtitle="Black"
-  colors={Object.keys(color.brand.black).reduce((acc, item, i) => {
-    acc[item] = Object.keys(color.brand.black).map(g => color.brand.black[g].value)[i];
-    return acc;
-  }, {})}
-/>
-
-<ColorItem
-  title="color-brand-grey"
-  subtitle="All greys"
-  colors={Object.keys(color.brand.grey).reduce((acc, item, i) => {
-    acc[item] = Object.keys(color.brand.grey).map(g => color.brand.grey[g].value)[i];
-    return acc;
-  }, {})}
-/>
-<ColorItem
-  title="color-brand-primary"
-  subtitle="Primary colors"
-  colors={Object.keys(color.brand.primary).reduce((acc, item, i) => {
-    acc[item] = Object.keys(color.brand.primary).map(g => color.brand.primary[g].value)[i];
-    return acc;
-  }, {})}
-/>
-<ColorItem
-  title="color-brand-secondary"
-  subtitle="secondary colors"
-  colors={Object.keys(color.brand.secondary).reduce((acc, item, i) => {
-    acc[item] = Object.keys(color.brand.secondary).map(g => color.brand.secondary[g].value)[i];
-    return acc;
-  }, {})}
-/>
-<ColorItem
-  title="color-brand-tertiary"
-  subtitle="tertiary colors"
-  colors={Object.keys(color.brand.tertiary).reduce((acc, item, i) => {
-    acc[item] = Object.keys(color.brand.tertiary).map(g => color.brand.tertiary[g].value)[i];
-    return acc;
-  }, {})}
-/>
-<ColorItem
-  title="color-brand-info"
-  subtitle="info colors"
-  colors={Object.keys(color.brand.info).reduce((acc, item, i) => {
-    acc[item] = Object.keys(color.brand.info).map(g => color.brand.info[g].value)[i];
-    return acc;
-  }, {})}
-/>
-<ColorItem
-  title="color-brand-warning"
-  subtitle="warning colors"
-  colors={Object.keys(color.brand.warning).reduce((acc, item, i) => {
-    acc[item] = Object.keys(color.brand.warning).map(g => color.brand.warning[g].value)[i];
-    return acc;
-  }, {})}
-/>
-<ColorItem
-  title="color-brand-danger"
-  subtitle="danger colors"
-  colors={Object.keys(color.brand.danger).reduce((acc, item, i) => {
-    acc[item] = Object.keys(color.brand.danger).map(g => color.brand.danger[g].value)[i];
-    return acc;
-  }, {})}
-/>
+  <ColorItem
+    title="color-brand-white"
+    subtitle="All whites"
+    colors={Object.keys(color.brand.white).reduce((acc, item, i) => {
+      acc[item] = Object.keys(color.brand.white).map(
+        (g) => color.brand.white[g].value
+      )[i];
+      return acc;
+    }, {})}
+  />
+  <ColorItem
+    title="color-brand-black"
+    subtitle="Black"
+    colors={Object.keys(color.brand.black).reduce((acc, item, i) => {
+      acc[item] = Object.keys(color.brand.black).map(
+        (g) => color.brand.black[g].value
+      )[i];
+      return acc;
+    }, {})}
+  />
+  <ColorItem
+    title="color-brand-magenta"
+    subtitle="magenta colors"
+    colors={Object.keys(color.brand.magenta).reduce((acc, item, i) => {
+      acc[item] = Object.keys(color.brand.magenta).map(
+        (g) => color.brand.magenta[g].value
+      )[i];
+      return acc;
+    }, {})}
+  />
+  <ColorItem
+    title="color-brand-grey"
+    subtitle="All greys"
+    colors={Object.keys(color.brand.grey).reduce((acc, item, i) => {
+      acc[item] = Object.keys(color.brand.grey).map(
+        (g) => color.brand.grey[g].value
+      )[i];
+      return acc;
+    }, {})}
+  />
+  <ColorItem
+    title="color-brand-primary"
+    subtitle="Primary colors"
+    colors={Object.keys(color.brand.primary).reduce((acc, item, i) => {
+      acc[item] = Object.keys(color.brand.primary).map(
+        (g) => color.brand.primary[g].value
+      )[i];
+      return acc;
+    }, {})}
+  />
+  <ColorItem
+    title="color-brand-blue"
+    subtitle="blue colors"
+    colors={Object.keys(color.brand.blue).reduce((acc, item, i) => {
+      acc[item] = Object.keys(color.brand.blue).map(
+        (g) => color.brand.blue[g].value
+      )[i];
+      return acc;
+    }, {})}
+  />
+  <ColorItem
+    title="color-brand-purple"
+    subtitle="purple colors"
+    colors={Object.keys(color.brand.purple).reduce((acc, item, i) => {
+      acc[item] = Object.keys(color.brand.purple).map(
+        (g) => color.brand.purple[g].value
+      )[i];
+      return acc;
+    }, {})}
+  />
+  <ColorItem
+    title="color-brand-yellow"
+    subtitle="yellow colors"
+    colors={Object.keys(color.brand.yellow).reduce((acc, item, i) => {
+      acc[item] = Object.keys(color.brand.yellow).map(
+        (g) => color.brand.yellow[g].value
+      )[i];
+      return acc;
+    }, {})}
+  />
+  <ColorItem
+    title="color-brand-red"
+    subtitle="red colors"
+    colors={Object.keys(color.brand.red).reduce((acc, item, i) => {
+      acc[item] = Object.keys(color.brand.red).map(
+        (g) => color.brand.red[g].value
+      )[i];
+      return acc;
+    }, {})}
+  />
 </ColorPalette>
 
 ## Font Family
@@ -290,7 +305,13 @@ Use these tokens for `font-size`. They are defined in `rem`, which means they wi
           <code>{name}</code>
         </td>
         <td>{entry.value}</td>
-        <td>{name === 'base' ? '16' : name === 'inherit' ? '' : entry.original.value * 16}</td>
+        <td>
+          {name === 'base'
+            ? '16'
+            : name === 'inherit'
+            ? ''
+            : entry.original.value * 16}
+        </td>
       </tr>
     ))}
   </tbody>
@@ -365,24 +386,27 @@ Spacing tokens are intended for use with `margin` and `padding` properties. They
     </tr>
   </thead>
   <tbody>
-    {Object.entries(size.spacing).map(([name, entry], i) => (
-      <tr key={i}>
-        <td>
-          <code>{`size-spacing-${name}`}</code>
-        </td>
-        <td>
-          <code>{name}</code>
-        </td>
-        <td>{entry.value}</td>
-        <td>
-          {name === 'base'
-            ? '16'
-            : ['inherit', 'auto'].includes(name)
-            ? ''
-            : entry.original.value * 16}
-        </td>
-      </tr>
-    ))}
+    {Object.entries(size.spacing).map(([name, entry], i) => {
+      console.log(entry.original.value);
+      return (
+        <tr key={i}>
+          <td>
+            <code>{`size-spacing-${name}`}</code>
+          </td>
+          <td>
+            <code>{name}</code>
+          </td>
+          <td>{entry.value}</td>
+          <td>
+            {name === 'base'
+              ? '16'
+              : ['inherit', 'auto'].includes(name)
+              ? ''
+              : entry.original.value * 16}
+          </td>
+        </tr>
+      );
+    })}
   </tbody>
 </table>
 

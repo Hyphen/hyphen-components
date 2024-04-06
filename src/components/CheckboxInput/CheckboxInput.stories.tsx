@@ -2,7 +2,6 @@ import React, { ChangeEvent, useState } from 'react';
 import type { Meta } from '@storybook/react';
 import { CheckboxInput } from './CheckboxInput';
 import { Box } from '../Box/Box';
-import { FormLabel } from '../FormLabel/FormLabel';
 
 const meta: Meta<typeof CheckboxInput> = {
   title: 'Components/CheckboxInput',
@@ -211,34 +210,6 @@ export const HiddenLabel = () => {
       onChange={(event) => setValue(event.target.checked)}
       isChecked={value}
     />
-  );
-};
-
-export const CustomLabel = () => {
-  const [value, setValue] = useState(false);
-  return (
-    <Box direction="row" alignItems="center">
-      <CheckboxInput
-        id="customLabel"
-        label="This label is custom"
-        hideLabel
-        onChange={(event) => setValue(event.target.checked)}
-        isChecked={value}
-      />
-      <FormLabel inputId="customLabel">
-        <Box display="block" fontSize="xl" color="secondary-500">
-          This is custom, look at this{' '}
-          <a
-            href="https://hyphen.ai"
-            onClick={() => alert('hey you clicked me!')}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Link
-          </a>
-        </Box>
-      </FormLabel>
-    </Box>
   );
 };
 

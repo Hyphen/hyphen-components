@@ -1,6 +1,7 @@
 .hyphen-components__variables__form-control {
   // ----GLOBALS----
-  --INTERNAL_form-control-box-shadow-focus: 0 0 0 4px var(--color-brand-primary-200);
+  --INTERNAL_form-control-box-shadow-focus: 0 0 0 2px
+    var(--color-brand-grey-200);
   --INTERNAL_form-control-label-margin: var(--size-spacing-xs);
   --INTERNAL_form-control-help-margin: var(--size-spacing-2xs);
   --INTERNAL_form-control-line-height: var(--size-line-height-input);
@@ -11,51 +12,56 @@
 
   // --SIZES--
 
-  // x-small
-  --INTERNAL_form-control-size-xs-border-radius: var(--size-border-radius-sm);
-  --INTERNAL_form-control-size-xs-font-size: var(--size-font-xs);
-  --INTERNAL_form-control-size-xs-padding: var(--size-spacing-2xs);
-
   // small
   --INTERNAL_form-control-size-sm-border-radius: var(--size-border-radius-sm);
-  --INTERNAL_form-control-size-sm-font-size: var(--size-font-sm);
-  --INTERNAL_form-control-size-sm-padding: var(--size-spacing-xs);
+  --INTERNAL_form-control-size-sm-font-size: var(--size-font-xs);
+  --INTERNAL_form-control-size-sm-padding: var(--size-spacing-sm);
 
   // medium (default)
   --INTERNAL_form-control-size-md-label-size: var(--size-font-sm);
-  --INTERNAL_form-control-size-md-border-radius: var(--size-border-radius-md);
-  --INTERNAL_form-control-size-md-font-size: var(--size-font-md);
-  --INTERNAL_form-control-size-md-padding: var(--size-spacing-sm);
+  --INTERNAL_form-control-size-md-border-radius: var(--size-border-radius-sm);
+  --INTERNAL_form-control-size-md-font-size: var(--size-font-sm);
+  --INTERNAL_form-control-size-md-padding: var(--size-spacing-lg);
 
   // large
-  --INTERNAL_form-control-size-lg-border-radius: var(--size-border-radius-md);
-  --INTERNAL_form-control-size-lg-font-size: var(--size-font-lg);
-  --INTERNAL_form-control-size-lg-padding: var(--size-spacing-md);
+  --INTERNAL_form-control-size-lg-border-radius: var(--size-border-radius-sm);
+  --INTERNAL_form-control-size-lg-font-size: var(--size-font-md);
+  --INTERNAL_form-control-size-lg-padding: var(--size-spacing-lg);
 
   // --COLORS--
-  --INTERNAL_form-control-background-color: var(--color-brand-white-base);
+  --INTERNAL_form-control-background-color: var(--color-brand-white-500);
   --INTERNAL_form-control-background-color-disabled: var(--color-brand-grey-50);
-  --INTERNAL_form-control-background-color-error: var(--color-brand-danger-50);
-  --INTERNAL_form-control-background-color-selected: var(--color-brand-primary-50);
-  --INTERNAL_form-control-border-color: var(--color-brand-grey-100);
-  --INTERNAL_form-control-border-color-error: var(--color-brand-danger-100);
-  --INTERNAL_form-control-border-color-error-disabled: var(--color-brand-danger-100);
-  --INTERNAL_form-control-border-color-focus: var(--color-brand-grey-600);
-  --INTERNAL_form-control-border-color-hover: var(--color-brand-grey-300);
+  --INTERNAL_form-control-background-color-error: var(--color-brand-red-50);
+  --INTERNAL_form-control-background-color-selected: var(
+    --color-brand-primary-50
+  );
+  --INTERNAL_form-control-border-color: var(--color-brand-grey-200);
+  --INTERNAL_form-control-border-color-error: var(--color-brand-red-100);
+  --INTERNAL_form-control-border-color-error-disabled: var(
+    --color-brand-red-100
+  );
+  --INTERNAL_form-control-border-color-focus: var(--color-brand-grey-300);
+  --INTERNAL_form-control-border-color-hover: var(--color-brand-grey-400);
   --INTERNAL_form-control-border-color-selected: var(--color-brand-primary-500);
-  --INTERNAL_form-control-border-color-selected-error: var(--color-brand-danger-500);
-  --INTERNAL_form-control-border-color-selected-hover: var(--color-brand-primary-500);
+  --INTERNAL_form-control-border-color-selected-error: var(
+    --color-brand-red-500
+  );
+  --INTERNAL_form-control-border-color-selected-hover: var(
+    --color-brand-primary-500
+  );
   --INTERNAL_form-control-font-color: var(--color-brand-dark-base);
   --INTERNAL_form-control-font-color-disabled: var(--color-brand-grey-300);
-  --INTERNAL_form-control-font-color-error: var(--color-brand-danger-500);
-  --INTERNAL_form-control-font-color-error-disabled: var(--color-brand-danger-200);
+  --INTERNAL_form-control-font-color-error: var(--color-brand-red-500);
+  --INTERNAL_form-control-font-color-error-disabled: var(--color-brand-red-200);
   --INTERNAL_form-control-description-color: var(--color-brand-grey-600);
   --INTERNAL_form-control-icon-color: var(--color-brand-grey-300);
   --INTERNAL_form-control-icon-color-hover: var(--color-brand-grey);
   --INTERNAL_form-control-placeholder-color: var(--color-brand-grey-300);
 
   // ----RADIO GROUP----
-  --INTERNAL_form-control-radio-group-description-spacing: var(--size-spacing-xs);
+  --INTERNAL_form-control-radio-group-description-spacing: var(
+    --size-spacing-xs
+  );
   --INTERNAL_form-control-radio-group-options-spacing: var(--size-spacing-md);
 
   // ----SELECT INPUT----

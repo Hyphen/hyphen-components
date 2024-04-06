@@ -2,7 +2,6 @@ import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
 import { Popover } from './Popover';
 import * as Stories from './Popover.stories';
 
-
 <Meta of={Stories} />
 
 # Popover
@@ -14,7 +13,7 @@ of uses for a popover include:
 2. Tooltips
 3. Context Menus
 
-<Canvas withSource="open" of={Stories.BasicUsage}/>
+<Canvas withSource="open" of={Stories.BasicUsage} />
 
 The popover requires a `children` node that will act as a trigger, as well as a `content` prop that has the contents of the Popover.
 
@@ -27,20 +26,13 @@ items, however are fully customizable.
 
 <ArgsTable of={Popover} />
 
-## Custom Class
-
-You can apply a custom class to your popover with the `className` prop. Here we have added font color to the text in the popover.
-
-<Canvas withSource="open" of={Stories.CustomClass}/>
-
-
 ## Popover Styling
 
 Because the rendered Popover is powered by our `Box` component ([Read More](/?path=/docs/components-box-overview--background)) you
 can use all known box props to style it. The below example includes some of the basics, but is not representative of
 the entire gamut of styling options.
 
-<Canvas withSource="open" of={Stories.PopoverStyling}/>
+<Canvas withSource="open" of={Stories.PopoverStyling} />
 
 ## Placement
 
@@ -48,7 +40,7 @@ Based on layout, it is beneficial to place the popover in a variety of positions
 Note that in case where the popover is in danger of overflowing, the component will fallback to `auto` in order to
 prevent the content from getting cut off.
 
-<Canvas withSource="open" of={Stories.Placement}/>
+<Canvas withSource="open" of={Stories.Placement} />
 
 ## With a Portal
 
@@ -62,7 +54,7 @@ use a (React Portal)[https://reactjs.org/docs/portals.html].
 By default the element is portaled into the document `body` but you can use the `portalTarget` prop
 in order to render the element anywhere on the page.
 
-<Canvas withSource="open" of={Stories.WithAPortal}/>
+<Canvas withSource="open" of={Stories.WithAPortal} />
 
 ## Hover Trigger
 
@@ -72,7 +64,7 @@ this can be done easily by attaching mouse events to the trigger element as show
 
 NOTE: this should be use sparingly since context dependent on hover, isn't an optimal experience for mobile users.
 
-<Canvas withSource="open" of={Stories.HoverTrigger}/>
+<Canvas withSource="open" of={Stories.HoverTrigger} />
 
 ## Respond to Outside Clicks
 
@@ -87,7 +79,7 @@ You can use the callback to set `isOpen` to false.
 NOTE: the click event is attached to the `document.body`, but will not bubble up the event
 in cases where the click target includes the Popover trigger or content nodes.
 
-<Canvas withSource="open" of={Stories.RespondToOutsideClicks}/>
+<Canvas withSource="open" of={Stories.RespondToOutsideClicks} />
 
 ## Trapping Focus
 
@@ -97,13 +89,13 @@ users from focusing on elements that might be behind or outside the Popover cont
 
 Use the `trapFocus` prop to constrain focus to popover content elements.
 
-<Canvas withSource="open" of={Stories.TrappingFocus}/>
+<Canvas withSource="open" of={Stories.TrappingFocus} />
 
 ## Without An Arrow
 
 Render the popover with no arrow by passing `hasArrow` false.
 
-<Canvas withSource="open" of={Stories.WithoutAnArrow}/>
+<Canvas withSource="open" of={Stories.WithoutAnArrow} />
 
 ## Offset Distance
 

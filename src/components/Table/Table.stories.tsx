@@ -871,13 +871,13 @@ export const ComponentAsColumnHeader = () =>
       {
         id: 1,
         color: 'red',
-        status: <Badge message="danger" variant="danger" />,
+        status: <Badge message="danger" variant="red" />,
       },
-      { id: 2, color: 'blue', status: <Badge message="info" variant="info" /> },
+      { id: 2, color: 'blue', status: <Badge message="info" variant="blue" /> },
       {
         id: 3,
         color: 'green',
-        status: <Badge message="success" variant="success" />,
+        status: <Badge message="success" variant="green" />,
       },
     ];
     return <Table rowKey="id" columns={columnConfig} rows={tableData} />;

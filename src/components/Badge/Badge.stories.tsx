@@ -10,20 +10,17 @@ const meta: Meta<typeof Badge> = {
 
 export default meta;
 
-export const Overview = () => (
-  <Badge variant="default" message="Hello world!" />
-);
+export const Overview = () => <Badge variant="grey" message="Hello world!" />;
 
 export const Variants = () => {
   const variants = [
-    'default',
+    'grey',
     'primary',
-    'secondary',
-    'tertiary',
-    'info',
-    'success',
-    'warning',
-    'danger',
+    'purple',
+    'blue',
+    'green',
+    'yellow',
+    'red',
   ] as BadgeVariant[];
   return (
     <Box direction="row" gap="sm">
@@ -40,13 +37,11 @@ export const Sizes = () => (
       <Badge size="sm" message="Small" />
       <Badge size="md" message="Medium" />
       <Badge size="lg" message="Large" />
-      <Badge size="xl" message="X-Large" />
       <Badge
         size={{
           base: 'sm',
           tablet: 'md',
           desktop: 'lg',
-          hd: 'xl',
         }}
         message="Responsive"
       />

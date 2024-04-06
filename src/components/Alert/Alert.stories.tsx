@@ -1,7 +1,7 @@
 import { Alert } from './Alert';
 import { AlertVariant } from './Alert.types';
 import { Button } from '../Button/Button';
-import { Heading } from '../Heading/Heading';
+
 import type { Meta } from '@storybook/react';
 import React from 'react';
 import { useState } from 'react';
@@ -53,39 +53,6 @@ export const Variants = () =>
     );
   })();
 
-export const CustomJSX = () =>
-  (() => {
-    const myMessage = (
-      <>
-        <Heading as="h3" size="xl">
-          Oops!
-        </Heading>
-        <p>Looks like something went wrong.</p>
-
-        <Button size="sm" className="m-top-sm">
-          Click this button to fix it!
-        </Button>
-      </>
-    );
-    return <Alert message={myMessage} variant="danger" />;
-  })();
-
-export const RenderProp = () =>
-  (() => {
-    const renderMyMessage = () => (
-      <>
-        <Heading as="h3" size="xl">
-          Oops!
-        </Heading>
-        <p>Looks like something went wrong. But I'm using a render function.</p>
-        <Button size="sm" className="m-top-sm">
-          Click this button to fix it!
-        </Button>
-      </>
-    );
-    return <Alert render={renderMyMessage} variant="danger" />;
-  })();
-
 export const Closable = () => {
   const [isAlertTwoShowing, setAlertTwoShowing] = useState(true);
   const [isAlertThreeShowing, setAlertThreeShowing] = useState(true);
@@ -133,54 +100,3 @@ export const Closable = () => {
     </>
   );
 };
-
-export const Compact = () => (
-  <Alert message="Compact Alerts have less padding" variant="info" isCompact />
-);
-
-export const CustomTheme = () => (
-  <>
-    <div
-      style={
-        {
-          '--color-brand-info-50': '#CFC5E9',
-          '--color-brand-info-500': '#603FB5',
-          '--alert-border-width': '0',
-        } as any
-      }
-    >
-      <Alert
-        message="Here we've overwritten base token values so that the alert inherits new values."
-        title="Custom Theme"
-        variant="info"
-        hasIcon
-        className="m-bottom-md"
-      />
-    </div>
-    <div
-      style={
-        {
-          '--alert-info-font-color': '#603FB5',
-          '--alert-info-background-color': 'white',
-          '--alert-info-icon-color': '#603FB5',
-          '--alert-border-width': 'var(--size-border-xs)',
-          '--alert-info-border-color': 'var(--alert-info-icon-color)',
-        } as any
-      }
-    >
-      <Alert
-        message="Here we've overwritten ONLY the values for the 'info' alert variant so other components will be unaffected"
-        title="Custom Theme"
-        variant="info"
-        hasIcon
-        className="m-bottom-md"
-      />
-      <Alert
-        message="An alert that uses default token values"
-        variant="warning"
-        title="Not Themed"
-        hasIcon
-      />
-    </div>
-  </>
-);

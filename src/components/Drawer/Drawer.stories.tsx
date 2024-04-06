@@ -354,7 +354,7 @@ export const ContainedDrawer = () => {
       height="500px"
       id="myContainer"
       ref={containerRef}
-      background="secondary-900"
+      background="blue-900"
       padding="lg"
       overflow="hidden"
     >

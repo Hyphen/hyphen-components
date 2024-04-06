@@ -11,17 +11,16 @@ import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
 import styles from './Badge.module.scss';
 import { Box } from '../Box/Box';
 
-export type BadgeSize = 'sm' | 'md' | 'lg' | 'xl';
+export type BadgeSize = 'sm' | 'md' | 'lg';
 
 export type BadgeVariant =
-  | 'info'
+  | 'grey'
   | 'primary'
-  | 'success'
-  | 'secondary'
-  | 'tertiary'
-  | 'warning'
-  | 'danger'
-  | 'default';
+  | 'green'
+  | 'purple'
+  | 'yellow'
+  | 'blue'
+  | 'red';
 
 export type BadgeColorAttributes = { font: FontColor; background: BrandColor };
 
@@ -51,20 +50,19 @@ export interface BadgeProps {
 
 export const BADGE_COLOR_MAP: { [key in BadgeVariant]: BadgeColorAttributes } =
   {
-    info: { font: 'grey-600', background: 'info-100' },
+    blue: { font: 'grey-600', background: 'blue-100' },
     primary: { font: 'grey-600', background: 'primary-100' },
-    success: { font: 'grey-600', background: 'success-100' },
-    secondary: { font: 'grey-600', background: 'secondary-100' },
-    warning: { font: 'grey-600', background: 'warning-100' },
-    tertiary: { font: 'grey-600', background: 'tertiary-100' },
-    danger: { font: 'grey-600', background: 'danger-100' },
-    default: { font: 'grey-600', background: 'grey-100' },
+    green: { font: 'grey-600', background: 'green-100' },
+    red: { font: 'grey-600', background: 'red-100' },
+    purple: { font: 'grey-600', background: 'purple-100' },
+    grey: { font: 'grey-600', background: 'grey-100' },
+    yellow: { font: 'grey-600', background: 'yellow-100' },
   };
 
 export const Badge: FC<BadgeProps> = ({
   className = '',
   message = '',
-  variant = 'default',
+  variant = 'grey',
   size = 'md',
   ...restProps
 }) => {

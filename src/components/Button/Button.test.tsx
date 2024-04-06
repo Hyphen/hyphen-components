@@ -286,12 +286,12 @@ describe('Button', () => {
         render(<Button isLoading>Button is loading</Button>);
         const spinnerElement = document.getElementsByClassName('spinner')[0];
         expect(spinnerElement).toBeInTheDocument();
-        expect(spinnerElement).toHaveClass('font-color-grey');
+        expect(spinnerElement).toHaveClass('font-color-white');
       });
 
-      test('it renders the grey spinning indicator if button variant is secondary-neutral', () => {
+      test('it renders the grey spinning indicator if button variant is secondary', () => {
         render(
-          <Button isLoading variant="secondary-neutral">
+          <Button isLoading variant="secondary">
             Button is loading
           </Button>
         );
@@ -316,9 +316,9 @@ describe('Button', () => {
         expect(spinnerElement).toHaveClass('font-color-white');
       });
 
-      test('it renders white spinning indicator when button is primary-danger', () => {
+      test('it renders white spinning indicator when button is danger', () => {
         render(
-          <Button variant="primary-danger" isLoading>
+          <Button variant="danger" isLoading>
             Button is loading
           </Button>
         );
@@ -347,16 +347,15 @@ describe('Button', () => {
         render(<Button>primary</Button>);
 
         expect(screen.getByText('primary').closest('button')).toHaveClass(
-          'primary-neutral'
+          'primary'
         );
       });
 
       const variants = [
         'primary',
-        'success',
+        'secondary',
+        'tertiary',
         'danger',
-        'light',
-        'dark',
       ] as ButtonVariant[];
       variants.forEach((variant) => {
         test(`It renders component with variant: ${variant} when passed`, () => {

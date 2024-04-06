@@ -67,19 +67,19 @@ const renderToastIcon = (toast: Toast) => {
 
   if (type === 'success') {
     iconName = 'c-check';
-    iconColor = 'success-300';
+    iconColor = 'green-300';
   }
 
   if (type === 'error') {
     iconName = 'c-warning';
-    iconColor = 'danger-300';
+    iconColor = 'red-300';
   }
 
   const icon =
     type !== 'loading' ? (
       <Icon name={iconName} color={iconColor} />
     ) : (
-      <Spinner variant="grey" />
+      <Spinner variant="blue" />
     );
 
   // eslint-disable-next-line consistent-return

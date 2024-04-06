@@ -3,17 +3,16 @@ import { render, screen } from '@testing-library/react';
 import { Badge, BadgeSize, BadgeVariant } from './Badge';
 
 export const BADGE_VARIANTS: BadgeVariant[] = [
-  'info',
+  'grey',
   'primary',
-  'success',
-  'secondary',
-  'tertiary',
-  'warning',
-  'danger',
-  'default',
+  'purple',
+  'blue',
+  'green',
+  'yellow',
+  'red',
 ];
 
-export const BADGE_SIZES: BadgeSize[] = ['sm', 'md', 'lg', 'xl'];
+export const BADGE_SIZES: BadgeSize[] = ['sm', 'md', 'lg'];
 
 describe('Badge', () => {
   test('Label correctly renders with base props', () => {
@@ -54,7 +53,7 @@ describe('Badge', () => {
             base: 'sm',
             tablet: 'md',
             desktop: 'lg',
-            hd: 'xl',
+            hd: 'sm',
           }}
           message="badge"
         >
@@ -67,7 +66,7 @@ describe('Badge', () => {
       expect(badge.getAttribute('class')).toContain('size-sm');
       expect(badge.getAttribute('class')).toContain('size-md-tablet');
       expect(badge.getAttribute('class')).toContain('size-lg-desktop');
-      expect(badge.getAttribute('class')).toContain('size-xl-hd');
+      expect(badge.getAttribute('class')).toContain('size-sm-hd');
     });
   });
 });
