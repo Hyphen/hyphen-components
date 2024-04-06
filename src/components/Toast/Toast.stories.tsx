@@ -211,16 +211,16 @@ export const BasicTypes = () =>
           Basic Types
         </Box>
         <Box gap="md" direction="row">
-          <Button onClick={() => handleClick('blank')} variant="tertiary">
+          <Button onClick={() => handleClick('blank')} variant="secondary">
             Default
           </Button>
-          <Button onClick={() => handleClick('error')} variant="tertiary">
+          <Button onClick={() => handleClick('error')} variant="secondary">
             Error
           </Button>
-          <Button onClick={() => handleClick('success')} variant="tertiary">
+          <Button onClick={() => handleClick('success')} variant="secondary">
             Success
           </Button>
-          <Button onClick={() => handleClick('loading')} variant="tertiary">
+          <Button onClick={() => handleClick('loading')} variant="secondary">
             Loading
           </Button>
         </Box>

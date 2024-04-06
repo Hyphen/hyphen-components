@@ -1,8 +1,8 @@
 @import '@hyphen/hyphen-design-tokens/build/scss/variables-size';
 
 @mixin thumb-size-sm {
-  width: calc(var(--size-spacing-md) - 4px);
-  height: calc(var(--size-spacing-md) - 4px);
+  width: calc(var(--size-spacing-2xl) - 4px);
+  height: calc(var(--size-spacing-2xl) - 4px);
 }
 
 %thumb-size-sm {
@@ -14,8 +14,8 @@
 }
 
 @mixin thumb-size-md {
-  width: calc(var(--size-spacing-lg) - 4px);
-  height: calc(var(--size-spacing-lg) - 4px);
+  width: calc(var(--size-spacing-3xl) - 4px);
+  height: calc(var(--size-spacing-3xl) - 4px);
 }
 
 %thumb-size-md {
@@ -27,8 +27,8 @@
 }
 
 @mixin thumb-size-lg {
-  width: calc(var(--size-spacing-xl) - 4px);
-  height: calc(var(--size-spacing-xl) - 4px);
+  width: calc(var(--size-spacing-4xl) - 4px);
+  height: calc(var(--size-spacing-4xl) - 4px);
 }
 
 %thumb-size-lg {
@@ -40,9 +40,9 @@
 }
 
 @mixin track-size-sm {
-  min-width: 1.5rem;
-  width: 1.5rem;
-  height: var(--size-spacing-md);
+  min-width: 2rem;
+  width: 2rem;
+  height: var(--size-spacing-2xl);
 }
 
 %track-size-sm {
@@ -56,7 +56,7 @@
 @mixin track-size-md {
   min-width: 2.5rem;
   width: 2.5rem;
-  height: var(--size-spacing-lg);
+  height: var(--size-spacing-3xl);
 }
 
 %track-size-md {
@@ -70,7 +70,7 @@
 @mixin track-size-lg {
   min-width: 3.5rem;
   width: 3.5rem;
-  height: var(--size-spacing-xl);
+  height: var(--size-spacing-4xl);
 }
 
 %track-size-lg {
@@ -181,7 +181,10 @@
   padding: 2px;
 
   &.error {
-    background-color: var(--toggle-background-color-error, var(--color-brand-danger-500));
+    background-color: var(
+      --toggle-background-color-error,
+      var(--color-brand-red-500)
+    );
   }
 }
 
@@ -197,83 +200,94 @@
   overflow: hidden;
   white-space: nowrap;
 
-  &:checked+.toggle-track {
-    background-color: var(--toggle-background-color-checked, var(--color-brand-secondary-300));
+  &:checked + .toggle-track {
+    background-color: var(
+      --toggle-background-color-checked,
+      var(--color-brand-green-500)
+    );
   }
 
-  &:checked+.toggle-track.error {
-    background-color: var(--toggle-background-color-error, var(--color-brand-danger-500));
+  &:checked + .toggle-track.error {
+    background-color: var(
+      --toggle-background-color-error,
+      var(--color-brand-red-500)
+    );
   }
 
-  &:checked+.toggle-track .toggle-thumb.thumb-size-sm {
-    transform: translateX(0.5rem);
+  &:checked + .toggle-track .toggle-thumb.thumb-size-sm {
+    transform: translateX(0.75rem);
   }
 
-  &:checked+.toggle-track .toggle-thumb.thumb-size-md {
+  &:checked + .toggle-track .toggle-thumb.thumb-size-md {
     transform: translateX(1rem);
   }
 
-  &:checked+.toggle-track .toggle-thumb.thumb-size-lg {
+  &:checked + .toggle-track .toggle-thumb.thumb-size-lg {
     transform: translateX(1.5rem);
   }
 
   @media (min-width: $size-breakpoint-tablet) {
-    &:checked+.toggle-track .toggle-thumb.thumb-size-sm-tablet {
+    &:checked + .toggle-track .toggle-thumb.thumb-size-sm-tablet {
       transform: translateX(0.5rem);
     }
 
-    &:checked+.toggle-track .toggle-thumb.thumb-size-md-tablet {
+    &:checked + .toggle-track .toggle-thumb.thumb-size-md-tablet {
       transform: translateX(1rem);
     }
 
-    &:checked+.toggle-track .toggle-thumb.thumb-size-lg-tablet {
+    &:checked + .toggle-track .toggle-thumb.thumb-size-lg-tablet {
       transform: translateX(1.5rem);
     }
   }
 
   @media (min-width: $size-breakpoint-desktop) {
-    &:checked+.toggle-track .toggle-thumb.thumb-size-sm-desktop {
+    &:checked + .toggle-track .toggle-thumb.thumb-size-sm-desktop {
       transform: translateX(0.5rem);
     }
 
-    &:checked+.toggle-track .toggle-thumb.thumb-size-md-desktop {
+    &:checked + .toggle-track .toggle-thumb.thumb-size-md-desktop {
       transform: translateX(1rem);
     }
 
-    &:checked+.toggle-track .toggle-thumb.thumb-size-lg-desktop {
+    &:checked + .toggle-track .toggle-thumb.thumb-size-lg-desktop {
       transform: translateX(1.5rem);
     }
   }
 
   @media (min-width: $size-breakpoint-hd) {
-    &:checked+.toggle-track .toggle-thumb.thumb-size-sm-hd {
+    &:checked + .toggle-track .toggle-thumb.thumb-size-sm-hd {
       transform: translateX(0.5rem);
     }
 
-    &:checked+.toggle-track .toggle-thumb.thumb-size-md-hd {
+    &:checked + .toggle-track .toggle-thumb.thumb-size-md-hd {
       transform: translateX(1rem);
     }
 
-    &:checked+.toggle-track .toggle-thumb.thumb-size-lg-hd {
+    &:checked + .toggle-track .toggle-thumb.thumb-size-lg-hd {
       transform: translateX(1.5rem);
     }
   }
 
-
-  &:focus+.toggle-track {
+  &:focus + .toggle-track {
     outline: 0;
-    box-shadow: var(--form-control-box-shadow-focus, var(--INTERNAL_form-control-box-shadow-focus));
+    box-shadow: var(
+      --form-control-box-shadow-focus,
+      var(--INTERNAL_form-control-box-shadow-focus)
+    );
   }
 
   // Show focus styles on keyboard focus.
-  &:focus-visible+.toggle-track {
+  &:focus-visible + .toggle-track {
     outline: 0;
-    box-shadow: var(--form-control-box-shadow-focus, var(--INTERNAL_form-control-box-shadow-focus));
+    box-shadow: var(
+      --form-control-box-shadow-focus,
+      var(--INTERNAL_form-control-box-shadow-focus)
+    );
   }
 
   // Hide focus styles if they are not needed, for example,
   // when an element receives focus via the mouse.
-  &:focus:not(:focus-visible)+.toggle-track {
+  &:focus:not(:focus-visible) + .toggle-track {
     outline: 0;
     box-shadow: none;
   }

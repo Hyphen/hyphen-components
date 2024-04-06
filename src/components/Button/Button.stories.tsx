@@ -21,16 +21,7 @@ export const Variants = () => (
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="tertiary">Tertiary</Button>
-    </Box>
-    <Box gap="sm" direction="row" alignItems="flex-start">
-      <Button variant="primary-neutral">Primary-Neutral</Button>
-      <Button variant="secondary-neutral">Secondary-Neutral</Button>
-      <Button variant="tertiary-neutral">Tertiary-Neutral</Button>
-    </Box>
-    <Box gap="sm" direction="row" alignItems="flex-start">
-      <Button variant="primary-danger">Primary-Danger</Button>
-      <Button variant="secondary-danger">Secondary-Danger</Button>
-      <Button variant="tertiary-danger">Tertiary-Danger</Button>
+      <Button variant="danger">Danger</Button>
     </Box>
   </Box>
 );
@@ -61,17 +52,17 @@ export const Sizes = () => (
 );
 
 export const FullWidth = () => (
-  <Button variant="primary-neutral" fullWidth>
+  <Button variant="primary" fullWidth>
     Full Width
   </Button>
 );
 
 export const Icons = () => (
-  <Box direction="row" gap="xs">
-    <Button variant="primary-neutral" iconPrefix="mail">
+  <Box direction="row" gap="xs" alignItems="flex-start">
+    <Button variant="primary" iconPrefix="mail">
       Email
     </Button>
-    <Button variant="secondary-neutral" iconSuffix="chat">
+    <Button variant="secondary" iconSuffix="chat">
       Chat Now
     </Button>
   </Box>
@@ -80,12 +71,8 @@ export const Icons = () => (
 export const IconButton = () => (
   <>
     <Button variant="tertiary" iconPrefix="add" aria-label="add" />
-    <Button
-      variant="tertiary-neutral"
-      iconPrefix="dots"
-      aria-label="open menu"
-    />
-    <Button variant="tertiary-danger" iconPrefix="trash" aria-label="remove" />
+    <Button variant="tertiary" iconPrefix="dots" aria-label="open menu" />
+    <Button variant="danger" iconPrefix="trash" aria-label="remove" />
   </>
 );
 
@@ -103,13 +90,13 @@ export const Loading = () => (
 
 export const Disabled = () => (
   <Box direction="row" gap="sm">
-    <Button variant="primary-neutral" isDisabled>
+    <Button variant="primary" isDisabled>
       Primary Disabled
     </Button>
-    <Button variant="secondary-neutral" isDisabled>
+    <Button variant="secondary" isDisabled>
       Secondary Disabled
     </Button>
-    <Button variant="tertiary-neutral" isDisabled>
+    <Button variant="tertiary" isDisabled>
       Tertiary Disabled
     </Button>
   </Box>

@@ -18,16 +18,7 @@ import { getElementType } from '../../lib/getElementType';
 import { handleReactRouterClick } from '../../lib/reactRouterClickHandler';
 import styles from './Button.module.scss';
 
-export type ButtonVariant =
-  | 'primary'
-  | 'secondary'
-  | 'tertiary'
-  | 'primary-neutral'
-  | 'secondary-neutral'
-  | 'tertiary-neutral'
-  | 'primary-danger'
-  | 'secondary-danger'
-  | 'tertiary-danger';
+export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'danger';
 
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
@@ -150,7 +141,7 @@ export const Button = forwardRef<
       target = undefined,
       type = undefined,
       size = 'md',
-      variant = 'primary-neutral',
+      variant = 'primary',
       ...restProps
     },
     ref
@@ -189,7 +180,7 @@ export const Button = forwardRef<
     };
 
     const getSpinnerVariant = () => {
-      if (variant === 'primary' || variant === 'primary-danger') return 'white';
+      if (variant === 'primary' || variant === 'danger') return 'white';
 
       return 'grey';
     };
@@ -211,7 +202,7 @@ export const Button = forwardRef<
                 aria-hidden="true"
                 focusable="false"
                 data-testid="prefixIcon"
-                size={size}
+                size={size == 'md' ? 'sm' : size}
               />
             </Box>
           )}
@@ -224,7 +215,7 @@ export const Button = forwardRef<
                 aria-hidden="true"
                 focusable="false"
                 data-testid="suffixIcon"
-                size={size}
+                size={size == 'md' ? 'sm' : size}
               />
             </Box>
           )}

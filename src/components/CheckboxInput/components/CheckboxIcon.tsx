@@ -55,8 +55,8 @@ export const CheckboxIcon: React.FC<CheckboxIconProps> = ({
     color = 'grey-200';
   }
 
-  if (error) color = 'danger-500';
-  if (isDisabled && error) color = 'danger-200';
+  if (error) color = 'red-500';
+  if (isDisabled && error) color = 'red-200';
 
   return (
     <Box

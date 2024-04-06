@@ -18,7 +18,7 @@ export const InputValidationMessage: FC<InputValidationMessageProps> = ({
   const classes = classNames(
     'hyphen-components__variables__form-control',
     styles['input-validation-message'],
-    'font-color-danger',
+    'font-color-red-500',
     `font-size-${size}`,
     'm-top-xs'
   );

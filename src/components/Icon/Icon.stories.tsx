@@ -16,11 +16,11 @@ export const Default = () => <Icon name="star" />;
 export const Sizes = () => (
   <>
     <Box direction="row" childGap="sm" margin="0 0 md 0" fontSize="xs">
-      <Icon name="remove" color="danger-500" />
+      <Icon name="remove" color="red-500" />
       <Box>Size is set by the Icon's parent</Box>
     </Box>
     <Box direction="row" fontSize="xl" childGap="sm">
-      <Icon name="star" color="warning-400" />
+      <Icon name="star" color="yellow-400" />
       <Box>Size is set by the Icon's parent</Box>
     </Box>
   </>
@@ -29,10 +29,10 @@ export const Sizes = () => (
 export const Colors = () => (
   <>
     <Box direction="row" childGap="sm" margin="0 0 md 0">
-      <Icon name="remove" color="danger-500" />
+      <Icon name="remove" color="red-500" />
       <Box>Color is set at the Icon level</Box>
     </Box>
-    <Box direction="row" childGap="sm" color="secondary-400">
+    <Box direction="row" childGap="sm" color="blue-500">
       <Icon name="add" />
       <Box>Color is set by the Icon's parent</Box>
     </Box>

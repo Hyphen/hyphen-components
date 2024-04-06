@@ -141,7 +141,7 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
     label,
     className: classNames(
       'hyphen-components__variables__form-control',
-      'm-right-xs'
+      'm-right-md'
     ),
     error,
   };

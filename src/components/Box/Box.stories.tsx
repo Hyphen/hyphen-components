@@ -24,22 +24,22 @@ export const Overview = () => (
       I am a box with a gray background and border
     </Box>
     <Box gap={{ base: 'sm', tablet: 'md', desktop: 'lg' }} direction="row">
-      <Box flex="auto" radius="md" background="secondary-100" height="lg" />
-      <Box flex="auto" radius="md" background="secondary-100" height="lg" />
-      <Box flex="auto" radius="md" background="secondary-100" height="lg" />
-      <Box flex="auto" radius="md" background="secondary-100" height="lg" />
-      <Box flex="auto" radius="md" background="secondary-100" height="lg" />
+      <Box flex="auto" radius="md" background="blue-100" height="lg" />
+      <Box flex="auto" radius="md" background="blue-100" height="lg" />
+      <Box flex="auto" radius="md" background="blue-100" height="lg" />
+      <Box flex="auto" radius="md" background="blue-100" height="lg" />
+      <Box flex="auto" radius="md" background="blue-100" height="lg" />
     </Box>
   </Box>
 );
 
 export const Background = () => (
   <>
-    <Box background="secondary-100" margin="xs" padding="xs">
-      secondary-100
+    <Box background="grey-100" margin="xs" padding="xs">
+      grey-100
     </Box>
-    <Box background="danger-50" margin="xs" padding="xs">
-      danger-50
+    <Box background="red-50" margin="xs" padding="xs">
+      red-50
     </Box>
     <Box background="primary-500" margin="xs" padding="xs">
       primary
@@ -52,7 +52,7 @@ export const Border = () => (
     <Box borderColor="grey-200" borderWidth="xs md" padding="xs">
       grey-100, xs md
     </Box>
-    <Box borderColor="danger-500" borderWidth="0 sm md xs" padding="xs">
+    <Box borderColor="red-500" borderWidth="0 sm md xs" padding="xs">
       danger, 0 sm md xs
     </Box>
     <Box borderColor="primary-700" borderWidth="md" padding="xs">
@@ -63,56 +63,56 @@ export const Border = () => (
 
 export const Gap = () => (
   <Box gap="lg" direction="row" wrap maxWidth="4xl">
-    <Box width="xl" background="primary-300" height="md" />
-    <Box width="xl" background="primary-300" height="md" />
-    <Box width="xl" background="primary-300" height="md" />
-    <Box width="xl" background="primary-300" height="md" />
-    <Box width="xl" background="primary-300" height="md" />
-    <Box width="xl" background="primary-300" height="md" />
+    <Box width="xl" background="blue-300" height="md" />
+    <Box width="xl" background="blue-300" height="md" />
+    <Box width="xl" background="blue-300" height="md" />
+    <Box width="xl" background="blue-300" height="md" />
+    <Box width="xl" background="blue-300" height="md" />
+    <Box width="xl" background="blue-300" height="md" />
   </Box>
 );
 
 export const GapShorthand = () => (
   <Box gap="xs 4xl" direction="row" wrap maxWidth="4xl">
-    <Box width="xl" background="primary-300" height="md" />
-    <Box width="xl" background="primary-300" height="md" />
-    <Box width="xl" background="primary-300" height="md" />
-    <Box width="xl" background="primary-300" height="md" />
-    <Box width="xl" background="primary-300" height="md" />
-    <Box width="xl" background="primary-300" height="md" />
+    <Box width="xl" background="blue-300" height="md" />
+    <Box width="xl" background="blue-300" height="md" />
+    <Box width="xl" background="blue-300" height="md" />
+    <Box width="xl" background="blue-300" height="md" />
+    <Box width="xl" background="blue-300" height="md" />
+    <Box width="xl" background="blue-300" height="md" />
   </Box>
 );
 
 export const GapRowAndColumn = () => (
   <Box gap="lg">
     <Box rowGap="xs" columnGap="xl" direction="row" wrap maxWidth="4xl">
-      <Box width="xl" background="primary-300" height="md" />
-      <Box width="xl" background="primary-300" height="md" />
-      <Box width="xl" background="primary-300" height="md" />
-      <Box width="xl" background="primary-300" height="md" />
-      <Box width="xl" background="primary-300" height="md" />
-      <Box width="xl" background="primary-300" height="md" />
+      <Box width="xl" background="blue-300" height="md" />
+      <Box width="xl" background="blue-300" height="md" />
+      <Box width="xl" background="blue-300" height="md" />
+      <Box width="xl" background="blue-300" height="md" />
+      <Box width="xl" background="blue-300" height="md" />
+      <Box width="xl" background="blue-300" height="md" />
     </Box>
     <Box rowGap="sm" maxWidth="4xl">
-      <Box width="100" background="primary-300" height="md" />
-      <Box width="100" background="primary-300" height="md" />
-      <Box width="100" background="primary-300" height="md" />
+      <Box width="100" background="blue-300" height="md" />
+      <Box width="100" background="blue-300" height="md" />
+      <Box width="100" background="blue-300" height="md" />
     </Box>
     <Box columnGap="sm" maxWidth="4xl" direction="row">
-      <Box flex="auto" background="primary-300" height="md" />
-      <Box flex="auto" background="primary-300" height="md" />
-      <Box flex="auto" background="primary-300" height="md" />
+      <Box flex="auto" background="blue-300" height="md" />
+      <Box flex="auto" background="blue-300" height="md" />
+      <Box flex="auto" background="blue-300" height="md" />
     </Box>
   </Box>
 );
 
 export const ChildGap = () => (
   <Box childGap="md" display="block">
-    <Box display="block" background="primary-300" padding="sm" />
-    <Box display="block" background="primary-300" padding="sm" />
-    <Box display="block" background="primary-300" padding="sm" />
-    <Box display="block" background="primary-300" padding="sm" />
-    <Box display="block" background="primary-300" padding="sm" />
+    <Box display="block" background="blue-300" padding="sm" />
+    <Box display="block" background="blue-300" padding="sm" />
+    <Box display="block" background="blue-300" padding="sm" />
+    <Box display="block" background="blue-300" padding="sm" />
+    <Box display="block" background="blue-300" padding="sm" />
   </Box>
 );
 
@@ -121,7 +121,7 @@ export const FlexAuto = () => (
     <Box gap="md" direction="row">
       <Box
         flex="auto"
-        background="primary-300"
+        background="blue-300"
         height="lg"
         justifyContent="center"
         alignItems="center"
@@ -130,7 +130,7 @@ export const FlexAuto = () => (
       </Box>
       <Box
         flex="auto"
-        background="primary-300"
+        background="blue-300"
         height="lg"
         justifyContent="center"
         alignItems="center"
@@ -139,7 +139,7 @@ export const FlexAuto = () => (
       </Box>
       <Box
         flex="auto"
-        background="primary-300"
+        background="blue-300"
         height="lg"
         justifyContent="center"
         alignItems="center"
@@ -148,7 +148,7 @@ export const FlexAuto = () => (
       </Box>
       <Box
         flex="auto"
-        background="primary-300"
+        background="blue-300"
         height="lg"
         justifyContent="center"
         alignItems="center"
@@ -157,7 +157,7 @@ export const FlexAuto = () => (
       </Box>
       <Box
         flex="auto"
-        background="primary-300"
+        background="blue-300"
         height="lg"
         justifyContent="center"
         alignItems="center"
@@ -174,19 +174,19 @@ export const FlexDirection = () => (
       Row
     </Box>
     <Box gap="md" padding="sm" direction="row">
-      <Box flex="auto" background="primary-300" padding="sm">
+      <Box flex="auto" background="blue-300" padding="sm">
         1
       </Box>
-      <Box flex="auto" background="primary-300" padding="sm">
+      <Box flex="auto" background="blue-300" padding="sm">
         2
       </Box>
-      <Box flex="auto" background="primary-300" padding="sm">
+      <Box flex="auto" background="blue-300" padding="sm">
         3
       </Box>
-      <Box flex="auto" background="primary-300" padding="sm">
+      <Box flex="auto" background="blue-300" padding="sm">
         4
       </Box>
-      <Box flex="auto" background="primary-300" padding="sm">
+      <Box flex="auto" background="blue-300" padding="sm">
         5
       </Box>
     </Box>
@@ -194,19 +194,19 @@ export const FlexDirection = () => (
       Column
     </Box>
     <Box gap="md" padding="sm" direction="column">
-      <Box width="20%" background="primary-300" padding="sm">
+      <Box width="20%" background="blue-300" padding="sm">
         1
       </Box>
-      <Box width="20%" background="primary-300" padding="sm">
+      <Box width="20%" background="blue-300" padding="sm">
         2
       </Box>
-      <Box width="20%" background="primary-300" padding="sm">
+      <Box width="20%" background="blue-300" padding="sm">
         3
       </Box>
-      <Box width="20%" background="primary-300" padding="sm">
+      <Box width="20%" background="blue-300" padding="sm">
         4
       </Box>
-      <Box width="20%" background="primary-300" padding="sm">
+      <Box width="20%" background="blue-300" padding="sm">
         5
       </Box>
     </Box>
@@ -214,19 +214,19 @@ export const FlexDirection = () => (
       Row Reverse
     </Box>
     <Box gap="md" padding="sm" direction="row-reverse">
-      <Box width="20%" background="danger-300" padding="sm">
+      <Box width="20%" background="red-300" padding="sm">
         1
       </Box>
-      <Box width="20%" background="danger-300" padding="sm">
+      <Box width="20%" background="red-300" padding="sm">
         2
       </Box>
-      <Box width="20%" background="danger-300" padding="sm">
+      <Box width="20%" background="red-300" padding="sm">
         3
       </Box>
-      <Box width="20%" background="danger-300" padding="sm">
+      <Box width="20%" background="red-300" padding="sm">
         4
       </Box>
-      <Box width="20%" background="danger-300" padding="sm">
+      <Box width="20%" background="red-300" padding="sm">
         5
       </Box>
     </Box>
@@ -234,19 +234,19 @@ export const FlexDirection = () => (
       Column Reverse
     </Box>
     <Box gap="md" padding="sm" direction="column-reverse">
-      <Box width="20%" background="danger-300" padding="sm">
+      <Box width="20%" background="red-300" padding="sm">
         1
       </Box>
-      <Box width="20%" background="danger-300" padding="sm">
+      <Box width="20%" background="red-300" padding="sm">
         2
       </Box>
-      <Box width="20%" background="danger-300" padding="sm">
+      <Box width="20%" background="red-300" padding="sm">
         3
       </Box>
-      <Box width="20%" background="danger-300" padding="sm">
+      <Box width="20%" background="red-300" padding="sm">
         4
       </Box>
-      <Box width="20%" background="danger-300" padding="sm">
+      <Box width="20%" background="red-300" padding="sm">
         5
       </Box>
     </Box>
@@ -254,19 +254,19 @@ export const FlexDirection = () => (
       Row Reverse
     </Box>
     <Box padding="sm" direction="row-reverse">
-      <Box width="20%" background="primary-300" padding="sm">
+      <Box width="20%" background="blue-300" padding="sm">
         1
       </Box>
-      <Box width="20%" background="primary-300" padding="sm" margin="0 md 0 0">
+      <Box width="20%" background="blue-300" padding="sm" margin="0 md 0 0">
         2
       </Box>
-      <Box width="20%" background="primary-300" padding="sm" margin="0 md 0 0">
+      <Box width="20%" background="blue-300" padding="sm" margin="0 md 0 0">
         3
       </Box>
-      <Box width="20%" background="primary-300" padding="sm" margin="0 md 0 0">
+      <Box width="20%" background="blue-300" padding="sm" margin="0 md 0 0">
         4
       </Box>
-      <Box width="20%" background="primary-300" padding="sm" margin="0 md 0 0">
+      <Box width="20%" background="blue-300" padding="sm" margin="0 md 0 0">
         5
       </Box>
     </Box>
@@ -274,19 +274,19 @@ export const FlexDirection = () => (
       Column Reverse
     </Box>
     <Box padding="sm" direction="column-reverse">
-      <Box width="20%" background="primary-300" padding="sm">
+      <Box width="20%" background="blue-300" padding="sm">
         1
       </Box>
-      <Box width="20%" background="primary-300" padding="sm" margin="0 0 md 0">
+      <Box width="20%" background="blue-300" padding="sm" margin="0 0 md 0">
         2
       </Box>
-      <Box width="20%" background="primary-300" padding="sm" margin="0 0 md 0">
+      <Box width="20%" background="blue-300" padding="sm" margin="0 0 md 0">
         3
       </Box>
-      <Box width="20%" background="primary-300" padding="sm" margin="0 0 md 0">
+      <Box width="20%" background="blue-300" padding="sm" margin="0 0 md 0">
         4
       </Box>
-      <Box width="20%" background="primary-300" padding="sm" margin="0 0 md 0">
+      <Box width="20%" background="blue-300" padding="sm" margin="0 0 md 0">
         5
       </Box>
     </Box>
@@ -298,7 +298,7 @@ export const FlexShrinkGrow = () => (
     <Box gap="md" direction="row">
       <Box
         style={{ flex: '3' }}
-        background="primary-300"
+        background="blue-300"
         height="lg"
         justifyContent="center"
         alignItems="center"
@@ -307,7 +307,7 @@ export const FlexShrinkGrow = () => (
       </Box>
       <Box
         style={{ flex: '1' }}
-        background="primary-300"
+        background="blue-300"
         height="lg"
         justifyContent="center"
         alignItems="center"
@@ -316,7 +316,7 @@ export const FlexShrinkGrow = () => (
       </Box>
       <Box
         style={{ flex: '1' }}
-        background="primary-300"
+        background="blue-300"
         height="lg"
         justifyContent="center"
         alignItems="center"
@@ -325,7 +325,7 @@ export const FlexShrinkGrow = () => (
       </Box>
       <Box
         style={{ flex: '2' }}
-        background="primary-300"
+        background="blue-300"
         height="lg"
         justifyContent="center"
         alignItems="center"
@@ -334,7 +334,7 @@ export const FlexShrinkGrow = () => (
       </Box>
       <Box
         style={{ flex: '1' }}
-        background="primary-300"
+        background="blue-300"
         height="lg"
         justifyContent="center"
         alignItems="center"
@@ -641,8 +641,8 @@ export const FlexAlignContent = () => (
 
 export const FontColor = () => (
   <>
-    <Box color="danger-500">Danger 500</Box>
-    <Box color="info-500">Info 500</Box>
+    <Box color="red-500">Red 500</Box>
+    <Box color="blue-500">Blue 500</Box>
     <Box>Default Color</Box>
   </>
 );
@@ -742,34 +742,34 @@ export const Padding = () => (
 export const Radius = () => (
   <>
     <Box direction="row" gap="2xs" justifyContent="space-between">
-      <Box radius="xs" background="secondary-300" padding="sm">
+      <Box radius="xs" background="blue-300" padding="sm">
         xs
       </Box>
-      <Box radius="sm" background="secondary-300" padding="sm">
+      <Box radius="sm" background="blue-300" padding="sm">
         sm
       </Box>
-      <Box radius="md" background="secondary-300" padding="sm">
+      <Box radius="md" background="blue-300" padding="sm">
         md
       </Box>
-      <Box radius="lg" background="secondary-300" padding="sm">
+      <Box radius="lg" background="blue-300" padding="sm">
         lg
       </Box>
-      <Box radius="circle" background="secondary-300" padding="sm">
+      <Box radius="circle" background="blue-300" padding="sm">
         circle
       </Box>
-      <Box radius="sm lg" background="secondary-300" padding="sm">
+      <Box radius="sm lg" background="blue-300" padding="sm">
         sm lg
       </Box>
-      <Box radius="sm md lg" background="secondary-300" padding="sm">
+      <Box radius="sm md lg" background="blue-300" padding="sm">
         sm md lg
       </Box>
-      <Box radius="xs sm md lg" background="secondary-300" padding="sm">
+      <Box radius="xs sm md lg" background="blue-300" padding="sm">
         xs sm md lg
       </Box>
-      <Box radius="0 0 md md" background="secondary-300" padding="sm">
+      <Box radius="0 0 md md" background="blue-300" padding="sm">
         0 0 md md
       </Box>
-      <Box radius="md md 0 0" background="secondary-300" padding="sm">
+      <Box radius="md md 0 0" background="blue-300" padding="sm">
         md md 0 0
       </Box>
     </Box>
@@ -876,13 +876,13 @@ export const Shadow = () => (
 
 export const Width = () => (
   <Box background="primary-50" gap="xs">
-    <Box background="primary-300" width="227px">
+    <Box background="blue-300" width="227px">
       227px
     </Box>
-    <Box background="primary-300" width="10rem">
+    <Box background="blue-300" width="10rem">
       10rem
     </Box>
-    <Box background="primary-300" width="50%">
+    <Box background="blue-300" width="50%">
       50%
     </Box>
   </Box>
@@ -890,28 +890,28 @@ export const Width = () => (
 
 export const WidthTokens = () => (
   <Box background="primary-50" gap="xs" overflow="auto">
-    <Box background="primary-300" width="sm">
+    <Box background="blue-300" width="sm">
       sm
     </Box>
-    <Box background="primary-300" width="md">
+    <Box background="blue-300" width="md">
       md
     </Box>
-    <Box background="primary-300" width="lg">
+    <Box background="blue-300" width="lg">
       lg
     </Box>
-    <Box background="primary-300" width="xl">
+    <Box background="blue-300" width="xl">
       xl
     </Box>
-    <Box background="primary-300" width="2xl">
+    <Box background="blue-300" width="2xl">
       2xl
     </Box>
-    <Box background="primary-300" width="3xl">
+    <Box background="blue-300" width="3xl">
       3xl
     </Box>
-    <Box background="primary-300" width="4xl">
+    <Box background="blue-300" width="4xl">
       4xl
     </Box>
-    <Box background="primary-300" width="5xl">
+    <Box background="blue-300" width="5xl">
       5xl
     </Box>
   </Box>
@@ -919,49 +919,49 @@ export const WidthTokens = () => (
 
 export const WidthPercentages = () => (
   <Box background="primary-50" gap="xs">
-    <Box background="primary-300" width="10">
+    <Box background="blue-300" width="10">
       10%
     </Box>
-    <Box background="primary-300" width="15">
+    <Box background="blue-300" width="15">
       15%
     </Box>
-    <Box background="primary-300" width="20">
+    <Box background="blue-300" width="20">
       20%
     </Box>
-    <Box background="primary-300" width="25">
+    <Box background="blue-300" width="25">
       25%
     </Box>
-    <Box background="primary-300" width="30">
+    <Box background="blue-300" width="30">
       30%
     </Box>
-    <Box background="primary-300" width="33">
+    <Box background="blue-300" width="33">
       33%
     </Box>
-    <Box background="primary-300" width="34">
+    <Box background="blue-300" width="34">
       34%
     </Box>
-    <Box background="primary-300" width="40">
+    <Box background="blue-300" width="40">
       40%
     </Box>
-    <Box background="primary-300" width="50">
+    <Box background="blue-300" width="50">
       50%
     </Box>
-    <Box background="primary-300" width="60">
+    <Box background="blue-300" width="60">
       60%
     </Box>
-    <Box background="primary-300" width="70">
+    <Box background="blue-300" width="70">
       70%
     </Box>
-    <Box background="primary-300" width="75">
+    <Box background="blue-300" width="75">
       75%
     </Box>
-    <Box background="primary-300" width="80">
+    <Box background="blue-300" width="80">
       80%
     </Box>
-    <Box background="primary-300" width="90">
+    <Box background="blue-300" width="90">
       90%
     </Box>
-    <Box background="primary-300" width="100">
+    <Box background="blue-300" width="100">
       100%
     </Box>
   </Box>
@@ -969,13 +969,13 @@ export const WidthPercentages = () => (
 
 export const WidthMax = () => (
   <Box background="primary-50" gap="xs">
-    <Box background="primary-300" maxWidth="2xl">
+    <Box background="blue-300" maxWidth="2xl">
       2xl
     </Box>
-    <Box background="primary-300" maxWidth="145px">
+    <Box background="blue-300" maxWidth="145px">
       145px
     </Box>
-    <Box background="primary-300" maxWidth="50%">
+    <Box background="blue-300" maxWidth="50%">
       50%
     </Box>
   </Box>
@@ -983,13 +983,13 @@ export const WidthMax = () => (
 
 export const WidthMin = () => (
   <Box alignItems="flex-start" background="primary-50" gap="xs">
-    <Box background="primary-300" minWidth="2xl">
+    <Box background="blue-300" minWidth="2xl">
       2xl
     </Box>
-    <Box background="primary-300" minWidth="145px">
+    <Box background="blue-300" minWidth="145px">
       145px
     </Box>
-    <Box background="primary-300" minWidth="50%">
+    <Box background="blue-300" minWidth="50%">
       50%
     </Box>
   </Box>
@@ -998,7 +998,7 @@ export const WidthMin = () => (
 export const Height = () => (
   <Box background="primary-50" gap="xs">
     <Box
-      background="primary-300"
+      background="blue-300"
       height="227px"
       justifyContent="center"
       alignItems="center"
@@ -1006,7 +1006,7 @@ export const Height = () => (
       227px
     </Box>
     <Box
-      background="primary-300"
+      background="blue-300"
       height="10rem"
       justifyContent="center"
       alignItems="center"
@@ -1014,7 +1014,7 @@ export const Height = () => (
       10rem
     </Box>
     <Box
-      background="primary-300"
+      background="blue-300"
       height="4em"
       justifyContent="center"
       alignItems="center"
@@ -1028,7 +1028,7 @@ export const HeightTokens = () => (
   <Box background="primary-50" gap="xs" height="5xl" direction="row">
     <Box
       flex="auto"
-      background="primary-300"
+      background="blue-300"
       justifyContent="center"
       alignItems="center"
       height="sm"
@@ -1037,7 +1037,7 @@ export const HeightTokens = () => (
     </Box>
     <Box
       flex="auto"
-      background="primary-300"
+      background="blue-300"
       justifyContent="center"
       alignItems="center"
       height="md"
@@ -1046,7 +1046,7 @@ export const HeightTokens = () => (
     </Box>
     <Box
       flex="auto"
-      background="primary-300"
+      background="blue-300"
       justifyContent="center"
       alignItems="center"
       height="lg"
@@ -1055,7 +1055,7 @@ export const HeightTokens = () => (
     </Box>
     <Box
       flex="auto"
-      background="primary-300"
+      background="blue-300"
       justifyContent="center"
       alignItems="center"
       height="xl"
@@ -1064,7 +1064,7 @@ export const HeightTokens = () => (
     </Box>
     <Box
       flex="auto"
-      background="primary-300"
+      background="blue-300"
       justifyContent="center"
       alignItems="center"
       height="2xl"
@@ -1073,7 +1073,7 @@ export const HeightTokens = () => (
     </Box>
     <Box
       flex="auto"
-      background="primary-300"
+      background="blue-300"
       justifyContent="center"
       alignItems="center"
       height="3xl"
@@ -1082,7 +1082,7 @@ export const HeightTokens = () => (
     </Box>
     <Box
       flex="auto"
-      background="primary-300"
+      background="blue-300"
       justifyContent="center"
       alignItems="center"
       height="4xl"
@@ -1091,7 +1091,7 @@ export const HeightTokens = () => (
     </Box>
     <Box
       flex="auto"
-      background="primary-300"
+      background="blue-300"
       justifyContent="center"
       alignItems="center"
       height="5xl"
@@ -1107,7 +1107,7 @@ export const HeightPercentages = () => (
       flex="auto"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
       height="10"
     >
       10%
@@ -1116,7 +1116,7 @@ export const HeightPercentages = () => (
       flex="auto"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
       height="15"
     >
       15%
@@ -1125,7 +1125,7 @@ export const HeightPercentages = () => (
       flex="auto"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
       height="20"
     >
       20%
@@ -1134,7 +1134,7 @@ export const HeightPercentages = () => (
       flex="auto"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
       height="25"
     >
       25%
@@ -1143,7 +1143,7 @@ export const HeightPercentages = () => (
       flex="auto"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
       height="30"
     >
       30%
@@ -1152,7 +1152,7 @@ export const HeightPercentages = () => (
       flex="auto"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
       height="33"
     >
       33%
@@ -1161,7 +1161,7 @@ export const HeightPercentages = () => (
       flex="auto"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
       height="34"
     >
       34%
@@ -1170,7 +1170,7 @@ export const HeightPercentages = () => (
       flex="auto"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
       height="40"
     >
       40%
@@ -1179,7 +1179,7 @@ export const HeightPercentages = () => (
       flex="auto"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
       height="50"
     >
       50%
@@ -1188,7 +1188,7 @@ export const HeightPercentages = () => (
       flex="auto"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
       height="60"
     >
       60%
@@ -1197,7 +1197,7 @@ export const HeightPercentages = () => (
       flex="auto"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
       height="70"
     >
       70%
@@ -1206,7 +1206,7 @@ export const HeightPercentages = () => (
       flex="auto"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
       height="75"
     >
       75%
@@ -1215,7 +1215,7 @@ export const HeightPercentages = () => (
       flex="auto"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
       height="80"
     >
       80%
@@ -1224,7 +1224,7 @@ export const HeightPercentages = () => (
       flex="auto"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
       height="90"
     >
       90%
@@ -1233,7 +1233,7 @@ export const HeightPercentages = () => (
       flex="auto"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
       height="100"
     >
       100%
@@ -1248,7 +1248,7 @@ export const HeightMax = () => (
       flex="auto"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
     >
       lg
     </Box>
@@ -1257,7 +1257,7 @@ export const HeightMax = () => (
       flex="auto"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
     >
       50px
     </Box>
@@ -1266,7 +1266,7 @@ export const HeightMax = () => (
       flex="auto"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
     >
       50%
     </Box>
@@ -1286,7 +1286,7 @@ export const HeightMin = () => (
       minHeight="3xl"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
     >
       3xl
     </Box>
@@ -1295,7 +1295,7 @@ export const HeightMin = () => (
       minHeight="50px"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
     >
       50px
     </Box>
@@ -1304,7 +1304,7 @@ export const HeightMin = () => (
       minHeight="50%"
       justifyContent="center"
       alignItems="center"
-      background="primary-300"
+      background="blue-300"
     >
       50%
     </Box>
@@ -1356,22 +1356,22 @@ export const Cursor = () => (
     background="primary-100"
     overflow="auto"
   >
-    <Box cursor="pointer" padding="md" background="primary-300">
+    <Box cursor="pointer" padding="md" background="blue-300">
       pointer
     </Box>
-    <Box cursor="move" padding="md" background="primary-300">
+    <Box cursor="move" padding="md" background="blue-300">
       move
     </Box>
-    <Box cursor="not-allowed" padding="md" background="primary-300">
+    <Box cursor="not-allowed" padding="md" background="blue-300">
       not-allowed
     </Box>
-    <Box cursor="grab" padding="md" background="primary-300">
+    <Box cursor="grab" padding="md" background="blue-300">
       grab
     </Box>
-    <Box cursor="zoom-in" padding="md" background="primary-300">
+    <Box cursor="zoom-in" padding="md" background="blue-300">
       zoom-in
     </Box>
-    <Box cursor="zoom-out" padding="md" background="primary-300">
+    <Box cursor="zoom-out" padding="md" background="blue-300">
       zoom-out
     </Box>
   </Box>
@@ -1389,7 +1389,7 @@ export const Position = () => (
     <Box
       position="absolute"
       padding="md"
-      background="secondary-300"
+      background="blue-300"
       style={{ zIndex: 1 }}
       width="100px"
       height="150px"
@@ -1399,7 +1399,7 @@ export const Position = () => (
     <Box
       position="relative"
       padding="md"
-      background="primary-300"
+      background="blue-300"
       textAlign="right"
       height="200px"
     >
@@ -1408,14 +1408,14 @@ export const Position = () => (
     <Box
       position="sticky"
       padding="md"
-      background="tertiary-300"
+      background="blue-300"
       height="50px"
       color="white-500"
       style={{ top: 0, zIndex: 2 }}
     >
       sticky
     </Box>
-    <Box position="static" padding="md" background="primary-300" height="400px">
+    <Box position="static" padding="md" background="blue-300" height="400px">
       static
     </Box>
   </Box>

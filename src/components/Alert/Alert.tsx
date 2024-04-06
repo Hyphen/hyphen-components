@@ -1,6 +1,5 @@
 import React, { FC, ReactNode, MouseEvent, KeyboardEvent } from 'react';
 import classNames from 'classnames';
-import { Heading } from '../Heading/Heading';
 import { Box } from '../Box/Box';
 import { Icon } from '../Icon/Icon';
 import styles from './Alert.module.scss';
@@ -79,7 +78,7 @@ export const Alert: FC<AlertProps> = ({
   };
 
   const renderAlertIcon = (): ReactNode => (
-    <Box fontSize="lg" className={styles[`alert__icon__${variant}`]}>
+    <Box fontSize="md" className={styles[`alert__icon__${variant}`]}>
       <Icon
         name={ALERT_ICONS_MAP[variant].icon}
         data-testid={`alert-icon-${variant}-test-id`}
@@ -122,7 +121,7 @@ export const Alert: FC<AlertProps> = ({
   return (
     <Box
       alignItems="flex-start"
-      gap="sm"
+      gap="md"
       className={alertContainerClasses}
       direction="row"
       padding={isCompact ? 'xs' : 'md'}
@@ -138,9 +137,15 @@ export const Alert: FC<AlertProps> = ({
         ) : (
           <Box display="block" childGap={message && title ? '2xs' : undefined}>
             {title && (
-              <Heading as="h4" size="md">
+              <Box
+                as="h4"
+                fontSize="sm"
+                fontWeight="medium"
+                color="grey-600"
+                className={styles['alert-heading']}
+              >
                 {title}
-              </Heading>
+              </Box>
             )}
             {message &&
               (typeof message === 'string' ? <p>{message}</p> : message)}
