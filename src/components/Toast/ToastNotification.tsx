@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Toast, ToastPosition, ToastType } from './Toast.types';
+import { Toast, ToastPosition } from './Toast.types';
 import { resolveValue } from '../../lib/resolveValue';
 import { prefersReducedMotion } from '../../lib/prefersReducedMotion';
 import { Box } from '../Box/Box';
