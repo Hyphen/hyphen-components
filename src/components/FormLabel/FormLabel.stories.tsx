@@ -13,16 +13,8 @@ const meta: Meta<typeof FormLabel> = {
 
 export default meta;
 
-export const DefaultFormLabel = () => (
-  <FormLabel inputId="inputId">Default Label</FormLabel>
-);
-
-export const OverviewFormLabel = () => (
-  <FormLabel inputId="inputId">Form Label</FormLabel>
-);
-
-export const HelpTextFormLabel = () => (
-  <FormLabel inputId="required" helpText="More helpful text about the input">
-    Required input label
+export const BasicUsage = () => (
+  <FormLabel inputId="inputId" helpText="More helpful text about the input">
+    Default Label
   </FormLabel>
 );
