@@ -22,9 +22,9 @@ describe('ModalHeader', () => {
     expect(mockOnDismiss).toBeCalledTimes(1);
   });
 
-  test('lg padding class is applied by default', () => {
+  test('xl padding class is applied by default', () => {
     const { container } = render(<ModalHeader id="modal" />);
-    expect(container.children[0].classList).toContain('p-lg');
+    expect(container.children[0].classList).toContain('p-xl');
   });
 
   test('height is set to lg by default', () => {

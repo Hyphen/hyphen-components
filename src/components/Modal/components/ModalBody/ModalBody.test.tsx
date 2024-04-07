@@ -8,9 +8,9 @@ describe('ModalBody', () => {
     expect(getByText('test modal')).toBeInTheDocument();
   });
 
-  test('lg padding class is applied by default', () => {
+  test('xl padding class is applied by default', () => {
     const { container } = render(<ModalBody>test modal</ModalBody>);
-    expect(container.children[0].classList).toContain('p-lg');
+    expect(container.children[0].classList).toContain('p-xl');
   });
 
   test('flex-auto class is applied by default', () => {
