@@ -28,7 +28,7 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
 
   return (
     <Box
-      padding="lg"
+      padding="xl"
       direction="row"
       alignItems="center"
       justifyContent={justifyContentValue}
@@ -36,7 +36,7 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
       style={{
         flexShrink: 0,
         borderColor:
-          'var(--modal-border-separator-color, var(--color-brand-grey-100))',
+          'var(--modal-border-separator-color, var(--color-brand-grey-200))',
       }}
       height="lg"
     >

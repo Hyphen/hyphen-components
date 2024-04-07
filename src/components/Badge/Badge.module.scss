@@ -54,7 +54,7 @@
 .badge {
   border-style: solid;
   border-width: var(--badge-border-width, var(--size-border-xs));
-  font-weight: var(--badge-font-weight, var(--size-font-weight-medium));
+  font-weight: var(--badge-font-weight, var(--size-font-weight-semi-bold));
   line-height: var(--size-line-height-base);
 
   &.primary {

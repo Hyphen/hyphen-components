@@ -55,7 +55,7 @@ export const CardSection: FC<CardSectionProps> = ({
   childGap = undefined,
   className = undefined,
   display = 'block',
-  padding = 'md lg',
+  padding = '2xl',
   subdued = undefined,
   title = undefined,
   ...restProps

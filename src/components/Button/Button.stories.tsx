@@ -117,30 +117,3 @@ export const Anchor = () => (
     I'm an anchor tag
   </Button>
 );
-
-export const CustomTheme = () => (
-  <Box
-    gap="sm"
-    direction="row"
-    alignItems="flex-start"
-    style={
-      {
-        '--button-font-family': 'var(--asset-fonts-brand)',
-        '--button-font-weight': 'var(--size-font-weight-medium)',
-        '--button-size-sm-border-radius': '0',
-        '--button-size-md-border-radius': '0',
-        '--button-size-lg-border-radius': '0',
-      } as any
-    }
-  >
-    <Button variant="primary" size="sm">
-      Custom Theme
-    </Button>
-    <Button variant="primary" size="md">
-      Custom Theme
-    </Button>
-    <Button variant="primary" size="lg">
-      Custom Theme
-    </Button>
-  </Box>
-);

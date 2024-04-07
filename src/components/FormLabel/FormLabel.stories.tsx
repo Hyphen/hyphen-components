@@ -21,17 +21,6 @@ export const OverviewFormLabel = () => (
   <FormLabel inputId="inputId">Form Label</FormLabel>
 );
 
-export const InteractiveFormLabel = () => (
-  <FormLabel inputId="customText">
-    This label has a span with
-    <span style={{ fontStyle: 'italic' }}>&nbsp;Italic&nbsp;</span>
-    and also a&nbsp;
-    <a href="https://hyphen.ai" target="_blank" rel="noreferrer">
-      Link
-    </a>
-  </FormLabel>
-);
-
 export const HelpTextFormLabel = () => (
   <FormLabel inputId="required" helpText="More helpful text about the input">
     Required input label

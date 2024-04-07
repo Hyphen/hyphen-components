@@ -34,7 +34,7 @@ export const CardFooter: FC<CardFooterProps> = ({
   children = null,
   className,
   display = 'block',
-  padding = 'md lg',
+  padding = '2xl',
   ...restProps
 }) => {
   const classes = classNames(

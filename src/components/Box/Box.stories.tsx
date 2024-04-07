@@ -2,7 +2,11 @@ import type { Meta } from '@storybook/react';
 
 import { Box } from './Box';
 import React from 'react';
-import { FONT_FAMILY_VALUES, FONT_SIZE_OPTIONS } from '../../lib/tokens';
+import {
+  FONT_FAMILY_VALUES,
+  FONT_SIZE_OPTIONS,
+  FONT_WEIGHT_OPTIONS,
+} from '../../lib/tokens';
 
 const meta: Meta<typeof Box> = {
   title: 'Components/Box',
@@ -660,12 +664,13 @@ export const FontSize = () => {
 };
 
 export const FontWeight = () => (
-  <Box>
-    <Box fontWeight="light">light</Box>
-    <Box fontWeight="regular">regular</Box>
-    <Box fontWeight="medium">medium</Box>
-    <Box fontWeight="bold">bold</Box>
-  </Box>
+  <>
+    {[...FONT_WEIGHT_OPTIONS].map((fontWeight, i) => (
+      <Box fontWeight={fontWeight} key={i}>
+        {fontWeight}
+      </Box>
+    ))}
+  </>
 );
 
 export const FontFamily = () => (

@@ -12,87 +12,6 @@ const meta: Meta<typeof Card> = {
 
 export default meta;
 
-export const Overview = () => (
-  <Box background="grey-50" padding="2xl">
-    <Card>
-      <Card.Header title="Profile Card Example">
-        <Box as="p" color="grey-500" fontSize="sm">
-          Personal and Contact Details
-        </Box>
-      </Card.Header>
-      <Box overflow="hidden" height="130px">
-        <img
-          src="https://images.unsplash.com/photo-1555412654-72a95a495858?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
-          alt=""
-        />
-      </Box>
-      <Card.Section title="profile">
-        <Box direction="row" gap="lg">
-          <Box flex="auto" gap="lg">
-            <Box gap="2xs">
-              <Box fontSize="sm" color="grey-500">
-                Full Name
-              </Box>
-              <Box>Jessica Ramirez</Box>
-            </Box>
-            <Box gap="2xs">
-              <Box fontSize="sm" color="grey-500">
-                Email
-              </Box>
-              <Box>jw1416@hyphen.ai</Box>
-            </Box>
-            <Box gap="2xs">
-              <Box fontSize="sm" color="grey-500">
-                Phone
-              </Box>
-              <Box>(123) 555-5555</Box>
-            </Box>
-          </Box>
-          <Box flex="auto" gap="lg">
-            <Box gap="2xs">
-              <Box fontSize="sm" color="grey-500">
-                Preferred Language
-              </Box>
-              <Box>English</Box>
-            </Box>
-            <Box gap="2xs">
-              <Box fontSize="sm" color="grey-500">
-                Country
-              </Box>
-              <Box>United States</Box>
-            </Box>
-          </Box>
-        </Box>
-      </Card.Section>
-      <Card.Section title="site location">
-        <Box gap="2xs">
-          <Box>12345 Jones Rd</Box>
-          <Box>Seattle, WA 98123</Box>
-        </Box>
-      </Card.Section>
-      <Card.Footer>
-        <Box
-          display="flex"
-          direction="row"
-          justify="between"
-          overflow="hidden"
-          gap="md"
-        >
-          <Box direction="row" gap="sm">
-            <Button size="sm" variant="primary">
-              Edit
-            </Button>
-            <Button size="sm" variant="primary">
-              Remove
-            </Button>
-          </Box>
-          <Button variant="danger">Delete</Button>
-        </Box>
-      </Card.Footer>
-    </Card>
-  </Box>
-);
-
 export const DefaultCard = () => (
   <Card>
     <Card.Header title="Default Card" />
@@ -183,7 +102,7 @@ export const ExampleSignUpForm = () => (
               Sign Up
             </Heading>
             <Box as="p" color="grey-500" fontSize="sm">
-              Create your account to create leads and proposals
+              Create your Hyphen account
             </Box>
           </Box>
           <Box gap="lg">

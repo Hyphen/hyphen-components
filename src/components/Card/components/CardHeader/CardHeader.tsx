@@ -26,13 +26,13 @@ export const CardHeader: FC<CardHeaderProps> = ({
   children = null,
   className = undefined,
   display = 'block',
-  padding = 'md lg',
+  padding = '2xl',
   title = null,
   ...restProps
 }) => {
   const renderTitle = () =>
     typeof title === 'string' ? (
-      <Heading size="lg" as="h4">
+      <Heading size="md" as="h4">
         {title}
       </Heading>
     ) : (

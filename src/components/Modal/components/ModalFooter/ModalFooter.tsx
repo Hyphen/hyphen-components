@@ -8,7 +8,7 @@ export type ModalFooterProps = Omit<
 
 export const ModalFooter: FC<ModalFooterProps> = ({
   children,
-  padding = 'lg',
+  padding = 'xl',
   direction = 'row',
   alignItems = 'center',
   justifyContent = 'flex-end',
@@ -26,7 +26,7 @@ export const ModalFooter: FC<ModalFooterProps> = ({
     style={{
       flexShrink: 0,
       borderColor:
-        'var(--modal-border-separator-color, var(--color-brand-grey-100))',
+        'var(--modal-border-separator-color, var(--color-brand-grey-200))',
       ...style,
     }}
     {...restProps}
