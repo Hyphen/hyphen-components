@@ -2,7 +2,9 @@
   "name": "@hyphen/hyphen-components",
   "version": "0.0.0-development",
   "license": "MIT",
-  "author": "@hyphen",
+  "author": {
+    "name": "@hyphen"
+  },
   "description": "A React component library to power all Hyphen UI.",
   "main": "dist/index.js",
   "module": "dist/hyphen-components.esm.js",
@@ -24,7 +26,8 @@
     "storybook": "storybook dev -p 6006",
     "test": "dts test --passWithNoTests",
     "test-watch": "dts test --watch",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "chromatic": "npx chromatic --project-token=chpt_8fddffb5556f0b7"
   },
   "husky": {
     "hooks": {
@@ -80,6 +83,7 @@
     "@types/react-modal": "^3.16.3",
     "autoprefixer": "^10.4.17",
     "babel-loader": "^9.1.3",
+    "chromatic": "^11.3.0",
     "clean-webpack-plugin": "^4.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.9.0",
@@ -129,6 +133,7 @@
     "react-remove-scroll": "^2.5.9",
     "react-router-dom": "^6.22.3",
     "react-select": "^5.8.0",
-    "react-select-event": "^5.5.1"
+    "react-select-event": "^5.5.1",
+    "@rollup/rollup-linux-x64-gnu": "^4.9.6"
   }
 }
