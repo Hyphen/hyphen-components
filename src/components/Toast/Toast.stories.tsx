@@ -130,7 +130,7 @@ export const Duration = () =>
     );
   })();
 
-export const Dismissible = () =>
+export const NotDismissible = () =>
   (() => {
     const handleClick = () => {
       toast(`This toast can't be dismissed`, {
@@ -211,16 +211,16 @@ export const BasicTypes = () =>
           Basic Types
         </Box>
         <Box gap="md" direction="row">
-          <Button onClick={() => handleClick('blank')} variant="secondary">
+          <Button onClick={() => handleClick('blank')} variant="primary">
             Default
           </Button>
-          <Button onClick={() => handleClick('error')} variant="secondary">
+          <Button onClick={() => handleClick('error')} variant="primary">
             Error
           </Button>
-          <Button onClick={() => handleClick('success')} variant="secondary">
+          <Button onClick={() => handleClick('success')} variant="primary">
             Success
           </Button>
-          <Button onClick={() => handleClick('loading')} variant="secondary">
+          <Button onClick={() => handleClick('loading')} variant="primary">
             Loading
           </Button>
         </Box>

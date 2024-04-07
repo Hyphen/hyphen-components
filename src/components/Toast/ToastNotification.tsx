@@ -90,8 +90,6 @@ const renderToastIcon = (toast: Toast) => {
   );
 };
 
-const toastTypesWithIcon: ToastType[] = ['error', 'success', 'loading'];
-
 const renderDismissIcon = (
   toast: Toast,
   onDismiss: ToastNotificationProps['onDismiss']
@@ -104,8 +102,9 @@ const renderDismissIcon = (
       as="button"
       borderWidth="0 0 0 sm"
       className={styles['toast-dismiss']}
-      margin="0 0 0 sm"
       padding="0 0 0 sm"
+      alignItems="center"
+      justifyContent="center"
       cursor="pointer"
       background="transparent-500" // transparent
       height="100"
@@ -124,9 +123,6 @@ export const ToastNotification: React.FC<ToastNotificationProps> = React.memo(
       <Box
         direction="row"
         justifyContent="center"
-        margin={
-          toastTypesWithIcon.includes(toast.type) ? '0 0 0 sm' : undefined
-        }
         style={{
           flex: '1 1 auto',
         }}
@@ -156,6 +152,7 @@ export const ToastNotification: React.FC<ToastNotificationProps> = React.memo(
         padding={toast.isCompact ? 'sm' : 'md'}
         direction="row"
         className={classes}
+        gap="sm"
         style={{
           ...style,
           ...toast.style,
