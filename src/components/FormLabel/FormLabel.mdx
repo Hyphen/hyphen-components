@@ -8,11 +8,7 @@ import * as Stories from './FormLabel.stories';
 
 FormLabel is a sub component of many of our inputs, and is meant to be paired with a form input. In most cases, the label will have already been built into another component as a prop. However, you can use it on its own or with another component.
 
-<Canvas of={Stories.OverviewFormLabel} isExpanded />
-
-## Props
-
-<ArgsTable of={FormLabel} />
+<Canvas of={Stories.BasicUsage} />
 
 ## Accessibility
 
@@ -23,13 +19,6 @@ FormLabel is a sub component of many of our inputs, and is meant to be paired wi
   2. Visible label that's associated to the input with aria-labelledby
   3. Label directly using aria-label
 
-## Examples
+## Props
 
-<Canvas of={Stories.DefaultFormLabel} />
-
-### Help Text
-
-Use `helpText` to add additional context for the FormLabel's input.
-This can help keep checkbox label concise.
-
-<Canvas of={Stories.HelpTextFormLabel} />
+<ArgsTable of={FormLabel} />

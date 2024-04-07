@@ -1,5 +1,4 @@
 import { Card } from './Card';
-import { Table } from '../Table/Table';
 import { Box, Button, TextInput } from '../../index';
 import type { Meta } from '@storybook/react';
 import React from 'react';
@@ -19,71 +18,6 @@ export const DefaultCard = () => (
       <p>Card content</p>
     </Card.Section>
     <Card.Footer>Footer</Card.Footer>
-  </Card>
-);
-
-export const SubduedCard = () => (
-  <Card subdued>
-    <Card.Header title="Subdued Card" />
-    <Card.Section>
-      <p>Card content</p>
-    </Card.Section>
-  </Card>
-);
-
-export const CardHeader = () => (
-  <Card>
-    <Card.Header title="Default Card">
-      This is a good place for card description text
-    </Card.Header>
-    <Card.Section>
-      <p>Card content</p>
-    </Card.Section>
-  </Card>
-);
-
-export const CardSection = () => (
-  <Card>
-    <Card.Header title="Card Title" />
-    <Card.Section title="Section Title">
-      <p>Section content</p>
-    </Card.Section>
-  </Card>
-);
-
-export const MultipleSections = () => (
-  <Card>
-    <Card.Header title="Card with Multiple Sections" />
-    <Card.Section title="Section A Title">
-      <p>Section content</p>
-    </Card.Section>
-    <Card.Section title="Section B Title">
-      <p>Section content</p>
-    </Card.Section>
-    <Card.Section>
-      <p>Section c has no title</p>
-    </Card.Section>
-  </Card>
-);
-
-export const SubduedSection = () => (
-  <Card>
-    <Card.Header title="Card with Subdued Section" />
-    <Card.Section subdued>
-      <Box as="p">Subdued section</Box>
-    </Card.Section>
-    <Card.Section>
-      <Box as="p">Another section that is not subdued</Box>
-    </Card.Section>
-  </Card>
-);
-
-export const CardFooter = () => (
-  <Card>
-    <Card.Section>content</Card.Section>
-    <Card.Footer>
-      <Button variant="primary">Publish</Button>
-    </Card.Footer>
   </Card>
 );
 
@@ -137,27 +71,6 @@ export const ExampleSignUpForm = () => (
     </Card>
   </Box>
 );
-
-export const ExampleCardWithTable = () => {
-  const columnConfig = [
-    { heading: 'ID', dataKey: 'id' },
-    { heading: 'Color', dataKey: 'color' },
-    { heading: 'Flavor', dataKey: 'flavor' },
-  ];
-  const tableData = [
-    { id: 1, color: 'red', flavor: 'vanilla' },
-    { id: 2, color: 'blue', flavor: 'chocolate' },
-    { id: 3, color: 'green', flavor: 'strawberry' },
-  ];
-  return (
-    <Card>
-      <Card.Header title="Flavor Table" />
-      <Card.Section padding="0">
-        <Table rowKey="id" columns={columnConfig} rows={tableData} />
-      </Card.Section>
-    </Card>
-  );
-};
 
 export const ExampleFullBleedPhotos = () => (
   <Box
