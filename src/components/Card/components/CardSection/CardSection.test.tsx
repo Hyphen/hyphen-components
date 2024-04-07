@@ -4,9 +4,9 @@ import { render } from '@testing-library/react';
 import { CardSection } from './CardSection';
 
 describe('Card/CardSection', () => {
-  test('lg padding class is applied by default', () => {
+  test('2xl padding class is applied by default', () => {
     const { container } = render(<CardSection>Test Card</CardSection>);
-    expect(container.children[0].classList).toContain('p-h-lg');
+    expect(container.children[0].classList).toContain('p-2xl');
   });
 
   test('is subdued', () => {

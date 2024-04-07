@@ -8,9 +8,9 @@ describe('ModalFooter', () => {
     expect(getByText('test modal')).toBeInTheDocument();
   });
 
-  test('lg padding class is applied by default', () => {
+  test('xl padding class is applied by default', () => {
     const { container } = render(<ModalFooter>test modal</ModalFooter>);
-    expect(container.children[0].classList).toContain('p-lg');
+    expect(container.children[0].classList).toContain('p-xl');
   });
 
   test('row direction class is applied by default', () => {

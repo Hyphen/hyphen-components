@@ -6,8 +6,7 @@ import { CardHeader } from './CardHeader';
 describe('Card/CardHeader', () => {
   test('correct padding classes are applied', () => {
     const { getByText } = render(<CardHeader>Test Card Header</CardHeader>);
-    expect(getByText('Test Card Header').classList).toContain('p-h-lg');
-    expect(getByText('Test Card Header').classList).toContain('p-v-md');
+    expect(getByText('Test Card Header').classList).toContain('p-2xl');
   });
 
   test('title is rendered as h4 if defined as a string', () => {
