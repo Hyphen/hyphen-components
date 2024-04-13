@@ -363,7 +363,11 @@ export const Box: FC<BoxProps> = forwardRef(
       },
     };
 
-    const getStatefulClasses = (stateKey: 'hover' | 'focus', values: BoxProps['hover' | 'hover']) => values // eslint-disable-line
+    const getStatefulClasses = (
+      stateKey: 'hover' | 'focus',
+      values: BoxProps['hover' | 'hover']
+    ) =>
+      values // eslint-disable-line
         ? Object.entries(values).map(
             ([key, value]) =>
               cssPropertyMap[key].transformer(
@@ -404,7 +408,7 @@ export const Box: FC<BoxProps> = forwardRef(
       generateResponsiveClasses('overflow', overflow),
       generateResponsiveClasses('shadow', shadow),
       generateResponsiveClasses('flex', flex),
-      cssShorthandToClasses('border-width', borderWidth),
+      cssShorthandToClasses('bw', borderWidth),
       generateResponsiveClasses('font-weight', fontWeight),
       generateResponsiveClasses('text-align', textAlign),
       generateResponsiveClasses('position', position),
