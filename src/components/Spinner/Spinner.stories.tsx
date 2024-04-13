@@ -1,4 +1,4 @@
-import { BRAND_COLOR_NAMES } from '../../lib/tokens';
+import { BASE_COLOR_NAMES } from '../../lib/tokens';
 import { Box } from '../Box/Box';
 import type { Meta } from '@storybook/react';
 import React from 'react';
@@ -15,7 +15,7 @@ export const Default = () => <Spinner />;
 
 export const Variants = () => (
   <Box display="block" childGap="md">
-    {BRAND_COLOR_NAMES.map((color) => (
+    {BASE_COLOR_NAMES.map((color) => (
       <Box direction="row" childGap="sm">
         <Spinner variant={color} />
         <div>{color}</div>

@@ -1,7 +1,7 @@
 import {
   BORDER_SIZE_OPTIONS,
   BOX_SHADOW_OPTIONS,
-  BRAND_COLOR_OPTIONS,
+  BASE_COLOR_OPTIONS,
   FONT_COLOR_OPTIONS,
   FONT_SIZE_OPTIONS,
   SPACING_OPTIONS,
@@ -20,7 +20,7 @@ describe('Box', () => {
   });
 
   test('background color token classes are applied', () => {
-    [...BRAND_COLOR_OPTIONS].forEach((color, i) => {
+    [...BASE_COLOR_OPTIONS].forEach((color, i) => {
       const { queryAllByText } = render(
         <Box background={color} key={i}>
           Test Box
@@ -59,7 +59,7 @@ describe('Box', () => {
   });
 
   test('border color token classes are applied', () => {
-    [...BRAND_COLOR_OPTIONS].forEach((color, i) => {
+    [...BASE_COLOR_OPTIONS].forEach((color, i) => {
       const { queryAllByText } = render(
         <Box borderColor={color} key={i}>
           Test Box
@@ -320,7 +320,7 @@ describe('Box', () => {
 
   describe('Focus States', () => {
     test('Background Hover -- box rendered with proper background hover classes', () => {
-      [...BRAND_COLOR_OPTIONS].forEach((brandColorOption, i) => {
+      [...BASE_COLOR_OPTIONS].forEach((brandColorOption, i) => {
         const { queryAllByText } = render(
           <Box hover={{ background: brandColorOption }} key={i}>
             Test Box
@@ -333,7 +333,7 @@ describe('Box', () => {
     });
 
     test('Border Color Hover -- box rendered with proper border color hover classes', () => {
-      [...BRAND_COLOR_OPTIONS].forEach((brandColorOption, i) => {
+      [...BASE_COLOR_OPTIONS].forEach((brandColorOption, i) => {
         const { queryAllByText } = render(
           <Box hover={{ borderColor: brandColorOption }} key={i}>
             Test Box
@@ -400,7 +400,7 @@ describe('Box', () => {
 
   describe('Focus States', () => {
     test('Background Focus -- box rendered with proper background focus classes', () => {
-      [...BRAND_COLOR_OPTIONS].forEach((brandColorOption, i) => {
+      [...BASE_COLOR_OPTIONS].forEach((brandColorOption, i) => {
         const { queryAllByText } = render(
           <Box focus={{ background: brandColorOption }} key={i}>
             Test Box
@@ -413,7 +413,7 @@ describe('Box', () => {
     });
 
     test('Border Color Focus -- box rendered with proper border color focus classes', () => {
-      [...BRAND_COLOR_OPTIONS].forEach((brandColorOption, i) => {
+      [...BASE_COLOR_OPTIONS].forEach((brandColorOption, i) => {
         const { queryAllByText } = render(
           <Box focus={{ borderColor: brandColorOption }} key={i}>
             Test Box

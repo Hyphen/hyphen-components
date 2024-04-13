@@ -1,4 +1,4 @@
-@import '@hyphen/hyphen-design-tokens/build/scss/variables-size';
+@import '@hyphen/hyphen-design-tokens/build/scss/_variables';
 
 @mixin floating-label-minimize-md {
   opacity: 0.75;
@@ -223,7 +223,7 @@
     border-radius: 100px;
     content: '';
     position: absolute;
-    background: var(--color-brand-grey-300);
+    background: var(--color-base-grey-300);
     pointer-events: none;
     width: 10px;
     height: 2px;

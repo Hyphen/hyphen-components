@@ -9,7 +9,6 @@ import FocusLock from 'react-focus-lock';
 import { RemoveScroll } from 'react-remove-scroll';
 import classNames from 'classnames';
 import { DimensionSize, CssDimensionValue } from '../../types';
-import { WIDTH_OPTIONS } from '../../lib';
 import { Box } from '../Box/Box';
 import { Icon } from '../Icon/Icon';
 import styles from './Drawer.module.scss';
@@ -133,11 +132,7 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
       }, 100);
     }, [initialFocusRef]);
 
-    const dynamicWidth = (WIDTH_OPTIONS as Array<string | undefined>).includes(
-      width
-    )
-      ? `var(--size-width-${width})`
-      : width;
+    const dynamicWidth = width;
 
     const dynamicStyle: CSSProperties = {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

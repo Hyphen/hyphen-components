@@ -1,4 +1,4 @@
-@import '@hyphen/hyphen-design-tokens/build/scss/variables-size';
+@import '@hyphen/hyphen-design-tokens/build/scss/_variables';
 
 @mixin floating-label-minimize-md {
   opacity: 0.75;
@@ -225,7 +225,7 @@
 .prefix {
   border: 1px solid
     var(--form-control-border-color, var(--INTERNAL_form-control-border-color));
-  background-color: var(--color-brand-grey-50);
+  background-color: var(--color-base-grey-50);
   border-top-left-radius: var(
     --form-control-size-md-border-radius,
     var(--INTERNAL_form-control-size-md-border-radius)
@@ -239,7 +239,7 @@
 .suffix {
   border: 1px solid
     var(--form-control-border-color, var(--INTERNAL_form-control-border-color));
-  background-color: var(--color-brand-grey-50);
+  background-color: var(--color-base-grey-50);
   border-top-right-radius: var(
     --form-control-size-md-border-radius,
     var(--INTERNAL_form-control-size-md-border-radius)

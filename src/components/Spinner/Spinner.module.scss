@@ -1,15 +1,15 @@
 .spinner {
-  --spinner-primary-color: var(--color-brand-primary-500);
-  --spinner-magenta-color: var(--color-brand-magenta-500);
-  --spinner-purple-color: var(--color-brand-purple-500);
-  --spinner-white-color: var(--color-brand-white-500);
-  --spinner-black-color: var(--color-brand-black-500);
-  --spinner-grey-color: var(--color-brand-grey-500);
-  --spinner-blue-color: var(--color-brand-blue-500);
-  --spinner-red-color: var(--color-brand-red-500);
-  --spinner-yellow-color: var(--color-brand-yellow-500);
-  --spinner-green-color: var(--color-brand-green-500);
-  --spinner-transparent-color: var(--color-brand-transparent-500);
+  --spinner-primary-color: var(--color-base-primary-500);
+  --spinner-magenta-color: var(--color-base-magenta-500);
+  --spinner-purple-color: var(--color-base-purple-500);
+  --spinner-white-color: var(--color-base-white-500);
+  --spinner-black-color: var(--color-base-black-500);
+  --spinner-grey-color: var(--color-base-grey-500);
+  --spinner-blue-color: var(--color-base-blue-500);
+  --spinner-red-color: var(--color-base-red-500);
+  --spinner-yellow-color: var(--color-base-yellow-500);
+  --spinner-green-color: var(--color-base-green-500);
+  --spinner-transparent-color: var(--color-base-transparent-500);
 
   svg {
     display: inherit;
