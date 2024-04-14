@@ -28,7 +28,7 @@ export interface HeadingProps {
    * A variant token identifier to use for the text variant. Available variants found:
    * [here](https://github.com/hyphen/hyphen-design-tokens/blob/main/properties/color/font.json).
    */
-  variant?: FontColor;
+  color?: FontColor;
   /**
    * By default, size is determined by the chosen tag (e.g. h1 is bigger than h2).
    * However, size can be set independently so that its size is appropriate for the surrounding content.
@@ -46,7 +46,7 @@ export const Heading: FC<HeadingProps> = ({
   as = 'h4',
   children,
   className,
-  variant,
+  color,
   size,
   ...restProps
 }) => {
@@ -57,9 +57,9 @@ export const Heading: FC<HeadingProps> = ({
   const classes = classNames(
     styles.heading,
     className,
-    generateResponsiveClasses('font-size', headingSize),
+    generateResponsiveClasses('heading', headingSize),
     {
-      [`font-color-${variant}`]: variant,
+      [`font-color-${color}`]: color,
     }
   );
 

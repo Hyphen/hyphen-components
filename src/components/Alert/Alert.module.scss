@@ -2,7 +2,7 @@
   border-width: var(--alert-border-width, var(--size-border-width-sm));
   border-style: solid;
   box-shadow: var(--alert-box-shadow, var(--size-box-shadow-0));
-  font-family: var(--alert-font-family, var(--asset-fonts-body));
+  font-family: var(--alert-font-family, var(--assets-font-family-body));
 
   .close-icon {
     > button {
