@@ -30,18 +30,20 @@ Use these tokens for `border-radius`. They are defined in `rem`, which means the
     </tr>
   </thead>
   <tbody>
-    {Object.entries(designTokens.size.border.radius).map(([name, entry], i) => (
-      <tr key={i}>
-        <td>
-          <code>{`size-border-radius-${name}`}</code>
-        </td>
-        <td>
-          <code>{name}</code>
-        </td>
-        <td>{entry.value}</td>
-        <td>{name !== 'circle' ? entry.original.value * 16 : ''}</td>
-      </tr>
-    ))}
+    {Object.entries(designTokens.size['border-radius']).map(
+      ([name, entry], i) => (
+        <tr key={i}>
+          <td>
+            <code>{`size-border-radius-${name}`}</code>
+          </td>
+          <td>
+            <code>{name}</code>
+          </td>
+          <td>{entry.value}</td>
+          <td>{name !== 'circle' ? entry.original.value * 16 : ''}</td>
+        </tr>
+      )
+    )}
   </tbody>
 </table>
 
@@ -58,17 +60,19 @@ Use these tokens for `border-width`.
     </tr>
   </thead>
   <tbody>
-    {Object.entries(designTokens.size.border.width).map(([name, entry], i) => (
-      <tr key={i}>
-        <td>
-          <code>{`size-border-width-${name}`}</code>
-        </td>
-        <td>
-          <code>{name}</code>
-        </td>
-        <td>{entry.value}</td>
-      </tr>
-    ))}
+    {Object.entries(designTokens.size['border-width']).map(
+      ([name, entry], i) => (
+        <tr key={i}>
+          <td>
+            <code>{`size-border-width-${name}`}</code>
+          </td>
+          <td>
+            <code>{name}</code>
+          </td>
+          <td>{entry.value}</td>
+        </tr>
+      )
+    )}
   </tbody>
 </table>
 
@@ -307,17 +311,19 @@ Use these tokens for `font-weight`.
     </tr>
   </thead>
   <tbody>
-    {Object.entries(designTokens.size.font.weight).map(([name, entry], i) => (
-      <tr key={i}>
-        <td>
-          <code>{`size-font-weight-${name}`}</code>
-        </td>
-        <td>
-          <code>{name}</code>
-        </td>
-        <td>{entry.original.value}</td>
-      </tr>
-    ))}
+    {Object.entries(designTokens.size['font-weight']).map(
+      ([name, entry], i) => (
+        <tr key={i}>
+          <td>
+            <code>{`size-font-weight-${name}`}</code>
+          </td>
+          <td>
+            <code>{name}</code>
+          </td>
+          <td>{entry.original.value}</td>
+        </tr>
+      )
+    )}
   </tbody>
 </table>
 

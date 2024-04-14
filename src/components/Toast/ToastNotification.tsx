@@ -67,12 +67,12 @@ const renderToastIcon = (toast: Toast) => {
 
   if (type === 'success') {
     iconName = 'c-check';
-    iconColor = 'green-300';
+    iconColor = 'success';
   }
 
   if (type === 'error') {
     iconName = 'c-warning';
-    iconColor = 'red-300';
+    iconColor = 'danger';
   }
 
   const icon =
@@ -106,7 +106,7 @@ const renderDismissIcon = (
       alignItems="center"
       justifyContent="center"
       cursor="pointer"
-      background="transparent-500" // transparent
+      background="transparent" // transparent
       height="100"
       onClick={onDismiss}
       aria-label="dismiss notification"

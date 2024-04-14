@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import classNames from 'classnames';
 import {
-  BrandColor,
+  BackgroundColor,
   FontColor,
   FontSize,
   BaseSpacing,
@@ -22,7 +22,10 @@ export type BadgeVariant =
   | 'blue'
   | 'red';
 
-export type BadgeColorAttributes = { font: FontColor; background: BrandColor };
+export type BadgeColorAttributes = {
+  font: FontColor;
+  background: BackgroundColor;
+};
 
 export type BadgeSizeAttributes = { fontSize: FontSize; padding: BaseSpacing };
 export interface BadgeProps {
@@ -50,13 +53,13 @@ export interface BadgeProps {
 
 export const BADGE_COLOR_MAP: { [key in BadgeVariant]: BadgeColorAttributes } =
   {
-    blue: { font: 'grey-600', background: 'blue-100' },
-    primary: { font: 'grey-600', background: 'primary-100' },
-    green: { font: 'grey-600', background: 'green-100' },
-    red: { font: 'grey-600', background: 'red-100' },
-    purple: { font: 'grey-600', background: 'purple-100' },
-    grey: { font: 'grey-600', background: 'grey-100' },
-    yellow: { font: 'grey-600', background: 'yellow-100' },
+    blue: { font: 'base', background: 'info' },
+    primary: { font: 'base', background: 'primary-100' },
+    green: { font: 'base', background: 'success' },
+    red: { font: 'base', background: 'danger' },
+    purple: { font: 'base', background: 'purple-100' },
+    grey: { font: 'base', background: 'secondary' },
+    yellow: { font: 'base', background: 'warning' },
   };
 
 export const Badge: FC<BadgeProps> = ({

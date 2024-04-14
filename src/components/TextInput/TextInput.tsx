@@ -236,7 +236,7 @@ export const TextInput: ForwardRefExoticComponent<TextInputProps> = forwardRef<
         <Box direction="row" className={inputWrapperClasses}>
           {prefix && (
             <Box
-              color="grey-400"
+              color="secondary"
               className={classNames(styles.prefix, 'ws-nowrap')}
             >
               {prefix}
@@ -248,7 +248,7 @@ export const TextInput: ForwardRefExoticComponent<TextInputProps> = forwardRef<
           {!!onClear && !!value && renderClearIcon()}
           {suffix && (
             <Box
-              color="grey-400"
+              color="secondary"
               className={classNames(styles.suffix, 'ws-nowrap')}
             >
               {suffix}
