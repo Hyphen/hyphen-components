@@ -5,7 +5,7 @@ import {
   BorderRadiusSize,
   BorderSize,
   BoxShadowSize,
-  BrandColor,
+  // BaseColor,
   BreakpointSizeWithBase,
   CssAlignContentValue,
   CssAlignItemsValue,
@@ -23,6 +23,8 @@ import {
   ResponsiveProp,
   SpacingSize,
   ZIndexSize,
+  BackgroundColor,
+  BorderColor,
 } from '../../types';
 import {
   CSSProperties,
@@ -70,12 +72,11 @@ export interface BoxProps {
   /**
    * Any valid [brand color token](/?path=/docs/foundation-design-tokens--docs#color), or a `url()` for an image
    */
-  background?: BrandColor;
+  background?: BackgroundColor;
   /**
    * Any valid [brand color token](/?path=/docs/foundation-design-tokens--docs#color) for the border color
-   * Or a responsive prop with BrandColor for each breakpoint.
    */
-  borderColor?: BrandColor;
+  borderColor?: BorderColor;
   /**
    * Width of the Box's border
    * Can be a single [border width token](/?path=/docs/foundation-design-tokens--docs#border-width).

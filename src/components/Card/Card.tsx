@@ -1,7 +1,7 @@
 import {
   BorderRadiusSize,
   BoxShadowSize,
-  BrandColor,
+  BackgroundColor,
   ResponsiveProp,
 } from '../../types';
 import { Box, BoxProps } from '../Box/Box';
@@ -16,7 +16,7 @@ export interface CardProps extends BoxProps {
    * If defined as a prop, this value will take higher precedence than the corresponding component design token value
    * Any valid [brand color token](/?path=/docs/foundation-design-tokens--docs#color), or a `url()` for an image
    */
-  background?: BrandColor;
+  background?: BackgroundColor;
   /**
    * The Card's contents.
    */

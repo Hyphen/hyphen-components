@@ -189,11 +189,7 @@ export const WithChildren = () => {
         onChange={(date) => setSelectedDate(date as Date)}
         selected={selectedDate}
       >
-        <Box
-          display="block"
-          style={{ textAlign: 'center' }}
-          color="primary-500"
-        >
+        <Box display="block" style={{ textAlign: 'center' }} color="base">
           It will be sunny out today!
         </Box>
       </DatePicker>

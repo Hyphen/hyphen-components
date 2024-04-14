@@ -2,9 +2,10 @@ import designTokens from '@hyphen/hyphen-design-tokens/build/json/_variables.jso
 // import { ICON_NAMES as iconNames } from '@hyphen/hyphen-design-tokens/build/icons';
 
 import {
+  BaseColor,
+  BackgroundColor,
   BorderRadiusSize,
   BorderSize,
-  BrandColor,
   Breakpoint,
   BreakpointSizeWithBase,
   BoxShadowSize,
@@ -13,8 +14,10 @@ import {
   FontSize,
   FontFamily,
   FontWeight,
+  HeightSize,
   LineHeightSize,
   SpacingSize,
+  WidthSize,
   ZIndexSize,
   // IconName,
 } from '../types';
@@ -22,12 +25,12 @@ import {
 
 // export const ICON_NAMES = iconNames as IconName[];
 export const BORDER_RADIUS_OPTIONS = Object.keys(
-  designTokens.size.border.radius
+  designTokens.size['border-radius']
 ) as BorderRadiusSize[];
-export const BORDER_RADIUS_VALUES = Object.values(designTokens.size.border.radius);
+export const BORDER_RADIUS_VALUES = Object.values(designTokens.size['border-radius']);
 
-export const BORDER_SIZE_OPTIONS = Object.keys(designTokens.size.border.width) as BorderSize[];
-export const BORDER_SIZE_VALUES = Object.values(designTokens.size.border.width);
+export const BORDER_SIZE_OPTIONS = Object.keys(designTokens.size['border-width']) as BorderSize[];
+export const BORDER_SIZE_VALUES = Object.values(designTokens.size['border-width']);
 
 export const BREAKPOINT_OPTIONS = Object.keys(
   designTokens.size.breakpoint
@@ -48,15 +51,16 @@ export const BASE_COLOR_OPTIONS = (Object.keys(designTokens.color.base) as Color
       colorGrade === 'base' ? colorName : `${colorName}-${colorGrade}`
     )
   )
-  .flat() as BrandColor[];
-
-console.log('BASE_COLOR_OPTIONS', BASE_COLOR_OPTIONS);
+  .flat() as BaseColor[];
 
 export const BASE_COLOR_NAMES = Object.keys(designTokens.color.base) as ColorName[];
-export const BRAND_COLOR_VALUES = Object.values(designTokens.color.base);
+export const BASE_COLOR_VALUES = Object.values(designTokens.color.base);
 
 export const FONT_COLOR_OPTIONS = Object.keys(designTokens.color.font) as FontColor[];
 export const FONT_COLOR_VALUES = designTokens.color.font;
+
+export const BACKGROUND_COLOR_OPTIONS = Object.keys(designTokens.color.background) as BackgroundColor[];
+export const BACKGROUND_COLOR_VALUES = designTokens.color.background;
 
 export const FONT_SIZE_OPTIONS = Object.keys(designTokens.size.font.size) as FontSize[];
 export const FONT_SIZE_VALUES = designTokens.size.font.size;
@@ -69,6 +73,9 @@ export const FONT_WEIGHT_OPTIONS = Object.keys(
 ) as FontWeight[];
 export const FONT_WEIGHT_VALUES = designTokens.size.font.weight;
 
+export const HEIGHT_OPTIONS = Object.keys(designTokens.size.dimension) as HeightSize[];
+export const HEIGHT_VALUES = designTokens.size.dimension;
+
 export const LINE_HEIGHT_OPTIONS = Object.keys(
   designTokens.size['line-height']
 ) as LineHeightSize[];
@@ -76,6 +83,9 @@ export const LINE_HEIGHT_VALUES = designTokens.size['line-height'];
 
 export const SPACING_OPTIONS = Object.keys(designTokens.size.spacing) as SpacingSize[];
 export const SPACING_VALUES = designTokens.size.spacing;
+
+export const WIDTH_OPTIONS = Object.keys(designTokens.size.dimension) as WidthSize[];
+export const WIDTH_VALUES = designTokens.size.dimension;
 
 export const Z_INDEX_OPTIONS = Object.keys(designTokens.size['z-index']) as ZIndexSize[];
 export const Z_INDEX_VALUES = designTokens.size['z-index'];

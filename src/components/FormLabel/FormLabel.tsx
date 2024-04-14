@@ -85,7 +85,7 @@ export const FormLabel: FC<FormLabelProps> = ({
           as="p"
           display="block"
           fontSize="sm"
-          color="grey-500"
+          color="secondary"
           className={styles['help-text']}
         >
           {helpText}
