@@ -78,7 +78,7 @@
       --badge-purple-border-color,
       var(--color-base-purple-600)
     );
-    color: var(--badge-purple-font-color, var(--color-base-white-500));
+    color: var(--badge-purple-font-color, var(--color-base-white));
   }
 
   &.green {
@@ -90,7 +90,7 @@
       --badge-success-border-color,
       var(--color-base-green-600)
     );
-    color: var(--badge-success-font-color, var(--color-base-white-500));
+    color: var(--badge-success-font-color, var(--color-base-white));
   }
 
   &.red {
@@ -99,7 +99,7 @@
       var(--color-base-red-500)
     );
     border-color: var(--badge-danger-border-color, var(--color-base-red-600));
-    color: var(--badge-danger-font-color, var(--color-base-white-500));
+    color: var(--badge-danger-font-color, var(--color-base-white));
   }
 
   &.blue {
@@ -108,7 +108,7 @@
       var(--color-base-blue-500)
     );
     border-color: var(--badge-info-border-color, var(--color-base-blue-600));
-    color: var(--badge-info-font-color, var(--color-base-white-500));
+    color: var(--badge-info-font-color, var(--color-base-white));
   }
 
   &.yellow {

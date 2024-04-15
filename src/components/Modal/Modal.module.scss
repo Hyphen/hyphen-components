@@ -58,10 +58,7 @@
     grid-column: 1;
     z-index: var(--size-z-index-modal);
     margin: 0;
-    background-color: var(
-      --modal-background-color,
-      var(--color-base-white-500)
-    );
+    background-color: var(--modal-background-color, var(--color-base-white));
     padding: 0;
     width: 100%;
     border-radius: var(--modal-border-radius, var(--size-border-radius-md))

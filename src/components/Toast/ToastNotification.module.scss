@@ -3,7 +3,7 @@
     --toast-notification-background-color,
     var(--color-base-grey-800)
   );
-  color: var(--toast-notification-font-color, var(--color-base-white-500));
+  color: var(--toast-notification-font-color, var(--color-base-white));
   border-radius: var(
     --toast-notification-border-radius,
     var(--size-border-radius-sm)
@@ -18,7 +18,7 @@
     --toast-notification-dismiss-border-color,
     var(--color-base-grey-600)
   );
-  color: var(--toast-notification-dismiss-color, var(--color-base-white-500));
+  color: var(--toast-notification-dismiss-color, var(--color-base-white));
 }
 
 .toast-notification-enter-top {

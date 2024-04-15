@@ -67,10 +67,7 @@ $lg-dimension: 36px;
   }
 
   input + div {
-    background: var(
-      --form-control-background-color,
-      var(--color-base-white-500)
-    );
+    background: var(--form-control-background-color, var(--color-base-white));
     color: var(--form-control-checkbox-color, var(--color-base-grey-500));
   }
 

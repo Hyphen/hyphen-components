@@ -11,7 +11,7 @@
     font-size: var(--date-picker-font-size, var(--size-font-size-sm));
     background-color: var(
       --date-picker-background-color,
-      var(--color-base-white-500)
+      var(--color-base-white)
     );
     border-radius: var(
       --date-picker-border-radius,
@@ -247,7 +247,7 @@
                 --date-picker-item-background-color-selected,
                 var(--color-base-primary-500)
               );
-              color: var(--color-base-white-500);
+              color: var(--color-base-white);
               font-weight: bold;
 
               &:hover {
@@ -321,7 +321,7 @@
         --date-picker-item-background-color-selected,
         var(--color-base-primary-500)
       );
-      color: var(--color-base-white-500);
+      color: var(--color-base-white);
 
       &:hover {
         background-color: var(
@@ -384,7 +384,7 @@
         --date-picker-item-background-color-selected,
         var(--color-base-primary-500)
       );
-      color: var(--color-base-white-500);
+      color: var(--color-base-white);
 
       &:hover {
         background-color: var(
@@ -409,7 +409,7 @@
         --date-picker-item-background-color-selected,
         var(--color-base-primary-500)
       );
-      color: var(--color-base-white-500);
+      color: var(--color-base-white);
 
       &:hover {
         background-color: var(
@@ -428,7 +428,7 @@
         --date-picker-item-background-color-in-range,
         var(--color-base-primary-400)
       );
-      color: var(--color-base-white-500);
+      color: var(--color-base-white);
 
       &:hover {
         background-color: var(

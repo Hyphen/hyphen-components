@@ -38,10 +38,7 @@
 
 .drawer {
   .drawer-content {
-    background-color: var(
-      --drawer-background-color,
-      var(--color-base-white-500)
-    );
+    background-color: var(--drawer-background-color, var(--color-base-white));
     color: var(--drawer-font-color, inherit);
     display: flex;
     flex-direction: column;
