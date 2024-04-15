@@ -1392,7 +1392,7 @@ export const Position = () => (
       padding="md"
       background="tertiary"
       height="50px"
-      // color="white-500"
+      color="white"
       style={{ top: 0, zIndex: 2 }}
     >
       sticky
@@ -1408,7 +1408,7 @@ export const Hover = () => (
     <Box
       padding="md"
       background="tertiary"
-      // color="white-500"
+      color="white"
       shadow="xs"
       hover={{
         background: 'success',
@@ -1429,7 +1429,7 @@ export const Hover = () => (
       justifyContent="center"
       hover={{
         background: 'success',
-        // color: 'white-500',
+        color: 'white',
       }}
       cursor="pointer"
     >

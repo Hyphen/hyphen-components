@@ -72,8 +72,8 @@ export const PopoverStyling = () => {
     { value: 'red-500', label: 'Red 500' },
   ];
   const fontColorOptions = [
-    { value: 'black-500', label: 'Black 500' },
-    { value: 'white-500', label: 'White 500' },
+    { value: 'base', label: 'base' },
+    { value: 'inverse', label: 'inverse' },
   ];
   const borderRadiusOptions = [
     { value: 'sm', label: 'Small' },
@@ -198,8 +198,8 @@ export const Placement = () => {
             placement={position}
             contentContainerProps={{
               padding: 'sm',
-              background: 'blue-200',
-              color: 'white-500',
+              background: 'info',
+              color: 'base',
             }}
           >
             <Button
@@ -360,7 +360,7 @@ export const TrappingFocus = () => {
         placement="right-start"
         contentContainerProps={{
           padding: 'md',
-          background: 'white-500',
+          background: 'primary',
         }}
         withPortal
         portalTarget={document.body}

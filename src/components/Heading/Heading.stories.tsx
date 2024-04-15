@@ -3,7 +3,6 @@
 import { Heading } from './Heading';
 import type { Meta } from '@storybook/react';
 import React from 'react';
-import { v4 as uuid } from 'uuid';
 
 const meta: Meta<typeof Heading> = {
   title: 'Components/Heading',

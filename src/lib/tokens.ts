@@ -46,12 +46,15 @@ export const BREAKPOINTS = [
 })) as Breakpoint[];
 
 export const BASE_COLOR_OPTIONS = (Object.keys(designTokens.color.base) as ColorName[])
-  .map((colorName) =>
-    Object.keys(designTokens.color.base[colorName]).map((colorGrade) =>
+  .map((colorName) => {
+    if (colorName === 'white' || colorName === 'black') return `${colorName}`;
+    return Object.keys(designTokens.color.base[colorName]).map((colorGrade) =>
       colorGrade === 'base' ? colorName : `${colorName}-${colorGrade}`
     )
+  }
   )
   .flat() as BaseColor[];
+  console.log(BASE_COLOR_OPTIONS);
 
 export const BASE_COLOR_NAMES = Object.keys(designTokens.color.base) as ColorName[];
 export const BASE_COLOR_VALUES = Object.values(designTokens.color.base);
