@@ -4,6 +4,7 @@ import { ICON_NAMES as iconNames } from '@hyphen/hyphen-design-tokens/build/icon
 import {
   BaseColor,
   BackgroundColor,
+  BorderColor,
   BorderRadiusSize,
   BorderSize,
   Breakpoint,
@@ -21,7 +22,6 @@ import {
   SpacingSize,
   WidthSize,
   ZIndexSize,
-  BorderColor,
 } from '../types';
 
 

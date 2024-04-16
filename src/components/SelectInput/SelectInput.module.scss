@@ -1,4 +1,4 @@
-@import '@hyphen/hyphen-design-tokens/build/scss/_variables';
+@import '@hyphen/hyphen-design-tokens/build/scss/variables';
 // The following styles required the :global tag since they need to be applied to react-select elements for which we do not own the markup
 
 @mixin react-select-icon {

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import '../src/styles/utilities.scss';
 import '../src/styles/variables/index.scss';
 import '../src/styles/reset.scss';
@@ -14,7 +14,7 @@ const preview: Preview = {
           'About',
           ['Introduction', 'Get Started'],
           'Foundation',
-          ['Design Tokens'],
+          ['Color', 'Design Tokens'],
           'Components',
         ],
       },

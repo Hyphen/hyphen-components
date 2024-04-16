@@ -48,7 +48,7 @@ export const Icon: FC<IconProps> = forwardRef<SVGSVGElement, IconProps>(
     ) : (
       <Box
         fontWeight="bold"
-        background="danger"
+        background="error"
         color="white"
         padding="2xs"
         fontSize="sm"

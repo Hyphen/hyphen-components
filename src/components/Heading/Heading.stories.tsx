@@ -1,5 +1,3 @@
-// import { FONT_COLOR_OPTIONS, FONT_SIZE_OPTIONS } from '../../lib/tokens';
-
 import { Heading } from './Heading';
 import type { Meta } from '@storybook/react';
 import React from 'react';

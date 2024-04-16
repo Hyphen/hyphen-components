@@ -1,8 +1,10 @@
 import { Card } from './Card';
-import { Box, Button, TextInput } from '../../index';
 import type { Meta } from '@storybook/react';
 import React from 'react';
-import { Heading } from '../../index';
+import { Box } from '../Box/Box';
+import { Button } from '../Button/Button';
+import { Heading } from '../Heading/Heading';
+import { TextInput } from '../TextInput/TextInput';
 
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',
@@ -73,12 +75,7 @@ export const ExampleSignUpForm = () => (
 );
 
 export const ExampleFullBleedPhotos = () => (
-  <Box
-    alignItems="center"
-    alignContent="center"
-    padding="2xl"
-    background="grey-50"
-  >
+  <>
     <Card width="300px">
       <Card.Section padding="0" overflow="hidden" height="300px">
         <img
@@ -92,5 +89,5 @@ export const ExampleFullBleedPhotos = () => (
         <Box as="p">This is the body copy of the card.</Box>
       </Card.Section>
     </Card>
-  </Box>
+  </>
 );

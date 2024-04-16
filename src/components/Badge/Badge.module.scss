@@ -1,4 +1,4 @@
-@import '@hyphen/hyphen-design-tokens/build/scss/_variables';
+@import '@hyphen/hyphen-design-tokens/build/scss/variables';
 
 @mixin size-sm {
   font-size: var(--badge-size-sm-font-size, var(--size-font-size-2xs));

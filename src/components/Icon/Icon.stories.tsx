@@ -1,5 +1,6 @@
 import { Box } from '../Box/Box';
-import { ICON_NAMES } from '../../lib/tokens';
+import { ICON_NAMES } from '@hyphen/hyphen-design-tokens/build/icons';
+import { IconName } from 'src/types';
 import { Icon } from './Icon';
 import type { Meta } from '@storybook/react';
 import React from 'react';
@@ -52,7 +53,7 @@ export const AvailableIcons = () => (
       gap: '1rem',
     }}
   >
-    {ICON_NAMES.map((iconName) => (
+    {ICON_NAMES.map((iconName: IconName) => (
       <Box
         key={iconName}
         fontSize="lg"
