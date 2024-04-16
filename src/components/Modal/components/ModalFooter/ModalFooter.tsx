@@ -12,21 +12,22 @@ export const ModalFooter: FC<ModalFooterProps> = ({
   direction = 'row',
   alignItems = 'center',
   justifyContent = 'flex-end',
+  background = 'secondary',
   gap = 'sm',
   style,
   ...restProps
 }) => (
   <Box
+    background={background}
     padding={padding}
     direction={direction}
     alignItems={alignItems}
     justifyContent={justifyContent}
-    borderWidth="xs 0 0 0"
+    borderWidth="sm 0 0 0"
+    borderColor="default"
     gap={gap}
     style={{
       flexShrink: 0,
-      borderColor:
-        'var(--modal-border-separator-color, var(--color-brand-grey-200))',
       ...style,
     }}
     {...restProps}

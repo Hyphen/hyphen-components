@@ -163,7 +163,7 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
             alignItems="flex-end"
             justifyContent="center"
             padding="md lg"
-            borderWidth="0 0 xs 0"
+            borderWidth="0 0 sm 0"
             className={styles['drawer-header']}
           >
             <button
@@ -184,7 +184,7 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
             justifyContent="space-between"
             alignItems="center"
             padding={onDismiss ? 'md lg' : 'lg'}
-            borderWidth="0 0 xs 0"
+            borderWidth="0 0 sm 0"
             className={styles['drawer-header']}
           >
             <Box className={styles.title} fontWeight="bold">
