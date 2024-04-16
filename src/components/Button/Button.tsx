@@ -215,7 +215,7 @@ export const Button = forwardRef<
                 aria-hidden="true"
                 focusable="false"
                 data-testid="suffixIcon"
-                size={size == 'md' ? 'sm' : size}
+                size={size === 'md' ? 'sm' : size}
               />
             </Box>
           )}

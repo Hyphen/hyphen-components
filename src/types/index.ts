@@ -26,7 +26,7 @@ export type {
   LineHeightSize,
   SpacingSize,
   WidthSize,
-  ZIndexSize
+  ZIndexSize,
 } from '@hyphen/hyphen-design-tokens/build/types';
 
 export type BreakpointSizeWithBase = BreakpointSize | 'base';
