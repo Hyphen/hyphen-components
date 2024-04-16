@@ -1,4 +1,4 @@
-import designTokens from '@hyphen/hyphen-design-tokens/build/json/_variables.json';
+import designTokens from '@hyphen/hyphen-design-tokens/build/json/variables';
 import { ICON_NAMES as iconNames } from '@hyphen/hyphen-design-tokens/build/icons';
 
 import {
