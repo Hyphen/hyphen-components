@@ -17,7 +17,6 @@ export type BadgeVariant =
   | 'grey'
   | 'primary'
   | 'green'
-  | 'purple'
   | 'yellow'
   | 'blue'
   | 'red';
@@ -54,10 +53,9 @@ export interface BadgeProps {
 export const BADGE_COLOR_MAP: { [key in BadgeVariant]: BadgeColorAttributes } =
   {
     blue: { font: 'base', background: 'info' },
-    primary: { font: 'base', background: 'primary-100' },
+    primary: { font: 'base', background: 'primary' },
     green: { font: 'base', background: 'success' },
     red: { font: 'base', background: 'danger' },
-    purple: { font: 'base', background: 'purple-100' },
     grey: { font: 'base', background: 'secondary' },
     yellow: { font: 'base', background: 'warning' },
   };

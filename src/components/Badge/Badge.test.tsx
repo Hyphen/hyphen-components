@@ -5,7 +5,6 @@ import { Badge, BadgeSize, BadgeVariant } from './Badge';
 export const BADGE_VARIANTS: BadgeVariant[] = [
   'grey',
   'primary',
-  'purple',
   'blue',
   'green',
   'yellow',

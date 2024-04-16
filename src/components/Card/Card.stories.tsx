@@ -35,7 +35,7 @@ export const ExampleSignUpForm = () => (
             <Heading as="h1" size="xl">
               Sign Up
             </Heading>
-            <Box as="p" color="grey-500" fontSize="sm">
+            <Box as="p" color="secondary" fontSize="sm">
               Create your Hyphen account
             </Box>
           </Box>
@@ -57,7 +57,7 @@ export const ExampleSignUpForm = () => (
               Sign Up
             </Button>
           </Box>
-          <Box alignItems="center" fontSize="sm" color="grey-500">
+          <Box alignItems="center" fontSize="sm" color="secondary">
             <p>
               Already have an account?{' '}
               <a href="/#" className="font-color-primary">

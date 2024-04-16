@@ -112,7 +112,7 @@ export const CommonExample = () =>
         render: (_cell: any, row: any) => (
           <div>
             <div>{row.name}</div>
-            <div className="font-color-grey">{row.email}</div>
+            <div className="font-color-base">{row.email}</div>
           </div>
         ),
       },

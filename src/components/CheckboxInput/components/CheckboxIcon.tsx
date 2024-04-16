@@ -36,7 +36,7 @@ export const CheckboxIcon: React.FC<CheckboxIconProps> = ({
   isIndeterminate = false,
   ...restProps
 }) => {
-  let color: FontColor = 'grey-500';
+  let color: FontColor = 'base';
   let name:
     | 'checkbox-btn'
     | 'checkbox-btn-checked'
@@ -48,15 +48,15 @@ export const CheckboxIcon: React.FC<CheckboxIconProps> = ({
   if (isIndeterminate) name = 'checkbox-btn-indeterminate';
 
   if (isChecked && isDisabled) {
-    color = 'primary-200';
+    color = 'disabled';
   } else if (isChecked && !isDisabled) {
-    color = 'primary-500';
+    color = 'base';
   } else if (isDisabled) {
-    color = 'grey-200';
+    color = 'disabled';
   }
 
-  if (error) color = 'red-500';
-  if (isDisabled && error) color = 'red-200';
+  if (error) color = 'danger';
+  if (isDisabled && error) color = 'danger-disabled';
 
   return (
     <Box

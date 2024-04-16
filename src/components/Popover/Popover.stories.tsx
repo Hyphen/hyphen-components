@@ -8,7 +8,10 @@ import { SelectInput } from '../SelectInput/SelectInput';
 import { TextInput } from '../TextInput/TextInput';
 import { Heading } from '../Heading/Heading';
 import { useOpenClose } from '../../hooks/useOpenClose/useOpenClose';
-import { FontColor } from '@hyphen/hyphen-design-tokens/build/types';
+import {
+  BackgroundColor,
+  FontColor,
+} from '@hyphen/hyphen-design-tokens/build/types';
 
 const meta: Meta<typeof Popover> = {
   title: 'Components/Popover',
@@ -64,12 +67,11 @@ export const PopoverStyling = () => {
     label: 'Small',
   });
   const backgroundOptions = [
-    { value: 'primary-500', label: 'Primary 500' },
-    { value: 'grey-500', label: 'Grey 500' },
-    { value: 'purple-500', label: 'Purple 500' },
-    { value: 'yellow-500', label: 'Yellow 500' },
-    { value: 'blue-500', label: 'Blue 500' },
-    { value: 'red-500', label: 'Red 500' },
+    { value: 'primary', label: 'primary' },
+    { value: 'secondary', label: 'secondary' },
+    { value: 'info', label: 'info' },
+    { value: 'warning', label: 'warn' },
+    { value: 'danger', label: 'danger' },
   ];
   const fontColorOptions = [
     { value: 'base', label: 'base' },
@@ -94,7 +96,7 @@ export const PopoverStyling = () => {
           placement={'right'}
           contentContainerProps={{
             padding: 'sm',
-            background: popoverBackground!.value as FontColor,
+            background: popoverBackground!.value as BackgroundColor,
             color: popoverFontColor!.value as FontColor,
             radius: popoverRadius!.value,
           }}
@@ -237,8 +239,8 @@ export const WithAPortal = () => {
         placement="right-start"
         contentContainerProps={{
           padding: 'md',
-          background: 'red-200',
-          color: 'primary-500',
+          background: 'danger',
+          color: 'base',
         }}
         withPortal
         portalTarget={document.body}
@@ -277,7 +279,7 @@ export const HoverTrigger = () => {
         placement="right-start"
         contentContainerProps={{
           padding: 'md',
-          background: 'blue-500',
+          background: 'info',
         }}
       >
         <Button
@@ -317,7 +319,7 @@ export const RespondToOutsideClicks = () => {
         onClickOutside={closePopover}
         contentContainerProps={{
           padding: 'md',
-          background: 'green-500',
+          background: 'success',
         }}
       >
         <Button onClick={togglePopover} variant="secondary">
@@ -430,7 +432,7 @@ export const OffsetDistance = () => {
           placement="right-start"
           contentContainerProps={{
             padding: 'md',
-            background: 'grey-200',
+            background: 'secondary',
           }}
           withPortal
           portalTarget={document.body}

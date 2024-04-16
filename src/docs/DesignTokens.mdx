@@ -131,7 +131,7 @@ The following breakpoints are used in utility classes, but you can use them to m
 ## Color
 
 <ColorPalette>
-  {/* <ColorItem
+  <ColorItem
     title="color-base-white"
     subtitle="White"
     colors={[designTokens.color.base.white.value]}
@@ -145,7 +145,7 @@ The following breakpoints are used in utility classes, but you can use them to m
     title="color-base-magenta"
     subtitle="Black"
     colors={[designTokens.color.base.magenta.value]}
-  /> */}
+  />
   <ColorItem
     title="color-base-grey"
     subtitle="Grey"
@@ -233,6 +233,76 @@ The following breakpoints are used in utility classes, but you can use them to m
   />
 
 </ColorPalette>
+
+## Dimension
+
+Dimension tokens are intended for use with `width` and `height` properties. They are defined in `rem`, which means they will scale when adjusting the root font size. Pixel values are calculated with a root font size of `16px`.
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>prop value</th>
+      <th>value</th>
+      <th>px</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(designTokens.size.dimension).map(([name, entry], i) => {
+      return (
+        <tr key={i}>
+          <td>
+            <code>{`size-dimension-${name}`}</code>
+          </td>
+          <td>
+            <code>{name}</code>
+          </td>
+          <td>{entry.value}</td>
+          <td>
+            {name === 'base'
+              ? '16'
+              : ['inherit', 'auto'].includes(name)
+              ? ''
+              : entry.original.value * 16}
+          </td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table>
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>prop value</th>
+      <th>value</th>
+      <th>px</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(designTokens.size.percentage).map(([name, entry], i) => {
+      return (
+        <tr key={i}>
+          <td>
+            <code>{`size-percentage-${name}`}</code>
+          </td>
+          <td>
+            <code>{name}</code>
+          </td>
+          <td>{entry.original.value}%</td>
+          <td>
+            {name === 'base'
+              ? '16'
+              : ['inherit', 'auto'].includes(name)
+              ? ''
+              : entry.original.value * 16}
+          </td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table>
 
 ## Font Family
 

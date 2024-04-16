@@ -166,8 +166,8 @@ export const Toggle: FC<ToggleProps> = ({
                   as="p"
                   display="block"
                   fontSize="sm"
-                  fontWeight="regular"
-                  color="grey-500"
+                  fontWeight="normal"
+                  color="secondary"
                 >
                   {helpText}
                 </Box>

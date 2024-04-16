@@ -35,21 +35,21 @@ export const RadioInputIcon: React.FC<RadioIconProps> = ({
   error = null,
   ...restProps
 }) => {
-  let color: FontColor = 'grey-500';
+  let color: FontColor = 'secondary';
   let name: 'radio-btn-unchecked' | 'radio-btn-checked' = 'radio-btn-unchecked';
 
   if (isSelected && isDisabled) {
-    color = 'primary-200';
+    color = 'disabled';
     name = 'radio-btn-checked';
   } else if (isSelected && !isDisabled) {
-    color = 'primary-500';
+    color = 'base';
     name = 'radio-btn-checked';
   } else if (isDisabled) {
-    color = 'grey-200';
+    color = 'disabled';
   }
 
-  if (error) color = 'red-500';
-  if (isDisabled && error) color = 'red-200';
+  if (error) color = 'danger';
+  if (isDisabled && error) color = 'danger-disabled';
 
   return (
     <Box className={className} {...restProps}>

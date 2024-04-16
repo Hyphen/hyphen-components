@@ -1,17 +1,19 @@
-import {
-  BORDER_SIZE_OPTIONS,
-  BOX_SHADOW_OPTIONS,
-  BASE_COLOR_OPTIONS,
-  FONT_COLOR_OPTIONS,
-  FONT_SIZE_OPTIONS,
-  SPACING_OPTIONS,
-} from '../../lib/tokens';
-import { CssDisplayValue, CssOverflowValue } from 'src/types';
+import { CssDisplayValue, CssOverflowValue } from '../../types';
 
 import { Box } from './Box';
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { render } from '@testing-library/react';
+
+import {
+  BACKGROUND_COLOR_OPTIONS,
+  BORDER_COLOR_OPTIONS,
+  BORDER_SIZE_OPTIONS,
+  BOX_SHADOW_OPTIONS,
+  FONT_COLOR_OPTIONS,
+  FONT_SIZE_OPTIONS,
+  SPACING_OPTIONS,
+} from '../../lib';
 
 describe('Box', () => {
   test('aria-label is applied if set', () => {
@@ -20,7 +22,7 @@ describe('Box', () => {
   });
 
   test('background color token classes are applied', () => {
-    [...BASE_COLOR_OPTIONS].forEach((color, i) => {
+    [...BACKGROUND_COLOR_OPTIONS].forEach((color, i) => {
       const { queryAllByText } = render(
         <Box background={color} key={i}>
           Test Box
@@ -59,7 +61,7 @@ describe('Box', () => {
   });
 
   test('border color token classes are applied', () => {
-    [...BASE_COLOR_OPTIONS].forEach((color, i) => {
+    [...BORDER_COLOR_OPTIONS].forEach((color, i) => {
       const { queryAllByText } = render(
         <Box borderColor={color} key={i}>
           Test Box
@@ -320,7 +322,7 @@ describe('Box', () => {
 
   describe('Focus States', () => {
     test('Background Hover -- box rendered with proper background hover classes', () => {
-      [...BASE_COLOR_OPTIONS].forEach((brandColorOption, i) => {
+      [...BACKGROUND_COLOR_OPTIONS].forEach((brandColorOption, i) => {
         const { queryAllByText } = render(
           <Box hover={{ background: brandColorOption }} key={i}>
             Test Box
@@ -333,7 +335,7 @@ describe('Box', () => {
     });
 
     test('Border Color Hover -- box rendered with proper border color hover classes', () => {
-      [...BASE_COLOR_OPTIONS].forEach((brandColorOption, i) => {
+      [...BORDER_COLOR_OPTIONS].forEach((brandColorOption, i) => {
         const { queryAllByText } = render(
           <Box hover={{ borderColor: brandColorOption }} key={i}>
             Test Box
@@ -346,14 +348,14 @@ describe('Box', () => {
     });
 
     test('Border Width Hover -- box rendered with proper border width hover classes', () => {
-      [...BORDER_SIZE_OPTIONS].forEach((borderSizeOption, i) => {
+      [...BORDER_SIZE_OPTIONS].forEach((borderWidthOption, i) => {
         const { queryAllByText } = render(
-          <Box hover={{ borderWidth: borderSizeOption }} key={i}>
+          <Box hover={{ borderWidth: borderWidthOption }} key={i}>
             Test Box
           </Box>
         );
         expect(queryAllByText('Test Box')[i].classList).toContain(
-          `hover:border-width-${borderSizeOption}`
+          `hover:border-width-${borderWidthOption}`
         );
       });
     });
@@ -400,7 +402,7 @@ describe('Box', () => {
 
   describe('Focus States', () => {
     test('Background Focus -- box rendered with proper background focus classes', () => {
-      [...BASE_COLOR_OPTIONS].forEach((brandColorOption, i) => {
+      [...BACKGROUND_COLOR_OPTIONS].forEach((brandColorOption, i) => {
         const { queryAllByText } = render(
           <Box focus={{ background: brandColorOption }} key={i}>
             Test Box
@@ -413,7 +415,7 @@ describe('Box', () => {
     });
 
     test('Border Color Focus -- box rendered with proper border color focus classes', () => {
-      [...BASE_COLOR_OPTIONS].forEach((brandColorOption, i) => {
+      [...BORDER_COLOR_OPTIONS].forEach((brandColorOption, i) => {
         const { queryAllByText } = render(
           <Box focus={{ borderColor: brandColorOption }} key={i}>
             Test Box
@@ -426,14 +428,14 @@ describe('Box', () => {
     });
 
     test('Border Width Focus -- box rendered with proper border width focus classes', () => {
-      [...BORDER_SIZE_OPTIONS].forEach((borderSizeOption, i) => {
+      [...BORDER_SIZE_OPTIONS].forEach((borderWidthOption, i) => {
         const { queryAllByText } = render(
-          <Box focus={{ borderWidth: borderSizeOption }} key={i}>
+          <Box focus={{ borderWidth: borderWidthOption }} key={i}>
             Test Box
           </Box>
         );
         expect(queryAllByText('Test Box')[i].classList).toContain(
-          `focus:border-width-${borderSizeOption}`
+          `focus:border-width-${borderWidthOption}`
         );
       });
     });

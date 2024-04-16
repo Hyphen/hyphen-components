@@ -9,7 +9,7 @@ import {
 } from '@hyphen/hyphen-design-tokens/build/types';
 
 export type {
-  // IconName,
+  IconName,
   BackgroundColor,
   BaseColor,
   BorderColor,
@@ -21,6 +21,7 @@ export type {
   FontFamily,
   FontSize,
   FontWeight,
+  HeadingSize,
   HeightSize,
   LineHeightSize,
   SpacingSize,

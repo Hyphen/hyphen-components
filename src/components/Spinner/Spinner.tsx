@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { ColorName } from '../../types';
+import { FontColor } from '@hyphen/hyphen-design-tokens/build/types';
 import classNames from 'classnames';
 import styles from './Spinner.module.scss';
 
@@ -12,7 +12,7 @@ export interface SpinnerProps {
   /**
    * Spinner variant (color), pass down one of the options from the Hyphen 'brand' palette.
    */
-  variant?: ColorName;
+  variant?: FontColor;
   /**
    * Size of the spinner.
    */
@@ -20,7 +20,7 @@ export interface SpinnerProps {
 }
 
 export const Spinner: FC<SpinnerProps> = ({
-  variant = 'dark',
+  variant = 'base',
   className,
   size = 'md',
 }) => {

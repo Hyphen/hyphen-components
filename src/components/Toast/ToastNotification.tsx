@@ -63,7 +63,7 @@ const renderToastIcon = (toast: Toast) => {
   if (type === 'blank') return;
 
   let iconName: IconName = 'exclamation-mark';
-  let iconColor: FontColor = 'primary-500'; // dark
+  let iconColor: FontColor = 'base'; // dark
 
   if (type === 'success') {
     iconName = 'c-check';
@@ -79,7 +79,7 @@ const renderToastIcon = (toast: Toast) => {
     type !== 'loading' ? (
       <Icon name={iconName} color={iconColor} />
     ) : (
-      <Spinner variant="blue" />
+      <Spinner variant="info" />
     );
 
   // eslint-disable-next-line consistent-return

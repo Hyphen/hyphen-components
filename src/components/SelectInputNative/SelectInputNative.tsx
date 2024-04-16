@@ -95,7 +95,7 @@ export const SelectInputNative: React.FC<SelectInputNativeProps> = ({
           aria-required={isRequired}
           value={value ?? ''}
           onChange={onChange}
-          color={!value ? 'grey-300' : 'grey-700'}
+          color={!value ? 'disabled' : 'base'}
           autoFocus={autoFocus}
           disabled={isDisabled}
           name={name}
@@ -109,7 +109,7 @@ export const SelectInputNative: React.FC<SelectInputNativeProps> = ({
               value={option.value}
               disabled={option.value === ''}
               hidden={option.value === ''}
-              color={option.value === '' ? 'grey-300' : 'grey-700'}
+              color={option.value === '' ? 'disabled' : 'base'}
             >
               {option.label}
             </Box>

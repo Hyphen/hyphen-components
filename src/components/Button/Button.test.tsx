@@ -297,7 +297,7 @@ describe('Button', () => {
         );
         const spinnerElement = document.getElementsByClassName('spinner')[0];
         expect(spinnerElement).toBeInTheDocument();
-        expect(spinnerElement).toHaveClass('font-color-grey');
+        expect(spinnerElement).toHaveClass('font-color-base');
       });
 
       test('it keeps the button text in the dom so the button width does not change', () => {
