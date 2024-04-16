@@ -174,7 +174,7 @@ export const MaxWidth = () => {
         ariaLabelledBy="titleFooterBody"
         isOpen={isModalOpen}
         onDismiss={closeModal}
-        maxWidth={{ tablet: '3xl', desktop: '4xl', hd: '5xl' }}
+        maxWidth={{ tablet: '8xl', desktop: '9xl' }}
         initialFocusRef={ref}
       >
         <Modal.Header
@@ -184,7 +184,6 @@ export const MaxWidth = () => {
         />
         <Modal.Body>Modal body content</Modal.Body>
         <Modal.Footer>
-          This is content in the modal footer
           <Button variant="secondary" ref={ref} onClick={closeModal}>
             Cancel
           </Button>
