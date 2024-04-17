@@ -1,4 +1,4 @@
-import { BrandColor, FontColor, IconName } from '../../types';
+import { BackgroundColor, FontColor, IconName } from '../../types';
 
 export type AlertVariant =
   | 'info'
@@ -10,5 +10,5 @@ export type AlertVariant =
 export type AlertAttributes = {
   icon: IconName;
   color: FontColor;
-  background: BrandColor;
+  background: BackgroundColor;
 };

@@ -1,12 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import classNames from 'classnames';
-import {
-  BackgroundColor,
-  FontColor,
-  FontSize,
-  BaseSpacing,
-  ResponsiveProp,
-} from '../../types';
+import { FontSize, BaseSpacing, ResponsiveProp } from '../../types';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
 import styles from './Badge.module.scss';
 import { Box } from '../Box/Box';
@@ -22,11 +16,6 @@ export type BadgeVariant =
   | 'red'
   | 'purple'
   | 'hyphen';
-
-export type BadgeColorAttributes = {
-  font: FontColor;
-  background: BackgroundColor;
-};
 
 export type BadgeSizeAttributes = { fontSize: FontSize; padding: BaseSpacing };
 export interface BadgeProps {
@@ -51,18 +40,6 @@ export interface BadgeProps {
    */
   [x: string]: any; // eslint-disable-line
 }
-
-export const BADGE_COLOR_MAP: { [key in BadgeVariant]: BadgeColorAttributes } =
-  {
-    blue: { font: 'base', background: 'info' },
-    inverse: { font: 'base', background: 'inverse' },
-    green: { font: 'base', background: 'success' },
-    red: { font: 'base', background: 'danger' },
-    grey: { font: 'base', background: 'secondary' },
-    yellow: { font: 'base', background: 'warning' },
-    purple: { font: 'base', background: 'purple' },
-    hyphen: { font: 'base', background: 'brand' },
-  };
 
 export const Badge: FC<BadgeProps> = ({
   className = '',

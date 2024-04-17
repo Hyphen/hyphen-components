@@ -4,11 +4,13 @@ import { Badge, BadgeSize, BadgeVariant } from './Badge';
 
 export const BADGE_VARIANTS: BadgeVariant[] = [
   'grey',
-  'primary',
-  'blue',
+  'inverse',
   'green',
   'yellow',
+  'blue',
   'red',
+  'purple',
+  'hyphen',
 ];
 
 export const BADGE_SIZES: BadgeSize[] = ['sm', 'md', 'lg'];

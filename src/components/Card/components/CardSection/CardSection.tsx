@@ -12,7 +12,7 @@ export interface CardSectionProps extends BoxProps {
   /**
    * If defined as a prop, this value will take higher precedence than the corresponding component design token value
    * Any valid [brand color token](/?path=/docs/foundation-design-tokens--docs#color) for the border color
-   * Or a responsive prop with BrandColor for each breakpoint.
+   * Or a responsive prop with borderColor for each breakpoint.
    */
   borderColor?: BoxProps['borderColor'];
   /**

@@ -28,7 +28,7 @@ export const ExampleSignUpForm = () => (
     alignItems="center"
     alignContent="center"
     padding="2xl"
-    background="grey-50"
+    background="secondary"
   >
     <Card maxWidth="9xl">
       <Card.Section padding="5xl">
