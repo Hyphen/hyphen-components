@@ -15,11 +15,13 @@ export type BadgeSize = 'sm' | 'md' | 'lg';
 
 export type BadgeVariant =
   | 'grey'
-  | 'primary'
+  | 'inverse'
   | 'green'
   | 'yellow'
   | 'blue'
-  | 'red';
+  | 'red'
+  | 'purple'
+  | 'hyphen';
 
 export type BadgeColorAttributes = {
   font: FontColor;
@@ -53,11 +55,13 @@ export interface BadgeProps {
 export const BADGE_COLOR_MAP: { [key in BadgeVariant]: BadgeColorAttributes } =
   {
     blue: { font: 'base', background: 'info' },
-    primary: { font: 'base', background: 'primary' },
+    inverse: { font: 'base', background: 'inverse' },
     green: { font: 'base', background: 'success' },
     red: { font: 'base', background: 'danger' },
     grey: { font: 'base', background: 'secondary' },
     yellow: { font: 'base', background: 'warning' },
+    purple: { font: 'base', background: 'purple' },
+    hyphen: { font: 'base', background: 'brand' },
   };
 
 export const Badge: FC<BadgeProps> = ({
