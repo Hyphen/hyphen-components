@@ -17,7 +17,7 @@
   );
   font-size: var(
     --form-control-size-sm-font-size,
-    var(--INTERNAL_form-control-size-sm-font-size)
+    var(--INTERNAL_form-control-size-smdfont-size)
   );
 
   .text-input-label {
@@ -30,9 +30,9 @@
   input {
     padding: calc(
         var(
-            --form-control-size-lg-padding,
-            var(--INTERNAL_form-control-size-lg-padding)
-          ) + 3px
+          --form-control-size-lg-padding,
+          var(--INTERNAL_form-control-size-lg-padding)
+        )
       )
       var(
         --form-control-size-md-padding,
@@ -40,9 +40,9 @@
       )
       calc(
         var(
-            --form-control-size-md-padding,
-            var(--INTERNAL_form-control-size-md-padding)
-          ) - 5px
+          --form-control-size-md-padding,
+          var(--INTERNAL_form-control-size-md-padding)
+        )
       )
       var(
         --form-control-size-md-padding,
@@ -256,15 +256,6 @@
     var(--INTERNAL_form-control-font-family)
   );
   position: relative;
-  box-shadow: var(
-      --form-control-box-shadow,
-      var(--INTERNAL_form-control-box-shadow)
-    ),
-    inset 0 0 0 1px
-      var(
-        --form-control-border-color,
-        var(--INTERNAL_form-control-border-color)
-      );
   background-color: var(
     --form-control-background-color,
     var(--INTERNAL_form-control-background-color)
@@ -319,7 +310,11 @@
     transition-duration: 300ms;
     transition-property: border, background-color;
     transition-timing-function: cubic-bezier(0.2, 0.8, 0.4, 1);
-    border: none;
+    border: 1px solid
+      var(
+        --form-control-border-color,
+        var(--INTERNAL_form-control-border-color)
+      );
     background-color: transparent;
     width: 100%;
     line-height: var(
@@ -355,15 +350,6 @@
   }
 
   &.error {
-    box-shadow: var(
-        --form-control-box-shadow,
-        var(--INTERNAL_form-control-box-shadow)
-      ),
-      inset 0 0 0 1px
-        var(
-          --form-control-border-color-error,
-          var(--INTERNAL_form-control-border-color-error)
-        );
     background-color: var(
       --form-control-background-color-error,
       var(--INTERNAL_form-control-background-color-error)

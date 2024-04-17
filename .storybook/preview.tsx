@@ -17,7 +17,7 @@ const preview: Preview = {
         },
         {
           name: 'secondary (light)',
-          value: '#e5e5e5',
+          value: '#f5f5f5',
         },
         {
           name: 'primary (dark)',

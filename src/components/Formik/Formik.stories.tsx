@@ -155,6 +155,13 @@ export const FormikForm = () =>
                   isRequired
                 />
                 <Field
+                  label="Country"
+                  name="country"
+                  id="country"
+                  component={FormikTextInputInset}
+                  isRequired
+                />
+                <Field
                   label="Email"
                   name="email"
                   id="email"
@@ -244,13 +251,6 @@ export const FormikForm = () =>
                   name="message"
                   id="message"
                   component={FormikTextareaInputInset}
-                  isRequired
-                />
-                <Field
-                  label="Country"
-                  name="country"
-                  id="country"
-                  component={FormikTextInputInset}
                   isRequired
                 />
                 <DateInput
