@@ -141,7 +141,6 @@ export const Alert: FC<AlertProps> = ({
                 as="h4"
                 fontSize="sm"
                 fontWeight="medium"
-                color="base"
                 className={styles['alert-heading']}
               >
                 {title}
