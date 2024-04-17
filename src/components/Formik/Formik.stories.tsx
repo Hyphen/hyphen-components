@@ -113,7 +113,6 @@ export const FormikForm = () =>
             lastName: '',
             email: '',
             phone: '',
-            phoneWithUnformattedValue: '',
             areTermsChecked: false,
             areTermsChecked2: false,
             flavor: null,
@@ -133,7 +132,7 @@ export const FormikForm = () =>
         >
           {({ isSubmitting, values, setFieldValue, handleBlur, errors }) => (
             <Form noValidate>
-              <Box gap="lg">
+              <Box gap="3xl">
                 <Field
                   type="text"
                   label="First Name"
@@ -163,24 +162,11 @@ export const FormikForm = () =>
                   isRequired
                 />
                 <Field
-                  label="Phone Returning a Formatted Value"
+                  label="Phone"
                   name="phone"
                   id="phone"
                   component={FormikTextInput}
                   type="tel"
-                />
-                <Field
-                  label="Phone Returning an Unformatted Value"
-                  name="phoneWithUnformattedValue"
-                  id="phoneWithUnformattedValue"
-                  component={FormikTextInput}
-                  type="tel"
-                  onChange={(event: ChangeEvent<any>) => {
-                    setFieldValue(
-                      'phoneWithUnformattedValue',
-                      event.target.rawValue
-                    );
-                  }}
                 />
                 <Field
                   label="Flavor with Custom onChange"
@@ -286,11 +272,7 @@ export const FormikForm = () =>
                     onBlur: handleBlur,
                   }}
                 />
-                <Button
-                  type="submit"
-                  className="m-bottom-md"
-                  isLoading={isSubmitting}
-                >
+                <Button type="submit" isLoading={isSubmitting}>
                   Submit
                 </Button>
                 <pre>

@@ -8,6 +8,27 @@ import { Preview } from '@storybook/react';
 
 const preview: Preview = {
   parameters: {
+    backgrounds: {
+      default: 'hyphen light',
+      values: [
+        {
+          name: 'primary (light)',
+          value: '#ffffff',
+        },
+        {
+          name: 'secondary (light)',
+          value: '#e5e5e5',
+        },
+        {
+          name: 'primary (dark)',
+          value: '#0a0a0a',
+        },
+        {
+          name: 'secondary (dark)',
+          value: '#171717',
+        },
+      ],
+    },
     options: {
       storySort: {
         order: [

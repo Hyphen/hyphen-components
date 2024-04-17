@@ -1,5 +1,8 @@
 .card-background {
-  background-color: var(--card-background-color, var(--color-base-white));
+  background-color: var(
+    --card-background-color,
+    var(--color-background-primary)
+  );
 }
 
 .card-radius {
@@ -13,7 +16,7 @@
 .card-section-border {
   + .card-section-border {
     border-top: 1px solid
-      var(--card-section-border-color, var(--color-base-grey-200));
+      var(--card-section-border-color, var(--color-border-default));
   }
 }
 
@@ -27,7 +30,7 @@
   .card-section-border {
     + .card-section-border {
       border-top: 1px solid
-        var(--card-section-subdued-border-color, var(--color-base-grey-200));
+        var(--card-section-subdued-border-color, var(--color-border-default));
     }
   }
 }
@@ -35,10 +38,10 @@
 .card-footer-background {
   background-color: var(
     --card-footer-background-color,
-    var(--color-base-grey-50)
+    var(--color-background-secondary)
   );
 }
 
 .card-footer-border-color {
-  border-color: var(--card-section-border-color, var(--color-base-grey-200));
+  border-color: var(--card-section-border-color, var(--color-border-default));
 }

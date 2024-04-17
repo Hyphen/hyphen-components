@@ -13,9 +13,9 @@ const meta: Meta<typeof Card> = {
 
 export default meta;
 
-export const DefaultCard = () => (
+export const OverviewCard = () => (
   <Card>
-    <Card.Header title="Default Card" />
+    <Card.Header title="Card Overview" />
     <Card.Section>
       <p>Card content</p>
     </Card.Section>
@@ -30,18 +30,18 @@ export const ExampleSignUpForm = () => (
     padding="2xl"
     background="grey-50"
   >
-    <Card maxWidth="4xl">
-      <Card.Section padding="3xl">
-        <Box gap="xl">
+    <Card maxWidth="9xl">
+      <Card.Section padding="5xl">
+        <Box gap="4xl">
           <Box gap="sm" alignItems="center">
-            <Heading as="h1" size="xl">
+            <Heading as="h1" size="lg">
               Sign Up
             </Heading>
             <Box as="p" color="secondary" fontSize="sm">
               Create your Hyphen account
             </Box>
           </Box>
-          <Box gap="lg">
+          <Box gap="2xl">
             <TextInput
               id="email"
               value=""
@@ -76,7 +76,7 @@ export const ExampleSignUpForm = () => (
 
 export const ExampleFullBleedPhotos = () => (
   <>
-    <Card width="300px">
+    <Card maxWidth="9xl">
       <Card.Section padding="0" overflow="hidden" height="300px">
         <img
           src="https://images.unsplash.com/photo-1555412654-72a95a495858?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=80"
