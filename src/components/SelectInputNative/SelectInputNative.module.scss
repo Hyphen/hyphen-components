@@ -59,7 +59,7 @@
   &::after {
     width: 8px;
     height: 2px;
-    top: calc(var(--size-spacing-sm) + 3px);
+    top: calc(var(--size-spacing-sm) + 12px);
   }
 
   &::before {
@@ -115,13 +115,11 @@
 
   &::before,
   &::after {
-    width: 14px;
-    height: 4px;
-    top: calc(var(--size-spacing-md) + 3px);
+    top: calc(var(--size-spacing-md) + 10px);
   }
 
   &::before {
-    right: calc(var(--size-spacing-sm) + 11px);
+    right: calc(var(--size-spacing-sm) + 10px);
   }
 
   &::after {
@@ -173,8 +171,8 @@
 
   &::before,
   &::after {
-    width: 14px;
-    height: 4px;
+    width: 10px;
+    height: 2px;
     top: calc(var(--size-spacing-md) + 9px);
   }
 
@@ -224,18 +222,22 @@
     border-radius: 100px;
     content: '';
     position: absolute;
-    background: var(--color-base-grey-light);
+    background: var(--color-base-grey-300);
     pointer-events: none;
+    width: 10px;
+    height: 2px;
   }
 
   //change the stacking context so this half of the chevron stays above the disabled background color.
   &::before {
+    right: calc(var(--size-spacing-sm) + 7px);
     transform-origin: 50% 50%;
     transform: rotate(42deg);
     z-index: 1;
   }
 
   &::after {
+    right: calc(var(--size-spacing-sm) + 1px);
     transform-origin: 50% 50%;
     transform: rotate(-42deg);
   }

@@ -2,12 +2,12 @@
 
 @mixin floating-label-minimize-md {
   opacity: 0.75;
-  transform: scale(0.6875) translateY(-0.3rem) translateX(0.15rem);
+  transform: scale(0.6875) translateY(-0.25rem) translateX(0.15rem);
 }
 
 @mixin floating-label-minimize-lg {
   opacity: 0.75;
-  transform: scale(0.75) translateY(-0.3rem) translateX(0.15rem);
+  transform: scale(0.75) translateY(-0.25rem) translateX(0.15rem);
 }
 
 @mixin size-md {
@@ -16,14 +16,16 @@
     var(--INTERNAL_form-control-size-md-border-radius)
   );
   font-size: var(
-    --form-control-size-sm-font-size,
-    var(--INTERNAL_form-control-size-sm-font-size)
+    --form-control-size-md-font-size,
+    var(--INTERNAL_form-control-size-md-font-size)
   );
 
   .text-input-label {
-    padding: var(
-      --form-control-size-md-padding,
-      var(--INTERNAL_form-control-size-md-padding)
+    padding: calc(
+      var(
+          --form-control-size-md-padding,
+          var(--INTERNAL_form-control-size-md-padding)
+        ) + 1px
     );
   }
 
@@ -32,7 +34,7 @@
         var(
             --form-control-size-lg-padding,
             var(--INTERNAL_form-control-size-lg-padding)
-          ) + 3px
+          ) + 12px
       )
       var(
         --form-control-size-md-padding,
@@ -42,7 +44,7 @@
         var(
             --form-control-size-md-padding,
             var(--INTERNAL_form-control-size-md-padding)
-          ) - 5px
+          ) - 6px
       )
       var(
         --form-control-size-md-padding,
@@ -79,14 +81,16 @@
     var(--INTERNAL_form-control-size-lg-border-radius)
   );
   font-size: var(
-    --form-control-size-md-font-size,
-    var(--INTERNAL_form-control-size-md-font-size)
+    --form-control-size-lg-font-size,
+    var(--INTERNAL_form-control-size-lg-font-size)
   );
 
   .text-input-label {
-    padding: var(
-      --form-control-size-lg-padding,
-      var(--INTERNAL_form-control-size-lg-padding)
+    padding: calc(
+      var(
+          --form-control-size-lg-padding,
+          var(--INTERNAL_form-control-size-lg-padding)
+        ) + 4px
     );
   }
 
@@ -95,7 +99,7 @@
         var(
             --form-control-size-lg-padding,
             var(--INTERNAL_form-control-size-lg-padding)
-          ) + 10px
+          ) + 16px
       )
       var(
         --form-control-size-lg-padding,
@@ -105,7 +109,7 @@
         var(
             --form-control-size-lg-padding,
             var(--INTERNAL_form-control-size-lg-padding)
-          ) - 5px
+          ) - 6px
       )
       var(
         --form-control-size-lg-padding,

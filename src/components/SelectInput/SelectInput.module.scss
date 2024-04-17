@@ -166,12 +166,12 @@
 
     svg {
       width: var(
-        --form-control-select-lg-icon-size,
-        var(--INTERNAL_form-control-select-lg-icon-size)
+        --form-control-select-md-icon-size,
+        var(--INTERNAL_form-control-select-md-icon-size)
       );
       height: var(
-        --form-control-select-lg-icon-size,
-        var(--INTERNAL_form-control-select-lg-icon-size)
+        --form-control-select-md-icon-size,
+        var(--INTERNAL_form-control-select-md-icon-size)
       );
     }
   }

@@ -146,19 +146,19 @@
 
       &-previous {
         top: 4px;
-        border-top-color: var(--color-base-grey-lighter);
+        border-top-color: var(--color-base-grey-300er);
 
         &:hover {
-          border-top-color: var(--color-base-grey-light);
+          border-top-color: var(--color-base-grey-300);
         }
       }
 
       &-upcoming {
         top: -4px;
-        border-bottom-color: var(--color-base-grey-lighter);
+        border-bottom-color: var(--color-base-grey-300er);
 
         &:hover {
-          border-bottom-color: var(--color-base-grey-lighter);
+          border-bottom-color: var(--color-base-grey-300er);
         }
       }
     }
@@ -197,7 +197,7 @@
 
   .react-datepicker__time-container {
     float: right;
-    border-left: 1px solid var(--color-base-grey-lighter);
+    border-left: 1px solid var(--color-base-grey-300er);
     width: 85px;
 
     &--with-today-button {
@@ -239,7 +239,7 @@
 
             &:hover {
               cursor: pointer;
-              background-color: var(--color-base-grey-lightest);
+              background-color: var(--color-base-grey-300est);
             }
 
             &--selected {
@@ -284,7 +284,7 @@
       cursor: pointer;
 
       &:hover {
-        background-color: var(--color-base-grey-lighter);
+        background-color: var(--color-base-grey-300er);
       }
     }
   }
@@ -308,7 +308,7 @@
     margin: 0 var(--size-spacing-2xs);
 
     &--outside-month {
-      color: var(--color-base-grey-light);
+      color: var(--color-base-grey-300);
     }
   }
 
@@ -332,7 +332,7 @@
     }
 
     &--disabled {
-      color: var(--color-base-grey-lighter);
+      color: var(--color-base-grey-300er);
       pointer-events: none;
 
       &:hover {
