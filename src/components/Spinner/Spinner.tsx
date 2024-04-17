@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-
-import { FontColor } from '@hyphen/hyphen-design-tokens/build/types';
+import { FontColor } from 'src/types';
 import classNames from 'classnames';
 import styles from './Spinner.module.scss';
 
