@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { FontColor } from 'src/types';
 import classNames from 'classnames';
 import styles from './Spinner.module.scss';
 
@@ -9,25 +8,13 @@ export interface SpinnerProps {
    */
   className?: string;
   /**
-   * Spinner variant (color), pass down one of the options from the Hyphen 'brand' palette.
-   */
-  variant?: FontColor;
-  /**
    * Size of the spinner.
    */
   size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
-export const Spinner: FC<SpinnerProps> = ({
-  variant = 'base',
-  className,
-  size = 'md',
-}) => {
-  const classes = classNames(
-    className,
-    styles.spinner,
-    `font-color-${variant}`
-  );
+export const Spinner: FC<SpinnerProps> = ({ className, size = 'md' }) => {
+  const classes = classNames(className, styles.spinner);
 
   const sizeInPixels = () => {
     let pixels;
@@ -48,12 +35,80 @@ export const Spinner: FC<SpinnerProps> = ({
         viewBox="0 0 16 16"
         data-testid="spinner-testid"
       >
-        <title>circle</title>
-        <g fill={`var(--spinner-${variant}-color)`}>
-          <path
-            fill={`var(--spinner-${variant}-color)`}
-            d="M8,16c-1.199,0-2.352-0.259-3.428-0.77l0.857-1.807C6.235,13.806,7.1,14,8,14c3.309,0,6-2.691,6-6 s-2.691-6-6-6S2,4.691,2,8c0,0.901,0.194,1.766,0.578,2.572l-1.806,0.859C0.26,10.354,0,9.2,0,8c0-4.411,3.589-8,8-8s8,3.589,8,8 S12.411,16,8,16z" /* eslint-disable-line max-len */
-          />
+        <g fill="currentColor">
+          <rect
+            fill="currentColor"
+            height="2"
+            rx=".5"
+            width="4"
+            x="12"
+            y="7"
+          ></rect>
+          <rect
+            fill="currentColor"
+            height="4.001"
+            rx=".5"
+            width="1.999"
+            opacity=".4"
+            x="11.243"
+            y="10.242"
+            transform="rotate(-44.975 12.243 12.243)"
+          ></rect>
+          <rect
+            fill="currentColor"
+            height="4"
+            rx=".5"
+            width="2"
+            opacity=".4"
+            x="7"
+            y="12"
+          ></rect>
+          <rect
+            fill="currentColor"
+            height="1.999"
+            rx=".5"
+            width="4.001"
+            opacity=".4"
+            x="1.757"
+            y="11.243"
+            transform="rotate(-45.03 3.757 12.242)"
+          ></rect>
+          <rect
+            fill="currentColor"
+            height="2"
+            rx=".5"
+            width="4"
+            opacity=".4"
+            y="7"
+          ></rect>
+          <rect
+            fill="currentColor"
+            height="4.001"
+            rx=".5"
+            width="1.999"
+            opacity=".4"
+            x="2.758"
+            y="1.757"
+            transform="rotate(-44.975 3.757 3.757)"
+          ></rect>
+          <rect
+            fill="currentColor"
+            height="4"
+            rx=".5"
+            width="2"
+            opacity=".6"
+            x="7"
+          ></rect>
+          <rect
+            fill="currentColor"
+            height="1.999"
+            rx=".5"
+            width="4.001"
+            opacity=".8"
+            x="10.242"
+            y="2.758"
+            transform="rotate(-45.03 12.242 3.757)"
+          ></rect>
         </g>
       </svg>
     </span>

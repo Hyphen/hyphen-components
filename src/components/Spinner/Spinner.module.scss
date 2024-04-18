@@ -1,19 +1,7 @@
 .spinner {
-  --spinner-primary-color: var(--color-base-primary-500);
-  --spinner-magenta-color: var(--color-base-magenta-500);
-  --spinner-purple-color: var(--color-base-purple-500);
-  --spinner-white-color: var(--color-base-white);
-  --spinner-black-color: var(--color-base-black-500);
-  --spinner-grey-color: var(--color-base-grey-500);
-  --spinner-blue-color: var(--color-base-blue-500);
-  --spinner-red-color: var(--color-base-red-500);
-  --spinner-yellow-color: var(--color-base-yellow-500);
-  --spinner-green-color: var(--color-base-green-500);
-  --spinner-transparent-color: var(--color-background-transparent);
-
   svg {
     display: inherit;
-    animation: spin 0.85s infinite linear;
+    animation: spin 1.5s infinite linear;
 
     @keyframes spin {
       0% {

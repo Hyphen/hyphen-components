@@ -2,7 +2,6 @@ import { Box } from '../Box/Box';
 import type { Meta } from '@storybook/react';
 import React from 'react';
 import { Spinner } from './Spinner';
-import { FONT_COLOR_OPTIONS } from '../../lib';
 
 const meta: Meta<typeof Spinner> = {
   title: 'Components/Spinner',
@@ -13,14 +12,17 @@ export default meta;
 
 export const Default = () => <Spinner />;
 
-export const Variants = () => (
+export const Color = () => (
   <Box display="block" childGap="md">
-    {[...FONT_COLOR_OPTIONS].map((color) => (
-      <Box direction="row" childGap="sm">
-        <Spinner variant={color} />
-        <div>{color}</div>
-      </Box>
-    ))}
+    <Box>
+      <Spinner />
+    </Box>
+    <Box color="success">
+      <Spinner />
+    </Box>
+    <Box color="inverse">
+      <Spinner />
+    </Box>
   </Box>
 );
 
