@@ -16,7 +16,7 @@
   "scripts": {
     "build": "cross-env-shell BABEL_ENV=build IS_PUBLISHING=true \"dts build && webpack --config webpack.config.js\"",
     "rollup": "cross-env-shell BABEL_ENV=build IS_PUBLISHING=true \"dts build\"",
-    "build-storybook": "storybook build -- --stats-json /tmp/stats",
+    "build-storybook": "storybook build --  --webpack-stats-json",
     "build-storybook-docs": "storybook build --docs",
     "storybook-docs": "storybook dev --docs",
     "lint": "dts lint",
@@ -27,7 +27,7 @@
     "test": "dts test --passWithNoTests",
     "test-watch": "dts test --watch",
     "semantic-release": "semantic-release",
-    "chromatic": "npx chromatic --project-token=chpt_8fddffb5556f0b7"
+    "chromatic": "npx chromatic --project-token=chpt_8fddffb5556f0b7 --only-changed"
   },
   "husky": {
     "hooks": {
