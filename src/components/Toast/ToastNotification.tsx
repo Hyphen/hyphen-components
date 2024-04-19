@@ -79,7 +79,7 @@ const renderToastIcon = (toast: Toast) => {
     type !== 'loading' ? (
       <Icon name={iconName} color={iconColor} />
     ) : (
-      <Spinner variant="info" />
+      <Spinner />
     );
 
   // eslint-disable-next-line consistent-return

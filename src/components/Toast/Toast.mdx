@@ -39,9 +39,9 @@ When not to use Toast:
 Keep the contents of a toast as short as possible by placing only the most important information in it. Toasts are meant to unobtrusively provide non-critical information or feedback. In general, toast messages should be:
 
 - Short and affirmative
-- Written in a pattern of noun + verb, such as "Proposal saved" or "hic_contract.pdf added".
+- Written in a pattern of noun + verb, such as "File saved" or "Role added".
 
-<Canvas isExpanded of={Stories.ContentGuidelines} />
+<Canvas isExpanded of={Stories.Example} />
 
 ## Required Setup
 
@@ -110,7 +110,7 @@ escape hatch, should a user want to clear it out of their view.
 In cases where you'd like the toast to remain for a set amount of time
 without the user being able to clear it, you can use `canDismiss: false`.
 
-<Canvas isExpanded of={Stories.Dismissible} />
+<Canvas isExpanded of={Stories.NotDismissible} />
 
 ### Programmatic Dismiss
 

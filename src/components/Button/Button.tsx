@@ -179,18 +179,11 @@ export const Button = forwardRef<
       if (onBlur) onBlur(event);
     };
 
-    const getSpinnerVariant = () => {
-      if (variant === 'primary' || variant === 'danger') return 'white';
-
-      return 'base';
-    };
-
     const buttonContent =
       iconPrefix || iconSuffix ? (
         <Box display="inline-flex" direction="row" alignItems="center" gap="xs">
           {isLoading && (
             <Spinner
-              variant={getSpinnerVariant()}
               className={styles['spinner-wrapper']}
             />
           )}
@@ -224,7 +217,6 @@ export const Button = forwardRef<
         <>
           {isLoading && (
             <Spinner
-              variant={getSpinnerVariant()}
               className={styles['spinner-wrapper']}
             />
           )}
