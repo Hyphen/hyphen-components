@@ -70,11 +70,11 @@ export interface BoxProps {
    */
   alignSelf?: CssAlignItemsValue | ResponsiveProp<CssAlignItemsValue>;
   /**
-   * Any valid [brand color token](/?path=/docs/foundation-design-tokens--docs#color), or a `url()` for an image
+   * Any valid background color token, or a `url()` for an image
    */
   background?: BackgroundColor;
   /**
-   * Any valid [brand color token](/?path=/docs/foundation-design-tokens--docs#color) for the border color
+   * Any valid border color token
    */
   borderColor?: BorderColor;
   /**

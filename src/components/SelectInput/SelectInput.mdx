@@ -1,4 +1,4 @@
-import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { Canvas, Meta, ArgTypes } from '@storybook/blocks';
 import { SelectInput } from './SelectInput';
 import * as Stories from './SelectInput.stories';
 
@@ -13,88 +13,87 @@ of react-select props, [Click Here](https://react-select.com/props).
 
 ## Props
 
-<ArgsTable of={SelectInput} />
+<ArgTypes of={SelectInput} />
 
 ## Default
 
 All that is required to render a basic version of the SelectInput is a unique `id`, a `label`, a list of options passed to the `options` prop, a `value`, and an onchange event handler passed to the `onChange` prop.
 
-<Canvas of={Stories.Default}/>
+<Canvas of={Stories.Default} />
 
 ## Pre-Selected
 
 Pre-select an option by passing its value to the `value` prop.
 
-<Canvas of={Stories.PreSelected}/>
+<Canvas of={Stories.PreSelected} />
 
 ## Help Text
 
 Use the `helpText` prop to add clarifying text beneath the input label.
 
-<Canvas of={Stories.HelpText}/>
+<Canvas of={Stories.HelpText} />
 
 ## Placeholder
 
 Use the `placeholder` prop to add a custom placeholder.
 
-<Canvas of={Stories.Placeholder}/>
+<Canvas of={Stories.Placeholder} />
 
 ## Hidden Label
 
 Use the `hideLabel` prop to not render the label.
 
-<Canvas of={Stories.HiddenLabel}/>
-
+<Canvas of={Stories.HiddenLabel} />
 
 ## Multi-Select
 
 Use the `isMulti` prop to allow the selection of multiple options.
 
-<Canvas of={Stories.MultiSelect}/>
+<Canvas of={Stories.MultiSelect} />
 
 ## Multi-Select and Pre-Selected
 
 Use the `isMulti` prop combined with passing one or more options in an array to the `value` prop to pre-select option(s).
 
-<Canvas of={Stories.MultiSelectAndPreSelected}/>
+<Canvas of={Stories.MultiSelectAndPreSelected} />
 
 ## Autofocus
 
 Use the `autoFocus` prop to autofocus a SelectInput.
 
-<Canvas of={Stories.Autofocus}/>
+<Canvas of={Stories.Autofocus} />
 
 ## Required
 
 Use the `isRequired` prop to mark the input as required.
 
-<Canvas of={Stories.Required}/>
+<Canvas of={Stories.Required} />
 
 ## Disabled
 
 Use the `isDisabled` prop to mark the input as disabled.
 
-<Canvas of={Stories.Disabled}/>
+<Canvas of={Stories.Disabled} />
 
 ## Clearable
 
 Use the `isClearable` prop to allow clearing of the input selected option. NOTE: this works by passing `null`
 to the `onChange` handler.
 
-<Canvas of={Stories.Clearable}/>
+<Canvas of={Stories.Clearable} />
 
 ## Error
 
 Use the `error` prop to mark the input as invalid. `error` accepts a `boolean`, `string`, or `node`. If either a `string` or `node` is passed, a validation message is displayed below it.
 
-<Canvas of={Stories.Error}/>
+<Canvas of={Stories.Error} />
 
 ## Sizes
 
 Set the size of the input to `sm`, `md` or `lg`. `md` is the default size.
 The `size` prop is also a `ResponsiveProp`, so it can be sized differently at each [breakpoint](?path=/docs/design-tokens-design-tokens--page#breakpoints) by passing an object.
 
-<Canvas of={Stories.Sizes}/>
+<Canvas of={Stories.Sizes} />
 
 ## With Portal
 
@@ -103,13 +102,13 @@ We maintain the react-select API here where the `menuPortalTarget` prop is used.
 being portaled to. In the example below we would see our dropdown menu be cutoff by the storybook story container,
 if we did not portal it to the body element.
 
-<Canvas of={Stories.WithPortal}/>
+<Canvas of={Stories.WithPortal} />
 
 ## Custom Classes
 
 Use the `className` prop to add a custom class, or classes to an input.
 
-<Canvas of={Stories.CustomClasses}/>
+<Canvas of={Stories.CustomClasses} />
 
 ## Component Design Tokens
 

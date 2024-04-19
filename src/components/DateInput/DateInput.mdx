@@ -1,4 +1,4 @@
-import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { Canvas, Meta, ArgTypes } from '@storybook/blocks';
 import { DateInput } from './DateInput';
 import * as Stories from './DateInput.stories';
 
@@ -11,11 +11,11 @@ Avoid using this component if the user needs to enter a date that is many years 
 For entering these types of dates we recommend using the `TextInput` component with a `date` mask. See an example here:
 [TextInput Date Example](?path=/docs/components-textinput-overview--with-date-mask)
 
-<Canvas isExpanded of={Stories.Basic}/>
+<Canvas isExpanded of={Stories.Basic} />
 
 ## Props
 
-<ArgsTable of={DateInput} />
+<ArgTypes of={DateInput} />
 
 ## Default
 
@@ -28,16 +28,15 @@ The DateInput is composed of 3 components. Each can be tailored based on their p
 The `DateInput` uses sensible defaults for these to allow for very straightforward ergonomics that allow users to
 select dates with minimal work.
 
-<Canvas of={Stories.Default}/>
+<Canvas of={Stories.Default} />
 
 ## Date Range
 
-<Canvas of={Stories.DateRange}/>
+<Canvas of={Stories.DateRange} />
 
 ## With Min/Max dates
 
-<Canvas of={Stories.WithMinAndMaxDates}/>
-
+<Canvas of={Stories.WithMinAndMaxDates} />
 
 ## Custom Date Format
 
@@ -45,7 +44,7 @@ You can manipulate the format on the input field by using the `dateFormat` and `
 props. Under the hood our component uses the [date-fns `format` function](https://date-fns.org/v2.16.1/docs/format)
 to generate a string based on these options.
 
-<Canvas of={Stories.CustomDateFormat}/>
+<Canvas of={Stories.CustomDateFormat} />
 
 ## On using onBlur event with DateInput
 
@@ -55,7 +54,7 @@ triggering form validation after an onBlur event.
 
 Make sure to pass the `onBlur` prop to the input via `textInputProps`.
 
-<Canvas of={Stories.InputBlurEvent}/>
+<Canvas of={Stories.InputBlurEvent} />
 
 ## Component Design Tokens
 

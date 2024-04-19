@@ -275,14 +275,14 @@ export const FormikForm = () =>
                 <Button type="submit" isLoading={isSubmitting}>
                   Submit
                 </Button>
-                <pre>
+                <pre className="font-family-monospace">
                   {JSON.stringify(
                     formatOutput(values, isSubmitting),
                     undefined,
                     2
                   )}
                 </pre>
-                <pre>
+                <pre className="font-family-monospace">
                   {JSON.stringify(
                     formatOutput(errors, undefined),
                     undefined,

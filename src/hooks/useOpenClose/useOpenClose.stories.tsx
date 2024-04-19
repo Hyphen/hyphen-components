@@ -1,5 +1,4 @@
 import React from 'react';
-import { action } from '@storybook/addon-actions';
 import type { Meta } from '@storybook/react';
 import { UseOpenCloseProps, useOpenClose } from './useOpenClose';
 import { Button } from '../../components/Button/Button';
@@ -16,10 +15,7 @@ const meta: Meta<typeof useOpenClose> = {
 export default meta;
 
 export const BasicUsage: React.FC<UseOpenCloseProps> = () => {
-  const { isOpen, handleOpen, handleClose } = useOpenClose({
-    onOpen: action('onOpen'),
-    onClose: action('onClose'),
-  });
+  const { isOpen, handleOpen, handleClose } = useOpenClose();
   const popoverContent = (
     <>
       <Box padding="lg" gap="md">

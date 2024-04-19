@@ -5,9 +5,13 @@ import '../src/styles/reset.scss';
 import '../src/styles/fonts.scss';
 
 import { Preview } from '@storybook/react';
+import hyphenTheme from './hyphenTheme';
 
 const preview: Preview = {
   parameters: {
+    docs: {
+      theme: hyphenTheme,
+    },
     backgrounds: {
       default: 'hyphen light',
       values: [

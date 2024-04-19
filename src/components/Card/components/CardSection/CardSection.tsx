@@ -6,12 +6,12 @@ import styles from '../../Card.module.scss';
 
 export interface CardSectionProps extends BoxProps {
   /**
-   * Any valid [brand color token](/?path=/docs/foundation-design-tokens--docs#color), or a `url()` for an image
+   * Any valid background color token, or a `url()` for an image
    */
   background?: BoxProps['background'];
   /**
    * If defined as a prop, this value will take higher precedence than the corresponding component design token value
-   * Any valid [brand color token](/?path=/docs/foundation-design-tokens--docs#color) for the border color
+   * Any valid border color token
    * Or a responsive prop with borderColor for each breakpoint.
    */
   borderColor?: BoxProps['borderColor'];

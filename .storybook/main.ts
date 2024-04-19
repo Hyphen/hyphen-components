@@ -2,11 +2,7 @@ import custom from '../webpack.config';
 
 module.exports = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@([tj]sx|mdx)'],
-  addons: [
-    '@storybook/addon-docs',
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-  ],
+  addons: ['@storybook/addon-essentials'],
   // https://storybook.js.org/docs/react/configure/typescript#mainjs-configuration
   // typescript: {
   //   check: true, // type-check stories during Storybook build
