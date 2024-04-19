@@ -7,9 +7,9 @@ import { Box } from '../Box/Box';
 import { Checkbox, CheckboxSize, CheckboxProps } from './components/Checkbox';
 
 const labelMarginSizeMap = {
-  sm: '0',
-  md: '2xs 0 0 0',
-  lg: 'xs 0 0 0',
+  sm: '2xs 0 0 0',
+  md: 'xs 0 0 0',
+  lg: 'sm 0 0 0',
 };
 
 const computedResponsiveSize = (
