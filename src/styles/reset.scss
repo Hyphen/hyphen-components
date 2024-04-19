@@ -16,8 +16,8 @@ body {
 // Setting font family and default px value (to be used by our rem units downstream)
 body {
   text-rendering: optimizespeed;
-  font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro,
-    sans-serif;
+  font-family: var(--assets-font-family-body);
+  font-weight: var(--size-font-weight-medium);
   font-size: 16px;
   scroll-behavior: smooth;
 }

@@ -654,7 +654,6 @@ export const FontSizes = () => (
 
 export const FontWeights = () => (
   <>
-    <Box fontWeight="light">light</Box>
     <Box fontWeight="normal">normal</Box>
     <Box fontWeight="medium">medium</Box>
     <Box fontWeight="semibold">semibold</Box>

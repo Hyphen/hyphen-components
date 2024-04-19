@@ -140,7 +140,7 @@ export const Alert: FC<AlertProps> = ({
               <Box
                 as="h4"
                 fontSize="sm"
-                fontWeight="medium"
+                fontWeight="semibold"
                 className={styles['alert-heading']}
               >
                 {title}
