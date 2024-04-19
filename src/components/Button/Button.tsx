@@ -182,11 +182,7 @@ export const Button = forwardRef<
     const buttonContent =
       iconPrefix || iconSuffix ? (
         <Box display="inline-flex" direction="row" alignItems="center" gap="xs">
-          {isLoading && (
-            <Spinner
-              className={styles['spinner-wrapper']}
-            />
-          )}
+          {isLoading && <Spinner className={styles['spinner-wrapper']} />}
           {iconPrefix && (
             <Box display="block">
               <Icon
@@ -215,11 +211,7 @@ export const Button = forwardRef<
         </Box>
       ) : (
         <>
-          {isLoading && (
-            <Spinner
-              className={styles['spinner-wrapper']}
-            />
-          )}
+          {isLoading && <Spinner className={styles['spinner-wrapper']} />}
           {(() => {
             if (children) {
               return <span className={styles.label}>{children}</span>;
