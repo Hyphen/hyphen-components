@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { DateInput } from './DateInput';
 import type { Meta } from '@storybook/react';
+import { DateInput } from './DateInput';
 import { Box } from '../Box/Box';
 
 const meta: Meta<typeof DateInput> = {
@@ -151,20 +151,18 @@ export const InputBlurEvent = () => {
     alert('TextInput Blur Event');
   };
   return (
-    <Box gap="md">
-      <DateInput
-        dateFormat={'MMMM dd, yyyy'}
-        datePickerProps={{
-          selected: selectedDate as Date,
-          onChange: setSelectedDate,
-        }}
-        textInputProps={{
-          id: 'withCustomDateFormat',
-          name: 'selectDate',
-          label: 'Select Date',
-          onBlur: handleTextInputBlur,
-        }}
-      />
-    </Box>
+    <DateInput
+      dateFormat={'MMMM dd, yyyy'}
+      datePickerProps={{
+        selected: selectedDate as Date,
+        onChange: setSelectedDate,
+      }}
+      textInputProps={{
+        id: 'withCustomDateFormat',
+        name: 'selectDate',
+        label: 'Select Date',
+        onBlur: handleTextInputBlur,
+      }}
+    />
   );
 };

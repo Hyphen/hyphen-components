@@ -1,0 +1,128 @@
+import { ColorPalette, ColorItem, Meta } from '@storybook/addon-docs';
+import designTokens from '@hyphen/hyphen-design-tokens/build/json/variables.json';
+
+<Meta title="Foundation/Colors" />
+
+## Base Colors
+
+<ColorPalette>
+  <ColorItem
+    title="color-base-white"
+    subtitle="White"
+    colors={[designTokens.color.base.white.value]}
+  />
+  <ColorItem
+    title="color-base-black"
+    subtitle="Black"
+    colors={[designTokens.color.base.black.value]}
+  />
+  <ColorItem
+    title="color-base-magenta"
+    subtitle="Black"
+    colors={[designTokens.color.base.magenta.value]}
+  />
+  <ColorItem
+    title="color-base-grey"
+    subtitle="Grey"
+    colors={Object.keys(designTokens.color.base.grey).reduce((acc, item, i) => {
+      acc[item] = Object.keys(designTokens.color.base.grey).map(
+        (g) => designTokens.color.base.grey[g].value
+      )[i];
+      return acc;
+    }, {})}
+  />
+  <ColorItem
+    title="color-base-primary"
+    subtitle="Primary"
+    colors={Object.keys(designTokens.color.base.primary).reduce(
+      (acc, item, i) => {
+        acc[item] = Object.keys(designTokens.color.base.primary).map(
+          (g) => designTokens.color.base.primary[g].value
+        )[i];
+        return acc;
+      },
+      {}
+    )}
+  />
+  <ColorItem
+    title="color-base-red"
+    subtitle="Red"
+    colors={Object.keys(designTokens.color.base.red).reduce((acc, item, i) => {
+      acc[item] = Object.keys(designTokens.color.base.red).map(
+        (g) => designTokens.color.base.red[g].value
+      )[i];
+      return acc;
+    }, {})}
+  />
+  <ColorItem
+    title="color-base-yellow"
+    subtitle="Primary"
+    colors={Object.keys(designTokens.color.base.yellow).reduce(
+      (acc, item, i) => {
+        acc[item] = Object.keys(designTokens.color.base.yellow).map(
+          (g) => designTokens.color.base.yellow[g].value
+        )[i];
+        return acc;
+      },
+      {}
+    )}
+  />
+  <ColorItem
+    title="color-base-green"
+    subtitle="Green"
+    colors={Object.keys(designTokens.color.base.green).reduce(
+      (acc, item, i) => {
+        acc[item] = Object.keys(designTokens.color.base.green).map(
+          (g) => designTokens.color.base.green[g].value
+        )[i];
+        return acc;
+      },
+      {}
+    )}
+  />
+  <ColorItem
+    title="color-base-blue"
+    subtitle="Blue"
+    colors={Object.keys(designTokens.color.base.blue).reduce(
+      (acc, item, i) => {
+        acc[item] = Object.keys(designTokens.color.base.blue).map(
+          (g) => designTokens.color.base.blue[g].value
+        )[i];
+        return acc;
+      },
+      {}
+    )}
+  />
+  <ColorItem
+    title="color-base-purple"
+    subtitle="Purple"
+    colors={Object.keys(designTokens.color.base.purple).reduce(
+      (acc, item, i) => {
+        acc[item] = Object.keys(designTokens.color.base.purple).map(
+          (g) => designTokens.color.base.purple[g].value
+        )[i];
+        return acc;
+      },
+      {}
+    )}
+  />
+
+</ColorPalette>
+
+## Backgrounds
+
+<ColorPalette>
+  <ColorItem
+    title="Backgrounds"
+    subtitle="used for backgrounds"
+    colors={Object.keys(designTokens.color.background).reduce(
+      (acc, item, i) => {
+        acc[item] = Object.keys(designTokens.color.background).map(
+          (g) => designTokens.color.background[g].value
+        )[i];
+        return acc;
+      },
+      {}
+    )}
+  />
+</ColorPalette>

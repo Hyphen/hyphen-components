@@ -32,13 +32,11 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
       direction="row"
       alignItems="center"
       justifyContent={justifyContentValue}
-      borderWidth="0 0 xs 0"
+      borderWidth="0 0 sm 0"
+      borderColor="default"
       style={{
         flexShrink: 0,
-        borderColor:
-          'var(--modal-border-separator-color, var(--color-brand-grey-200))',
       }}
-      height="lg"
     >
       {title && (
         <Box as="h4" fontSize={{ base: 'md', tablet: 'lg' }} id={id}>

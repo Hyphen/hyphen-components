@@ -15,12 +15,13 @@ export const Overview = () => <Badge variant="grey" message="Hello world!" />;
 export const Variants = () => {
   const variants = [
     'grey',
-    'primary',
+    'inverse',
     'purple',
     'blue',
     'green',
     'yellow',
     'red',
+    'hyphen',
   ] as BadgeVariant[];
   return (
     <Box direction="row" gap="sm">

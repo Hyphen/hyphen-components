@@ -1,3 +1,5 @@
-@import './tokens';
+@import '@hyphen/hyphen-design-tokens/build/css/variables.css';
+@import '@hyphen/hyphen-design-tokens/build/css/variables-dark.css' screen and
+  (prefers-color-scheme: dark);
 @import './forms';
 @import './table';

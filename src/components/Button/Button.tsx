@@ -179,21 +179,10 @@ export const Button = forwardRef<
       if (onBlur) onBlur(event);
     };
 
-    const getSpinnerVariant = () => {
-      if (variant === 'primary' || variant === 'danger') return 'white';
-
-      return 'grey';
-    };
-
     const buttonContent =
       iconPrefix || iconSuffix ? (
         <Box display="inline-flex" direction="row" alignItems="center" gap="xs">
-          {isLoading && (
-            <Spinner
-              variant={getSpinnerVariant()}
-              className={styles['spinner-wrapper']}
-            />
-          )}
+          {isLoading && <Spinner className={styles['spinner-wrapper']} />}
           {iconPrefix && (
             <Box display="block">
               <Icon
@@ -202,7 +191,7 @@ export const Button = forwardRef<
                 aria-hidden="true"
                 focusable="false"
                 data-testid="prefixIcon"
-                size={size == 'md' ? 'sm' : size}
+                size={size === 'md' ? 'sm' : size}
               />
             </Box>
           )}
@@ -215,19 +204,14 @@ export const Button = forwardRef<
                 aria-hidden="true"
                 focusable="false"
                 data-testid="suffixIcon"
-                size={size == 'md' ? 'sm' : size}
+                size={size === 'md' ? 'sm' : size}
               />
             </Box>
           )}
         </Box>
       ) : (
         <>
-          {isLoading && (
-            <Spinner
-              variant={getSpinnerVariant()}
-              className={styles['spinner-wrapper']}
-            />
-          )}
+          {isLoading && <Spinner className={styles['spinner-wrapper']} />}
           {(() => {
             if (children) {
               return <span className={styles.label}>{children}</span>;

@@ -5,7 +5,7 @@ import { useOpenClose } from '../../hooks';
 import { Button } from '../Button/Button';
 import { Box } from '../Box/Box';
 import { RadioGroup } from '../RadioGroup/RadioGroup';
-import { WidthSize } from 'src/types';
+import { WidthSize } from '../../types';
 
 const meta: Meta<typeof Drawer> = {
   title: 'Components/Drawer',
@@ -354,7 +354,7 @@ export const ContainedDrawer = () => {
       height="500px"
       id="myContainer"
       ref={containerRef}
-      background="blue-900"
+      background="info"
       padding="lg"
       overflow="hidden"
     >

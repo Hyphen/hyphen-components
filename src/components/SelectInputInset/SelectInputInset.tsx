@@ -207,7 +207,7 @@ export const SelectInputInset: ForwardRefExoticComponent<SelectInputInsetProps> 
                   value={option.value}
                   disabled={option.value === ''}
                   hidden={option.value === ''}
-                  color={option.value === '' ? 'grey-500' : 'grey-600'}
+                  color={option.value === '' ? 'secondary' : 'base'}
                 >
                   {option.label}
                 </Box>

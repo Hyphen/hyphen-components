@@ -2,29 +2,31 @@ import { Key, KeyboardEvent, MouseEvent, ReactNode } from 'react';
 
 import {
   BorderRadiusSize as BorderRadius,
-  HeightSize,
   SpacingSize,
-  WidthSize,
   BreakpointSize,
+  HeightSize,
+  WidthSize,
 } from '@hyphen/hyphen-design-tokens/build/types';
 
 export type {
+  IconName,
+  BackgroundColor,
+  BaseColor,
+  BorderColor,
   BorderSize,
   BoxShadowSize,
-  BrandColor,
+  BreakpointSize,
   ColorName,
   FontColor,
+  FontFamily,
   FontSize,
   FontWeight,
+  HeadingSize,
   HeightSize,
   LineHeightSize,
-  OpacitySize,
   SpacingSize,
   WidthSize,
   ZIndexSize,
-  IconName,
-  FontFamily,
-  BreakpointSize,
 } from '@hyphen/hyphen-design-tokens/build/types';
 
 export type BreakpointSizeWithBase = BreakpointSize | 'base';

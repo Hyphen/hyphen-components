@@ -5,7 +5,7 @@ import {
   BorderRadiusSize,
   BorderSize,
   BoxShadowSize,
-  BrandColor,
+  // BaseColor,
   BreakpointSizeWithBase,
   CssAlignContentValue,
   CssAlignItemsValue,
@@ -23,6 +23,8 @@ import {
   ResponsiveProp,
   SpacingSize,
   ZIndexSize,
+  BackgroundColor,
+  BorderColor,
 } from '../../types';
 import {
   CSSProperties,
@@ -70,12 +72,11 @@ export interface BoxProps {
   /**
    * Any valid [brand color token](/?path=/docs/foundation-design-tokens--docs#color), or a `url()` for an image
    */
-  background?: BrandColor;
+  background?: BackgroundColor;
   /**
    * Any valid [brand color token](/?path=/docs/foundation-design-tokens--docs#color) for the border color
-   * Or a responsive prop with BrandColor for each breakpoint.
    */
-  borderColor?: BrandColor;
+  borderColor?: BorderColor;
   /**
    * Width of the Box's border
    * Can be a single [border width token](/?path=/docs/foundation-design-tokens--docs#border-width).
@@ -363,7 +364,11 @@ export const Box: FC<BoxProps> = forwardRef(
       },
     };
 
-    const getStatefulClasses = (stateKey: 'hover' | 'focus', values: BoxProps['hover' | 'hover']) => values // eslint-disable-line
+    const getStatefulClasses = (
+      stateKey: 'hover' | 'focus',
+      values: BoxProps['hover' | 'hover']
+    ) =>
+      values // eslint-disable-line
         ? Object.entries(values).map(
             ([key, value]) =>
               cssPropertyMap[key].transformer(
@@ -404,7 +409,7 @@ export const Box: FC<BoxProps> = forwardRef(
       generateResponsiveClasses('overflow', overflow),
       generateResponsiveClasses('shadow', shadow),
       generateResponsiveClasses('flex', flex),
-      cssShorthandToClasses('border-width', borderWidth),
+      cssShorthandToClasses('bw', borderWidth),
       generateResponsiveClasses('font-weight', fontWeight),
       generateResponsiveClasses('text-align', textAlign),
       generateResponsiveClasses('position', position),

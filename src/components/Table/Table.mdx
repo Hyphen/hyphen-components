@@ -22,20 +22,20 @@ The column object allows you to configure each table column header as well as so
 You will pass an array of columns to your table, where each column is an object with the following properties.
 NOTE: all properties in a column object are optional, but we highly recommend including a `heading` in every column.
 
-<Canvas of={Stories.Column}/>
+<Canvas of={Stories.Column} />
 
 ## Common Example
 
 An example showcasing the props required to render a list of customers in a table. `rows` and `columns`.
 
-<Canvas of={Stories.CommonExample}/>
+<Canvas of={Stories.CommonExample} />
 
 ## Loading
 
 Use the `isLoading` prop on the `<Table />` component to display an overlay that prevents user interaction. Useful for when
 table data is being fetched or refreshed.
 
-<Canvas of={Stories.Loading}/>
+<Canvas of={Stories.Loading} />
 
 ## Sortable
 
@@ -52,20 +52,20 @@ include the `sortedColumn` prop which comprises the following attributes:
 
 `sortDirection: oneOf: 'none', 'ascending', 'descending'`
 
-<Canvas of={Stories.Sortable}/>
+<Canvas of={Stories.Sortable} />
 
 ## Sortable with Default Sorted Column
 
 Having a column be sorted by default is no different than sorting a column, we pass the `sortedColumn` object as a prop on initial
 render rather than only populating it upon user interaction.
 
-<Canvas of={Stories.SortablewithDefaultSortedColumn}/>
+<Canvas of={Stories.SortablewithDefaultSortedColumn} />
 
 ## Sortable and Loading
 
 Setting the `isLoading` prop to true will disable clicking on the column headers. This prevents a race condition where an attempt to sort is made before data from the previous load is available.
 
-<Canvas of={Stories.SortableAndLoading}/>
+<Canvas of={Stories.SortableAndLoading} />
 
 ## Scrollable
 
@@ -81,55 +81,55 @@ Note, the table will use the standard `auto` HTML algorithm for sizing columns b
 is given a specific width. In the example below we've made the table fit in a parent container that is 300x300 pixels
 with the second column having a fixed width of 300 pixels.
 
-<Canvas of={Stories.Scrollable}/>
+<Canvas of={Stories.Scrollable} />
 
 ## Scrollable with Sticky Header
 
 Pass `hasStickyHeader` as a prop to stick the header to the top of the table, and prevent it from scrolling away.
 
-<Canvas of={Stories.ScrollablewithStickyHeader}/>
+<Canvas of={Stories.ScrollablewithStickyHeader} />
 
 ## Scrollable with First Column Stuck to Left
 
 To stick the first column to the left of the table when it scrolls horizontally, add `sticky: 'left` to the column's config.
 
-<Canvas of={Stories.ScrollablewithFirstColumnStuckToLeft}/>
+<Canvas of={Stories.ScrollablewithFirstColumnStuckToLeft} />
 
 ## Scrollable with Sticky Header and Nth Column Stuck to Left
 
 Add `sticky: 'left` to any column to stick it to the left of the table when it scrolls horizontally.
 
-<Canvas of={Stories.ScrollablewithStickyHeaderAndNthColumnStuckToLeft}/>
+<Canvas of={Stories.ScrollablewithStickyHeaderAndNthColumnStuckToLeft} />
 
 ## Scrollable with Last Column Stuck to Right
 
 To stick the last, or any, column to the right of the table when it scrolls horizontally, add `sticky: 'right'` to the column's config.
 
-<Canvas of={Stories.ScrollableWithLastColumnStuckToRight}/>
+<Canvas of={Stories.ScrollableWithLastColumnStuckToRight} />
 
 ## Scrollable with Sticky Header and First Column Stuck to Left, Striped, and Hoverable
 
 To stick the header to the top, and the first column to the left, pass `hasStickyHeader` as a prop, and add `sticky: 'left'` to the column's config.
 
-<Canvas of={Stories.ScrollableWithStickyHeaderAndFirstColumnStuckToLeft}/>
+<Canvas of={Stories.ScrollableWithStickyHeaderAndFirstColumnStuckToLeft} />
 
 ## Scrollable and Loading
 
 All interactions, including clicking and scrolling will be disabled when a scrollable table is loading.
 
-<Canvas of={Stories.ScrollableAndLoading}/>
+<Canvas of={Stories.ScrollableAndLoading} />
 
 ## Fixed-Width Columns
 
 If you wish to lock the width of a particular column set the actual column `width` in your column object. Widths are set independently for each column.
 
-<Canvas of={Stories.FixedWidthColumns}/>
+<Canvas of={Stories.FixedWidthColumns} />
 
 ## Fixed Table Layout
 
 The default layout algorithm for a HTML table is `auto`. Use the `useFixedTableLayout` prop to set the table's layout algorithm to `fixed`.
 
-<Canvas of={Stories.FixedTableLayout}/>
+<Canvas of={Stories.FixedTableLayout} />
 
 ## Truncate Overflow
 
@@ -138,7 +138,7 @@ This will truncate column content, but only if a fixed width is passed to that c
 in the `Column` object as well, making it possible to set it globally on the table or individually on a column. The column
 value will supersede the global setting.
 
-<Canvas of={Stories.TruncateOverflow}/>
+<Canvas of={Stories.TruncateOverflow} />
 
 ## Custom Actions
 
@@ -155,7 +155,7 @@ The render method also exposes data about the cell and row, namely:
 With this data in the render function it is possible to render complex elements inside of a single cell.
 See `Based on cell/row` example below.
 
-<Canvas of={Stories.CustomActions}/>
+<Canvas of={Stories.CustomActions} />
 
 ## Empty Cell Placeholder
 
@@ -164,37 +164,37 @@ by adding the `emptyCellPlaceholder` to the column configuration object. In case
 placeholder takes precedence over the global placeholder. As seen in the example below where the price column uses
 `$0.00` as a placeholder where a price is missing.
 
-<Canvas of={Stories.EmptyCellPlaceholder}/>
+<Canvas of={Stories.EmptyCellPlaceholder} />
 
 ## Borderless
 
 Render a borderless table by passing `isBorderless` (boolean) prop to the table.
 
-<Canvas of={Stories.Borderless}/>
+<Canvas of={Stories.Borderless} />
 
 ## Compact
 
 Render a compact table by passing `isCompact` (boolean) prop to the table.
 
-<Canvas of={Stories.Compact}/>
+<Canvas of={Stories.Compact} />
 
 ## Striped
 
 Render a striped table to slightly improve readibility by passing `isStriped` (boolean) prop to the table.
 
-<Canvas of={Stories.Striped}/>
+<Canvas of={Stories.Striped} />
 
 ## Hoverable
 
 Make rows 'hoverable' by passing `hoverableRows` (boolean) prop to the table.
 
-<Canvas of={Stories.Hoverable}/>
+<Canvas of={Stories.Hoverable} />
 
 ## Striped & Hoverable
 
 You can combine any of these boolean props based on your UI needs.
 
-<Canvas of={Stories.StripedAndHoverable}/>
+<Canvas of={Stories.StripedAndHoverable} />
 
 ## Aligning Cell Text
 
@@ -203,7 +203,7 @@ in a single `Column` object. NOTE: right alignment is best reserved for numerica
 We recommend refraining from specific alignment unless it serves the data, as alignment discrepancies in different columns
 may interrupt the natural reading flow for a user.
 
-<Canvas of={Stories.AligningCellText}/>
+<Canvas of={Stories.AligningCellText} />
 
 The below is an example of setting the `align` prop globally in the `<Table />` and overwriting its value on a specific column
 
@@ -213,61 +213,4 @@ The below is an example of setting the `align` prop globally in the `<Table />` 
 
 You can use a ReactNode as your table header or cell.
 
-<Canvas of={Stories.ComponentAsColumnHeader}/>
-
-## Themed Table
-
-<Canvas of={Stories.ThemedTable}/>
-
-## Custom Column Classes
-
-Add custom classes to cells in a column by passing the `cellClassName` in the column config.
-
-<Canvas of={Stories.CustomColumnClasses}/>
-
-
-## Component Design Tokens
-
-<table>
-  <thead>
-    <tr>
-      <th>token name</th>
-      <th>default value</th>
-    </tr>
-  </thead>
-  <tbody>
-    {(() => {
-      const tokens = {
-        'table-border-color': '--color-brand-grey-100',
-        'table-border-width': '--size-border-xs',
-        'table-background-color': '--color-brand-white-500',
-        'table-font-color': '--color-brand-grey-600',
-        'table-font-size': '--size-font-sm',
-        'table-padding-horizontal': '--size-spacing-lg',
-        'table-padding-vertical': '--size-spacing-md',
-        'table-compact-padding-horizontal': '--size-spacing-xs',
-        'table-compact-padding-vertical': '--size-spacing-xs',
-        'table-header-background-color': '--color-brand-white-500',
-        'table-header-font-size': '--size-font-xs',
-        'table-header-font-color': '--color-brand-grey-600',
-        'table-header-font-weight': '--size-font-weight-bold',
-        'table-header-sort-icon-spacing': '--size-spacing-xs',
-        'table-header-padding-vertical': '--size-spacing-md',
-        'table-header-border-width': '--size-border-xs',
-        'table-row-hover-background': '--color-brand-grey-50',
-        'table-row-striped-background': '--color-brand-grey-50',
-      };
-      return Object.entries(tokens).map(([name, entry], i) => (
-        <tr key={i}>
-          <td>
-            <code>{name}</code>
-          </td>
-          <td>
-            <code>{entry}</code>
-          </td>
-        </tr>
-      ));
-    })()}
-
-  </tbody>
-</table>
+<Canvas of={Stories.ComponentAsColumnHeader} />

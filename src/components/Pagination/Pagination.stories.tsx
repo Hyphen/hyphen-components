@@ -46,7 +46,7 @@ export const PageNumbers = () => {
       activePage={activePage}
       itemsPerPage={20}
       onChange={setActivePage}
-      totalItemsCount={1000}
+      totalItemsCount={100}
       isCompact
       arePagesVisible
       numberOfPagesDisplayed={3}

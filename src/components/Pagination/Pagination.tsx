@@ -118,22 +118,23 @@ export const Pagination: FC<PaginationProps> = ({
         </Button>
         {arePagesVisible && (
           <Box direction="row" gap="2xs">
-            {pages.map(({ pageNumber, isPage }) => (
-              <Button
-                key={pageNumber}
-                onClick={() => onChange(pageNumber)}
-                // TODO: Review if we want this to be a prop
-                // isOutlined={activePage !== pageNumber}
-                size={isCompact ? 'sm' : 'md'}
-                style={{
-                  minWidth: isCompact ? '33px' : '42px',
-                  border: 0,
-                }}
-                className={className}
-              >
-                {isPage ? pageNumber : '...'}
-              </Button>
-            ))}
+            {pages.map(({ pageNumber, isPage }) => {
+              console.log(activePage, pageNumber, isPage);
+              return (
+                <Button
+                  key={pageNumber}
+                  onClick={() => onChange(pageNumber)}
+                  variant={pageNumber === activePage ? 'secondary' : 'tertiary'}
+                  size={isCompact ? 'sm' : 'md'}
+                  style={{
+                    minWidth: isCompact ? '33px' : '42px',
+                  }}
+                  className={className}
+                >
+                  {isPage ? pageNumber : '...'}
+                </Button>
+              );
+            })}
           </Box>
         )}
         <Button

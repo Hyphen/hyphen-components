@@ -1,6 +1,6 @@
 //import '@testing-library/jest-dom';
 
-import { FONT_COLOR_OPTIONS, FONT_SIZE_OPTIONS } from '../../lib/tokens';
+import { FONT_COLOR_OPTIONS, HEADING_SIZE_OPTIONS } from '../../lib/tokens';
 import { render, screen } from '@testing-library/react';
 
 import { HEADING_LEVELS } from './Heading.constants';
@@ -14,15 +14,15 @@ const headingComponentLevels = HEADING_LEVELS.map((level) => (
   </Heading>
 ));
 
-const headingComponentSizes = FONT_SIZE_OPTIONS.map((fontSize) => (
+const headingComponentSizes = HEADING_SIZE_OPTIONS.map((fontSize) => (
   <Heading size={fontSize} key={uuid()}>
     {fontSize}
   </Heading>
 ));
 
-const headingComponentColors = FONT_COLOR_OPTIONS.map((variant) => (
-  <Heading variant={variant} key={uuid()}>
-    {variant}
+const headingComponentColors = FONT_COLOR_OPTIONS.map((color) => (
+  <Heading color={color} key={uuid()}>
+    {color}
   </Heading>
 ));
 
@@ -45,11 +45,11 @@ describe('Heading', () => {
 
   describe('Sizes', () => {
     headingComponentSizes.forEach((headingComponent, index) => {
-      test(`it renders the specified size ${FONT_SIZE_OPTIONS[index]}`, () => {
+      test(`it renders the specified size ${HEADING_SIZE_OPTIONS[index]}`, () => {
         render(headingComponent);
-        expect(screen.getByText(FONT_SIZE_OPTIONS[index]).classList).toContain(
-          `font-size-${FONT_SIZE_OPTIONS[index]}`
-        );
+        expect(
+          screen.getByText(HEADING_SIZE_OPTIONS[index]).classList
+        ).toContain(`heading-${HEADING_SIZE_OPTIONS[index]}`);
       });
     });
   });

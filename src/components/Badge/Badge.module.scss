@@ -1,7 +1,7 @@
-@import '@hyphen/hyphen-design-tokens/build/scss/variables-size';
+@import '@hyphen/hyphen-design-tokens/build/scss/variables';
 
 @mixin size-sm {
-  font-size: var(--badge-size-sm-font-size, var(--size-font-2xs));
+  font-size: var(--badge-size-sm-font-size, var(--size-font-size-2xs));
   padding: var(--badge-size-sm-padding-vertical, var(--size-spacing-xs))
     var(--badge-size-sm-padding-horizontal, var(--size-spacing-xs));
   border-radius: var(
@@ -18,7 +18,7 @@
 }
 
 @mixin size-md {
-  font-size: var(--badge-size-md-font-size, var(--size-font-xs));
+  font-size: var(--badge-size-md-font-size, var(--size-font-size-xs));
   padding: var(--badge-size-md-padding-vertical, var(--size-spacing-sm))
     var(--badge-size-md-padding-horizontal, var(--size-spacing-sm));
   border-radius: var(
@@ -35,13 +35,9 @@
 }
 
 @mixin size-lg {
-  font-size: var(--badge-size-lg-font-size, var(--size-font-sm));
-  padding: var(--badge-size-lg-padding-vertical, var(--size-spacing-md))
-    var(--badge-size-lg-padding-horizontal, var(--size-spacing-md));
-  border-radius: var(
-    --badge-size-lg-border-radius,
-    var(--size-border-radius-lg)
-  );
+  font-size: var(--size-font-size-sm);
+  padding: var(--size-spacing-md) var(--size-spacing-md);
+  border-radius: var(--size-border-radius-lg);
 }
 
 %size-lg {
@@ -53,86 +49,56 @@
 
 .badge {
   border-style: solid;
-  border-width: var(--badge-border-width, var(--size-border-xs));
-  font-weight: var(--badge-font-weight, var(--size-font-weight-semi-bold));
+  border-width: var(--size-border-width-sm);
+  font-weight: var(--size-font-weight-semi-bold);
   line-height: var(--size-line-height-base);
 
-  &.primary {
-    background-color: var(
-      --badge-primary-background-color,
-      var(--color-brand-primary-600)
-    );
-    border-color: var(
-      --badge-primary-border-color,
-      var(--color-brand-primary-600)
-    );
-    color: var(--badge-primary-font-color, var(--color-brand-grey-50));
+  &.inverse {
+    background-color: var(--color-background-inverse);
+    border-color: var(--color-background-inverse);
+    color: var(--color-font-inverse);
   }
 
   &.purple {
-    background-color: var(
-      --badge-purple-background-color,
-      var(--color-brand-purple-500)
-    );
-    border-color: var(
-      --badge-purple-border-color,
-      var(--color-brand-purple-600)
-    );
-    color: var(--badge-purple-font-color, var(--color-brand-white-500));
+    background-color: var(--color-base-purple-500);
+    border-color: var(--color-base-purple-600);
+    color: var(--color-base-white);
   }
 
   &.green {
-    background-color: var(
-      --badge-success-background-color,
-      var(--color-brand-green-500)
-    );
-    border-color: var(
-      --badge-success-border-color,
-      var(--color-brand-green-600)
-    );
-    color: var(--badge-success-font-color, var(--color-brand-white-500));
+    background-color: var(--color-base-green-500);
+    border-color: var(--color-base-green-600);
+    color: var(--color-base-white);
   }
 
   &.red {
-    background-color: var(
-      --badge-danger-background-color,
-      var(--color-brand-red-500)
-    );
-    border-color: var(--badge-danger-border-color, var(--color-brand-red-600));
-    color: var(--badge-danger-font-color, var(--color-brand-white-500));
+    background-color: var(--color-base-red-500);
+    border-color: var(--color-base-red-600);
+    color: var(--color-base-white);
   }
 
   &.blue {
-    background-color: var(
-      --badge-info-background-color,
-      var(--color-brand-blue-500)
-    );
-    border-color: var(--badge-info-border-color, var(--color-brand-blue-600));
-    color: var(--badge-info-font-color, var(--color-brand-white-500));
+    background-color: var(--color-base-blue-500);
+    border-color: var(--color-base-blue-600);
+    color: var(--color-base-white);
   }
 
   &.yellow {
-    background-color: var(
-      --badge-warning-background-color,
-      var(--color-brand-yellow-400)
-    );
-    border-color: var(
-      --badge-warning-border-color,
-      var(--color-brand-yellow-500)
-    );
-    color: var(--badge-warning-font-color, var(--color-brand-black-500));
+    background-color: var(--color-base-yellow-400);
+    border-color: var(--color-base-yellow-500);
+    color: var(--color-base-black-500);
   }
 
   &.grey {
-    background-color: var(
-      --badge-default-background-color,
-      var(--color-brand-grey-200)
-    );
-    border-color: var(
-      --badge-default-border-color,
-      var(--color-brand-grey-300)
-    );
-    color: var(--badge-default-font-color, var(--color-brand-grey-700));
+    background-color: var(--color-base-grey-200);
+    border-color: var(--color-base-grey-300);
+    color: var(--color-base-grey-700);
+  }
+
+  &.hyphen {
+    background: var(--color-background-brand-gradient);
+    border-color: var(--color-base-yellow-500);
+    color: var(--color-base-white);
   }
 
   &.size-sm {

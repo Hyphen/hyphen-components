@@ -26,9 +26,4 @@ describe('ModalHeader', () => {
     const { container } = render(<ModalHeader id="modal" />);
     expect(container.children[0].classList).toContain('p-xl');
   });
-
-  test('height is set to lg by default', () => {
-    const { container } = render(<ModalHeader id="modal" />);
-    expect(container.children[0].classList).toContain('h-lg');
-  });
 });

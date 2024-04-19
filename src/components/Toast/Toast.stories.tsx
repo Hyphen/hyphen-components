@@ -23,9 +23,9 @@ const meta: Meta<typeof ToastContainer> = {
 
 export default meta;
 
-export const ContentGuidelines = () =>
+export const Example = () =>
   (() => {
-    const handleClick = () => toast('Proposal saved', { duration: 5000 });
+    const handleClick = () => toast.success('File saved', { duration: 5000 });
     return <Button onClick={handleClick}>Show toast</Button>;
   })();
 

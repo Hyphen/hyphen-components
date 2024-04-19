@@ -1,17 +1,8 @@
-import { Meta, Canvas, ArgsTable, Story} from '@storybook/addon-docs';
+import { Meta, Canvas, ArgsTable, Story } from '@storybook/addon-docs';
 import { Box } from './Box';
 import * as Stories from './Box.stories';
 
-import {
-  FONT_SIZE_OPTIONS,
-  FONT_FAMILY_OPTIONS,
-  FONT_FAMILY_VALUES,
-  FONT_COLOR_OPTIONS,
-  BRAND_COLOR_NAMES,
-  SPACING_OPTIONS,
-} from '../../lib/tokens';
-
-<Meta of={Stories}/>
+<Meta of={Stories} />
 
 # Overview
 
@@ -22,7 +13,7 @@ A `<Box>` is a layout component to build UIs with consistent padding and spacing
 - Allows you to specify the spacing between child elements using `gap`
 - Many props accept `ResponsiveProp` that take an object with keys that correspond to [breakpoint tokens](?path=/docs/foundation-design-tokens--docs#breakpoints).
 
-<Canvas of={Stories.Overview}/>
+<Canvas of={Stories.Overview} />
 
 ## Props
 
@@ -32,7 +23,7 @@ A `<Box>` is a layout component to build UIs with consistent padding and spacing
 
 Use the `background` prop to set the color of the background
 
-<Canvas of={Stories.Background}/>
+<Canvas of={Stories.Background} />
 
 ## Border
 
@@ -44,21 +35,15 @@ Use the `borderColor` prop to set the color of the border and the borderWidth to
 
 Use `gap` to set the spacing between children of a Box (for display grid and flex).
 
-<Canvas of={Stories.Gap} />
-
-### Controlling row and column gaps independently
-
 Use `rowGap` and `columnGap` to set the spacing between children of a Box (for display grid and flex) in the row and column directions independently. You can also use shorthand `gap` to set both at once (e.g. `gap="row col"`).
 
-<Canvas of={Stories.GapShorthand} />
-
-<Canvas of={Stories.GapRowAndColumn} />
+<Canvas of={Stories.Gap} />
 
 ### Child Gap
 
 For block layouts, you can use `childGap` to set the spacing between children of a Box. For flex or grid layouts, use `gap` instead.
 
-<Canvas of={Stories.ChildGap}/>
+<Canvas of={Stories.ChildGap} />
 
 ## Flex Properties
 
@@ -71,160 +56,133 @@ This is equivalent to setting "flex: 1 1 auto".
 If you need more granular flex control for properties such as `flex-grow`, `flex-shrink`, `flex-basis`, we recommend
 passing using a standard `style` object with the `flex` shorthand you need.
 
-<Canvas of={Stories.FlexAuto}/>
+<Canvas of={Stories.FlexAuto} />
 
 ### Flex Direction
 
 Set direction of child elements in a flex container.
 
-<Canvas of={Stories.FlexDirection}/>
+<Canvas of={Stories.FlexDirection} />
 
-<Canvas of={Stories.FlexShrinkGrow}/>
+<Canvas of={Stories.FlexShrinkGrow} />
 
 ### Justify Content
 
 Set content alignment along the main axis
 
-<Canvas of={Stories.FlexJustify}/>
+<Canvas of={Stories.FlexJustify} />
 
 ### Align Items
 
 Set content alignment along the cross axis.
 
-<Canvas of={Stories.FlexAlign}/>
+<Canvas of={Stories.FlexAlign} />
 
 ### Align Content
 
 Set the Box's lines within where there is extra space in the cross-axis.
 This property has no effect when there is only one line of flex items.
 
-<Canvas of={Stories.FlexAlignContent}/>
+<Canvas of={Stories.FlexAlignContent} />
 
 ## Font Color
 
 Use the `color` prop to set the color of the text
 
-<Canvas of={Stories.FontColor}/>
+<Canvas of={Stories.FontColor} />
 
 ## Font Size
 
 Set the `fontSize` prop with a [font size](?path=/docs/foundation-design-tokens--docs#font-size) token to set the size of the text in the Box.
 
-<Canvas of={Stories.FontSize}/>
-
+<Canvas of={Stories.FontSizes} />
 
 ### Font Family
 
-<Canvas of={Stories.FontFamily}/>
+<Canvas of={Stories.FontFamily} />
 
 ## Font Weight
 
 Set the `fontWeight` prop with a [font weight](?path=/docs/foundation-design-tokens--docs#font-weight) token to set the size of the text in the Box.
 
-
-<Canvas of={Stories.FontWeight}/>
-
+<Canvas of={Stories.FontWeights} />
 
 ## Text Align
 
 Set the `textAlign` prop to set the alignment of the text in the Box.
 
-<Canvas of={Stories.TextAlign}/>
+<Canvas of={Stories.TextAlign} />
 
 ## Margin
 
 The `margin` prop accepts a single [spacing](?path=/docs/foundation-design-tokens--docs#spacing) value or a set of spacing values that correspond with css shorthand syntax. Margin values can be set on the horizontal or vertical axis, or the top, right, bottom and left sides of a Box.
 
-<Canvas of={Stories.Margin}/>
+<Canvas of={Stories.Margin} />
 
 ## Padding
 
 The `padding` prop accepts a single [spacing](?path=/docs/foundation-design-tokens--docs#spacing) value or a set of spacing values that correspond with css shorthand syntax. Padding values can be set on the horizontal or vertical axis, or the top, right, bottom and left sides of a Box.
 
-<Canvas of={Stories.Padding}/>
+<Canvas of={Stories.Padding} />
 
 ## Radius
 
 Set the `radius` prop with a [radius token](?path=/docs/foundation-design-tokens--docs#border-radius) to set the corner radius of the box.
 
-<Canvas of={Stories.Radius}/>
+<Canvas of={Stories.Radius} />
 
 ## Shadow
 
 Set the `shadow` prop with a [shadow token](?path=/docs/foundation-design-tokens--docs#box-shadow) to set the outer shadow of the box.
 
-<Canvas of={Stories.Shadow}/>
+<Canvas of={Stories.Shadow} />
 
 ## Width
 
 Width can be set to any CSS unit value (px, rem, em, %).
 
-<Canvas of={Stories.Width}/>
+<Canvas of={Stories.Width} />
 
 [Width tokens](?path=/docs/foundation-design-tokens--docs#width) may be used to set widths as well.
 
-<Canvas of={Stories.WidthTokens}/>
+<Canvas of={Stories.WidthTokens} />
 
 Set the width to a common percentage of the Box's parent.
 
-<Canvas of={Stories.WidthPercentages}/>
-
-## Max Width
-
-Set the maximum width of the Box by setting `maxWidth` to a [width token](?path=/docs/foundation-design-tokens--docs#width) or any valid css unit.
-
-<Canvas of={Stories.WidthMax}/>
-
-## Min Width
-
-Set the minimum width of the Box by setting `minWidth` to a [width token](?path=/docs/foundation-design-tokens--docs#width) or any valid css unit.
-
-<Canvas of={Stories.WidthMin}/>
+<Canvas of={Stories.WidthPercentages} />
 
 ## Height
 
 Height can be set to any CSS unit value (px, rem, em, %).
 
-<Canvas of={Stories.Height}/>
+<Canvas of={Stories.Height} />
 
-[Width tokens](?path=/docs/foundation-design-tokens--docs#height) may be used to set height as well.
+[Height tokens](?path=/docs/foundation-design-tokens--docs#height) may be used to set height as well.
 
-<Canvas of={Stories.HeightTokens}/>
+<Canvas of={Stories.HeightTokens} />
 
 Set the height to a common percentage of the Box's parent.
 
-<Canvas of={Stories.HeightPercentages}/>
-
-## Max Height
-
-Set the maximum width of the Box by setting `maxHeight` to a [height token](?path=/docs/foundation-design-tokens--docs#height) or any valid css unit.
-
-<Canvas of={Stories.HeightMax}/>
-
-## Min Height
-
-Set the minimum width of the Box by setting `minHeight` to a [height token](?path=/docs/foundation-design-tokens--docs#height) or any valid css unit.
-
-<Canvas of={Stories.HeightMin}/>
+<Canvas of={Stories.HeightPercentages} />
 
 ## Overflow
 
 Set the overflow behavior of the Box with `overflow`
 
-<Canvas of={Stories.Overflow}/>
+<Canvas of={Stories.Overflow} />
 
 ## Cursor
 
 Set the cursor for value for the element in question. Use any valid [CSS cursor value](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor#values).
 
-<Canvas of={Stories.Cursor}/>
+<Canvas of={Stories.Cursor} />
 
 ## Position
 
 Set the CSS position for the element in question. Use any valid [CSS position value](https://developer.mozilla.org/en-US/docs/Web/CSS/position#values) or a
 responsive object prop with said values. Example with `fixed` position not included. Scroll the container to see these in action.
 
-<Canvas of={Stories.Position}/>
+<Canvas of={Stories.Position} />
 
 ## Hover States
 
@@ -240,7 +198,7 @@ Currently our library supports hover states for:
 - `fontSize`
 - `shadow`
 
-<Canvas of={Stories.Hover}/>
+<Canvas of={Stories.Hover} />
 
 ## Focus States
 
@@ -255,7 +213,7 @@ Currently our library supports hover states for:
 - `color`
 - `shadow`
 
-<Canvas of={Stories.Focus}/>
+<Canvas of={Stories.Focus} />
 
 ## Responsive Props
 
@@ -291,11 +249,11 @@ Responsive enabled props take a keyed object that specifies at which [breakpoint
 
 Try resizing the browser to see the responsive properties in action.
 
-<Canvas of={Stories.Responsive}/>
+<Canvas of={Stories.Responsive} />
 
 #### Omitting Keys
 
 When passing an object, omitting a key is the same as not applying any styles.
 For example the following has padding at the `desktop` breakpoint and wider.
 
-<Canvas of={Stories.Omit}/>
+<Canvas of={Stories.Omit} />

@@ -96,7 +96,7 @@ export const Alert: FC<AlertProps> = ({
     return (
       <Box
         margin="0 0 0 auto"
-        color="grey-500"
+        color="secondary"
         className={styles['close-icon']}
       >
         <button
@@ -141,7 +141,6 @@ export const Alert: FC<AlertProps> = ({
                 as="h4"
                 fontSize="sm"
                 fontWeight="medium"
-                color="grey-600"
                 className={styles['alert-heading']}
               >
                 {title}

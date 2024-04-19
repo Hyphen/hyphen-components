@@ -32,7 +32,7 @@ export const CardHeader: FC<CardHeaderProps> = ({
 }) => {
   const renderTitle = () =>
     typeof title === 'string' ? (
-      <Heading size="md" as="h4">
+      <Heading size="sm" as="h4">
         {title}
       </Heading>
     ) : (

@@ -63,23 +63,23 @@ const renderToastIcon = (toast: Toast) => {
   if (type === 'blank') return;
 
   let iconName: IconName = 'exclamation-mark';
-  let iconColor: FontColor = 'primary-500'; // dark
+  let iconColor: FontColor = 'base'; // dark
 
   if (type === 'success') {
     iconName = 'c-check';
-    iconColor = 'green-300';
+    iconColor = 'success';
   }
 
   if (type === 'error') {
     iconName = 'c-warning';
-    iconColor = 'red-300';
+    iconColor = 'danger';
   }
 
   const icon =
     type !== 'loading' ? (
       <Icon name={iconName} color={iconColor} />
     ) : (
-      <Spinner variant="blue" />
+      <Spinner />
     );
 
   // eslint-disable-next-line consistent-return
@@ -106,7 +106,7 @@ const renderDismissIcon = (
       alignItems="center"
       justifyContent="center"
       cursor="pointer"
-      background="transparent-500" // transparent
+      background="transparent" // transparent
       height="100"
       onClick={onDismiss}
       aria-label="dismiss notification"

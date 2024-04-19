@@ -1,12 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import classNames from 'classnames';
-import {
-  BrandColor,
-  FontColor,
-  FontSize,
-  BaseSpacing,
-  ResponsiveProp,
-} from '../../types';
+import { FontSize, BaseSpacing, ResponsiveProp } from '../../types';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
 import styles from './Badge.module.scss';
 import { Box } from '../Box/Box';
@@ -15,14 +9,13 @@ export type BadgeSize = 'sm' | 'md' | 'lg';
 
 export type BadgeVariant =
   | 'grey'
-  | 'primary'
+  | 'inverse'
   | 'green'
-  | 'purple'
   | 'yellow'
   | 'blue'
-  | 'red';
-
-export type BadgeColorAttributes = { font: FontColor; background: BrandColor };
+  | 'red'
+  | 'purple'
+  | 'hyphen';
 
 export type BadgeSizeAttributes = { fontSize: FontSize; padding: BaseSpacing };
 export interface BadgeProps {
@@ -47,17 +40,6 @@ export interface BadgeProps {
    */
   [x: string]: any; // eslint-disable-line
 }
-
-export const BADGE_COLOR_MAP: { [key in BadgeVariant]: BadgeColorAttributes } =
-  {
-    blue: { font: 'grey-600', background: 'blue-100' },
-    primary: { font: 'grey-600', background: 'primary-100' },
-    green: { font: 'grey-600', background: 'green-100' },
-    red: { font: 'grey-600', background: 'red-100' },
-    purple: { font: 'grey-600', background: 'purple-100' },
-    grey: { font: 'grey-600', background: 'grey-100' },
-    yellow: { font: 'grey-600', background: 'yellow-100' },
-  };
 
 export const Badge: FC<BadgeProps> = ({
   className = '',

@@ -12,7 +12,7 @@ export interface CardSectionProps extends BoxProps {
   /**
    * If defined as a prop, this value will take higher precedence than the corresponding component design token value
    * Any valid [brand color token](/?path=/docs/foundation-design-tokens--docs#color) for the border color
-   * Or a responsive prop with BrandColor for each breakpoint.
+   * Or a responsive prop with borderColor for each breakpoint.
    */
   borderColor?: BoxProps['borderColor'];
   /**
@@ -63,7 +63,7 @@ export const CardSection: FC<CardSectionProps> = ({
   const renderTitle =
     typeof title === 'string' ? (
       <Box className="m-bottom-md">
-        <Box as="h4" fontWeight="bold" fontSize="sm" color="grey-600">
+        <Box as="h4" fontWeight="bold" fontSize="sm" color="base">
           {title}
         </Box>
       </Box>

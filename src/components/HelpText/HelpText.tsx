@@ -24,6 +24,8 @@ export const HelpText = forwardRef<HTMLDivElement, HelpTextProps>(
         className
       )}
       display="block"
+      color="secondary"
+      fontSize="sm"
     >
       {children}
     </Box>

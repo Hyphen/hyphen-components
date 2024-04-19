@@ -1,13 +1,13 @@
-@import '@hyphen/hyphen-design-tokens/build/scss/variables-size';
+@import '@hyphen/hyphen-design-tokens/build/scss/variables';
 
 @mixin floating-label-minimize-md {
   opacity: 0.75;
-  transform: scale(0.6875) translateY(-0.3rem) translateX(0.15rem);
+  transform: scale(0.6875) translateY(-0.25rem) translateX(0.15rem);
 }
 
 @mixin floating-label-minimize-lg {
   opacity: 0.75;
-  transform: scale(0.75) translateY(-0.3rem) translateX(0.15rem);
+  transform: scale(0.75) translateY(-0.25rem) translateX(0.15rem);
 }
 
 @mixin size-md {
@@ -16,14 +16,16 @@
     var(--INTERNAL_form-control-size-md-border-radius)
   );
   font-size: var(
-    --form-control-size-sm-font-size,
-    var(--INTERNAL_form-control-size-sm-font-size)
+    --form-control-size-md-font-size,
+    var(--INTERNAL_form-control-size-md-font-size)
   );
 
   .text-input-label {
-    padding: var(
-      --form-control-size-md-padding,
-      var(--INTERNAL_form-control-size-md-padding)
+    padding: calc(
+      var(
+          --form-control-size-md-padding,
+          var(--INTERNAL_form-control-size-md-padding)
+        ) + 1px
     );
   }
 
@@ -32,7 +34,7 @@
         var(
             --form-control-size-lg-padding,
             var(--INTERNAL_form-control-size-lg-padding)
-          ) + 3px
+          ) + 12px
       )
       var(
         --form-control-size-md-padding,
@@ -42,7 +44,7 @@
         var(
             --form-control-size-md-padding,
             var(--INTERNAL_form-control-size-md-padding)
-          ) - 5px
+          ) - 6px
       )
       var(
         --form-control-size-md-padding,
@@ -100,14 +102,16 @@
     var(--INTERNAL_form-control-size-lg-border-radius)
   );
   font-size: var(
-    --form-control-size-md-font-size,
-    var(--INTERNAL_form-control-size-md-font-size)
+    --form-control-size-lg-font-size,
+    var(--INTERNAL_form-control-size-lg-font-size)
   );
 
   .text-input-label {
-    padding: var(
-      --form-control-size-lg-padding,
-      var(--INTERNAL_form-control-size-lg-padding)
+    padding: calc(
+      var(
+          --form-control-size-lg-padding,
+          var(--INTERNAL_form-control-size-lg-padding)
+        ) + 4px
     );
   }
 
@@ -116,7 +120,7 @@
         var(
             --form-control-size-lg-padding,
             var(--INTERNAL_form-control-size-lg-padding)
-          ) + 10px
+          ) + 16px
       )
       var(
         --form-control-size-lg-padding,
@@ -126,7 +130,7 @@
         var(
             --form-control-size-lg-padding,
             var(--INTERNAL_form-control-size-lg-padding)
-          ) - 5px
+          ) - 6px
       )
       var(
         --form-control-size-lg-padding,
@@ -225,7 +229,7 @@
 .prefix {
   border: 1px solid
     var(--form-control-border-color, var(--INTERNAL_form-control-border-color));
-  background-color: var(--color-brand-grey-50);
+  background-color: var(--color-base-grey-50);
   border-top-left-radius: var(
     --form-control-size-md-border-radius,
     var(--INTERNAL_form-control-size-md-border-radius)
@@ -239,7 +243,7 @@
 .suffix {
   border: 1px solid
     var(--form-control-border-color, var(--INTERNAL_form-control-border-color));
-  background-color: var(--color-brand-grey-50);
+  background-color: var(--color-base-grey-50);
   border-top-right-radius: var(
     --form-control-size-md-border-radius,
     var(--INTERNAL_form-control-size-md-border-radius)
@@ -256,15 +260,6 @@
     var(--INTERNAL_form-control-font-family)
   );
   position: relative;
-  box-shadow: var(
-      --form-control-box-shadow,
-      var(--INTERNAL_form-control-box-shadow)
-    ),
-    inset 0 0 0 1px
-      var(
-        --form-control-border-color,
-        var(--INTERNAL_form-control-border-color)
-      );
   background-color: var(
     --form-control-background-color,
     var(--INTERNAL_form-control-background-color)
@@ -319,7 +314,11 @@
     transition-duration: 300ms;
     transition-property: border, background-color;
     transition-timing-function: cubic-bezier(0.2, 0.8, 0.4, 1);
-    border: none;
+    border: 1px solid
+      var(
+        --form-control-border-color,
+        var(--INTERNAL_form-control-border-color)
+      );
     background-color: transparent;
     width: 100%;
     line-height: var(
@@ -355,15 +354,6 @@
   }
 
   &.error {
-    box-shadow: var(
-        --form-control-box-shadow,
-        var(--INTERNAL_form-control-box-shadow)
-      ),
-      inset 0 0 0 1px
-        var(
-          --form-control-border-color-error,
-          var(--INTERNAL_form-control-border-color-error)
-        );
     background-color: var(
       --form-control-background-color-error,
       var(--INTERNAL_form-control-background-color-error)
