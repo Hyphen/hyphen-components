@@ -1,4 +1,4 @@
-import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { Canvas, Meta, ArgTypes } from '@storybook/blocks';
 import { ResponsiveProvider } from './ResponsiveProvider';
 import * as Stories from './ResponsiveProvider.stories';
 
@@ -14,7 +14,7 @@ markup without diving into CSS.
 
 ## Props
 
-<ArgsTable of={ResponsiveProvider} />
+<ArgTypes of={ResponsiveProvider} />
 
 ## Basic Usage
 
@@ -26,11 +26,11 @@ The example below shows basic usage.
 **NOTE:** we've included hooks that work in conjuction with this component in order to get
 window size data from the provider. the example below uses `useWindowSize`.
 
-<Canvas isExpanded of={Stories.BasicUsage}/>
+<Canvas isExpanded of={Stories.BasicUsage} />
 
 ## Breakpoints
 
 Our library includes opinionated [breakpoints](?path=/story/design-tokens-design-tokens--page#breakpoints). The `useBreakpoint` hook exposes
 these to any component nested under a `ResponsiveProvider`
 
-<Canvas isExpanded of={Stories.Breakpoints}/>
+<Canvas isExpanded of={Stories.Breakpoints} />

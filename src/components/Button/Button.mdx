@@ -1,5 +1,4 @@
-import { action } from '@storybook/addon-actions';
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { Meta, Story, Canvas, ArgTypes } from '@storybook/addon-docs';
 import { Button } from './Button';
 import { Box } from '../Box/Box';
 
@@ -17,7 +16,7 @@ Actions almost always occur on the same page.
 
 ## Props
 
-<ArgsTable of={Button} />
+<ArgTypes of={Button} />
 
 ## Variants
 
@@ -63,12 +62,6 @@ Use for actions that aren’t currently available, such as immediately after a f
 The interface should make it clear why the button is disabled and what needs to be done to enable it.
 
 <Canvas of={Stories.Disabled} />
-
-## Event Callbacks
-
-Callback functions can be passed to `onClick`, `onBlur`, and `onFocus` events.
-
-<Canvas of={Stories.EventCallbacks} />
 
 ## As an Anchor
 

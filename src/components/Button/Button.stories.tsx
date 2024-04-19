@@ -2,7 +2,6 @@ import { Box } from '../Box/Box';
 import { Button } from './Button';
 import type { Meta } from '@storybook/react';
 import React from 'react';
-import { action } from '@storybook/addon-actions';
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
@@ -100,16 +99,6 @@ export const Disabled = () => (
       Tertiary Disabled
     </Button>
   </Box>
-);
-
-export const EventCallbacks = () => (
-  <Button
-    onBlur={action('blur')}
-    onClick={action('click')}
-    onFocus={action('focus')}
-  >
-    click, focus, blur events
-  </Button>
 );
 
 export const Anchor = () => (

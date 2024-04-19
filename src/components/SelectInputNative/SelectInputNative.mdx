@@ -1,4 +1,4 @@
-import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { Canvas, Meta, ArgTypes } from '@storybook/blocks';
 import { SelectInputNative } from './SelectInputNative';
 import * as Stories from './SelectInputNative.stories';
 
@@ -13,25 +13,25 @@ when a custom UI is not needed for a select, or the native UI is preferred (this
 
 ## Props
 
-<ArgsTable of={SelectInputNative} />
+<ArgTypes of={SelectInputNative} />
 
 ## Default
 
 All that is required to render a basic version of the SelectInputNative is a unique `id`, a `label`, a list of options passed to the `options` prop, a `value`, and an onchange event handler passed to the `onChange` prop.
 
-<Canvas of={Stories.Default}/>
+<Canvas of={Stories.Default} />
 
 ## Pre-Selected
 
 Pre-select an option by passing its value to the `value` prop.
 
-<Canvas of={Stories.PreSelected}/>
+<Canvas of={Stories.PreSelected} />
 
 ## Help Text
 
 Use the `helpText` prop to add clarifying text beneath the input label.
 
-<Canvas of={Stories.HelpText}/>
+<Canvas of={Stories.HelpText} />
 
 ## Placeholder
 
@@ -39,41 +39,41 @@ Use the `placeholder` prop to add a custom placeholder. Note that this component
 to use as a placeholder with a value of `''`. This first option is however disabled can't be selected after a user has picked
 one of the real options.
 
-<Canvas of={Stories.Placeholder}/>
+<Canvas of={Stories.Placeholder} />
 
 ## Hidden Label
 
 Use the `hideLabel` prop to not render the label.
 
-<Canvas of={Stories.HiddenLabel}/>
+<Canvas of={Stories.HiddenLabel} />
 
 ## Autofocus
 
 Use the `autoFocus` prop to autofocus a SelectInput.
 
-<Canvas of={Stories.Autofocus}/>
+<Canvas of={Stories.Autofocus} />
 
 ## Required
 
 Use the `isRequired` prop to set the `required` and `aria-required` on the underlying input element.
 
-<Canvas of={Stories.Required}/>
+<Canvas of={Stories.Required} />
 
 You can remove or customize the required indicator using the `requiredIndicator` prop.
 
-<Canvas of={Stories.CustomRequiredIndicator}/>
+<Canvas of={Stories.CustomRequiredIndicator} />
 
 ## Disabled
 
 Use the `isDisabled` prop to mark the input as disabled.
 
-<Canvas of={Stories.Disabled}/>
+<Canvas of={Stories.Disabled} />
 
 ## Error
 
 Use the `error` prop to mark the input as invalid. `error` accepts a `boolean`, `string`, or `node`. If either a `string` or `node` is passed, a validation message is displayed below it.
 
-<Canvas of={Stories.Error}/>
+<Canvas of={Stories.Error} />
 
 ## Sizes
 
@@ -81,7 +81,7 @@ Set the size of the input to `sm`, `md` or `lg`. `md` is the default size.
 The `size` prop is also a `ResponsiveProp`, so it can be sized differently at each [breakpoint](?path=/docs/design-tokens-design-tokens--page#breakpoints) by passing an object.
 
 <Canvas of={Stories.Sizes} />
- 
+
 ## Component Design Tokens
 
 This component shares component design tokens with all form controls. For a complete list of tokens, see the [Theming Form Controls documentation](/docs/theming-form-controls--custom-theme-form).

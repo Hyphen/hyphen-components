@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { action } from '@storybook/addon-actions';
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { Meta, Story, Canvas, ArgTypes } from '@storybook/addon-docs';
 import { Pagination } from './Pagination';
 import * as Stories from './Pagination.stories';
-
 
 <Meta of={Stories} />
 
@@ -13,19 +11,16 @@ Use pagination to improve user scanning, as well as load times, for large collec
 
 ## Props
 
-<ArgsTable of={Pagination} />
+<ArgTypes of={Pagination} />
 
 ## Default
-<Canvas of={Stories.Default}/>
 
+<Canvas of={Stories.Default} />
 
 ## Compact
 
-<Canvas of={Stories.Compact}/>
-
+<Canvas of={Stories.Compact} />
 
 ## With Interactive Page Numbers
 
-<Canvas of={Stories.PageNumbers}/>
-
-
+<Canvas of={Stories.PageNumbers} />

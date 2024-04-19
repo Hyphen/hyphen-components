@@ -1,4 +1,4 @@
-import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { Canvas, Meta, ArgTypes } from '@storybook/blocks';
 import { TimePickerNative } from './TimePickerNative';
 import * as Stories from './TimePickerNative.stories';
 
@@ -15,18 +15,18 @@ _ABOUT TIME FORMAT:_ The value returned will always be a JS ISO date string, lik
 
 ## Props
 
-<ArgsTable of={TimePickerNative} />
+<ArgTypes of={TimePickerNative} />
 
 ## Default
 
-<Canvas of={Stories.Default}/>
+<Canvas of={Stories.Default} />
 
 ## With A Specific Interval
 
 Pass an `interval` (seconds) value to determine how many times get generated as options.
 The example below uses `3600` --> 1 Hour Intervals
 
-<Canvas of={Stories.WithASpecificInterval}/>
+<Canvas of={Stories.WithASpecificInterval} />
 
 ## With Min and Max Times
 
@@ -39,7 +39,7 @@ the options showing the startTime twice when using a 24-hour cycle.
 
 See example below where we want to show 15 minute increments starting at 9:00AM and ending at 3:30PM.
 
-<Canvas of={Stories.WithMinAndMaxTimes}/>
+<Canvas of={Stories.WithMinAndMaxTimes} />
 
 ## With Custom Date Display
 
@@ -50,17 +50,17 @@ NOTE: that the option values are always returned as ISO strings regardless of th
 
 The example below is shown in military (24-hour) time.
 
-<Canvas of={Stories.WithCustomDateDisplay}/>
+<Canvas of={Stories.WithCustomDateDisplay} />
 
 ## Help Text
 
-<Canvas of={Stories.HelpText}/>
+<Canvas of={Stories.HelpText} />
 
 ## Sizes
 
 Set the size of the input to `sm`, `md` or `lg`. `md` is the default size.
 
-<Canvas of={Stories.Sizes}/>
+<Canvas of={Stories.Sizes} />
 
 ## Component Design Tokens
 
