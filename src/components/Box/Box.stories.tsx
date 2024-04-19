@@ -1585,6 +1585,7 @@ export const Responsive = () => (
     fontSize={{ base: 'md', tablet: 'lg', desktop: 'xl', hd: '3xl' }}
     borderWidth={{ base: 'sm', tablet: 'xs', desktop: 'md', hd: '0' }}
     textAlign={{ base: 'center', tablet: 'right', desktop: 'left' }}
+    width={{ base: '5xl', tablet: '50', desktop: '25', hd: '10xl' }}
   >
     <p>Resize the viewport to see how my appearance changes.</p>
   </Box>

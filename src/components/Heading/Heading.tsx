@@ -1,5 +1,5 @@
 import { FC, ReactNode, createElement } from 'react';
-import { FontColor, FontSize, ResponsiveProp } from '../../types';
+import { FontColor, HeadingSize, ResponsiveProp } from '../../types';
 import {
   HEADING_DEFAULT_SIZE_MAP,
   HEADING_LEVELS_TYPE,
@@ -35,7 +35,7 @@ export interface HeadingProps {
    * Available sizes found:
    * [here](https://github.com/hyphen/hyphen-design-tokens/blob/main/properties/size/font.json).
    */
-  size?: FontSize | ResponsiveProp<FontSize>;
+  size?: HeadingSize | ResponsiveProp<HeadingSize>;
   /**
    * Additional props to be spread to rendered element
    */
