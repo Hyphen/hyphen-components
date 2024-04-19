@@ -23,7 +23,7 @@
     "lint-fix": "dts lint --fix",
     "size": "size-limit",
     "start": "dts watch",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006 --stats-json",
     "test": "dts test --passWithNoTests",
     "test-watch": "dts test --watch",
     "semantic-release": "semantic-release",
