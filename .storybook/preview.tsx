@@ -13,7 +13,7 @@ const preview: Preview = {
       theme: hyphenTheme,
     },
     backgrounds: {
-      default: 'hyphen light',
+      default: 'primary (light)',
       values: [
         {
           name: 'primary (light)',
