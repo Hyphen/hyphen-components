@@ -43,13 +43,13 @@ export const BREAKPOINT_OPTIONS = Object.keys(
 
 export const BREAKPOINTS = [
   ...Object.entries(designTokens.size.breakpoint),
-  ['base', {value: '0'}],
+  ['base', { value: '0' }],
 ].map(([name, data]) => {
   if (typeof data === 'object' && data !== null && 'value' in data) {
-    return ({
+    return {
       name,
       minWidth: parseInt(data['value'] as string, 10),
-    });
+    };
   }
 }) as Breakpoint[];
 
