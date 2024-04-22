@@ -5,9 +5,6 @@ import { useBreakpoint } from './useBreakpoint';
 
 const meta: Meta<typeof useBreakpoint> = {
   title: 'Hooks/useBreakpoint',
-  parameters: {
-    controls: { hideNoControlsWarning: true },
-  },
 };
 
 export default meta;
@@ -18,10 +15,10 @@ export const BasicUsage = () =>
       const { isPhone, isTablet, isDesktop, isHd } = useBreakpoint();
       return (
         <div>
-          {isPhone && <p>Phone layout</p>}
-          {isTablet && <p>Tablet layout</p>}
-          {isDesktop && <p>Desktop layout</p>}
-          {isHd && <p>HD layout</p>}
+          <p>phone: {isPhone ? '✅' : '❌'}</p>
+          <p>tablet: {isTablet ? '✅' : '❌'}</p>
+          <p>desktop: {isDesktop ? '✅' : '❌'}</p>
+          <p>hd: {isHd ? '✅' : '❌'}</p>
         </div>
       );
     };

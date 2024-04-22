@@ -43,11 +43,15 @@ export const BREAKPOINT_OPTIONS = Object.keys(
 
 export const BREAKPOINTS = [
   ...Object.entries(designTokens.size.breakpoint),
-  ['base', 0],
-].map(([name, value]) => ({
-  name,
-  minWidth: parseInt(value as string, 10),
-})) as Breakpoint[];
+  ['base', { value: '0' }],
+].map(([name, data]) => {
+  if (typeof data === 'object' && data !== null && 'value' in data) {
+    return {
+      name,
+      minWidth: parseInt(data['value'] as string, 10),
+    };
+  }
+}) as Breakpoint[];
 
 export const BASE_COLOR_OPTIONS = (
   Object.keys(designTokens.color.base) as ColorName[]
