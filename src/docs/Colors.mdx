@@ -1,5 +1,6 @@
 import { ColorPalette, ColorItem, Meta } from '@storybook/addon-docs';
 import designTokens from '@hyphen/hyphen-design-tokens/build/json/variables.json';
+import { Box } from '../../src/components/Box/Box';
 
 <Meta title="Foundation/Colors" />
 
@@ -124,5 +125,35 @@ import designTokens from '@hyphen/hyphen-design-tokens/build/json/variables.json
       },
       {}
     )}
+  />
+</ColorPalette>
+
+## Borders
+
+<ColorPalette>
+  <ColorItem
+    title="Backgrounds"
+    subtitle="used for borders"
+    colors={Object.keys(designTokens.color.border).reduce((acc, item, i) => {
+      acc[item] = Object.keys(designTokens.color.border).map(
+        (g) => designTokens.color.border[g].value
+      )[i];
+      return acc;
+    }, {})}
+  />
+</ColorPalette>
+
+## Text
+
+<ColorPalette>
+  <ColorItem
+    title="Text"
+    subtitle="used for text"
+    colors={Object.keys(designTokens.color.font).reduce((acc, item, i) => {
+      acc[item] = Object.keys(designTokens.color.font).map(
+        (g) => designTokens.color.font[g].value
+      )[i];
+      return acc;
+    }, {})}
   />
 </ColorPalette>

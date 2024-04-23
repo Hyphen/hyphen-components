@@ -98,7 +98,16 @@ export const Border = () => {
   return (
     <Box gap="md">
       <Box borderColor="default" borderWidth="sm" padding="md">
-        separator
+        default
+      </Box>
+      <Box borderColor="subtle" borderWidth="sm" padding="md">
+        subtle
+      </Box>
+      <Box borderColor="hover" borderWidth="sm" padding="md">
+        hover
+      </Box>
+      <Box borderColor="active" borderWidth="sm" padding="md">
+        active
       </Box>
       <Box borderColor="info" borderWidth="sm" padding="md">
         info
