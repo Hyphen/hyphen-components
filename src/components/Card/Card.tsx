@@ -1,4 +1,3 @@
-import { BoxShadowSize, ResponsiveProp } from '../../types';
 import { Box, BoxProps } from '../Box/Box';
 import { CardFooter, CardHeader, CardSection } from './components';
 import React, { ReactNode } from 'react';
