@@ -19,6 +19,7 @@ export const OverviewCard = () => (
     <Card.Section>
       <p>Card content</p>
     </Card.Section>
+    <Card.Section title="Section Two">Another section</Card.Section>
     <Card.Footer>Footer</Card.Footer>
   </Card>
 );
