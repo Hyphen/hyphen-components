@@ -10,8 +10,8 @@ import { RemoveScroll } from 'react-remove-scroll';
 import classNames from 'classnames';
 import { DimensionSize, CssDimensionValue } from '../../types';
 import { Box } from '../Box/Box';
-import { Icon } from '../Icon/Icon';
 import styles from './Drawer.module.scss';
+import { Button } from '../Button/Button';
 
 export type DrawerPlacementType = 'left' | 'right' | 'top' | 'bottom';
 export interface DrawerProps {
@@ -159,21 +159,14 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
     const renderHeader = () => {
       if (closeButton && onDismiss && !title) {
         return (
-          <Box
-            alignItems="flex-end"
-            justifyContent="center"
-            padding="md lg"
-            borderWidth="0 0 sm 0"
-            className={styles['drawer-header']}
-          >
-            <button
+          <Box alignItems="flex-end" justifyContent="center" padding="md lg">
+            <Button
+              variant="tertiary"
+              onClick={onDismiss}
               aria-label="close"
               type="button"
-              className={styles['drawer-close-button']}
-              onClick={onDismiss}
-            >
-              <Icon name="remove" />
-            </button>
+              iconPrefix="remove"
+            />
           </Box>
         );
       }
@@ -183,22 +176,19 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
             direction="row"
             justifyContent="space-between"
             alignItems="center"
-            padding={onDismiss ? 'md lg' : 'lg'}
-            borderWidth="0 0 sm 0"
-            className={styles['drawer-header']}
+            padding="2xl"
           >
             <Box className={styles.title} fontWeight="bold">
               {title}
             </Box>
             {onDismiss && (
-              <button
+              <Button
+                variant="tertiary"
+                onClick={onDismiss}
                 aria-label="close"
                 type="button"
-                className={styles['drawer-close-button']}
-                onClick={onDismiss}
-              >
-                <Icon name="remove" />
-              </button>
+                iconPrefix="remove"
+              />
             )}
           </Box>
         );

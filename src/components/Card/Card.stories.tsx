@@ -32,43 +32,41 @@ export const ExampleSignUpForm = () => (
     background="secondary"
   >
     <Card maxWidth="9xl">
-      <Card.Section padding="5xl">
-        <Box gap="4xl">
-          <Box gap="sm" alignItems="center">
-            <Heading as="h1" size="lg">
-              Sign Up
-            </Heading>
-            <Box as="p" color="secondary" fontSize="sm">
-              Create your Hyphen account
-            </Box>
+      <Card.Section padding="5xl" gap="4xl">
+        <Box gap="sm" alignItems="center">
+          <Heading as="h1" size="lg">
+            Sign Up
+          </Heading>
+          <Box as="p" color="secondary" fontSize="sm">
+            Create your Hyphen account
           </Box>
-          <Box gap="2xl">
-            <TextInput
-              id="email"
-              value=""
-              label="Email Address"
-              onChange={() => null}
-            />
-            <TextInput
-              id="password"
-              type="password"
-              value=""
-              label="Password"
-              onChange={() => null}
-            />
-            <Button fullWidth variant="primary">
-              Sign Up
-            </Button>
-          </Box>
-          <Box alignItems="center" fontSize="sm" color="secondary">
-            <p>
-              Already have an account?{' '}
-              <a href="/#" className="font-color-primary">
-                Log in
-              </a>
-              .
-            </p>
-          </Box>
+        </Box>
+        <Box gap="2xl">
+          <TextInput
+            id="email"
+            value=""
+            label="Email Address"
+            onChange={() => null}
+          />
+          <TextInput
+            id="password"
+            type="password"
+            value=""
+            label="Password"
+            onChange={() => null}
+          />
+          <Button fullWidth variant="primary">
+            Sign Up
+          </Button>
+        </Box>
+        <Box alignItems="center" fontSize="sm" color="secondary">
+          <p>
+            Already have an account?{' '}
+            <a href="/#" className="font-color-primary">
+              Log in
+            </a>
+            .
+          </p>
         </Box>
       </Card.Section>
     </Card>

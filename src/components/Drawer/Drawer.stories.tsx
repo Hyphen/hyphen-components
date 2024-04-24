@@ -31,7 +31,7 @@ export const BasicUsage = () => {
         onDismiss={closeDrawer}
         ariaLabel="drawer component example"
       >
-        <Box padding="lg" display="block" childGap="md">
+        <Box padding="2xl" display="block" childGap="md">
           <Box>Drawer content&hellip;</Box>
           <Box>Drawer content&hellip;</Box>
           <Box>Drawer content&hellip;</Box>
@@ -90,7 +90,7 @@ export const Placement = () => {
         placement={placement as DrawerPlacementType}
         ariaLabel="drawer component example"
       >
-        <Box padding="lg" display="block" childGap="md">
+        <Box padding="2xl" display="block" childGap="md">
           <Box as="p">drawer content</Box>
           <Box as="p">drawer content</Box>
           <Box as="p">drawer content</Box>
@@ -127,7 +127,7 @@ export const DrawerHeader = () => {
         onDismiss={closeDrawer}
         title="Drawer Title"
       >
-        <Box padding="lg" display="block" childGap="md">
+        <Box padding="2xl" display="block" childGap="md">
           {drawerContent}
         </Box>
       </Drawer>
@@ -156,7 +156,7 @@ export const TitleAndCloseButton = () => {
         onDismiss={closeDrawer}
         title="Drawer Title"
       >
-        <Box padding="lg" display="block" childGap="md">
+        <Box padding="2xl" display="block" childGap="md">
           {drawerContent}
         </Box>
       </Drawer>
@@ -185,7 +185,7 @@ export const CloseButtonOnly = () => {
         onDismiss={closeDrawer}
         closeButton
       >
-        <Box padding="lg" display="block" childGap="md">
+        <Box padding="2xl" display="block" childGap="md">
           {drawerContent}
         </Box>
       </Drawer>
@@ -204,7 +204,7 @@ export const Width = () => {
     setWidth(newWidth);
     openDrawer();
   };
-  const widths = ['3xl', '6xl', '100%'];
+  const widths = ['16rem', '400px', '100%'];
   return (
     <>
       <Box gap="sm" direction="row">
@@ -226,7 +226,7 @@ export const Width = () => {
         closeButton
         ariaLabel="drawer component example"
       >
-        <Box padding="lg" display="block" childGap="md">
+        <Box padding="2xl" display="block" childGap="md">
           <Box>drawer content</Box>
         </Box>
       </Drawer>
@@ -295,7 +295,7 @@ export const HiddenOverlay = () => {
         ariaLabel="drawer component example"
         hideOverlay
       >
-        <Box padding="lg" display="block" childGap="md">
+        <Box padding="2xl" display="block" childGap="md">
           <Button
             ref={closeBtnRef as MutableRefObject<HTMLButtonElement>}
             onClick={closeDrawer}
@@ -329,7 +329,7 @@ export const InitialFocusRef = () => {
         title="initialFocusRef"
         ariaLabel="drawer component example"
       >
-        <Box padding="lg" display="block" childGap="md">
+        <Box padding="2xl" display="block" childGap="md">
           <Box>drawer content</Box>
           <Button variant="primary" ref={ref} onClick={closeDrawer}>
             I receive focus
