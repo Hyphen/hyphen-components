@@ -53,6 +53,7 @@ export const CardSection: FC<CardSectionProps> = ({
   borderWidth = undefined,
   children = null,
   childGap = undefined,
+  gap = undefined,
   className = undefined,
   display = 'block',
   padding = '2xl',
@@ -91,7 +92,9 @@ export const CardSection: FC<CardSectionProps> = ({
       {...restProps}
     >
       {renderTitle}
-      <Box childGap={childGap}>{children}</Box>
+      <Box gap={gap} childGap={childGap}>
+        {children}
+      </Box>
     </Box>
   );
 };
