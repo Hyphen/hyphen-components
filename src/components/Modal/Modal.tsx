@@ -119,7 +119,7 @@ export const ModalBaseComponent: React.FC<ModalProps> = forwardRef<
 
     const parentElement = containerRef?.current
       ? (containerRef.current as HTMLElement)
-      : document.body;
+      : undefined;
     return (
       <FocusLock
         autoFocus
@@ -136,7 +136,7 @@ export const ModalBaseComponent: React.FC<ModalProps> = forwardRef<
               className={contentClassnames}
               onRequestClose={onDismiss}
               ariaHideApp={false}
-              parentSelector={() => parentElement}
+              parentSelector={parentElement ? () => parentElement : undefined}
               {...restProps}
             >
               <Box
