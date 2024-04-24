@@ -10,7 +10,6 @@ import { RemoveScroll } from 'react-remove-scroll';
 import classNames from 'classnames';
 import { DimensionSize, CssDimensionValue } from '../../types';
 import { Box } from '../Box/Box';
-import { Icon } from '../Icon/Icon';
 import styles from './Drawer.module.scss';
 import { Button } from '../Button/Button';
 
