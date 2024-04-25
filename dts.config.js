@@ -10,23 +10,23 @@ module.exports = {
         plugins: [
           autoprefixer(),
           cssnano({
-              preset: 'default',
+            preset: 'default',
           }),
         ],
         use: [
           ['sass', {
-              includePaths: [path.resolve('node_modules')]
+            includePaths: [path.resolve('node_modules')]
           }]
         ],
-      inject: false,
-      extract: path.resolve('dist/css/index.css'),
+        inject: false,
+        extract: path.resolve('dist/css/index.css'),
       })
     );
 
-  if (!config.output.banner) {
-    config.output.banner = "'use client';";
-  }
-
-  return config;
+    if (!config.output.banner) {
+      config.output.banner = "'use client';";
+    }
+  
+    return config;
   },
 };
