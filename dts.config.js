@@ -22,6 +22,11 @@ module.exports = {
         extract: path.resolve('dist/css/index.css'),
       })
     );
+
+    if (!config.output.banner) {
+      config.output.banner = "'use client';";
+    }
+  
     return config;
   },
 };
