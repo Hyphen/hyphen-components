@@ -57,6 +57,7 @@
   "include": [
     "src",
     "types",
-    "index.d.ts"
+    "index.d.ts",
+    ".storybook/modes.ts"
   ],
 }

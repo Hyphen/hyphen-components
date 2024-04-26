@@ -1,11 +1,20 @@
+import React from 'react';
 import { Box } from '../Box/Box';
 import { Button } from './Button';
 import type { Meta } from '@storybook/react';
-import React from 'react';
+import { allModes } from '../../../.storybook/modes';
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
+  parameters: {
+    chromatic: {
+      modes: {
+        light: allModes['light'],
+        dark: allModes['dark'],
+      },
+    },
+  },
 };
 
 export default meta;

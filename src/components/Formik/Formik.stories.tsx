@@ -14,9 +14,18 @@ import { FormikTimePickerNative } from './FormikTimePickerNative/FormikTimePicke
 import { FormikSelectInputInset } from './FormikSelectInputInset/FormikSelectInputInset';
 import { FormikTextareaInputInset } from './FormikTextareaInputInset/FormikTextareaInputInset';
 import { FormikTextInputInset } from './FormikTextInputInset/FormikTextInputInset';
+import { allModes } from '../../../.storybook/modes';
 
 const meta = {
   title: 'Patterns/Formik Form',
+  parameters: {
+    chromatic: {
+      modes: {
+        light: allModes['light'],
+        dark: allModes['dark'],
+      },
+    },
+  },
 };
 
 export default meta;
@@ -106,7 +115,7 @@ export const FormikForm = () =>
       return { ...values, isSubmitting };
     };
     return (
-      <Box maxWidth="500px" margin="lg auto">
+      <Box maxWidth="500px" margin="lg auto" background="primary" padding="2xl">
         <Formik
           initialValues={{
             firstName: '',
