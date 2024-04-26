@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '../Box/Box';
 import { Button } from './Button';
 import type { Meta } from '@storybook/react';
-import { allModes } from '../../../.storybook/modes';
+import { allModes } from '../../modes';
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',

@@ -14,7 +14,7 @@ import { FormikTimePickerNative } from './FormikTimePickerNative/FormikTimePicke
 import { FormikSelectInputInset } from './FormikSelectInputInset/FormikSelectInputInset';
 import { FormikTextareaInputInset } from './FormikTextareaInputInset/FormikTextareaInputInset';
 import { FormikTextInputInset } from './FormikTextInputInset/FormikTextInputInset';
-import { allModes } from '../../../.storybook/modes';
+import { allModes } from '../../modes';
 
 const meta = {
   title: 'Patterns/Formik Form',

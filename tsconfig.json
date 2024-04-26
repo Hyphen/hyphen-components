@@ -58,6 +58,5 @@
     "src",
     "types",
     "index.d.ts",
-    ".storybook/modes.ts"
   ],
 }
