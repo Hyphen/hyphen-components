@@ -36,7 +36,7 @@ export const BasicUsage = () =>
       ];
 
       return (
-        <Box gap="md">
+        <Box gap="md" background="secondary" padding="xl" color="base">
           <p>Theme: {theme}</p>
 
           <RadioGroup
