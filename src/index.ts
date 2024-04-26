@@ -40,6 +40,7 @@ export * from './components/TextareaInput/TextareaInput';
 export * from './components/TextareaInputInset/TextareaInputInset';
 export * from './components/TextInput/TextInput';
 export * from './components/TextInputInset/TextInputInset';
+export * from './components/ThemeProvider/ThemeProvider';
 export * from './components/TimePicker/TimePicker';
 export * from './components/TimePickerNative/TimePickerNative';
 export * from './components/Toast';
