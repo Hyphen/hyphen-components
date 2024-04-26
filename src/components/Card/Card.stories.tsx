@@ -5,10 +5,19 @@ import { Box } from '../Box/Box';
 import { Button } from '../Button/Button';
 import { Heading } from '../Heading/Heading';
 import { TextInput } from '../TextInput/TextInput';
+import { allModes } from '../../modes';
 
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',
   component: Card,
+  parameters: {
+    chromatic: {
+      modes: {
+        light: allModes['light'],
+        dark: allModes['dark'],
+      },
+    },
+  },
 };
 
 export default meta;

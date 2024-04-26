@@ -5,7 +5,18 @@ import '../src/styles/reset.scss';
 import '../src/styles/fonts.scss';
 
 import { Preview } from '@storybook/react';
+import { withThemeByClassName } from '@storybook/addon-themes';
 import hyphenTheme from './hyphenTheme';
+
+export const decorators = [
+  withThemeByClassName({
+    themes: {
+      light: 'light',
+      dark: 'dark',
+    },
+    defaultTheme: 'light',
+  }),
+];
 
 const preview: Preview = {
   parameters: {
@@ -44,6 +55,7 @@ const preview: Preview = {
         ],
       },
     },
+    decorators: decorators,
   },
 };
 

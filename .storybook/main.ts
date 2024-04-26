@@ -5,7 +5,8 @@ module.exports = {
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-mdx-gfm',
-    '@chromatic-com/storybook'
+    '@chromatic-com/storybook',
+    '@storybook/addon-themes'
   ],
   // https://storybook.js.org/docs/react/configure/typescript#mainjs-configuration
   // typescript: {

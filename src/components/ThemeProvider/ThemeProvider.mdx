@@ -1,0 +1,11 @@
+import { Canvas, Meta, ArgTypes } from '@storybook/blocks';
+import { ThemeProvider } from './ThemeProvider';
+import * as Stories from './ThemeProvider.stories';
+
+<Meta of={Stories} />
+
+# ThemeProvider
+
+Allow users to set the theme for the entire application by adding the `ThemeProvider` to the root of the application.
+
+<Canvas of={Stories.BasicUsage} />
