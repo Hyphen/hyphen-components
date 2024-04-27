@@ -40,7 +40,7 @@ export const BasicUsage = () =>
           <p>Theme: {theme}</p>
 
           <RadioGroup
-            name="noTitleOrDescription"
+            name="SelectTheme"
             value={theme}
             onChange={(event) => setTheme(event.target.value as Theme)}
             options={options}
