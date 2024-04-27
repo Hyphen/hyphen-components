@@ -216,6 +216,7 @@ export const TextInputInset: ForwardRefExoticComponent<TextInputInsetProps> =
                 color="base"
                 alignItems="center"
                 justifyContent="center"
+                background="secondary"
                 className={classNames(styles.prefix, 'ws-nowrap')}
               >
                 {prefix}
@@ -243,6 +244,7 @@ export const TextInputInset: ForwardRefExoticComponent<TextInputInsetProps> =
             {suffix && (
               <Box
                 color="base"
+                background="secondary"
                 className={classNames(styles.suffix, 'ws-nowrap')}
               >
                 {suffix}

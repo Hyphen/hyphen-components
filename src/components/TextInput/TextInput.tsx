@@ -214,8 +214,8 @@ export const TextInput: ForwardRefExoticComponent<TextInputProps> = forwardRef<
       type,
       value,
       className: classNames(inputProps.className, {
-        'p-left-xs p-left-xs-tablet p-left-xs-desktop p-left-xs-hd': prefix,
-        'p-right-xs p-right-xs-tablet p-right-xs-desktop p-right-xs-hd': suffix,
+        // 'p-left-xs p-left-xs-tablet p-left-xs-desktop p-left-xs-hd': prefix,
+        // 'p-right-xs p-right-xs-tablet p-right-xs-desktop p-right-xs-hd': suffix,
         'p-h-0': !suffix && !prefix,
       }),
     };
@@ -233,10 +233,11 @@ export const TextInput: ForwardRefExoticComponent<TextInputProps> = forwardRef<
         ref={ref}
         {...restProps}
       >
-        <Box direction="row" className={inputWrapperClasses}>
+        <Box direction="row" overflow="hidden" className={inputWrapperClasses}>
           {prefix && (
             <Box
               color="secondary"
+              background="secondary"
               className={classNames(styles.prefix, 'ws-nowrap')}
             >
               {prefix}
@@ -249,6 +250,7 @@ export const TextInput: ForwardRefExoticComponent<TextInputProps> = forwardRef<
           {suffix && (
             <Box
               color="secondary"
+              background="secondary"
               className={classNames(styles.suffix, 'ws-nowrap')}
             >
               {suffix}
