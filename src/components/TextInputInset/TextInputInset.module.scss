@@ -227,8 +227,6 @@
 }
 
 .prefix {
-  border: 1px solid
-    var(--form-control-border-color, var(--INTERNAL_form-control-border-color));
   border-top-left-radius: var(
     --form-control-size-md-border-radius,
     var(--INTERNAL_form-control-size-md-border-radius)
@@ -240,8 +238,6 @@
 }
 
 .suffix {
-  border: 1px solid
-    var(--form-control-border-color, var(--INTERNAL_form-control-border-color));
   border-top-right-radius: var(
     --form-control-size-md-border-radius,
     var(--INTERNAL_form-control-size-md-border-radius)
@@ -253,6 +249,8 @@
 }
 
 .text-input-wrapper {
+  border: 1px solid
+    var(--form-control-border-color, var(--INTERNAL_form-control-border-color));
   font-family: var(
     --form-control-font-family,
     var(--INTERNAL_form-control-font-family)
@@ -307,16 +305,12 @@
 
   // border and background is set on the text-input-wrapper
   input {
+    border: none;
     box-sizing: border-box;
     display: flex;
     transition-duration: 300ms;
     transition-property: border, background-color;
     transition-timing-function: cubic-bezier(0.2, 0.8, 0.4, 1);
-    border: 1px solid
-      var(
-        --form-control-border-color,
-        var(--INTERNAL_form-control-border-color)
-      );
     background-color: transparent;
     width: 100%;
     line-height: var(
@@ -389,51 +383,11 @@
 
   &:focus-within {
     outline: none;
+    border: 1px solid var(--color-border-default);
     box-shadow: var(
-        --form-control-box-shadow-focus,
-        var(--INTERNAL_form-control-box-shadow-focus)
-      ),
-      inset 0 0 0 1px
-        var(
-          --form-control-border-color-focus,
-          var(--INTERNAL_form-control-border-color-focus)
-        );
-
-    .prefix {
-      border-top: 1px solid
-        var(
-          --form-control-border-color-focus,
-          var(--INTERNAL_form-control-border-color-focus)
-        );
-      border-bottom: 1px solid
-        var(
-          --form-control-border-color-focus,
-          var(--INTERNAL_form-control-border-color-focus)
-        );
-      border-left: 1px solid
-        var(
-          --form-control-border-color-focus,
-          var(--INTERNAL_form-control-border-color-focus)
-        );
-    }
-
-    .suffix {
-      border-top: 1px solid
-        var(
-          --form-control-border-color-focus,
-          var(--INTERNAL_form-control-border-color-focus)
-        );
-      border-bottom: 1px solid
-        var(
-          --form-control-border-color-focus,
-          var(--INTERNAL_form-control-border-color-focus)
-        );
-      border-right: 1px solid
-        var(
-          --form-control-border-color-focus,
-          var(--INTERNAL_form-control-border-color-focus)
-        );
-    }
+      --form-control-box-shadow-focus,
+      var(--INTERNAL_form-control-box-shadow-focus)
+    );
   }
 
   &.disabled {
