@@ -363,7 +363,7 @@
 
   &:focus-within {
     outline: none;
-    border-color: var(--color-border-default);
+    border-color: var(--color-border-active);
     box-shadow: var(
       --form-control-box-shadow-focus,
       var(--INTERNAL_form-control-box-shadow-focus)
