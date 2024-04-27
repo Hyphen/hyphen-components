@@ -23,34 +23,16 @@
 
   .prefix {
     padding: var(
-        --form-control-size-sm-padding,
-        var(--INTERNAL_form-control-size-sm-padding)
-      )
-      0
-      var(
-        --form-control-size-sm-padding,
-        var(--INTERNAL_form-control-size-sm-padding)
-      )
-      var(
-        --form-control-size-sm-padding,
-        var(--INTERNAL_form-control-size-sm-padding)
-      );
+      --form-control-size-sm-padding,
+      var(--INTERNAL_form-control-size-sm-padding)
+    );
   }
 
   .suffix {
     padding: var(
-        --form-control-size-sm-padding,
-        var(--INTERNAL_form-control-size-sm-padding)
-      )
-      var(
-        --form-control-size-sm-padding,
-        var(--INTERNAL_form-control-size-sm-padding)
-      )
-      var(
-        --form-control-size-sm-padding,
-        var(--INTERNAL_form-control-size-sm-padding)
-      )
-      0;
+      --form-control-size-sm-padding,
+      var(--INTERNAL_form-control-size-sm-padding)
+    );
   }
 
   .clear-button {
@@ -110,34 +92,16 @@
 
   .prefix {
     padding: var(
-        --form-control-size-md-padding,
-        var(--INTERNAL_form-control-size-md-padding)
-      )
-      0
-      var(
-        --form-control-size-md-padding,
-        var(--INTERNAL_form-control-size-md-padding)
-      )
-      var(
-        --form-control-size-md-padding,
-        var(--INTERNAL_form-control-size-md-padding)
-      );
+      --form-control-size-md-padding,
+      var(--INTERNAL_form-control-size-md-padding)
+    );
   }
 
   .suffix {
     padding: var(
-        --form-control-size-md-padding,
-        var(--INTERNAL_form-control-size-md-padding)
-      )
-      var(
-        --form-control-size-md-padding,
-        var(--INTERNAL_form-control-size-md-padding)
-      )
-      var(
-        --form-control-size-md-padding,
-        var(--INTERNAL_form-control-size-md-padding)
-      )
-      0;
+      --form-control-size-md-padding,
+      var(--INTERNAL_form-control-size-md-padding)
+    );
   }
 
   .clear-button {
@@ -197,34 +161,16 @@
 
   .prefix {
     padding: var(
-        --form-control-size-lg-padding,
-        var(--INTERNAL_form-control-size-lg-padding)
-      )
-      0
-      var(
-        --form-control-size-lg-padding,
-        var(--INTERNAL_form-control-size-lg-padding)
-      )
-      var(
-        --form-control-size-lg-padding,
-        var(--INTERNAL_form-control-size-lg-padding)
-      );
+      --form-control-size-lg-padding,
+      var(--INTERNAL_form-control-size-lg-padding)
+    );
   }
 
   .suffix {
     padding: var(
-        --form-control-size-lg-padding,
-        var(--INTERNAL_form-control-size-lg-padding)
-      )
-      var(
-        --form-control-size-lg-padding,
-        var(--INTERNAL_form-control-size-lg-padding)
-      )
-      var(
-        --form-control-size-lg-padding,
-        var(--INTERNAL_form-control-size-lg-padding)
-      )
-      0;
+      --form-control-size-lg-padding,
+      var(--INTERNAL_form-control-size-lg-padding)
+    );
   }
 
   .clear-button {
@@ -274,6 +220,8 @@
 }
 
 .text-input-wrapper {
+  border: 1px solid
+    var(--form-control-border-color, var(--INTERNAL_form-control-border-color));
   font-family: var(
     --form-control-font-family,
     var(--INTERNAL_form-control-font-family)
@@ -340,16 +288,12 @@
 
   // border and background is set on the text-input-wrapper
   > input {
+    border: none;
     box-sizing: border-box;
     display: flex;
     transition-duration: 300ms;
     transition-property: border, background-color;
     transition-timing-function: cubic-bezier(0.2, 0.8, 0.4, 1);
-    border: 1px solid
-      var(
-        --form-control-border-color,
-        var(--INTERNAL_form-control-border-color)
-      );
     background-color: transparent;
     width: 100%;
     line-height: var(
@@ -370,11 +314,8 @@
     }
 
     &:focus {
+      border: none;
       outline: none;
-      border-color: var(
-        --form-control-border-color-focus,
-        var(--INTERNAL_form-control-border-color-focus)
-      );
     }
 
     &:disabled {
@@ -422,15 +363,11 @@
 
   &:focus-within {
     outline: none;
+    border-color: var(--color-border-active);
     box-shadow: var(
-        --form-control-box-shadow-focus,
-        var(--INTERNAL_form-control-box-shadow-focus)
-      ),
-      inset 0 0 0 1px
-        var(
-          --form-control-border-color-focus,
-          var(--INTERNAL_form-control-border-color-focus)
-        );
+      --form-control-box-shadow-focus,
+      var(--INTERNAL_form-control-box-shadow-focus)
+    );
   }
 
   &.disabled {

@@ -153,7 +153,7 @@ export const PrefixAndSuffix = () => {
         label="Prefix and Suffix"
         onChange={(event) => setPrefixValue2(event.target.value)}
         prefix="$"
-        suffix="per watt"
+        suffix="per month"
       />
       <TextInput
         id="prefixSuffix3"
