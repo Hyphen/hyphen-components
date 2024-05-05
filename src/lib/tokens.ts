@@ -1,5 +1,5 @@
 import designTokens from '@hyphen/hyphen-design-tokens/build/json/variables';
-import { ICON_NAMES as iconNames } from '@hyphen/hyphen-design-tokens/build/icons';
+import { ICON_NAMES as iconNames } from '@hyphen/hyphen-design-tokens/build/assets/icons';
 
 import {
   BaseColor,

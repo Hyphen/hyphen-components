@@ -4,7 +4,7 @@ import React, { FC, forwardRef } from 'react';
 import { Box } from '../Box/Box';
 import classNames from 'classnames';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
-import icons from '@hyphen/hyphen-design-tokens/build/icons/react';
+import icons from '@hyphen/hyphen-design-tokens/build/assets/icons/react';
 
 export interface IconProps {
   className?: string;

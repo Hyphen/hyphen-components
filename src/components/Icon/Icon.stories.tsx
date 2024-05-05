@@ -1,5 +1,5 @@
 import { Box } from '../Box/Box';
-import { ICON_NAMES } from '@hyphen/hyphen-design-tokens/build/icons';
+import { ICON_NAMES } from '@hyphen/hyphen-design-tokens/build/assets/icons';
 import { IconName } from 'src/types';
 import { Icon } from './Icon';
 import type { Meta } from '@storybook/react';
@@ -12,7 +12,7 @@ const meta: Meta<typeof Icon> = {
 
 export default meta;
 
-export const Default = () => <Icon name="star" />;
+export const Default = () => <Icon name="logo-env" />;
 
 export const Sizes = () => (
   <>

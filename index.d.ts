@@ -7,5 +7,5 @@ declare module '*.svg';
 declare module '@hyphen/hyphen-design-tokens/build/js/variables';
 declare module '@hyphen/hyphen-design-tokens/build/json/variables';
 declare module '@hyphen/hyphen-design-tokens/build/types/';
-declare module '@hyphen/hyphen-design-tokens/build/icons/react';
-declare module '@hyphen/hyphen-design-tokens/build/icons';
+declare module '@hyphen/hyphen-design-tokens/build/assets/icons/react';
+declare module '@hyphen/hyphen-design-tokens/build/assets/icons';
