@@ -49,6 +49,7 @@ const preview: Preview = {
         order: [
           'About',
           ['Introduction', 'Get Started'],
+          'Brands',
           'Foundation',
           ['Color', 'Design Tokens'],
           'Components',

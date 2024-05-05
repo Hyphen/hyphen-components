@@ -1,5 +1,5 @@
 import { Box } from '../Box/Box';
-import { ICON_NAMES } from '@hyphen/hyphen-design-tokens/build/icons';
+import { ICON_NAMES } from '@hyphen/hyphen-design-tokens/build/assets/icons';
 import { IconName } from 'src/types';
 import { Icon } from './Icon';
 import type { Meta } from '@storybook/react';
