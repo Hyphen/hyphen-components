@@ -12,7 +12,7 @@ const meta: Meta<typeof Icon> = {
 
 export default meta;
 
-export const Default = () => <Icon name="logo-env" />;
+export const Default = () => <Icon name="star" />;
 
 export const Sizes = () => (
   <>
