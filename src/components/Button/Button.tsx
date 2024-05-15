@@ -184,29 +184,25 @@ export const Button = forwardRef<
         <Box display="inline-flex" direction="row" alignItems="center" gap="xs">
           {isLoading && <Spinner className={styles['spinner-wrapper']} />}
           {iconPrefix && (
-            <Box display="block">
-              <Icon
-                className={styles.label}
-                name={iconPrefix}
-                aria-hidden="true"
-                focusable="false"
-                data-testid="prefixIcon"
-                size={size === 'md' ? 'sm' : size}
-              />
-            </Box>
+            <Icon
+              className={styles.label}
+              name={iconPrefix}
+              aria-hidden="true"
+              focusable="false"
+              data-testid="prefixIcon"
+              size={size === 'md' ? 'sm' : size}
+            />
           )}
           {children && <span className={styles.label}>{children}</span>}
           {iconSuffix && (
-            <Box display="block">
-              <Icon
-                className={styles.label}
-                name={iconSuffix}
-                aria-hidden="true"
-                focusable="false"
-                data-testid="suffixIcon"
-                size={size === 'md' ? 'sm' : size}
-              />
-            </Box>
+            <Icon
+              className={styles.label}
+              name={iconSuffix}
+              aria-hidden="true"
+              focusable="false"
+              data-testid="suffixIcon"
+              size={size === 'md' ? 'sm' : size}
+            />
           )}
         </Box>
       ) : (
