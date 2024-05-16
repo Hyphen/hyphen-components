@@ -153,7 +153,6 @@ export const Button = forwardRef<
     );
 
     const buttonClasses = classNames(
-      'hyphen-components__variables__button',
       'hyphen-components__variables__form-control',
       styles.button,
       className,

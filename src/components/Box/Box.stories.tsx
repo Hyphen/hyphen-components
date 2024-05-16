@@ -160,12 +160,21 @@ export const Gap = () => (
 );
 
 export const ChildGap = () => (
-  <Box childGap="2xl" display="block">
-    <Box display="block" background="tertiary" padding="sm" />
-    <Box display="block" background="tertiary" padding="sm" />
-    <Box display="block" background="tertiary" padding="sm" />
-    <Box display="block" background="tertiary" padding="sm" />
-    <Box display="block" background="tertiary" padding="sm" />
+  <Box childGap="lg">
+    <Box childGap="5xl" display="block">
+      <Box display="block" background="tertiary" height="xl" />
+      <Box display="block" background="tertiary" height="xl" />
+      <Box display="block" background="tertiary" height="xl" />
+      <Box display="block" background="tertiary" height="xl" />
+      <Box display="block" background="tertiary" height="xl" />
+    </Box>
+    <Box childGap="5xl" direction="row">
+      <Box display="block" background="tertiary" height="xl" width="xl" />
+      <Box display="block" background="tertiary" height="xl" width="xl" />
+      <Box display="block" background="tertiary" height="xl" width="xl" />
+      <Box display="block" background="tertiary" height="xl" width="xl" />
+      <Box display="block" background="tertiary" height="xl" width="xl" />
+    </Box>
   </Box>
 );
 
