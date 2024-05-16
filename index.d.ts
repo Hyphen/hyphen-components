@@ -9,3 +9,5 @@ declare module '@hyphen/hyphen-design-tokens/build/json/variables';
 declare module '@hyphen/hyphen-design-tokens/build/types/';
 declare module '@hyphen/hyphen-design-tokens/build/assets/icons/react';
 declare module '@hyphen/hyphen-design-tokens/build/assets/icons';
+declare module '@hyphen/hyphen-design-tokens/build/assets/images/';
+declare module '@hyphen/hyphen-design-tokens/build/assets/images/react/*';
