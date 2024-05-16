@@ -7,20 +7,10 @@
 }
 
 @mixin size-sm {
-  border-radius: var(
-    --button-size-sm-border-radius,
-    var(--INTERNAL_form-control-size-sm-border-radius)
-  );
-  padding: var(
-      --button-size-sm-padding-vertical,
-      var(--INTERNAL_form-control-size-sm-padding)
-    )
-    var(--button-size-sm-padding-horizontal, var(--size-spacing-md));
+  border-radius: var(--INTERNAL_form-control-size-sm-border-radius);
+  padding: var(--INTERNAL_form-control-size-sm-padding) var(--size-spacing-md);
   min-height: 32px;
-  font-size: var(
-    --button-size-sm-font-size,
-    var(--INTERNAL_form-control-size-sm-font-size)
-  );
+  font-size: var(--INTERNAL_form-control-size-sm-font-size);
   letter-spacing: 0.2px;
   height: 32px;
 }
@@ -96,8 +86,8 @@
   background-color: transparent;
   padding: 0;
   color: inherit;
-  line-height: var(--size-line-height-input);
-  font-family: var(--button-font-family, var(--assets-font-family-body));
+  line-height: 1;
+  font-family: var(--assets-font-family-body);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -107,7 +97,7 @@
   transition-timing-function: cubic-bezier(0.67, 0.83, 0.67);
   text-align: center;
   text-decoration: none;
-  font-weight: var(--button-font-weight, var(--size-font-weight-semi-bold));
+  font-weight: var(--size-font-weight-semi-bold);
 
   &:hover {
     text-decoration: none;
@@ -247,14 +237,6 @@
       outline: 0;
       box-shadow: none;
     }
-  }
-
-  &.sm {
-    border-radius: var(--button-size-sm-border-radius);
-    padding: var(--button-size-sm-padding-vertical)
-      var(--button-size-sm-padding-horizontal);
-    min-height: 32px;
-    font-size: var(--button-size-sm-font-size);
   }
 
   &.size-sm {
