@@ -59,7 +59,6 @@ const TableBodyCell: FC<TableBodyCellProps> = ({
 }) => {
   const columnIsSticky = sticky === 'left' || sticky === 'right';
   const tableCellClasses = classNames(
-    'hyphen-components__variables__table',
     styles['table-cell'],
     {
       [styles.truncated]: truncateOverflow,
