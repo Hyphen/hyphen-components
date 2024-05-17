@@ -1,24 +1,17 @@
 .toast-notification {
-  background-color: var(
-    --toast-notification-background-color,
-    var(--color-base-grey-800)
-  );
-  color: var(--toast-notification-font-color, var(--color-base-white));
-  border-radius: var(
-    --toast-notification-border-radius,
-    var(--size-border-radius-sm)
-  );
-  box-shadow: var(--toast-notification-box-shadow, var(--size-box-shadow-2xs));
+  background-color: var(--color-background-primary);
+  color: var(--color-font-primary);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--size-border-radius-lg);
+  box-shadow: var(--size-box-shadow-md);
+  font-size: var(--size-font-size-sm);
   will-change: transform;
   pointer-events: auto;
 }
 
 .toast-dismiss {
-  border-color: var(
-    --toast-notification-dismiss-border-color,
-    var(--color-base-grey-600)
-  );
-  color: var(--toast-notification-dismiss-color, var(--color-base-white));
+  border-color: var(--color-border-default);
+  color: var(--color-font-primary);
 }
 
 .toast-notification-enter-top {
