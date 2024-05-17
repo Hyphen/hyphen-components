@@ -3,7 +3,8 @@ import { render, screen } from '@testing-library/react';
 import { Badge, BadgeSize, BadgeVariant } from './Badge';
 
 export const BADGE_VARIANTS: BadgeVariant[] = [
-  'grey',
+  'light-grey',
+  'dark-grey',
   'inverse',
   'green',
   'yellow',

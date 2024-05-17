@@ -9,6 +9,7 @@ export type BadgeSize = 'sm' | 'md' | 'lg';
 
 export type BadgeVariant =
   | 'light-grey'
+  | 'dark-grey'
   | 'inverse'
   | 'green'
   | 'yellow'
