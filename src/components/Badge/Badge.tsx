@@ -8,7 +8,7 @@ import { Box } from '../Box/Box';
 export type BadgeSize = 'sm' | 'md' | 'lg';
 
 export type BadgeVariant =
-  | 'grey'
+  | 'light-grey'
   | 'inverse'
   | 'green'
   | 'yellow'
@@ -44,7 +44,7 @@ export interface BadgeProps {
 export const Badge: FC<BadgeProps> = ({
   className = '',
   message = '',
-  variant = 'grey',
+  variant = 'light-grey',
   size = 'md',
   ...restProps
 }) => {

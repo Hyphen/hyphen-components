@@ -1,13 +1,9 @@
 @import '@hyphen/hyphen-design-tokens/build/scss/variables';
 
 @mixin size-sm {
-  font-size: var(--badge-size-sm-font-size, var(--size-font-size-2xs));
-  padding: var(--badge-size-sm-padding-vertical, var(--size-spacing-xs))
-    var(--badge-size-sm-padding-horizontal, var(--size-spacing-xs));
-  border-radius: var(
-    --badge-size-sm-border-radius,
-    var(--size-border-radius-sm)
-  );
+  font-size: var(--size-font-size-xs);
+  padding: var(--size-spacing-2xs) var(--size-spacing-sm);
+  border-radius: var(--size-border-radius-lg);
 }
 
 %size-sm {
@@ -18,13 +14,9 @@
 }
 
 @mixin size-md {
-  font-size: var(--badge-size-md-font-size, var(--size-font-size-xs));
-  padding: var(--badge-size-md-padding-vertical, var(--size-spacing-sm))
-    var(--badge-size-md-padding-horizontal, var(--size-spacing-sm));
-  border-radius: var(
-    --badge-size-md-border-radius,
-    var(--size-border-radius-md)
-  );
+  font-size: var(--size-font-size-sm);
+  padding: var(--size-spacing-xs) var(--size-spacing-md);
+  border-radius: var(--size-border-radius-xl);
 }
 
 %size-md {
@@ -35,9 +27,9 @@
 }
 
 @mixin size-lg {
-  font-size: var(--size-font-size-sm);
-  padding: var(--size-spacing-md) var(--size-spacing-md);
-  border-radius: var(--size-border-radius-lg);
+  font-size: var(--size-font-size-md);
+  padding: var(--size-spacing-sm) var(--size-spacing-lg);
+  border-radius: var(--size-border-radius-2xl);
 }
 
 %size-lg {
@@ -89,10 +81,16 @@
     color: var(--color-base-black-500);
   }
 
-  &.grey {
+  &.light-grey {
     background-color: var(--color-base-grey-200);
-    border-color: var(--color-base-grey-300);
-    color: var(--color-base-grey-700);
+    border-color: var(--color-base-grey-200);
+    color: var(--color-base-grey-600);
+  }
+
+  &.dark-grey {
+    background-color: var(--color-base-grey-400);
+    border-color: var(--color-base-grey-400);
+    color: var(--color-base-white);
   }
 
   &.hyphen {

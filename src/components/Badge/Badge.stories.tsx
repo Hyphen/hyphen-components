@@ -10,11 +10,12 @@ const meta: Meta<typeof Badge> = {
 
 export default meta;
 
-export const Overview = () => <Badge variant="grey" message="Hello world!" />;
+export const Overview = () => <Badge message="Hello world!" />;
 
 export const Variants = () => {
   const variants = [
-    'grey',
+    'light-grey',
+    'dark-grey',
     'inverse',
     'purple',
     'blue',
