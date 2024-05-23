@@ -90,6 +90,33 @@ export const Background = () => {
       <Box background="inverse" color="inverse" padding="md">
         inverse
       </Box>
+      <Box background="brand-yellow" padding="md">
+        brand-yellow
+      </Box>
+      <Box background="brand-orange" padding="md">
+        brand-orange
+      </Box>
+      <Box background="brand-magenta" padding="md">
+        brand-magenta
+      </Box>
+      <Box color="white" background="brand-dark-grey" padding="md">
+        brand-dark-grey
+      </Box>
+      <Box background="brand-cyan" padding="md">
+        brand-cyan
+      </Box>
+      <Box background="brand-pink" padding="md">
+        brand-pink
+      </Box>
+      <Box background="brand-light-purple" padding="md">
+        brand-light-purple
+      </Box>
+      <Box color="white" background="brand-medium-purple" padding="md">
+        brand-medium-purple
+      </Box>
+      <Box color="white" background="brand-dark-purple" padding="md">
+        brand-dark-purple
+      </Box>
     </Box>
   );
 };
@@ -118,8 +145,32 @@ export const Border = () => {
       <Box borderColor="danger" borderWidth="sm" padding="md">
         danger
       </Box>
-      <Box borderColor="inverse" borderWidth="sm" padding="md">
-        inverse
+      <Box borderColor="brand-yellow" borderWidth="sm" padding="md">
+        brand-yellow
+      </Box>
+      <Box borderColor="brand-orange" borderWidth="sm" padding="md">
+        brand-orange
+      </Box>
+      <Box borderColor="brand-magenta" borderWidth="sm" padding="md">
+        brand-magenta
+      </Box>
+      <Box borderColor="brand-dark-grey" borderWidth="sm" padding="md">
+        brand-dark-grey
+      </Box>
+      <Box borderColor="brand-cyan" borderWidth="sm" padding="md">
+        brand-cyan
+      </Box>
+      <Box borderColor="brand-pink" borderWidth="sm" padding="md">
+        brand-pink
+      </Box>
+      <Box borderColor="brand-light-purple" borderWidth="sm" padding="md">
+        brand-light-purple
+      </Box>
+      <Box borderColor="brand-medium-purple" borderWidth="sm" padding="md">
+        brand-medium-purple
+      </Box>
+      <Box borderColor="brand-dark-purple" borderWidth="sm" padding="md">
+        brand-dark-purple
       </Box>
     </Box>
   );
@@ -645,11 +696,21 @@ export const FontColor = () => (
   <>
     <Box color="base">base</Box>
     <Box color="secondary">secondary</Box>
+    <Box color="tertiary">tertiary</Box>
     <Box color="inverse">inverse</Box>
     <Box color="disabled">disabled</Box>
     <Box color="success">success</Box>
     <Box color="warn">warn</Box>
     <Box color="danger">danger</Box>
+    <Box color="brand-yellow">brand-yellow</Box>
+    <Box color="brand-orange">brand-orange</Box>
+    <Box color="brand-magenta">brand-magenta</Box>
+    <Box color="brand-dark-grey">brand-dark-grey</Box>
+    <Box color="brand-cyan">brand-cyan</Box>
+    <Box color="brand-pink">brand-pink</Box>
+    <Box color="brand-light-purple">brand-light-purple</Box>
+    <Box color="brand-medium-purple">brand-medium-purple</Box>
+    <Box color="brand-dark-purple">brand-dark-purple</Box>
   </>
 );
 
