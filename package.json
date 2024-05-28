@@ -16,7 +16,6 @@
   "scripts": {
     "build": "cross-env-shell BABEL_ENV=build IS_PUBLISHING=true \"dts build && webpack --config webpack.config.js\"",
     "rollup": "cross-env-shell BABEL_ENV=build IS_PUBLISHING=true \"dts build\"",
-    "install-and-build": "echo \"//registry.npmjs.org/:_authToken=${NPM_TOKEN}\" > .npmrc && npm install && npm run build-storybook-docs",
     "build-storybook": "storybook build",
     "build-storybook-docs": "storybook build --docs",
     "storybook-docs": "storybook dev --docs",
