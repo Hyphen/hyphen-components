@@ -1,6 +1,6 @@
 {
   "name": "@hyphen/hyphen-components",
-  "version": "2.9.0",
+  "version": "2.9.1",
   "license": "MIT",
   "author": {
     "name": "@hyphen"
@@ -27,6 +27,7 @@
     "test": "dts test --passWithNoTests",
     "test-watch": "dts test --watch",
     "semantic-release": "semantic-release",
+    "prepare": "npm run build",
     "chromatic": "npx chromatic --project-token=chpt_8fddffb5556f0b7 --only-changed"
   },
   "husky": {
