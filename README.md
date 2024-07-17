@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://hyphen.ai" rel="noopener" target="_blank"><img width="150" src="./public/images/logo.png" alt="Hyphen logo"></a></p>
+  <a href="https://hyphen.ai" rel="noopener" target="_blank"><img width="150" src="public/images/logo.png" alt="Hyphen logo"></a></p>
 </p>
 
 <h1 align="center" style="border-bottom: none;">Hyphen Component Library</h1>
