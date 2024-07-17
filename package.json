@@ -1,6 +1,6 @@
 {
   "name": "@hyphen/hyphen-components",
-  "version": "2.9.1",
+  "version": "2.9.2",
   "license": "MIT",
   "author": {
     "name": "@hyphen"
@@ -120,7 +120,7 @@
     "@rollup/rollup-linux-x64-gnu": "^4.9.6"
   },
   "dependencies": {
-    "@hyphen/hyphen-design-tokens": "^4.4.1",
+    "@hyphen/hyphen-design-tokens": "^4.4.2",
     "@popperjs/core": "^2.11.8",
     "@types/react-modal": "^3.16.3",
     "classnames": "^2.5.1",
