@@ -358,10 +358,28 @@
       );
     }
 
+    input, label {
+      color: var(
+        --form-control-font-color,
+        var(--INTERNAL_form-control-input-color-error)
+      );
+    }
+
     input:focus {
       outline: none;
       background-color: transparent;
+      color: var(
+        --form-control-font-color,
+        var(--INTERNAL_form-control-font-color)
+      );
+      + .text-input-label {
+        color: var(
+          --form-control-font-color,
+          var(--INTERNAL_form-control-label-color)
+        );
+      }
     }
+
   }
 
   //Necessary so that inset shadow that we use for border does not get covered by child elements.

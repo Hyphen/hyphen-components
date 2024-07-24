@@ -222,6 +222,10 @@
         --form-control-border-color-focus,
         var(--INTERNAL_form-control-background-color-error)
       );
+      color: var(
+        --form-control-font-color,
+        var(--INTERNAL_form-control-input-color-error)
+      );
     }
 
     textarea:focus {
@@ -238,6 +242,12 @@
         --form-control-border-color-focus,
         var(--INTERNAL_form-control-border-color-focus)
       );
+      > textarea {
+        color: var(
+          --form-control-font-color,
+          var(--INTERNAL_form-control-font-color)
+        );
+      }
     }
   }
 
