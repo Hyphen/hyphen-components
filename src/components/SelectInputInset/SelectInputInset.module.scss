@@ -328,11 +328,32 @@
         --form-control-background-color,
         var(--INTERNAL_form-control-background-color)
       );
+      color: var(
+        --form-control-font-color,
+        var(--INTERNAL_form-control-font-color)
+      );
     }
 
+    select, label {
+      color: var(
+        --form-control-font-color,
+        var(--INTERNAL_form-control-input-color-error)
+      );
+    }
     select:focus {
       outline: none;
       background-color: transparent;
+      color: var(
+        --form-control-font-color,
+        var(--INTERNAL_form-control-label-color)
+      );
+      + label {
+        color: var(
+          --form-control-font-color,
+          var(--INTERNAL_form-control-label-color)
+        );
+
+      }
     }
   }
 

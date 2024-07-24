@@ -288,6 +288,22 @@
       --form-control-background-color-error,
       var(--INTERNAL_form-control-background-color-error)
     );
+    color: var(
+      --form-control-font-color,
+      var(--INTERNAL_form-control-input-color-error)
+    );
+
+    &:focus {
+      outline: none;
+      background-color: transparent;
+    }
+
+    + label {
+      color: var(
+        --form-control-font-color,
+        var(--INTERNAL_form-control-input-color-error)
+      );
+    }
 
     &:focus-within {
       outline: none;
@@ -296,6 +312,20 @@
         --form-control-box-shadow-focus,
         var(--INTERNAL_form-control-box-shadow-focus)
       );
+      background-color: var(
+        --form-control-background-color,
+        var(--INTERNAL_form-control-background-color)
+      );
+      color: var(
+        --form-control-font-color,
+        var(--INTERNAL_form-control-font-color)
+      );
+     + label {
+       color: var(
+         --form-control-font-color,
+         var(--INTERNAL_form-control-label-color)
+       );
+     }
     }
   }
 
