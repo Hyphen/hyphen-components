@@ -146,7 +146,7 @@ export const DateInput: FC<DateInputProps> = ({
   const handleOnClickOutside = (event: MouseEvent | KeyboardEvent) => {
     const target = event.target as Element;
 
-    if (target.className.includes('react-datepicker__navigation')) {
+    if (target.classList.contains('react-datepicker__navigation')) {
       return;
     }
 
