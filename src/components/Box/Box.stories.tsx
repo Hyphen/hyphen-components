@@ -117,6 +117,12 @@ export const Background = () => {
       <Box color="white" background="brand-dark-purple" padding="md">
         brand-dark-purple
       </Box>
+      <Box color="white" background="chart-1" padding="md">
+        chart-1
+      </Box>
+      <Box color="white" background="chart-2" padding="md">
+        chart-2
+      </Box>
     </Box>
   );
 };
