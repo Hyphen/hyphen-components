@@ -180,7 +180,7 @@ export const Button = forwardRef<
 
     const buttonContent =
       iconPrefix || iconSuffix ? (
-        <Box display="inline-flex" direction="row" alignItems="center" gap="xs">
+        <Box display="inline-flex" direction="row" alignItems="center" gap="md">
           {isLoading && <Spinner className={styles['spinner-wrapper']} />}
           {iconPrefix && (
             <Icon
