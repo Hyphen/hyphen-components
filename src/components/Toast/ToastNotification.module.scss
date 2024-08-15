@@ -1,7 +1,7 @@
 .toast-notification {
-  background-color: var(--color-background-primary);
-  color: var(--color-font-primary);
-  border: 1px solid var(--color-border-subtle);
+  background-color: var(--color-background-toast);
+  color: var(--color-font-toast);
+  border: 1px solid var(--color-border-toast);
   border-radius: var(--size-border-radius-lg);
   box-shadow: var(--size-box-shadow-md);
   font-size: var(--size-font-size-sm);
@@ -9,9 +9,18 @@
   pointer-events: auto;
 }
 
+.toast-error {
+  background-color: var(--color-background-toast-error);
+  border-color: var(--color-border-toast-error);
+  color: var(--color-font-white);
+}
+
+.toast-error .toast-dismiss {
+  color: var(--color-font-white);
+}
+
 .toast-dismiss {
-  border-color: var(--color-border-default);
-  color: var(--color-font-primary);
+  color: var(--color-font-toast);
 }
 
 .toast-notification-enter-top {

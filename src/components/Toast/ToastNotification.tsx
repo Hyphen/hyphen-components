@@ -72,7 +72,7 @@ const renderToastIcon = (toast: Toast) => {
 
   if (type === 'error') {
     iconName = 'c-warning';
-    iconColor = 'danger';
+    iconColor = 'white';
   }
 
   const icon =
@@ -100,7 +100,7 @@ const renderDismissIcon = (
   return (
     <Box
       as="button"
-      borderWidth="0 0 0 sm"
+      borderWidth="0"
       className={styles['toast-dismiss']}
       padding="0 0 0 sm"
       alignItems="center"
@@ -142,6 +142,7 @@ export const ToastNotification: React.FC<ToastNotificationProps> = React.memo(
       animationClass,
       {
         'toast-notification--not-visible': !toast.visible,
+        [styles['toast-error']]: toast.type === 'error',
       }
     );
 
