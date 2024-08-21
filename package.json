@@ -120,7 +120,7 @@
     "@rollup/rollup-linux-x64-gnu": "^4.9.6"
   },
   "dependencies": {
-    "@hyphen/hyphen-design-tokens": "^4.8.0",
+    "@hyphen/hyphen-design-tokens": "^4.9.0",
     "@popperjs/core": "^2.11.8",
     "@types/react-modal": "^3.16.3",
     "classnames": "^2.5.1",
