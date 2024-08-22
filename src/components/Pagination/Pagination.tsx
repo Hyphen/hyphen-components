@@ -99,7 +99,6 @@ export const Pagination: FC<PaginationProps> = ({
       direction="row"
       alignItems="center"
       justifyContent="space-between"
-      padding="lg"
       className={classNames(className)}
     >
       <Box
