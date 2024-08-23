@@ -3,10 +3,7 @@
     --form-control-font-family,
     var(--INTERNAL_form-control-font-family)
   );
-  margin-top: var(
-    --form-control-help-margin,
-    var(--INTERNAL_form-control-help-margin)
-  );
+  margin-top: var(--size-spacing-xs);
   font-weight: var(
     --form-control-help-text-font-weight,
     var(--INTERNAL_form-control-help-text-font-weight)
