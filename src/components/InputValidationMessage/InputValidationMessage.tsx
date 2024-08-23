@@ -20,7 +20,7 @@ export const InputValidationMessage: FC<InputValidationMessageProps> = ({
     styles['input-validation-message'],
     'font-color-danger',
     `font-size-${size}`,
-    'm-top-xs'
+    'm-top-sm'
   );
 
   return <div className={classes}>{children}</div>;
