@@ -1,14 +1,18 @@
 import React from 'react';
-import { ThemeProvider } from './ThemeProvider';
+import {
+  Theme,
+  ThemeProvider,
+} from '../../components/ThemeProvider/ThemeProvider';
 import type { Meta } from '@storybook/react';
-import { Box } from '../Box/Box';
-import { RadioGroup } from '../RadioGroup/RadioGroup';
-import { Theme } from './ThemeProvider';
+import { Box } from '../../components/Box/Box';
+import { RadioGroup } from '../../components/RadioGroup/RadioGroup';
 import { useTheme } from '../../hooks/useTheme/useTheme';
 
 const meta: Meta<typeof ThemeProvider> = {
-  title: 'Providers/ThemeProvider',
-  component: ThemeProvider,
+  title: 'Hooks/useTheme',
+  parameters: {
+    controls: { hideNoControlsWarning: true },
+  },
 };
 
 export default meta;
