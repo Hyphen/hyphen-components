@@ -139,10 +139,7 @@
 
     &::placeholder {
       opacity: 1;
-      color: var(
-        --form-control-placeholder-color,
-        var(--INTERNAL_form-control-placeholder-color)
-      );
+      color: var(--color-font-placeholder);
     }
 
     &:focus {
