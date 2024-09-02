@@ -59,7 +59,7 @@ jobs:
             ${{ runner.os }}-node_modules-
       - if: steps.cache-node_modules.outputs.cache-hit != 'true'
         name: Set up .npmrc
-        run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc      
+        run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
       - name: Install dependencies
         run: npm install
       - name: Build
@@ -108,10 +108,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Run CI  
+      - name: Run CI
         run: npm ci
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          # onlyChanged: true # Required option to enable TurboSnap
+          onlyChanged: true # Required option to enable TurboSnap
