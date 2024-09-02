@@ -453,7 +453,9 @@ export const Box: FC<BoxProps> = forwardRef(
       };
 
       if (typeof direction === 'string') {
-        childGapDirection = { base: getChildGapMarginDirection(direction) };
+        childGapDirection = {
+          base: getChildGapMarginDirection(direction as CssFlexDirectionValue),
+        };
       } else if (typeof direction === 'object' && direction !== null) {
         childGapDirection = Object.keys(direction).reduce(
           (acc, curr) => ({
