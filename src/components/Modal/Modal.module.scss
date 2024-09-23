@@ -40,7 +40,7 @@
   align-items: flex-end;
   z-index: var(--size-z-index-overlay);
   background: hsl(0deg 0% 0% / 33%);
-  background-color: rgb(77 82 79 / 50%);
+  background-color: rgba( 0, 0, 0, .6);
   overflow: hidden;
 
   :global {
