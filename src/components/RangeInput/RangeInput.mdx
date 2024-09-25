@@ -1,0 +1,25 @@
+import { Canvas, Meta, ArgTypes } from '@storybook/blocks';
+import * as Stories from './RangeInput.stories';
+import {RangeInput} from "./RangeInput";
+
+<Meta of={Stories} />
+
+# RangeInput
+
+Use a RangeInput when a user is required to select a value within a range. It is ideal for this scenario because the range is displayed without having to interact.
+
+## Props
+
+<ArgTypes of={RangeInput} />
+
+## Default
+
+All that is required to render a basic version of the RangeInput is the input's unique `id`, a `value`, a `max`, and an `onChange` event handler passed to the `onChange` prop.
+
+<Canvas isExpanded of={Stories.Default} />
+
+### Disabled
+
+Use the `isDisabled` prop to disable the input.
+
+<Canvas of={Stories.Disabled} />
