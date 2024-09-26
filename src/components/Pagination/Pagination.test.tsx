@@ -168,7 +168,7 @@ describe('Pagination', () => {
       ellipsisFound = screen.queryAllByText('...');
       expect(ellipsisFound.length).toBe(2);
 
-      const buttonsFound = screen.queryAllByRole('button');
+      const buttonsFound = screen.queryAllByRole('div');
       expect(buttonsFound[2]).toHaveTextContent('...');
       expect(buttonsFound[buttonsFound.length - 3]).toHaveTextContent('...');
     });
