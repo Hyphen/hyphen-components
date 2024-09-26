@@ -4,7 +4,6 @@ import { Box } from '../Box/Box';
 import { Button } from '../Button/Button';
 import {
   generatePages,
-  generatePageRange,
   generatePageTotal,
   generateActiveListRange,
 } from './Pagination.utilities';
@@ -72,26 +71,40 @@ export const Pagination: FC<PaginationProps> = ({
   numberOfPagesDisplayed = 5,
   prevPageText = 'Previous',
 }) => {
-  const pageTotal = useMemo(
-    () => generatePageTotal(totalItemsCount, itemsPerPage),
-    [totalItemsCount, itemsPerPage]
-  );
+  const pageTotal = useMemo(() => {
+    if (itemsPerPage <= 0) return 1;
+    return generatePageTotal(totalItemsCount, itemsPerPage);
+  }, [totalItemsCount, itemsPerPage]);
 
-  const pageRange = useMemo(
-    () => generatePageRange(numberOfPagesDisplayed, pageTotal),
-    [numberOfPagesDisplayed, pageTotal]
-  );
+  const validActivePage = Math.max(1, Math.min(activePage, pageTotal));
 
   const activeListRange = useMemo(
-    () => generateActiveListRange(activePage, totalItemsCount, itemsPerPage),
-    [activePage, totalItemsCount, itemsPerPage]
+    () =>
+      generateActiveListRange(validActivePage, totalItemsCount, itemsPerPage),
+    [validActivePage, totalItemsCount, itemsPerPage]
   );
 
   const pages = useMemo(
     () =>
-      generatePages(pageRange, pageTotal, activePage, numberOfPagesDisplayed),
-    [pageRange, pageTotal, activePage, numberOfPagesDisplayed]
+      generatePages(
+        pageTotal,
+        validActivePage,
+        numberOfPagesDisplayed
+      ),
+    [pageTotal, validActivePage, numberOfPagesDisplayed]
   );
+
+  const paginationClassNames = useMemo(
+    () => classNames(className),
+    [className]
+  );
+
+  const activeListRangeText = useMemo(() => {
+    if (totalItemsCount === 0) {
+      return 'No items to display';
+    }
+    return `Showing ${activeListRange.first}-${activeListRange.last} of ${totalItemsCount}`;
+  }, [activeListRange, totalItemsCount]);
 
   return (
     <Box
@@ -99,7 +112,7 @@ export const Pagination: FC<PaginationProps> = ({
       direction="row"
       alignItems="center"
       justifyContent="space-between"
-      className={classNames(className)}
+      className={paginationClassNames}
     >
       <Box
         direction="row"
@@ -110,16 +123,15 @@ export const Pagination: FC<PaginationProps> = ({
         <Button
           variant="secondary"
           size={isCompact ? 'sm' : 'md'}
-          isDisabled={activePage === 1}
-          onClick={() => onChange(activePage - 1)}
+          isDisabled={validActivePage === 1}
+          onClick={() => onChange(validActivePage - 1)}
         >
           {prevPageText}
         </Button>
         {arePagesVisible && (
           <Box direction="row" gap="2xs">
-            {pages.map(({ pageNumber, isPage }) => {
-              console.log(activePage, pageNumber, isPage);
-              return (
+            {pages.map(({ pageNumber, isPage }, index) => {
+              return isPage ? (
                 <Button
                   key={pageNumber}
                   onClick={() => onChange(pageNumber)}
@@ -130,8 +142,20 @@ export const Pagination: FC<PaginationProps> = ({
                   }}
                   className={className}
                 >
-                  {isPage ? pageNumber : '...'}
+                  {pageNumber}
                 </Button>
+              ) : (
+                <Box
+                  key={`ellipsis-${index}`}
+                  style={{
+                    display: 'inline-block',
+                    minWidth: isCompact ? '33px' : '42px',
+                    textAlign: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  ...
+                </Box>
               );
             })}
           </Box>
@@ -139,8 +163,8 @@ export const Pagination: FC<PaginationProps> = ({
         <Button
           variant="secondary"
           size={isCompact ? 'sm' : 'md'}
-          isDisabled={activePage === pageTotal}
-          onClick={() => onChange(activePage + 1)}
+          isDisabled={validActivePage === pageTotal}
+          onClick={() => onChange(validActivePage + 1)}
         >
           {nextPageText}
         </Button>
@@ -153,8 +177,7 @@ export const Pagination: FC<PaginationProps> = ({
         }}
         fontSize={isCompact ? 'sm' : 'md'}
       >
-        {isTotalVisible &&
-          `Showing ${activeListRange.first}-${activeListRange.last} of ${totalItemsCount}`}
+        {isTotalVisible && activeListRangeText}
       </Box>
     </Box>
   );
