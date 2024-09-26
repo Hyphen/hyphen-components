@@ -61,4 +61,3 @@ export const generateActiveListRange = (
 
   return { first, last };
 };
-

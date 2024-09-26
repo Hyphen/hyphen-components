@@ -172,7 +172,6 @@ describe('Pagination', () => {
       expect(buttonsFound.length).toBe(8);
       expect(ellipsisFound[0].previousElementSibling?.textContent).toBe('1');
       expect(ellipsisFound[0].nextElementSibling?.textContent).toBe('4');
-      
       expect(ellipsisFound[1].previousElementSibling?.textContent).toBe('7');
       expect(ellipsisFound[1].nextElementSibling?.textContent).toBe('12');
     });

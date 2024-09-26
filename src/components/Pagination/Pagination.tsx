@@ -85,12 +85,7 @@ export const Pagination: FC<PaginationProps> = ({
   );
 
   const pages = useMemo(
-    () =>
-      generatePages(
-        pageTotal,
-        validActivePage,
-        numberOfPagesDisplayed
-      ),
+    () => generatePages(pageTotal, validActivePage, numberOfPagesDisplayed),
     [pageTotal, validActivePage, numberOfPagesDisplayed]
   );
 
