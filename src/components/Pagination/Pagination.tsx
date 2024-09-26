@@ -148,9 +148,9 @@ export const Pagination: FC<PaginationProps> = ({
                 <Box
                   key={`ellipsis-${index}`}
                   style={{
-                    display: 'inline-block',
+                    display: 'flexk',
                     minWidth: isCompact ? '33px' : '42px',
-                    textAlign: 'center',
+                    justifyContent: 'space-around',
                     alignItems: 'center',
                   }}
                 >
