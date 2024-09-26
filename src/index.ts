@@ -30,6 +30,7 @@ export * from './components/Modal/Modal';
 export * from './components/Pagination/Pagination';
 export * from './components/Popover/Popover';
 export * from './components/RadioGroup/RadioGroup';
+export * from './components/RangeInput/RangeInput';
 export * from './components/ResponsiveProvider/ResponsiveProvider';
 export * from './components/SelectInput/SelectInput';
 export * from './components/SelectInputInset/SelectInputInset';

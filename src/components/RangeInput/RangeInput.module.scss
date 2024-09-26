@@ -1,0 +1,25 @@
+.slider {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0 !important;
+  background-color: var(--color-base-grey-700);
+  border: none;
+  border-radius: 2.5rem;
+  height: var(--size-spacing-sm);
+  overflow: visible;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: var(--size-spacing-2xl);
+  width: var(--size-spacing-2xl);
+  background-color: var(--color-base-white);
+  border-radius: var(--size-percentage-50);
+  border: 0.125rem solid #0f172a;
+  cursor: pointer;
+}
+
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
