@@ -4,69 +4,44 @@ export interface Page {
 }
 
 export const generatePages = (
-  pageRange: number,
   pageTotal: number,
   activePage: number,
   numberOfPagesDisplayed: number
 ): Page[] => {
+  const pageRange = Math.min(pageTotal, Math.max(1, numberOfPagesDisplayed));
   const pages: Page[] = [];
   let startingPage = 1;
   let endingPage = pageRange;
 
-  if (pageTotal <= pageRange) {
-    startingPage = 1;
-    endingPage = pageRange;
-  } else if (activePage + numberOfPagesDisplayed > pageTotal) {
-    startingPage = pageTotal - (numberOfPagesDisplayed - 1);
-    endingPage = startingPage + (numberOfPagesDisplayed - 1);
-  } else if (
-    activePage > numberOfPagesDisplayed &&
-    activePage + numberOfPagesDisplayed <= pageTotal
-  ) {
-    startingPage = activePage - Math.floor(numberOfPagesDisplayed / 2);
-    endingPage = startingPage + (numberOfPagesDisplayed - 1);
+  if (activePage + Math.floor(pageRange / 2) >= pageTotal) {
+    startingPage = Math.max(1, pageTotal - pageRange + 1);
+    endingPage = pageTotal;
+  } else {
+    startingPage = Math.max(1, activePage - Math.floor(pageRange / 2));
+    endingPage = Math.min(pageTotal, startingPage + pageRange - 1);
   }
 
   for (let i = startingPage; i <= endingPage; i += 1) {
     pages.push({ pageNumber: i, isPage: true });
   }
 
-  if (pageTotal > pages[pages.length - 1]?.pageNumber) {
-    const secondToLastPage =
-      pageTotal !== activePage + numberOfPagesDisplayed
-        ? activePage + numberOfPagesDisplayed
-        : pageTotal - 1;
-
-    // only add ellipsis if there are more than 0 pages between the final page and the rest of the pages
-    if (pageTotal > numberOfPagesDisplayed + 1) {
-      pages.push({ pageNumber: secondToLastPage, isPage: false });
+  // Handling ellipsis for overflow pages
+  if (endingPage < pageTotal) {
+    if (endingPage < pageTotal - 1) {
+      pages.push({ pageNumber: -1, isPage: false }); // represents ellipsis
     }
-
     pages.push({ pageNumber: pageTotal, isPage: true });
   }
 
-  if (activePage > numberOfPagesDisplayed) {
-    const threeDotsPage =
-      activePage - numberOfPagesDisplayed > 1
-        ? activePage - numberOfPagesDisplayed
-        : activePage - numberOfPagesDisplayed + 1;
-
-    pages.unshift(
-      { pageNumber: 1, isPage: true },
-      { pageNumber: threeDotsPage, isPage: false }
-    );
+  if (startingPage > 1) {
+    pages.unshift({ pageNumber: 1, isPage: true });
+    if (startingPage > 2) {
+      pages.splice(1, 0, { pageNumber: -1, isPage: false }); // represents ellipsis
+    }
   }
 
-  return [...pages];
+  return pages;
 };
-
-// Return the true page range in cases
-// where number of pages wanted for display is larger than the actual page total.
-export const generatePageRange = (
-  numberOfPagesDisplayed: number,
-  pageTotal: number
-): number =>
-  numberOfPagesDisplayed > pageTotal ? pageTotal : numberOfPagesDisplayed;
 
 export const generatePageTotal = (
   totalItemsCount: number,
@@ -80,22 +55,10 @@ export const generateActiveListRange = (
   activePage: number,
   totalItemsCount: number,
   itemsPerPage: number
-): { first?: number; last?: number } => {
-  const activePageRange: { first?: number; last?: number } = {};
+): { first: number; last: number } => {
+  const first = (activePage - 1) * itemsPerPage + 1;
+  const last = Math.min(activePage * itemsPerPage, totalItemsCount);
 
-  const pageTotal = generatePageTotal(totalItemsCount, itemsPerPage);
-
-  if (activePage === 1) {
-    activePageRange.first = 1;
-    activePageRange.last =
-      totalItemsCount > itemsPerPage ? itemsPerPage : totalItemsCount;
-  } else if (activePage < pageTotal) {
-    activePageRange.first = activePage * itemsPerPage - (itemsPerPage - 1);
-    activePageRange.last = activePage * itemsPerPage;
-  } else {
-    activePageRange.first = activePage * itemsPerPage - (itemsPerPage - 1);
-    activePageRange.last = totalItemsCount;
-  }
-
-  return activePageRange;
+  return { first, last };
 };
+
