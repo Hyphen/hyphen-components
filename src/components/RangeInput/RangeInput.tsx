@@ -49,6 +49,9 @@ export const RangeInput: FC<InputRangeProps> = ({
 			min="0"
 			value={value}
 			max={max}
+			aria-valuemax={max}
+			aria-valuenow={value}
+			aria-label="range input"
 			className={classNames(styles.slider, className, {
 				[styles.disabled]: isDisabled,
 			})}
