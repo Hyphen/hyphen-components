@@ -1,26 +1,8 @@
 import {
   generatePages,
-  generatePageRange,
   generatePageTotal,
   generateActiveListRange,
 } from './Pagination.utilities';
-
-describe('generatePageRange', () => {
-  it('returns the number of pages displayed if there are enough total pages', () => {
-    const pageRange = generatePageRange(3, 50);
-    expect(pageRange).toBe(3);
-  });
-
-  it('returns the page total if it is smaller than the number of pages displayed', () => {
-    const pageRange = generatePageRange(3, 2);
-    expect(pageRange).toBe(2);
-  });
-
-  it('returns the number of pages displayed if it is the same as total pages', () => {
-    const pageRange = generatePageRange(3, 3);
-    expect(pageRange).toBe(3);
-  });
-});
 
 describe('generatePageTotal', () => {
   it('returns correct number of pages for a variety of inputs', () => {
@@ -51,8 +33,8 @@ describe('generateActiveListRange', () => {
 
 describe('generatePages', () => {
   it('returns correct pages -- scenario 1', () => {
-    const pages = generatePages(3, 10, 3, 3);
-    expect(pages.length).toBe(5);
+    const pages = generatePages(10, 3, 3);
+    expect(pages.length).toBe(6);
 
     expect(pages[0].isPage).toBe(true);
     expect(pages[0].pageNumber).toBe(1);
@@ -63,22 +45,25 @@ describe('generatePages', () => {
     expect(pages[2].isPage).toBe(true);
     expect(pages[2].pageNumber).toBe(3);
 
-    expect(pages[3].isPage).toBe(false);
-    expect(pages[3].pageNumber).toBe(6);
+    expect(pages[3].isPage).toBe(true);
+    expect(pages[3].pageNumber).toBe(4);
 
-    expect(pages[4].isPage).toBe(true);
-    expect(pages[4].pageNumber).toBe(10);
+    expect(pages[4].isPage).toBe(false);
+    expect(pages[4].pageNumber).toBe(-1);
+
+    expect(pages[5].isPage).toBe(true);
+    expect(pages[5].pageNumber).toBe(10);
   });
 
   it('returns correct pages -- scenario 2', () => {
-    const pages = generatePages(3, 10, 6, 3);
+    const pages = generatePages(10, 6, 3);
     expect(pages.length).toBe(7);
 
     expect(pages[0].isPage).toBe(true);
     expect(pages[0].pageNumber).toBe(1);
 
     expect(pages[1].isPage).toBe(false);
-    expect(pages[1].pageNumber).toBe(3);
+    expect(pages[1].pageNumber).toBe(-1);
 
     expect(pages[2].isPage).toBe(true);
     expect(pages[2].pageNumber).toBe(5);
@@ -90,21 +75,21 @@ describe('generatePages', () => {
     expect(pages[4].pageNumber).toBe(7);
 
     expect(pages[5].isPage).toBe(false);
-    expect(pages[5].pageNumber).toBe(9);
+    expect(pages[5].pageNumber).toBe(-1);
 
     expect(pages[6].isPage).toBe(true);
     expect(pages[6].pageNumber).toBe(10);
   });
 
   it('returns correct pages -- scenario 3', () => {
-    const pages = generatePages(3, 10, 9, 3);
+    const pages = generatePages(10, 9, 3);
     expect(pages.length).toBe(5);
 
     expect(pages[0].isPage).toBe(true);
     expect(pages[0].pageNumber).toBe(1);
 
     expect(pages[1].isPage).toBe(false);
-    expect(pages[1].pageNumber).toBe(6);
+    expect(pages[1].pageNumber).toBe(-1);
 
     expect(pages[2].isPage).toBe(true);
     expect(pages[2].pageNumber).toBe(8);
@@ -117,7 +102,7 @@ describe('generatePages', () => {
   });
 
   it('returns the correct pages -- one less page range than total', () => {
-    const pages = generatePages(2, 3, 1, 2);
+    const pages = generatePages(3, 1, 2);
 
     expect(pages[0].isPage).toBe(true);
     expect(pages[0].pageNumber).toBe(1);

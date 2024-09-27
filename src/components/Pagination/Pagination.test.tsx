@@ -169,8 +169,11 @@ describe('Pagination', () => {
       expect(ellipsisFound.length).toBe(2);
 
       const buttonsFound = screen.queryAllByRole('button');
-      expect(buttonsFound[2]).toHaveTextContent('...');
-      expect(buttonsFound[buttonsFound.length - 3]).toHaveTextContent('...');
+      expect(buttonsFound.length).toBe(8);
+      expect(ellipsisFound[0].previousElementSibling?.textContent).toBe('1');
+      expect(ellipsisFound[0].nextElementSibling?.textContent).toBe('4');
+      expect(ellipsisFound[1].previousElementSibling?.textContent).toBe('7');
+      expect(ellipsisFound[1].nextElementSibling?.textContent).toBe('12');
     });
   });
 
