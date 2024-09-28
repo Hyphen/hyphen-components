@@ -119,7 +119,8 @@ export type CssDisplayValue =
   | 'inline'
   | 'inherit'
   | 'grid'
-  | 'table-cell';
+  | 'table-cell'
+  | 'contents';
 
 export type CssTextAlignValue = 'left' | 'center' | 'right';
 

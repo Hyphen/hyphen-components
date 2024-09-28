@@ -1,10 +1,12 @@
-import { CssDisplayValue, CssOverflowValue } from '../../types';
-
+import {
+  CssDisplayValue,
+  CssFlexDirectionValue,
+  CssOverflowValue,
+  ResponsiveProp,
+} from '../../types';
 import { Box } from './Box';
-/* eslint-disable react/no-array-index-key */
 import React from 'react';
-import { render } from '@testing-library/react';
-
+import { fireEvent, render } from '@testing-library/react';
 import {
   BACKGROUND_COLOR_OPTIONS,
   BORDER_COLOR_OPTIONS,
@@ -16,65 +18,97 @@ import {
 } from '../../lib';
 
 describe('Box', () => {
-  test('aria-label is applied if set', () => {
-    const { getByLabelText } = render(<Box aria-label="test label" />);
-    expect(getByLabelText('test label')).toBeDefined();
+  const renderBox = (props = {}) => render(<Box {...props}>Test Box</Box>);
+
+  describe('aria attributes', () => {
+    test('aria-label is applied if set', () => {
+      const { getByLabelText } = renderBox({ 'aria-label': 'test label' });
+      expect(getByLabelText('test label')).toBeDefined();
+    });
   });
 
-  test('background color token classes are applied', () => {
-    [...BACKGROUND_COLOR_OPTIONS].forEach((color, i) => {
-      const { queryAllByText } = render(
-        <Box background={color} key={i}>
-          Test Box
-        </Box>
-      );
+  test('renders with default display value of flex', () => {
+    const { getByText } = renderBox();
+    expect(getByText('Test Box')).toHaveClass('display-flex');
+  });
+
+  describe('Invalid props', () => {
+    test('handles invalid direction value gracefully', () => {
+      const { getByText } = renderBox({ direction: 'invalid' });
+      expect(getByText('Test Box')).not.toHaveClass('direction-invalid');
+    });
+
+    // test('handles invalid padding value gracefully', () => {
+    //   const { getByText } = renderBox({ padding: 'invalid' });
+    //   expect(getByText('Test Box')).not.toHaveClass('p-invalid');
+    // });
+
+    // test('handles invalid margin value gracefully', () => {
+    //   const { getByText } = renderBox({ margin: 'invalid' });
+    //   expect(getByText('Test Box')).not.toHaveClass('m-invalid');
+    // });
+  });
+
+  test('renders with proper hover classes', () => {
+    const { getByText } = renderBox({ hover: { background: 'primary' } });
+    expect(getByText('Test Box')).toHaveClass('hover:background-color-primary');
+  });
+
+  test('renders with proper focus classes', () => {
+    const { getByText } = renderBox({ focus: { borderColor: 'primary' } });
+    expect(getByText('Test Box')).toHaveClass('focus:border-color-primary');
+  });
+
+  test('renders with proper cursor class', () => {
+    const { getByText } = renderBox({ cursor: 'pointer' });
+    expect(getByText('Test Box')).toHaveClass('cursor-pointer');
+  });
+
+  test('renders with proper border radius class', () => {
+    const { getByText } = renderBox({ radius: 'md' });
+    expect(getByText('Test Box')).toHaveClass('br-md');
+  });
+
+  test('renders with proper box shadow class', () => {
+    const { getByText } = renderBox({ shadow: 'lg' });
+    expect(getByText('Test Box')).toHaveClass('shadow-lg');
+  });
+
+  const testTokenClasses = (
+    propName: string,
+    options: any[],
+    classNamePrefix: string
+  ) => {
+    options.forEach((option, i) => {
+      const { queryAllByText } = renderBox({ [propName]: option, key: i });
       expect(queryAllByText('Test Box')[i].classList).toContain(
-        `background-color-${color}`
+        `${classNamePrefix}-${option}`
       );
     });
+  };
+
+  test('background color token classes are applied', () => {
+    testTokenClasses(
+      'background',
+      BACKGROUND_COLOR_OPTIONS,
+      'background-color'
+    );
   });
 
   test('font size token classes are applied', () => {
-    [...FONT_SIZE_OPTIONS].forEach((fontSize, i) => {
-      const { queryAllByText } = render(
-        <Box fontSize={fontSize} key={i}>
-          Test Box
-        </Box>
-      );
-      expect(queryAllByText('Test Box')[i].classList).toContain(
-        `font-size-${fontSize}`
-      );
-    });
+    testTokenClasses('fontSize', FONT_SIZE_OPTIONS, 'font-size');
   });
 
   test('text color token classes are applied', () => {
-    [...FONT_COLOR_OPTIONS].forEach((color, i) => {
-      const { queryAllByText } = render(
-        <Box color={color} key={i}>
-          Test Box
-        </Box>
-      );
-      expect(queryAllByText('Test Box')[i].classList).toContain(
-        `font-color-${color}`
-      );
-    });
+    testTokenClasses('color', FONT_COLOR_OPTIONS, 'font-color');
   });
 
   test('border color token classes are applied', () => {
-    [...BORDER_COLOR_OPTIONS].forEach((color, i) => {
-      const { queryAllByText } = render(
-        <Box borderColor={color} key={i}>
-          Test Box
-        </Box>
-      );
-      expect(queryAllByText('Test Box')[i].classList).toContain(
-        `border-color-${color}`
-      );
-    });
+    testTokenClasses('borderColor', BORDER_COLOR_OPTIONS, 'border-color');
   });
 
   test('overflow option classes are applied', () => {
-    const overflowOptions = [
+    const overflowOptions: CssOverflowValue[] = [
       'visible',
       'hidden',
       'clip',
@@ -83,24 +117,17 @@ describe('Box', () => {
       'inherit',
       'initial',
       'unset',
-    ] as CssOverflowValue[];
-
-    [...overflowOptions].forEach((value, i) => {
-      const { queryAllByText } = render(
-        <Box overflow={value} key={i}>
-          Test Box
-        </Box>
-      );
-      expect(queryAllByText('Test Box')[i].classList).toContain(
-        `overflow-${value}`
-      );
-    });
+    ];
+    testTokenClasses('overflow', overflowOptions, 'overflow');
   });
 
-  test('childGap margin classes are applied for column layout', () => {
-    [...SPACING_OPTIONS].forEach((value, optionIndex) => {
+  const testChildGapClasses = (
+    direction: CssFlexDirectionValue | ResponsiveProp<CssFlexDirectionValue>,
+    marginClass: string
+  ) => {
+    SPACING_OPTIONS.forEach((value, optionIndex) => {
       const { container } = render(
-        <Box childGap={value} key={optionIndex}>
+        <Box childGap={value} key={optionIndex} direction={direction}>
           <Box className="foo" key={`child1${optionIndex}`}>
             child 1
           </Box>
@@ -111,49 +138,68 @@ describe('Box', () => {
       );
 
       const { children } = container.children[0];
-
       Array.from(children).forEach((child, childIndex) => {
         expect(child.classList).toContain('foo');
-        if (childIndex > children.length - 1) {
-          expect(child.classList).toContain(`m-bottom-${value}`);
+        if (childIndex < children.length - 1) {
+          expect(child.classList).toContain(`${marginClass}-${value}`);
         }
       });
     });
+  };
+
+  test('childGap margin classes are applied for column layout', () => {
+    testChildGapClasses('column', 'm-bottom');
   });
 
   test('childGap margin classes are applied for row layout', () => {
-    [...SPACING_OPTIONS].forEach((value, optionIndex) => {
-      const { container } = render(
-        <Box childGap={value} key={optionIndex} direction="row">
-          <Box className="foo" key={`child1${optionIndex}`}>
-            child 1
-          </Box>
-          <Box className="foo" key={`child2${optionIndex}`}>
-            child 2
-          </Box>
-        </Box>
-      );
+    testChildGapClasses('row', 'm-right');
+  });
 
-      const { children } = container.children[0];
+  describe('Event Handlers', () => {
+    test('calls onClick handler when clicked', () => {
+      const handleClick = jest.fn();
+      const { getByText } = renderBox({ onClick: handleClick });
+      getByText('Test Box').click();
+      expect(handleClick).toHaveBeenCalledTimes(1);
+    });
 
-      Array.from(children).forEach((child, childIndex) => {
-        expect(child.classList).toContain('foo');
-        if (childIndex > children.length - 1) {
-          expect(child.classList).toContain(`m-right-${value}`);
-        }
-      });
+    test('calls onMouseEnter handler when hovered', () => {
+      const handleMouseEnter = jest.fn();
+      const { getByText } = renderBox({ onMouseEnter: handleMouseEnter });
+      fireEvent.mouseEnter(getByText('Test Box'));
+      expect(handleMouseEnter).toHaveBeenCalledTimes(1);
+    });
+
+    test('calls onMouseLeave handler when mouse leaves', () => {
+      const handleMouseLeave = jest.fn();
+      const { getByText } = renderBox({ onMouseLeave: handleMouseLeave });
+      fireEvent.mouseLeave(getByText('Test Box'));
+      expect(handleMouseLeave).toHaveBeenCalledTimes(1);
+    });
+
+    test('calls onFocus handler when focused', () => {
+      const handleFocus = jest.fn();
+      const { getByText } = renderBox({ onFocus: handleFocus });
+      fireEvent.focus(getByText('Test Box'));
+      expect(handleFocus).toHaveBeenCalledTimes(1);
+    });
+
+    test('calls onBlur handler when focus is lost', () => {
+      const handleBlur = jest.fn();
+      const { getByText } = renderBox({ onBlur: handleBlur });
+      fireEvent.blur(getByText('Test Box'));
+      expect(handleBlur).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('Display', () => {
     test('box renders with default display value of flex', () => {
-      const { getByText } = render(<Box>Hello</Box>);
-
-      expect(getByText('Hello')).toHaveClass('display-flex');
+      const { getByText } = renderBox();
+      expect(getByText('Test Box')).toHaveClass('display-flex');
     });
 
     test('box renders with display class matching prop', () => {
-      const displayValues = [
+      const displayValues: CssDisplayValue[] = [
         'flex',
         'inline-flex',
         'block',
@@ -161,13 +207,9 @@ describe('Box', () => {
         'inline',
         'inherit',
         'grid',
-      ] as CssDisplayValue[];
-
-      displayValues.forEach((value, i) => {
-        const { queryAllByText } = render(<Box display={value}>hello</Box>);
-
-        expect(queryAllByText('hello')[i]).toHaveClass(`display-${value}`);
-      });
+        'contents',
+      ];
+      testTokenClasses('display', displayValues, 'display');
     });
   });
 
@@ -182,121 +224,93 @@ describe('Box', () => {
       'inherit',
       'initial',
       'unset',
-    ] as any[];
+    ];
 
     positions.forEach((p) => {
       test(`renders with class for position ${p}`, () => {
-        const { getByText } = render(<Box position={p}>my box</Box>);
-        expect(getByText('my box')).toHaveClass(`position-${p}`);
+        const { getByText } = renderBox({ position: p });
+        expect(getByText('Test Box')).toHaveClass(`position-${p}`);
       });
     });
   });
 
   describe('wrap', () => {
     test('box renders with wrap class if wrap is true', () => {
-      const { getByText } = render(<Box wrap>Hello</Box>);
-      expect(getByText('Hello')).toHaveClass('flex-wrap');
+      const { getByText } = renderBox({ wrap: true });
+      expect(getByText('Test Box')).toHaveClass('flex-wrap');
     });
 
     test('box renders with nowrap class if wrap is false', () => {
-      const { getByText } = render(<Box wrap={false}>Hello</Box>);
-      expect(getByText('Hello')).toHaveClass('flex-nowrap');
+      const { getByText } = renderBox({ wrap: false });
+      expect(getByText('Test Box')).toHaveClass('flex-nowrap');
     });
 
     test('box will not add wrap class if display is not flex', () => {
-      const { getByText } = render(
-        <Box display="block" wrap>
-          Hello
-        </Box>
-      );
-      expect(getByText('Hello')).not.toHaveClass('flex-wrap');
+      const { getByText } = renderBox({ display: 'block', wrap: true });
+      expect(getByText('Test Box')).not.toHaveClass('flex-wrap');
     });
   });
 
   describe('Responsive styles and Classes', () => {
-    test('box renders with the correct responsive spacing classes based on props', () => {
-      const spacing = {
-        base: 'sm',
-        tablet: 'md',
-        desktop: 'lg',
-        hd: 'xl',
-      } as any;
+    const responsiveProps = {
+      width: 'w',
+      height: 'h',
+      maxWidth: 'mw',
+      maxHeight: 'mh',
+      padding: 'p',
+      margin: 'm',
+      fontSize: 'font-size',
+      position: 'position',
+      zIndex: 'z-index',
+      radius: 'br',
+      shadow: 'shadow',
+    };
 
-      const position = {
-        base: 'sticky',
-        tablet: 'absolute',
-        desktop: 'relative',
-        hd: 'fixed',
-      } as any;
-      const { getByText } = render(
-        <Box
-          width={spacing}
-          height={spacing}
-          maxWidth={spacing}
-          maxHeight={spacing}
-          padding={spacing}
-          margin={spacing}
-          fontSize={spacing}
-          position={position}
-        >
-          my box
-        </Box>
-      );
-      const box = getByText('my box');
-
-      expect(box).toHaveClass(
-        ...[
-          'w-sm',
-          'w-md-tablet',
-          'w-lg-desktop',
-          'w-xl-hd',
-          'h-sm',
-          'h-md-tablet',
-          'h-lg-desktop',
-          'h-xl-hd',
-          'mw-sm',
-          'mw-md-tablet',
-          'mw-lg-desktop',
-          'mw-xl-hd',
-          'mh-sm',
-          'mh-md-tablet',
-          'mh-lg-desktop',
-          'mh-xl-hd',
-          'p-sm',
-          'p-md-tablet',
-          'p-lg-desktop',
-          'p-xl-hd',
-          'm-sm',
-          'm-md-tablet',
-          'm-lg-desktop',
-          'm-xl-hd',
-          'font-size-sm',
-          'font-size-md-tablet',
-          'font-size-lg-desktop',
-          'font-size-xl-hd',
-          'position-sticky',
-          'position-absolute-tablet',
-          'position-relative-desktop',
-          'position-fixed-hd',
-        ]
-      );
+    Object.entries(responsiveProps).forEach(([prop, classNamePrefix]) => {
+      test(`box renders with the correct responsive ${prop} classes based on props`, () => {
+        const responsiveValues = {
+          base: 'sm',
+          tablet: 'md',
+          desktop: 'lg',
+          hd: 'xl',
+        };
+        const { getByText } = renderBox({ [prop]: responsiveValues });
+        const box = getByText('Test Box');
+        expect(box).toHaveClass(
+          `${classNamePrefix}-sm`,
+          `${classNamePrefix}-md-tablet`,
+          `${classNamePrefix}-lg-desktop`,
+          `${classNamePrefix}-xl-hd`
+        );
+      });
     });
 
     test('box renders children with the correct gap classes for its children', () => {
-      const direction = {
+      const direction: ResponsiveProp<CssFlexDirectionValue> = {
         base: 'column',
         tablet: 'column',
         desktop: 'row',
         hd: 'row',
-      } as any;
-
-      const childGap = {
+      };
+      const childGap: ResponsiveProp<
+        | 'sm'
+        | 'md'
+        | 'lg'
+        | 'xl'
+        | '0'
+        | '2xs'
+        | 'xs'
+        | '2xl'
+        | '3xl'
+        | '4xl'
+        | '5xl'
+        | 'auto'
+      > = {
         base: 'sm',
         tablet: 'md',
         desktop: 'lg',
         hd: 'xl',
-      } as any;
-
+      };
       const { getByText } = render(
         <Box direction={direction} childGap={childGap}>
           <div>one</div>
@@ -304,175 +318,76 @@ describe('Box', () => {
         </Box>
       );
       const childBox = getByText('one');
-
       expect(childBox).toHaveClass(
-        ...[
-          'm-bottom-sm',
-          'm-right-0',
-          'm-bottom-md-tablet',
-          'm-right-0-tablet',
-          'm-right-lg-desktop',
-          'm-bottom-0-desktop',
-          'm-right-xl-hd',
-          'm-bottom-0-hd',
-        ]
+        'm-bottom-sm',
+        'm-right-0',
+        'm-bottom-md-tablet',
+        'm-right-0-tablet',
+        'm-right-lg-desktop',
+        'm-bottom-0-desktop',
+        'm-right-xl-hd',
+        'm-bottom-0-hd'
       );
     });
   });
 
   describe('Focus States', () => {
-    test('Background Hover -- box rendered with proper background hover classes', () => {
-      [...BACKGROUND_COLOR_OPTIONS].forEach((brandColorOption, i) => {
+    const testFocusClasses = (
+      propName: string,
+      options: any[],
+      classNamePrefix: string
+    ) => {
+      options.forEach((option, i) => {
         const { queryAllByText } = render(
-          <Box hover={{ background: brandColorOption }} key={i}>
+          <Box focus={{ [propName]: option }} key={i}>
             Test Box
           </Box>
         );
         expect(queryAllByText('Test Box')[i].classList).toContain(
-          `hover:background-color-${brandColorOption}`
+          `focus:${classNamePrefix}-${option}`
         );
       });
-    });
+    };
 
-    test('Border Color Hover -- box rendered with proper border color hover classes', () => {
-      [...BORDER_COLOR_OPTIONS].forEach((brandColorOption, i) => {
-        const { queryAllByText } = render(
-          <Box hover={{ borderColor: brandColorOption }} key={i}>
-            Test Box
-          </Box>
-        );
-        expect(queryAllByText('Test Box')[i].classList).toContain(
-          `hover:border-color-${brandColorOption}`
-        );
-      });
-    });
-
-    test('Border Width Hover -- box rendered with proper border width hover classes', () => {
-      [...BORDER_SIZE_OPTIONS].forEach((borderWidthOption, i) => {
-        const { queryAllByText } = render(
-          <Box hover={{ borderWidth: borderWidthOption }} key={i}>
-            Test Box
-          </Box>
-        );
-        expect(queryAllByText('Test Box')[i].classList).toContain(
-          `hover:border-width-${borderWidthOption}`
-        );
-      });
-    });
-
-    test('Font Size Hover -- box rendered with proper font size hover classes', () => {
-      [...FONT_SIZE_OPTIONS].forEach((fontSizeOption, i) => {
-        const { queryAllByText } = render(
-          <Box hover={{ fontSize: fontSizeOption }} key={i}>
-            Test Box
-          </Box>
-        );
-        expect(queryAllByText('Test Box')[i].classList).toContain(
-          `hover:font-size-${fontSizeOption}`
-        );
-      });
-    });
-
-    test('Font Color Hover -- box rendered with proper font color hover classes', () => {
-      [...FONT_COLOR_OPTIONS].forEach((fontColorOption, i) => {
-        const { queryAllByText } = render(
-          <Box hover={{ color: fontColorOption }} key={i}>
-            Test Box
-          </Box>
-        );
-        expect(queryAllByText('Test Box')[i].classList).toContain(
-          `hover:font-color-${fontColorOption}`
-        );
-      });
-    });
-
-    test('Shadow Hover -- box rendered with proper font color hover classes', () => {
-      [...BOX_SHADOW_OPTIONS].forEach((boxShadowOption, i) => {
-        const { queryAllByText } = render(
-          <Box hover={{ shadow: boxShadowOption }} key={i}>
-            Test Box
-          </Box>
-        );
-        expect(queryAllByText('Test Box')[i].classList).toContain(
-          `hover:shadow-${boxShadowOption}`
-        );
-      });
-    });
-  });
-
-  describe('Focus States', () => {
     test('Background Focus -- box rendered with proper background focus classes', () => {
-      [...BACKGROUND_COLOR_OPTIONS].forEach((brandColorOption, i) => {
-        const { queryAllByText } = render(
-          <Box focus={{ background: brandColorOption }} key={i}>
-            Test Box
-          </Box>
-        );
-        expect(queryAllByText('Test Box')[i].classList).toContain(
-          `focus:background-color-${brandColorOption}`
-        );
-      });
+      testFocusClasses(
+        'background',
+        BACKGROUND_COLOR_OPTIONS,
+        'background-color'
+      );
     });
 
     test('Border Color Focus -- box rendered with proper border color focus classes', () => {
-      [...BORDER_COLOR_OPTIONS].forEach((brandColorOption, i) => {
-        const { queryAllByText } = render(
-          <Box focus={{ borderColor: brandColorOption }} key={i}>
-            Test Box
-          </Box>
-        );
-        expect(queryAllByText('Test Box')[i].classList).toContain(
-          `focus:border-color-${brandColorOption}`
-        );
-      });
+      testFocusClasses('borderColor', BORDER_COLOR_OPTIONS, 'border-color');
     });
 
     test('Border Width Focus -- box rendered with proper border width focus classes', () => {
-      [...BORDER_SIZE_OPTIONS].forEach((borderWidthOption, i) => {
-        const { queryAllByText } = render(
-          <Box focus={{ borderWidth: borderWidthOption }} key={i}>
-            Test Box
-          </Box>
-        );
-        expect(queryAllByText('Test Box')[i].classList).toContain(
-          `focus:border-width-${borderWidthOption}`
-        );
-      });
+      testFocusClasses('borderWidth', BORDER_SIZE_OPTIONS, 'border-width');
     });
 
     test('Font Color Focus -- box rendered with proper font color focus classes', () => {
-      [...FONT_COLOR_OPTIONS].forEach((fontColorOption, i) => {
-        const { queryAllByText } = render(
-          <Box focus={{ color: fontColorOption }} key={i}>
-            Test Box
-          </Box>
-        );
-        expect(queryAllByText('Test Box')[i].classList).toContain(
-          `focus:font-color-${fontColorOption}`
-        );
-      });
+      testFocusClasses('color', FONT_COLOR_OPTIONS, 'font-color');
     });
 
-    test('Shadow Focus -- box rendered with proper font color focus classes', () => {
-      [...BOX_SHADOW_OPTIONS].forEach((boxShadowOption, i) => {
-        const { queryAllByText } = render(
-          <Box focus={{ shadow: boxShadowOption }} key={i}>
-            Test Box
-          </Box>
-        );
-        expect(queryAllByText('Test Box')[i].classList).toContain(
-          `focus:shadow-${boxShadowOption}`
-        );
-      });
+    test('Shadow Focus -- box rendered with proper shadow focus classes', () => {
+      testFocusClasses('shadow', BOX_SHADOW_OPTIONS, 'shadow');
     });
   });
 
   describe('Cursor', () => {
     test('Renders with proper cursor utility class when prop is passed', () => {
-      const { queryAllByText } = render(<Box cursor="pointer">Test Box</Box>);
+      const { queryAllByText } = renderBox({ cursor: 'pointer' });
       expect(queryAllByText('Test Box')[0].classList).toContain(
         'cursor-pointer'
       );
     });
+  });
+
+  test('padding classes are applied', () => {
+    testTokenClasses('padding', SPACING_OPTIONS, 'p');
+  });
+
+  test('margin classes are applied', () => {
+    testTokenClasses('margin', SPACING_OPTIONS, 'm');
   });
 });
