@@ -27,6 +27,9 @@
 .display-table-cell {
   display: table-cell;
 }
+.display-contents {
+  display: contents;
+}
 
 @media (min-width: $size-breakpoint-tablet) {
   .display-inherit-tablet {
@@ -55,6 +58,9 @@
   }
   .display-table-cell-tablet {
     display: table-cell;
+  }
+  .display-contents-tablet {
+    display: contents;
   }
 }
 
@@ -86,6 +92,9 @@
   .display-table-cell-desktop {
     display: table-cell;
   }
+  .display-contents-desktop {
+    display: contents;
+  }
 }
 
 @media (min-width: $size-breakpoint-hd) {
@@ -115,5 +124,8 @@
   }
   .display-table-cell-hd {
     display: table-cell;
+  }
+  .display-contents-hd {
+    display: contents;
   }
 }
