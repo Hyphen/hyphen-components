@@ -194,7 +194,6 @@ export const MultiSelectCreatable = () => {
     { value: 'strawberry', label: 'Strawberry' },
   ];
 
-  console.log(value);
   return (
     <div style={{ height: '200px' }}>
       <SelectInput
