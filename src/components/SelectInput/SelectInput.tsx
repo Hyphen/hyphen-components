@@ -6,9 +6,9 @@ import Select, {
   OptionsOrGroups,
   OnChangeValue,
 } from 'react-select';
+import CreatableSelect from 'react-select/creatable';
 import { ResponsiveProp } from '../../types';
-import { Z_INDEX_VALUES } from '../../lib/tokens';
-import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
+import { generateResponsiveClasses, Z_INDEX_VALUES,  } from '../../lib';
 import { Box } from '../Box/Box';
 import { Icon } from '../Icon/Icon';
 import { FormLabel } from '../FormLabel/FormLabel';
@@ -83,6 +83,10 @@ export interface SelectInputProps {
    */
   isClearable?: boolean;
   /**
+   * Include custom option in dropdown list.
+   */
+  isCreatable?: boolean;
+  /**
    * If the input should be disabled and not focusable.
    */
   isDisabled?: boolean;
@@ -143,6 +147,7 @@ export const SelectInput: FC<SelectInputProps> = ({
   helpText,
   hideLabel = false,
   isClearable = false,
+  isCreatable = false,
   isDisabled = false,
   isMulti = false,
   isRequired = false,
@@ -207,10 +212,12 @@ export const SelectInput: FC<SelectInputProps> = ({
     </components.ClearIndicator>
   );
 
+  const Component = isCreatable ? CreatableSelect : Select;
+
   return (
     <Box width="100%" className={wrapperClasses}>
       {label && !hideLabel && <FormLabel {...labelProps}>{label}</FormLabel>}
-      <Select
+      <Component
         {...restProps}
         inputId={id}
         aria-label={label}
