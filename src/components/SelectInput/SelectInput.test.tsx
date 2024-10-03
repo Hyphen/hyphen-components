@@ -25,7 +25,7 @@ function getByTextWithMarkup(
 
 describe('SelectInput', () => {
   describe('Callback Handling', () => {
-    test('it fires onChange callback on change', async () => {
+    it('it fires onChange callback on change', async () => {
       const mockedHandleChange = jest.fn();
 
       const { getByLabelText } = render(
@@ -44,7 +44,7 @@ describe('SelectInput', () => {
       expect(mockedHandleChange).toBeCalledTimes(1);
     });
 
-    test('it fires onFocus callback on focus', () => {
+    it('it fires onFocus callback on focus', () => {
       const mockedHandleChange = jest.fn();
       const mockedHandleFocus = jest.fn();
 
@@ -65,7 +65,7 @@ describe('SelectInput', () => {
       expect(mockedHandleFocus).toBeCalledTimes(1);
     });
 
-    test('it fires onBlur callback on blur', () => {
+    it('it fires onBlur callback on blur', () => {
       const mockedHandleChange = jest.fn();
       const mockedHandleBlur = jest.fn();
 
@@ -89,7 +89,7 @@ describe('SelectInput', () => {
 
   describe('States', () => {
     describe('Hidden label, with a placeholder', () => {
-      test('it renders input without a visual label, and with a placeholder', () => {
+      it('it renders input without a visual label, and with a placeholder', () => {
         const mockedHandleChange = jest.fn();
 
         render(
@@ -108,7 +108,7 @@ describe('SelectInput', () => {
       });
     });
 
-    test('does not assign "aria-labelledby" attribute when a label is hidden', () => {
+    it('does not assign "aria-labelledby" attribute when a label is hidden', () => {
       const mockedHandleChange = jest.fn();
 
       render(
@@ -126,7 +126,7 @@ describe('SelectInput', () => {
     });
 
     describe('With a label, and no custom placeholder', () => {
-      test('it renders input with a label, and with a default placeholder', () => {
+      it('it renders input with a label, and with a default placeholder', () => {
         const mockedHandleChange = jest.fn();
 
         render(
@@ -143,7 +143,7 @@ describe('SelectInput', () => {
         expect(screen.getByText('Select...')).toBeInTheDocument();
       });
 
-      test('assigns the "aria-labelledby" attribute and renders label correct id, when a label is provided', () => {
+      it('assigns the "aria-labelledby" attribute and renders label correct id, when a label is provided', () => {
         const mockedHandleChange = jest.fn();
         render(
           <SelectInput
@@ -164,7 +164,7 @@ describe('SelectInput', () => {
     });
 
     describe('Single select, pre-selected', () => {
-      test('it renders with value pre-selected', () => {
+      it('it renders with value pre-selected', () => {
         const mockedHandleChange = jest.fn();
 
         render(
@@ -181,8 +181,27 @@ describe('SelectInput', () => {
       });
     });
 
+    describe('Single select with creatable options', () => {
+      it('it renders a new option when a user types in a new value', async () => {
+        const mockedHandleChange = jest.fn();
+
+        render(
+          <SelectInput
+            id="testId"
+            onChange={mockedHandleChange}
+            label="Select Label"
+            options={selectOptions}
+            isCreatable
+            value={[{ value: 'new-value', label: 'New Value' }]}
+          />
+        );
+
+        expect(screen.queryByText('New Value')).toBeInTheDocument();
+      });
+    });
+
     describe('Multi select, no selection', () => {
-      test('it renders input with a label, and with a default placeholder', () => {
+      it('it renders input with a label, and with a default placeholder', () => {
         const mockedHandleChange = jest.fn();
 
         render(
@@ -202,7 +221,7 @@ describe('SelectInput', () => {
     });
 
     describe('Multi select, with multiple items selected', () => {
-      test('it renders input with a label, and with two items selected', () => {
+      it('it renders input with a label, and with two items selected', () => {
         const mockedHandleChange = jest.fn();
 
         render(
@@ -223,8 +242,28 @@ describe('SelectInput', () => {
       });
     });
 
+    describe('Multi select with creatable options', () => {
+      it('it renders a new option when a user types in a new value', async () => {
+        const mockedHandleChange = jest.fn();
+
+        render(
+          <SelectInput
+            id="testId"
+            onChange={mockedHandleChange}
+            label="Select Label"
+            options={selectOptions}
+            isMulti
+            isCreatable
+            value={[{ value: 'new-value', label: 'New Value' }]}
+          />
+        );
+
+        expect(screen.queryByText('New Value')).toBeInTheDocument();
+      });
+    });
+
     describe('Is Required', () => {
-      test('it renders an asterisk in the label', () => {
+      it('it renders an asterisk in the label', () => {
         const mockedHandleChange = jest.fn();
 
         render(
@@ -247,7 +286,7 @@ describe('SelectInput', () => {
     });
 
     describe('Is Disabled', () => {
-      test('it disables the input', () => {
+      it('it disables the input', () => {
         const mockedHandleChange = jest.fn();
 
         const { container } = render(
@@ -270,7 +309,7 @@ describe('SelectInput', () => {
     });
 
     describe('Is Invalid, with a helpful message', () => {
-      test('it renders the helpful message', () => {
+      it('it renders the helpful message', () => {
         const mockedHandleChange = jest.fn();
 
         render(
@@ -289,7 +328,7 @@ describe('SelectInput', () => {
     });
 
     describe('Is Clearable', () => {
-      test('it does not render the X icon if input has value but is not clearable', () => {
+      it('it does not render the X icon if input has value but is not clearable', () => {
         const mockedHandleChange = jest.fn();
 
         const { container } = render(
@@ -308,7 +347,7 @@ describe('SelectInput', () => {
         ).not.toBeInTheDocument();
       });
 
-      test('it renders the X icon if input has value and is clearable', () => {
+      it('it renders the X icon if input has value and is clearable', () => {
         const mockedHandleChange = jest.fn();
 
         const { container } = render(
@@ -336,7 +375,7 @@ describe('SelectInput', () => {
     const breakpoints = ['tablet', 'desktop', 'hd'];
 
     sizes.forEach((size) => {
-      test(`it has a ${size} class applied to it`, () => {
+      it(`it has a ${size} class applied to it`, () => {
         const { container } = render(
           <SelectInput
             id="testId"
@@ -352,7 +391,7 @@ describe('SelectInput', () => {
       });
 
       breakpoints.forEach((breakpoint) => {
-        test(`it applies responsive classes for breakpoint: ${breakpoint} and size: ${size}`, () => {
+        it(`it applies responsive classes for breakpoint: ${breakpoint} and size: ${size}`, () => {
           const { container } = render(
             <SelectInput
               id="testId"
@@ -371,7 +410,7 @@ describe('SelectInput', () => {
       });
     });
 
-    test('It applies responsive classes when multiple are applied', () => {
+    it('It applies responsive classes when multiple are applied', () => {
       const { container } = render(
         <SelectInput
           id="testId"

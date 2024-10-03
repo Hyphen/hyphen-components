@@ -122,6 +122,27 @@ export const HiddenLabel = () => {
   );
 };
 
+export const CreatableSelect = () => {
+  const [value, setValue] = useState(null);
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+  ];
+  return (
+    <div style={{ height: '200px' }}>
+      <SelectInput
+        id="creatableSelect"
+        label="Label"
+        value={value}
+        // @ts-ignore - TS is not recognizing the value as a valid option
+        onChange={(event) => setValue(event.target.value)}
+        options={options}
+        isCreatable
+      />
+    </div>
+  );
+};
+
 export const MultiSelect = () => {
   const [value, setValue] = useState(null);
   const options = [
@@ -161,6 +182,29 @@ export const MultiSelectAndPreSelected = () => {
         onChange={(event) => setValue(event.target.value)}
         options={options}
         isMulti
+      />
+    </div>
+  );
+};
+
+export const MultiSelectCreatable = () => {
+  const [value, setValue] = useState(null);
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+  ];
+
+  return (
+    <div style={{ height: '200px' }}>
+      <SelectInput
+        id="creatableMultiSelect"
+        label="Label"
+        value={value}
+        // @ts-ignore - TS is not recognizing the value as a valid option
+        onChange={(event) => setValue(event.target.value)}
+        options={options}
+        isMulti
+        isCreatable
       />
     </div>
   );
