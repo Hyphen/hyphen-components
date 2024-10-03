@@ -8,7 +8,7 @@ import Select, {
 } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import { ResponsiveProp } from '../../types';
-import { generateResponsiveClasses, Z_INDEX_VALUES,  } from '../../lib';
+import { generateResponsiveClasses, Z_INDEX_VALUES } from '../../lib';
 import { Box } from '../Box/Box';
 import { Icon } from '../Icon/Icon';
 import { FormLabel } from '../FormLabel/FormLabel';

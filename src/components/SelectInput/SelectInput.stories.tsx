@@ -141,7 +141,7 @@ export const CreatableSelect = () => {
       />
     </div>
   );
-}
+};
 
 export const MultiSelect = () => {
   const [value, setValue] = useState(null);
@@ -208,7 +208,7 @@ export const MultiSelectCreatable = () => {
       />
     </div>
   );
-}
+};
 
 export const Autofocus = () => {
   const options = [
