@@ -206,8 +206,13 @@
     }
 
     :global(.react-select__option),
-    :global(.react-select__single-value) {
+    :global(.react-select__single-value),
+    :global(.react-select__input-container) {
       color: var(--color-font-base);
+    }
+
+    :global(.react-select__multi-value__remove) {
+      color: var(--color-font-grey);
     }
 
     :global(.react-select__control) {
