@@ -29,7 +29,7 @@ export const FormikSelectInput: React.FC<FormikSelectInputProps> = ({
 }) => {
   const error = getIn(errors, name);
   const errorMessage =
-    typeof error !== 'string' && error?.find((error: any) => error.label);
+    typeof error !== 'string' && error?.find((error: any) => error?.label);
   return (
     <SelectInput
       id={id}
