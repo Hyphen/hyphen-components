@@ -84,7 +84,7 @@ export const FormikForm = () =>
       if (!values.dateInput) {
         errors.dateInput = 'required';
       }
-      if(!values.colors.length) {
+      if (!values.colors.length) {
         errors.colors = 'required';
       }
       if (!values.colors2) {
