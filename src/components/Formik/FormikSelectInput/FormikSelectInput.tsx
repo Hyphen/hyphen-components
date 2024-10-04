@@ -28,7 +28,7 @@ export const FormikSelectInput: React.FC<FormikSelectInputProps> = ({
   ...props
 }) => {
   const error = getIn(errors, name);
-  const errorArray =
+  const errorMessage =
     typeof error !== 'string' && error?.find((error: any) => error.label);
   return (
     <SelectInput
@@ -39,7 +39,7 @@ export const FormikSelectInput: React.FC<FormikSelectInputProps> = ({
       onBlur={onBlur}
       onChange={onChange ?? formikOnChange}
       value={value}
-      error={errorArray?.label ?? (getIn(touched, name) && error)}
+      error={errorMessage?.label ?? (getIn(touched, name) && error)}
       {...props}
     />
   );
