@@ -1,5 +1,6 @@
 {
   "projectId": "Project:6612e280af622d0d5562189d",
   "autoAcceptChanges": "main",
-  "exitOnceUploaded": true
+  "exitOnceUploaded": true,
+  "onlyChanged": true
 }
