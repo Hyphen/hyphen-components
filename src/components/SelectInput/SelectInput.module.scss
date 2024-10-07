@@ -368,6 +368,9 @@
       background-color: 
         var(--color-background-disabled);
     }
+    &:hover {
+      cursor: not-allowed;
+    }
   }
 }
 // stylelint-enable
