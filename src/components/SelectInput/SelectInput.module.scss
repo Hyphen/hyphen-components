@@ -278,6 +278,9 @@
       &:global(.react-select__control--is-disabled) {
         :global(.react-select__dropdown-indicator) {
           color: var(--color-font-disabled);
+          background-color: var(
+        var(--color-background-tertiary)
+      );
         }
       }
     }
@@ -313,8 +316,6 @@
       }
     }
   }
-
-
 
   &.size-sm {
     @extend %size-sm;
@@ -364,10 +365,8 @@
 
   &.disabled {
     :global(.react-select__control--is-disabled) {
-      background-color: var(
-        --form-control-background-color-disabled,
-        var(--INTERNAL_form-control-background-color-disabled)
-      );
+      background-color: 
+        var(--color-background-disabled);
     }
   }
 }
