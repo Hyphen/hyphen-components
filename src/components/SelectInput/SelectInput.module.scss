@@ -278,9 +278,7 @@
       &:global(.react-select__control--is-disabled) {
         :global(.react-select__dropdown-indicator) {
           color: var(--color-font-disabled);
-          background-color: var(
-        var(--color-background-tertiary)
-      );
+          background-color: var(--color-background-disabled);
         }
       }
     }
@@ -365,8 +363,7 @@
 
   &.disabled {
     :global(.react-select__control--is-disabled) {
-      background-color: 
-        var(--color-background-disabled);
+      background-color: var(--color-background-disabled);
     }
     &:hover {
       cursor: not-allowed;
