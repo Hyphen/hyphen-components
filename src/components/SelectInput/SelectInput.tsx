@@ -1,4 +1,4 @@
-import React, { FC, FocusEvent, ReactNode, FocusEventHandler } from 'react';
+import React, { FocusEvent, ReactNode, FocusEventHandler } from 'react';
 import classNames from 'classnames';
 import Select, {
   components,
@@ -6,6 +6,8 @@ import Select, {
   OptionsOrGroups,
   OnChangeValue,
 } from 'react-select';
+import AsyncCreatableSelect from 'react-select/async-creatable';
+import AsyncSelect from 'react-select/async';
 import CreatableSelect from 'react-select/creatable';
 import { ResponsiveProp } from '../../types';
 import { generateResponsiveClasses, Z_INDEX_VALUES } from '../../lib';
@@ -49,10 +51,6 @@ export interface SelectInputProps {
    * Callback function to call on change event.
    */
   onChange: (event: SimulatedEventPayloadType) => void;
-  /**
-   * Options for dropdown list.
-   */
-  options: SelectInputOptions;
   /**
    * The value(s) of select.
    */
@@ -135,31 +133,70 @@ export interface SelectInputProps {
   [x: string]: any; // eslint-disable-line
 }
 
-export const SelectInput: FC<SelectInputProps> = ({
-  id,
-  label,
-  onChange,
-  options,
-  value,
-  autoFocus = false,
-  className = '',
-  error = false,
-  helpText,
-  hideLabel = false,
-  isClearable = false,
-  isCreatable = false,
-  isDisabled = false,
-  isMulti = false,
-  isRequired = false,
-  menuPortalTarget = null,
-  name = '',
-  onFocus = null,
-  onBlur = null,
-  placeholder = undefined,
-  requiredIndicator = ' *',
-  size = 'md',
-  ...restProps
-}) => {
+type AsyncOptions = (inputValue: string) => Promise<SelectInputOptions>;
+type AsyncSelectInputProps = SelectInputProps & {
+  /**
+   * Load the input asynchronously.
+   */
+  isAsync: true;
+  /**
+   * Load options asynchronously.
+   */
+  options: AsyncOptions;
+  /**
+   * If cacheOptions is passed, then the loaded data will be cached.
+   */
+  cacheOptions?: boolean;
+  /**
+   * The default set of options to show before the user starts searching.
+   */
+  defaultOptions?: boolean;
+};
+
+type SyncSelectInputProps = SelectInputProps & {
+  /**
+   * Load the input synchronously.
+   */
+  isAsync?: false;
+  /**
+   * Options for dropdown list.
+   */
+  options: SelectInputOptions;
+};
+
+export function SelectInput(props: AsyncSelectInputProps): JSX.Element;
+export function SelectInput(props: SyncSelectInputProps): JSX.Element;
+export function SelectInput(props: SelectInputProps): JSX.Element {
+  const {
+    id,
+    label,
+    onChange,
+    options,
+    value,
+    autoFocus = false,
+    className = '',
+    error = false,
+    helpText,
+    hideLabel = false,
+    isClearable = false,
+    isAsync = false,
+    isCreatable = false,
+    isDisabled = false,
+    isMulti = false,
+    isRequired = false,
+    menuPortalTarget = null,
+    name = '',
+    onFocus = null,
+    onBlur = null,
+    placeholder = undefined,
+    requiredIndicator = ' *',
+    size = 'md',
+    loadOptions,
+    defaultOptions,
+    cacheOptions,
+    ...restProps
+  } = props;
+
   const handleChange = (values: OnChangeValue<SelectInputOptions, boolean>) => {
     const simulatedEventPayloadType: SimulatedEventPayloadType = {
       target: {
@@ -212,13 +249,21 @@ export const SelectInput: FC<SelectInputProps> = ({
     </components.ClearIndicator>
   );
 
-  const Component = isCreatable ? CreatableSelect : Select;
+  const Component =
+    isCreatable && isAsync
+      ? AsyncCreatableSelect
+      : isCreatable
+      ? CreatableSelect
+      : isAsync
+      ? AsyncSelect
+      : Select;
 
   return (
     <Box width="100%" className={wrapperClasses}>
       {label && !hideLabel && <FormLabel {...labelProps}>{label}</FormLabel>}
       <Component
         {...restProps}
+        {...(isAsync ? { loadOptions: options } : { options })}
         inputId={id}
         aria-label={label}
         components={{ ClearIndicator }}
@@ -232,7 +277,6 @@ export const SelectInput: FC<SelectInputProps> = ({
         menuPortalTarget={menuPortalTarget}
         name={name}
         autoFocus={autoFocus}
-        options={options}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
@@ -249,4 +293,4 @@ export const SelectInput: FC<SelectInputProps> = ({
       )}
     </Box>
   );
-};
+}
