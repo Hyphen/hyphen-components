@@ -146,14 +146,14 @@ export const CreatableSelect = () => {
 export const AsyncSelect = () => {
   type Option = {
     value: string;
-    label: string
-  }
+    label: string;
+  };
 
   const [value, setValue] = useState(null);
   const options = [
     { value: 'chocolate', label: 'Chocolate' },
     { value: 'strawberry', label: 'Strawberry' },
-  ]
+  ];
 
   const filterOptions = (inputValue: string) => {
     return options.filter((i) =>
@@ -188,13 +188,13 @@ export const AsyncSelect = () => {
 export const AsyncCreatableSelect = () => {
   type Option = {
     value: string;
-    label: string
-  }
+    label: string;
+  };
 
   const options = [
     { value: 'chocolate', label: 'Chocolate' },
     { value: 'strawberry', label: 'Strawberry' },
-  ]
+  ];
 
   const [value, setValue] = useState(null);
 
