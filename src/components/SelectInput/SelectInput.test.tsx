@@ -209,7 +209,7 @@ describe('SelectInput', () => {
     describe('Async select', () => {
       it('it renders with loading state', async () => {
         const mockedHandleChange = jest.fn();
-        const loadOptions = jest.fn(() => Promise.resolve([])); // Simula la promesa que resuelve con un array vacío
+        const loadOptions = jest.fn(() => Promise.resolve([]));
 
         const { getByLabelText } = render(
           <SelectInput
