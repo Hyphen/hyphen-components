@@ -69,6 +69,18 @@ Use the `isMulti` and `isCreatable` props to allow the selection of multiple opt
 
 <Canvas of={Stories.MultiSelectCreatable} />
 
+## Async Select
+
+Use the `options` prop to pass a function that returns a promise to load options asynchronously.
+
+<Canvas of={Stories.AsyncSelect} />
+
+## Async Creatable Select
+
+Use the `isCreatable` prop to allow the creation of new options and the `options` prop to pass a function that returns a promise to load options asynchronously.
+
+<Canvas of={Stories.AsyncCreatableSelect} />
+
 ## Autofocus
 
 Use the `autoFocus` prop to autofocus a SelectInput.

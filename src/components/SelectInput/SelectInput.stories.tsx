@@ -143,6 +143,92 @@ export const CreatableSelect = () => {
   );
 };
 
+export const AsyncSelect = () => {
+  type Option = {
+    value: string;
+    label: string;
+  };
+
+  const [value, setValue] = useState(null);
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+  ];
+
+  const filterOptions = (inputValue: string) => {
+    return options.filter((i) =>
+      i.label.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  };
+  const loadOptions = (inputValue: string) => {
+    return new Promise<Option[]>((resolve) => {
+      setTimeout(() => {
+        resolve(filterOptions(inputValue));
+      }, 1000);
+    });
+  };
+
+  return (
+    <div style={{ height: '200px' }}>
+      <SelectInput
+        id="asyncSelect"
+        label="Label"
+        value={value}
+        // @ts-ignore - TS is not recognizing the value as a valid option
+        onChange={(event) => setValue(event.target.value)}
+        options={loadOptions}
+        defaultOptions
+        cacheOptions
+        isAsync
+      />
+    </div>
+  );
+};
+
+export const AsyncCreatableSelect = () => {
+  type Option = {
+    value: string;
+    label: string;
+  };
+
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+  ];
+
+  const [value, setValue] = useState(null);
+
+  const filterOptions = (inputValue: string) => {
+    return options.filter((i) =>
+      i.label.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  };
+  const loadOptions = (inputValue: string) => {
+    return new Promise<Option[]>((resolve) => {
+      setTimeout(() => {
+        resolve(filterOptions(inputValue));
+      }, 1000);
+    });
+  };
+
+  return (
+    <div style={{ height: '200px' }}>
+      <SelectInput
+        id="asyncCreateSelect"
+        label="Label"
+        value={value}
+        // @ts-ignore - TS is not recognizing the value as a valid option
+        onChange={(event) => setValue(event.target.value)}
+        options={loadOptions}
+        isCreatable
+        defaultOptions
+        cacheOptions
+        isAsync
+      />
+    </div>
+  );
+};
+
 export const MultiSelect = () => {
   const [value, setValue] = useState(null);
   const options = [
