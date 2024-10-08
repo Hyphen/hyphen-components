@@ -1,5 +1,11 @@
 import React from 'react';
-import { render, fireEvent, screen, Matcher } from '@testing-library/react';
+import {
+  render,
+  fireEvent,
+  screen,
+  Matcher,
+  waitFor,
+} from '@testing-library/react';
 import selectEvent from 'react-select-event';
 import { SelectInput, TextInputSize } from './SelectInput';
 
@@ -197,6 +203,31 @@ describe('SelectInput', () => {
         );
 
         expect(screen.queryByText('New Value')).toBeInTheDocument();
+      });
+    });
+
+    describe('Async select', () => {
+      it('it renders with loading state', async () => {
+        const mockedHandleChange = jest.fn();
+        const loadOptions = jest.fn(() => Promise.resolve([])); // Simula la promesa que resuelve con un array vacío
+
+        const { getByLabelText } = render(
+          <SelectInput
+            id="testId"
+            onChange={mockedHandleChange}
+            label="Select Label"
+            options={loadOptions}
+            value={''}
+            isAsync
+          />
+        );
+
+        const inputElement = getByLabelText('Select Label');
+        fireEvent.change(inputElement, { target: { value: 'test' } });
+
+        await waitFor(() => {
+          expect(loadOptions).toHaveBeenCalledTimes(1);
+        });
       });
     });
 

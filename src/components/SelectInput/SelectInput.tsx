@@ -191,9 +191,6 @@ export function SelectInput(props: SelectInputProps): JSX.Element {
     placeholder = undefined,
     requiredIndicator = ' *',
     size = 'md',
-    loadOptions,
-    defaultOptions,
-    cacheOptions,
     ...restProps
   } = props;
 
