@@ -153,6 +153,14 @@ export const AsyncSelect = () => {
   const options = [
     { value: 'chocolate', label: 'Chocolate' },
     { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' },
+    { value: 'mint', label: 'Mint' },
+    { value: 'caramel', label: 'Caramel' },
+    { value: 'blueberry', label: 'Blueberry' },
+    { value: 'raspberry', label: 'Raspberry' },
+    { value: 'lemon', label: 'Lemon' },
+    { value: 'coconut', label: 'Coconut' },
+    { value: 'mango', label: 'Mango' },
   ];
 
   const filterOptions = (inputValue: string) => {
@@ -194,6 +202,14 @@ export const AsyncCreatableSelect = () => {
   const options = [
     { value: 'chocolate', label: 'Chocolate' },
     { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' },
+    { value: 'mint', label: 'Mint' },
+    { value: 'caramel', label: 'Caramel' },
+    { value: 'blueberry', label: 'Blueberry' },
+    { value: 'raspberry', label: 'Raspberry' },
+    { value: 'lemon', label: 'Lemon' },
+    { value: 'coconut', label: 'Coconut' },
+    { value: 'mango', label: 'Mango' },
   ];
 
   const [value, setValue] = useState(null);
