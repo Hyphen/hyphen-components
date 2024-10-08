@@ -1,14 +1,9 @@
 @import '@hyphen/hyphen-design-tokens/build/scss/variables';
 
 %disabled-base {
-  background-color: var(
-    --form-control-background-color-disabled,
-    var(--INTERNAL_form-control-background-color-disabled)
-  );
-  color: var(
-    --form-control-font-color-disabled,
-    var(--INTERNAL_form-control-font-color-disabled)
-  );
+  background-color: var(--color-background-disabled);
+  color: var(--color-font-disabled);
+  -webkit-text-fill-color: var(--color-font-disabled);
   opacity: 1;
 
   &:hover {

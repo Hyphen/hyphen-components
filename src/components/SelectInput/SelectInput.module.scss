@@ -184,6 +184,19 @@
   @extend %size-lg;
 }
 
+:global(.react-select__menu-portal) {
+  :global(.react-select__menu) {
+    z-index: var(--size-z-index-popover);
+    background-color: var(--color-background-primary);
+    border-color: var(--color-border-default);
+
+    :global(.react-select__option--is-selected),
+    :global(.react-select__option--is-focused) {
+      background-color: var(--color-background-tertiary);
+    }
+  }
+}
+
 :global(.select-input-wrapper) {
   font-family: var(
     --form-control-font-family,
@@ -265,6 +278,7 @@
       &:global(.react-select__control--is-disabled) {
         :global(.react-select__dropdown-indicator) {
           color: var(--color-font-disabled);
+          background-color: var(--color-background-disabled);
         }
       }
     }
@@ -349,10 +363,10 @@
 
   &.disabled {
     :global(.react-select__control--is-disabled) {
-      background-color: var(
-        --form-control-background-color-disabled,
-        var(--INTERNAL_form-control-background-color-disabled)
-      );
+      background-color: var(--color-background-disabled);
+    }
+    &:hover {
+      cursor: not-allowed;
     }
   }
 }
