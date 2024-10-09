@@ -236,7 +236,11 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
               }}
               parentSelector={() => parentElement}
             >
-              <Box aria-label={ariaLabel} aria-labelledby={ariaLabelledBy}>
+              <Box
+                aria-label={ariaLabel}
+                aria-labelledby={ariaLabelledBy}
+                height="100%"
+              >
                 {renderHeader()}
                 {content}
               </Box>
