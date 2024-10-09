@@ -263,7 +263,9 @@ export function SelectInput(props: SelectInputProps): JSX.Element {
       ? AsyncSelect
       : Select;
 
-  const selectOptions = isAsync ? {loadOptions: options} as {loadOptions: AsyncOptions} : { options} as {options: SelectInputOptions}
+  const selectOptions = isAsync
+    ? ({ loadOptions: options } as { loadOptions: AsyncOptions })
+    : ({ options } as { options: SelectInputOptions });
 
   return (
     <Box width="100%" className={wrapperClasses}>
