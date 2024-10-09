@@ -56,6 +56,10 @@ export interface SelectInputProps {
    */
   value: any | any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
   /**
+   * Options for dropdown list.
+   */
+  options: SelectInputOptions | AsyncOptions;
+  /**
    * Autofocus select input on render.
    */
   autoFocus?: boolean;
@@ -76,6 +80,10 @@ export interface SelectInputProps {
    * Visually hide the label.
    */
   hideLabel?: boolean;
+  /**
+   * Load the input asynchronously.
+   */
+  isAsync?: boolean;
   /**
    * If the input value is clearable programmatically.
    */
@@ -255,12 +263,16 @@ export function SelectInput(props: SelectInputProps): JSX.Element {
       ? AsyncSelect
       : Select;
 
+  const selectOptions = isAsync
+    ? ({ loadOptions: options } as { loadOptions: AsyncOptions })
+    : ({ options } as { options: SelectInputOptions });
+
   return (
     <Box width="100%" className={wrapperClasses}>
       {label && !hideLabel && <FormLabel {...labelProps}>{label}</FormLabel>}
       <Component
         {...restProps}
-        {...(isAsync ? { loadOptions: options } : { options })}
+        {...selectOptions}
         inputId={id}
         aria-label={label}
         components={{ ClearIndicator }}
