@@ -1,4 +1,4 @@
-import { IconName, ResponsiveProp } from '../../types';
+import { BoxShadowSize, IconName, ResponsiveProp } from '../../types';
 import React, {
   AnchorHTMLAttributes,
   ButtonHTMLAttributes,
@@ -77,6 +77,10 @@ export interface BaseButtonProps {
    */
   onFocus?: (event: FocusEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
   /**
+   * The size of the drop shadow applied to the Box
+   */
+  shadow?: BoxShadowSize | ResponsiveProp<BoxShadowSize>;
+  /**
    * Specify the tabIndex of the button.
    */
   tabIndex?: number;
@@ -137,10 +141,11 @@ export const Button = forwardRef<
       onClick = undefined,
       onFocus = undefined,
       onBlur = undefined,
+      shadow = undefined,
+      size = 'md',
       tabIndex = undefined,
       target = undefined,
       type = undefined,
-      size = 'md',
       variant = 'primary',
       ...restProps
     },
@@ -157,6 +162,7 @@ export const Button = forwardRef<
       styles.button,
       className,
       responsiveClasses,
+      generateResponsiveClasses('shadow', shadow),
       {
         [styles.loading]: isLoading,
         [styles[variant]]: variant,
@@ -221,11 +227,16 @@ export const Button = forwardRef<
     return createElement(
       buttonElement,
       {
+        ['aria-disabled']: disabled,
         id,
         href,
         className: buttonClasses,
         disabled,
         target: as === 'a' && href ? target : null,
+        rel:
+          as === 'a' && href && target === '_blank'
+            ? 'noopener noreferrer'
+            : null,
         onBlur: handleBlur,
         onClick: (event: MouseEvent<HTMLAnchorElement | HTMLButtonElement>) =>
           handleClick(event, onClick, target, navigate),
