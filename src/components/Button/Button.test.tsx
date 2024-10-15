@@ -4,457 +4,405 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import React from 'react';
 
+const renderButton = (props = {}) => render(<Button {...props} />);
+const getButton = (text: string): HTMLButtonElement =>
+  screen.getByText(text).closest('button') as HTMLButtonElement;
+const getAnchor = (text: string): HTMLAnchorElement =>
+  screen.getByText(text).closest('a') as HTMLAnchorElement;
+
 describe('Button', () => {
-  describe('html button type', () => {
-    test('is set to button', () => {
-      render(<Button>Button</Button>);
+  describe('HTML Button Type', () => {
+    test('is set to button by default', () => {
+      renderButton({ children: 'Button' });
       const testBtn = screen.getByRole('button');
-      expect(testBtn.getAttribute('type')).toBe('button');
+      expect(testBtn).toHaveAttribute('type', 'button');
     });
 
-    test('is set to "submit" if specified', () => {
-      render(<Button type="submit">Submit Button</Button>);
-
+    test('is set to submit if specified', () => {
+      renderButton({ type: 'submit', children: 'Submit Button' });
       const testBtn = screen.getByRole('button');
-      expect(testBtn.getAttribute('type')).toBe('submit');
+      expect(testBtn).toHaveAttribute('type', 'submit');
     });
 
-    test('is set to "reset" if specified', () => {
-      render(<Button type="reset">Reset Button</Button>);
-
+    test('is set to reset if specified', () => {
+      renderButton({ type: 'reset', children: 'Reset Button' });
       const testBtn = screen.getByRole('button');
-      expect(testBtn.getAttribute('type')).toBe('reset');
+      expect(testBtn).toHaveAttribute('type', 'reset');
     });
 
-    test('is not set if "as" prop is an anchor tag', () => {
-      render(
-        <Button as="a" href="https://www.hyphen.ai">
-          link button
-        </Button>
-      );
+    test('is not set if as prop is an anchor tag', () => {
+      renderButton({
+        as: 'a',
+        href: 'https://www.hyphen.ai',
+        children: 'link button',
+      });
       const testBtn = screen.getByText('link button').parentElement;
       expect(testBtn).not.toHaveAttribute('type');
     });
   });
 
-  describe('with Icon', () => {
-    test('Renders an icon prefix if specified', () => {
-      render(<Button iconPrefix="alarm">Alarm Button</Button>);
+  describe('With Icon', () => {
+    test('renders an icon prefix if specified', () => {
+      renderButton({ iconPrefix: 'alarm', children: 'Alarm Button' });
       expect(screen.getByTestId('prefixIcon')).toBeInTheDocument();
     });
 
-    test('Renders an icon suffix if specified', () => {
-      render(<Button iconSuffix="alarm">Alarm Button</Button>);
+    test('renders an icon suffix if specified', () => {
+      renderButton({ iconSuffix: 'alarm', children: 'Alarm Button' });
       expect(screen.getByTestId('suffixIcon')).toBeInTheDocument();
     });
 
-    test('Renders icon prefix and suffix if specified', () => {
-      render(
-        <Button iconPrefix="alarm" iconSuffix="check">
-          Suffix Prefix Icon Button
-        </Button>
-      );
+    test('renders icon prefix and suffix if specified', () => {
+      renderButton({
+        iconPrefix: 'alarm',
+        iconSuffix: 'check',
+        children: 'Suffix Prefix Icon Button',
+      });
       expect(screen.getByTestId('prefixIcon')).toBeInTheDocument();
       expect(screen.getByTestId('suffixIcon')).toBeInTheDocument();
     });
   });
 
   describe('Sizes', () => {
-    BUTTON_SIZES.map((size) =>
-      describe(`${BUTTON_SIZES}`, () => {
-        test(`it has a ${size} class applied to it`, () => {
-          render(<Button size={size}>{`${size} Button`}</Button>);
+    BUTTON_SIZES.forEach((size) => {
+      test(`it has a ${size} class applied to it`, () => {
+        renderButton({ size, children: `${size} Button` });
+        const btn = getButton(`${size} Button`);
+        expect(btn).toHaveClass(`size-${size}`);
+      });
+    });
 
-          const btn = screen.getByText(`${size} Button`).closest('button');
-
-          expect(btn?.getAttribute('class')).toContain(`size-${size}`);
-        });
-      })
-    );
-
-    test('It applies responsive classes', () => {
-      render(
-        <Button size={{ base: 'lg', tablet: 'sm', desktop: 'md', hd: 'lg' }}>
-          button
-        </Button>
+    test('applies responsive classes', () => {
+      renderButton({
+        size: { base: 'lg', tablet: 'sm', desktop: 'md', hd: 'lg' },
+        children: 'button',
+      });
+      const btn = getButton('button');
+      expect(btn).toHaveClass(
+        'size-lg',
+        'size-sm-tablet',
+        'size-md-desktop',
+        'size-lg-hd'
       );
-
-      const btn = screen.getByText('button').closest('button');
-
-      expect(btn?.getAttribute('class')).toContain('size-lg');
-      expect(btn?.getAttribute('class')).toContain('size-sm-tablet');
-      expect(btn?.getAttribute('class')).toContain('size-md-desktop');
-      expect(btn?.getAttribute('class')).toContain('size-lg-hd');
     });
   });
 
   describe('Variants', () => {
-    BUTTON_VARIANTS.map((variant) =>
-      describe(`${BUTTON_VARIANTS}`, () => {
-        test(`it has a ${variant} class applied to it`, () => {
-          render(<Button variant={variant}>{`${variant} Button`}</Button>);
-
-          const btn = screen.getByText(`${variant} Button`).closest('button');
-
-          expect(btn?.getAttribute('class')).toContain(variant);
-        });
-      })
-    );
+    BUTTON_VARIANTS.forEach((variant) => {
+      test(`it has a ${variant} class applied to it`, () => {
+        renderButton({ variant, children: `${variant} Button` });
+        const btn = getButton(`${variant} Button`);
+        expect(btn).toHaveClass(variant);
+      });
+    });
   });
 
   describe('Callback Handling', () => {
     describe('onClick', () => {
-      test('it fires onClick callback', () => {
+      test('fires onClick callback', () => {
         const mockedHandleClick = jest.fn();
-
-        render(<Button onClick={mockedHandleClick}>Click</Button>);
-
-        const buttonElement = screen.getByText('Click').closest('button');
-        if (buttonElement) {
-          fireEvent.click(buttonElement);
-        }
-
-        expect(mockedHandleClick).toBeCalledTimes(1);
+        renderButton({ onClick: mockedHandleClick, children: 'Click' });
+        const buttonElement: HTMLButtonElement = getButton('Click');
+        fireEvent.click(buttonElement);
+        expect(mockedHandleClick).toHaveBeenCalledTimes(1);
       });
 
-      test('it does not fire function if onClick callback not provided', () => {
+      test('does not fire function if onClick callback not provided', () => {
         const mockedHandleClick = jest.fn();
-
-        render(<Button>Click</Button>);
-
-        const buttonElement = screen.getByText('Click').closest('button');
-        if (buttonElement) {
-          fireEvent.click(buttonElement);
-        }
-
-        expect(mockedHandleClick).toBeCalledTimes(0);
+        renderButton({ children: 'Click' });
+        const buttonElement = getButton('Click');
+        fireEvent.click(buttonElement);
+        expect(mockedHandleClick).toHaveBeenCalledTimes(0);
       });
 
-      test('it prevents default event behavior if specified by onClick', async () => {
+      test('prevents default event behavior if specified by onClick', () => {
         const mockedHandleClick = jest.fn((event) => event.preventDefault());
-        const mockedNavigate = jest.fn(() => null);
-
-        render(
-          <Button navigate={mockedNavigate} onClick={mockedHandleClick}>
-            Click
-          </Button>
-        );
-        const buttonElement = screen.getByText('Click').closest('button');
-        if (buttonElement) {
-          fireEvent.click(buttonElement);
-        }
-
-        expect(mockedHandleClick).toBeCalledTimes(1);
+        const mockedNavigate = jest.fn();
+        renderButton({
+          navigate: mockedNavigate,
+          onClick: mockedHandleClick,
+          children: 'Click',
+        });
+        const buttonElement = getButton('Click');
+        fireEvent.click(buttonElement);
+        expect(mockedHandleClick).toHaveBeenCalledTimes(1);
         expect(mockedNavigate).not.toBeCalled();
       });
     });
 
     describe('onFocus', () => {
-      test('it fires onFocus callback', () => {
+      test('fires onFocus callback', () => {
         const mockedHandleFocus = jest.fn();
-
-        render(<Button onFocus={mockedHandleFocus}>Focus</Button>);
-
-        const buttonElement = screen.getByText('Focus').closest('button');
-        if (buttonElement) {
-          fireEvent.focus(buttonElement);
-        }
-
-        expect(mockedHandleFocus).toBeCalledTimes(1);
+        renderButton({ onFocus: mockedHandleFocus, children: 'Focus' });
+        const buttonElement = getButton('Focus');
+        fireEvent.focus(buttonElement);
+        expect(mockedHandleFocus).toHaveBeenCalledTimes(1);
       });
 
-      test('it does not fire function of onFocus callback not provided', () => {
+      test('does not fire function if onFocus callback not provided', () => {
         const mockedHandleFocus = jest.fn();
-
-        render(<Button>Focus</Button>);
-
-        const buttonElement = screen.getByText('Focus').closest('button');
-        if (buttonElement) {
-          fireEvent.focus(buttonElement);
-        }
-
-        expect(mockedHandleFocus).toBeCalledTimes(0);
+        renderButton({ children: 'Focus' });
+        const buttonElement = getButton('Focus');
+        fireEvent.focus(buttonElement);
+        expect(mockedHandleFocus).toHaveBeenCalledTimes(0);
       });
     });
 
     describe('onBlur', () => {
-      test('it fires onBlur callback', () => {
+      test('fires onBlur callback', () => {
         const mockedHandleBlur = jest.fn();
-
-        render(<Button onBlur={mockedHandleBlur}>Blur</Button>);
-
-        const buttonElement = screen.getByText('Blur').closest('button');
-        if (buttonElement) {
-          fireEvent.blur(buttonElement);
-        }
-
-        expect(mockedHandleBlur).toBeCalledTimes(1);
+        renderButton({ onBlur: mockedHandleBlur, children: 'Blur' });
+        const buttonElement = getButton('Blur');
+        fireEvent.blur(buttonElement);
+        expect(mockedHandleBlur).toHaveBeenCalledTimes(1);
       });
 
-      test('it does not fire onBlur callback if not provided', () => {
+      test('does not fire onBlur callback if not provided', () => {
         const mockedHandleBlur = jest.fn();
-
-        render(<Button>Blur</Button>);
-
-        const buttonElement = screen.getByText('Blur').closest('button');
-        if (buttonElement) {
-          fireEvent.blur(buttonElement);
-        }
-
-        expect(mockedHandleBlur).toBeCalledTimes(0);
+        renderButton({ children: 'Blur' });
+        const buttonElement = getButton('Blur');
+        fireEvent.blur(buttonElement);
+        expect(mockedHandleBlur).toHaveBeenCalledTimes(0);
       });
     });
   });
 
   describe('States', () => {
     describe('Default', () => {
-      test('it renders the button with simple text', () => {
-        render(<Button>Button!</Button>);
+      test('renders the button with simple text', () => {
+        renderButton({ children: 'Button!' });
         const buttonElement = screen.getByText('Button!');
-
         expect(buttonElement).toBeInTheDocument();
       });
 
-      test('it renders the button with nested dom nodes', () => {
-        render(
-          <Button>
+      test('renders the button with nested DOM nodes', () => {
+        renderButton({
+          children: (
             <div className="buttonLoadingIndicator">
-              <div>Im a nested dom node!</div>
+              <div>I'm a nested DOM node!</div>
             </div>
-          </Button>
-        );
-        const buttonElement = screen.getByText('Im a nested dom node!');
-
+          ),
+        });
+        const buttonElement = screen.getByText("I'm a nested DOM node!");
         expect(buttonElement).toBeInTheDocument();
       });
 
-      test('it does not have a disabled attribute', () => {
-        render(<Button>Not Disabled Button</Button>);
-
-        expect(
-          screen.getByText('Not Disabled Button').closest('button')
-        ).not.toBeDisabled();
+      test('does not have a disabled attribute', () => {
+        renderButton({ children: 'Not Disabled Button' });
+        expect(getButton('Not Disabled Button')).not.toBeDisabled();
       });
 
-      test('it renders an empty button when no children are passed', () => {
-        render(<Button />);
+      test('renders an empty button when no children are passed', () => {
+        renderButton();
         const buttonElement = screen.getByRole('button');
-
         expect(buttonElement).toBeInTheDocument();
-        expect(buttonElement.innerText).toBe(undefined);
+        expect(buttonElement).toBeEmptyDOMElement();
       });
     });
 
     describe('Full Width', () => {
-      test('it has a fullWidth class applied to it', () => {
-        render(<Button fullWidth>Full Width Button</Button>);
-
-        const fullWidthBtn = screen
-          .getByText('Full Width Button')
-          .closest('button');
-
-        expect(fullWidthBtn?.getAttribute('class')).toContain('full-width');
+      test('has a fullWidth class applied to it', () => {
+        renderButton({ fullWidth: true, children: 'Full Width Button' });
+        const fullWidthBtn = getButton('Full Width Button');
+        expect(fullWidthBtn).toHaveClass('full-width');
       });
     });
 
     describe('Custom ClassName', () => {
-      test('if a ClassName is provided, its added to the button', () => {
-        render(<Button className="custom-class">Custom ClassName</Button>);
-
-        const customClassNameBtn = screen
-          .getByText('Custom ClassName')
-          .closest('button');
-
-        expect(customClassNameBtn?.getAttribute('class')).toContain(
-          'custom-class'
-        );
+      test('adds custom className to the button', () => {
+        renderButton({
+          className: 'custom-class',
+          children: 'Custom ClassName',
+        });
+        const customClassNameBtn = getButton('Custom ClassName');
+        expect(customClassNameBtn).toHaveClass('custom-class');
       });
     });
 
     describe('Disabled', () => {
-      test('it has a disabled attribute', () => {
-        render(<Button isDisabled>Disabled Button</Button>);
+      test('has a disabled attribute', () => {
+        renderButton({ isDisabled: true, children: 'Disabled Button' });
+        expect(getButton('Disabled Button')).toBeDisabled();
+      });
 
-        expect(
-          screen.getByText('Disabled Button').closest('button')
-        ).toBeDisabled();
+      test('applies aria-disabled attribute when button is disabled', () => {
+        renderButton({ isDisabled: true, children: 'Aria Disabled Button' });
+        const buttonElement = getButton('Aria Disabled Button');
+        expect(buttonElement).toHaveAttribute('aria-disabled', 'true');
       });
     });
 
     describe('Loading', () => {
-      test('it renders the spinning loading indicator', () => {
-        render(<Button isLoading>Button is loading</Button>);
+      test('renders the spinning loading indicator', () => {
+        renderButton({ isLoading: true, children: 'Button is loading' });
         const spinnerElement = document.getElementsByClassName('spinner')[0];
         expect(spinnerElement).toBeInTheDocument();
       });
 
-      test('it renders the grey spinning indicator if button variant is secondary', () => {
-        render(
-          <Button isLoading variant="secondary">
-            Button is loading
-          </Button>
-        );
+      test('renders the grey spinning indicator if button variant is secondary', () => {
+        renderButton({
+          isLoading: true,
+          variant: 'secondary',
+          children: 'Button is loading',
+        });
         const spinnerElement = document.getElementsByClassName('spinner')[0];
         expect(spinnerElement).toBeInTheDocument();
       });
 
-      test('it keeps the button text in the dom so the button width does not change', () => {
-        render(<Button isLoading>Button is loading</Button>);
+      test('keeps the button text in the DOM so the button width does not change', () => {
+        renderButton({ isLoading: true, children: 'Button is loading' });
         expect(screen.getByText('Button is loading')).toBeInTheDocument();
       });
 
-      test('it renders white spinning indicator when button is primary', () => {
-        render(
-          <Button variant="primary" isLoading>
-            Button is loading
-          </Button>
-        );
+      test('renders white spinning indicator when button is primary', () => {
+        renderButton({
+          isLoading: true,
+          variant: 'primary',
+          children: 'Button is loading',
+        });
         const spinnerElement = document.getElementsByClassName('spinner')[0];
         expect(spinnerElement).toBeInTheDocument();
       });
 
-      test('it renders white spinning indicator when button is danger', () => {
-        render(
-          <Button variant="danger" isLoading>
-            Button is loading
-          </Button>
-        );
+      test('renders white spinning indicator when button is danger', () => {
+        renderButton({
+          isLoading: true,
+          variant: 'danger',
+          children: 'Button is loading',
+        });
         const spinnerElement = document.getElementsByClassName('spinner')[0];
         expect(spinnerElement).toBeInTheDocument();
       });
     });
 
     describe('Disabled and Loading', () => {
-      test('it has a disabled attribute', () => {
-        render(
-          <Button isDisabled isLoading>
-            Disabled and Loading Button
-          </Button>
-        );
-
-        expect(
-          screen.getByText('Disabled and Loading Button').closest('button')
-        ).toBeDisabled();
+      test('has a disabled attribute', () => {
+        renderButton({
+          isDisabled: true,
+          isLoading: true,
+          children: 'Disabled and Loading Button',
+        });
+        expect(getButton('Disabled and Loading Button')).toBeDisabled();
       });
     });
 
     describe('Color Variations', () => {
-      test('Renders button with default variant neutral', () => {
-        render(<Button>primary</Button>);
-
-        expect(screen.getByText('primary').closest('button')).toHaveClass(
-          'primary'
-        );
+      test('renders button with default variant primary', () => {
+        renderButton({ children: 'primary' });
+        expect(getButton('primary')).toHaveClass('primary');
       });
 
-      const variants = [
+      const variants: ButtonVariant[] = [
         'primary',
         'secondary',
         'tertiary',
         'danger',
-      ] as ButtonVariant[];
+      ];
       variants.forEach((variant) => {
-        test(`It renders component with variant: ${variant} when passed`, () => {
-          render(<Button variant={variant}>{variant}</Button>);
-          expect(screen.getByText(variant).closest('button')).toHaveClass(
-            variant
-          );
+        test(`renders component with variant: ${variant} when passed`, () => {
+          renderButton({ variant, children: variant });
+          expect(getButton(variant)).toHaveClass(variant);
         });
       });
     });
 
     describe('Anchor', () => {
-      test('it renders an anchor tag if as prop `a` is passed', () => {
-        render(
-          <Button href="http://hyphen.ai" as="a">
-            hey there
-          </Button>
-        );
+      test('renders an anchor tag if as prop `a` is passed', () => {
+        renderButton({
+          as: 'a',
+          href: 'http://hyphen.ai',
+          children: 'hey there',
+        });
         const buttonElement = screen.getByRole('link');
-
         expect(buttonElement).toBeInTheDocument();
       });
 
-      test('it does not have a button type attribute if as prop `a` is passed', () => {
-        render(
-          <Button href="http://hyphen.ai" as="a">
-            hey there
-          </Button>
-        );
+      test('does not have a button type attribute if as prop `a` is passed', () => {
+        renderButton({
+          as: 'a',
+          href: 'http://hyphen.ai',
+          children: 'hey there',
+        });
         const buttonElement = screen.getByRole('link');
-
-        expect(buttonElement.getAttribute('type')).toBe(null);
+        expect(buttonElement).not.toHaveAttribute('type');
       });
 
-      test('it renders a target attribute if one is passed, the element is an anchor, and there is a href', () => {
-        render(
-          <Button href="http://hyphen.ai" as="a" target="_blank">
-            hey there
-          </Button>
-        );
+      test('renders a target attribute if one is passed, the element is an anchor, and there is a href', () => {
+        renderButton({
+          as: 'a',
+          href: 'http://hyphen.ai',
+          target: '_blank',
+          children: 'hey there',
+        });
         const buttonElement = screen.getByRole('link');
-
-        expect(buttonElement).toBeInTheDocument();
-        expect(buttonElement).toHaveAttribute('target');
+        expect(buttonElement).toHaveAttribute('target', '_blank');
       });
 
-      test('it does not render a target attribute if the element is not an anchor', () => {
-        render(
-          <Button href="http://hyphen.ai" target="_blank">
-            hey there
-          </Button>
-        );
+      test('does not render a target attribute if the element is not an anchor', () => {
+        renderButton({
+          href: 'http://hyphen.ai',
+          target: '_blank',
+          children: 'hey there',
+        });
         const buttonElement = screen.getByRole('button');
-
-        expect(buttonElement).toBeInTheDocument();
         expect(buttonElement).not.toHaveAttribute('target');
       });
 
-      test('it does not render a target attribute if the element does not have an href', () => {
-        render(
-          <Button as="a" target="_blank">
-            hey there
-          </Button>
-        );
+      test('does not render a target attribute if the element does not have an href', () => {
+        renderButton({ as: 'a', target: '_blank', children: 'hey there' });
         const buttonElement = screen.getByText('hey there');
-
-        expect(buttonElement).toBeInTheDocument();
         expect(buttonElement).not.toHaveAttribute('target');
+      });
+
+      describe('Rel Attribute', () => {
+        test('applies rel attribute when target is _blank', () => {
+          renderButton({
+            as: 'a',
+            href: 'http://hyphen.ai',
+            target: '_blank',
+            children: 'Link with rel',
+          });
+          const anchorElement = getAnchor('Link with rel');
+          expect(anchorElement).toHaveAttribute('rel', 'noopener noreferrer');
+        });
       });
     });
   });
 
   describe('React Router', () => {
-    it('fires navigate callback when included', () => {
-      const mockedNavigate = jest.fn(() => {});
-      render(
-        <Button as="a" navigate={mockedNavigate} href="/">
-          react router link
-        </Button>
-      );
-
-      const anchorElement = screen.getByText('react router link').closest('a');
-      if (anchorElement) {
-        fireEvent.click(anchorElement);
-      }
-
-      expect(mockedNavigate).toBeCalledTimes(1);
+    test('fires navigate callback when included', () => {
+      const mockedNavigate = jest.fn();
+      renderButton({
+        as: 'a',
+        navigate: mockedNavigate,
+        href: '/',
+        children: 'react router link',
+      });
+      const anchorElement = getAnchor('react router link');
+      fireEvent.click(anchorElement);
+      expect(mockedNavigate).toHaveBeenCalledTimes(1);
     });
 
-    it('does not fire navigate callback if target is _blank', () => {
-      const mockedNavigate = jest.fn(() => {});
-      render(
-        <Button as="a" navigate={mockedNavigate} href="/" target="_blank">
-          react router link
-        </Button>
-      );
+    test('does not fire navigate callback if target is _blank', () => {
+      const mockedNavigate = jest.fn();
+      renderButton({
+        as: 'a',
+        navigate: mockedNavigate,
+        href: '/',
+        target: '_blank',
+        children: 'react router link',
+      });
+      const anchorElement = getAnchor('react router link');
+      fireEvent.click(anchorElement);
+      expect(mockedNavigate).toHaveBeenCalledTimes(0);
+    });
+  });
 
-      const anchorElement = screen.getByText('react router link').closest('a');
-      if (anchorElement) {
-        fireEvent.click(anchorElement);
-      }
-
-      expect(mockedNavigate).toBeCalledTimes(0);
+  describe('Role Attribute', () => {
+    test('applies role attribute', () => {
+      renderButton({ role: 'button', children: 'Button with Role' });
+      const buttonElement = getButton('Button with Role');
+      expect(buttonElement).toHaveAttribute('role', 'button');
     });
   });
 });

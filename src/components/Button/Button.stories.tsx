@@ -110,8 +110,24 @@ export const Disabled = () => (
   </Box>
 );
 
+export const Shadow = () => (
+  <Box direction="row" gap="sm">
+    <Button variant="secondary" shadow="xs">
+      xs shadow
+    </Button>
+    <Button variant="secondary" shadow="sm">
+      sm shadow
+    </Button>
+    <Button variant="secondary" shadow="md">
+      md shadow
+    </Button>
+  </Box>
+);
+
 export const Anchor = () => (
-  <Button as="a" href="https://ux.hyphen.ai" target="_blank">
-    I'm an anchor tag
-  </Button>
+  <Box direction="row" gap="sm">
+    <Button as="a" href="https://ux.hyphen.ai" target="_blank">
+      I'm an anchor tag
+    </Button>
+  </Box>
 );
