@@ -115,10 +115,12 @@ export const WithoutHeader = () => {
       >
         <Modal.Body>Modal content</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={closeModal}>
+          <Button variant="secondary" onClick={closeModal} shadow="sm">
             Cancel
           </Button>
-          <Button variant="primary">Primary Action</Button>
+          <Button variant="primary" shadow="sm">
+            Primary Action
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>
@@ -149,10 +151,12 @@ export const FullscreenMobile = () => {
         />
         <Modal.Body>Modal content</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={closeModal}>
+          <Button variant="secondary" onClick={closeModal} shadow="sm">
             Cancel
           </Button>
-          <Button variant="primary">Primary Action</Button>
+          <Button variant="primary" shadow="sm">
+            Primary Action
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>
@@ -186,7 +190,12 @@ export const MaxWidth = () => {
         />
         <Modal.Body>Modal body content</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" ref={ref} onClick={closeModal}>
+          <Button
+            variant="secondary"
+            ref={ref}
+            onClick={closeModal}
+            shadow="sm"
+          >
             Cancel
           </Button>
         </Modal.Footer>
