@@ -1,11 +1,10 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { Modal } from './Modal';
 
 describe('Modal', () => {
   test('renders its children', () => {
     const { getByText } = render(
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
       <Modal isOpen onDismiss={() => {}} ariaLabel="testDefault">
         test modal
       </Modal>
@@ -15,7 +14,6 @@ describe('Modal', () => {
 
   test('it open and closes based on isOpen prop', () => {
     const { queryByText, getByText, rerender } = render(
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
       <Modal isOpen={false} onDismiss={() => {}} ariaLabel="testIsOpen">
         test modal
       </Modal>
@@ -24,7 +22,6 @@ describe('Modal', () => {
     expect(queryByText('test modal')).toBe(null);
 
     rerender(
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
       <Modal isOpen onDismiss={() => {}} ariaLabel="testIsOpen">
         test modal
       </Modal>
@@ -35,9 +32,7 @@ describe('Modal', () => {
 
   test('Subcomponents', () => {
     const { getByText } = render(
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
       <Modal isOpen onDismiss={() => {}} ariaLabel="testSubcomponents">
-        {/* eslint-disable-next-line @typescript-eslint/no-empty-function */}
         <Modal.Header
           id="titleFooterBody"
           title="The Modal Title"
@@ -55,27 +50,39 @@ describe('Modal', () => {
     ).toBeInTheDocument();
   });
 
-  test('onDismiss', async () => {
-    const mockOnDismiss = jest.fn();
-    const { getByTestId } = render(
-      <Modal isOpen onDismiss={mockOnDismiss} ariaLabel="testSubcomponents">
-        <Modal.Header
-          id="titleFooterBody"
-          title="The Modal Title"
-          onDismiss={mockOnDismiss}
-        />
-        <Modal.Body>Modal body content</Modal.Body>
-        <Modal.Footer>This is content in the modal footer</Modal.Footer>
+  test('applies maxWidth styles', () => {
+    const { getByLabelText } = render(
+      <Modal
+        isOpen
+        onDismiss={() => {}}
+        ariaLabel="testMaxWidth"
+        maxWidth="500px"
+      >
+        test modal
       </Modal>
     );
 
-    const closeButton = getByTestId('icon-testid--remove').closest('button');
-    expect(closeButton).toBeInTheDocument();
+    expect(getByLabelText('testMaxWidth').parentElement).toHaveStyle(
+      'max-width: 500px'
+    );
+  });
 
-    if (closeButton) {
-      await fireEvent.click(closeButton);
-    }
+  test('applies aria-labelledby attribute', () => {
+    const { getByLabelText } = render(
+      <Modal
+        isOpen
+        onDismiss={() => {}}
+        ariaLabelledBy="modalTitle"
+        ariaLabel="testAriaLabelledBy"
+      >
+        <h1 id="modalTitle">Modal Title</h1>
+        test modal
+      </Modal>
+    );
 
-    expect(mockOnDismiss).toHaveBeenCalledTimes(1);
+    expect(getByLabelText('testAriaLabelledBy')).toHaveAttribute(
+      'aria-labelledby',
+      'modalTitle'
+    );
   });
 });

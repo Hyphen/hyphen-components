@@ -6,7 +6,6 @@ export type ModalBodyProps = BoxProps;
 export const ModalBody: FC<ModalBodyProps> = ({
   children,
   flex = 'auto',
-  padding,
   overflow = 'auto',
   height = '100',
   ...restProps
