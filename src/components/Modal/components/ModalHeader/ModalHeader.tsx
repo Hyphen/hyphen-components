@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { Box } from '../../../Box/Box';
-import { Icon } from '../../../Icon/Icon';
-import styles from '../../Modal.module.scss';
+import { Button } from '../../../Button/Button';
 
 export type ModalHeaderProps = {
   /**
@@ -28,12 +27,10 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
 
   return (
     <Box
-      padding="xl"
       direction="row"
       alignItems="center"
       justifyContent={justifyContentValue}
-      borderWidth="0 0 sm 0"
-      borderColor="default"
+      gap="3xl"
       style={{
         flexShrink: 0,
       }}
@@ -44,14 +41,13 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
         </Box>
       )}
       {onDismiss && (
-        <button
+        <Button
           aria-label="close"
-          type="button"
-          className={styles['modal-close']}
+          variant="tertiary"
           onClick={onDismiss}
-        >
-          <Icon name="remove" />
-        </button>
+          iconPrefix="remove"
+          size="sm"
+        />
       )}
     </Box>
   );

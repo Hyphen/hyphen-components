@@ -144,6 +144,8 @@ export const ModalBaseComponent: React.FC<ModalProps> = forwardRef<
                 aria-labelledby={ariaLabelledBy}
                 style={{ ...maxWidthCss.styles }}
                 height="100"
+                padding={{ base: '2xl', tablet: '4xl' }}
+                gap="3xl"
               >
                 {children}
               </Box>

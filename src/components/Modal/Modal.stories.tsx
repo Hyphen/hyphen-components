@@ -22,11 +22,7 @@ export const BasicUsage = () => {
       <Button variant="primary" onClick={openModal}>
         Show Modal
       </Button>
-      <Modal
-        ariaLabelledBy="titleBasic"
-        isOpen={isModalOpen}
-        onDismiss={closeModal}
-      >
+      <Modal ariaLabelledBy="titleBasic" isOpen={true} onDismiss={closeModal}>
         <Modal.Header
           id="titleBasic"
           title="The Modal Title"
@@ -34,10 +30,12 @@ export const BasicUsage = () => {
         />
         <Modal.Body>Modal content</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={closeModal}>
+          <Button variant="secondary" onClick={closeModal} shadow="sm">
             Cancel
           </Button>
-          <Button variant="primary">Primary Action</Button>
+          <Button variant="primary" shadow="sm">
+            Primary Action
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>

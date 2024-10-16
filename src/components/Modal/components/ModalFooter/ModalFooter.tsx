@@ -8,23 +8,19 @@ export type ModalFooterProps = Omit<
 
 export const ModalFooter: FC<ModalFooterProps> = ({
   children,
-  padding = 'xl',
+  padding,
   direction = 'row',
   alignItems = 'center',
   justifyContent = 'flex-end',
-  background = 'secondary',
-  gap = 'sm',
+  gap = 'md',
   style,
   ...restProps
 }) => (
   <Box
-    background={background}
     padding={padding}
     direction={direction}
     alignItems={alignItems}
     justifyContent={justifyContent}
-    borderWidth="sm 0 0 0"
-    borderColor="default"
     gap={gap}
     style={{
       flexShrink: 0,
