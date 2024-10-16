@@ -3,7 +3,7 @@ import { Modal } from './Modal';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../Button/Button';
 import { useOpenClose } from '../../hooks/useOpenClose/useOpenClose';
-import { userEvent, within } from '@storybook/test';
+import { userEvent, within, expect } from '@storybook/test';
 
 const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',
@@ -19,8 +19,11 @@ export const BasicUsage = () => {
     handleOpen: openModal,
     handleClose: closeModal,
   } = useOpenClose();
+
+  const ref = useRef(null);
+
   return (
-    <div>
+    <div id="modalContainer" ref={ref}>
       <Button variant="primary" onClick={openModal}>
         Show Modal
       </Button>
@@ -28,6 +31,7 @@ export const BasicUsage = () => {
         ariaLabelledBy="titleBasic"
         isOpen={isModalOpen}
         onDismiss={closeModal}
+        containerRef={ref}
       >
         <Modal.Header
           id="titleBasic"
@@ -54,6 +58,8 @@ export const OpenModal: Story = {
     const canvas = within(canvasElement);
 
     await userEvent.click(canvas.getByText('Show Modal'));
+
+    await expect(canvas.getByText('Modal content')).toBeInTheDocument();
   },
 };
 
