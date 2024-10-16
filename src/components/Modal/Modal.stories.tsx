@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
 import { Modal } from './Modal';
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../Button/Button';
 import { useOpenClose } from '../../hooks/useOpenClose/useOpenClose';
+import { userEvent, within, expect } from '@storybook/test';
 
 const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',
@@ -10,6 +11,7 @@ const meta: Meta<typeof Modal> = {
 };
 
 export default meta;
+type Story = StoryObj<typeof Modal>;
 
 export const BasicUsage = () => {
   const {
@@ -44,6 +46,15 @@ export const BasicUsage = () => {
       </Modal>
     </div>
   );
+};
+
+export const OpenModal: Story = {
+  play: async ({ canvasElement, mount }) => {
+    await mount(<BasicUsage />);
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByText('Show Modal'));
+  },
 };
 
 export const BodyAndFooter = () => {
