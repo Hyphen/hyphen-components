@@ -1,30 +1,23 @@
 import React, { FC } from 'react';
 import { Box, BoxProps } from '../../../Box/Box';
 
-export type ModalFooterProps = Omit<
-  BoxProps,
-  'as' | 'background' | 'borderColor' | 'borderWidth' | 'radius'
->;
+export type ModalFooterProps = Omit<BoxProps, 'as' | 'radius'>;
 
 export const ModalFooter: FC<ModalFooterProps> = ({
   children,
-  padding = 'xl',
+  padding,
   direction = 'row',
   alignItems = 'center',
   justifyContent = 'flex-end',
-  background = 'secondary',
-  gap = 'sm',
+  gap = 'md',
   style,
   ...restProps
 }) => (
   <Box
-    background={background}
     padding={padding}
     direction={direction}
     alignItems={alignItems}
     justifyContent={justifyContent}
-    borderWidth="sm 0 0 0"
-    borderColor="default"
     gap={gap}
     style={{
       flexShrink: 0,

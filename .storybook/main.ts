@@ -6,6 +6,7 @@ module.exports = {
     '@storybook/addon-essentials',
     '@chromatic-com/storybook',
     '@storybook/addon-themes',
+    '@storybook/addon-interactions',
   ],
   // https://storybook.js.org/docs/react/configure/typescript#mainjs-configuration
   // typescript: {

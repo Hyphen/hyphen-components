@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
 import { Modal } from './Modal';
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../Button/Button';
 import { useOpenClose } from '../../hooks/useOpenClose/useOpenClose';
+import { userEvent, within, expect } from '@storybook/test';
 
 const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',
@@ -10,6 +11,7 @@ const meta: Meta<typeof Modal> = {
 };
 
 export default meta;
+type Story = StoryObj<typeof Modal>;
 
 export const BasicUsage = () => {
   const {
@@ -17,8 +19,11 @@ export const BasicUsage = () => {
     handleOpen: openModal,
     handleClose: closeModal,
   } = useOpenClose();
+
+  const ref = useRef(null);
+
   return (
-    <div>
+    <div id="modalContainer" ref={ref}>
       <Button variant="primary" onClick={openModal}>
         Show Modal
       </Button>
@@ -26,6 +31,7 @@ export const BasicUsage = () => {
         ariaLabelledBy="titleBasic"
         isOpen={isModalOpen}
         onDismiss={closeModal}
+        containerRef={ref}
       >
         <Modal.Header
           id="titleBasic"
@@ -34,14 +40,27 @@ export const BasicUsage = () => {
         />
         <Modal.Body>Modal content</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={closeModal}>
+          <Button variant="secondary" onClick={closeModal} shadow="sm">
             Cancel
           </Button>
-          <Button variant="primary">Primary Action</Button>
+          <Button variant="primary" shadow="sm">
+            Primary Action
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>
   );
+};
+
+export const OpenModal: Story = {
+  play: async ({ canvasElement, mount }) => {
+    await mount(<BasicUsage />);
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByText('Show Modal'));
+
+    await expect(canvas.getByText('Modal content')).toBeInTheDocument();
+  },
 };
 
 export const BodyAndFooter = () => {
@@ -113,10 +132,12 @@ export const WithoutHeader = () => {
       >
         <Modal.Body>Modal content</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={closeModal}>
+          <Button variant="secondary" onClick={closeModal} shadow="sm">
             Cancel
           </Button>
-          <Button variant="primary">Primary Action</Button>
+          <Button variant="primary" shadow="sm">
+            Primary Action
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>
@@ -147,10 +168,12 @@ export const FullscreenMobile = () => {
         />
         <Modal.Body>Modal content</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={closeModal}>
+          <Button variant="secondary" onClick={closeModal} shadow="sm">
             Cancel
           </Button>
-          <Button variant="primary">Primary Action</Button>
+          <Button variant="primary" shadow="sm">
+            Primary Action
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>
@@ -184,7 +207,12 @@ export const MaxWidth = () => {
         />
         <Modal.Body>Modal body content</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" ref={ref} onClick={closeModal}>
+          <Button
+            variant="secondary"
+            ref={ref}
+            onClick={closeModal}
+            shadow="sm"
+          >
             Cancel
           </Button>
         </Modal.Footer>

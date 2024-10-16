@@ -117,6 +117,8 @@ export const ModalBaseComponent: React.FC<ModalProps> = forwardRef<
       }
     );
 
+    if (!isOpen) return null;
+
     const parentElement = containerRef?.current
       ? (containerRef.current as HTMLElement)
       : undefined;
@@ -137,13 +139,15 @@ export const ModalBaseComponent: React.FC<ModalProps> = forwardRef<
               onRequestClose={onDismiss}
               ariaHideApp={false}
               parentSelector={parentElement ? () => parentElement : undefined}
+              style={{ content: { ...maxWidthCss.styles } }}
               {...restProps}
             >
               <Box
                 aria-label={ariaLabel}
                 aria-labelledby={ariaLabelledBy}
-                style={{ ...maxWidthCss.styles }}
                 height="100"
+                padding={{ base: '2xl', tablet: '4xl' }}
+                gap="3xl"
               >
                 {children}
               </Box>
