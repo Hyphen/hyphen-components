@@ -56,7 +56,6 @@ export interface TableBodyProps {
 
 export const TableBody: FC<TableBodyProps> = ({
   columns,
-  rowKey,
   rows,
   align = 'left',
   className = '',
@@ -84,7 +83,7 @@ export const TableBody: FC<TableBodyProps> = ({
           row={row}
           rowIndex={rowIndex}
           align={align}
-          key={row[rowKey as any]}
+          key={rowIndex}
           emptyCellPlaceholder={emptyCellPlaceholder}
           truncateOverflow={truncateOverflow}
           isBorderless={isBorderless}

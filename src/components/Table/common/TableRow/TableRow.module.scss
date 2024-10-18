@@ -1,5 +1,17 @@
 .table-row {
+  border-color: var(--color-border-subtle);
+  border-bottom-style: solid;
+  border-bottom-width: var(--size-border-width-sm);
+
+  &:last-of-type {
+    border-bottom-width: 0;
+  }
+
   &.hoverable {
     background-color: var(--table-row-hover-background);
   }
+}
+
+thead > .table-row {
+  border-bottom-width: var(--size-border-width-sm) !important;
 }
