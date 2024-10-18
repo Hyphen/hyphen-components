@@ -1,9 +1,6 @@
 .table-cell {
-  border-color: var(--color-border-default);
-  border-bottom-style: solid;
-  border-width: 0 0 var(--size-border-width-sm) 0;
   color: var(--color-font-base);
-  padding: var(--size-spacing-md) var(--size-spacing-lg);
+  padding: var(--size-spacing-md) var(--size-spacing-2xl);
 
   &.borderless {
     border-width: 0;
