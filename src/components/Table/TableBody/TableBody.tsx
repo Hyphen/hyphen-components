@@ -56,7 +56,6 @@ export interface TableBodyProps {
 
 export const TableBody: FC<TableBodyProps> = ({
   columns,
-  rowKey,
   rows,
   align = 'left',
   className = '',
