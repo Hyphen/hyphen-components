@@ -176,7 +176,7 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
             direction="row"
             justifyContent="space-between"
             alignItems="center"
-              padding={{ base: '2xl', tablet: '4xl' }}
+            padding={{ base: '2xl', tablet: '4xl' }}
           >
             <Box className={styles.title} fontWeight="bold">
               {title}
