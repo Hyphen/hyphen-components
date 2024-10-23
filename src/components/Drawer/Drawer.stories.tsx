@@ -1,11 +1,12 @@
 import { Drawer, DrawerPlacementType } from './Drawer';
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { useOpenClose } from '../../hooks';
 import { Button } from '../Button/Button';
 import { Box } from '../Box/Box';
 import { RadioGroup } from '../RadioGroup/RadioGroup';
 import { WidthSize } from '../../types';
+import { userEvent, within, expect } from '@storybook/test';
 
 const meta: Meta<typeof Drawer> = {
   title: 'Components/Drawer',
@@ -13,6 +14,7 @@ const meta: Meta<typeof Drawer> = {
 };
 
 export default meta;
+type Story = StoryObj<typeof Drawer>;
 
 export const BasicUsage = () => {
   const {
@@ -20,8 +22,11 @@ export const BasicUsage = () => {
     handleOpen: openDrawer,
     handleClose: closeDrawer,
   } = useOpenClose();
+
+  const ref = useRef(null);
+
   return (
-    <>
+    <div id="drawerContainer" ref={ref} style={{ height: '240px' }}>
       <Button variant="primary" onClick={openDrawer}>
         Open Drawer
       </Button>
@@ -30,15 +35,29 @@ export const BasicUsage = () => {
         title="Drawer Title"
         onDismiss={closeDrawer}
         ariaLabel="drawer component example"
+        containerRef={ref}
       >
-        <Box padding="2xl" display="block" childGap="md">
-          <Box>Drawer content&hellip;</Box>
-          <Box>Drawer content&hellip;</Box>
-          <Box>Drawer content&hellip;</Box>
+        <Box
+          padding={{ base: '0 2xl 2xl 2xl', tablet: '0 4xl 4xl 4xl' }}
+          display="block"
+          childGap="md"
+        >
+          <Box>Drawer content</Box>
         </Box>
       </Drawer>
-    </>
+    </div>
   );
+};
+
+export const OpenDrawer: Story = {
+  play: async ({ canvasElement, mount }) => {
+    await mount(<BasicUsage />);
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByText('Open Drawer'));
+
+    await expect(canvas.getByText('Drawer content')).toBeInTheDocument();
+  },
 };
 
 export const Placement = () => {
@@ -90,7 +109,11 @@ export const Placement = () => {
         placement={placement as DrawerPlacementType}
         ariaLabel="drawer component example"
       >
-        <Box padding="2xl" display="block" childGap="md">
+        <Box
+          padding={{ base: '0 2xl 2xl 2xl', tablet: '0 4xl 4xl 4xl' }}
+          display="block"
+          childGap="md"
+        >
           <Box as="p">drawer content</Box>
           <Box as="p">drawer content</Box>
           <Box as="p">drawer content</Box>
@@ -127,7 +150,11 @@ export const DrawerHeader = () => {
         onDismiss={closeDrawer}
         title="Drawer Title"
       >
-        <Box padding="2xl" display="block" childGap="md">
+        <Box
+          padding={{ base: '0 2xl 2xl 2xl', tablet: '0 4xl 4xl 4xl' }}
+          display="block"
+          childGap="md"
+        >
           {drawerContent}
         </Box>
       </Drawer>
@@ -156,7 +183,11 @@ export const TitleAndCloseButton = () => {
         onDismiss={closeDrawer}
         title="Drawer Title"
       >
-        <Box padding="2xl" display="block" childGap="md">
+        <Box
+          padding={{ base: '0 2xl 2xl 2xl', tablet: '0 4xl 4xl 4xl' }}
+          display="block"
+          childGap="md"
+        >
           {drawerContent}
         </Box>
       </Drawer>
@@ -185,7 +216,11 @@ export const CloseButtonOnly = () => {
         onDismiss={closeDrawer}
         closeButton
       >
-        <Box padding="2xl" display="block" childGap="md">
+        <Box
+          padding={{ base: '0 2xl 2xl 2xl', tablet: '0 4xl 4xl 4xl' }}
+          display="block"
+          childGap="md"
+        >
           {drawerContent}
         </Box>
       </Drawer>
@@ -226,7 +261,11 @@ export const Width = () => {
         closeButton
         ariaLabel="drawer component example"
       >
-        <Box padding="2xl" display="block" childGap="md">
+        <Box
+          padding={{ base: '0 2xl 2xl 2xl', tablet: '0 4xl 4xl 4xl' }}
+          display="block"
+          childGap="md"
+        >
           <Box>drawer content</Box>
         </Box>
       </Drawer>
@@ -252,8 +291,8 @@ export const Height = () => {
         closeButton
         ariaLabel="drawer component example"
       >
-        <Box padding="lg" height="3xl" display="block" childGap="md">
-          <Box>3xl Height</Box>
+        <Box padding="lg" height="4xl" display="block" childGap="md">
+          <Box>4xl Height</Box>
         </Box>
       </Drawer>
     </>
@@ -295,7 +334,11 @@ export const HiddenOverlay = () => {
         ariaLabel="drawer component example"
         hideOverlay
       >
-        <Box padding="2xl" display="block" childGap="md">
+        <Box
+          padding={{ base: '2xl', tablet: '4xl' }}
+          display="block"
+          childGap="md"
+        >
           <Button
             ref={closeBtnRef as MutableRefObject<HTMLButtonElement>}
             onClick={closeDrawer}
@@ -329,7 +372,11 @@ export const InitialFocusRef = () => {
         title="initialFocusRef"
         ariaLabel="drawer component example"
       >
-        <Box padding="2xl" display="block" childGap="md">
+        <Box
+          padding={{ base: '0 2xl 2xl 2xl', tablet: '0 4xl 4xl 4xl' }}
+          display="block"
+          childGap="md"
+        >
           <Box>drawer content</Box>
           <Button variant="primary" ref={ref} onClick={closeDrawer}>
             I receive focus
@@ -370,7 +417,10 @@ export const ContainedDrawer = () => {
         title="containerRef"
         ariaLabel="drawer component example"
       >
-        <Box padding="lg" as="p">
+        <Box
+          padding={{ base: '0 2xl 2xl 2xl', tablet: '0 4xl 4xl 4xl' }}
+          as="p"
+        >
           This drawer is rendered inside it&apos;s containing div, rather than
           the document.body
         </Box>
