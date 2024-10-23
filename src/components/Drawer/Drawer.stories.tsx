@@ -26,7 +26,7 @@ export const BasicUsage = () => {
   const ref = useRef(null);
 
   return (
-    <div id="drawerContainer" ref={ref}>
+    <div id="drawerContainer" ref={ref} style={{ height: '240px' }}>
       <Button variant="primary" onClick={openDrawer}>
         Open Drawer
       </Button>
