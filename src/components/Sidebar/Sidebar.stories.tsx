@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta } from '@storybook/react';
-import { SidebarProvider, Sidebar } from './Sidebar';
+import { SidebarProvider, Sidebar, SidebarTrigger } from './Sidebar';
 import { allModes } from '../../modes';
 import { Box } from '../Box/Box';
 import { Card } from '../Card/Card';
@@ -27,10 +27,11 @@ export default meta;
 export const SidebarExample = () => {
   return (
     <SidebarProvider>
-      <Sidebar side="left" collapsible="none">
+      <Sidebar side="left" collapsible="offcanvas">
         hello
       </Sidebar>
       <Box padding="2xl" width="100">
+        <SidebarTrigger />
         <Card height="100" padding="2xl">
           content
         </Card>

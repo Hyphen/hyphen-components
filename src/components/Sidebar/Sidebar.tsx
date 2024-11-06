@@ -148,14 +148,14 @@ const Sidebar = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<'div'> & {
     side?: 'left' | 'right';
-    variant?: 'sidebar' | 'floating' | 'inset';
+    // variant?: 'sidebar' | 'floating' | 'inset';
     collapsible?: 'offcanvas' | 'icon' | 'none';
   }
 >(
   (
     {
       side = 'left',
-      variant = 'sidebar',
+      //   variant = 'sidebar',
       collapsible = 'offcanvas',
       className,
       children,
@@ -212,7 +212,7 @@ const Sidebar = React.forwardRef<
         color="base"
         data-state={state}
         data-collapsible={state === 'collapsed' ? collapsible : ''}
-        data-variant={variant}
+        // data-variant={variant}
         data-side={side}
       >
         {/* This is what handles the sidebar gap on desktop */}
@@ -223,21 +223,20 @@ const Sidebar = React.forwardRef<
             transitionDuration: '200ms',
             animationDuration: '200ms',
             transitionProperty: 'width',
-            width: 'var(--sidebar-width)',
+            width: state === 'collapsed' ? '0' : 'var(--sidebar-width)',
             height: '100svh',
           }}
           className={classNames(
             'position-relative',
-            'group-data-[collapsible=offcanvas]:w-0',
             'group-data-[side=right]:rotate-180'
-            // variant === 'floating' || variant === 'inset'
+            // TODO: variant === 'floating' || variant === 'inset'
             //   ? 'group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]'
             //   : 'group-data-[collapsible=icon]:w-[--sidebar-width-icon]'
           )}
         />
         <div
           style={{
-            left: '0',
+            left: state === 'expanded' ? '0' : 'calc(var(--sidebar-width)*-1)',
             top: '0',
             bottom: '0',
             zIndex: 'var(--size-z-index-drawer)',
@@ -251,9 +250,9 @@ const Sidebar = React.forwardRef<
               ? 'group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]'
               : 'right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]',
             // Adjust the padding for floating and inset variants.
-            variant === 'floating' || variant === 'inset'
-              ? 'p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]'
-              : 'group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l',
+            // TODO: variant === 'floating' || variant === 'inset'
+            //   ? 'p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]'
+            //   : 'group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l',
             className
           )}
           {...props}
@@ -281,9 +280,9 @@ const SidebarTrigger = React.forwardRef<
     <Button
       ref={ref}
       data-sidebar="trigger"
-      variant="primary"
-      size="md"
-      className={classNames('h-7 w-7', className)}
+      variant="secondary"
+      size="sm"
+      className={classNames(className)}
       onClick={(event) => {
         onClick?.(event);
         toggleSidebar();
