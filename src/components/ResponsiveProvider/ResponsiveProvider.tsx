@@ -1,5 +1,5 @@
 import React, { useState, createContext } from 'react';
-import { useIsomorphicLayoutEffect } from '../../hooks/useIsomorphicLayoutEffect/useIsomorphicLayouEffect';
+import { useIsomorphicLayoutEffect } from '../../hooks/useIsomorphicLayoutEffect/useIsomorphicLayoutEffect';
 
 export interface ResponsiveContextShape {
   isCreated: boolean;

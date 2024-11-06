@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BREAKPOINTS } from '../../lib/tokens';
 import { Breakpoint } from '../../types';
 import { useWindowSize } from '../useWindowSize/useWindowSize';
-import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect/useIsomorphicLayouEffect';
+import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect/useIsomorphicLayoutEffect';
 
 const defaultBreakpoint: Breakpoint = { name: 'base', minWidth: 0 };
 
