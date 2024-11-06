@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { Button } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
 import { useIsMobile } from '../../hooks/useIsMobile/useIsMobile';
-import { Box } from '../Box/Box';
+import { Box, BoxProps } from '../Box/Box';
 
 type SidebarContext = {
   state: 'expanded' | 'collapsed';
@@ -296,6 +296,23 @@ const SidebarTrigger = React.forwardRef<
 });
 SidebarTrigger.displayName = 'SidebarTrigger';
 
+const SidebarInset = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<'main'>
+>(({ className, ...props }, ref) => {
+  return (
+    <main
+      ref={ref}
+      className={classNames(
+        'display-flex w-100 flex-direction-column p-lg background-color-secondary',
+        className
+      )}
+      {...props}
+    />
+  );
+});
+SidebarInset.displayName = 'SidebarInset';
+
 export {
   Sidebar,
   // SidebarContent,
@@ -306,7 +323,7 @@ export {
   // SidebarGroupLabel,
   // SidebarHeader,
   // SidebarInput,
-  // SidebarInset,
+  SidebarInset,
   // SidebarMenu,
   // SidebarMenuAction,
   // SidebarMenuBadge,
