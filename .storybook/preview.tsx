@@ -10,11 +10,18 @@ import { withThemeByClassName } from '@storybook/addon-themes';
 import hyphenTheme from './hyphenTheme';
 
 export const decorators = [
-  (Story) => (
-    <Box display="block" background="primary" padding="xl">
-      <Story />
-    </Box>
-  ),
+  (Story, context) => {
+    const { parameters } = context;
+    if (parameters.overrideDecorator) {
+      return <div style={{ padding: '0', margin: '0' }}>{Story()}</div>;
+    } else {
+      return (
+        <Box display="block" background="primary" padding="xl">
+          <Story />
+        </Box>
+      );
+    }
+  },
   withThemeByClassName({
     themes: {
       light: 'light',
