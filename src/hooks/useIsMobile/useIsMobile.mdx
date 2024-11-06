@@ -1,0 +1,12 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import * as Stories from './useIsMobile.stories';
+
+<Meta of={Stories} />
+
+# useIsMobile
+
+The `useIsMobile` returns a boolean of whether `window.innerWidth` is greater than the minimum width of the `desktop` breakpoint.
+
+## Basic Usage
+
+<Canvas isExpanded of={Stories.BasicUsage} />
