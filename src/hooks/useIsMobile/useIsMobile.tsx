@@ -4,7 +4,7 @@ import { BREAKPOINTS } from '../../lib/tokens';
 const desktopBreakpoint = BREAKPOINTS.find((b) => b.name === 'desktop');
 const MOBILE_BREAKPOINT = desktopBreakpoint ? desktopBreakpoint.minWidth : 0; // min width in pixels
 
-export function useIsMobile(): Boolean {
+export function useIsMobile(): boolean {
   const [isMobile, setIsMobile] = React.useState<boolean | undefined>(
     undefined
   );
