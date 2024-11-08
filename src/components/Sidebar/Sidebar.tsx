@@ -169,7 +169,7 @@ const Sidebar = React.forwardRef<
       return (
         <div
           className={classNames(
-            'display-flex h-100 flex-direction-column background-color-secondary font-color-base',
+            'display-flex h-100 font-size-xs flex-direction-column background-color-secondary font-color-base',
             className
           )}
           style={{
@@ -210,6 +210,7 @@ const Sidebar = React.forwardRef<
         background="primary"
         display={{ base: 'none', desktop: 'block' }}
         color="base"
+        fontSize="sm"
         data-state={state}
         data-collapsible={state === 'collapsed' ? collapsible : ''}
         // data-variant={variant}
@@ -235,6 +236,16 @@ const Sidebar = React.forwardRef<
           )}
         />
         <div
+          className={classNames(
+            'duration-200 position-fixed display-none display-flex-desktop ',
+            side === 'right' &&
+              'right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]',
+            // Adjust the padding for floating and inset variants.
+            // TODO: variant === 'floating' || variant === 'inset'
+            //   ? 'p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]'
+            //   : 'group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l',
+            className
+          )}
           style={{
             left: state === 'expanded' ? '0' : 'calc(var(--sidebar-width)*-1)',
             top: '0',
@@ -244,22 +255,11 @@ const Sidebar = React.forwardRef<
             width: 'var(--sidebar-width)',
             height: '100svh',
           }}
-          className={classNames(
-            'duration-200 position-fixed display-none display-flex-desktop ',
-            side === 'left'
-              ? 'group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]'
-              : 'right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]',
-            // Adjust the padding for floating and inset variants.
-            // TODO: variant === 'floating' || variant === 'inset'
-            //   ? 'p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]'
-            //   : 'group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l',
-            className
-          )}
           {...props}
         >
           <div
             data-sidebar="sidebar"
-            className="display-flex h-100 w-100 flex-direction-column background-color-secondary group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
+            className="display-flex h-100 w-100 flex-direction-column background-color-secondary"
           >
             {children}
           </div>
@@ -313,26 +313,167 @@ const SidebarInset = React.forwardRef<
 });
 SidebarInset.displayName = 'SidebarInset';
 
+const SidebarHeader = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<'div'>
+>(({ className, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      data-sidebar="header"
+      className={classNames('display-flex g-sm p-xl', className)}
+      {...props}
+    />
+  );
+});
+SidebarHeader.displayName = 'SidebarHeader';
+
+const SidebarFooter = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<'div'>
+>(({ className, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      data-sidebar="footer"
+      className={classNames('display-flex g-sm p-xl', className)}
+      {...props}
+    />
+  );
+});
+SidebarFooter.displayName = 'SidebarFooter';
+
+const SidebarContent = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<'div'>
+>(({ className, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      data-sidebar="content"
+      className={classNames(
+        'display-flex flex-direction-column minh-0 flex-auto overflow-auto',
+        className
+      )}
+      {...props}
+    />
+  );
+});
+SidebarContent.displayName = 'SidebarContent';
+
+const SidebarMenu = React.forwardRef<
+  HTMLUListElement,
+  React.ComponentProps<'ul'>
+>(({ className, ...props }, ref) => (
+  <ul
+    ref={ref}
+    data-sidebar="menu"
+    className={classNames(
+      'display-flex flex-direction-column w-100 minw-0 g-xs p-0 m-0',
+      className
+    )}
+    style={{
+      listStyle: 'none',
+    }}
+    {...props}
+  />
+));
+SidebarMenu.displayName = 'SidebarMenu';
+
+const SidebarMenuItem = React.forwardRef<
+  HTMLLIElement,
+  React.ComponentProps<'li'>
+>(({ className, ...props }, ref) => (
+  <li
+    ref={ref}
+    data-sidebar="menu-item"
+    className={classNames('group/menu-item position-relative', className)}
+    {...props}
+  />
+));
+SidebarMenuItem.displayName = 'SidebarMenuItem';
+
+const SidebarGroup = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<'div'>
+>(({ className, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      data-sidebar="group"
+      className={classNames(
+        'position-relative display-flex w-100 minw-0 flex-direction-column p-xl',
+        className
+      )}
+      {...props}
+    />
+  );
+});
+SidebarGroup.displayName = 'SidebarGroup';
+
+const SidebarGroupLabel = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<'div'>
+>(({ className, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      data-sidebar="group-label"
+      className={classNames(
+        'duration-200 flex h-8 shrink-0 items-center rounded-md px-2 font-size-xs font-medium text-sidebar-foreground/70 outline-none ring-sidebar-ring transition-[margin,opa] ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0',
+        className
+      )}
+      {...props}
+    />
+  );
+});
+SidebarGroupLabel.displayName = 'SidebarGroupLabel';
+
+const SidebarMenuSub = React.forwardRef<
+  HTMLUListElement,
+  React.ComponentProps<'ul'>
+>(({ className, ...props }, ref) => (
+  <ul
+    ref={ref}
+    data-sidebar="menu-sub"
+    className={classNames(
+      'display-flex min-w-0 translate-x-px p-0 flex-direction-column g-sm b-l-sm',
+      className
+    )}
+    style={{
+      listStyle: 'none',
+    }}
+    {...props}
+  />
+));
+SidebarMenuSub.displayName = 'SidebarMenuSub';
+
+const SidebarMenuSubItem = React.forwardRef<
+  HTMLLIElement,
+  React.ComponentProps<'li'>
+>(({ ...props }, ref) => <li ref={ref} {...props} />);
+SidebarMenuSubItem.displayName = 'SidebarMenuSubItem';
+
 export {
   Sidebar,
-  // SidebarContent,
-  // SidebarFooter,
-  // SidebarGroup,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
   // SidebarGroupAction,
   // SidebarGroupContent,
-  // SidebarGroupLabel,
-  // SidebarHeader,
+  SidebarGroupLabel,
+  SidebarHeader,
   // SidebarInput,
   SidebarInset,
-  // SidebarMenu,
+  SidebarMenu,
   // SidebarMenuAction,
   // SidebarMenuBadge,
-  // SidebarMenuButton,
-  // SidebarMenuItem,
+  //   SidebarMenuButton,
+  SidebarMenuItem,
   // SidebarMenuSkeleton,
-  // SidebarMenuSub,
+  SidebarMenuSub,
   // SidebarMenuSubButton,
-  // SidebarMenuSubItem,
+  SidebarMenuSubItem,
   SidebarProvider,
   // SidebarRail,
   // SidebarSeparator,
