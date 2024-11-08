@@ -1,10 +1,10 @@
 import React, { useCallback, useMemo, useState } from 'react';
-
+import { Slot } from '@radix-ui/react-slot';
 import classNames from 'classnames';
 import { Button } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
 import { useIsMobile } from '../../hooks/useIsMobile/useIsMobile';
-import { Box, BoxProps } from '../Box/Box';
+import { Box } from '../Box/Box';
 
 type SidebarContext = {
   state: 'expanded' | 'collapsed';
@@ -393,6 +393,28 @@ const SidebarMenuItem = React.forwardRef<
 ));
 SidebarMenuItem.displayName = 'SidebarMenuItem';
 
+const SidebarMenuButton = React.forwardRef<
+  HTMLButtonElement,
+  React.ComponentProps<'button'> & {
+    asChild?: boolean;
+    isActive?: boolean;
+  }
+>(({ asChild = false, isActive = false, ...props }, ref) => {
+  const Comp = asChild ? Slot : 'button';
+
+  const button = (
+    <Comp
+      ref={ref}
+      data-sidebar="menu-button"
+      data-active={isActive}
+      {...props}
+    />
+  );
+
+  return button;
+});
+SidebarMenuButton.displayName = 'SidebarMenuButton';
+
 const SidebarGroup = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<'div'>
@@ -454,6 +476,35 @@ const SidebarMenuSubItem = React.forwardRef<
 >(({ ...props }, ref) => <li ref={ref} {...props} />);
 SidebarMenuSubItem.displayName = 'SidebarMenuSubItem';
 
+const SidebarMenuSubButton = React.forwardRef<
+  HTMLAnchorElement,
+  React.ComponentProps<'a'> & {
+    asChild?: boolean;
+    size?: 'sm' | 'md';
+    isActive?: boolean;
+  }
+>(({ asChild = false, size = 'sm', isActive, className, ...props }, ref) => {
+  const Comp = asChild ? Slot : 'a';
+
+  return (
+    <Comp
+      ref={ref}
+      data-sidebar="menu-sub-button"
+      data-size={size}
+      data-active={isActive}
+      className={classNames(
+        'display-flex h-7 minw-0 -translate-x-px align-items-center gap-sm overflow-hidden rounded-md px-2 text-sidebar-foreground outline-none ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-sidebar-accent-foreground',
+        'data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground',
+        size === 'sm' && 'text-sm',
+        'group-data-[collapsible=icon]:hidden',
+        className
+      )}
+      {...props}
+    />
+  );
+});
+SidebarMenuSubButton.displayName = 'SidebarMenuSubButton';
+
 export {
   Sidebar,
   SidebarContent,
@@ -468,11 +519,11 @@ export {
   SidebarMenu,
   // SidebarMenuAction,
   // SidebarMenuBadge,
-  //   SidebarMenuButton,
+  SidebarMenuButton,
   SidebarMenuItem,
   // SidebarMenuSkeleton,
   SidebarMenuSub,
-  // SidebarMenuSubButton,
+  SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarProvider,
   // SidebarRail,

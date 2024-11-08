@@ -14,6 +14,8 @@ import {
   SidebarGroupLabel,
   SidebarMenuSub,
   SidebarMenuSubItem,
+  SidebarMenuButton,
+  SidebarMenuSubButton,
 } from './Sidebar';
 import { allModes } from '../../modes';
 import { Card } from '../Card/Card';
@@ -193,23 +195,26 @@ export const SidebarExample = () => {
                   key={item.title}
                   defaultOpen={item.isActive}
                   className="group/collapsible"
+                  asChild
                 >
                   <SidebarMenuItem>
-                    <CollapsibleTrigger>
-                      {/* <SidebarMenuButton tooltip={item.title}> */}
-                      {/* {item.icon && <item.icon />} */}
-                      <span>{item.title}</span>
-                      <Icon name="caret-right" />
-                      {/* <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" /> */}
-                      {/* </SidebarMenuButton> */}
+                    <CollapsibleTrigger asChild>
+                      <SidebarMenuButton>
+                        {/* {item.icon && <item.icon />} */}
+                        <span>{item.title}</span>
+                        <Icon name="caret-right" />
+                        {/* <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" /> */}
+                      </SidebarMenuButton>
                     </CollapsibleTrigger>
                     <CollapsibleContent>
                       <SidebarMenuSub>
                         {item.items?.map((subItem) => (
                           <SidebarMenuSubItem key={subItem.title}>
-                            <a href={subItem.url}>
-                              <span>{subItem.title}</span>
-                            </a>
+                            <SidebarMenuSubButton asChild>
+                              <a href={subItem.url}>
+                                <span>{subItem.title}</span>
+                              </a>
+                            </SidebarMenuSubButton>
                           </SidebarMenuSubItem>
                         ))}
                       </SidebarMenuSub>
