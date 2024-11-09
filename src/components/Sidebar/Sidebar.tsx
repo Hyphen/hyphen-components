@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import classNames from 'classnames';
 import { Button } from '../Button/Button';
+import { Drawer } from '../Drawer/Drawer';
 import { Icon } from '../Icon/Icon';
 import { useIsMobile } from '../../hooks/useIsMobile/useIsMobile';
 import { Box } from '../Box/Box';
@@ -185,7 +186,18 @@ const Sidebar = React.forwardRef<
 
     if (isMobile) {
       return (
-        <div>TODO: mobile</div>
+        <Drawer
+          isOpen={openMobile}
+          onDismiss={() => setOpenMobile(false)}
+          placement={side}
+          //   style={{
+          //     width: SIDEBAR_WIDTH_MOBILE
+          //   }}
+        >
+          <Box data-sidebar="sidebar" data-mobile="true">
+            {children}
+          </Box>
+        </Drawer>
         // <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
         //   <SheetContent
         //     data-sidebar="sidebar"
