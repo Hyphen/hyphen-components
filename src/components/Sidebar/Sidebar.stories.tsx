@@ -176,7 +176,7 @@ const data = {
 // type Story = StoryObj<typeof Sidebar>;
 
 export const SidebarExample = () => {
-  const [activeTeam, setActiveTeam] = React.useState(data.teams[0]);
+  //   const [activeTeam, setActiveTeam] = React.useState(data.teams[0]);
   return (
     <SidebarProvider>
       <Sidebar side="left" collapsible="offcanvas">

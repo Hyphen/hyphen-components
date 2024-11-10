@@ -20,7 +20,7 @@ type SidebarContext = {
 const SIDEBAR_COOKIE_NAME = 'sidebar:state';
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 const SIDEBAR_WIDTH = '16rem';
-const SIDEBAR_WIDTH_MOBILE = '18rem';
+// const SIDEBAR_WIDTH_MOBILE = '18rem';
 const SIDEBAR_WIDTH_ICON = '3rem';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
 
@@ -268,18 +268,18 @@ const SidebarTrigger = React.forwardRef<
     <Button
       ref={ref}
       data-sidebar="trigger"
-      variant="secondary"
+      variant="tertiary"
       size="sm"
+      iconPrefix="dock-left"
       className={classNames(className)}
       onClick={(event) => {
         onClick?.(event);
         toggleSidebar();
       }}
+      style={{ marginLeft: 'calc(var(--size-spacing-sm) * -1)' }}
+      aria-label="toggle sidebar"
       {...props}
-    >
-      <Icon name="menu" />
-      <span className="sr-only">Toggle Sidebar</span>
-    </Button>
+    />
   );
 });
 SidebarTrigger.displayName = 'SidebarTrigger';
@@ -292,7 +292,7 @@ const SidebarInset = React.forwardRef<
     <main
       ref={ref}
       className={classNames(
-        'display-flex w-100 flex-direction-column p-lg background-color-secondary',
+        'display-flex w-100 flex-direction-column g-lg align-items-flex-start p-lg background-color-secondary',
         className
       )}
       {...props}
