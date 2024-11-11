@@ -121,9 +121,10 @@
     "@rollup/rollup-linux-x64-gnu": "^4.21.2"
   },
   "dependencies": {
-    "@hyphen/hyphen-design-tokens": "^4.15.0",
+    "@hyphen/hyphen-design-tokens": "^4.16.0",
     "@popperjs/core": "^2.11.8",
     "@radix-ui/react-collapsible": "^1.1.1",
+    "@radix-ui/react-dropdown-menu": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.0",
     "@types/react-modal": "^3.16.3",
     "classnames": "^2.5.1",

@@ -25,6 +25,16 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '../Collapsible/Collapsible';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '../DropdownMenu/DropdownMenu';
+import { Box } from '../Box/Box';
+import { IconName } from 'src/types';
 
 const meta: Meta<typeof Sidebar> = {
   title: 'Components/Sidebar',
@@ -54,121 +64,95 @@ const data = {
     {
       name: 'Acme Inc',
       // logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
+      //   plan: 'Enterprise',
     },
     {
       name: 'Acme Corp.',
       // logo: AudioWaveform,
-      plan: 'Startup',
+      //   plan: 'Startup',
     },
     {
       name: 'Evil Corp.',
       // logo: Command,
-      plan: 'Free',
+      //   plan: 'Free',
     },
   ],
   navMain: [
     {
-      title: 'Playground',
+      title: 'Dashboard',
       url: '#',
-      // icon: SquareTerminal,
-      isActive: true,
+      icon: 'dashboard',
+    },
+    {
+      title: 'Teams',
+      url: '#',
+      icon: 'users',
+    },
+    {
+      title: 'Link',
+      url: '#',
+      icon: 'logo-link',
+    },
+    {
+      title: 'ENV',
+      url: '#',
+      icon: 'logo-env',
+    },
+    {
+      title: 'Toggle',
+      url: '#',
+      icon: 'logo-toggle',
       items: [
         {
-          title: 'History',
+          title: 'Feature Toggles',
           url: '#',
         },
         {
-          title: 'Starred',
-          url: '#',
-        },
-        {
-          title: 'Settings',
+          title: 'Segments',
           url: '#',
         },
       ],
     },
     {
-      title: 'Models',
+      title: 'Integrations',
       url: '#',
-      // icon: Bot,
-      items: [
-        {
-          title: 'Genesis',
-          url: '#',
-        },
-        {
-          title: 'Explorer',
-          url: '#',
-        },
-        {
-          title: 'Quantum',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Documentation',
-      url: '#',
-      // icon: BookOpen,
-      items: [
-        {
-          title: 'Introduction',
-          url: '#',
-        },
-        {
-          title: 'Get Started',
-          url: '#',
-        },
-        {
-          title: 'Tutorials',
-          url: '#',
-        },
-        {
-          title: 'Changelog',
-          url: '#',
-        },
-      ],
+      icon: 'stack',
     },
     {
       title: 'Settings',
       url: '#',
-      // icon: Settings2,
+      icon: 'settings',
       items: [
         {
           title: 'General',
           url: '#',
         },
         {
-          title: 'Team',
+          title: 'Members',
           url: '#',
         },
         {
           title: 'Billing',
           url: '#',
         },
-        {
-          title: 'Limits',
-          url: '#',
-        },
       ],
     },
   ],
-  projects: [
+  favorites: [
     {
-      name: 'Design Engineering',
+      name: 'Project One',
       url: '#',
-      // icon: Frame,
+      icon: 'block',
     },
     {
-      name: 'Sales & Marketing',
+      name: 'Spring Campaign Link',
       url: '#',
-      // icon: PieChart,
+      icon: 'logo-link',
     },
     {
-      name: 'Travel',
+      name: 'Fall Campaign Link',
       url: '#',
-      icon: Map,
+      icon: 'logo-link',
     },
   ],
 };
@@ -176,62 +160,110 @@ const data = {
 // type Story = StoryObj<typeof Sidebar>;
 
 export const SidebarExample = () => {
-  //   const [activeTeam, setActiveTeam] = React.useState(data.teams[0]);
+  const [activeTeam, setActiveTeam] = React.useState(data.teams[0]);
   return (
     <SidebarProvider>
       <Sidebar side="left" collapsible="offcanvas">
         <SidebarHeader>
           <SidebarMenu>
-            <SidebarMenuItem>header item</SidebarMenuItem>
-            <SidebarMenuItem>header item</SidebarMenuItem>
+            <SidebarMenuItem>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <SidebarMenuButton>
+                    <Box direction="row" gap="sm" alignItems="center">
+                      <div className="background-color-black display-flex w-3xl h-3xl align-items-center justify-content-center br-sm"></div>
+                      <span className="font-weight-semibold">
+                        {activeTeam.name}
+                      </span>
+                    </Box>
+                    <Icon name="caret-up-down" />
+                  </SidebarMenuButton>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" side="bottom" sideOffset={4}>
+                  <DropdownMenuLabel className="text-xs text-muted-foreground">
+                    Teams
+                  </DropdownMenuLabel>
+                  {data.teams.map((team) => (
+                    <DropdownMenuItem
+                      key={team.name}
+                      onClick={() => setActiveTeam(team)}
+                      className="gap-2 p-2"
+                    >
+                      <div className="flex size-6 items-center justify-center rounded-sm border">
+                        {/* <team.logo className="size-4 shrink-0" /> */}
+                      </div>
+                      {team.name}
+                      {/* <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut> */}
+                    </DropdownMenuItem>
+                  ))}
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="gap-2 p-2">
+                    <div className="flex size-6 items-center justify-center rounded-md border bg-background">
+                      {/* <Plus className="size-4" /> */}
+                    </div>
+                    <div className="font-medium text-muted-foreground">
+                      Add team
+                    </div>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </SidebarMenuItem>
           </SidebarMenu>
         </SidebarHeader>
         <SidebarContent>
           <SidebarGroup>
             <SidebarGroupLabel>Platform</SidebarGroupLabel>
             <SidebarMenu>
-              {data.navMain.map((item) => (
-                <Collapsible
-                  key={item.title}
-                  defaultOpen={item.isActive}
-                  className="group/collapsible"
-                  asChild
-                >
-                  <SidebarMenuItem>
-                    <CollapsibleTrigger asChild>
-                      <SidebarMenuButton>
-                        {/* {item.icon && <item.icon />} */}
-                        <span>{item.title}</span>
-                        <Icon name="caret-right" />
-                        {/* <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" /> */}
-                      </SidebarMenuButton>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent>
-                      <SidebarMenuSub>
-                        {item.items?.map((subItem) => (
-                          <SidebarMenuSubItem key={subItem.title}>
-                            <SidebarMenuSubButton asChild>
-                              <a href={subItem.url}>
-                                <span>{subItem.title}</span>
-                              </a>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        ))}
-                      </SidebarMenuSub>
-                    </CollapsibleContent>
+              {data.navMain.map((item) =>
+                item.items ? (
+                  <Collapsible
+                    key={item.title}
+                    className="group/collapsible"
+                    asChild
+                  >
+                    <SidebarMenuItem>
+                      <CollapsibleTrigger asChild>
+                        <SidebarMenuButton icon={item.icon as IconName}>
+                          <Box flex="auto">{item.title}</Box>
+                          <Icon name="caret-sm-right" />
+                          {/* <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" /> */}
+                        </SidebarMenuButton>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <SidebarMenuSub>
+                          {item.items?.map((subItem) => (
+                            <SidebarMenuSubItem key={subItem.title}>
+                              <SidebarMenuSubButton asChild>
+                                <a href={subItem.url}>
+                                  <span>{subItem.title}</span>
+                                </a>
+                              </SidebarMenuSubButton>
+                            </SidebarMenuSubItem>
+                          ))}
+                        </SidebarMenuSub>
+                      </CollapsibleContent>
+                    </SidebarMenuItem>
+                  </Collapsible>
+                ) : (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton icon={item.icon as IconName} asChild>
+                      <a href={item.url}>{item.title}</a>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
-                </Collapsible>
-              ))}
+                )
+              )}
             </SidebarMenu>
           </SidebarGroup>
           <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-            <SidebarGroupLabel>Projects</SidebarGroupLabel>
+            <SidebarGroupLabel>Favorites</SidebarGroupLabel>
             <SidebarMenu>
-              {data.projects.map((item) => (
+              {data.favorites.map((item) => (
                 <SidebarMenuItem key={item.name}>
-                  <a href={item.url}>
-                    <span>{item.name}</span>
-                  </a>
+                  <SidebarMenuButton icon={item.icon} asChild>
+                    <a href={item.url}>
+                      <span>{item.name}</span>
+                    </a>
+                  </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>

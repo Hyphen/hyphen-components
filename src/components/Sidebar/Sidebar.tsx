@@ -3,9 +3,10 @@ import { Slot } from '@radix-ui/react-slot';
 import classNames from 'classnames';
 import { Button } from '../Button/Button';
 import { Drawer } from '../Drawer/Drawer';
-import { Icon } from '../Icon/Icon';
 import { useIsMobile } from '../../hooks/useIsMobile/useIsMobile';
 import { Box } from '../Box/Box';
+import { IconName } from 'src/types';
+import { Icon } from '../Icon/Icon';
 
 type SidebarContext = {
   state: 'expanded' | 'collapsed';
@@ -276,7 +277,7 @@ const SidebarTrigger = React.forwardRef<
         onClick?.(event);
         toggleSidebar();
       }}
-      style={{ marginLeft: 'calc(var(--size-spacing-sm) * -1)' }}
+      //   style={{ marginLeft: 'calc(var(--size-spacing-sm) * -1)' }}
       aria-label="toggle sidebar"
       {...props}
     />
@@ -309,7 +310,7 @@ const SidebarHeader = React.forwardRef<
     <div
       ref={ref}
       data-sidebar="header"
-      className={classNames('display-flex g-sm p-xl', className)}
+      className={classNames('display-flex g-sm p-v-md p-left-md', className)}
       {...props}
     />
   );
@@ -324,7 +325,7 @@ const SidebarFooter = React.forwardRef<
     <div
       ref={ref}
       data-sidebar="footer"
-      className={classNames('display-flex g-sm p-xl', className)}
+      className={classNames('display-flex g-sm  p-v-md p-left-md', className)}
       {...props}
     />
   );
@@ -340,7 +341,7 @@ const SidebarContent = React.forwardRef<
       ref={ref}
       data-sidebar="content"
       className={classNames(
-        'display-flex flex-direction-column minh-0 flex-auto overflow-auto',
+        'display-flex flex-direction-column g-xl minh-0 flex-auto overflow-auto',
         className
       )}
       {...props}
@@ -375,7 +376,7 @@ const SidebarMenuItem = React.forwardRef<
   <li
     ref={ref}
     data-sidebar="menu-item"
-    className={classNames('group/menu-item position-relative', className)}
+    className={classNames('font-size-sm position-relative', className)}
     {...props}
   />
 ));
@@ -386,8 +387,9 @@ const SidebarMenuButton = React.forwardRef<
   React.ComponentProps<'button'> & {
     asChild?: boolean;
     isActive?: boolean;
+    icon?: IconName;
   }
->(({ asChild = false, isActive = false, ...props }, ref) => {
+>(({ asChild = false, isActive = false, icon, className, ...props }, ref) => {
   const Comp = asChild ? Slot : 'button';
 
   const button = (
@@ -395,8 +397,23 @@ const SidebarMenuButton = React.forwardRef<
       ref={ref}
       data-sidebar="menu-button"
       data-active={isActive}
+      className={classNames(
+        'p-sm br-sm g-md flex-direction-row display-flex align-items-center align-self-flex-start font-size-sm bw-0 font-weight-medium text-align-left text-decoration-none hover:background-color-tertiary background-color-transparent font-color-base cursor-pointer display-flex w-100',
+        className
+      )}
       {...props}
-    />
+    >
+      <Box
+        flex="auto"
+        direction="row"
+        gap="md"
+        alignItems="center"
+        color="base"
+      >
+        {icon && <Icon name={icon} color="tertiary" />}
+        {props.children}
+      </Box>
+    </Comp>
   );
 
   return button;
@@ -412,7 +429,7 @@ const SidebarGroup = React.forwardRef<
       ref={ref}
       data-sidebar="group"
       className={classNames(
-        'position-relative display-flex w-100 minw-0 flex-direction-column p-xl',
+        'position-relative p-left-md p-left-md display-flex w-100 minw-0 flex-direction-column',
         className
       )}
       {...props}
@@ -430,7 +447,7 @@ const SidebarGroupLabel = React.forwardRef<
       ref={ref}
       data-sidebar="group-label"
       className={classNames(
-        'duration-200 flex h-8 shrink-0 items-center rounded-md px-2 font-size-xs font-medium text-sidebar-foreground/70 outline-none ring-sidebar-ring transition-[margin,opa] ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0',
+        'display-flex h-3xl align-items-center br-sm p-h-sm font-size-xs font-weight-medium outline-none',
         className
       )}
       {...props}
@@ -447,7 +464,7 @@ const SidebarMenuSub = React.forwardRef<
     ref={ref}
     data-sidebar="menu-sub"
     className={classNames(
-      'display-flex min-w-0 translate-x-px p-0 flex-direction-column g-sm b-l-sm',
+      'display-flex min-w-0 m-left-xl p-left-sm flex-direction-column g-2xs bw-left-sm border-color-default',
       className
     )}
     style={{
@@ -481,7 +498,7 @@ const SidebarMenuSubButton = React.forwardRef<
       data-size={size}
       data-active={isActive}
       className={classNames(
-        'display-flex h-7 minw-0 -translate-x-px align-items-center gap-sm overflow-hidden rounded-md px-2 text-sidebar-foreground outline-none ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-sidebar-accent-foreground',
+        'display-flex text-decoration-none h-4xl p-left-sm font-color-base minw-0 align-items-center gap-sm overflow-hidden br-sm outline-none hover:background-color-tertiary',
         'data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground',
         size === 'sm' && 'text-sm',
         'group-data-[collapsible=icon]:hidden',
