@@ -1,0 +1,21 @@
+import { Canvas, Meta, ArgTypes } from '@storybook/blocks';
+import { Collapsible, CollapsibleTrigger } from './Collapsible';
+import * as Stories from './Collapsible.stories';
+
+<Meta of={Stories} />
+
+# Collapsible
+
+Collapsible components are used to hide or show content based on user interaction. 
+
+This component is extended from [Radix](https://www.radix-ui.com/primitives/docs/components/collapsible).
+
+[API Reference](https://www.radix-ui.com/primitives/docs/components/collapsible#api-reference)
+
+<Canvas of={Stories.Uncontrolled} />
+
+## Controlled
+
+The `isOpen` prop can be used to control the state of the collapsible component.
+
+<Canvas of={Stories.Controlled} />
