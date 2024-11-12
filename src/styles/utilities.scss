@@ -24,3 +24,13 @@ a, a:visited {
     color: inherit;
     text-decoration: none;
 }
+
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.outline-none {
+    outline: none;
+}

@@ -6,7 +6,6 @@ import { Drawer } from '../Drawer/Drawer';
 import { useIsMobile } from '../../hooks/useIsMobile/useIsMobile';
 import { Box } from '../Box/Box';
 import { IconName } from 'src/types';
-import { Icon } from '../Icon/Icon';
 
 type SidebarContext = {
   state: 'expanded' | 'collapsed';
@@ -102,7 +101,6 @@ const SidebarProvider = React.forwardRef<
     }, [toggleSidebar]);
 
     // We add a state so that we can do data-state="expanded" or "collapsed".
-    // This makes it easier to style the sidebar with Tailwind classes.
     const state = open ? 'expanded' : 'collapsed';
 
     const contextValue = useMemo<SidebarContext>(
@@ -310,7 +308,10 @@ const SidebarHeader = React.forwardRef<
     <div
       ref={ref}
       data-sidebar="header"
-      className={classNames('display-flex g-sm p-v-md p-left-md', className)}
+      className={classNames(
+        'display-flex g-sm p-v-md p-h-md p-right-0-desktop',
+        className
+      )}
       {...props}
     />
   );
@@ -325,7 +326,10 @@ const SidebarFooter = React.forwardRef<
     <div
       ref={ref}
       data-sidebar="footer"
-      className={classNames('display-flex g-sm  p-v-md p-left-md', className)}
+      className={classNames(
+        'display-flex g-sm  p-v-md p-h-md p-right-0-desktop',
+        className
+      )}
       {...props}
     />
   );
@@ -398,21 +402,12 @@ const SidebarMenuButton = React.forwardRef<
       data-sidebar="menu-button"
       data-active={isActive}
       className={classNames(
-        'p-sm br-sm g-md flex-direction-row display-flex align-items-center align-self-flex-start font-size-sm bw-0 font-weight-medium text-align-left text-decoration-none hover:background-color-tertiary background-color-transparent font-color-base cursor-pointer display-flex w-100',
+        'display-flex w-100 flex-auto p-sm br-sm g-md flex-direction-row flex-auto align-items-center font-size-sm bw-0 font-weight-medium text-align-left text-decoration-none hover:background-color-tertiary background-color-transparent font-color-base cursor-pointer',
         className
       )}
       {...props}
     >
-      <Box
-        flex="auto"
-        direction="row"
-        gap="md"
-        alignItems="center"
-        color="base"
-      >
-        {icon && <Icon name={icon} color="tertiary" />}
-        {props.children}
-      </Box>
+      {props.children}
     </Comp>
   );
 
@@ -429,7 +424,7 @@ const SidebarGroup = React.forwardRef<
       ref={ref}
       data-sidebar="group"
       className={classNames(
-        'position-relative p-left-md p-left-md display-flex w-100 minw-0 flex-direction-column',
+        'position-relative p-h-md p-right-0-desktop display-flex w-100 minw-0 flex-direction-column',
         className
       )}
       {...props}
@@ -447,7 +442,7 @@ const SidebarGroupLabel = React.forwardRef<
       ref={ref}
       data-sidebar="group-label"
       className={classNames(
-        'display-flex h-3xl align-items-center br-sm p-h-sm font-size-xs font-weight-medium outline-none',
+        'display-flex h-3xl align-items-center br-sm p-h-sm font-color-secondary font-size-xs font-weight-medium outline-none',
         className
       )}
       {...props}
@@ -499,7 +494,7 @@ const SidebarMenuSubButton = React.forwardRef<
       data-active={isActive}
       className={classNames(
         'display-flex text-decoration-none h-4xl p-left-sm font-color-base minw-0 align-items-center gap-sm overflow-hidden br-sm outline-none hover:background-color-tertiary',
-        'data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground',
+        'data-[active=true]:bg-sidebar-accent',
         size === 'sm' && 'text-sm',
         'group-data-[collapsible=icon]:hidden',
         className
@@ -509,6 +504,69 @@ const SidebarMenuSubButton = React.forwardRef<
   );
 });
 SidebarMenuSubButton.displayName = 'SidebarMenuSubButton';
+
+const SidebarMenuAction = React.forwardRef<
+  HTMLButtonElement,
+  React.ComponentProps<'button'> & {
+    asChild?: boolean;
+  }
+>(({ className, asChild = false, ...props }, ref) => {
+  const Comp = asChild ? Slot : 'button';
+
+  return (
+    <Comp
+      ref={ref}
+      data-sidebar="menu-action"
+      className={classNames(
+        'position-absolute p-xs font-color-secondary cursor-pointer hover:font-color-base minw-0 align-items-center bw-0 br-sm outline-none background-color-transparent hover:background-color-tertiary',
+        'data-[active=true]:bg-sidebar-accent',
+        className
+      )}
+      style={{
+        top: 'var(--size-spacing-xs)',
+        right: 'var(--size-spacing-xs)',
+        lineHeight: '1',
+      }}
+      {...props}
+    />
+  );
+});
+SidebarMenuAction.displayName = 'SidebarMenuAction';
+
+const SidebarRail = React.forwardRef<
+  HTMLButtonElement,
+  React.ComponentProps<'button'>
+>(({ className, ...props }, ref) => {
+  const { open, toggleSidebar } = useSidebar();
+
+  return (
+    <button
+      ref={ref}
+      data-sidebar="rail"
+      aria-label="Toggle Sidebar"
+      tabIndex={-1}
+      onClick={toggleSidebar}
+      title="Toggle Sidebar"
+      className={classNames(
+        'position-absolute  background-color-transparent bw-0',
+        {
+          'cursor-w-resize': open,
+          'cursor-e-resize': !open,
+        },
+        className
+      )}
+      style={{
+        top: '0',
+        bottom: '0',
+        right: '-1rem',
+        width: '1rem',
+        zIndex: '20',
+      }}
+      {...props}
+    />
+  );
+});
+SidebarRail.displayName = 'SidebarRail';
 
 export {
   Sidebar,
@@ -522,7 +580,7 @@ export {
   // SidebarInput,
   SidebarInset,
   SidebarMenu,
-  // SidebarMenuAction,
+  SidebarMenuAction,
   // SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -531,7 +589,7 @@ export {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarProvider,
-  // SidebarRail,
+  SidebarRail,
   // SidebarSeparator,
   SidebarTrigger,
   useSidebar,

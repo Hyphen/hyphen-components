@@ -24,8 +24,8 @@ const DropdownMenuItem = React.forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={classNames(
-      'relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
-      inset && 'pl-8',
+      'font-size-sm position-relative cursor-default display-flex br-sm align-items-center p-sm g-sm outline-none hover:background-color-secondary focus:background-color-secondary',
+      inset && 'p-left-md',
       className
     )}
     {...props}
@@ -42,10 +42,13 @@ const DropdownMenuContent = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       className={classNames(
-        'minw-8xl overflow-hidden br-sm bw-sm border-color-subtle background-color-primary p-md font-color-base shadow-md',
+        'p-xs minw-7xl overflow-hidden br-sm bw-sm border-color-subtle background-color-primary font-color-base shadow-md',
         className
       )}
-      style={{ zIndex: 'var(--size-z-index-popover)' }}
+      style={{
+        zIndex: 'var(--size-z-index-popover)',
+        width: 'var(--radix-dropdown-menu-trigger-width)',
+      }}
       {...props}
     />
   </DropdownMenuPrimitive.Portal>
@@ -61,8 +64,8 @@ const DropdownMenuLabel = React.forwardRef<
   <DropdownMenuPrimitive.Label
     ref={ref}
     className={classNames(
-      'font-size-sm font-color-secondary',
-      inset && 'pl-8',
+      'display-flex align-items-center br-sm p-h-sm p-v-xs font-color-secondary font-size-xs font-weight-medium outline-none',
+      inset && 'p-left-md',
       className
     )}
     {...props}
@@ -76,26 +79,43 @@ const DropdownMenuSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.Separator
     ref={ref}
-    className={classNames('-mx-1 my-1 h-px bg-muted', className)}
+    className={classNames(
+      'h-2xs m-v-xs bw-top-sm border-color-subtle',
+      className
+    )}
+    style={{
+      marginLeft: 'calc(var(--size-spacing-md)*-1)',
+      marginRight: 'calc(var(--size-spacing-md)*-1)',
+    }}
     {...props}
   />
 ));
 DropdownMenuSeparator.displayName = DropdownMenuPrimitive.Separator.displayName;
+
+const DropdownMenuShortcut = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLSpanElement>) => {
+  return (
+    <span
+      className={classNames('font-size-xs font-color-tertiary', className)}
+      style={{ marginLeft: 'auto', letterSpacing: '0.5px' }}
+      {...props}
+    />
+  );
+};
+DropdownMenuShortcut.displayName = 'DropdownMenuShortcut';
 
 export {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-  // DropdownMenuCheckboxItem,
-  // DropdownMenuRadioItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  // DropdownMenuShortcut,
+  DropdownMenuShortcut,
   DropdownMenuGroup,
   DropdownMenuPortal,
   DropdownMenuSub,
-  // DropdownMenuSubContent,
-  // DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
 };

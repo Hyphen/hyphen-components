@@ -3,6 +3,7 @@ import { Meta } from '@storybook/react';
 import {
   SidebarProvider,
   Sidebar,
+  SidebarRail,
   SidebarTrigger,
   SidebarInset,
   SidebarHeader,
@@ -16,6 +17,7 @@ import {
   SidebarMenuSubItem,
   SidebarMenuButton,
   SidebarMenuSubButton,
+  SidebarMenuAction,
 } from './Sidebar';
 import { allModes } from '../../modes';
 import { Card } from '../Card/Card';
@@ -28,9 +30,11 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '../DropdownMenu/DropdownMenu';
 import { Box } from '../Box/Box';
@@ -56,9 +60,9 @@ export default meta;
 // This is sample data.
 const data = {
   user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
+    name: 'taylor anderson',
+    email: 'taylor.anderson@hyphen.ai',
+    avatar: '/avatars/avatar.jpg',
   },
   teams: [
     {
@@ -170,8 +174,22 @@ export const SidebarExample = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <SidebarMenuButton>
-                    <Box direction="row" gap="sm" alignItems="center">
-                      <div className="background-color-black display-flex w-3xl h-3xl align-items-center justify-content-center br-sm"></div>
+                    <Box
+                      flex="auto"
+                      direction="row"
+                      gap="sm"
+                      alignItems="center"
+                    >
+                      <Box
+                        background="black"
+                        borderColor="subtle"
+                        borderWidth="sm"
+                        width="4xl"
+                        height="4xl"
+                        alignItems="center"
+                        justifyContent="center"
+                        radius="md"
+                      ></Box>
                       <span className="font-weight-semibold">
                         {activeTeam.name}
                       </span>
@@ -181,29 +199,26 @@ export const SidebarExample = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="start" side="bottom" sideOffset={4}>
                   <DropdownMenuLabel className="text-xs text-muted-foreground">
-                    Teams
+                    Organizations
                   </DropdownMenuLabel>
-                  {data.teams.map((team) => (
+                  {data.teams.map((team, index) => (
                     <DropdownMenuItem
                       key={team.name}
                       onClick={() => setActiveTeam(team)}
-                      className="gap-2 p-2"
                     >
-                      <div className="flex size-6 items-center justify-center rounded-sm border">
-                        {/* <team.logo className="size-4 shrink-0" /> */}
-                      </div>
                       {team.name}
-                      {/* <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut> */}
+                      <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
                     </DropdownMenuItem>
                   ))}
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="gap-2 p-2">
-                    <div className="flex size-6 items-center justify-center rounded-md border bg-background">
-                      {/* <Plus className="size-4" /> */}
-                    </div>
-                    <div className="font-medium text-muted-foreground">
-                      Add team
-                    </div>
+                  <DropdownMenuItem>
+                    <a
+                      href="#"
+                      className="display-flex flex-direction-row g-sm align-items-center"
+                    >
+                      <Icon name="add" color="tertiary" />
+                      <span>Create Organization</span>
+                    </a>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -223,8 +238,14 @@ export const SidebarExample = () => {
                   >
                     <SidebarMenuItem>
                       <CollapsibleTrigger asChild>
-                        <SidebarMenuButton icon={item.icon as IconName}>
-                          <Box flex="auto">{item.title}</Box>
+                        <SidebarMenuButton>
+                          <Box direction="row" gap="md" flex="auto">
+                            <Icon
+                              name={item.icon as IconName}
+                              color="tertiary"
+                            />
+                            {item.title}
+                          </Box>
                           <Icon name="caret-sm-right" />
                           {/* <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" /> */}
                         </SidebarMenuButton>
@@ -246,31 +267,111 @@ export const SidebarExample = () => {
                   </Collapsible>
                 ) : (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton icon={item.icon as IconName} asChild>
-                      <a href={item.url}>{item.title}</a>
+                    <SidebarMenuButton asChild>
+                      <a href={item.url}>
+                        <Icon name={item.icon as IconName} color="tertiary" />
+                        <span>{item.title}</span>
+                      </a>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 )
               )}
             </SidebarMenu>
           </SidebarGroup>
-          <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+          <SidebarGroup>
             <SidebarGroupLabel>Favorites</SidebarGroupLabel>
             <SidebarMenu>
               {data.favorites.map((item) => (
                 <SidebarMenuItem key={item.name}>
-                  <SidebarMenuButton icon={item.icon} asChild>
+                  <SidebarMenuButton asChild>
                     <a href={item.url}>
+                      <Icon name={item.icon as IconName} color="tertiary" />
                       <span>{item.name}</span>
                     </a>
                   </SidebarMenuButton>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <SidebarMenuAction>
+                        <Icon name="dots" />
+                        <span className="sr-only">More</span>
+                      </SidebarMenuAction>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent side="bottom" align="end">
+                      <DropdownMenuItem>
+                        {/* <Icon name="folder" color="tertiary" /> */}
+                        <a href="#">View</a>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        {/* <Icon name="arrow-share" color="tertiary" /> */}
+                        <a href="#">Share</a>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>
+                        {/* <Icon name="trash" color="danger" /> */}
+                        <a href="#">Remove</a>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
           </SidebarGroup>
         </SidebarContent>
-
-        <SidebarFooter>footer</SidebarFooter>
+        <SidebarRail />
+        <SidebarFooter>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <SidebarMenuButton>
+                    <Box flex="auto" direction="column" gap="2xs">
+                      <span className="font-weight-semibold">
+                        {data.user.name}
+                      </span>
+                      <span className="truncate font-size-xs font-color-secondary">
+                        {data.user.email}
+                      </span>
+                    </Box>
+                    <Icon name="caret-up-down" />
+                  </SidebarMenuButton>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+                  side="bottom"
+                  align="end"
+                  sideOffset={4}
+                >
+                  <DropdownMenuLabel>
+                    <Box flex="auto" direction="column" gap="2xs">
+                      <span className="font-weight-semibold">
+                        {data.user.name}
+                      </span>
+                      <span className="truncate font-size-xs font-color-secondary">
+                        {data.user.email}
+                      </span>
+                    </Box>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem>
+                      <Icon name="user" color="tertiary" />
+                      Profile
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <Icon name="alarm" color="tertiary" />
+                      Notifications{' '}
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <Icon name="logout" color="tertiary" />
+                    Log out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarFooter>
       </Sidebar>
       <SidebarInset>
         <SidebarTrigger />
