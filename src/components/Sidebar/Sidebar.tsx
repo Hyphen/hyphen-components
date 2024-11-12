@@ -147,19 +147,12 @@ SidebarProvider.displayName = 'SidebarProvider';
 const Sidebar = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<'div'> & {
-    side?: 'left' | 'right';
+    side?: 'left'; // no right sidebar yet
     collapsible?: 'offcanvas' | 'icon' | 'none';
   }
 >(
   (
-    {
-      side = 'left',
-      //   variant = 'sidebar',
-      collapsible = 'offcanvas',
-      className,
-      children,
-      ...props
-    },
+    { side = 'left', collapsible = 'offcanvas', className, children, ...props },
     ref
   ) => {
     const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
@@ -229,8 +222,6 @@ const Sidebar = React.forwardRef<
         <div
           className={classNames(
             'duration-200 position-fixed display-none display-flex-desktop ',
-            side === 'right' &&
-              'right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]',
             className
           )}
           style={{
@@ -402,7 +393,11 @@ const SidebarMenuButton = React.forwardRef<
       data-sidebar="menu-button"
       data-active={isActive}
       className={classNames(
-        'display-flex w-100 flex-auto p-sm br-sm g-md flex-direction-row flex-auto align-items-center font-size-sm bw-0 font-weight-medium text-align-left text-decoration-none hover:background-color-tertiary background-color-transparent font-color-base cursor-pointer',
+        'display-flex w-100 flex-auto p-sm br-sm g-lg flex-direction-row flex-auto align-items-center font-size-sm bw-0 font-weight-medium text-align-left text-decoration-none hover:background-color-tertiary font-color-base cursor-pointer',
+        {
+          'background-color-tertiary': isActive,
+          'background-color-transparent': !isActive,
+        },
         className
       )}
       {...props}
@@ -480,23 +475,22 @@ const SidebarMenuSubButton = React.forwardRef<
   HTMLAnchorElement,
   React.ComponentProps<'a'> & {
     asChild?: boolean;
-    size?: 'sm' | 'md';
     isActive?: boolean;
   }
->(({ asChild = false, size = 'sm', isActive, className, ...props }, ref) => {
+>(({ asChild = false, isActive, className, ...props }, ref) => {
   const Comp = asChild ? Slot : 'a';
 
   return (
     <Comp
       ref={ref}
       data-sidebar="menu-sub-button"
-      data-size={size}
       data-active={isActive}
       className={classNames(
-        'display-flex text-decoration-none h-4xl p-left-sm font-color-base minw-0 align-items-center gap-sm overflow-hidden br-sm outline-none hover:background-color-tertiary',
-        'data-[active=true]:bg-sidebar-accent',
-        size === 'sm' && 'text-sm',
-        'group-data-[collapsible=icon]:hidden',
+        'display-flex text-decoration-none h-4xl p-left-lg font-color-base minw-0 align-items-center gap-sm overflow-hidden br-sm outline-none hover:background-color-tertiary',
+        {
+          'background-color-tertiary': isActive,
+          'background-color-transparent': !isActive,
+        },
         className
       )}
       {...props}

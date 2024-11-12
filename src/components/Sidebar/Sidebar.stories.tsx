@@ -86,6 +86,7 @@ const data = {
       title: 'Dashboard',
       url: '#',
       icon: 'dashboard',
+      isActive: true,
     },
     {
       title: 'Teams',
@@ -239,10 +240,11 @@ export const SidebarExample = () => {
                     <SidebarMenuItem>
                       <CollapsibleTrigger asChild>
                         <SidebarMenuButton>
-                          <Box direction="row" gap="md" flex="auto">
+                          <Box direction="row" gap="lg" flex="auto">
                             <Icon
                               name={item.icon as IconName}
                               color="tertiary"
+                              size="lg"
                             />
                             {item.title}
                           </Box>
@@ -267,9 +269,13 @@ export const SidebarExample = () => {
                   </Collapsible>
                 ) : (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
+                    <SidebarMenuButton asChild isActive={item.isActive}>
                       <a href={item.url}>
-                        <Icon name={item.icon as IconName} color="tertiary" />
+                        <Icon
+                          name={item.icon as IconName}
+                          color="tertiary"
+                          size="lg"
+                        />
                         <span>{item.title}</span>
                       </a>
                     </SidebarMenuButton>
