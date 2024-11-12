@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import {
   Collapsible,
   CollapsibleTrigger,
@@ -7,6 +7,7 @@ import {
 } from './Collapsible';
 import { Button } from '../Button/Button';
 import { Box } from '../Box/Box';
+import { userEvent, within, expect } from '@storybook/test';
 
 const meta: Meta<typeof Collapsible> = {
   title: 'Components/Collapsible',
@@ -14,6 +15,7 @@ const meta: Meta<typeof Collapsible> = {
 };
 
 export default meta;
+type Story = StoryObj<typeof Collapsible>;
 
 export const Uncontrolled = () => (
   <Collapsible>
@@ -89,3 +91,14 @@ export function Controlled() {
     </Collapsible>
   );
 }
+
+export const ClickOpenCollapsible: Story = {
+  play: async ({ canvasElement, mount }) => {
+    await mount(<Controlled />);
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByLabelText('toggle'));
+
+    await expect(canvas.getByText('@radix-ui/colors')).toBeInTheDocument();
+  },
+};
