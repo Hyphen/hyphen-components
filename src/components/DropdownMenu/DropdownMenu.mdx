@@ -1,0 +1,21 @@
+import { Canvas, Meta, ArgTypes } from '@storybook/blocks';
+import { DropdownMenu } from './DropdownMenu';
+import * as Stories from './DropdownMenu.stories';
+
+<Meta of={Stories} />
+
+# DropdownMenu
+
+DropdownMenu components are used to hide or show content based on user interaction. 
+
+This component is extended from [Radix](https://www.radix-ui.com/primitives/docs/components/dropdown-menu).
+
+[API Reference](https://www.radix-ui.com/primitives/docs/components/dropdown-menu#api-reference)
+
+<Canvas of={Stories.Uncontrolled} />
+
+## Controlled
+
+The `open` prop can be used to control the state of the DropdownMenu component.
+
+<Canvas of={Stories.Controlled} />
