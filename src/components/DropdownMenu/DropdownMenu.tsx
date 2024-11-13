@@ -2,6 +2,7 @@ import React from 'react';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 
 import classNames from 'classnames';
+import { Icon } from '../Icon/Icon';
 
 const DropdownMenu = DropdownMenuPrimitive.Root;
 
@@ -42,11 +43,10 @@ const DropdownMenuContent = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       className={classNames(
-        'p-xs minw-7xl overflow-hidden br-sm bw-sm border-color-subtle background-color-primary font-color-base shadow-md',
+        'z-index-popover p-xs minw-7xl overflow-hidden br-sm bw-sm border-color-subtle background-color-primary font-color-base shadow-md',
         className
       )}
       style={{
-        zIndex: 'var(--size-z-index-popover)',
         width: 'var(--radix-dropdown-menu-trigger-width)',
       }}
       {...props}
@@ -98,13 +98,54 @@ const DropdownMenuShortcut = ({
 }: React.HTMLAttributes<HTMLSpanElement>) => {
   return (
     <span
-      className={classNames('font-size-xs font-color-tertiary', className)}
-      style={{ marginLeft: 'auto', letterSpacing: '0.5px' }}
+      className={classNames(
+        'm-left-auto font-size-xs font-color-tertiary',
+        className
+      )}
+      style={{ letterSpacing: '0.5px' }}
       {...props}
     />
   );
 };
 DropdownMenuShortcut.displayName = 'DropdownMenuShortcut';
+
+const DropdownMenuSubTrigger = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.SubTrigger>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubTrigger> & {
+    inset?: boolean;
+  }
+>(({ className, inset, children, ...props }, ref) => (
+  <DropdownMenuPrimitive.SubTrigger
+    ref={ref}
+    className={classNames(
+      'display-flex cursor-default gap-xl align-items-center br-sm p-sm g-sm font-size-sm outline-none focus:background-color-secondary',
+      inset && 'p-left-md',
+      className
+    )}
+    {...props}
+  >
+    {children}
+    <Icon name="caret-sm-right" className="m-left-auto" />
+  </DropdownMenuPrimitive.SubTrigger>
+));
+DropdownMenuSubTrigger.displayName =
+  DropdownMenuPrimitive.SubTrigger.displayName;
+
+const DropdownMenuSubContent = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.SubContent>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubContent>
+>(({ className, ...props }, ref) => (
+  <DropdownMenuPrimitive.SubContent
+    ref={ref}
+    className={classNames(
+      'z-index-popover minw-7xl overflow-hidden br-sm border-color-subtle bw-sm background-color-primary p-xs font-color-primary shadow-lg',
+      className
+    )}
+    {...props}
+  />
+));
+DropdownMenuSubContent.displayName =
+  DropdownMenuPrimitive.SubContent.displayName;
 
 export {
   DropdownMenu,
@@ -114,6 +155,8 @@ export {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuGroup,
   DropdownMenuPortal,
   DropdownMenuSub,
