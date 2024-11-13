@@ -6,6 +6,7 @@ import { Drawer } from '../Drawer/Drawer';
 import { useIsMobile } from '../../hooks/useIsMobile/useIsMobile';
 import { Box } from '../Box/Box';
 import { IconName } from 'src/types';
+import { Icon } from '../Icon/Icon';
 
 type SidebarContext = {
   state: 'expanded' | 'collapsed';
@@ -531,6 +532,8 @@ const SidebarRail = React.forwardRef<
 >(({ className, ...props }, ref) => {
   const { open, toggleSidebar } = useSidebar();
 
+  const caretIcon = open ? 'caret-sm-left' : 'caret-sm-right';
+
   return (
     <button
       ref={ref}
@@ -540,7 +543,7 @@ const SidebarRail = React.forwardRef<
       onClick={toggleSidebar}
       title="Toggle Sidebar"
       className={classNames(
-        'position-absolute  background-color-transparent bw-0',
+        'hover-show-child display-flex p-top-5xl justify-content-center position-absolute background-color-transparent bw-0',
         {
           'cursor-w-resize': open,
           'cursor-e-resize': !open,
@@ -552,10 +555,30 @@ const SidebarRail = React.forwardRef<
         bottom: '0',
         right: '-1rem',
         width: '1rem',
-        zIndex: '20',
+        zIndex: '-1',
       }}
       {...props}
-    />
+    >
+      <Box
+        radius="xl"
+        background="primary"
+        color="secondary"
+        borderWidth="sm"
+        padding="xs"
+        margin="0 0 0 sm"
+        shadow="xs"
+        className={classNames(
+          'hover-child',
+          {
+            'cursor-w-resize': open,
+            'cursor-e-resize': !open,
+          },
+          className
+        )}
+      >
+        <Icon name={caretIcon} />
+      </Box>
+    </button>
   );
 });
 SidebarRail.displayName = 'SidebarRail';

@@ -236,16 +236,16 @@ export const SidebarExample = () => {
                     <SidebarMenuItem>
                       <CollapsibleTrigger asChild>
                         <SidebarMenuButton>
-                          <Box direction="row" gap="lg" flex="auto">
-                            <Icon
-                              name={item.icon as IconName}
-                              color="tertiary"
-                              size="lg"
-                            />
-                            {item.title}
-                          </Box>
-                          <Icon name="caret-sm-right" />
-                          {/* <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" /> */}
+                          <Icon
+                            name={item.icon as IconName}
+                            color="tertiary"
+                            size="lg"
+                          />
+                          {item.title}
+                          <Icon
+                            name="caret-sm-right"
+                            className="m-left-auto transform data-[state=open]:rotate-90"
+                          />
                         </SidebarMenuButton>
                       </CollapsibleTrigger>
                       <CollapsibleContent>
@@ -303,16 +303,13 @@ export const SidebarExample = () => {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent side="bottom" align="end">
                       <DropdownMenuItem>
-                        {/* <Icon name="folder" color="tertiary" /> */}
                         <a href="#">View</a>
                       </DropdownMenuItem>
                       <DropdownMenuItem>
-                        {/* <Icon name="arrow-share" color="tertiary" /> */}
                         <a href="#">Share</a>
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem>
-                        {/* <Icon name="trash" color="danger" /> */}
                         <a href="#">Remove</a>
                       </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -379,7 +376,7 @@ export const SidebarExample = () => {
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <SidebarTrigger />
+        {/* <SidebarTrigger /> */}
         <Card height="100" padding="2xl">
           content
         </Card>

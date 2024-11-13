@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+* {
+  border-color: var(--color-border-subtle);
+}
+
 html,
 body {
   height: 100%;
