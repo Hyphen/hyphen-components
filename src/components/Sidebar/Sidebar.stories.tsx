@@ -18,6 +18,7 @@ import {
   SidebarMenuButton,
   SidebarMenuSubButton,
   SidebarMenuAction,
+  SidebarMenuBadge,
 } from './Sidebar';
 import { allModes } from '../../modes';
 import { Card } from '../Card/Card';
@@ -67,18 +68,12 @@ const data = {
   teams: [
     {
       name: 'Acme Inc',
-      // logo: GalleryVerticalEnd,
-      //   plan: 'Enterprise',
     },
     {
       name: 'Acme Corp.',
-      // logo: AudioWaveform,
-      //   plan: 'Startup',
     },
     {
       name: 'Evil Corp.',
-      // logo: Command,
-      //   plan: 'Free',
     },
   ],
   navMain: [
@@ -122,6 +117,7 @@ const data = {
       title: 'Integrations',
       url: '#',
       icon: 'stack',
+      count: 23,
     },
     {
       title: 'Settings',
@@ -279,6 +275,9 @@ export const SidebarExample = () => {
                         <span>{item.title}</span>
                       </a>
                     </SidebarMenuButton>
+                    {item.count && (
+                      <SidebarMenuBadge>{item.count}</SidebarMenuBadge>
+                    )}
                   </SidebarMenuItem>
                 )
               )}

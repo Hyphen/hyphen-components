@@ -512,14 +512,12 @@ const SidebarMenuAction = React.forwardRef<
       ref={ref}
       data-sidebar="menu-action"
       className={classNames(
-        'position-absolute p-xs font-color-secondary cursor-pointer hover:font-color-base minw-0 align-items-center bw-0 br-sm outline-none background-color-transparent hover:background-color-tertiary',
-        'data-[active=true]:bg-sidebar-accent',
+        'position-absolute lh-none p-xs font-color-secondary cursor-pointer hover:font-color-base minw-0 align-items-center bw-0 br-sm outline-none background-color-transparent hover:background-color-tertiary',
         className
       )}
       style={{
         top: 'var(--size-spacing-xs)',
         right: 'var(--size-spacing-xs)',
-        lineHeight: '1',
       }}
       {...props}
     />
@@ -562,29 +560,44 @@ const SidebarRail = React.forwardRef<
 });
 SidebarRail.displayName = 'SidebarRail';
 
+const SidebarMenuBadge = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<'div'>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    data-sidebar="menu-badge"
+    className={classNames(
+      'position-absolute font-size-xs cursor-default lh-none p-xs font-color-base minw-0 align-items-center bw-0 br-sm outline-none background-color-transparent',
+      className
+    )}
+    style={{
+      top: 'var(--size-spacing-sm)',
+      right: 'var(--size-spacing-xs)',
+    }}
+    {...props}
+  />
+));
+SidebarMenuBadge.displayName = 'SidebarMenuBadge';
+
 export {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  // SidebarGroupAction,
-  // SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
-  // SidebarInput,
   SidebarInset,
   SidebarMenu,
   SidebarMenuAction,
-  // SidebarMenuBadge,
+  SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
-  // SidebarMenuSkeleton,
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarProvider,
   SidebarRail,
-  // SidebarSeparator,
   SidebarTrigger,
   useSidebar,
 };
