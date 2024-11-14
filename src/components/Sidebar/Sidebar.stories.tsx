@@ -347,12 +347,7 @@ export const SidebarExample = () => {
                       <Icon name="caret-up-down" />
                     </SidebarMenuButton>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent
-                    className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-                    side="bottom"
-                    align="end"
-                    sideOffset={4}
-                  >
+                  <DropdownMenuContent side="bottom" align="end" sideOffset={4}>
                     <DropdownMenuLabel>
                       <Box flex="auto" direction="column" gap="2xs">
                         <span className="font-weight-semibold">

@@ -1,4 +1,10 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, {
+  useCallback,
+  useMemo,
+  useState,
+  useEffect,
+  forwardRef,
+} from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import classNames from 'classnames';
 import { Button } from '../Button/Button';
@@ -8,7 +14,13 @@ import { Box } from '../Box/Box';
 import { IconName } from 'src/types';
 import { Icon } from '../Icon/Icon';
 
-type SidebarContext = {
+const SIDEBAR_COOKIE_NAME = 'sidebar:state';
+const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
+const SIDEBAR_WIDTH = '16rem';
+const SIDEBAR_WIDTH_ICON = '3rem';
+const SIDEBAR_KEYBOARD_SHORTCUT = '[';
+
+interface SidebarContextProps {
   state: 'expanded' | 'collapsed';
   open: boolean;
   setOpen: (open: boolean) => void;
@@ -16,27 +28,19 @@ type SidebarContext = {
   setOpenMobile: (open: boolean) => void;
   isMobile: boolean;
   toggleSidebar: () => void;
-};
+}
 
-const SIDEBAR_COOKIE_NAME = 'sidebar:state';
-const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-const SIDEBAR_WIDTH = '16rem';
-// const SIDEBAR_WIDTH_MOBILE = '18rem';
-const SIDEBAR_WIDTH_ICON = '3rem';
-const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
-
-const SidebarContext = React.createContext<SidebarContext | null>(null);
+const SidebarContext = React.createContext<SidebarContextProps | null>(null);
 
 function useSidebar() {
   const context = React.useContext(SidebarContext);
   if (!context) {
     throw new Error('useSidebar must be used within a SidebarProvider.');
   }
-
   return context;
 }
 
-const SidebarProvider = React.forwardRef<
+const SidebarProvider = forwardRef<
   HTMLDivElement,
   React.ComponentProps<'div'> & {
     defaultOpen?: boolean;
@@ -57,7 +61,7 @@ const SidebarProvider = React.forwardRef<
     ref
   ) => {
     const isMobile = useIsMobile();
-    const [openMobile, setOpenMobile] = useState(false);
+    const [openMobile, setOpenMobile] = useState(openProp ?? defaultOpen);
 
     // This is the internal state of the sidebar.
     // We use openProp and setOpenProp for control from outside the component.
@@ -86,7 +90,7 @@ const SidebarProvider = React.forwardRef<
     }, [isMobile, setOpen, setOpenMobile]);
 
     // Adds a keyboard shortcut to toggle the sidebar.
-    React.useEffect(() => {
+    useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
         if (
           event.key === SIDEBAR_KEYBOARD_SHORTCUT &&
@@ -101,10 +105,21 @@ const SidebarProvider = React.forwardRef<
       return () => window.removeEventListener('keydown', handleKeyDown);
     }, [toggleSidebar]);
 
+    useEffect(() => {
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === SIDEBAR_KEYBOARD_SHORTCUT) {
+          event.preventDefault();
+          toggleSidebar();
+        }
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [toggleSidebar]);
+
     // We add a state so that we can do data-state="expanded" or "collapsed".
     const state = open ? 'expanded' : 'collapsed';
 
-    const contextValue = useMemo<SidebarContext>(
+    const contextValue = useMemo<SidebarContextProps>(
       () => ({
         state,
         open,
@@ -182,9 +197,6 @@ const Sidebar = React.forwardRef<
           isOpen={openMobile}
           onDismiss={() => setOpenMobile(false)}
           placement={side}
-          //   style={{
-          //     width: SIDEBAR_WIDTH_MOBILE
-          //   }}
         >
           <Box data-sidebar="sidebar" data-mobile="true">
             {children}
@@ -215,10 +227,7 @@ const Sidebar = React.forwardRef<
             width: state === 'collapsed' ? '0' : 'var(--sidebar-width)',
             height: '100svh',
           }}
-          className={classNames(
-            'position-relative',
-            'group-data-[side=right]:rotate-180'
-          )}
+          className={classNames('position-relative', className)}
         />
         <div
           className={classNames(
@@ -267,7 +276,6 @@ const SidebarTrigger = React.forwardRef<
         onClick?.(event);
         toggleSidebar();
       }}
-      //   style={{ marginLeft: 'calc(var(--size-spacing-sm) * -1)' }}
       aria-label="toggle sidebar"
       {...props}
     />
