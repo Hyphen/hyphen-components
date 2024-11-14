@@ -394,7 +394,7 @@ const SidebarMenuButton = React.forwardRef<
       data-sidebar="menu-button"
       data-active={isActive}
       className={classNames(
-        'display-flex w-100 flex-auto p-sm br-sm g-lg flex-direction-row flex-auto align-items-center font-size-sm bw-0 font-weight-medium text-align-left text-decoration-none hover:background-color-tertiary font-color-base cursor-pointer',
+        'display-flex w-100 flex-auto p-sm br-sm g-lg flex-direction-row flex-auto align-items-center font-size-sm bw-0 font-weight-medium text-align-left td-none hover:background-color-tertiary font-color-base cursor-pointer',
         {
           'background-color-tertiary': isActive,
           'background-color-transparent': !isActive,
@@ -487,7 +487,7 @@ const SidebarMenuSubButton = React.forwardRef<
       data-sidebar="menu-sub-button"
       data-active={isActive}
       className={classNames(
-        'display-flex text-decoration-none h-4xl p-left-lg font-color-base minw-0 align-items-center gap-sm overflow-hidden br-sm outline-none hover:background-color-tertiary',
+        'display-flex td-none h-4xl p-left-lg font-color-base minw-0 align-items-center gap-sm overflow-hidden br-sm outline-none hover:background-color-tertiary',
         {
           'background-color-tertiary': isActive,
           'background-color-transparent': !isActive,
