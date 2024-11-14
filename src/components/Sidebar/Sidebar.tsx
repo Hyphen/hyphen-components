@@ -134,7 +134,6 @@ const SidebarProvider = forwardRef<
 
     return (
       <SidebarContext.Provider value={contextValue}>
-        {/* <TooltipProvider delayDuration={0}> */}
         <div
           style={
             {
@@ -153,7 +152,6 @@ const SidebarProvider = forwardRef<
         >
           {children}
         </div>
-        {/* </TooltipProvider> */}
       </SidebarContext.Provider>
     );
   }
@@ -173,6 +171,20 @@ const Sidebar = React.forwardRef<
   ) => {
     const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
 
+    if (isMobile) {
+      return (
+        <Drawer
+          isOpen={openMobile}
+          onDismiss={() => setOpenMobile(false)}
+          placement={side}
+        >
+          <Box data-sidebar="sidebar" data-mobile="true">
+            {children}
+          </Box>
+        </Drawer>
+      );
+    }
+
     if (collapsible === 'none') {
       return (
         <div
@@ -188,20 +200,6 @@ const Sidebar = React.forwardRef<
         >
           {children}
         </div>
-      );
-    }
-
-    if (isMobile) {
-      return (
-        <Drawer
-          isOpen={openMobile}
-          onDismiss={() => setOpenMobile(false)}
-          placement={side}
-        >
-          <Box data-sidebar="sidebar" data-mobile="true">
-            {children}
-          </Box>
-        </Drawer>
       );
     }
 
@@ -247,7 +245,7 @@ const Sidebar = React.forwardRef<
         >
           <div
             data-sidebar="sidebar"
-            className="display-flex h-100 w-100 flex-direction-column background-color-secondary"
+            className="display-flex h-100 w-100 flex-direction-column background-color-secondary font-color-base"
           >
             {children}
           </div>
@@ -291,7 +289,7 @@ const SidebarInset = React.forwardRef<
     <main
       ref={ref}
       className={classNames(
-        'display-flex w-100 flex-direction-column g-lg align-items-flex-start p-lg background-color-secondary',
+        'display-flex flex-auto flex-direction-column g-lg align-items-flex-start p-lg background-color-secondary',
         className
       )}
       {...props}
