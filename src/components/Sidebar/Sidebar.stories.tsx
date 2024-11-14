@@ -4,7 +4,6 @@ import {
   SidebarProvider,
   Sidebar,
   SidebarRail,
-  SidebarTrigger,
   SidebarInset,
   SidebarHeader,
   SidebarFooter,
