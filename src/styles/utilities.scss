@@ -7,7 +7,35 @@
 @import './text-align';
 @import './white-space';
 @import './position';
+@import './transform';
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .outline-none {
-    outline: none;
+  outline: none;
+}
+
+.hover-show-child .hover-child {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hover-show-child:hover .hover-child {
+  opacity: 1;
 }

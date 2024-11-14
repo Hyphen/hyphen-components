@@ -37,6 +37,7 @@ export * from './components/ResponsiveProvider/ResponsiveProvider';
 export * from './components/SelectInput/SelectInput';
 export * from './components/SelectInputInset/SelectInputInset';
 export * from './components/SelectInputNative/SelectInputNative';
+export * from './components/Sidebar/Sidebar';
 export * from './components/Spinner/Spinner';
 export * from './components/Table/Table';
 export * from './components/TextareaInput/TextareaInput';

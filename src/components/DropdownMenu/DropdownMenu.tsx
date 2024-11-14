@@ -25,7 +25,7 @@ const DropdownMenuItem = React.forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={classNames(
-      'font-size-sm position-relative cursor-default display-flex br-sm align-items-center p-sm g-sm  outline-none hover:background-color-secondary focus:background-color-secondary',
+      'font-size-sm position-relative cursor-default display-flex br-sm align-items-center p-sm g-sm outline-none hover:background-color-secondary focus:background-color-secondary',
       inset && 'p-left-md',
       className
     )}
