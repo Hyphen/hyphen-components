@@ -63,33 +63,34 @@ const SidebarProvider = forwardRef<
     const isMobile = useIsMobile();
     const [openMobile, setOpenMobile] = useState(openProp ?? defaultOpen);
 
-    // This is the internal state of the sidebar.
-    // We use openProp and setOpenProp for control from outside the component.
-    const [_open, _setOpen] = useState(defaultOpen);
+    // Manages sidebar open state with a fallback to internal state when openProp is not provided
+    const [_open, _setOpen] = useState(openProp ?? defaultOpen);
     const open = openProp ?? _open;
+
     const setOpen = useCallback(
       (value: boolean | ((value: boolean) => boolean)) => {
-        const openState = typeof value === 'function' ? value(open) : value;
-        if (setOpenProp) {
-          setOpenProp(openState);
-        } else {
-          _setOpen(openState);
-        }
+        const newOpenState = typeof value === 'function' ? value(open) : value;
 
-        // This sets the cookie to keep the sidebar state.
-        document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+        if (newOpenState !== open) {
+          if (setOpenProp) {
+            setOpenProp(newOpenState);
+          } else {
+            _setOpen(newOpenState);
+          }
+
+          // Set cookie only if state changes
+          document.cookie = `${SIDEBAR_COOKIE_NAME}=${newOpenState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+        }
       },
       [setOpenProp, open]
     );
 
-    // Helper to toggle the sidebar.
+    // Toggle sidebar based on screen type
     const toggleSidebar = useCallback(() => {
-      return isMobile
-        ? setOpenMobile((open) => !open)
-        : setOpen((open) => !open);
+      isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open);
     }, [isMobile, setOpen, setOpenMobile]);
 
-    // Adds a keyboard shortcut to toggle the sidebar.
+    // Keydown event handler for toggling sidebar
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
         if (
@@ -105,18 +106,14 @@ const SidebarProvider = forwardRef<
       return () => window.removeEventListener('keydown', handleKeyDown);
     }, [toggleSidebar]);
 
+    // Update open state when `isMobile` changes
     useEffect(() => {
-      const handleKeyDown = (event: KeyboardEvent) => {
-        if (event.key === SIDEBAR_KEYBOARD_SHORTCUT) {
-          event.preventDefault();
-          toggleSidebar();
-        }
-      };
-      window.addEventListener('keydown', handleKeyDown);
-      return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [toggleSidebar]);
+      if (isMobile && open) {
+        setOpenMobile(open);
+      }
+    }, [isMobile, open]);
 
-    // We add a state so that we can do data-state="expanded" or "collapsed".
+    // Assign state for data attributes
     const state = open ? 'expanded' : 'collapsed';
 
     const contextValue = useMemo<SidebarContextProps>(
@@ -139,8 +136,8 @@ const SidebarProvider = forwardRef<
             {
               '--sidebar-width': SIDEBAR_WIDTH,
               '--sidebar-width-icon': SIDEBAR_WIDTH_ICON,
-              ...style,
               minBlockSize: '100svh',
+              ...style,
             } as React.CSSProperties
           }
           className={classNames(
@@ -211,16 +208,16 @@ const Sidebar = React.forwardRef<
         color="base"
         fontSize="sm"
         data-state={state}
-        data-collapsible={state === 'collapsed' ? collapsible : ''}
+        data-collapsible={collapsible}
         data-side={side}
       >
-        {/* This is what handles the sidebar gap on desktop */}
         <div
           style={{
-            animationTimingFunction: 'linear',
-            transitionTimingFunction: 'linear',
-            transitionDuration: '200ms',
-            animationDuration: '200ms',
+            animationTimingFunction: 'var(--sidebar-transition-timing, linear)',
+            transitionTimingFunction:
+              'var(--sidebar-transition-timing, linear)',
+            transitionDuration: 'var(--sidebar-transition-duration, 200ms)',
+            animationDuration: 'var(--sidebar-transition-duration, 200ms)',
             transitionProperty: 'width',
             width: state === 'collapsed' ? '0' : 'var(--sidebar-width)',
             height: '100svh',
@@ -229,7 +226,7 @@ const Sidebar = React.forwardRef<
         />
         <div
           className={classNames(
-            'duration-200 position-fixed display-none display-flex-desktop ',
+            'position-fixed display-none display-flex-desktop ',
             className
           )}
           style={{
@@ -269,7 +266,7 @@ const SidebarTrigger = React.forwardRef<
       variant="tertiary"
       size="sm"
       iconPrefix="dock-left"
-      className={classNames(className)}
+      className={className}
       onClick={(event) => {
         onClick?.(event);
         toggleSidebar();
