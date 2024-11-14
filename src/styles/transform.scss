@@ -1,49 +1,305 @@
+.transform {
+  --hy-translate-x: 0;
+  --hy-translate-y: 0;
+  --hy-skew-x: 0;
+  --hy-skew-y: 0;
+  --hy-scale-x: 1;
+  --hy-scale-y: 1;
+  transition: transform 0.2s ease-out;
+  transform: translate(var(--hy-translate-x), var(--hy-translate-y))
+    rotate(var(--hy-rotate)) skewX(var(--hy-skew-x)) skewY(var(--hy-skew-y))
+    scaleX(var(--hy-scale-x)) scaleY(var(--hy-scale-y));
+}
+
 /* Rotation Variables */
 .rotate-0 {
-  --tw-rotate: 0deg;
+  --hy-rotate: 0deg;
 }
 
 .rotate-1 {
-  --tw-rotate: 1deg;
+  --hy-rotate: 1deg;
 }
 
 .rotate-2 {
-  --tw-rotate: 2deg;
+  --hy-rotate: 2deg;
 }
 
 .rotate-3 {
-  --tw-rotate: 3deg;
+  --hy-rotate: 3deg;
 }
 
 .rotate-6 {
-  --tw-rotate: 6deg;
+  --hy-rotate: 6deg;
 }
 
 .rotate-12 {
-  --tw-rotate: 12deg;
+  --hy-rotate: 12deg;
 }
 
 .rotate-45 {
-  --tw-rotate: 45deg;
+  --hy-rotate: 45deg;
+}
+
+.rotate-90 {
+  --hy-rotate: 90deg;
 }
 
 [data-state='open'] .data-\[state\=open\]\:rotate-90 {
-  --tw-rotate: 90deg;
+  --hy-rotate: 90deg;
 }
 
 .rotate-180 {
-  --tw-rotate: 180deg;
+  --hy-rotate: 180deg;
 }
 
-.transform {
-  --tw-translate-x: 0;
-  --tw-translate-y: 0;
-  --tw-skew-x: 0;
-  --tw-skew-y: 0;
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-  transition: transform 0.2s ease-out;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
-    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
-    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+/* Positive Translate X classes */
+.translate-x-0 {
+  --hy-translate-x: var(--size-dimension-0);
+}
+
+.translate-x-2xs {
+  --hy-translate-x: var(--size-dimension-2xs);
+}
+
+.translate-x-xs {
+  --hy-translate-x: var(--size-dimension-xs);
+}
+
+.translate-x-sm {
+  --hy-translate-x: var(--size-dimension-sm);
+}
+
+.translate-x-md {
+  --hy-translate-x: var(--size-dimension-md);
+}
+
+.translate-x-lg {
+  --hy-translate-x: var(--size-dimension-lg);
+}
+
+.translate-x-xl {
+  --hy-translate-x: var(--size-dimension-xl);
+}
+
+.translate-x-2xl {
+  --hy-translate-x: var(--size-dimension-2xl);
+}
+
+.translate-x-3xl {
+  --hy-translate-x: var(--size-dimension-3xl);
+}
+
+.translate-x-4xl {
+  --hy-translate-x: var(--size-dimension-4xl);
+}
+
+.translate-x-5xl {
+  --hy-translate-x: var(--size-dimension-5xl);
+}
+
+.translate-x-6xl {
+  --hy-translate-x: var(--size-dimension-6xl);
+}
+
+.translate-x-7xl {
+  --hy-translate-x: var(--size-dimension-7xl);
+}
+
+.translate-x-8xl {
+  --hy-translate-x: var(--size-dimension-8xl);
+}
+
+.translate-x-9xl {
+  --hy-translate-x: var(--size-dimension-9xl);
+}
+
+.translate-x-10xl {
+  --hy-translate-x: var(--size-dimension-10xl);
+}
+
+/* Negative Translate X classes */
+.-translate-x-2xs {
+  --hy-translate-x: calc(var(--size-dimension-2xs) * -1);
+}
+
+.-translate-x-xs {
+  --hy-translate-x: calc(var(--size-dimension-xs) * -1);
+}
+
+.-translate-x-sm {
+  --hy-translate-x: calc(var(--size-dimension-sm) * -1);
+}
+
+.-translate-x-md {
+  --hy-translate-x: calc(var(--size-dimension-md) * -1);
+}
+
+.-translate-x-lg {
+  --hy-translate-x: calc(var(--size-dimension-lg) * -1);
+}
+
+.-translate-x-xl {
+  --hy-translate-x: calc(var(--size-dimension-xl) * -1);
+}
+
+.-translate-x-2xl {
+  --hy-translate-x: calc(var(--size-dimension-2xl) * -1);
+}
+
+.-translate-x-3xl {
+  --hy-translate-x: calc(var(--size-dimension-3xl) * -1);
+}
+
+.-translate-x-4xl {
+  --hy-translate-x: calc(var(--size-dimension-4xl) * -1);
+}
+
+.-translate-x-5xl {
+  --hy-translate-x: calc(var(--size-dimension-5xl) * -1);
+}
+
+.-translate-x-6xl {
+  --hy-translate-x: calc(var(--size-dimension-6xl) * -1);
+}
+
+.-translate-x-7xl {
+  --hy-translate-x: calc(var(--size-dimension-7xl) * -1);
+}
+
+.-translate-x-8xl {
+  --hy-translate-x: calc(var(--size-dimension-8xl) * -1);
+}
+
+.-translate-x-9xl {
+  --hy-translate-x: calc(var(--size-dimension-9xl) * -1);
+}
+
+.-translate-x-10xl {
+  --hy-translate-x: calc(var(--size-dimension-10xl) * -1);
+}
+
+/* Positive Translate Y classes */
+.translate-y-0 {
+  --hy-translate-y: var(--size-dimension-0);
+}
+
+.translate-y-2xs {
+  --hy-translate-y: var(--size-dimension-2xs);
+}
+
+.translate-y-xs {
+  --hy-translate-y: var(--size-dimension-xs);
+}
+
+.translate-y-sm {
+  --hy-translate-y: var(--size-dimension-sm);
+}
+
+.translate-y-md {
+  --hy-translate-y: var(--size-dimension-md);
+}
+
+.translate-y-lg {
+  --hy-translate-y: var(--size-dimension-lg);
+}
+
+.translate-y-xl {
+  --hy-translate-y: var(--size-dimension-xl);
+}
+
+.translate-y-2xl {
+  --hy-translate-y: var(--size-dimension-2xl);
+}
+
+.translate-y-3xl {
+  --hy-translate-y: var(--size-dimension-3xl);
+}
+
+.translate-y-4xl {
+  --hy-translate-y: var(--size-dimension-4xl);
+}
+
+.translate-y-5xl {
+  --hy-translate-y: var(--size-dimension-5xl);
+}
+
+.translate-y-6xl {
+  --hy-translate-y: var(--size-dimension-6xl);
+}
+
+.translate-y-7xl {
+  --hy-translate-y: var(--size-dimension-7xl);
+}
+
+.translate-y-8xl {
+  --hy-translate-y: var(--size-dimension-8xl);
+}
+
+.translate-y-9xl {
+  --hy-translate-y: var(--size-dimension-9xl);
+}
+
+.translate-y-10xl {
+  --hy-translate-y: var(--size-dimension-10xl);
+}
+
+/* Negative Translate Y classes */
+.-translate-y-2xs {
+  --hy-translate-y: calc(var(--size-dimension-2xs) * -1);
+}
+
+.-translate-y-xs {
+  --hy-translate-y: calc(var(--size-dimension-xs) * -1);
+}
+
+.-translate-y-sm {
+  --hy-translate-y: calc(var(--size-dimension-sm) * -1);
+}
+
+.-translate-y-md {
+  --hy-translate-y: calc(var(--size-dimension-md) * -1);
+}
+
+.-translate-y-lg {
+  --hy-translate-y: calc(var(--size-dimension-lg) * -1);
+}
+
+.-translate-y-xl {
+  --hy-translate-y: calc(var(--size-dimension-xl) * -1);
+}
+
+.-translate-y-2xl {
+  --hy-translate-y: calc(var(--size-dimension-2xl) * -1);
+}
+
+.-translate-y-3xl {
+  --hy-translate-y: calc(var(--size-dimension-3xl) * -1);
+}
+
+.-translate-y-4xl {
+  --hy-translate-y: calc(var(--size-dimension-4xl) * -1);
+}
+
+.-translate-y-5xl {
+  --hy-translate-y: calc(var(--size-dimension-5xl) * -1);
+}
+
+.-translate-y-6xl {
+  --hy-translate-y: calc(var(--size-dimension-6xl) * -1);
+}
+
+.-translate-y-7xl {
+  --hy-translate-y: calc(var(--size-dimension-7xl) * -1);
+}
+
+.-translate-y-8xl {
+  --hy-translate-y: calc(var(--size-dimension-8xl) * -1);
+}
+
+.-translate-y-9xl {
+  --hy-translate-y: calc(var(--size-dimension-9xl) * -1);
+}
+
+.-translate-y-10xl {
+  --hy-translate-y: calc(var(--size-dimension-10xl) * -1);
 }
