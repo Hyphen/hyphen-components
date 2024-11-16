@@ -266,7 +266,7 @@ const SidebarTrigger = React.forwardRef<
       variant="tertiary"
       size="sm"
       iconPrefix="dock-left"
-      className={className}
+      className={classNames('m-left-sm m-left-0-tablet', className)}
       onClick={(event) => {
         onClick?.(event);
         toggleSidebar();
@@ -286,7 +286,7 @@ const SidebarInset = React.forwardRef<
     <main
       ref={ref}
       className={classNames(
-        'display-flex flex-auto flex-direction-column g-lg align-items-flex-start p-lg background-color-secondary',
+        'display-flex flex-auto flex-direction-column g-lg align-items-flex-start p-h-0 p-top-lg p-bottom-0 p-lg-tablet background-color-secondary',
         className
       )}
       {...props}
