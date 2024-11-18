@@ -61,11 +61,22 @@ const SidebarProvider = forwardRef<
     ref
   ) => {
     const isMobile = useIsMobile();
-    const [openMobile, setOpenMobile] = useState(openProp ?? defaultOpen);
+    const [openMobile, setOpenMobile] = useState(() =>
+      isMobile ? false : openProp ?? defaultOpen
+    );
 
     // Manages sidebar open state with a fallback to internal state when openProp is not provided
     const [_open, _setOpen] = useState(openProp ?? defaultOpen);
     const open = openProp ?? _open;
+
+    // Update open state when openProp or isMobile changes
+    useEffect(() => {
+      if (isMobile) {
+        setOpenMobile(false); // Always start closed on mobile
+      } else {
+        _setOpen(openProp ?? defaultOpen); // Use desktop state
+      }
+    }, [isMobile, openProp, defaultOpen]);
 
     const setOpen = useCallback(
       (value: boolean | ((value: boolean) => boolean)) => {
@@ -105,13 +116,6 @@ const SidebarProvider = forwardRef<
       window.addEventListener('keydown', handleKeyDown);
       return () => window.removeEventListener('keydown', handleKeyDown);
     }, [toggleSidebar]);
-
-    // Update open state when `isMobile` changes
-    useEffect(() => {
-      if (isMobile && open) {
-        setOpenMobile(open);
-      }
-    }, [isMobile, open]);
 
     // Assign state for data attributes
     const state = open ? 'expanded' : 'collapsed';
