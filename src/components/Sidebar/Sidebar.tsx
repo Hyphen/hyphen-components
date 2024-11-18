@@ -179,7 +179,7 @@ const Sidebar = React.forwardRef<
           onDismiss={() => setOpenMobile(false)}
           placement={side}
         >
-          <Box data-sidebar="sidebar" data-mobile="true">
+          <Box data-sidebar="sidebar" data-mobile="true" height="100">
             {children}
           </Box>
         </Drawer>
