@@ -51,20 +51,6 @@ The Drawer can appear from the right (default), left, top, or bottom of the scre
 
 <Canvas withSource="open" of={Stories.Placement} />
 
-## Drawer Header
-
-A header will be added to the drawer content if `title` is defined, or `closeButton` is `true`. If the content of the drawer is taller than the drawer height, then the content will scroll while the header remains fixed to the top.
-
-<Canvas withSource="open" of={Stories.DrawerHeader} />
-
-## Title and Close Button
-
-<Canvas withSource="open" of={Stories.TitleAndCloseButton} />
-
-## Close Button Only
-
-<Canvas withSource="open" of={Stories.CloseButtonOnly} />
-
 ## Width
 
 Set the width of a Drawer to specific value for a `left` or `right` placement via `width`. The Drawer height will be 100% of the viewport, or if `containerRef` is used, 100% of the container.
@@ -77,7 +63,7 @@ When `placement` is set to `top` or `bottom`, the `width` prop is ignored and th
 
 The height of Drawers with a `top` or `bottom` placement is determined by Drawer's contents. The width will be set to 100%.
 
-<Canvas withSource="open" of={Stories.Height} />
+<Canvas withSource="open" of={Stories.ContentHeight} />
 
 ## Hidden Overlay
 

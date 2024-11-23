@@ -9,7 +9,7 @@ import FocusLock from 'react-focus-lock';
 import { RemoveScroll } from 'react-remove-scroll';
 import classNames from 'classnames';
 import { DimensionSize, CssDimensionValue } from '../../types';
-import { Box } from '../Box/Box';
+import { Box, BoxProps } from '../Box/Box';
 import styles from './Drawer.module.scss';
 import { Button } from '../Button/Button';
 
@@ -41,11 +41,6 @@ export interface DrawerProps {
    * Additional class names to add to the drawer content.
    */
   className?: string;
-  /**
-   * Whether the drawer has a visible close button.
-   * If a title is defined, then a close button will be rendered
-   */
-  closeButton?: boolean;
   /**
    * If true, the drawer will close when the overlay is clicked
    */
@@ -88,11 +83,6 @@ export interface DrawerProps {
    */
   onDismiss?: (event?: React.SyntheticEvent) => void;
   /**
-   * Title to be displayed at the top of the Drawer.
-   * A close button will be rendered automatically if this prop is defined.
-   */
-  title?: string;
-  /**
    * The width of the Drawer when opened. Can be given a standard css value (px, rem, em, %),
    * or a [width token](/?path=/story/design-tokens-design-tokens--page#width)
    */
@@ -109,7 +99,6 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
       allowPinchZoom = false,
       children = undefined,
       className = undefined,
-      closeButton = false,
       closeOnOverlayClick = true,
       containerRef = undefined,
       dangerouslyBypassFocusLock = false,
@@ -119,7 +108,6 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
       isOpen,
       onDismiss = undefined,
       placement = 'right',
-      title = undefined,
       width = undefined,
     },
     ref
@@ -136,7 +124,7 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
 
     const dynamicStyle: CSSProperties = {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ['--w' as any]: dynamicWidth,
+      ['--drawer-width' as any]: dynamicWidth,
     };
 
     const overlayClassnames = classNames(styles.overlay, styles.drawer, {
@@ -151,59 +139,9 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
       styles[placement],
       {
         [styles['hide-overlay']]: hideOverlay,
-        'overflow-auto': !closeButton && !title,
         className,
       }
     );
-
-    const renderHeader = () => {
-      if (closeButton && onDismiss && !title) {
-        return (
-          <Box alignItems="flex-end" justifyContent="center" padding="md lg">
-            <Button
-              variant="tertiary"
-              onClick={onDismiss}
-              aria-label="close"
-              type="button"
-              iconPrefix="remove"
-            />
-          </Box>
-        );
-      }
-      if (title) {
-        return (
-          <Box
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            padding={{ base: '2xl', tablet: '4xl' }}
-          >
-            <Box className={styles.title} fontWeight="bold">
-              {title}
-            </Box>
-            {onDismiss && (
-              <Button
-                variant="tertiary"
-                onClick={onDismiss}
-                aria-label="close"
-                type="button"
-                iconPrefix="remove"
-              />
-            )}
-          </Box>
-        );
-      }
-      return null;
-    };
-
-    const content =
-      title || closeButton ? (
-        <Box flex="auto" overflow="auto">
-          {children}
-        </Box>
-      ) : (
-        children
-      );
 
     const parentElement = containerRef?.current
       ? (containerRef.current as HTMLElement)
@@ -239,10 +177,9 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
               <Box
                 aria-label={ariaLabel}
                 aria-labelledby={ariaLabelledBy}
-                height="100%"
+                height="100"
               >
-                {renderHeader()}
-                {content}
+                {children}
               </Box>
             </ReactModal>
           </Box>
@@ -251,3 +188,70 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
     );
   }
 );
+
+const DrawerHeader = React.forwardRef<HTMLDivElement, BoxProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <Box
+        ref={ref}
+        data-drawer="header"
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        padding={{ base: '2xl 2xl 0 2xl', tablet: '3xl 3xl 0 3xl' }}
+        {...props}
+      />
+    );
+  }
+);
+DrawerHeader.displayName = 'DrawerHeader';
+
+const DrawerTitle = React.forwardRef<HTMLDivElement, BoxProps>(
+  ({ ...props }, ref) => {
+    return <Box ref={ref} data-drawer="title" fontWeight="bold" {...props} />;
+  }
+);
+
+const DrawerCloseButton = React.forwardRef<
+  React.ElementRef<typeof Button>,
+  React.ComponentProps<typeof Button>
+>(({ className, onClick, ...props }, ref) => {
+  // const { toggleSidebar } = useSidebar();
+
+  return (
+    <Button
+      ref={ref}
+      variant="tertiary"
+      aria-label="close"
+      type="button"
+      iconPrefix="remove"
+      data-drawer="close"
+      className={classNames('m-left-auto', className)}
+      size="sm"
+      onClick={(event) => {
+        onClick?.(event);
+      }}
+      {...props}
+    />
+  );
+});
+DrawerCloseButton.displayName = 'DrawerCloseButton';
+
+const DrawerContent = React.forwardRef<HTMLDivElement, BoxProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <Box
+        ref={ref}
+        data-drawer="content"
+        flex="auto"
+        overflow="auto"
+        alignItems="flex-start"
+        padding={{ base: '2xl', tablet: '3xl' }}
+        gap="md"
+        {...props}
+      />
+    );
+  }
+);
+
+export { DrawerContent, DrawerHeader, DrawerTitle, DrawerCloseButton };

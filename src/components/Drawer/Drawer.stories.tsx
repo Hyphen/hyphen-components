@@ -1,4 +1,11 @@
-import { Drawer, DrawerPlacementType } from './Drawer';
+import {
+  Drawer,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerPlacementType,
+  DrawerTitle,
+} from './Drawer';
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { useOpenClose } from '../../hooks';
@@ -16,6 +23,11 @@ const meta: Meta<typeof Drawer> = {
 export default meta;
 type Story = StoryObj<typeof Drawer>;
 
+const drawerContent: JSX.Element[] = [];
+for (let i = 0; i < 50; i++) {
+  drawerContent.push(<Box key={i}>Drawer content&hellip;</Box>);
+}
+
 export const BasicUsage = () => {
   const {
     isOpen: isDrawerOpen,
@@ -32,18 +44,15 @@ export const BasicUsage = () => {
       </Button>
       <Drawer
         isOpen={isDrawerOpen}
-        title="Drawer Title"
-        onDismiss={closeDrawer}
         ariaLabel="drawer component example"
         containerRef={ref}
+        onDismiss={closeDrawer}
       >
-        <Box
-          padding={{ base: '0 2xl 2xl 2xl', tablet: '0 4xl 4xl 4xl' }}
-          display="block"
-          childGap="md"
-        >
-          <Box>Drawer content</Box>
-        </Box>
+        <DrawerHeader>
+          <DrawerTitle>Drawer Title</DrawerTitle>
+          <DrawerCloseButton onClick={closeDrawer} />
+        </DrawerHeader>
+        <DrawerContent>{drawerContent}</DrawerContent>
       </Drawer>
     </div>
   );
@@ -56,17 +65,18 @@ export const OpenDrawer: Story = {
 
     await userEvent.click(canvas.getByText('Open Drawer'));
 
-    await expect(canvas.getByText('Drawer content')).toBeInTheDocument();
+    await expect(canvas.getByText('Drawer Title')).toBeInTheDocument();
   },
 };
 
 export const Placement = () => {
+  const ref = useRef<HTMLDivElement>(null);
   const {
     isOpen: isDrawerOpen,
     handleOpen: openDrawer,
     handleClose: closeDrawer,
   } = useOpenClose();
-  const [placement, setPlacement] = useState('right');
+  const [placement, setPlacement] = useState('bottom');
   const placementOptions = [
     {
       id: 'top',
@@ -90,7 +100,11 @@ export const Placement = () => {
     },
   ];
   return (
-    <Box display="block" childGap="md">
+    <div
+      id="placementStory"
+      className="display-flex flex-direction-column align-items-flex-start g-lg"
+      ref={ref}
+    >
       <RadioGroup
         title="Placement"
         direction="row"
@@ -103,96 +117,28 @@ export const Placement = () => {
         Open Drawer
       </Button>
       <Drawer
-        title="test"
         isOpen={isDrawerOpen}
         onDismiss={closeDrawer}
         placement={placement as DrawerPlacementType}
         ariaLabel="drawer component example"
       >
-        <Box
-          padding={{ base: '0 2xl 2xl 2xl', tablet: '0 4xl 4xl 4xl' }}
-          display="block"
-          childGap="md"
-        >
-          <Box as="p">drawer content</Box>
-          <Box as="p">drawer content</Box>
-          <Box as="p">drawer content</Box>
-          <Box as="p">drawer content</Box>
-          <Box as="p">drawer content</Box>
-          <Box as="p">drawer content</Box>
-          <Box as="p">drawer content</Box>
-          <Box as="p">drawer content</Box>
-          <Box as="p">drawer content</Box>
-        </Box>
+        <DrawerHeader>
+          <DrawerTitle>Drawer Title</DrawerTitle>
+          <DrawerCloseButton onClick={closeDrawer} />
+        </DrawerHeader>
+        <DrawerContent height="8xl">{drawerContent}</DrawerContent>
       </Drawer>
-    </Box>
+    </div>
   );
 };
 
-export const DrawerHeader = () => {
-  const {
-    isOpen: isDrawerOpen,
-    handleOpen: openDrawer,
-    handleClose: closeDrawer,
-  } = useOpenClose();
-  const drawerContent = [];
-  for (let i = 0; i < 50; i++) {
-    drawerContent.push(<Box key={i}>Drawer content&hellip;</Box>);
-  }
-  return (
-    <>
-      <Button variant="primary" onClick={openDrawer}>
-        Title and Close Button
-      </Button>
-      <Drawer
-        ariaLabel="drawer component example"
-        isOpen={isDrawerOpen}
-        onDismiss={closeDrawer}
-        title="Drawer Title"
-      >
-        <Box
-          padding={{ base: '0 2xl 2xl 2xl', tablet: '0 4xl 4xl 4xl' }}
-          display="block"
-          childGap="md"
-        >
-          {drawerContent}
-        </Box>
-      </Drawer>
-    </>
-  );
-};
+export const OpenBottomDrawer: Story = {
+  play: async ({ canvasElement, mount }) => {
+    await mount(<Placement />);
+    const canvas = within(canvasElement);
 
-export const TitleAndCloseButton = () => {
-  const {
-    isOpen: isDrawerOpen,
-    handleOpen: openDrawer,
-    handleClose: closeDrawer,
-  } = useOpenClose();
-  const drawerContent = [];
-  for (let i = 0; i < 50; i++) {
-    drawerContent.push(<Box key={i}>Drawer content&hellip;</Box>);
-  }
-  return (
-    <>
-      <Button variant="primary" onClick={openDrawer}>
-        Title and Close Button
-      </Button>
-      <Drawer
-        ariaLabel="drawer component example"
-        isOpen={isDrawerOpen}
-        onDismiss={closeDrawer}
-        title="Drawer Title"
-      >
-        <Box
-          padding={{ base: '0 2xl 2xl 2xl', tablet: '0 4xl 4xl 4xl' }}
-          display="block"
-          childGap="md"
-        >
-          {drawerContent}
-        </Box>
-      </Drawer>
-    </>
-  );
+    await userEvent.click(canvas.getByText('Open Drawer'));
+  },
 };
 
 export const CloseButtonOnly = () => {
@@ -201,10 +147,7 @@ export const CloseButtonOnly = () => {
     handleOpen: openDrawer,
     handleClose: closeDrawer,
   } = useOpenClose();
-  const drawerContent = [];
-  for (let i = 0; i < 50; i++) {
-    drawerContent.push(<Box key={i}>Drawer content&hellip;</Box>);
-  }
+
   return (
     <>
       <Button variant="primary" onClick={openDrawer}>
@@ -214,15 +157,11 @@ export const CloseButtonOnly = () => {
         ariaLabel="drawer component example"
         isOpen={isDrawerOpen}
         onDismiss={closeDrawer}
-        closeButton
       >
-        <Box
-          padding={{ base: '0 2xl 2xl 2xl', tablet: '0 4xl 4xl 4xl' }}
-          display="block"
-          childGap="md"
-        >
-          {drawerContent}
-        </Box>
+        <DrawerHeader>
+          <DrawerCloseButton onClick={closeDrawer} />
+        </DrawerHeader>
+        <DrawerContent>{drawerContent}</DrawerContent>
       </Drawer>
     </>
   );
@@ -239,7 +178,7 @@ export const Width = () => {
     setWidth(newWidth);
     openDrawer();
   };
-  const widths = ['16rem', '400px', '100%'];
+  const widths = ['20rem', '400px', '100%'];
   return (
     <>
       <Box gap="sm" direction="row">
@@ -255,25 +194,21 @@ export const Width = () => {
       </Box>
       <Drawer
         width={width as WidthSize}
-        title={`${width} wide drawer`}
         isOpen={isDrawerOpen}
         onDismiss={closeDrawer}
-        closeButton
         ariaLabel="drawer component example"
       >
-        <Box
-          padding={{ base: '0 2xl 2xl 2xl', tablet: '0 4xl 4xl 4xl' }}
-          display="block"
-          childGap="md"
-        >
-          <Box>drawer content</Box>
-        </Box>
+        <DrawerHeader>
+          {width} wide drawer
+          <DrawerCloseButton onClick={closeDrawer} />
+        </DrawerHeader>
+        <DrawerContent>{drawerContent}</DrawerContent>
       </Drawer>
     </>
   );
 };
 
-export const Height = () => {
+export const ContentHeight = () => {
   const {
     isOpen: isDrawerOpen,
     handleOpen: openDrawer,
@@ -288,12 +223,13 @@ export const Height = () => {
         placement="top"
         isOpen={isDrawerOpen}
         onDismiss={closeDrawer}
-        closeButton
         ariaLabel="drawer component example"
       >
-        <Box padding="lg" height="4xl" display="block" childGap="md">
-          <Box>4xl Height</Box>
-        </Box>
+        <DrawerHeader>
+          <DrawerTitle>Drawer Header</DrawerTitle>
+          <DrawerCloseButton onClick={closeDrawer} />
+        </DrawerHeader>
+        <DrawerContent height="8xl">{drawerContent}</DrawerContent>
       </Drawer>
     </>
   );
@@ -334,20 +270,13 @@ export const HiddenOverlay = () => {
         ariaLabel="drawer component example"
         hideOverlay
       >
-        <Box
-          padding={{ base: '2xl', tablet: '4xl' }}
-          display="block"
-          childGap="md"
-        >
-          <Button
-            ref={closeBtnRef as MutableRefObject<HTMLButtonElement>}
+        <DrawerHeader>
+          <DrawerCloseButton
             onClick={closeDrawer}
-            variant="primary"
-          >
-            close
-          </Button>
-          <Box>drawer content</Box>
-        </Box>
+            ref={closeBtnRef as MutableRefObject<HTMLButtonElement>}
+          />
+        </DrawerHeader>
+        <DrawerContent>{drawerContent}</DrawerContent>
       </Drawer>
     </>
   );
@@ -361,7 +290,7 @@ export const InitialFocusRef = () => {
   } = useOpenClose();
   const ref = useRef(null);
   return (
-    <>
+    <div>
       <Button variant="primary" onClick={openDrawer}>
         Open Drawer
       </Button>
@@ -369,21 +298,21 @@ export const InitialFocusRef = () => {
         isOpen={isDrawerOpen}
         onDismiss={closeDrawer}
         initialFocusRef={ref}
-        title="initialFocusRef"
         ariaLabel="drawer component example"
       >
-        <Box
-          padding={{ base: '0 2xl 2xl 2xl', tablet: '0 4xl 4xl 4xl' }}
-          display="block"
-          childGap="md"
-        >
-          <Box>drawer content</Box>
+        <DrawerHeader>
+          <DrawerTitle>initialFocusRef</DrawerTitle>
+          <DrawerCloseButton onClick={closeDrawer} />
+        </DrawerHeader>
+        <DrawerContent>
+          drawer content
           <Button variant="primary" ref={ref} onClick={closeDrawer}>
             I receive focus
           </Button>
-        </Box>
+          {drawerContent}
+        </DrawerContent>
       </Drawer>
-    </>
+    </div>
   );
 };
 
@@ -406,7 +335,7 @@ export const ContainedDrawer = () => {
       overflow="hidden"
     >
       <Button variant="primary" onClick={openDrawer}>
-        Show Drawer
+        Open Drawer
       </Button>
       <Drawer
         isOpen={isDrawerOpen}
@@ -414,17 +343,28 @@ export const ContainedDrawer = () => {
         containerRef={containerRef as MutableRefObject<HTMLDivElement>}
         dangerouslyBypassScrollLock
         hideOverlay
-        title="containerRef"
         ariaLabel="drawer component example"
       >
-        <Box
-          padding={{ base: '0 2xl 2xl 2xl', tablet: '0 4xl 4xl 4xl' }}
-          as="p"
-        >
+        <DrawerHeader>
+          <DrawerTitle>containerRef</DrawerTitle>
+        </DrawerHeader>
+        <DrawerContent>
           This drawer is rendered inside it&apos;s containing div, rather than
           the document.body
-        </Box>
+          {drawerContent}
+        </DrawerContent>
       </Drawer>
     </Box>
   );
+};
+
+export const OpenContainedDrawer: Story = {
+  play: async ({ canvasElement, mount }) => {
+    await mount(<ContainedDrawer />);
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByText('Open Drawer'));
+
+    await expect(canvas.getByText('containerRef')).toBeInTheDocument();
+  },
 };
