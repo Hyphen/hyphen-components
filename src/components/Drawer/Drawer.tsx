@@ -1,9 +1,14 @@
 import React, {
   CSSProperties,
   RefObject,
+  createContext,
   forwardRef,
   useCallback,
+  useContext,
+  useMemo,
+  useState,
 } from 'react';
+import { Slot } from '@radix-ui/react-slot';
 import ReactModal from 'react-modal';
 import FocusLock from 'react-focus-lock';
 import { RemoveScroll } from 'react-remove-scroll';
@@ -13,12 +18,130 @@ import { Box, BoxProps } from '../Box/Box';
 import styles from './Drawer.module.scss';
 import { Button } from '../Button/Button';
 
+interface DrawerContextProps {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  toggleDrawer: () => void;
+}
+
+const DrawerContext = createContext<DrawerContextProps | null>(null);
+
+export function useDrawer() {
+  const context = useContext(DrawerContext);
+  if (!context) {
+    throw new Error('useDrawer must be used within a DrawerProvider.');
+  }
+  return context;
+}
+
+interface DrawerProviderProps extends React.ComponentProps<'div'> {
+  defaultIsOpen?: boolean;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+export const DrawerProvider = forwardRef<HTMLDivElement, DrawerProviderProps>(
+  (
+    {
+      defaultIsOpen = false,
+      open: openProp,
+      onOpenChange: setOpenProp,
+      className,
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    const [_open, _setOpen] = useState(openProp ?? defaultIsOpen);
+    const open = openProp ?? _open;
+
+    const setOpen = useCallback(
+      (value: boolean | ((prev: boolean) => boolean)) => {
+        const newOpen = typeof value === 'function' ? value(open) : value;
+        if (newOpen !== open) {
+          if (setOpenProp) {
+            setOpenProp(newOpen); // Controlled
+          } else {
+            _setOpen(newOpen); // Uncontrolled
+          }
+        }
+      },
+      [open, setOpenProp]
+    );
+
+    const toggleDrawer = useCallback(() => {
+      setOpen((prev) => !prev);
+    }, [setOpen]);
+
+    const contextValue = useMemo(
+      () => ({ open, setOpen, toggleDrawer }),
+      [open, setOpen, toggleDrawer]
+    );
+
+    return (
+      <DrawerContext.Provider value={contextValue}>
+        <div
+          className={classNames(
+            'drawer-container',
+            { 'drawer-open': open },
+            className
+          )}
+          ref={ref}
+          {...props}
+        >
+          {children}
+        </div>
+      </DrawerContext.Provider>
+    );
+  }
+);
+
+DrawerProvider.displayName = 'DrawerProvider';
+
+const DrawerTrigger = React.forwardRef<
+  HTMLButtonElement,
+  React.ComponentProps<'button'> & {
+    asChild?: boolean;
+  }
+>(({ asChild = false, onClick, ...triggerProps }, ref) => {
+  const context = useContext(DrawerContext);
+  const isStandalone = !context;
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    onClick?.(event);
+
+    if (!isStandalone) {
+      // Use context to toggle the drawer
+      context?.toggleDrawer();
+    }
+  };
+
+  const Comp = asChild ? Slot : 'button';
+
+  return (
+    <Comp
+      ref={ref}
+      data-drawer="trigger"
+      aria-haspopup="dialog"
+      aria-expanded={context?.open}
+      data-state={context?.open}
+      aria-label="toggle drawer"
+      {...triggerProps}
+      onClick={handleClick}
+    />
+  );
+});
+DrawerTrigger.displayName = 'SidebarTrigger';
+
 export type DrawerPlacementType = 'left' | 'right' | 'top' | 'bottom';
 export interface DrawerProps {
   /**
-   * If the drawer is open
+   * If the drawer is open (controlled mode)
    */
-  isOpen: boolean;
+  isOpen?: boolean;
+  /**
+   * If the drawer starts open (uncontrolled mode)
+   */
+  defaultIsOpen?: boolean;
   /**
    * Handle zoom/pinch gestures on iOS devices when scroll locking is enabled.
    */
@@ -88,10 +211,7 @@ export interface DrawerProps {
    */
   width?: DimensionSize | CssDimensionValue;
 }
-export const Drawer: React.FC<DrawerProps> = forwardRef<
-  HTMLDivElement,
-  DrawerProps
->(
+const Drawer: React.FC<DrawerProps> = forwardRef<HTMLDivElement, DrawerProps>(
   (
     {
       ariaLabel = undefined,
@@ -105,13 +225,34 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
       dangerouslyBypassScrollLock = false,
       hideOverlay = false,
       initialFocusRef = undefined,
-      isOpen,
+      isOpen: controlledIsOpen,
+      defaultIsOpen = false,
       onDismiss = undefined,
       placement = 'right',
       width = undefined,
     },
     ref
   ) => {
+    const context = useContext(DrawerContext);
+    const isStandalone = !context; // Determine if there's no provider
+
+    const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultIsOpen);
+    const isOpen = isStandalone
+      ? controlledIsOpen ?? uncontrolledOpen // Use internal or prop-based state
+      : context.open; // Use context-provided state
+
+    const setOpen = isStandalone
+      ? setUncontrolledOpen // Update internal state
+      : context.setOpen; // Update context state
+
+    const handleDismiss = useCallback(
+      (event?: React.SyntheticEvent) => {
+        setOpen(false); // Update state (context or standalone)
+        onDismiss?.(event); // Trigger external callback
+      },
+      [setOpen, onDismiss]
+    );
+
     const activateFocusLock = useCallback(() => {
       setTimeout(() => {
         if (initialFocusRef && initialFocusRef.current) {
@@ -166,7 +307,7 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
               isOpen={isOpen}
               overlayClassName={overlayClassnames}
               className={contentClassnames}
-              onRequestClose={closeOnOverlayClick ? onDismiss : undefined}
+              onRequestClose={closeOnOverlayClick ? handleDismiss : undefined}
               ariaHideApp={false}
               style={{
                 content: dynamicStyle,
@@ -214,9 +355,26 @@ const DrawerTitle = React.forwardRef<HTMLDivElement, BoxProps>(
 
 const DrawerCloseButton = React.forwardRef<
   React.ElementRef<typeof Button>,
-  React.ComponentProps<typeof Button>
->(({ className, onClick, ...props }, ref) => {
-  // const { toggleSidebar } = useSidebar();
+  React.ComponentProps<typeof Button> & {
+    onClose?: () => void; // Fallback to onClose if provided
+  }
+>(({ className, onClick, onClose, ...props }, ref) => {
+  const context = useContext(DrawerContext);
+  const isStandalone = !context;
+
+  const handleClick = (
+    event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+  ) => {
+    onClick?.(event);
+
+    if (isStandalone) {
+      // Fallback to onClose if provided
+      onClose?.();
+    } else {
+      // Use context to toggle the drawer
+      context?.toggleDrawer();
+    }
+  };
 
   return (
     <Button
@@ -228,9 +386,7 @@ const DrawerCloseButton = React.forwardRef<
       data-drawer="close"
       className={classNames('m-left-auto', className)}
       size="sm"
-      onClick={(event) => {
-        onClick?.(event);
-      }}
+      onClick={handleClick}
       {...props}
     />
   );
@@ -254,4 +410,11 @@ const DrawerContent = React.forwardRef<HTMLDivElement, BoxProps>(
   }
 );
 
-export { DrawerContent, DrawerHeader, DrawerTitle, DrawerCloseButton };
+export {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+  DrawerCloseButton,
+};

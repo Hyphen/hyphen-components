@@ -7,6 +7,8 @@ import {
   DrawerCloseButton,
   DrawerHeader,
   DrawerProps,
+  DrawerProvider,
+  DrawerTrigger,
 } from './Drawer';
 
 const renderDrawer = (props: Partial<DrawerProps> = {}) => {
@@ -17,13 +19,15 @@ const renderDrawer = (props: Partial<DrawerProps> = {}) => {
     ...props,
   };
   return render(
-    <Drawer {...defaultProps}>
-      <DrawerHeader>
-        <DrawerTitle>Drawer Title</DrawerTitle>
-        <DrawerCloseButton onClick={defaultProps.onDismiss} />
-      </DrawerHeader>
-      <DrawerContent>Drawer Content</DrawerContent>
-    </Drawer>
+    <DrawerProvider>
+      <Drawer {...defaultProps}>
+        <DrawerHeader>
+          <DrawerTitle>Drawer Title</DrawerTitle>
+          <DrawerCloseButton onClick={defaultProps.onDismiss} />
+        </DrawerHeader>
+        <DrawerContent>Drawer Content</DrawerContent>
+      </Drawer>
+    </DrawerProvider>
   );
 };
 
@@ -68,7 +72,7 @@ describe('Drawer', () => {
       const ControlledDrawer = () => {
         const [isOpen, setIsOpen] = useState(false);
         return (
-          <>
+          <DrawerProvider>
             <button onClick={() => setIsOpen(!isOpen)}>Toggle Drawer</button>
             <Drawer
               isOpen={isOpen}
@@ -77,7 +81,7 @@ describe('Drawer', () => {
             >
               <DrawerCloseButton onClick={() => setIsOpen(false)} />
             </Drawer>
-          </>
+          </DrawerProvider>
         );
       };
 
@@ -90,6 +94,35 @@ describe('Drawer', () => {
 
       fireEvent.click(screen.getByLabelText('close'));
       expect(screen.queryByLabelText('Controlled Drawer')).toBe(null);
+    });
+  });
+
+  describe('Uncontrolled Drawer', () => {
+    it('renders and toggles the drawer based on internal state', () => {
+      const UncontrolledDrawer = () => {
+        return (
+          <DrawerProvider>
+            <Drawer defaultIsOpen={false} ariaLabel="Uncontrolled Drawer">
+              <DrawerHeader>
+                <DrawerTitle>Drawer Title</DrawerTitle>
+                <DrawerCloseButton />
+              </DrawerHeader>
+              <DrawerContent>Drawer Content</DrawerContent>
+            </Drawer>
+            <DrawerTrigger>Toggle Drawer</DrawerTrigger>
+          </DrawerProvider>
+        );
+      };
+
+      render(<UncontrolledDrawer />);
+
+      const toggleButton = screen.getByText('Toggle Drawer');
+      fireEvent.click(toggleButton);
+
+      expect(screen.getByLabelText('Uncontrolled Drawer')).toBeInTheDocument();
+
+      fireEvent.click(screen.getByLabelText('close'));
+      expect(screen.queryByLabelText('Uncontrolled Drawer')).toBe(null);
     });
   });
 });
