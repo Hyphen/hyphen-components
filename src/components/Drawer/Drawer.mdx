@@ -38,10 +38,11 @@ Drawers are good for short pieces of content that are related to the main screen
 
 ## Accessibility
 
-- Use the `ariaLabel` or `ariaLabelledBy` props to properly label a drawer to provide context for users with assistive technology such as screen readers. If a drawer is announced to the user without a label, it can be confusing and difficult to navigate.
-- When the Drawer is opened, focus is trapped inside the Drawer.
+- Ensure the `ariaLabel` or `ariaLabelledBy` props are provided for accessibility.
+- The drawer traps focus within its content when open, ensuring keyboard navigation is contained.
 - The 'Esc' key will close the Drawer.
 - After the drawer closes, focus is returned to the element that triggered it.
+- The `DrawerCloseButton` component provides a close button with appropriate aria attributes.
 
 ## Props
 
