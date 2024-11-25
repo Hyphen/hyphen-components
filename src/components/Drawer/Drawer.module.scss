@@ -45,10 +45,11 @@
     position: absolute;
     box-shadow: var(--drawer-box-shadow, var(--size-box-shadow-xl));
     z-index: var(--size-z-index-drawer);
+    overflow: auto;
 
     &.left {
       left: 0;
-      width: var(--w, 80vw);
+      width: var(--drawer-width, 80vw);
       height: 100%;
 
       :global {
@@ -58,7 +59,7 @@
 
     &.right {
       right: 0;
-      width: var(--w, 80vw);
+      width: var(--drawer-width, 80vw);
       height: 100%;
 
       :global {
@@ -89,7 +90,7 @@
     @media (min-width: $size-breakpoint-tablet) {
       &.right,
       &.left {
-        width: var(--w, var(--size-dimension-8xl));
+        width: var(--drawer-width, var(--size-dimension-8xl));
       }
     }
   }

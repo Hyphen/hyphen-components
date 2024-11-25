@@ -9,12 +9,14 @@ import * as Stories from './Drawer.stories';
 
 A Drawer is a panel that slides in from one edge of the viewport and overlays content on top of the page. It contains information or actions without leaving the context of the original page.
 
-<Canvas withSource="open" of={Stories.BasicUsage} />
+<Canvas withSource="open" of={Stories.UncontrolledWithProvider} />
 
 ## Usage Guidelines
 
 - Use the drawer as way to achieve progressive disclosure, to reveal relevant information at the appropriate time.
-- The Drawer visibility is controlled via the `isOpen` prop, and is hidden by default. To handle closing the Drawer, provide an `onDismiss` callback that will be called when the user clicks the Overlay or Esc keyboard key.
+- The Drawer can be both uncontrolled and controlled. The uncontrolled Drawer is managed by the component itself, while the controlled Drawer is managed by the consuming component.
+  - For an uncontrolled Drawer, use the `DrawerProvider` to manage the Drawer's visibility. You can set a default `defaultIsOpen` value to determine if the Drawer is open by default.
+  - For a controlled Drawer, omit the `DrawerProvider` as visibility is controlled via the `isOpen` prop. To handle closing the Drawer, provide an `onDismiss` callback that will be called when the user clicks the Overlay or Esc keyboard key.
 - When a Drawer is open, the main body is scroll-locked by default.
 - Avoid nesting Drawers to prevent usability issues.
 - The button that triggers the drawer opening should be in close proximity to the Drawer itself.
@@ -36,10 +38,11 @@ Drawers are good for short pieces of content that are related to the main screen
 
 ## Accessibility
 
-- Use the `ariaLabel` or `ariaLabelledBy` props to properly label a drawer to provide context for users with assistive technology such as screen readers. If a drawer is announced to the user without a label, it can be confusing and difficult to navigate.
-- When the Drawer is opened, focus is trapped inside the Drawer.
+- Ensure the `ariaLabel` or `ariaLabelledBy` props are provided for accessibility.
+- The drawer traps focus within its content when open, ensuring keyboard navigation is contained.
 - The 'Esc' key will close the Drawer.
 - After the drawer closes, focus is returned to the element that triggered it.
+- The `DrawerCloseButton` component provides a close button with appropriate aria attributes.
 
 ## Props
 
@@ -51,20 +54,6 @@ The Drawer can appear from the right (default), left, top, or bottom of the scre
 
 <Canvas withSource="open" of={Stories.Placement} />
 
-## Drawer Header
-
-A header will be added to the drawer content if `title` is defined, or `closeButton` is `true`. If the content of the drawer is taller than the drawer height, then the content will scroll while the header remains fixed to the top.
-
-<Canvas withSource="open" of={Stories.DrawerHeader} />
-
-## Title and Close Button
-
-<Canvas withSource="open" of={Stories.TitleAndCloseButton} />
-
-## Close Button Only
-
-<Canvas withSource="open" of={Stories.CloseButtonOnly} />
-
 ## Width
 
 Set the width of a Drawer to specific value for a `left` or `right` placement via `width`. The Drawer height will be 100% of the viewport, or if `containerRef` is used, 100% of the container.
@@ -73,11 +62,6 @@ When `placement` is set to `top` or `bottom`, the `width` prop is ignored and th
 
 <Canvas withSource="open" of={Stories.Width} />
 
-## Height
-
-The height of Drawers with a `top` or `bottom` placement is determined by Drawer's contents. The width will be set to 100%.
-
-<Canvas withSource="open" of={Stories.Height} />
 
 ## Hidden Overlay
 
@@ -91,6 +75,7 @@ In cases where content in the drawer is supplemental to content on the main area
 />
 
 <Canvas withSource="open" of={Stories.HiddenOverlay} />
+
 
 ## Initial Focus Ref
 

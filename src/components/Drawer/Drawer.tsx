@@ -1,24 +1,147 @@
 import React, {
   CSSProperties,
   RefObject,
+  createContext,
   forwardRef,
   useCallback,
+  useContext,
+  useMemo,
+  useState,
 } from 'react';
+import { Slot } from '@radix-ui/react-slot';
 import ReactModal from 'react-modal';
 import FocusLock from 'react-focus-lock';
 import { RemoveScroll } from 'react-remove-scroll';
 import classNames from 'classnames';
 import { DimensionSize, CssDimensionValue } from '../../types';
-import { Box } from '../Box/Box';
+import { Box, BoxProps } from '../Box/Box';
 import styles from './Drawer.module.scss';
 import { Button } from '../Button/Button';
+
+interface DrawerContextProps {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  toggleDrawer: () => void;
+}
+
+const DrawerContext = createContext<DrawerContextProps | null>(null);
+
+export function useDrawer() {
+  const context = useContext(DrawerContext);
+  if (!context) {
+    throw new Error('useDrawer must be used within a DrawerProvider.');
+  }
+  return context;
+}
+
+interface DrawerProviderProps extends React.ComponentProps<'div'> {
+  defaultIsOpen?: boolean;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+export const DrawerProvider = forwardRef<HTMLDivElement, DrawerProviderProps>(
+  (
+    {
+      defaultIsOpen = false,
+      open: openProp,
+      onOpenChange: setOpenProp,
+      className,
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    const [_open, _setOpen] = useState(openProp ?? defaultIsOpen);
+    const open = openProp ?? _open;
+
+    const setOpen = useCallback(
+      (value: boolean | ((prev: boolean) => boolean)) => {
+        const newOpen = typeof value === 'function' ? value(open) : value;
+        if (newOpen !== open) {
+          if (setOpenProp) {
+            setOpenProp(newOpen); // Controlled
+          } else {
+            _setOpen(newOpen); // Uncontrolled
+          }
+        }
+      },
+      [open, setOpenProp]
+    );
+
+    const toggleDrawer = useCallback(() => {
+      setOpen((prev) => !prev);
+    }, [setOpen]);
+
+    const contextValue = useMemo(
+      () => ({ open, setOpen, toggleDrawer }),
+      [open, setOpen, toggleDrawer]
+    );
+
+    return (
+      <DrawerContext.Provider value={contextValue}>
+        <div
+          className={classNames(
+            'drawer-container',
+            { 'drawer-open': open },
+            className
+          )}
+          ref={ref}
+          {...props}
+        >
+          {children}
+        </div>
+      </DrawerContext.Provider>
+    );
+  }
+);
+
+DrawerProvider.displayName = 'DrawerProvider';
+
+const DrawerTrigger = React.forwardRef<
+  HTMLButtonElement,
+  React.ComponentProps<'button'> & {
+    asChild?: boolean;
+  }
+>(({ asChild = false, onClick, ...triggerProps }, ref) => {
+  const context = useContext(DrawerContext);
+  const isStandalone = !context;
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    onClick?.(event);
+
+    if (!isStandalone) {
+      // Use context to toggle the drawer
+      context?.toggleDrawer();
+    }
+  };
+
+  const Comp = asChild ? Slot : 'button';
+
+  return (
+    <Comp
+      ref={ref}
+      data-drawer="trigger"
+      aria-haspopup="dialog"
+      aria-expanded={context?.open}
+      data-state={context?.open}
+      aria-label="toggle drawer"
+      {...triggerProps}
+      onClick={handleClick}
+    />
+  );
+});
+DrawerTrigger.displayName = 'SidebarTrigger';
 
 export type DrawerPlacementType = 'left' | 'right' | 'top' | 'bottom';
 export interface DrawerProps {
   /**
-   * If the drawer is open
+   * If the drawer is open (controlled mode)
    */
-  isOpen: boolean;
+  isOpen?: boolean;
+  /**
+   * If the drawer starts open (uncontrolled mode)
+   */
+  defaultIsOpen?: boolean;
   /**
    * Handle zoom/pinch gestures on iOS devices when scroll locking is enabled.
    */
@@ -41,11 +164,6 @@ export interface DrawerProps {
    * Additional class names to add to the drawer content.
    */
   className?: string;
-  /**
-   * Whether the drawer has a visible close button.
-   * If a title is defined, then a close button will be rendered
-   */
-  closeButton?: boolean;
   /**
    * If true, the drawer will close when the overlay is clicked
    */
@@ -88,20 +206,12 @@ export interface DrawerProps {
    */
   onDismiss?: (event?: React.SyntheticEvent) => void;
   /**
-   * Title to be displayed at the top of the Drawer.
-   * A close button will be rendered automatically if this prop is defined.
-   */
-  title?: string;
-  /**
    * The width of the Drawer when opened. Can be given a standard css value (px, rem, em, %),
    * or a [width token](/?path=/story/design-tokens-design-tokens--page#width)
    */
   width?: DimensionSize | CssDimensionValue;
 }
-export const Drawer: React.FC<DrawerProps> = forwardRef<
-  HTMLDivElement,
-  DrawerProps
->(
+const Drawer: React.FC<DrawerProps> = forwardRef<HTMLDivElement, DrawerProps>(
   (
     {
       ariaLabel = undefined,
@@ -109,21 +219,40 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
       allowPinchZoom = false,
       children = undefined,
       className = undefined,
-      closeButton = false,
       closeOnOverlayClick = true,
       containerRef = undefined,
       dangerouslyBypassFocusLock = false,
       dangerouslyBypassScrollLock = false,
       hideOverlay = false,
       initialFocusRef = undefined,
-      isOpen,
+      isOpen: controlledIsOpen,
+      defaultIsOpen = false,
       onDismiss = undefined,
       placement = 'right',
-      title = undefined,
       width = undefined,
     },
     ref
   ) => {
+    const context = useContext(DrawerContext);
+    const isStandalone = !context; // Determine if there's no provider
+
+    const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultIsOpen);
+    const isOpen = isStandalone
+      ? controlledIsOpen ?? uncontrolledOpen // Use internal or prop-based state
+      : context.open; // Use context-provided state
+
+    const setOpen = isStandalone
+      ? setUncontrolledOpen // Update internal state
+      : context.setOpen; // Update context state
+
+    const handleDismiss = useCallback(
+      (event?: React.SyntheticEvent) => {
+        setOpen(false); // Update state (context or standalone)
+        onDismiss?.(event); // Trigger external callback
+      },
+      [setOpen, onDismiss]
+    );
+
     const activateFocusLock = useCallback(() => {
       setTimeout(() => {
         if (initialFocusRef && initialFocusRef.current) {
@@ -136,7 +265,7 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
 
     const dynamicStyle: CSSProperties = {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ['--w' as any]: dynamicWidth,
+      ['--drawer-width' as any]: dynamicWidth,
     };
 
     const overlayClassnames = classNames(styles.overlay, styles.drawer, {
@@ -151,59 +280,8 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
       styles[placement],
       {
         [styles['hide-overlay']]: hideOverlay,
-        'overflow-auto': !closeButton && !title,
-        className,
       }
     );
-
-    const renderHeader = () => {
-      if (closeButton && onDismiss && !title) {
-        return (
-          <Box alignItems="flex-end" justifyContent="center" padding="md lg">
-            <Button
-              variant="tertiary"
-              onClick={onDismiss}
-              aria-label="close"
-              type="button"
-              iconPrefix="remove"
-            />
-          </Box>
-        );
-      }
-      if (title) {
-        return (
-          <Box
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            padding={{ base: '2xl', tablet: '4xl' }}
-          >
-            <Box className={styles.title} fontWeight="bold">
-              {title}
-            </Box>
-            {onDismiss && (
-              <Button
-                variant="tertiary"
-                onClick={onDismiss}
-                aria-label="close"
-                type="button"
-                iconPrefix="remove"
-              />
-            )}
-          </Box>
-        );
-      }
-      return null;
-    };
-
-    const content =
-      title || closeButton ? (
-        <Box flex="auto" overflow="auto">
-          {children}
-        </Box>
-      ) : (
-        children
-      );
 
     const parentElement = containerRef?.current
       ? (containerRef.current as HTMLElement)
@@ -228,7 +306,7 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
               isOpen={isOpen}
               overlayClassName={overlayClassnames}
               className={contentClassnames}
-              onRequestClose={closeOnOverlayClick ? onDismiss : undefined}
+              onRequestClose={closeOnOverlayClick ? handleDismiss : undefined}
               ariaHideApp={false}
               style={{
                 content: dynamicStyle,
@@ -239,10 +317,11 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
               <Box
                 aria-label={ariaLabel}
                 aria-labelledby={ariaLabelledBy}
-                height="100%"
+                height="100"
+                data-testid="drawer-content"
+                className={className}
               >
-                {renderHeader()}
-                {content}
+                {children}
               </Box>
             </ReactModal>
           </Box>
@@ -251,3 +330,92 @@ export const Drawer: React.FC<DrawerProps> = forwardRef<
     );
   }
 );
+
+const DrawerHeader = React.forwardRef<HTMLDivElement, BoxProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <Box
+        ref={ref}
+        data-drawer="header"
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        padding={{ base: '2xl 2xl 0 2xl', tablet: '3xl 3xl 0 3xl' }}
+        {...props}
+      />
+    );
+  }
+);
+DrawerHeader.displayName = 'DrawerHeader';
+
+const DrawerTitle = React.forwardRef<HTMLDivElement, BoxProps>(
+  ({ ...props }, ref) => {
+    return <Box ref={ref} data-drawer="title" fontWeight="bold" {...props} />;
+  }
+);
+
+const DrawerCloseButton = React.forwardRef<
+  React.ElementRef<typeof Button>,
+  React.ComponentProps<typeof Button> & {
+    onClose?: () => void; // Fallback to onClose if provided
+  }
+>(({ className, onClick, onClose, ...props }, ref) => {
+  const context = useContext(DrawerContext);
+  const isStandalone = !context;
+
+  const handleClick = (
+    event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+  ) => {
+    onClick?.(event);
+
+    if (isStandalone) {
+      // Fallback to onClose if provided
+      onClose?.();
+    } else {
+      // Use context to toggle the drawer
+      context?.toggleDrawer();
+    }
+  };
+
+  return (
+    <Button
+      ref={ref}
+      variant="tertiary"
+      aria-label="close"
+      type="button"
+      iconPrefix="remove"
+      data-drawer="close"
+      className={classNames('m-left-auto', className)}
+      size="sm"
+      onClick={handleClick}
+      {...props}
+    />
+  );
+});
+DrawerCloseButton.displayName = 'DrawerCloseButton';
+
+const DrawerContent = React.forwardRef<HTMLDivElement, BoxProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <Box
+        ref={ref}
+        data-drawer="content"
+        flex="auto"
+        overflow="auto"
+        alignItems="flex-start"
+        padding={{ base: '2xl', tablet: '3xl' }}
+        gap="md"
+        {...props}
+      />
+    );
+  }
+);
+
+export {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+  DrawerCloseButton,
+};
