@@ -9,12 +9,14 @@ import * as Stories from './Drawer.stories';
 
 A Drawer is a panel that slides in from one edge of the viewport and overlays content on top of the page. It contains information or actions without leaving the context of the original page.
 
-<Canvas withSource="open" of={Stories.BasicUsage} />
+<Canvas withSource="open" of={Stories.UncontrolledWithProvider} />
 
 ## Usage Guidelines
 
 - Use the drawer as way to achieve progressive disclosure, to reveal relevant information at the appropriate time.
-- The Drawer visibility is controlled via the `isOpen` prop, and is hidden by default. To handle closing the Drawer, provide an `onDismiss` callback that will be called when the user clicks the Overlay or Esc keyboard key.
+- The Drawer can be both uncontrolled and controlled. The uncontrolled Drawer is managed by the component itself, while the controlled Drawer is managed by the consuming component.
+  - For an uncontrolled Drawer, use the `DrawerProvider` to manage the Drawer's visibility. You can set a default `defaultIsOpen` value to determine if the Drawer is open by default.
+  - For a controlled Drawer, omit the `DrawerProvider` as visibility is controlled via the `isOpen` prop. To handle closing the Drawer, provide an `onDismiss` callback that will be called when the user clicks the Overlay or Esc keyboard key.
 - When a Drawer is open, the main body is scroll-locked by default.
 - Avoid nesting Drawers to prevent usability issues.
 - The button that triggers the drawer opening should be in close proximity to the Drawer itself.
@@ -59,11 +61,6 @@ When `placement` is set to `top` or `bottom`, the `width` prop is ignored and th
 
 <Canvas withSource="open" of={Stories.Width} />
 
-## Height
-
-The height of Drawers with a `top` or `bottom` placement is determined by Drawer's contents. The width will be set to 100%.
-
-<Canvas withSource="open" of={Stories.ContentHeight} />
 
 ## Hidden Overlay
 
@@ -77,6 +74,7 @@ In cases where content in the drawer is supplemental to content on the main area
 />
 
 <Canvas withSource="open" of={Stories.HiddenOverlay} />
+
 
 ## Initial Focus Ref
 

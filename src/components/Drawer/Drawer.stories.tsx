@@ -9,7 +9,7 @@ import {
   DrawerTrigger,
 } from './Drawer';
 import type { Meta, StoryObj } from '@storybook/react';
-import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useOpenClose } from '../../hooks';
 import { Button } from '../Button/Button';
 import { Box } from '../Box/Box';
@@ -59,6 +59,12 @@ export const OpenUncontrolledWithProvider: Story = {
     await userEvent.click(canvas.getByText('Toggle Uncontrolled Drawer'));
 
     await expect(canvas.getByText('Drawer Title')).toBeInTheDocument();
+
+    await userEvent.click(canvas.getByLabelText('close'));
+
+    await expect(canvas.queryByText('Drawer Title')).toBeNull();
+
+    await userEvent.click(canvas.getByText('Toggle Uncontrolled Drawer'));
   },
 };
 
@@ -92,6 +98,10 @@ export const ControlledWithoutProvider = () => {
   );
 };
 
+ControlledWithoutProvider.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
 export const OpenControlledControlledWithoutProvider: Story = {
   play: async ({ canvasElement, mount }) => {
     await mount(<ControlledWithoutProvider />);
@@ -100,305 +110,280 @@ export const OpenControlledControlledWithoutProvider: Story = {
     await userEvent.click(canvas.getByText('Open Drawer'));
 
     await expect(canvas.getByText('Drawer Title')).toBeInTheDocument();
+
+    await userEvent.click(canvas.getByLabelText('close'));
+
+    await expect(canvas.queryByText('Drawer Title')).toBeNull();
+
+    await userEvent.click(canvas.getByText('Open Drawer'));
+
+    await userEvent.click(
+      document.getElementsByClassName('ReactModal__Overlay')[0]
+    );
+
+    await expect(canvas.queryByText('Drawer Title')).toBeNull();
+
+    await userEvent.click(canvas.getByText('Open Drawer'));
   },
 };
 
-// export const Placement = () => {
-//   const ref = useRef<HTMLDivElement>(null);
-//   const {
-//     isOpen: isDrawerOpen,
-//     handleOpen: openDrawer,
-//     handleClose: closeDrawer,
-//   } = useOpenClose();
-//   const [placement, setPlacement] = useState('bottom');
-//   const placementOptions = [
-//     {
-//       id: 'top',
-//       value: 'top',
-//       label: 'top',
-//     },
-//     {
-//       id: 'right',
-//       value: 'right',
-//       label: 'right',
-//     },
-//     {
-//       id: 'bottom',
-//       value: 'bottom',
-//       label: 'bottom',
-//     },
-//     {
-//       id: 'left',
-//       value: 'left',
-//       label: 'left',
-//     },
-//   ];
-//   return (
-//     <div
-//       id="placementStory"
-//       className="display-flex flex-direction-column align-items-flex-start g-lg"
-//       ref={ref}
-//     >
-//       <RadioGroup
-//         title="Placement"
-//         direction="row"
-//         name="placement"
-//         onChange={(event) => setPlacement(event.target.value)}
-//         value={placement}
-//         options={placementOptions}
-//       />
-//       <Button variant="primary" onClick={openDrawer}>
-//         Open Drawer
-//       </Button>
-//       <Drawer
-//         isOpen={isDrawerOpen}
-//         onDismiss={closeDrawer}
-//         placement={placement as DrawerPlacementType}
-//         ariaLabel="drawer component example"
-//       >
-//         <DrawerHeader>
-//           <DrawerTitle>Drawer Title</DrawerTitle>
-//           <DrawerCloseButton onClick={closeDrawer} />
-//         </DrawerHeader>
-//         <DrawerContent height="8xl">{drawerContent}</DrawerContent>
-//       </Drawer>
-//     </div>
-//   );
-// };
+export const DefaultIsOpen = () => {
+  const {
+    isOpen: isDrawerOpen,
+    handleOpen: openDrawer,
+    handleClose: closeDrawer,
+  } = useOpenClose();
 
-// export const OpenBottomDrawer: Story = {
-//   play: async ({ canvasElement, mount }) => {
-//     await mount(<Placement />);
-//     const canvas = within(canvasElement);
+  const ref = useRef(null);
 
-//     await userEvent.click(canvas.getByText('Open Drawer'));
-//   },
-// };
+  return (
+    <div id="drawerContainer" ref={ref} style={{ height: '240px' }}>
+      <DrawerProvider defaultIsOpen>
+        <DrawerTrigger asChild onClick={openDrawer}>
+          <Button variant="primary">Open Drawer</Button>
+        </DrawerTrigger>
+        <Drawer
+          isOpen={isDrawerOpen}
+          ariaLabel="drawer component example"
+          containerRef={ref}
+          onDismiss={closeDrawer}
+        >
+          <DrawerHeader>
+            <DrawerTitle>Drawer Title</DrawerTitle>
+            <DrawerCloseButton onClose={closeDrawer} />
+          </DrawerHeader>
+          <DrawerContent>{drawerContent}</DrawerContent>
+        </Drawer>
+      </DrawerProvider>
+    </div>
+  );
+};
 
-// export const CloseButtonOnly = () => {
-//   const {
-//     isOpen: isDrawerOpen,
-//     handleOpen: openDrawer,
-//     handleClose: closeDrawer,
-//   } = useOpenClose();
+export const Placement = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [placement, setPlacement] = useState('bottom');
+  const placementOptions = [
+    {
+      id: 'top',
+      value: 'top',
+      label: 'top',
+    },
+    {
+      id: 'right',
+      value: 'right',
+      label: 'right',
+    },
+    {
+      id: 'bottom',
+      value: 'bottom',
+      label: 'bottom',
+    },
+    {
+      id: 'left',
+      value: 'left',
+      label: 'left',
+    },
+  ];
+  return (
+    <div
+      id="placementStory"
+      className="display-flex flex-direction-column align-items-flex-start g-lg"
+      ref={ref}
+    >
+      <RadioGroup
+        title="Placement"
+        direction="row"
+        name="placement"
+        onChange={(event) => setPlacement(event.target.value)}
+        value={placement}
+        options={placementOptions}
+      />
+      <DrawerProvider>
+        <DrawerTrigger asChild>
+          <Button variant="primary">Open Drawer</Button>
+        </DrawerTrigger>
+        <Drawer
+          placement={placement as DrawerPlacementType}
+          ariaLabel="drawer component example"
+        >
+          <DrawerHeader>
+            <DrawerTitle>{placement} placement</DrawerTitle>
+            <DrawerCloseButton />
+          </DrawerHeader>
+          <DrawerContent height="8xl">{drawerContent}</DrawerContent>
+        </Drawer>
+      </DrawerProvider>
+    </div>
+  );
+};
 
-//   return (
-//     <>
-//       <Button variant="primary" onClick={openDrawer}>
-//         Close Button Only
-//       </Button>
-//       <Drawer
-//         ariaLabel="drawer component example"
-//         isOpen={isDrawerOpen}
-//         onDismiss={closeDrawer}
-//       >
-//         <DrawerHeader>
-//           <DrawerCloseButton onClick={closeDrawer} />
-//         </DrawerHeader>
-//         <DrawerContent>{drawerContent}</DrawerContent>
-//       </Drawer>
-//     </>
-//   );
-// };
+Placement.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
-// export const Width = () => {
-//   const {
-//     isOpen: isDrawerOpen,
-//     handleOpen: openDrawer,
-//     handleClose: closeDrawer,
-//   } = useOpenClose();
-//   const [width, setWidth] = React.useState('default');
-//   const handleClick = (newWidth: WidthSize) => {
-//     setWidth(newWidth);
-//     openDrawer();
-//   };
-//   const widths = ['20rem', '400px', '100%'];
-//   return (
-//     <>
-//       <Box gap="sm" direction="row">
-//         {widths.map((width: string) => (
-//           <Button
-//             variant="primary"
-//             onClick={() => handleClick(width as WidthSize)}
-//             key={width}
-//           >
-//             {`Open ${width} Drawer `}
-//           </Button>
-//         ))}
-//       </Box>
-//       <Drawer
-//         width={width as WidthSize}
-//         isOpen={isDrawerOpen}
-//         onDismiss={closeDrawer}
-//         ariaLabel="drawer component example"
-//       >
-//         <DrawerHeader>
-//           {width} wide drawer
-//           <DrawerCloseButton onClick={closeDrawer} />
-//         </DrawerHeader>
-//         <DrawerContent>{drawerContent}</DrawerContent>
-//       </Drawer>
-//     </>
-//   );
-// };
+export const OpenBottomDrawer: Story = {
+  play: async ({ canvasElement, mount }) => {
+    await mount(<Placement />);
+    const canvas = within(canvasElement);
 
-// export const ContentHeight = () => {
-//   const {
-//     isOpen: isDrawerOpen,
-//     handleOpen: openDrawer,
-//     handleClose: closeDrawer,
-//   } = useOpenClose();
-//   return (
-//     <>
-//       <Button variant="primary" onClick={openDrawer}>
-//         Open Drawer
-//       </Button>
-//       <Drawer
-//         placement="top"
-//         isOpen={isDrawerOpen}
-//         onDismiss={closeDrawer}
-//         ariaLabel="drawer component example"
-//       >
-//         <DrawerHeader>
-//           <DrawerTitle>Drawer Header</DrawerTitle>
-//           <DrawerCloseButton onClick={closeDrawer} />
-//         </DrawerHeader>
-//         <DrawerContent height="8xl">{drawerContent}</DrawerContent>
-//       </Drawer>
-//     </>
-//   );
-// };
+    await userEvent.click(canvas.getByText('Open Drawer'));
+  },
+};
 
-// export const HiddenOverlay = () => {
-//   const closeBtnRef = useRef<HTMLButtonElement>();
-//   const returnFocusRef = useRef<HTMLButtonElement>();
-//   const returnFocus = () => {
-//     if (returnFocusRef && returnFocusRef.current) {
-//       returnFocusRef.current.focus();
-//     }
-//   };
-//   const {
-//     isOpen: isDrawerOpen,
-//     handleToggle: handleDrawerToggle,
-//     handleClose: closeDrawer,
-//   } = useOpenClose({ onClose: returnFocus });
-//   useEffect(() => {
-//     setTimeout(() => {
-//       if (closeBtnRef && closeBtnRef.current) {
-//         closeBtnRef.current.focus();
-//       }
-//     }, 100);
-//   }, [isDrawerOpen]);
-//   return (
-//     <>
-//       <Button
-//         variant="primary"
-//         onClick={handleDrawerToggle}
-//         ref={returnFocusRef as MutableRefObject<HTMLButtonElement>}
-//       >
-//         Toggle Drawer
-//       </Button>
-//       <Drawer
-//         isOpen={isDrawerOpen}
-//         onDismiss={closeDrawer}
-//         ariaLabel="drawer component example"
-//         hideOverlay
-//       >
-//         <DrawerHeader>
-//           <DrawerCloseButton
-//             onClick={closeDrawer}
-//             ref={closeBtnRef as MutableRefObject<HTMLButtonElement>}
-//           />
-//         </DrawerHeader>
-//         <DrawerContent>{drawerContent}</DrawerContent>
-//       </Drawer>
-//     </>
-//   );
-// };
+export const Width = () => {
+  const [width, setWidth] = React.useState('default');
+  const handleClick = (newWidth: WidthSize) => {
+    setWidth(newWidth);
+  };
+  const widths = ['16rem', '400px', '100%'];
+  return (
+    <DrawerProvider defaultIsOpen={false}>
+      <Box gap="md" direction="row">
+        {widths.map((width: string) => (
+          <DrawerTrigger asChild>
+            <Button
+              variant="primary"
+              onClick={() => handleClick(width as WidthSize)}
+              key={width}
+            >
+              {`Open ${width} Drawer `}
+            </Button>
+          </DrawerTrigger>
+        ))}
+      </Box>
+      <Drawer width={width as WidthSize} ariaLabel="drawer component example">
+        <DrawerHeader>
+          <DrawerTitle>Drawer Title</DrawerTitle>
+          <DrawerCloseButton />
+        </DrawerHeader>
+        <DrawerContent>{drawerContent}</DrawerContent>
+      </Drawer>
+    </DrawerProvider>
+  );
+};
 
-// export const InitialFocusRef = () => {
-//   const {
-//     isOpen: isDrawerOpen,
-//     handleOpen: openDrawer,
-//     handleClose: closeDrawer,
-//   } = useOpenClose();
-//   const ref = useRef(null);
-//   return (
-//     <div>
-//       <Button variant="primary" onClick={openDrawer}>
-//         Open Drawer
-//       </Button>
-//       <Drawer
-//         isOpen={isDrawerOpen}
-//         onDismiss={closeDrawer}
-//         initialFocusRef={ref}
-//         ariaLabel="drawer component example"
-//       >
-//         <DrawerHeader>
-//           <DrawerTitle>initialFocusRef</DrawerTitle>
-//           <DrawerCloseButton onClick={closeDrawer} />
-//         </DrawerHeader>
-//         <DrawerContent>
-//           drawer content
-//           <Button variant="primary" ref={ref} onClick={closeDrawer}>
-//             I receive focus
-//           </Button>
-//           {drawerContent}
-//         </DrawerContent>
-//       </Drawer>
-//     </div>
-//   );
-// };
+Width.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
-// export const ContainedDrawer = () => {
-//   const containerRef = useRef<HTMLDivElement>();
-//   const {
-//     isOpen: isDrawerOpen,
-//     handleOpen: openDrawer,
-//     handleClose: closeDrawer,
-//   } = useOpenClose();
-//   return (
-//     <Box
-//       position="relative"
-//       display="block"
-//       height="500px"
-//       id="myContainer"
-//       ref={containerRef}
-//       background="info"
-//       padding="lg"
-//       overflow="hidden"
-//     >
-//       <Button variant="primary" onClick={openDrawer}>
-//         Open Drawer
-//       </Button>
-//       <Drawer
-//         isOpen={isDrawerOpen}
-//         onDismiss={closeDrawer}
-//         containerRef={containerRef as MutableRefObject<HTMLDivElement>}
-//         dangerouslyBypassScrollLock
-//         hideOverlay
-//         ariaLabel="drawer component example"
-//       >
-//         <DrawerHeader>
-//           <DrawerTitle>containerRef</DrawerTitle>
-//         </DrawerHeader>
-//         <DrawerContent>
-//           This drawer is rendered inside it&apos;s containing div, rather than
-//           the document.body
-//           {drawerContent}
-//         </DrawerContent>
-//       </Drawer>
-//     </Box>
-//   );
-// };
+export const HiddenOverlay = () => {
+  return (
+    <DrawerProvider defaultIsOpen={false}>
+      <DrawerTrigger asChild>
+        <Button variant="primary">Toggle Drawer</Button>
+      </DrawerTrigger>
+      <Drawer hideOverlay ariaLabel="drawer component example">
+        <DrawerHeader>
+          <DrawerTitle>Drawer Title</DrawerTitle>
+          <DrawerCloseButton />
+        </DrawerHeader>
+        <DrawerContent>{drawerContent}</DrawerContent>
+      </Drawer>
+    </DrawerProvider>
+  );
+};
 
-// export const OpenContainedDrawer: Story = {
-//   play: async ({ canvasElement, mount }) => {
-//     await mount(<ContainedDrawer />);
-//     const canvas = within(canvasElement);
+HiddenOverlay.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
-//     await userEvent.click(canvas.getByText('Open Drawer'));
+export const OpenHiddenOverlay: Story = {
+  play: async ({ canvasElement, mount }) => {
+    await mount(<HiddenOverlay />);
+    const canvas = within(canvasElement);
 
-//     await expect(canvas.getByText('containerRef')).toBeInTheDocument();
-//   },
-// };
+    await userEvent.click(canvas.getByText('Toggle Drawer'));
+  },
+};
+
+export const InitialFocusRef = () => {
+  const ref = useRef(null);
+  const containerRef = useRef(null);
+  return (
+    <div ref={containerRef}>
+      <DrawerProvider defaultIsOpen={false}>
+        <DrawerTrigger asChild>
+          <Button variant="primary">Toggle Drawer</Button>
+        </DrawerTrigger>
+        <Drawer
+          initialFocusRef={ref}
+          containerRef={containerRef}
+          ariaLabel="drawer component example"
+        >
+          <DrawerHeader>
+            <DrawerTitle>Drawer Title</DrawerTitle>
+            <DrawerCloseButton />
+          </DrawerHeader>
+          <DrawerContent>
+            <DrawerTrigger asChild>
+              <Button variant="primary" ref={ref} data-testid="focus-button">
+                I receive focus
+              </Button>
+            </DrawerTrigger>
+          </DrawerContent>
+        </Drawer>
+      </DrawerProvider>
+    </div>
+  );
+};
+
+InitialFocusRef.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
+export const OpenInitialFocusRef: Story = {
+  play: async ({ canvasElement, mount }) => {
+    await mount(<InitialFocusRef />);
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByText('Toggle Drawer'));
+  },
+};
+
+export const ContainedDrawer = () => {
+  const containerRef = useRef(null);
+  return (
+    <Box
+      position="relative"
+      display="block"
+      height="500px"
+      id="myContainer"
+      ref={containerRef}
+      background="info"
+      padding="lg"
+      overflow="hidden"
+      borderWidth="sm"
+    >
+      <DrawerProvider defaultIsOpen={false}>
+        <DrawerTrigger asChild>
+          <Button variant="primary">Toggle Drawer</Button>
+        </DrawerTrigger>
+        <Drawer
+          containerRef={containerRef}
+          ariaLabel="drawer component example"
+        >
+          <DrawerHeader>
+            <DrawerTitle>Drawer Title</DrawerTitle>
+            <DrawerCloseButton />
+          </DrawerHeader>
+          <DrawerContent>{drawerContent}</DrawerContent>
+        </Drawer>
+      </DrawerProvider>
+    </Box>
+  );
+};
+
+ContainedDrawer.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
+export const OpenContainedDrawer: Story = {
+  play: async ({ canvasElement, mount }) => {
+    await mount(<ContainedDrawer />);
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByText('Toggle Drawer'));
+
+    await expect(canvas.getByText('Drawer Title')).toBeInTheDocument();
+  },
+};

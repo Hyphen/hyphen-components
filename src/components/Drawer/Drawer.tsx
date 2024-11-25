@@ -280,7 +280,6 @@ const Drawer: React.FC<DrawerProps> = forwardRef<HTMLDivElement, DrawerProps>(
       styles[placement],
       {
         [styles['hide-overlay']]: hideOverlay,
-        className,
       }
     );
 
@@ -319,6 +318,8 @@ const Drawer: React.FC<DrawerProps> = forwardRef<HTMLDivElement, DrawerProps>(
                 aria-label={ariaLabel}
                 aria-labelledby={ariaLabelledBy}
                 height="100"
+                data-testid="drawer-content"
+                className={className}
               >
                 {children}
               </Box>
