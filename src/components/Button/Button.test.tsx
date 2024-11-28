@@ -1,43 +1,40 @@
+import React from 'react';
 import { BUTTON_SIZES, BUTTON_VARIANTS } from './Button.constants';
 import { Button, ButtonVariant } from './Button';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import React from 'react';
-
 const renderButton = (props = {}) => render(<Button {...props} />);
 const getButton = (text: string): HTMLButtonElement =>
   screen.getByText(text).closest('button') as HTMLButtonElement;
-const getAnchor = (text: string): HTMLAnchorElement =>
-  screen.getByText(text).closest('a') as HTMLAnchorElement;
 
 describe('Button', () => {
-  describe('HTML Button Type', () => {
-    test('is set to button by default', () => {
-      renderButton({ children: 'Button' });
-      const testBtn = screen.getByRole('button');
-      expect(testBtn).toHaveAttribute('type', 'button');
-    });
-
-    test('is set to submit if specified', () => {
-      renderButton({ type: 'submit', children: 'Submit Button' });
-      const testBtn = screen.getByRole('button');
-      expect(testBtn).toHaveAttribute('type', 'submit');
-    });
-
-    test('is set to reset if specified', () => {
-      renderButton({ type: 'reset', children: 'Reset Button' });
-      const testBtn = screen.getByRole('button');
-      expect(testBtn).toHaveAttribute('type', 'reset');
-    });
-
-    test('is not set if as prop is an anchor tag', () => {
-      renderButton({
-        as: 'a',
-        href: 'https://www.hyphen.ai',
-        children: 'link button',
+  describe('Disabled states', () => {
+    test('supports controlled isLoading state', () => {
+      const { rerender } = renderButton({
+        isLoading: true,
+        children: 'Loading Button',
       });
-      const testBtn = screen.getByText('link button').parentElement;
-      expect(testBtn).not.toHaveAttribute('type');
+      const button = getButton('Loading Button');
+      expect(button).toHaveAttribute('aria-disabled', 'true');
+      expect(button).toBeDisabled();
+
+      rerender(<Button isLoading={false} children="Loading Button" />);
+      expect(button).not.toHaveAttribute('aria-disabled');
+      expect(button).not.toBeDisabled();
+    });
+
+    test('supports controlled isDisabled state', () => {
+      const { rerender } = renderButton({
+        isDisabled: true,
+        children: 'Disabled Button',
+      });
+      const button = getButton('Disabled Button');
+      expect(button).toHaveAttribute('aria-disabled', 'true');
+      expect(button).toBeDisabled();
+
+      rerender(<Button isDisabled={false} children="Disabled Button" />);
+      expect(button).not.toHaveAttribute('aria-disabled');
+      expect(button).not.toBeDisabled();
     });
   });
 
@@ -107,6 +104,18 @@ describe('Button', () => {
         expect(mockedHandleClick).toHaveBeenCalledTimes(1);
       });
 
+      test('does not fire onClick callback when disabled', () => {
+        const mockedHandleClick = jest.fn();
+        renderButton({
+          onClick: mockedHandleClick,
+          children: 'Click',
+          isDisabled: true,
+        });
+        const buttonElement: HTMLButtonElement = getButton('Click');
+        fireEvent.click(buttonElement);
+        expect(mockedHandleClick).toHaveBeenCalledTimes(0);
+      });
+
       test('does not fire function if onClick callback not provided', () => {
         const mockedHandleClick = jest.fn();
         renderButton({ children: 'Click' });
@@ -139,6 +148,18 @@ describe('Button', () => {
         expect(mockedHandleFocus).toHaveBeenCalledTimes(1);
       });
 
+      test('does not fire onFocus callback when disabled', () => {
+        const mockedHandleFocus = jest.fn();
+        renderButton({
+          onFocus: mockedHandleFocus,
+          children: 'Focus',
+          isDisabled: true,
+        });
+        const buttonElement = getButton('Focus');
+        fireEvent.focus(buttonElement);
+        expect(mockedHandleFocus).toHaveBeenCalledTimes(0);
+      });
+
       test('does not fire function if onFocus callback not provided', () => {
         const mockedHandleFocus = jest.fn();
         renderButton({ children: 'Focus' });
@@ -155,6 +176,18 @@ describe('Button', () => {
         const buttonElement = getButton('Blur');
         fireEvent.blur(buttonElement);
         expect(mockedHandleBlur).toHaveBeenCalledTimes(1);
+      });
+
+      test('does not fire onBlur callback when disabled', () => {
+        const mockedHandleBlur = jest.fn();
+        renderButton({
+          onBlur: mockedHandleBlur,
+          children: 'Blur',
+          isDisabled: true,
+        });
+        const buttonElement = getButton('Blur');
+        fireEvent.blur(buttonElement);
+        expect(mockedHandleBlur).toHaveBeenCalledTimes(0);
       });
 
       test('does not fire onBlur callback if not provided', () => {
@@ -305,97 +338,6 @@ describe('Button', () => {
         });
       });
     });
-
-    describe('Anchor', () => {
-      test('renders an anchor tag if as prop `a` is passed', () => {
-        renderButton({
-          as: 'a',
-          href: 'http://hyphen.ai',
-          children: 'hey there',
-        });
-        const buttonElement = screen.getByRole('link');
-        expect(buttonElement).toBeInTheDocument();
-      });
-
-      test('does not have a button type attribute if as prop `a` is passed', () => {
-        renderButton({
-          as: 'a',
-          href: 'http://hyphen.ai',
-          children: 'hey there',
-        });
-        const buttonElement = screen.getByRole('link');
-        expect(buttonElement).not.toHaveAttribute('type');
-      });
-
-      test('renders a target attribute if one is passed, the element is an anchor, and there is a href', () => {
-        renderButton({
-          as: 'a',
-          href: 'http://hyphen.ai',
-          target: '_blank',
-          children: 'hey there',
-        });
-        const buttonElement = screen.getByRole('link');
-        expect(buttonElement).toHaveAttribute('target', '_blank');
-      });
-
-      test('does not render a target attribute if the element is not an anchor', () => {
-        renderButton({
-          href: 'http://hyphen.ai',
-          target: '_blank',
-          children: 'hey there',
-        });
-        const buttonElement = screen.getByRole('button');
-        expect(buttonElement).not.toHaveAttribute('target');
-      });
-
-      test('does not render a target attribute if the element does not have an href', () => {
-        renderButton({ as: 'a', target: '_blank', children: 'hey there' });
-        const buttonElement = screen.getByText('hey there');
-        expect(buttonElement).not.toHaveAttribute('target');
-      });
-
-      describe('Rel Attribute', () => {
-        test('applies rel attribute when target is _blank', () => {
-          renderButton({
-            as: 'a',
-            href: 'http://hyphen.ai',
-            target: '_blank',
-            children: 'Link with rel',
-          });
-          const anchorElement = getAnchor('Link with rel');
-          expect(anchorElement).toHaveAttribute('rel', 'noopener noreferrer');
-        });
-      });
-    });
-  });
-
-  describe('React Router', () => {
-    test('fires navigate callback when included', () => {
-      const mockedNavigate = jest.fn();
-      renderButton({
-        as: 'a',
-        navigate: mockedNavigate,
-        href: '/',
-        children: 'react router link',
-      });
-      const anchorElement = getAnchor('react router link');
-      fireEvent.click(anchorElement);
-      expect(mockedNavigate).toHaveBeenCalledTimes(1);
-    });
-
-    test('does not fire navigate callback if target is _blank', () => {
-      const mockedNavigate = jest.fn();
-      renderButton({
-        as: 'a',
-        navigate: mockedNavigate,
-        href: '/',
-        target: '_blank',
-        children: 'react router link',
-      });
-      const anchorElement = getAnchor('react router link');
-      fireEvent.click(anchorElement);
-      expect(mockedNavigate).toHaveBeenCalledTimes(0);
-    });
   });
 
   describe('Role Attribute', () => {
@@ -403,6 +345,77 @@ describe('Button', () => {
       renderButton({ role: 'button', children: 'Button with Role' });
       const buttonElement = getButton('Button with Role');
       expect(buttonElement).toHaveAttribute('role', 'button');
+    });
+  });
+  describe('Aria Attributes', () => {
+    test('applies aria-label attribute', () => {
+      renderButton({ 'aria-label': 'Aria Label Button', children: 'Button' });
+      const buttonElement = getButton('Button');
+      expect(buttonElement).toHaveAttribute('aria-label', 'Aria Label Button');
+    });
+
+    test('applies aria-labelledby attribute', () => {
+      renderButton({ 'aria-labelledby': 'label-id', children: 'Button' });
+      const buttonElement = getButton('Button');
+      expect(buttonElement).toHaveAttribute('aria-labelledby', 'label-id');
+    });
+  });
+
+  describe('Shadow Prop', () => {
+    test('applies shadow class when shadow prop is provided', () => {
+      renderButton({ shadow: 'lg', children: 'Shadow Button' });
+      const buttonElement = getButton('Shadow Button');
+      expect(buttonElement).toHaveClass('shadow-lg');
+    });
+
+    test('applies responsive shadow classes', () => {
+      renderButton({
+        shadow: { base: 'sm', tablet: 'md', desktop: 'lg' },
+        children: 'Responsive Shadow Button',
+      });
+      const buttonElement = getButton('Responsive Shadow Button');
+      expect(buttonElement).toHaveClass(
+        'shadow-sm',
+        'shadow-md-tablet',
+        'shadow-lg-desktop'
+      );
+    });
+  });
+
+  describe('As Child', () => {
+    test('renders as a different component when asChild is true', () => {
+      renderButton({ asChild: true, children: <a href="#">Link Button</a> });
+      const linkElement = screen.getByRole('link');
+      expect(linkElement).toBeInTheDocument();
+      expect(linkElement).toHaveAttribute('href', '#');
+    });
+  });
+
+  describe('Button Type', () => {
+    test('renders with type button', () => {
+      renderButton({ children: 'Default Type Button', type: 'button' });
+      const buttonElement = getButton('Default Type Button');
+      expect(buttonElement).toHaveAttribute('type', 'button');
+    });
+
+    test('renders with type submit when specified', () => {
+      renderButton({ type: 'submit', children: 'Submit Button' });
+      const buttonElement = getButton('Submit Button');
+      expect(buttonElement).toHaveAttribute('type', 'submit');
+    });
+
+    test('renders with type reset when specified', () => {
+      renderButton({ type: 'reset', children: 'Reset Button' });
+      const buttonElement = getButton('Reset Button');
+      expect(buttonElement).toHaveAttribute('type', 'reset');
+    });
+  });
+
+  describe('Button Ref', () => {
+    test('forwards ref to the button element', () => {
+      const ref = React.createRef<HTMLButtonElement>();
+      renderButton({ ref, children: 'Button with Ref' });
+      expect(ref.current).toBeInstanceOf(HTMLButtonElement);
     });
   });
 });

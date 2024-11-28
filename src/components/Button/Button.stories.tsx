@@ -23,6 +23,14 @@ export const Default = () => (
   <Button onClick={() => alert('clicked')}>Button</Button>
 );
 
+export const AsChild = () => (
+  <Button asChild>
+    <a href="https://ux.hyphen.ai" target="_blank">
+      I'm an anchor
+    </a>
+  </Button>
+);
+
 export const Variants = () => (
   <Box gap="md" style={{ backgroundColor: 'var(--background-primary)' }}>
     <Box gap="sm" direction="row" alignItems="flex-start">
@@ -66,7 +74,7 @@ export const FullWidth = () => (
 );
 
 export const Icons = () => (
-  <Box direction="row" gap="xs" alignItems="flex-start">
+  <Box direction="row" gap="md" alignItems="flex-start">
     <Button variant="primary" iconPrefix="mail">
       Email
     </Button>
@@ -85,7 +93,7 @@ export const IconButton = () => (
 );
 
 export const Loading = () => (
-  <Box direction="row" gap="sm">
+  <Box direction="row" gap="md">
     <Button isLoading>Primary Loading</Button>
     <Button variant="secondary" isLoading>
       Secondary Loading
@@ -97,7 +105,7 @@ export const Loading = () => (
 );
 
 export const Disabled = () => (
-  <Box direction="row" gap="sm">
+  <Box direction="row" gap="md">
     <Button variant="primary" isDisabled>
       Primary Disabled
     </Button>
@@ -111,7 +119,7 @@ export const Disabled = () => (
 );
 
 export const Shadow = () => (
-  <Box direction="row" gap="sm">
+  <Box direction="row" gap="md">
     <Button variant="secondary" shadow="xs">
       xs shadow
     </Button>
@@ -120,14 +128,6 @@ export const Shadow = () => (
     </Button>
     <Button variant="secondary" shadow="md">
       md shadow
-    </Button>
-  </Box>
-);
-
-export const Anchor = () => (
-  <Box direction="row" gap="sm">
-    <Button as="a" href="https://ux.hyphen.ai" target="_blank">
-      I'm an anchor tag
     </Button>
   </Box>
 );
