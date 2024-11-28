@@ -25,7 +25,7 @@ export const Default = () => (
 
 export const AsChild = () => (
   <Button asChild>
-    <a href="https://ux.hyphen.ai" target="_blank">
+    <a href="https://ux.hyphen.ai" target="_blank" rel="noreferrer">
       I'm an anchor
     </a>
   </Button>

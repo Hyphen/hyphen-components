@@ -384,10 +384,13 @@ describe('Button', () => {
 
   describe('As Child', () => {
     test('renders as a different component when asChild is true', () => {
-      renderButton({ asChild: true, children: <a href="#">Link Button</a> });
+      renderButton({
+        asChild: true,
+        children: <a href="https://ux.hyphen.com">Link Button</a>,
+      });
       const linkElement = screen.getByRole('link');
       expect(linkElement).toBeInTheDocument();
-      expect(linkElement).toHaveAttribute('href', '#');
+      expect(linkElement).toHaveAttribute('href', 'https://ux.hyphen.com');
     });
   });
 

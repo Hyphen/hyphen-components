@@ -58,6 +58,7 @@
     --button-size-lg-border-radius,
     var(--INTERNAL_form-control-size-lg-border-radius)
   );
+  gap: var(--size-spacing-lg);
   padding: var(
       --button-size-lg-padding-vertical,
       var(--INTERNAL_form-control-size-lg-padding)
