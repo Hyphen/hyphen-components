@@ -220,7 +220,7 @@ export const SidebarExample = () => {
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
                       <a
-                        href="#"
+                        href="https://ux.hyphen.ai"
                         className="display-flex flex-direction-row g-sm align-items-center"
                       >
                         <Icon name="add" color="tertiary" />
@@ -313,14 +313,14 @@ export const SidebarExample = () => {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent side="bottom" align="end">
                         <DropdownMenuItem>
-                          <a href="#">View</a>
+                          <a href="https://ux.hyphen.ai">View</a>
                         </DropdownMenuItem>
                         <DropdownMenuItem>
-                          <a href="#">Share</a>
+                          <a href="https://ux.hyphen.ai">Share</a>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>
-                          <a href="#">Remove</a>
+                          <a href="https://ux.hyphen.ai">Remove</a>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>

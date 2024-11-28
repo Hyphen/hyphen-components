@@ -44,14 +44,17 @@ export const BREAKPOINT_OPTIONS = Object.keys(
 export const BREAKPOINTS = [
   ...Object.entries(designTokens.size.breakpoint),
   ['base', { value: '0' }],
-].map(([name, data]) => {
-  if (typeof data === 'object' && data !== null && 'value' in data) {
-    return {
-      name,
-      minWidth: parseInt(data['value'] as string, 10),
-    };
-  }
-}) as Breakpoint[];
+]
+  .map(([name, data]) => {
+    if (typeof data === 'object' && data !== null && 'value' in data) {
+      return {
+        name,
+        minWidth: parseInt(data['value'] as string, 10),
+      };
+    }
+    return undefined;
+  })
+  .filter((breakpoint): breakpoint is Breakpoint => breakpoint !== undefined);
 
 export const BASE_COLOR_OPTIONS = (
   Object.keys(designTokens.color.base) as ColorName[]
