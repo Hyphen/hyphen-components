@@ -363,9 +363,7 @@ const DrawerCloseButton = React.forwardRef<
   const context = useContext(DrawerContext);
   const isStandalone = !context;
 
-  const handleClick = (
-    event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
-  ) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     onClick?.(event);
 
     if (isStandalone) {
