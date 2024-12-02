@@ -359,7 +359,8 @@ const DrawerCloseButton = React.forwardRef<
   React.ComponentProps<typeof Button> & {
     onClose?: () => void; // Fallback to onClose if provided
   }
->(({ className, onClick, onClose, ...props }, ref) => {
+>((props) => {
+  const { className, onClick, onClose, ...rest } = props;
   const context = useContext(DrawerContext);
   const isStandalone = !context;
 
@@ -377,7 +378,6 @@ const DrawerCloseButton = React.forwardRef<
 
   return (
     <Button
-      ref={ref}
       variant="tertiary"
       aria-label="close"
       type="button"
@@ -386,7 +386,7 @@ const DrawerCloseButton = React.forwardRef<
       className={classNames('m-left-auto', className)}
       size="sm"
       onClick={handleClick}
-      {...props}
+      {...rest}
     />
   );
 });
