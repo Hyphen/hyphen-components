@@ -16,7 +16,7 @@ import classNames from 'classnames';
 import { DimensionSize, CssDimensionValue } from '../../types';
 import { Box, BoxProps } from '../Box/Box';
 import styles from './Drawer.module.scss';
-import { Button } from '../Button/Button';
+import { Button, ButtonMergedProps } from '../Button/Button';
 
 interface DrawerContextProps {
   open: boolean;
@@ -356,7 +356,7 @@ const DrawerTitle = React.forwardRef<HTMLDivElement, BoxProps>(
 
 const DrawerCloseButton = forwardRef<
   HTMLButtonElement,
-  ButtonProps & { onClose?: () => void }
+  ButtonMergedProps & { onClose?: () => void }
 >(({ className, onClick, onClose, ...rest }, ref) => {
   const context = useContext(DrawerContext);
   const isStandalone = !context;
