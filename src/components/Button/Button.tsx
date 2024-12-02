@@ -1,6 +1,10 @@
 import { BoxShadowSize, IconName, ResponsiveProp } from '../../types';
 import { Slot, Slottable } from '@radix-ui/react-slot';
-import React, { ButtonHTMLAttributes, forwardRef } from 'react';
+import React, {
+  ButtonHTMLAttributes,
+  forwardRef,
+  ForwardRefExoticComponent,
+} from 'react';
 
 import { Icon } from '../Icon/Icon';
 import { Spinner } from '../Spinner/Spinner';
@@ -55,11 +59,13 @@ export interface BaseButtonProps {
   variant?: ButtonVariant;
 }
 
-export interface ButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    BaseButtonProps {}
+export type ButtonMergedProps = BaseButtonProps &
+  ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+export const Button: ForwardRefExoticComponent<ButtonMergedProps> = forwardRef<
+  HTMLButtonElement,
+  ButtonMergedProps
+>(
   (
     {
       asChild,
@@ -151,3 +157,5 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     );
   }
 );
+
+Button.displayName = 'Button';
