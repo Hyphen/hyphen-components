@@ -59,7 +59,10 @@ export interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     BaseButtonProps {}
 
-export const Button: FC<ButtonProps> = forwardRef(
+export const Button: FC<ButtonProps> = forwardRef<
+  HTMLButtonElement,
+  ButtonProps
+>(
   (
     {
       asChild,
