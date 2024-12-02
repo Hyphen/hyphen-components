@@ -4,7 +4,7 @@ import { Box } from '../Box/Box';
 
 import * as Stories from './Button.stories';
 
-<Meta of={Stories} />
+<Meta of={Stories} title="Components/Button" component={Button} />
 
 # Button
 
@@ -17,6 +17,12 @@ Actions almost always occur on the same page.
 ## Props
 
 <ArgTypes of={Button} />
+
+## As Child
+
+Apply the `asChild` prop to apply the button styles to a child element.
+
+<Canvas of={Stories.AsChild} />
 
 ## Variants
 
@@ -70,9 +76,3 @@ The interface should make it clear why the button is disabled and what needs to 
 
 <Canvas of={Stories.Disabled} />
 
-## As an Anchor
-
-You can render an anchor tag with the style of a button by using the `as` prop. You
-can render buttons as one of `button`, `a`, and `input`.
-
-<Canvas of={Stories.Anchor} />

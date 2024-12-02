@@ -58,6 +58,7 @@
     --button-size-lg-border-radius,
     var(--INTERNAL_form-control-size-lg-border-radius)
   );
+  gap: var(--size-spacing-lg);
   padding: var(
       --button-size-lg-padding-vertical,
       var(--INTERNAL_form-control-size-lg-padding)
@@ -89,6 +90,7 @@
   line-height: 1;
   font-family: var(--assets-font-family-body);
   display: inline-flex;
+  gap: var(--size-spacing-sm);
   align-items: center;
   justify-content: center;
   position: relative;
@@ -103,6 +105,7 @@
     text-decoration: none;
   }
 
+  &[aria-disabled='true'],
   &:disabled {
     opacity: 0.45;
     cursor: not-allowed;
