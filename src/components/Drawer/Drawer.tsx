@@ -16,7 +16,7 @@ import classNames from 'classnames';
 import { DimensionSize, CssDimensionValue } from '../../types';
 import { Box, BoxProps } from '../Box/Box';
 import styles from './Drawer.module.scss';
-import { Button, ButtonProps } from '../Button/Button';
+import { Button } from '../Button/Button';
 
 interface DrawerContextProps {
   open: boolean;
