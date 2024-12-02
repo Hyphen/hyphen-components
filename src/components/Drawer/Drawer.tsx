@@ -16,7 +16,7 @@ import classNames from 'classnames';
 import { DimensionSize, CssDimensionValue } from '../../types';
 import { Box, BoxProps } from '../Box/Box';
 import styles from './Drawer.module.scss';
-import { Button } from '../Button/Button';
+import { Button, ButtonProps } from '../Button/Button';
 
 interface DrawerContextProps {
   open: boolean;
@@ -354,13 +354,10 @@ const DrawerTitle = React.forwardRef<HTMLDivElement, BoxProps>(
   }
 );
 
-const DrawerCloseButton = React.forwardRef<
-  React.ElementRef<typeof Button>,
-  React.ComponentProps<typeof Button> & {
-    onClose?: () => void; // Fallback to onClose if provided
-  }
->((props, ref) => {
-  const { className, onClick, onClose, ...rest } = props;
+const DrawerCloseButton = forwardRef<
+  HTMLButtonElement,
+  ButtonProps & { onClose?: () => void }
+>(({ className, onClick, onClose, ...rest }, ref) => {
   const context = useContext(DrawerContext);
   const isStandalone = !context;
 
@@ -378,7 +375,6 @@ const DrawerCloseButton = React.forwardRef<
 
   return (
     <Button
-      ref={ref}
       variant="tertiary"
       aria-label="close"
       type="button"
@@ -387,6 +383,7 @@ const DrawerCloseButton = React.forwardRef<
       className={classNames('m-left-auto', className)}
       size="sm"
       onClick={handleClick}
+      ref={ref}
       {...rest}
     />
   );
