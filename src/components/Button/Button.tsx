@@ -55,10 +55,10 @@ export interface BaseButtonProps {
   variant?: ButtonVariant;
 }
 
-export type ButtonMergedProps = BaseButtonProps &
+export type ButtonProps = BaseButtonProps &
   ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const Button = forwardRef<HTMLButtonElement, ButtonMergedProps>(
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       asChild,
