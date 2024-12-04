@@ -1060,6 +1060,9 @@ export const WidthPercentages = () => (
     <Box background="tertiary" width="60">
       60%
     </Box>
+    <Box background="tertiary" width="66">
+      66%
+    </Box>
     <Box background="tertiary" width="70">
       70%
     </Box>
@@ -1342,6 +1345,15 @@ export const HeightPercentages = () => (
       height="60"
     >
       60%
+    </Box>
+    <Box
+      flex="auto"
+      justifyContent="center"
+      alignItems="center"
+      background="tertiary"
+      height="66"
+    >
+      66%
     </Box>
     <Box
       flex="auto"
