@@ -392,6 +392,15 @@ describe('Button', () => {
       expect(linkElement).toBeInTheDocument();
       expect(linkElement).toHaveAttribute('href', 'https://ux.hyphen.ai');
     });
+
+    test('does not render type prop when asChild is true', () => {
+      renderButton({
+        asChild: true,
+        children: <a href="https://ux.hyphen.ai">Link Button</a>,
+      });
+      const linkElement = screen.getByRole('link');
+      expect(linkElement).not.toHaveAttribute('type');
+    });
   });
 
   describe('Button Type', () => {
