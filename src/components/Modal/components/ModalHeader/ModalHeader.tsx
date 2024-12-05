@@ -47,6 +47,7 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
           onClick={onDismiss}
           iconPrefix="remove"
           size="sm"
+          type="button"
         />
       )}
     </Box>
