@@ -50,6 +50,11 @@ export interface BaseButtonProps {
    */
   size?: ButtonSize | ResponsiveProp<ButtonSize>;
   /**
+   * The type of button
+   *
+   */
+  type?: 'button' | 'submit' | 'reset';
+  /**
    * Visual variant of the button
    */
   variant?: ButtonVariant;
@@ -74,6 +79,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onFocus,
       shadow,
       size = 'md',
+      type = 'button',
       variant = 'primary',
       ...restProps
     },
@@ -113,6 +119,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onBlur={handleBlur}
         onFocus={handleFocus}
         ref={ref}
+        {...(!asChild && {
+          type,
+        })}
         {...restProps}
       >
         {isLoading && <Spinner className={styles['spinner-wrapper']} />}
