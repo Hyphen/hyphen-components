@@ -21,17 +21,22 @@ const DropdownMenuItem = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> & {
     inset?: boolean;
   }
->(({ className, inset, ...props }, ref) => (
-  <DropdownMenuPrimitive.Item
-    ref={ref}
-    className={classNames(
-      'font-size-sm position-relative cursor-default display-flex br-sm align-items-center p-sm g-sm outline-none hover:background-color-secondary focus:background-color-secondary',
-      inset && 'p-left-md',
-      className
-    )}
-    {...props}
-  />
-));
+>(({ className, inset, ...props }, ref) => {
+  return (
+    <DropdownMenuPrimitive.Item
+      ref={ref}
+      className={classNames(
+        'font-size-sm position-relative cursor-default display-flex br-sm align-items-center p-sm g-sm outline-none',
+        inset && 'p-left-md',
+        !props.disabled &&
+          'hover:background-color-secondary focus:background-color-secondary',
+        props.disabled && 'cursor-not-allowed font-color-disabled',
+        className
+      )}
+      {...props}
+    />
+  );
+});
 DropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName;
 
 const DropdownMenuContent = React.forwardRef<
