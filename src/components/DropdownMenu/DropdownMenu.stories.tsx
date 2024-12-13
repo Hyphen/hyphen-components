@@ -51,6 +51,9 @@ export const Uncontrolled = () => (
           <span>Settings</span>
           <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
         </DropdownMenuItem>
+        <DropdownMenuItem disabled>
+          <span>Disabled</span>
+        </DropdownMenuItem>
         <DropdownMenuItem>
           <span>Keyboard shortcuts</span>
           <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
@@ -133,6 +136,7 @@ export const Controlled = () => {
             <span>Keyboard shortcuts</span>
             <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
           </DropdownMenuItem>
+          <DropdownMenuItem disabled>Disabled</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
