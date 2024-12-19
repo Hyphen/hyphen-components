@@ -1,0 +1,9 @@
+.rail {
+  border-width: 0;
+  transition: border-right 0.3s linear;
+  border-right: 2px solid transparent;
+}
+
+.rail:hover {
+  border-right: 2px solid var(--color-background-inverse);
+}
