@@ -236,6 +236,11 @@ const Sidebar = React.forwardRef<
             top: '0',
             bottom: '0',
             zIndex: 'var(--size-z-index-drawer)',
+            animationTimingFunction: 'var(--sidebar-transition-timing, linear)',
+            transitionTimingFunction:
+              'var(--sidebar-transition-timing, linear)',
+            transitionDuration: 'var(--sidebar-transition-duration, 200ms)',
+            animationDuration: 'var(--sidebar-transition-duration, 200ms)',
             transitionProperty: 'left, right, width',
             width: 'var(--sidebar-width)',
             height: '100svh',
