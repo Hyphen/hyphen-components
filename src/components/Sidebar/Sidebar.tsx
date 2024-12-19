@@ -13,6 +13,7 @@ import { useIsMobile } from '../../hooks/useIsMobile/useIsMobile';
 import { Box } from '../Box/Box';
 import { IconName } from 'src/types';
 import { Icon } from '../Icon/Icon';
+import styles from './Sidebar.module.scss';
 
 const SIDEBAR_COOKIE_NAME = 'sidebar:state';
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -104,10 +105,7 @@ const SidebarProvider = forwardRef<
     // Keydown event handler for toggling sidebar
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
-        if (
-          event.key === SIDEBAR_KEYBOARD_SHORTCUT &&
-          (event.metaKey || event.ctrlKey)
-        ) {
+        if (event.key === SIDEBAR_KEYBOARD_SHORTCUT) {
           event.preventDefault();
           toggleSidebar();
         }
@@ -548,9 +546,10 @@ const SidebarRail = React.forwardRef<
       aria-label="Toggle Sidebar"
       tabIndex={-1}
       onClick={toggleSidebar}
-      title="Toggle Sidebar"
+      title="Toggle Sidebar ["
       className={classNames(
-        'hover-show-child display-flex p-top-5xl justify-content-center position-absolute background-color-transparent bw-0',
+        styles.rail,
+        'hover-show-child background-color-transparent display-flex p-top-5xl p-left-xl p-right-0 justify-content-center position-absolute',
         {
           'cursor-w-resize': open,
           'cursor-e-resize': !open,
@@ -558,11 +557,10 @@ const SidebarRail = React.forwardRef<
         className
       )}
       style={{
-        top: '0',
-        bottom: '0',
-        right: '-1rem',
-        width: '1rem',
-        zIndex: '-1',
+        top: '20px',
+        bottom: '20px',
+        right: '-14px',
+        width: '10px',
       }}
       {...props}
     >
@@ -572,7 +570,7 @@ const SidebarRail = React.forwardRef<
         color="secondary"
         borderWidth="sm"
         padding="xs"
-        margin="0 0 0 sm"
+        margin="0"
         shadow="xs"
         className={classNames(
           'hover-child',
