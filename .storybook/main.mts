@@ -1,6 +1,6 @@
 import custom from '../webpack.config';
 
-module.exports = {
+export default {
   stories: ['../src/**/*.mdx', '../src/**/*.@(mdx|stories.@([tj]sx))'],
   addons: [
     '@storybook/addon-essentials',
