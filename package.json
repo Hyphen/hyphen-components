@@ -61,7 +61,7 @@
     }
   ],
   "dependencies": {
-    "@hyphen/hyphen-design-tokens": "^4.20.0",
+    "@hyphen/hyphen-design-tokens": "^4.21.0",
     "@popperjs/core": "^2.11.8",
     "@radix-ui/react-collapsible": "^1.1.1",
     "@radix-ui/react-dropdown-menu": "^2.1.2",
