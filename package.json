@@ -82,7 +82,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.23.7",
-    "@chromatic-com/storybook": "^1.8.0",
+    "@chromatic-com/storybook": "^3.2.4",
     "@semantic-release/commit-analyzer": "^11.1.0",
     "@size-limit/preset-small-lib": "^11.1.4",
     "@storybook/addon-essentials": "^8.4.2",
