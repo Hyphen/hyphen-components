@@ -78,7 +78,8 @@
     "react-remove-scroll": "^2.5.10",
     "react-router-dom": "^6.26.1",
     "react-select": "^5.9.0",
-    "react-select-event": "^5.5.1"
+    "react-select-event": "^5.5.1",
+    "@emotion/react": "^11.14.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.7",
