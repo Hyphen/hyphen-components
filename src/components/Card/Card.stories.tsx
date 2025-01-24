@@ -24,8 +24,10 @@ export default meta;
 
 export const OverviewCard = () => (
   <Card>
-    <Card.Header title="Card Overview" />
-    <Card.Section>
+    <Card.Header title="Card Overview" description="This is the description">
+      <Button size="sm">action</Button>
+    </Card.Header>
+    <Card.Section title="Section One">
       <p>Card content</p>
     </Card.Section>
     <Card.Section title="Section Two">Another section</Card.Section>

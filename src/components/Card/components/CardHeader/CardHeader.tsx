@@ -4,50 +4,48 @@ import { Heading } from '../../../Heading/Heading';
 
 export interface CardHeaderProps extends BoxProps {
   /**
-   * contents of the Header
-   */
-  children?: ReactNode;
-  /**
-   * Additional class names to add
-   */
-  className?: string;
-  /**
    * The title of the card
    */
   title?: ReactNode;
   /**
-   * Additional props to be spread to rendered element
+   * Description copy of the card
    */
-  [x: string]: any; // eslint-disable-line
+  description?: string;
 }
 
 export const CardHeader: FC<CardHeaderProps> = ({
-  childGap = '2xs',
-  children = null,
-  className = undefined,
-  display = 'block',
-  padding = '2xl',
-  title = null,
+  children,
+  title,
+  description,
   ...restProps
 }) => {
-  const renderTitle = () =>
-    typeof title === 'string' ? (
-      <Heading size="sm" as="h4">
-        {title}
-      </Heading>
-    ) : (
-      title
-    );
-
   return (
     <Box
-      childGap={childGap}
-      display={display}
-      padding={padding}
-      className={className}
+      padding="2xl"
+      direction="row"
+      gap="2xl"
+      width="100"
+      justifyContent="space-between"
       {...restProps}
     >
-      {title && renderTitle()}
+      <Box gap="2xs">
+        {title && (
+          <>
+            {typeof title === 'string' ? (
+              <Heading size="sm" as="h4">
+                {title}
+              </Heading>
+            ) : (
+              title
+            )}
+          </>
+        )}
+        {description && (
+          <Box fontSize={{ base: 'xs', tablet: 'sm' }} color="secondary">
+            {description}
+          </Box>
+        )}
+      </Box>
       {children}
     </Box>
   );
