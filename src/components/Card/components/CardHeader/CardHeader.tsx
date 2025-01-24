@@ -8,9 +8,9 @@ export interface CardHeaderProps extends BoxProps {
    */
   title?: ReactNode;
   /**
-   * Description copy of the card
+   * Description of the card, or element below the title
    */
-  description?: string;
+  description?: ReactNode;
 }
 
 export const CardHeader: FC<CardHeaderProps> = ({
@@ -41,9 +41,15 @@ export const CardHeader: FC<CardHeaderProps> = ({
           </>
         )}
         {description && (
-          <Box fontSize={{ base: 'xs', tablet: 'sm' }} color="secondary">
-            {description}
-          </Box>
+          <>
+            {typeof description === 'string' ? (
+              <Box fontSize={{ base: 'xs', tablet: 'sm' }} color="secondary">
+                {description}
+              </Box>
+            ) : (
+              description
+            )}
+          </>
         )}
       </Box>
       {children}
