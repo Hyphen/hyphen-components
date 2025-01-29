@@ -49,4 +49,5 @@ export * from './components/TimePicker/TimePicker';
 export * from './components/TimePickerNative/TimePickerNative';
 export * from './components/Toast';
 export * from './components/Toggle/Toggle';
+export * from './components/Tooltip/Tooltip';
 export * from './hooks';
