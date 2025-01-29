@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, forwardRef } from 'react';
+import React, { ReactNode, forwardRef } from 'react';
 import classNames from 'classnames';
 import { FontSize, BaseSpacing, ResponsiveProp } from '../../types';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
