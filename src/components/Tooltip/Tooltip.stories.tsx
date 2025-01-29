@@ -8,6 +8,7 @@ import {
 } from './Tooltip';
 import type { Meta } from '@storybook/react';
 import { Button } from '../Button/Button';
+import { Badge } from '../Badge/Badge';
 
 const meta: Meta<typeof Tooltip> = {
   title: 'Components/Tooltip',
@@ -32,6 +33,19 @@ export const WithPortal = () => (
     <Tooltip>
       <TooltipTrigger asChild>
         <Button>Tooltip in Portal</Button>
+      </TooltipTrigger>
+      <TooltipPortal>
+        <TooltipContent>This is the tooltip content</TooltipContent>
+      </TooltipPortal>
+    </Tooltip>
+  </TooltipProvider>
+);
+
+export const BadgeTooltip = () => (
+  <TooltipProvider delayDuration={100}>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Badge as="button" message="hover" variant="blue" />
       </TooltipTrigger>
       <TooltipPortal>
         <TooltipContent>This is the tooltip content</TooltipContent>

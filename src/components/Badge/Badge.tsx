@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { ReactNode, forwardRef } from 'react';
 import classNames from 'classnames';
 import { FontSize, BaseSpacing, ResponsiveProp } from '../../types';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
@@ -42,29 +42,39 @@ export interface BadgeProps {
   [x: string]: any; // eslint-disable-line
 }
 
-export const Badge: FC<BadgeProps> = ({
-  className = '',
-  message = '',
-  variant = 'light-grey',
-  size = 'md',
-  ...restProps
-}) => {
-  const responsiveClasses = generateResponsiveClasses('size', size).map(
-    (c) => styles[c]
-  );
-
-  const badgeClasses: string = classNames(
-    styles.badge,
-    className,
-    responsiveClasses,
+export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
+  (
     {
-      [styles[variant]]: variant,
-    }
-  );
+      className = '',
+      message = '',
+      variant = 'light-grey',
+      size = 'md',
+      ...restProps
+    },
+    ref
+  ) => {
+    const responsiveClasses = generateResponsiveClasses('size', size).map(
+      (c) => styles[c]
+    );
 
-  return (
-    <Box className={badgeClasses} display="inline-block" {...restProps}>
-      {message}
-    </Box>
-  );
-};
+    const badgeClasses: string = classNames(
+      styles.badge,
+      className,
+      responsiveClasses,
+      {
+        [styles[variant]]: variant,
+      }
+    );
+
+    return (
+      <Box
+        ref={ref}
+        className={badgeClasses}
+        display="inline-block"
+        {...restProps}
+      >
+        {message}
+      </Box>
+    );
+  }
+);
