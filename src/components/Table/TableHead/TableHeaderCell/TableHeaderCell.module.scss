@@ -1,12 +1,10 @@
 .table-header-cell {
   text-align: left;
-  text-transform: uppercase;
   letter-spacing: 0.05em;
   white-space: nowrap;
   background-color: var(--color-background-primary);
   color: var(--color-font-secondary);
-  font-size: var(--size-font-size-sm);
-  font-weight: var(--size-font-weight-bold);
+  font-weight: var(--size-font-weight-medium);
   padding: var(--size-spacing-md) var(--size-spacing-2xl);
 
   &.sortable {
@@ -33,7 +31,6 @@
     z-index: var(--size-z-index-sticky);
   }
 
-
   &.sticky-column-left {
     left: 0;
   }
@@ -45,10 +42,10 @@
   &.sticky-column {
     position: sticky;
     z-index: calc(var(--size-z-index-sticky) + 1);
-    box-shadow: 5px 0 5px -2px rgb(0 0 0 / 10%), -5px 0 5px -2px rgb(0 0 0 / 10%);
+    box-shadow: 5px 0 5px -2px rgb(0 0 0 / 10%),
+      -5px 0 5px -2px rgb(0 0 0 / 10%);
     background-color: var(--color-background-primary);
   }
-
 
   &.align-right {
     text-align: right;

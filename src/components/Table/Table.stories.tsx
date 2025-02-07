@@ -116,9 +116,9 @@ export const CommonExample = () =>
           </div>
         ),
       },
-      { heading: 'phone', dataKey: 'phone', width: 125 },
-      { heading: 'plan', dataKey: 'plan', width: 125 },
-      { heading: 'status', dataKey: 'status', width: 125 },
+      { heading: 'Phone', dataKey: 'phone', width: 125 },
+      { heading: 'Plan', dataKey: 'plan', width: 125 },
+      { heading: 'Status', dataKey: 'status', width: 125 },
     ];
     const tableData = [
       {
