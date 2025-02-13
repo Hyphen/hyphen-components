@@ -577,6 +577,10 @@ const SidebarRail = React.forwardRef<
         padding="xs"
         margin="0"
         shadow="xs"
+        width="3xl"
+        height="3xl"
+        alignItems="center"
+        justifyContent="center"
         className={classNames(
           'hover-child',
           {
