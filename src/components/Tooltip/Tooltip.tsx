@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
+import styles from './Tooltip.module.scss';
 
 import classNames from 'classnames';
 
@@ -19,6 +20,7 @@ const TooltipContent = React.forwardRef<
     ref={ref}
     sideOffset={sideOffset}
     className={classNames(
+      styles.TooltipContent,
       'background-color-tooltip font-color-tooltip font-size-xs z-index-popover overflow-hidden br-sm p-h-sm p-v-xs shadow-sm',
       className
     )}
