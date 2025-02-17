@@ -1,0 +1,66 @@
+.TooltipContent {
+  transform-origin: var(--radix-tooltip-content-transform-origin);
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+
+  animation-duration: 400ms;
+  will-change: transform, opacity;
+  &[data-state='instant-open'][data-side='top'],
+  &[data-state='delayed-open'][data-side='top'] {
+    animation-name: tooltip-slideUpAndFade;
+  }
+  &[data-state='instant-open'][data-side='right'],
+  &[data-state='delayed-open'][data-side='right'] {
+    animation-name: tooltip-slideRightAndFade;
+  }
+  &[data-state='instant-open'][data-side='bottom'],
+  &[data-state='delayed-open'][data-side='bottom'] {
+    animation-name: tooltip-slideDownAndFade;
+  }
+  &[data-state='instant-open'][data-side='left'],
+  &[data-state='delayed-open'][data-side='left'] {
+    animation-name: tooltip-slideLeftAndFade;
+  }
+}
+@keyframes tooltip-slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tooltip-slideRightAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes tooltip-slideDownAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tooltip-slideLeftAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
