@@ -209,6 +209,7 @@ const Sidebar = React.forwardRef<
         display={{ base: 'none', desktop: 'block' }}
         color="base"
         fontSize="sm"
+        position="relative"
         data-state={state}
         data-collapsible={collapsible}
         data-side={side}
@@ -228,7 +229,7 @@ const Sidebar = React.forwardRef<
         />
         <div
           className={classNames(
-            'position-fixed display-none display-flex-desktop ',
+            'position-absolute display-none display-flex-desktop ',
             className
           )}
           style={{
