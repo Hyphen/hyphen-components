@@ -1,8 +1,11 @@
 .label {
-  font-family: var(--INTERNAL_form-control-font-family);
   color: var(--color-font-base);
-  font-size: var(--INTERNAL_form-control-size-md-label-size);
-  font-weight: var(--INTERNAL_form-control-label-font-weight);
+  font-family: var(
+    --form-control-font-family,
+    var(--INTERNAL_form-control-font-family)
+  );
+  font-size: var(--size-font-size-form-label);
+  font-weight: var(--size-font-weight-form-label);
 
   &.radio-input-label {
     font-weight: 400;
