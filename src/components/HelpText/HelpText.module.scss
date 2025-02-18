@@ -4,8 +4,6 @@
     var(--INTERNAL_form-control-font-family)
   );
   margin-top: var(--size-spacing-xs);
-  font-weight: var(
-    --form-control-help-text-font-weight,
-    var(--INTERNAL_form-control-help-text-font-weight)
-  );
+  font-size: var(--size-font-size-form-help-text);
+  font-weight: var(--size-font-weight-form-help-text);
 }
