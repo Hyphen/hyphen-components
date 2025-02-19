@@ -13,13 +13,14 @@ const meta: Meta<typeof SelectInputNative> = {
 
 export default meta;
 
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' },
+];
+
 export const Default = () => {
   const [value, setValue] = useState<string | null>(null);
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
   return (
     <div>
       <SelectInputNative
@@ -36,11 +37,6 @@ export const Default = () => {
 };
 
 export const PreSelected = () => {
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
   const [value, setValue] = useState(options[1].value);
   return (
     <div>
@@ -57,11 +53,6 @@ export const PreSelected = () => {
 
 export const HelpText = () => {
   const [value, setValue] = useState<string | null>(null);
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
   return (
     <div>
       <SelectInputNative
@@ -78,11 +69,6 @@ export const HelpText = () => {
 
 export const Placeholder = () => {
   const [value, setValue] = useState<string | null>(null);
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
   return (
     <div>
       <SelectInputNative
@@ -99,11 +85,6 @@ export const Placeholder = () => {
 
 export const HiddenLabel = () => {
   const [value, setValue] = useState<string | null>(null);
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
   return (
     <div>
       <SelectInputNative
@@ -119,11 +100,6 @@ export const HiddenLabel = () => {
 };
 
 export const Autofocus = () => {
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
   const [value, setValue] = useState<string | null>(null);
   return (
     <div>
@@ -140,11 +116,6 @@ export const Autofocus = () => {
 };
 
 export const Required = () => {
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
   const [value, setValue] = useState<string | null>(null);
   return (
     <SelectInputNative
@@ -159,11 +130,6 @@ export const Required = () => {
 };
 
 export const CustomRequiredIndicator = () => {
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
   const [value, setValue] = useState('');
   const [value2, setValue2] = useState('');
   return (
@@ -191,11 +157,6 @@ export const CustomRequiredIndicator = () => {
 };
 
 export const Disabled = () => {
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
   const [value, setValue] = useState<string | null>(null);
   return (
     <div style={{ height: '85px' }}>
@@ -212,11 +173,6 @@ export const Disabled = () => {
 };
 
 export const Error = () => {
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
   const [value, setValue] = useState<string | null>(null);
   return (
     <div style={{ height: '200px' }}>
@@ -238,11 +194,6 @@ export const Sizes = () => {
   const [value1, setValue1] = useState('');
   const [value2, setValue2] = useState('');
   const [value3, setValue3] = useState('');
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
   return (
     <Box gap="md">
       <SelectInputNative
