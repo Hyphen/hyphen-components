@@ -88,6 +88,8 @@
     padding: 4px 8px;
   }
 
+  :global(.react-select__option),
+  :global(.react-select__placeholder),
   :global(.react-select__single-value) {
     font-size: var(
       --form-control-size-md-font-size,
