@@ -55,12 +55,12 @@ export const PopoverStyling = () => {
   const { isOpen: isPopoverOpen, handleToggle: togglePopover } = useOpenClose();
   const [popoverBackground, setPopoverBackground] =
     useState<PopoverStylingType>({
-      value: 'primary-500',
-      label: 'Primary 500',
+      value: 'primary',
+      label: 'Primary',
     });
   const [popoverFontColor, setPopoverFontColor] = useState<PopoverStylingType>({
-    value: 'black-500',
-    label: 'Black 500',
+    value: 'black',
+    label: 'Black',
   });
   const [popoverRadius, setPopoverRadius] = useState<PopoverStylingType>({
     value: 'sm',
