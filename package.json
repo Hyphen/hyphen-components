@@ -62,7 +62,7 @@
   ],
   "dependencies": {
     "@emotion/react": "^11.14.0",
-    "@hyphen/hyphen-design-tokens": "^4.28.0",
+    "@hyphen/hyphen-design-tokens": "^4.29.1",
     "@popperjs/core": "^2.11.8",
     "@radix-ui/react-collapsible": "^1.1.3",
     "@radix-ui/react-dropdown-menu": "^2.1.6",
