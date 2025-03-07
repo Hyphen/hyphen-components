@@ -55,6 +55,7 @@ export const FormLabel: FC<FormLabelProps> = ({
   requiredIndicator = ' *',
   margin = '0',
   padding = '0',
+  size = 'md',
   ...restProps
 }) => {
   const labelClasses = classNames(
@@ -62,7 +63,7 @@ export const FormLabel: FC<FormLabelProps> = ({
     styles.label,
     className,
     {
-      [styles.disabled]: isDisabled,
+      [styles.sm]: size === 'sm',
       [styles.disabled]: isDisabled,
       [styles['radio-input-label']]: isRadioInputLabel,
     }

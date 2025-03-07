@@ -135,10 +135,11 @@ export const Toggle: FC<ToggleProps> = ({
     isDisabled,
     display: 'flex' as BoxProps['display'],
     direction: 'row' as BoxProps['direction'],
-    childGap: 'md' as BoxProps['childGap'],
+    childGap: 'sm' as BoxProps['childGap'],
     alignItems: helpText ? 'flex-start' : ('center' as BoxProps['alignItems']),
     isFieldRequired: isRequired,
     requiredIndicator,
+    size,
   };
 
   return (
