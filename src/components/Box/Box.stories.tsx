@@ -1025,6 +1025,18 @@ export const WidthTokens = () => (
     <Box background="tertiary" width="10xl">
       10xl
     </Box>
+    <Box background="tertiary" width="auto">
+      auto
+    </Box>
+    <Box background="tertiary" width="min">
+      min
+    </Box>
+    <Box background="tertiary" width="max">
+      max
+    </Box>
+    <Box background="tertiary" width="fit">
+      fit
+    </Box>
   </Box>
 );
 
@@ -1250,6 +1262,43 @@ export const HeightTokens = () => (
       height="10xl"
     >
       10xl
+    </Box>
+
+    <Box
+      flex="auto"
+      background="tertiary"
+      justifyContent="center"
+      alignItems="center"
+      height="auto"
+    >
+      auto
+    </Box>
+    <Box
+      flex="auto"
+      background="tertiary"
+      justifyContent="center"
+      alignItems="center"
+      height="fit"
+    >
+      fit
+    </Box>
+    <Box
+      flex="auto"
+      background="tertiary"
+      justifyContent="center"
+      alignItems="center"
+      height="min"
+    >
+      min
+    </Box>
+    <Box
+      flex="auto"
+      background="tertiary"
+      justifyContent="center"
+      alignItems="center"
+      height="max"
+    >
+      max
     </Box>
   </Box>
 );
