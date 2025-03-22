@@ -154,7 +154,7 @@ Dimension tokens are intended for use with `width` and `height` properties. They
           <td>
             {name === 'base'
               ? '16'
-              : ['inherit', 'auto'].includes(name)
+              : ['inherit', 'auto', 'fit', 'min', 'max'].includes(name)
               ? ''
               : entry.original.value * 16}
           </td>
