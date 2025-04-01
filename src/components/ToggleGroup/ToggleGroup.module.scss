@@ -1,0 +1,41 @@
+@import '@hyphen/hyphen-design-tokens/build/scss/variables';
+
+.item {
+  border-radius: var(--size-border-radius-sm);
+  padding: var(--size-spacing-sm);
+  color: var(--color-font-secondary);
+  font-size: var(--size-font-size-sm);
+  background-color: var(--color-background-transparent); // Default background
+  border-width: 0;
+
+  &:hover {
+    background-color: var(--color-background-secondary);
+  }
+  &[data-state='on'] {
+    background-color: var(--color-background-secondary);
+    color: var(--color-font-base);
+  }
+  &:focus-visible {
+    position: relative;
+    box-shadow: 0 0 0 2px black;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.outline {
+  border: 1px solid var(--color-border-default);
+  box-shadow: var(--size-box-shadow-xs);
+
+  &:disabled,
+  &[data-state='on'] {
+    box-shadow: none;
+  }
+
+  &:disabled {
+    pointer-events: none;
+  }
+}
