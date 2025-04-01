@@ -6,9 +6,9 @@ import {
   FormikValues,
   getIn,
 } from 'formik';
-import { Toggle } from '../../Switch/Switch';
+import { Switch } from '../../Switch/Switch';
 
-export interface FormikToggleProps {
+export interface FormikSwitchProps {
   field: FieldAttributes<HTMLTextAreaElement>;
   form: {
     touched: FormikTouched<FormikValues>;
@@ -18,7 +18,7 @@ export interface FormikToggleProps {
   label: string;
 }
 
-export const FormikToggle: React.FC<FormikToggleProps> = ({
+export const FormikSwitch: React.FC<FormikSwitchProps> = ({
   field: {
     name,
     onBlur, // eslint-disable-line no-unused-vars
@@ -28,7 +28,7 @@ export const FormikToggle: React.FC<FormikToggleProps> = ({
   form: { touched, errors },
   ...props
 }) => (
-  <Toggle
+  <Switch
     error={getIn(touched, name) && getIn(errors, name)}
     isChecked={value}
     onBlur={onBlur}

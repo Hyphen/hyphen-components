@@ -7,7 +7,7 @@ import {
   act,
 } from '@testing-library/react';
 import { Formik, Form, Field, getIn, setIn, FormikValues } from 'formik';
-import { FormikToggle } from './FormikToggle';
+import { FormikSwitch } from './FormikSwitch';
 
 const testLabelName = 'test checkbox';
 
@@ -34,7 +34,7 @@ const renderForm = (
           label={testValueKey}
           name={testValueKey}
           id={testValueKey}
-          component={FormikToggle}
+          component={FormikSwitch}
           {...props}
         />
         <button type="submit">submit</button>
@@ -106,7 +106,7 @@ describe('CheckboxInput', () => {
         );
       });
 
-      test('correctly renders the toggle with an error message from nested object', async () => {
+      test('correctly renders the switch with an error message from nested object', async () => {
         const { getByText } = render(
           renderForm(
             { outer: { nested: false } },

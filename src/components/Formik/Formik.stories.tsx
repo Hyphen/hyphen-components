@@ -7,7 +7,7 @@ import { FormikSelectInputNative } from './FormikSelectInputNative/FormikSelectI
 import { FormikRadioGroup } from './FormikRadioGroup/FormikRadioGroup';
 import { FormikTextareaInput } from './FormikTextareaInput/FormikTextareaInput';
 import { DateInput } from '../DateInput/DateInput';
-import { FormikToggle } from './FormikToggle/FormikToggle';
+import { FormikSwitch } from './FormikSwitch/FormikSwitch';
 import { Button } from '../Button/Button';
 import { Box } from '../Box/Box';
 import { FormikTimePickerNative } from './FormikTimePickerNative/FormikTimePickerNative';
@@ -256,7 +256,7 @@ export const FormikForm = () =>
                   label="Terms and Conditions Toggle"
                   name="areTermsChecked2"
                   id="areTermsChecked2"
-                  component={FormikToggle}
+                  component={FormikSwitch}
                   isRequired
                 />
                 <Field

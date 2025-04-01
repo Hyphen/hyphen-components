@@ -24,7 +24,7 @@ export * from './components/Formik/FormikTextInput/FormikTextInput';
 export * from './components/Formik/FormikTextareaInput/FormikTextareaInput';
 export * from './components/Formik/FormikTimePicker/FormikTimePicker';
 export * from './components/Formik/FormikTimePickerNative/FormikTimePickerNative';
-export * from './components/Formik/FormikToggle/FormikToggle';
+export * from './components/Formik/FormikSwitch/FormikSwitch';
 export * from './components/Formik/FormikToggleGroup/FormikToggleGroup';
 export * from './components/FormLabel/FormLabel';
 export * from './components/Heading/Heading';
