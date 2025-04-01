@@ -4,6 +4,8 @@ import styles from './ToggleGroup.module.scss';
 
 import classNames from 'classnames';
 import { InputValidationMessage } from '../InputValidationMessage/InputValidationMessage';
+import { BaseSpacing, ResponsiveProp } from '../../types';
+import { cssShorthandToClasses } from '../../lib';
 
 type ToggleVariant = 'default' | 'outline';
 
@@ -16,6 +18,7 @@ type ToggleGroupProps = React.ComponentPropsWithoutRef<
 > & {
   variant?: ToggleVariant;
   name?: string;
+  gap?: BaseSpacing | ResponsiveProp<BaseSpacing>;
   /**
    * Mark the toggle group as invalid and display a validation message.
    * Pass a string or node to render a validation message below the input.
@@ -26,24 +29,30 @@ type ToggleGroupProps = React.ComponentPropsWithoutRef<
 const ToggleGroup = forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Root>,
   ToggleGroupProps
->(({ className, variant = 'default', children, error, ...props }, ref) => (
-  <div>
-    <ToggleGroupPrimitive.Root
-      ref={ref}
-      className={classNames(
-        'display-flex align-items-center justify-content-start g-xs',
-        className
-      )}
-      {...props}
-    >
-      <ToggleGroupContext.Provider value={{ variant }}>
-        {children}
-      </ToggleGroupContext.Provider>
-    </ToggleGroupPrimitive.Root>
+>(
+  (
+    { className, variant = 'default', children, gap = 'xs', error, ...props },
+    ref
+  ) => (
+    <div>
+      <ToggleGroupPrimitive.Root
+        ref={ref}
+        className={classNames(
+          'display-flex align-items-center justify-content-start',
+          className,
+          cssShorthandToClasses('g', gap)
+        )}
+        {...props}
+      >
+        <ToggleGroupContext.Provider value={{ variant }}>
+          {children}
+        </ToggleGroupContext.Provider>
+      </ToggleGroupPrimitive.Root>
 
-    {error && <InputValidationMessage>{error}</InputValidationMessage>}
-  </div>
-));
+      {error && <InputValidationMessage>{error}</InputValidationMessage>}
+    </div>
+  )
+);
 
 type ToggleGroupItemProps = React.ComponentPropsWithoutRef<
   typeof ToggleGroupPrimitive.Item

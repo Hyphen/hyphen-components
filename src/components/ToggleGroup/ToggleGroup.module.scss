@@ -5,14 +5,15 @@
   padding: var(--size-spacing-sm);
   color: var(--color-font-secondary);
   font-size: var(--size-font-size-sm);
-  background-color: var(--color-background-transparent); // Default background
+  background-color: var(--color-background-transparent);
   border-width: 0;
+  cursor: pointer;
 
   &:hover {
-    background-color: var(--color-background-secondary);
+    background-color: var(--color-background-toggle-group-item-hover);
   }
   &[data-state='on'] {
-    background-color: var(--color-background-secondary);
+    background-color: var(--color-background-toggle-group-item-active);
     color: var(--color-font-base);
   }
   &:focus-visible {
