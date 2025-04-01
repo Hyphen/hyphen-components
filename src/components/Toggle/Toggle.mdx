@@ -6,46 +6,26 @@ import * as Stories from './Toggle.stories';
 
 # Toggle
 
-A `Toggle` switch is like a digital on/off switch. They prompt users to choose between two mutually exclusive options and always have a default value.
-Toggles should provide immediate results and should not require the user to Save or Submit to apply the new state.
+A two-state button that can be toggled on or off.
 
-<Canvas of={Stories.Overview} />
+This component is extended from [Radix](https://www.radix-ui.com/primitives/docs/components/toggle).
 
-## Props
-
-<ArgTypes of={Toggle} />
-
-### Basic Example
+[API Reference](https://www.radix-ui.com/primitives/docs/components/toggle#api-reference)
 
 <Canvas of={Stories.Basic} />
 
-### Help Text
+## Pressed
 
-Use the `helpText` prop to add clarifying text beneath the toggle label.
+<Canvas of={Stories.DefaultPressed} />
 
-<Canvas of={Stories.HelpText} />
+## Variants
 
-### Hidden Label
+An outlined alternative variant is available.
 
-Use the `hideLabel` prop to not render the label, however a `label` is still required for accessability purposes.
+<Canvas of={Stories.Outline} />
 
-<Canvas of={Stories.HiddenLabel} />
+## Disabled
 
-### Sizes
-
-Set the size of the `toggle` to `sm`, `md` or `lg`. `md` is the default size.
-The `size` prop is also a `ResponsiveProp`, so it can be sized differently at each [breakpoint](?path=/docs/design-tokens-design-tokens--page#breakpoints) by passing an object.
-
-<Canvas of={Stories.Sizes} />
-
-### Disabled
-
-Disable the toggle by setting the `isDisabled` prop.
+The `disabled` prop can be used to disable the ToggleGroup component, preventing user interaction. Individual item may also be disabled.
 
 <Canvas of={Stories.Disabled} />
-
-## Error
-
-Use the `error` prop to mark the input as invalid. `error` accepts a `boolean`, `string`, or `node`. If either a `string` or `node` is passed, a validation message is displayed below it.
-
-<Canvas of={Stories.Error} />

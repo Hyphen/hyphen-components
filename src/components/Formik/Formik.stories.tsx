@@ -7,7 +7,7 @@ import { FormikSelectInputNative } from './FormikSelectInputNative/FormikSelectI
 import { FormikRadioGroup } from './FormikRadioGroup/FormikRadioGroup';
 import { FormikTextareaInput } from './FormikTextareaInput/FormikTextareaInput';
 import { DateInput } from '../DateInput/DateInput';
-import { FormikToggle } from './FormikToggle/FormikToggle';
+import { FormikSwitch } from './FormikSwitch/FormikSwitch';
 import { Button } from '../Button/Button';
 import { Box } from '../Box/Box';
 import { FormikTimePickerNative } from './FormikTimePickerNative/FormikTimePickerNative';
@@ -15,6 +15,7 @@ import { FormikSelectInputInset } from './FormikSelectInputInset/FormikSelectInp
 import { FormikTextareaInputInset } from './FormikTextareaInputInset/FormikTextareaInputInset';
 import { FormikTextInputInset } from './FormikTextInputInset/FormikTextInputInset';
 import { allModes } from '../../modes';
+import { FormikToggleGroup } from './FormikToggleGroup/FormikToggleGroup';
 
 const meta = {
   title: 'Patterns/Formik Form',
@@ -96,6 +97,13 @@ export const FormikForm = () =>
       if (!values.country) {
         errors.country = 'required';
       }
+
+      if (!values.country) {
+        errors.country = 'required';
+      }
+      if (!values.availability) {
+        errors.availability = 'required';
+      }
       return errors;
     };
     const handleSubmit = (
@@ -137,6 +145,7 @@ export const FormikForm = () =>
             dateInput: '',
             message: '',
             country: '',
+            availability: '',
           }}
           validate={handleValidation}
           validateOnChange={false}
@@ -247,7 +256,7 @@ export const FormikForm = () =>
                   label="Terms and Conditions Toggle"
                   name="areTermsChecked2"
                   id="areTermsChecked2"
-                  component={FormikToggle}
+                  component={FormikSwitch}
                   isRequired
                 />
                 <Field
@@ -265,6 +274,34 @@ export const FormikForm = () =>
                   component={FormikTextareaInputInset}
                   isRequired
                 />
+                <Field
+                  label="Availability"
+                  name="availability"
+                  id="availability"
+                  component={FormikToggleGroup}
+                  options={[
+                    {
+                      id: '99',
+                      label: '99',
+                      value: '99',
+                    },
+                    {
+                      id: '999',
+                      label: '99.9',
+                      value: '99.9',
+                    },
+                    {
+                      id: '9999',
+                      label: '99.99',
+                      value: '99.99',
+                    },
+                    {
+                      id: '99999',
+                      label: '99.999',
+                      value: '99.999',
+                    },
+                  ]}
+                ></Field>
                 <DateInput
                   datePickerProps={{
                     onChange: (date) => {

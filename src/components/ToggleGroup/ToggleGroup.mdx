@@ -1,0 +1,39 @@
+import { Canvas, Meta, ArgTypes } from '@storybook/blocks';
+import { ToggleGroup } from './ToggleGroup';
+import * as Stories from './ToggleGroup.stories';
+
+<Meta of={Stories} />
+
+# ToggleGroup
+
+A set of two-state buttons that can be toggled on or off.
+
+This component is extended from [Radix](https://www.radix-ui.com/primitives/docs/components/toggle-group).
+
+[API Reference](https://www.radix-ui.com/primitives/docs/components/toggle-group#api-reference)
+
+<Canvas of={Stories.Uncontrolled} />
+
+## Multiple
+
+By default, one value is allowed, but you can allow for multiple selections by setting the `type` to `multiple`.
+
+<Canvas of={Stories.Multiple} />
+
+## Controlled
+
+The `onChange` prop can be used to handle changes to the selected value.
+
+<Canvas of={Stories.Controlled} />
+
+## Variants
+
+An outlined alternative variant is available.
+
+<Canvas of={Stories.Outlined} />
+
+## Disabled
+
+The `disabled` prop can be used to disable the ToggleGroup component, preventing user interaction. Individual item may also be disabled.
+
+<Canvas of={Stories.Disabled} />

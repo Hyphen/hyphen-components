@@ -1,56 +1,56 @@
-import { Toggle, ToggleSize } from './Toggle';
+import { Switch, SwitchSize } from './Switch';
 import { fireEvent, render } from '@testing-library/react';
 
 import React from 'react';
 
-const TOGGLE_SIZES: ToggleSize[] = ['sm', 'md', 'lg'];
+const SWITCH_SIZES: SwitchSize[] = ['sm', 'md', 'lg'];
 
-describe('Toggle', () => {
+describe('Switch', () => {
   test('not disabled, checked, or invalid by default', () => {
     const { getByLabelText } = render(
-      <Toggle
-        id="testToggle"
-        label="test toggle"
+      <Switch
+        id="testSwitch"
+        label="test switch"
         isChecked={false}
         onChange={() => null}
       />
     );
-    const toggle = getByLabelText('test toggle') as HTMLInputElement;
+    const switchElement = getByLabelText('test switch') as HTMLInputElement;
 
-    expect(toggle.checked).toBe(false);
-    expect(toggle.disabled).toBe(false);
-    expect(toggle.getAttribute('aria-invalid')).toBe('false');
+    expect(switchElement.checked).toBe(false);
+    expect(switchElement.disabled).toBe(false);
+    expect(switchElement.getAttribute('aria-invalid')).toBe('false');
   });
 
   test('input is checked when isChecked is true', () => {
     const { getByLabelText } = render(
-      <Toggle
-        id="testToggle"
-        label="test toggle"
+      <Switch
+        id="testSwitch"
+        label="test switch"
         onChange={() => null}
         isChecked
       />
     );
-    const toggle = getByLabelText('test toggle') as HTMLInputElement;
-    expect(toggle.checked).toEqual(true);
+    const switchElement = getByLabelText('test switch') as HTMLInputElement;
+    expect(switchElement.checked).toEqual(true);
   });
 
   test('input is not checked when isChecked is false', () => {
     const { getByLabelText } = render(
-      <Toggle
-        id="testToggle"
-        label="test toggle"
+      <Switch
+        id="testSwitch"
+        label="test switch"
         isChecked={false}
         onChange={() => null}
       />
     );
-    const toggle = getByLabelText('test toggle') as HTMLInputElement;
-    expect(toggle.checked).toEqual(false);
+    const switchElement = getByLabelText('test switch') as HTMLInputElement;
+    expect(switchElement.checked).toEqual(false);
   });
 
   test('assigns the "aria-labelledby" attribute', () => {
     const { getByLabelText } = render(
-      <Toggle
+      <Switch
         isChecked={false}
         id="testInput"
         label="test label"
@@ -65,7 +65,7 @@ describe('Toggle', () => {
 
   test('aria-label is assigned if label is hidden', () => {
     const { getByLabelText } = render(
-      <Toggle
+      <Switch
         isChecked={false}
         id="testInput"
         label="hidden test label"
@@ -78,7 +78,7 @@ describe('Toggle', () => {
 
   test('HelpText is rendered when set', () => {
     const { getByText } = render(
-      <Toggle
+      <Switch
         isChecked={false}
         id="testInput"
         label="test label"
@@ -92,9 +92,9 @@ describe('Toggle', () => {
   describe('error states', () => {
     test('renders error message if error exists and is not true', () => {
       const { getByText } = render(
-        <Toggle
-          id="testToggle"
-          label="test toggle"
+        <Switch
+          id="testSwitch"
+          label="test switch"
           isChecked={false}
           onChange={() => null}
           error="This is the error message"
@@ -105,12 +105,12 @@ describe('Toggle', () => {
   });
 
   test('controlled - check and unchecked when clicked', () => {
-    const ControlledToggle = () => {
+    const ControlledSwitch = () => {
       const [checked, setChecked] = React.useState(false);
       return (
-        <Toggle
-          id="testToggle"
-          label="test toggle"
+        <Switch
+          id="testSwitch"
+          label="test switch"
           isChecked={checked}
           onChange={(e) => {
             setChecked(e.target.checked);
@@ -119,18 +119,18 @@ describe('Toggle', () => {
       );
     };
 
-    const { getByLabelText, container } = render(<ControlledToggle />);
+    const { getByLabelText, container } = render(<ControlledSwitch />);
 
     const input = container.querySelector('input');
 
     expect(input).not.toBeChecked();
 
-    const toggle = getByLabelText('test toggle');
-    fireEvent.click(toggle);
+    const switchElement = getByLabelText('test switch');
+    fireEvent.click(switchElement);
 
     expect(input).toBeChecked();
 
-    fireEvent.click(toggle);
+    fireEvent.click(switchElement);
 
     expect(input).not.toBeChecked();
   });
@@ -140,15 +140,15 @@ describe('Toggle', () => {
       const mockedHandleChange = jest.fn(() => null);
 
       const { getByLabelText } = render(
-        <Toggle
-          id="testToggle"
-          label="test toggle"
+        <Switch
+          id="testSwitch"
+          label="test switch"
           isChecked={false}
           onChange={mockedHandleChange}
         />
       );
-      const toggle = getByLabelText('test toggle');
-      fireEvent.click(toggle);
+      const switchElement = getByLabelText('test switch');
+      fireEvent.click(switchElement);
       expect(mockedHandleChange).toHaveBeenCalledTimes(1);
     });
 
@@ -159,15 +159,15 @@ describe('Toggle', () => {
       });
 
       const { getByLabelText } = render(
-        <Toggle
-          id="testToggle"
-          label="test toggle"
+        <Switch
+          id="testSwitch"
+          label="test switch"
           onChange={mockedHandleChange}
           isChecked={value}
         />
       );
-      const toggle = getByLabelText('test toggle');
-      fireEvent.click(toggle);
+      const switchElement = getByLabelText('test switch');
+      fireEvent.click(switchElement);
       expect(mockedHandleChange).toBeCalledTimes(1);
       expect(value).toBe(false);
     });
@@ -180,9 +180,9 @@ describe('Toggle', () => {
       const { getByText, getByLabelText } = render(
         <div>
           <button type="button">focus</button>
-          <Toggle
-            id="testToggle"
-            label="test toggle"
+          <Switch
+            id="testSwitch"
+            label="test switch"
             isChecked={false}
             onChange={() => null}
             onFocus={mockedHandleFocus}
@@ -190,7 +190,7 @@ describe('Toggle', () => {
           />
         </div>
       );
-      getByLabelText('test toggle').focus();
+      getByLabelText('test switch').focus();
       getByText('focus').focus();
       expect(mockedHandleFocus).toHaveBeenCalledTimes(1);
     });
@@ -203,16 +203,16 @@ describe('Toggle', () => {
       const { getByText, getByLabelText } = render(
         <div>
           <button type="button">focus</button>
-          <Toggle
-            id="testToggle"
-            label="test toggle"
+          <Switch
+            id="testSwitch"
+            label="test switch"
             isChecked={false}
             onChange={() => null}
             onBlur={mockedHandleBlur}
           />
         </div>
       );
-      getByLabelText('test toggle').focus();
+      getByLabelText('test switch').focus();
       getByText('focus').focus();
       expect(mockedHandleBlur).toHaveBeenCalledTimes(1);
     });
@@ -221,22 +221,22 @@ describe('Toggle', () => {
   describe('Sizes', () => {
     const breakpoints = ['tablet', 'desktop', 'hd'];
 
-    TOGGLE_SIZES.forEach((size) => {
-      test(`it has a ${size} class applied to the toggle thumb and track`, () => {
+    SWITCH_SIZES.forEach((size) => {
+      test(`it has a ${size} class applied to the switch thumb and track`, () => {
         const { getByTestId } = render(
-          <Toggle
-            id="testToggle"
-            label={`test ${size} toggle`}
+          <Switch
+            id="testSwitch"
+            label={`test ${size} switch`}
             isChecked={false}
             onChange={() => null}
             size={size}
           />
         );
 
-        expect(getByTestId('toggleTrack').getAttribute('class')).toContain(
+        expect(getByTestId('switchTrack').getAttribute('class')).toContain(
           `track-size-${size}`
         );
-        expect(getByTestId('toggleThumb').getAttribute('class')).toContain(
+        expect(getByTestId('switchThumb').getAttribute('class')).toContain(
           `thumb-size-${size}`
         );
       });
@@ -244,19 +244,19 @@ describe('Toggle', () => {
       breakpoints.forEach((breakpoint) => {
         test(`it applies responsive classes for breakpoint: ${breakpoint} and size: ${size}`, () => {
           const { getByTestId } = render(
-            <Toggle
-              id="testToggle"
-              label={`test ${size} toggle`}
+            <Switch
+              id="testSwitch"
+              label={`test ${size} switch`}
               isChecked={false}
               onChange={() => null}
               size={{ [breakpoint]: size }}
             />
           );
 
-          expect(getByTestId('toggleTrack').getAttribute('class')).toContain(
+          expect(getByTestId('switchTrack').getAttribute('class')).toContain(
             `track-size-${size}-${breakpoint}`
           );
-          expect(getByTestId('toggleThumb').getAttribute('class')).toContain(
+          expect(getByTestId('switchThumb').getAttribute('class')).toContain(
             `thumb-size-${size}-${breakpoint}`
           );
         });
@@ -265,9 +265,9 @@ describe('Toggle', () => {
 
     test('It applies responsive classes when multiple are applied', () => {
       const { getByTestId } = render(
-        <Toggle
-          id="testToggle"
-          label={`test toggle`}
+        <Switch
+          id="testSwitch"
+          label={`test switch`}
           isChecked={false}
           onChange={() => null}
           size={{
@@ -279,28 +279,28 @@ describe('Toggle', () => {
         />
       );
 
-      expect(getByTestId('toggleTrack').getAttribute('class')).toContain(
+      expect(getByTestId('switchTrack').getAttribute('class')).toContain(
         'track-size-sm'
       );
-      expect(getByTestId('toggleTrack').getAttribute('class')).toContain(
+      expect(getByTestId('switchTrack').getAttribute('class')).toContain(
         'track-size-md-tablet'
       );
-      expect(getByTestId('toggleTrack').getAttribute('class')).toContain(
+      expect(getByTestId('switchTrack').getAttribute('class')).toContain(
         'track-size-lg-desktop'
       );
-      expect(getByTestId('toggleTrack').getAttribute('class')).toContain(
+      expect(getByTestId('switchTrack').getAttribute('class')).toContain(
         'track-size-sm-hd'
       );
-      expect(getByTestId('toggleThumb').getAttribute('class')).toContain(
+      expect(getByTestId('switchThumb').getAttribute('class')).toContain(
         'thumb-size-sm'
       );
-      expect(getByTestId('toggleThumb').getAttribute('class')).toContain(
+      expect(getByTestId('switchThumb').getAttribute('class')).toContain(
         'thumb-size-md-tablet'
       );
-      expect(getByTestId('toggleThumb').getAttribute('class')).toContain(
+      expect(getByTestId('switchThumb').getAttribute('class')).toContain(
         'thumb-size-lg-desktop'
       );
-      expect(getByTestId('toggleThumb').getAttribute('class')).toContain(
+      expect(getByTestId('switchThumb').getAttribute('class')).toContain(
         'thumb-size-sm-hd'
       );
     });
