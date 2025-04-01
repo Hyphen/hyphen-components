@@ -145,7 +145,7 @@ export const FormikForm = () =>
             dateInput: '',
             message: '',
             country: '',
-            availability: '',
+            availability: '99',
           }}
           validate={handleValidation}
           validateOnChange={false}
@@ -276,28 +276,30 @@ export const FormikForm = () =>
                 />
                 <Field
                   label="Availability"
+                  helpText="Impacts multi-zone setup, load balancing, and redundancy"
                   name="availability"
                   id="availability"
+                  variant="outline"
                   component={FormikToggleGroup}
                   options={[
                     {
                       id: '99',
-                      label: '99',
+                      label: '99%',
                       value: '99',
                     },
                     {
                       id: '999',
-                      label: '99.9',
+                      label: '99.9%',
                       value: '99.9',
                     },
                     {
                       id: '9999',
-                      label: '99.99',
+                      label: '99.99%',
                       value: '99.99',
                     },
                     {
                       id: '99999',
-                      label: '99.999',
+                      label: '99.999%',
                       value: '99.999',
                     },
                   ]}
