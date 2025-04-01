@@ -6,20 +6,20 @@ import { InputValidationMessage } from '../InputValidationMessage/InputValidatio
 import { ResponsiveProp } from '../../types';
 import classNames from 'classnames';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
-import styles from './Toggle.module.scss';
+import styles from './Switch.module.scss';
 
-export type ToggleSize = 'sm' | 'md' | 'lg';
-export interface ToggleProps {
+export type SwitchSize = 'sm' | 'md' | 'lg';
+export interface SwitchProps {
   /**
    * The id attribute of the input.
    */
   id: string;
   /**
-   * The toggle input "checked" attribute.
+   * The switch input "checked" attribute.
    */
   isChecked: boolean;
   /**
-   * Custom content to be displayed to right of toggle.
+   * Custom content to be displayed to right of switch.
    */
   label: string;
   /**
@@ -65,12 +65,12 @@ export interface ToggleProps {
    */
   requiredIndicator?: React.ReactNode;
   /**
-   * The size of the toggle.
+   * The size of the switch.
    */
-  size?: ToggleSize | ResponsiveProp<ToggleSize>;
+  size?: SwitchSize | ResponsiveProp<SwitchSize>;
 }
 
-export const Toggle: FC<ToggleProps> = ({
+export const Switch: FC<SwitchProps> = ({
   id,
   isChecked,
   label,
@@ -103,14 +103,14 @@ export const Toggle: FC<ToggleProps> = ({
     { [styles.disabled]: isDisabled }
   );
   const trackClasses = classNames(
-    styles['toggle-track'],
+    styles['switch-track'],
     ...generateResponsiveClasses('track-size', size).map((c) => styles[c]),
     {
       [styles.error]: error,
     }
   );
   const thumbClasses = classNames(
-    styles['toggle-thumb'],
+    styles['switch-thumb'],
     ...generateResponsiveClasses('thumb-size', size).map((c) => styles[c])
   );
 
@@ -127,7 +127,7 @@ export const Toggle: FC<ToggleProps> = ({
     onFocus: handleFocus,
     required: isRequired,
     type: 'checkbox',
-    className: styles['toggle-input'],
+    className: styles['switch-input'],
   };
 
   const labelProps = {
@@ -150,9 +150,9 @@ export const Toggle: FC<ToggleProps> = ({
           <span
             aria-hidden="true"
             className={trackClasses}
-            data-testid="toggleTrack"
+            data-testid="switchTrack"
           >
-            <span className={thumbClasses} data-testid="toggleThumb" />
+            <span className={thumbClasses} data-testid="switchThumb" />
           </span>
           {!hideLabel && (
             <Box

@@ -2,25 +2,25 @@ import React, { useState } from 'react';
 
 import { Box } from '../Box/Box';
 import type { Meta } from '@storybook/react';
-import { Toggle } from './Toggle';
+import { Switch } from './Switch';
 
-const meta: Meta<typeof Toggle> = {
-  title: 'Components/Toggle',
-  component: Toggle,
+const meta: Meta<typeof Switch> = {
+  title: 'Components/Switch',
+  component: Switch,
 };
 
 export default meta;
 
 export const Overview = () => (
-  <Toggle id="example" label="toggle label" isChecked onChange={() => {}} />
+  <Switch id="example" label="Switch label" isChecked onChange={() => {}} />
 );
 
 export const Basic = () => {
   const [value, setValue] = useState(false);
   return (
-    <Toggle
+    <Switch
       id="defaultStateIsUnchecked"
-      label="toggle label"
+      label="Switch label"
       onChange={(event) => setValue(event.target.checked)}
       isChecked={value}
     />
@@ -30,9 +30,9 @@ export const Basic = () => {
 export const HelpText = () => {
   const [value, setValue] = useState(false);
   return (
-    <Toggle
+    <Switch
       id="helpText"
-      label="toggle label"
+      label="Switch label"
       helpText="descriptive help text"
       onChange={(event) => setValue(event.target.checked)}
       isChecked={value}
@@ -43,8 +43,8 @@ export const HelpText = () => {
 export const HiddenLabel = () => {
   const [value, setValue] = useState(false);
   return (
-    <Toggle
-      id="hiddenLabelToggle"
+    <Switch
+      id="hiddenLabelSwitch"
       label="Hidden Label"
       helpText="hidden help text too"
       hideLabel
@@ -58,30 +58,30 @@ export const Sizes = () => {
   const [value, setValue] = useState(true);
   return (
     <Box gap="md">
-      <Toggle
-        id="smToggle"
-        label="small toggle"
+      <Switch
+        id="smSwitch"
+        label="small Switch"
         onChange={(event) => setValue(event.target.checked)}
         isChecked={value}
         size="sm"
       />
-      <Toggle
-        id="mediumToggle"
-        label="medium toggle"
+      <Switch
+        id="mediumSwitch"
+        label="medium Switch"
         onChange={(event) => setValue(event.target.checked)}
         isChecked={value}
         size="md"
       />
-      <Toggle
-        id="largeToggle"
-        label="large toggle"
+      <Switch
+        id="largeSwitch"
+        label="large Switch"
         onChange={(event) => setValue(event.target.checked)}
         isChecked={value}
         size="lg"
       />
-      <Toggle
-        id="responsiveToggle"
-        label="responsive toggle"
+      <Switch
+        id="responsiveSwitch"
+        label="responsive Switch"
         onChange={(event) => setValue(event.target.checked)}
         isChecked={value}
         size={{ base: 'sm', tablet: 'md', desktop: 'lg', hd: 'sm' }}
@@ -93,8 +93,8 @@ export const Sizes = () => {
 export const Disabled = () => {
   const [value, setValue] = useState(false);
   return (
-    <Toggle
-      id="disabledToggle"
+    <Switch
+      id="disabledSwitch"
       label="Label"
       onChange={(event) => setValue(event.target.checked)}
       isChecked={value}
@@ -108,16 +108,16 @@ export const Error = () => {
   const [value2, setValue2] = useState(true);
   return (
     <Box gap="md">
-      <Toggle
-        id="invalidToggle"
+      <Switch
+        id="invalidSwitch"
         label="Agree to Terms and Conditions"
         isChecked={value}
         onChange={(event) => setValue(event.target.checked)}
         isRequired
         error="You must accept the Terms and Conditions"
       />
-      <Toggle
-        id="invalidToggle2"
+      <Switch
+        id="invalidSwitch2"
         label="Roof Replacement"
         isChecked={value2}
         onChange={(event) => setValue2(event.target.checked)}

@@ -49,7 +49,7 @@ export * from './components/ThemeProvider/ThemeProvider';
 export * from './components/TimePicker/TimePicker';
 export * from './components/TimePickerNative/TimePickerNative';
 export * from './components/Toast';
-export * from './components/Toggle/Toggle';
+export * from './components/Switch/Switch';
 export * from './components/ToggleGroup/ToggleGroup';
 export * from './components/Tooltip/Tooltip';
 export * from './hooks';

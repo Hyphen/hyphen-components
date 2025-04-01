@@ -164,7 +164,7 @@
   cursor: not-allowed;
 }
 
-.toggle-thumb {
+.switch-thumb {
   display: block;
   transition: transform 0.25s ease;
   border-radius: 50%;
@@ -172,24 +172,24 @@
   background-color: var(--color-base-white);
 }
 
-.toggle-track {
+.switch-track {
   display: block;
   transition: background-color 0.25s ease;
   border-radius: 9999em;
-  background-color: var(--toggle-background-color, var(--color-base-grey-200));
+  background-color: var(--switch-background-color, var(--color-base-grey-200));
   cursor: pointer;
   padding: 2px;
 
   &.error {
     background-color: var(
-      --toggle-background-color-error,
+      --switch-background-color-error,
       var(--color-base-red-500)
     );
   }
 }
 
 //Hide the checkbox input (only needed for `:checked` property)
-.toggle-input {
+.switch-input {
   position: absolute;
   clip: rect(0, 0, 0, 0);
   margin: -1px;
@@ -200,75 +200,75 @@
   overflow: hidden;
   white-space: nowrap;
 
-  &:checked + .toggle-track {
+  &:checked + .switch-track {
     background-color: var(
-      --toggle-background-color-checked,
+      --switch-background-color-checked,
       var(--color-base-green-500)
     );
   }
 
-  &:checked + .toggle-track.error {
+  &:checked + .switch-track.error {
     background-color: var(
-      --toggle-background-color-error,
+      --switch-background-color-error,
       var(--color-base-red-500)
     );
   }
 
-  &:checked + .toggle-track .toggle-thumb.thumb-size-sm {
+  &:checked + .switch-track .switch-thumb.thumb-size-sm {
     transform: translateX(0.75rem);
   }
 
-  &:checked + .toggle-track .toggle-thumb.thumb-size-md {
+  &:checked + .switch-track .switch-thumb.thumb-size-md {
     transform: translateX(1rem);
   }
 
-  &:checked + .toggle-track .toggle-thumb.thumb-size-lg {
+  &:checked + .switch-track .switch-thumb.thumb-size-lg {
     transform: translateX(1.5rem);
   }
 
   @media (min-width: $size-breakpoint-tablet) {
-    &:checked + .toggle-track .toggle-thumb.thumb-size-sm-tablet {
+    &:checked + .switch-track .switch-thumb.thumb-size-sm-tablet {
       transform: translateX(0.5rem);
     }
 
-    &:checked + .toggle-track .toggle-thumb.thumb-size-md-tablet {
+    &:checked + .switch-track .switch-thumb.thumb-size-md-tablet {
       transform: translateX(1rem);
     }
 
-    &:checked + .toggle-track .toggle-thumb.thumb-size-lg-tablet {
+    &:checked + .switch-track .switch-thumb.thumb-size-lg-tablet {
       transform: translateX(1.5rem);
     }
   }
 
   @media (min-width: $size-breakpoint-desktop) {
-    &:checked + .toggle-track .toggle-thumb.thumb-size-sm-desktop {
+    &:checked + .switch-track .switch-thumb.thumb-size-sm-desktop {
       transform: translateX(0.5rem);
     }
 
-    &:checked + .toggle-track .toggle-thumb.thumb-size-md-desktop {
+    &:checked + .switch-track .switch-thumb.thumb-size-md-desktop {
       transform: translateX(1rem);
     }
 
-    &:checked + .toggle-track .toggle-thumb.thumb-size-lg-desktop {
+    &:checked + .switch-track .switch-thumb.thumb-size-lg-desktop {
       transform: translateX(1.5rem);
     }
   }
 
   @media (min-width: $size-breakpoint-hd) {
-    &:checked + .toggle-track .toggle-thumb.thumb-size-sm-hd {
+    &:checked + .switch-track .switch-thumb.thumb-size-sm-hd {
       transform: translateX(0.5rem);
     }
 
-    &:checked + .toggle-track .toggle-thumb.thumb-size-md-hd {
+    &:checked + .switch-track .switch-thumb.thumb-size-md-hd {
       transform: translateX(1rem);
     }
 
-    &:checked + .toggle-track .toggle-thumb.thumb-size-lg-hd {
+    &:checked + .switch-track .switch-thumb.thumb-size-lg-hd {
       transform: translateX(1.5rem);
     }
   }
 
-  &:focus + .toggle-track {
+  &:focus + .switch-track {
     outline: 0;
     box-shadow: var(
       --form-control-box-shadow-focus,
@@ -277,7 +277,7 @@
   }
 
   // Show focus styles on keyboard focus.
-  &:focus-visible + .toggle-track {
+  &:focus-visible + .switch-track {
     outline: 0;
     box-shadow: var(
       --form-control-box-shadow-focus,
@@ -287,7 +287,7 @@
 
   // Hide focus styles if they are not needed, for example,
   // when an element receives focus via the mouse.
-  &:focus:not(:focus-visible) + .toggle-track {
+  &:focus:not(:focus-visible) + .switch-track {
     outline: 0;
     box-shadow: none;
   }

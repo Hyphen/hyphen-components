@@ -6,7 +6,7 @@ import {
   FormikValues,
   getIn,
 } from 'formik';
-import { Toggle } from '../../Toggle/Toggle';
+import { Toggle } from '../../Switch/Switch';
 
 export interface FormikToggleProps {
   field: FieldAttributes<HTMLTextAreaElement>;

@@ -1,0 +1,47 @@
+import { Canvas, Meta, ArgTypes } from '@storybook/blocks';
+import { Switch } from './Switch';
+import * as Stories from './Switch.stories';
+
+<Meta of={Stories} />
+
+# Switch
+
+A `Switch` is like a digital on/off switch. They prompt users to choose between two mutually exclusive options and always have a default value.
+Switches should provide immediate results and should not require the user to Save or Submit to apply the new state.
+
+<Canvas of={Stories.Basic} />
+
+## Props
+
+<ArgTypes of={Switch} />
+
+### Help Text
+
+Use the `helpText` prop to add clarifying text beneath the switch label.
+
+<Canvas of={Stories.HelpText} />
+
+### Hidden Label
+
+Use the `hideLabel` prop to not render the label, however a `label` is still required for accessibility purposes.
+
+<Canvas of={Stories.HiddenLabel} />
+
+### Sizes
+
+Set the size of the `switch` to `sm`, `md` or `lg`. `md` is the default size.
+The `size` prop is also a `ResponsiveProp`, so it can be sized differently at each [breakpoint](?path=/docs/design-tokens-design-tokens--page#breakpoints) by passing an object.
+
+<Canvas of={Stories.Sizes} />
+
+### Disabled
+
+Disable the switch by setting the `isDisabled` prop.
+
+<Canvas of={Stories.Disabled} />
+
+## Error
+
+Use the `error` prop to mark the input as invalid. `error` accepts a `boolean`, `string`, or `node`. If either a `string` or `node` is passed, a validation message is displayed below it.
+
+<Canvas of={Stories.Error} />
