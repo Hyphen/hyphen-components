@@ -1,11 +1,7 @@
 @import '@hyphen/hyphen-design-tokens/build/scss/variables';
 
 .item {
-  display: flex;
-  align-items: center;
-  gap: var(--size-spacing-sm);
   line-height: 1;
-  border-radius: var(--size-border-radius-sm);
   padding: var(--size-spacing-sm);
   color: var(--color-font-secondary);
   font-size: var(--size-font-size-sm);

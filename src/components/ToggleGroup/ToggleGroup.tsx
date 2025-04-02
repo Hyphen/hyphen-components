@@ -71,6 +71,7 @@ const ToggleGroupItem = forwardRef<
     <ToggleGroupPrimitive.Item
       ref={ref}
       className={classNames(
+        'br-sm display-flex g-sm p-sm',
         styles.item,
         appliedVariant === 'outline' && styles.outline,
         className

@@ -19,6 +19,7 @@ const Toggle = forwardRef<
   <TogglePrimitive.Root
     ref={ref}
     className={classNames(
+      'br-sm display-flex g-sm p-sm',
       styles.item,
       variant === 'outline' && styles.outline,
       className

@@ -16,6 +16,9 @@ import { FormikTextareaInputInset } from './FormikTextareaInputInset/FormikTexta
 import { FormikTextInputInset } from './FormikTextInputInset/FormikTextInputInset';
 import { allModes } from '../../modes';
 import { FormikToggleGroup } from './FormikToggleGroup/FormikToggleGroup';
+import { ToggleGroupItem } from '../ToggleGroup/ToggleGroup';
+import { Tooltip, TooltipContent, TooltipProvider } from '../Tooltip/Tooltip';
+import { TooltipTrigger } from '@radix-ui/react-tooltip';
 
 const meta = {
   title: 'Patterns/Formik Form',
@@ -51,6 +54,36 @@ export const FormikForm = () =>
       { id: 'small', value: 'small', label: 'Small' },
       { id: 'medium', value: 'medium', label: 'Medium' },
       { id: 'large', value: 'large', label: 'Large' },
+    ];
+    const availabilityOptions = [
+      {
+        id: '99',
+        label: '99%',
+        value: '99',
+        description: 'Standard',
+        downtime: '3.65 days/year',
+      },
+      {
+        id: '999',
+        label: '99.9%',
+        value: '99.9',
+        description: 'High',
+        downtime: '8.76 hours/year',
+      },
+      {
+        id: '9999',
+        label: '99.99%',
+        value: '99.99',
+        description: 'Very High',
+        downtime: '52.56 minutes/year',
+      },
+      {
+        id: '99999',
+        label: '99.999%',
+        value: '99.999',
+        description: 'Mission Critical',
+        downtime: '5.26 minutes/year',
+      },
     ];
     const handleValidation = (values: Record<string, any>) => {
       const errors: Record<string, string> = {};
@@ -97,7 +130,6 @@ export const FormikForm = () =>
       if (!values.country) {
         errors.country = 'required';
       }
-
       if (!values.country) {
         errors.country = 'required';
       }
@@ -145,7 +177,7 @@ export const FormikForm = () =>
             dateInput: '',
             message: '',
             country: '',
-            availability: '',
+            availability: '99',
           }}
           validate={handleValidation}
           validateOnChange={false}
@@ -274,34 +306,44 @@ export const FormikForm = () =>
                   component={FormikTextareaInputInset}
                   isRequired
                 />
-                <Field
-                  label="Availability"
-                  name="availability"
-                  id="availability"
-                  component={FormikToggleGroup}
-                  options={[
-                    {
-                      id: '99',
-                      label: '99',
-                      value: '99',
-                    },
-                    {
-                      id: '999',
-                      label: '99.9',
-                      value: '99.9',
-                    },
-                    {
-                      id: '9999',
-                      label: '99.99',
-                      value: '99.99',
-                    },
-                    {
-                      id: '99999',
-                      label: '99.999',
-                      value: '99.999',
-                    },
-                  ]}
-                ></Field>
+                <TooltipProvider delayDuration={0}>
+                  <Field
+                    label="Availability"
+                    helpText="Impacts multi-zone setup, load balancing, and redundancy"
+                    name="availability"
+                    id="availability"
+                    variant="outline"
+                    component={FormikToggleGroup}
+                    options={availabilityOptions}
+                    gap="md"
+                  >
+                    {availabilityOptions.map((option) => (
+                      <ToggleGroupItem key={option.id} value={option.value}>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Box
+                              textAlign="left"
+                              alignItems="flex-start"
+                              gap="xs"
+                              padding="xs"
+                            >
+                              <Box fontSize="xl" fontWeight="semibold">
+                                {option.label}
+                              </Box>
+                              <Box color="tertiary" fontSize="xs">
+                                {option.description}
+                              </Box>
+                            </Box>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" sideOffset={10}>
+                            Up to {option.downtime} days/year downtime
+                          </TooltipContent>
+                        </Tooltip>
+                      </ToggleGroupItem>
+                    ))}
+                  </Field>
+                </TooltipProvider>
+
                 <DateInput
                   datePickerProps={{
                     onChange: (date) => {
