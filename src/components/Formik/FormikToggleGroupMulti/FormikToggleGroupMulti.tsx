@@ -1,5 +1,5 @@
 import React from 'react';
-import { FieldArray, useField, getIn } from 'formik';
+import { FieldArray, useField } from 'formik';
 import {
   ToggleGroup,
   ToggleGroupItem,
