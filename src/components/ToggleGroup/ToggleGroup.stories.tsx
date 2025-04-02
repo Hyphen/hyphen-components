@@ -9,7 +9,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '../Tooltip/Tooltip';
-import { Icon } from '../Icon/Icon';
 
 const meta: Meta<typeof ToggleGroup> = {
   title: 'Components/ToggleGroup',
