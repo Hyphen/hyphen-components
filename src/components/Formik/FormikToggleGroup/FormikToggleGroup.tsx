@@ -25,6 +25,7 @@ export interface FormikToggleGroupProps {
   }>;
   helpText?: string;
   label?: string;
+  children?: React.ReactNode;
 }
 
 export const FormikToggleGroup: React.FC<FormikToggleGroupProps> = ({
@@ -33,6 +34,7 @@ export const FormikToggleGroup: React.FC<FormikToggleGroupProps> = ({
   options,
   helpText,
   label,
+  children,
   ...props
 }) => {
   return (
@@ -52,15 +54,17 @@ export const FormikToggleGroup: React.FC<FormikToggleGroupProps> = ({
         error={getIn(touched, name) && getIn(errors, name)}
         type="single"
       >
-        {options.map((option) => (
-          <ToggleGroupItem
-            value={option.value}
-            key={option.id}
-            disabled={!!option.disabled}
-          >
-            {option.label}
-          </ToggleGroupItem>
-        ))}
+        {children
+          ? children
+          : options.map((option) => (
+              <ToggleGroupItem
+                value={option.value}
+                key={option.id}
+                disabled={!!option.disabled}
+              >
+                {option.label}
+              </ToggleGroupItem>
+            ))}
       </ToggleGroup>
     </Box>
   );

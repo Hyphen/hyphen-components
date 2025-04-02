@@ -3,6 +3,7 @@ import type { Meta } from '@storybook/react';
 
 import { Toggle } from './Toggle';
 import { Icon } from '../Icon/Icon';
+import { Box } from '../Box/Box';
 
 const meta: Meta<typeof Toggle> = {
   title: 'Components/Toggle',
@@ -39,5 +40,24 @@ export const Outline = () => (
 export const Disabled = () => (
   <Toggle disabled aria-label="list">
     <Icon name="list" />
+  </Toggle>
+);
+
+export const AsChild = () => (
+  <Toggle asChild aria-label="list">
+    <Box
+      width="fit"
+      justifyContent="flex-start"
+      textAlign="left"
+      alignItems="flex-start"
+      gap="xs"
+    >
+      <Box fontSize="xl" fontWeight="semibold">
+        99%
+      </Box>
+      <Box color="tertiary" fontSize="xs">
+        Standard
+      </Box>
+    </Box>
   </Toggle>
 );
