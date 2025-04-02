@@ -18,7 +18,7 @@ export interface FormikToggleGroupProps {
     setFieldValue: (field: string, value: any) => void;
   };
   options: Array<{
-    id: string | number;
+    id: string;
     value: string;
     label: React.ReactNode;
     disabled?: boolean;
@@ -58,6 +58,7 @@ export const FormikToggleGroup: React.FC<FormikToggleGroupProps> = ({
           ? children
           : options.map((option) => (
               <ToggleGroupItem
+                id={option.id}
                 value={option.value}
                 key={option.id}
                 disabled={!!option.disabled}
