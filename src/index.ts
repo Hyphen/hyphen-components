@@ -26,6 +26,7 @@ export * from './components/Formik/FormikTimePicker/FormikTimePicker';
 export * from './components/Formik/FormikTimePickerNative/FormikTimePickerNative';
 export * from './components/Formik/FormikSwitch/FormikSwitch';
 export * from './components/Formik/FormikToggleGroup/FormikToggleGroup';
+export * from './components/Formik/FormikToggleGroupMulti/FormikToggleGroupMulti';
 export * from './components/FormLabel/FormLabel';
 export * from './components/Heading/Heading';
 export * from './components/Icon/Icon';
