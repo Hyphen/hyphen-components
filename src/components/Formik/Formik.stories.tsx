@@ -19,6 +19,8 @@ import { FormikToggleGroup } from './FormikToggleGroup/FormikToggleGroup';
 import { ToggleGroupItem } from '../ToggleGroup/ToggleGroup';
 import { Tooltip, TooltipContent, TooltipProvider } from '../Tooltip/Tooltip';
 import { TooltipTrigger } from '@radix-ui/react-tooltip';
+import { FormikToggleGroupMulti } from './FormikToggleGroupMulti/FormikToggleGroupMulti';
+import { Icon } from '../Icon/Icon';
 
 const meta = {
   title: 'Patterns/Formik Form',
@@ -55,6 +57,12 @@ export const FormikForm = () =>
       { id: 'medium', value: 'medium', label: 'Medium' },
       { id: 'large', value: 'large', label: 'Large' },
     ];
+    const locationOptions = [
+      { id: 'ca', value: 'ca', label: 'Canada' },
+      { id: 'mx', value: 'mx', label: 'Mexico' },
+      { id: 'us', value: 'us', label: 'United States' },
+    ];
+
     const availabilityOptions = [
       {
         id: '99',
@@ -136,6 +144,9 @@ export const FormikForm = () =>
       if (!values.availability) {
         errors.availability = 'required';
       }
+      if (values.locations.length < 1) {
+        errors.locations = 'required';
+      }
       return errors;
     };
     const handleSubmit = (
@@ -178,9 +189,9 @@ export const FormikForm = () =>
             message: '',
             country: '',
             availability: '99',
+            locations: [] as string[],
           }}
           validate={handleValidation}
-          validateOnChange={false}
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, values, setFieldValue, handleBlur, errors }) => (
@@ -343,6 +354,23 @@ export const FormikForm = () =>
                     ))}
                   </Field>
                 </TooltipProvider>
+
+                <FormikToggleGroupMulti
+                  name="locations"
+                  label="Locations"
+                  helpText="Select all that apply"
+                  options={locationOptions}
+                  variant="outline"
+                >
+                  {locationOptions.map((option) => (
+                    <ToggleGroupItem key={option.id} value={option.value}>
+                      {values.locations.includes(option.value) && (
+                        <Icon name="check" />
+                      )}{' '}
+                      {option.label}
+                    </ToggleGroupItem>
+                  ))}
+                </FormikToggleGroupMulti>
 
                 <DateInput
                   datePickerProps={{
