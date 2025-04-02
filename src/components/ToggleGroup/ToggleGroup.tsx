@@ -7,7 +7,7 @@ import { InputValidationMessage } from '../InputValidationMessage/InputValidatio
 import { BaseSpacing, ResponsiveProp } from '../../types';
 import { cssShorthandToClasses } from '../../lib';
 
-type ToggleVariant = 'default' | 'outline';
+export type ToggleVariant = 'default' | 'outline';
 
 const ToggleGroupContext = createContext<{ variant: ToggleVariant }>({
   variant: 'default',
