@@ -7,3 +7,18 @@
 .rail:hover {
   border-right: 2px solid var(--color-border-sidebar-rail-hover);
 }
+
+[data-sidebar='sidebar'] svg {
+  flex-shrink: 0;
+}
+
+.group-data-[collapsible='icon']:hidden {
+  display: none;
+}
+
+:global(
+    .group[data-collapsible='icon'][data-state='collapsed']
+      .group-data-collapsible-icon-hidden
+  ) {
+  display: none;
+}
