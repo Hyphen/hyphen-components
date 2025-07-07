@@ -79,7 +79,7 @@ const data = {
       name: 'Evil Corp.',
     },
   ],
-  navMain: [
+  items: [
     {
       title: 'Dashboard',
       url: '#',
@@ -177,52 +177,39 @@ export const SidebarExample = () => {
     <ResponsiveProvider>
       <SidebarProvider defaultOpen={startOpen === 'true'}>
         <Sidebar side="left" collapsible="icon">
-          <NavHeader
-            activeTeam={activeTeam}
-            setActiveTeam={setActiveTeam}
-            items={data.navMain}
-          />
+          <NavHeader activeTeam={activeTeam} setActiveTeam={setActiveTeam} />
           <SidebarContent>
-            <NavMain items={data.navMain} />
-            <SidebarGroup>
-              <SidebarGroupLabel>Favorites</SidebarGroupLabel>
-              <SidebarMenu>
-                {data.favorites.map((item, idx) => (
-                  <SidebarMenuItem key={`${item.name}-${idx}`}>
-                    <SidebarMenuButton asChild tooltip={item.name}>
-                      <a href={item.url}>
-                        <Icon
-                          name={item.icon as IconName}
-                          color="tertiary"
-                          size="lg"
-                        />
-                        <span>{item.name}</span>
-                      </a>
-                    </SidebarMenuButton>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <SidebarMenuAction className="group-data-collapsible-icon-hidden">
-                          <Icon name="dots" />
-                          <span className="sr-only">More</span>
-                        </SidebarMenuAction>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent side="bottom" align="end">
-                        <DropdownMenuItem>
-                          <a href="https://ux.hyphen.ai">View</a>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <a href="https://ux.hyphen.ai">Share</a>
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                          <a href="https://ux.hyphen.ai">Remove</a>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroup>
+            <NavMain items={data.items} />
+            <NavFavorites favorites={data.favorites} />
+          </SidebarContent>
+          <NavFooter />
+          <SidebarRail />
+        </Sidebar>
+        <SidebarInset>
+          {isMobile && <SidebarTrigger />}
+          <Card height="100" padding="2xl">
+            content
+          </Card>
+        </SidebarInset>
+      </SidebarProvider>
+    </ResponsiveProvider>
+  );
+};
+
+export const SidebarCollapsed = () => {
+  const [activeTeam, setActiveTeam] = React.useState(data.teams[0]);
+  const isMobile = useIsMobile();
+
+  const startOpen = getCookieValue('false');
+
+  return (
+    <ResponsiveProvider>
+      <SidebarProvider defaultOpen={startOpen === 'true'}>
+        <Sidebar side="left" collapsible="icon">
+          <NavHeader activeTeam={activeTeam} setActiveTeam={setActiveTeam} />
+          <SidebarContent>
+            <NavMain items={data.items} />
+            <NavFavorites favorites={data.favorites} />
           </SidebarContent>
           <NavFooter />
           <SidebarRail />
@@ -485,3 +472,41 @@ const NavFooter = () => {
     </SidebarFooter>
   );
 };
+
+const NavFavorites = ({ favorites }: { favorites: typeof data.favorites }) => (
+  <SidebarGroup>
+    <SidebarGroupLabel>Favorites</SidebarGroupLabel>
+    <SidebarMenu>
+      {favorites.map((item, idx) => (
+        <SidebarMenuItem key={`${item.name}-${idx}`}>
+          <SidebarMenuButton asChild tooltip={item.name}>
+            <a href={item.url}>
+              <Icon name={item.icon as IconName} color="tertiary" size="lg" />
+              <span>{item.name}</span>
+            </a>
+          </SidebarMenuButton>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <SidebarMenuAction className="group-data-collapsible-icon-hidden">
+                <Icon name="dots" />
+                <span className="sr-only">More</span>
+              </SidebarMenuAction>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent side="bottom" align="end">
+              <DropdownMenuItem>
+                <a href="https://ux.hyphen.ai">View</a>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <a href="https://ux.hyphen.ai">Share</a>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <a href="https://ux.hyphen.ai">Remove</a>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </SidebarMenuItem>
+      ))}
+    </SidebarMenu>
+  </SidebarGroup>
+);
