@@ -326,7 +326,7 @@ const NavMain = ({ items }: { items: NavItem[] }) => {
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item, idx) =>
+        {items.map((item) =>
           item.items && state === 'expanded' ? (
             <Collapsible
               key={`${item.title}`}
