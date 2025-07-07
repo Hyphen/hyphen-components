@@ -21,8 +21,6 @@ import {
   TooltipTrigger,
 } from '../Tooltip/Tooltip';
 
-const SIDEBAR_COOKIE_NAME = 'sidebar_expanded';
-const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 const SIDEBAR_WIDTH = '16rem';
 const SIDEBAR_WIDTH_ICON = '44px';
 const SIDEBAR_KEYBOARD_SHORTCUT = '[';
@@ -52,6 +50,7 @@ const SidebarProvider = forwardRef<
   React.ComponentProps<'div'> & {
     defaultOpen?: boolean;
     open?: boolean;
+    storageKey?: string;
     onOpenChange?: (open: boolean) => void;
   }
 >(
@@ -59,6 +58,7 @@ const SidebarProvider = forwardRef<
     {
       defaultOpen = true,
       open: openProp,
+      storageKey = 'sidebar_expanded',
       onOpenChange: setOpenProp,
       className,
       style,
@@ -96,8 +96,7 @@ const SidebarProvider = forwardRef<
             _setOpen(newOpenState);
           }
 
-          // Set cookie only if state changes
-          document.cookie = `${SIDEBAR_COOKIE_NAME}=${newOpenState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+          localStorage.setItem(storageKey, `${newOpenState}`);
         }
       },
       [setOpenProp, open]

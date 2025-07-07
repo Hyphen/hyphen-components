@@ -158,24 +158,20 @@ const data = {
 
 // type Story = StoryObj<typeof Sidebar>;
 
-function getCookieValue(name: string): string | null {
-  const match = document.cookie.match(
-    new RegExp(
-      `(?:^|; )${name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1')}=([^;]*)`
-    )
-  );
-  return match ? decodeURIComponent(match[1]) : null;
-}
-
 export const SidebarExample = () => {
   const [activeTeam, setActiveTeam] = React.useState(data.teams[0]);
   const isMobile = useIsMobile();
 
-  const startOpen = getCookieValue('sidebar_expanded') || 'true';
+  const STORAGE_KEY = 'sidebar_expanded_storybook';
+
+  const startOpen = localStorage.getItem(STORAGE_KEY) || 'true';
 
   return (
     <ResponsiveProvider>
-      <SidebarProvider defaultOpen={startOpen === 'true'}>
+      <SidebarProvider
+        storageKey={STORAGE_KEY}
+        defaultOpen={startOpen === 'true'}
+      >
         <Sidebar side="left" collapsible="icon">
           <NavHeader activeTeam={activeTeam} setActiveTeam={setActiveTeam} />
           <SidebarContent>
@@ -197,14 +193,18 @@ export const SidebarExample = () => {
 };
 
 export const SidebarCollapsed = () => {
+  const STORAGE_KEY = 'sidebar_collapsed';
+
   const [activeTeam, setActiveTeam] = React.useState(data.teams[0]);
   const isMobile = useIsMobile();
-
-  const startOpen = getCookieValue('false');
+  const startOpen = localStorage.getItem(STORAGE_KEY) || 'false';
 
   return (
     <ResponsiveProvider>
-      <SidebarProvider defaultOpen={startOpen === 'true'}>
+      <SidebarProvider
+        storageKey={STORAGE_KEY}
+        defaultOpen={startOpen === 'true'}
+      >
         <Sidebar side="left" collapsible="icon">
           <NavHeader activeTeam={activeTeam} setActiveTeam={setActiveTeam} />
           <SidebarContent>
@@ -326,10 +326,10 @@ const NavMain = ({ items }: { items: NavItem[] }) => {
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item, idx) =>
+        {items.map((item) =>
           item.items && state === 'expanded' ? (
             <Collapsible
-              key={`${item.title}-${idx}`}
+              key={`${item.title}`}
               className="group/collapsible"
               asChild
             >
@@ -364,7 +364,7 @@ const NavMain = ({ items }: { items: NavItem[] }) => {
               </SidebarMenuItem>
             </Collapsible>
           ) : item.items && state === 'collapsed' ? (
-            <DropdownMenu>
+            <DropdownMenu key={`${item.title}`}>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton tooltip={item.title}>
                   <Icon
