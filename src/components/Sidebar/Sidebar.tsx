@@ -14,11 +14,17 @@ import { Box } from '../Box/Box';
 import { IconName } from 'src/types';
 import { Icon } from '../Icon/Icon';
 import styles from './Sidebar.module.scss';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '../Tooltip/Tooltip';
 
-const SIDEBAR_COOKIE_NAME = 'sidebar:state';
+const SIDEBAR_COOKIE_NAME = 'sidebar_expanded';
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 const SIDEBAR_WIDTH = '16rem';
-const SIDEBAR_WIDTH_ICON = '3rem';
+const SIDEBAR_WIDTH_ICON = '44px';
 const SIDEBAR_KEYBOARD_SHORTCUT = '[';
 
 interface SidebarContextProps {
@@ -133,24 +139,26 @@ const SidebarProvider = forwardRef<
 
     return (
       <SidebarContext.Provider value={contextValue}>
-        <div
-          style={
-            {
-              '--sidebar-width': SIDEBAR_WIDTH,
-              '--sidebar-width-icon': SIDEBAR_WIDTH_ICON,
-              minBlockSize: '100svh',
-              ...style,
-            } as React.CSSProperties
-          }
-          className={classNames(
-            'display-flex w-100 background-color-secondary',
-            className
-          )}
-          ref={ref}
-          {...props}
-        >
-          {children}
-        </div>
+        <TooltipProvider delayDuration={0}>
+          <div
+            style={
+              {
+                '--sidebar-width': SIDEBAR_WIDTH,
+                '--sidebar-width-icon': SIDEBAR_WIDTH_ICON,
+                minBlockSize: '100svh',
+                ...style,
+              } as React.CSSProperties
+            }
+            className={classNames(
+              'display-flex w-100 background-color-secondary',
+              className
+            )}
+            ref={ref}
+            {...props}
+          >
+            {children}
+          </div>
+        </TooltipProvider>
       </SidebarContext.Provider>
     );
   }
@@ -188,7 +196,7 @@ const Sidebar = React.forwardRef<
       return (
         <div
           className={classNames(
-            'display-flex h-100 font-size-xs flex-direction-column background-color-secondary font-color-base',
+            'group display-flex h-100 font-size-xs flex-direction-column background-color-secondary font-color-base',
             className
           )}
           style={{
@@ -213,6 +221,7 @@ const Sidebar = React.forwardRef<
         data-state={state}
         data-collapsible={collapsible}
         data-side={side}
+        className="group"
       >
         <div
           style={{
@@ -222,7 +231,12 @@ const Sidebar = React.forwardRef<
             transitionDuration: 'var(--sidebar-transition-duration, 200ms)',
             animationDuration: 'var(--sidebar-transition-duration, 200ms)',
             transitionProperty: 'width',
-            width: state === 'collapsed' ? '0' : 'var(--sidebar-width)',
+            width:
+              state === 'collapsed' && collapsible === 'icon'
+                ? 'var(--sidebar-width-icon)'
+                : state === 'collapsed'
+                ? '0'
+                : 'var(--sidebar-width)',
             height: '100svh',
           }}
           className={classNames('position-relative', className)}
@@ -233,7 +247,10 @@ const Sidebar = React.forwardRef<
             className
           )}
           style={{
-            left: state === 'expanded' ? '0' : 'calc(var(--sidebar-width)*-1)',
+            left:
+              state === 'expanded' || collapsible === 'icon'
+                ? '0'
+                : 'calc(var(--sidebar-width)*-1)',
             top: '0',
             bottom: '0',
             zIndex: 'var(--size-z-index-drawer)',
@@ -243,7 +260,10 @@ const Sidebar = React.forwardRef<
             transitionDuration: 'var(--sidebar-transition-duration, 200ms)',
             animationDuration: 'var(--sidebar-transition-duration, 200ms)',
             transitionProperty: 'left, right, width',
-            width: 'var(--sidebar-width)',
+            width:
+              state === 'collapsed' && collapsible === 'icon'
+                ? 'var(--sidebar-width-icon)'
+                : 'var(--sidebar-width)',
             height: '100svh',
           }}
           {...props}
@@ -312,7 +332,7 @@ const SidebarHeader = React.forwardRef<
       ref={ref}
       data-sidebar="header"
       className={classNames(
-        'display-flex g-sm p-v-md p-h-md p-right-0-desktop',
+        'display-flex g-sm p-v-md p-h-md p-right-0-desktop overflow-hidden',
         className
       )}
       {...props}
@@ -330,7 +350,7 @@ const SidebarFooter = React.forwardRef<
       ref={ref}
       data-sidebar="footer"
       className={classNames(
-        'display-flex g-sm  p-v-md p-h-md p-right-0-desktop',
+        'display-flex g-sm  p-v-md p-h-md p-right-0-desktop overflow-hidden',
         className
       )}
       {...props}
@@ -348,9 +368,10 @@ const SidebarContent = React.forwardRef<
       ref={ref}
       data-sidebar="content"
       className={classNames(
-        'display-flex flex-direction-column g-xl minh-0 flex-auto overflow-auto',
+        'display-flex flex-direction-column g-xl minh-0 flex-auto',
         className
       )}
+      style={{ overflowX: 'hidden', overflowY: 'auto' }}
       {...props}
     />
   );
@@ -384,6 +405,7 @@ const SidebarMenuItem = React.forwardRef<
     ref={ref}
     data-sidebar="menu-item"
     className={classNames('font-size-sm position-relative', className)}
+    style={{ whiteSpace: 'nowrap' }}
     {...props}
   />
 ));
@@ -395,31 +417,58 @@ const SidebarMenuButton = React.forwardRef<
     asChild?: boolean;
     isActive?: boolean;
     icon?: IconName;
+    tooltip?: string | React.ComponentProps<typeof TooltipContent>;
   }
->(({ asChild = false, isActive = false, icon, className, ...props }, ref) => {
-  const Comp = asChild ? Slot : 'button';
+>(
+  (
+    { asChild = false, isActive = false, icon, tooltip, className, ...props },
+    ref
+  ) => {
+    const Comp = asChild ? Slot : 'button';
+    const { isMobile, state } = useSidebar();
 
-  const button = (
-    <Comp
-      ref={ref}
-      data-sidebar="menu-button"
-      data-active={isActive}
-      className={classNames(
-        'display-flex w-100 flex-auto p-sm br-sm g-lg flex-direction-row flex-auto align-items-center font-size-sm bw-0 font-weight-medium text-align-left td-none hover:background-color-tertiary font-color-base cursor-pointer',
-        {
-          'background-color-tertiary': isActive,
-          'background-color-transparent': !isActive,
-        },
-        className
-      )}
-      {...props}
-    >
-      {props.children}
-    </Comp>
-  );
+    const button = (
+      <Comp
+        ref={ref}
+        data-sidebar="menu-button"
+        data-active={isActive}
+        className={classNames(
+          'display-flex w-100 flex-auto p-sm br-sm g-lg flex-direction-row flex-auto align-items-center font-size-sm bw-0 font-weight-medium text-align-left td-none hover:background-color-tertiary font-color-base cursor-pointer',
+          {
+            'background-color-tertiary': isActive,
+            'background-color-transparent': !isActive,
+          },
+          className
+        )}
+        {...props}
+      >
+        {props.children}
+      </Comp>
+    );
 
-  return button;
-});
+    if (!tooltip) {
+      return button;
+    }
+
+    if (typeof tooltip === 'string') {
+      tooltip = {
+        children: tooltip,
+      };
+    }
+
+    return (
+      <Tooltip>
+        <TooltipTrigger asChild>{button}</TooltipTrigger>
+        <TooltipContent
+          side="right"
+          align="center"
+          hidden={state !== 'collapsed' || isMobile}
+          {...tooltip}
+        />
+      </Tooltip>
+    );
+  }
+);
 SidebarMenuButton.displayName = 'SidebarMenuButton';
 
 const SidebarGroup = React.forwardRef<
@@ -431,7 +480,7 @@ const SidebarGroup = React.forwardRef<
       ref={ref}
       data-sidebar="group"
       className={classNames(
-        'position-relative p-h-md p-right-0-desktop display-flex w-100 minw-0 flex-direction-column',
+        'position-relative p-h-md p-right-0-desktop display-flex w-100 minw-0 flex-direction-column ',
         className
       )}
       {...props}
@@ -449,7 +498,7 @@ const SidebarGroupLabel = React.forwardRef<
       ref={ref}
       data-sidebar="group-label"
       className={classNames(
-        'display-flex h-3xl align-items-center br-sm p-h-sm font-color-secondary font-size-xs font-weight-medium outline-none',
+        'group-data-collapsible-icon-hidden display-flex h-3xl align-items-center br-sm p-h-sm font-color-secondary font-size-xs font-weight-medium outline-none',
         className
       )}
       {...props}
@@ -606,7 +655,7 @@ const SidebarMenuBadge = React.forwardRef<
     ref={ref}
     data-sidebar="menu-badge"
     className={classNames(
-      'position-absolute font-size-xs cursor-default lh-none p-xs font-color-base minw-0 align-items-center bw-0 br-sm outline-none background-color-transparent',
+      'group-data-collapsible-icon-hidden position-absolute font-size-xs cursor-default lh-none p-xs font-color-base minw-0 align-items-center bw-0 br-sm outline-none background-color-transparent',
       className
     )}
     style={{

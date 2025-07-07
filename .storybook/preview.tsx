@@ -8,6 +8,7 @@ import { Box } from '../src/components/Box/Box';
 import { Preview } from '@storybook/react';
 import { withThemeByClassName } from '@storybook/addon-themes';
 import hyphenTheme from './hyphenTheme';
+import { ResponsiveProvider } from '../src/components/ResponsiveProvider/ResponsiveProvider';
 
 export const decorators = [
   (Story, context) => {
@@ -16,9 +17,11 @@ export const decorators = [
       return <div style={{ padding: '0', margin: '0' }}>{Story()}</div>;
     } else {
       return (
-        <Box display="block" background="primary" padding="xl">
-          <Story />
-        </Box>
+        <ResponsiveProvider>
+          <Box display="block" background="primary" padding="xl">
+            <Story />
+          </Box>
+        </ResponsiveProvider>
       );
     }
   },

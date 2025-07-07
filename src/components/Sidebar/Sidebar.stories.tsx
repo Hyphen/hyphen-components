@@ -19,6 +19,7 @@ import {
   SidebarMenuAction,
   SidebarMenuBadge,
   SidebarTrigger,
+  useSidebar,
 } from './Sidebar';
 import { allModes } from '../../modes';
 import { Card } from '../Card/Card';
@@ -78,53 +79,48 @@ const data = {
       name: 'Evil Corp.',
     },
   ],
-  navMain: [
+  items: [
     {
       title: 'Dashboard',
       url: '#',
-      icon: 'dashboard',
+      icon: 'dashboard' as IconName,
       isActive: true,
+    },
+    {
+      title: 'Deploy',
+      url: '#',
+      icon: 'logo-deploy' as IconName,
     },
     {
       title: 'Teams',
       url: '#',
-      icon: 'users',
+      icon: 'users' as IconName,
     },
     {
       title: 'Link',
       url: '#',
-      icon: 'logo-link',
+      icon: 'logo-link' as IconName,
     },
     {
       title: 'ENV',
       url: '#',
-      icon: 'logo-env',
+      icon: 'logo-env' as IconName,
     },
     {
       title: 'Toggle',
       url: '#',
-      icon: 'logo-toggle',
-      items: [
-        {
-          title: 'Feature Toggles',
-          url: '#',
-        },
-        {
-          title: 'Segments',
-          url: '#',
-        },
-      ],
+      icon: 'logo-toggle' as IconName,
     },
     {
       title: 'Integrations',
       url: '#',
-      icon: 'stack',
+      icon: 'stack' as IconName,
       count: 23,
     },
     {
       title: 'Settings',
       url: '#',
-      icon: 'settings',
+      icon: 'settings' as IconName,
       items: [
         {
           title: 'General',
@@ -162,223 +158,32 @@ const data = {
 
 // type Story = StoryObj<typeof Sidebar>;
 
+function getCookieValue(name: string): string | null {
+  const match = document.cookie.match(
+    new RegExp(
+      `(?:^|; )${name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1')}=([^;]*)`
+    )
+  );
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
 export const SidebarExample = () => {
   const [activeTeam, setActiveTeam] = React.useState(data.teams[0]);
   const isMobile = useIsMobile();
+
+  const startOpen = getCookieValue('sidebar_expanded') || 'true';
+
   return (
     <ResponsiveProvider>
-      <SidebarProvider>
-        <Sidebar side="left" collapsible="offcanvas">
-          <SidebarHeader>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <SidebarMenuButton>
-                      <Box
-                        flex="auto"
-                        direction="row"
-                        gap="sm"
-                        alignItems="center"
-                      >
-                        <Box
-                          background="black"
-                          borderColor="subtle"
-                          borderWidth="sm"
-                          width="4xl"
-                          height="4xl"
-                          alignItems="center"
-                          justifyContent="center"
-                          radius="md"
-                        ></Box>
-                        <span className="font-weight-semibold">
-                          {activeTeam.name}
-                        </span>
-                      </Box>
-                      <Icon name="caret-up-down" />
-                    </SidebarMenuButton>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent
-                    align="start"
-                    side="bottom"
-                    sideOffset={4}
-                  >
-                    <DropdownMenuLabel className="text-xs text-muted-foreground">
-                      Organizations
-                    </DropdownMenuLabel>
-                    {data.teams.map((team, index) => (
-                      <DropdownMenuItem
-                        key={team.name}
-                        onClick={() => setActiveTeam(team)}
-                      >
-                        {team.name}
-                        <DropdownMenuShortcut>
-                          ⌘{index + 1}
-                        </DropdownMenuShortcut>
-                      </DropdownMenuItem>
-                    ))}
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>
-                      <a
-                        href="https://ux.hyphen.ai"
-                        className="display-flex flex-direction-row g-sm align-items-center"
-                      >
-                        <Icon name="add" color="tertiary" />
-                        <span>Create Organization</span>
-                      </a>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarHeader>
+      <SidebarProvider defaultOpen={startOpen === 'true'}>
+        <Sidebar side="left" collapsible="icon">
+          <NavHeader activeTeam={activeTeam} setActiveTeam={setActiveTeam} />
           <SidebarContent>
-            <SidebarGroup>
-              <SidebarGroupLabel>Platform</SidebarGroupLabel>
-              <SidebarMenu>
-                {data.navMain.map((item) =>
-                  item.items ? (
-                    <Collapsible
-                      key={item.title}
-                      className="group/collapsible"
-                      asChild
-                    >
-                      <SidebarMenuItem>
-                        <CollapsibleTrigger asChild>
-                          <SidebarMenuButton>
-                            <Icon
-                              name={item.icon as IconName}
-                              color="tertiary"
-                              size="lg"
-                            />
-                            {item.title}
-                            <Icon
-                              name="caret-sm-right"
-                              className="m-left-auto transform data-[state=open]:rotate-90"
-                            />
-                          </SidebarMenuButton>
-                        </CollapsibleTrigger>
-                        <CollapsibleContent>
-                          <SidebarMenuSub>
-                            {item.items?.map((subItem) => (
-                              <SidebarMenuSubItem key={subItem.title}>
-                                <SidebarMenuSubButton asChild>
-                                  <a href={subItem.url}>
-                                    <span>{subItem.title}</span>
-                                  </a>
-                                </SidebarMenuSubButton>
-                              </SidebarMenuSubItem>
-                            ))}
-                          </SidebarMenuSub>
-                        </CollapsibleContent>
-                      </SidebarMenuItem>
-                    </Collapsible>
-                  ) : (
-                    <SidebarMenuItem key={item.title}>
-                      <SidebarMenuButton asChild isActive={item.isActive}>
-                        <a href={item.url}>
-                          <Icon
-                            name={item.icon as IconName}
-                            color="tertiary"
-                            size="lg"
-                          />
-                          <span>{item.title}</span>
-                        </a>
-                      </SidebarMenuButton>
-                      {item.count && (
-                        <SidebarMenuBadge>{item.count}</SidebarMenuBadge>
-                      )}
-                    </SidebarMenuItem>
-                  )
-                )}
-              </SidebarMenu>
-            </SidebarGroup>
-            <SidebarGroup>
-              <SidebarGroupLabel>Favorites</SidebarGroupLabel>
-              <SidebarMenu>
-                {data.favorites.map((item) => (
-                  <SidebarMenuItem key={item.name}>
-                    <SidebarMenuButton asChild>
-                      <a href={item.url}>
-                        <Icon name={item.icon as IconName} color="tertiary" />
-                        <span>{item.name}</span>
-                      </a>
-                    </SidebarMenuButton>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <SidebarMenuAction>
-                          <Icon name="dots" />
-                          <span className="sr-only">More</span>
-                        </SidebarMenuAction>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent side="bottom" align="end">
-                        <DropdownMenuItem>
-                          <a href="https://ux.hyphen.ai">View</a>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <a href="https://ux.hyphen.ai">Share</a>
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                          <a href="https://ux.hyphen.ai">Remove</a>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroup>
+            <NavMain items={data.items} />
+            <NavFavorites favorites={data.favorites} />
           </SidebarContent>
+          <NavFooter />
           <SidebarRail />
-          <SidebarFooter>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <SidebarMenuButton>
-                      <Box flex="auto" direction="column" gap="2xs">
-                        <span className="font-weight-semibold">
-                          {data.user.name}
-                        </span>
-                        <span className="truncate font-size-xs font-color-secondary">
-                          {data.user.email}
-                        </span>
-                      </Box>
-                      <Icon name="caret-up-down" />
-                    </SidebarMenuButton>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent side="bottom" align="end" sideOffset={4}>
-                    <DropdownMenuLabel>
-                      <Box flex="auto" direction="column" gap="2xs">
-                        <span className="font-weight-semibold">
-                          {data.user.name}
-                        </span>
-                        <span className="truncate font-size-xs font-color-secondary">
-                          {data.user.email}
-                        </span>
-                      </Box>
-                    </DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuGroup>
-                      <DropdownMenuItem>
-                        <Icon name="user" color="tertiary" />
-                        Profile
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <Icon name="alarm" color="tertiary" />
-                        Notifications{' '}
-                      </DropdownMenuItem>
-                    </DropdownMenuGroup>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>
-                      <Icon name="logout" color="tertiary" />
-                      Log out
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarFooter>
         </Sidebar>
         <SidebarInset>
           {isMobile && <SidebarTrigger />}
@@ -390,3 +195,318 @@ export const SidebarExample = () => {
     </ResponsiveProvider>
   );
 };
+
+export const SidebarCollapsed = () => {
+  const [activeTeam, setActiveTeam] = React.useState(data.teams[0]);
+  const isMobile = useIsMobile();
+
+  const startOpen = getCookieValue('false');
+
+  return (
+    <ResponsiveProvider>
+      <SidebarProvider defaultOpen={startOpen === 'true'}>
+        <Sidebar side="left" collapsible="icon">
+          <NavHeader activeTeam={activeTeam} setActiveTeam={setActiveTeam} />
+          <SidebarContent>
+            <NavMain items={data.items} />
+            <NavFavorites favorites={data.favorites} />
+          </SidebarContent>
+          <NavFooter />
+          <SidebarRail />
+        </Sidebar>
+        <SidebarInset>
+          {isMobile && <SidebarTrigger />}
+          <Card height="100" padding="2xl">
+            content
+          </Card>
+        </SidebarInset>
+      </SidebarProvider>
+    </ResponsiveProvider>
+  );
+};
+
+interface NavItem {
+  title: string;
+  url: string;
+  icon?: IconName;
+  isActive?: boolean;
+  count?: number;
+  items?: {
+    title: string;
+    url: string;
+  }[];
+}
+
+const NavHeader = ({
+  activeTeam,
+  setActiveTeam,
+}: {
+  activeTeam: any;
+  setActiveTeam: (team: any) => void;
+}) => {
+  const { state } = useSidebar();
+
+  return (
+    <SidebarHeader>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <SidebarMenuButton style={{ padding: 'var(--size-spacing-xs)' }}>
+                <Box flex="auto" direction="row" gap="sm" alignItems="center">
+                  <Box
+                    background="black"
+                    borderColor="subtle"
+                    borderWidth="sm"
+                    width="24px"
+                    height="24px"
+                    minWidth="24px"
+                    minHeight="24px"
+                    alignItems="center"
+                    justifyContent="center"
+                    radius="sm"
+                    color="white"
+                    fontSize="xs"
+                    fontWeight="bold"
+                  >
+                    AC
+                  </Box>
+                  <span
+                    className="font-weight-semibold"
+                    style={{ whiteSpace: 'nowrap' }}
+                  >
+                    {activeTeam.name}
+                  </span>
+                </Box>
+                <Icon
+                  name="caret-up-down"
+                  className="group-data-collapsible-icon-hidden"
+                />
+              </SidebarMenuButton>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="start"
+              side={state === 'expanded' ? 'bottom' : 'right'}
+              sideOffset={4}
+            >
+              <DropdownMenuLabel className="text-xs text-muted-foreground">
+                Organizations
+              </DropdownMenuLabel>
+              {data.teams.map((team, index) => (
+                <DropdownMenuItem
+                  key={`team.name-${index}`}
+                  onClick={() => setActiveTeam(team)}
+                >
+                  {team.name}
+                  <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
+                </DropdownMenuItem>
+              ))}
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <a
+                  href="https://ux.hyphen.ai"
+                  className="display-flex flex-direction-row g-sm align-items-center"
+                >
+                  <Icon name="add" color="tertiary" />
+                  <span>Create Organization</span>
+                </a>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarHeader>
+  );
+};
+
+const NavMain = ({ items }: { items: NavItem[] }) => {
+  const { state } = useSidebar();
+
+  return (
+    <SidebarGroup>
+      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarMenu>
+        {items.map((item, idx) =>
+          item.items && state === 'expanded' ? (
+            <Collapsible
+              key={`${item.title}-${idx}`}
+              className="group/collapsible"
+              asChild
+            >
+              <SidebarMenuItem>
+                <CollapsibleTrigger asChild>
+                  <SidebarMenuButton tooltip={item.title}>
+                    <Icon
+                      name={item.icon as IconName}
+                      color="tertiary"
+                      size="lg"
+                    />
+                    {item.title}
+                    <Icon
+                      name="caret-sm-right"
+                      className="m-left-auto transform data-[state=open]:rotate-90"
+                    />
+                  </SidebarMenuButton>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="test">
+                  <SidebarMenuSub>
+                    {item.items?.map((subItem, idx) => (
+                      <SidebarMenuSubItem key={`${subItem.title}-${idx}`}>
+                        <SidebarMenuSubButton asChild>
+                          <a href={subItem.url}>
+                            <span>{subItem.title}</span>
+                          </a>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    ))}
+                  </SidebarMenuSub>
+                </CollapsibleContent>
+              </SidebarMenuItem>
+            </Collapsible>
+          ) : item.items && state === 'collapsed' ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <SidebarMenuButton tooltip={item.title}>
+                  <Icon
+                    name={item.icon as IconName}
+                    color="tertiary"
+                    size="lg"
+                  />
+                  {item.title}
+                  <Icon
+                    name="caret-sm-right"
+                    className="m-left-auto transform data-[state=open]:rotate-90"
+                  />
+                </SidebarMenuButton>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent side="right" align="start" sideOffset={4}>
+                {item.items.map((subItem, idx) => (
+                  <DropdownMenuItem key={`${subItem.title}-${idx}`}>
+                    <a href={subItem.url}>
+                      <span>{subItem.title}</span>
+                    </a>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <SidebarMenuItem key={item.title}>
+              <SidebarMenuButton
+                asChild
+                isActive={item.isActive}
+                tooltip={item.title}
+              >
+                <a href={item.url}>
+                  <Icon
+                    name={item.icon as IconName}
+                    color="tertiary"
+                    size="lg"
+                  />
+                  <span>{item.title}</span>
+                </a>
+              </SidebarMenuButton>
+              {item.count && <SidebarMenuBadge>{item.count}</SidebarMenuBadge>}
+            </SidebarMenuItem>
+          )
+        )}
+      </SidebarMenu>
+    </SidebarGroup>
+  );
+};
+
+const NavFooter = () => {
+  const { state } = useSidebar();
+  return (
+    <SidebarFooter>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <SidebarMenuButton tooltip="Your Profile">
+                <Icon name="user" size="lg" color="tertiary" />
+                <Box flex="auto" direction="column" gap="2xs">
+                  <span className="font-weight-semibold">{data.user.name}</span>
+                  <span className="truncate font-size-xs font-color-secondary">
+                    {data.user.email}
+                  </span>
+                </Box>
+                <Icon
+                  name="caret-up-down"
+                  className="group-data-collapsible-icon-hidden"
+                />
+              </SidebarMenuButton>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              side={state === 'expanded' ? 'top' : 'right'}
+              align="end"
+              sideOffset={4}
+            >
+              <DropdownMenuLabel>
+                <Box flex="auto" direction="column" gap="2xs">
+                  <span className="font-weight-semibold">{data.user.name}</span>
+                  <span className="truncate font-size-xs font-color-secondary">
+                    {data.user.email}
+                  </span>
+                </Box>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem>
+                  <Icon name="user" color="tertiary" />
+                  Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Icon name="alarm" color="tertiary" />
+                  Notifications{' '}
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Icon name="logout" color="tertiary" />
+                Log out
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarFooter>
+  );
+};
+
+const NavFavorites = ({ favorites }: { favorites: typeof data.favorites }) => (
+  <SidebarGroup>
+    <SidebarGroupLabel>Favorites</SidebarGroupLabel>
+    <SidebarMenu>
+      {favorites.map((item, idx) => (
+        <SidebarMenuItem key={`${item.name}-${idx}`}>
+          <SidebarMenuButton asChild tooltip={item.name}>
+            <a href={item.url}>
+              <Icon name={item.icon as IconName} color="tertiary" size="lg" />
+              <span>{item.name}</span>
+            </a>
+          </SidebarMenuButton>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <SidebarMenuAction className="group-data-collapsible-icon-hidden">
+                <Icon name="dots" />
+                <span className="sr-only">More</span>
+              </SidebarMenuAction>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent side="bottom" align="end">
+              <DropdownMenuItem>
+                <a href="https://ux.hyphen.ai">View</a>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <a href="https://ux.hyphen.ai">Share</a>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <a href="https://ux.hyphen.ai">Remove</a>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </SidebarMenuItem>
+      ))}
+    </SidebarMenu>
+  </SidebarGroup>
+);
