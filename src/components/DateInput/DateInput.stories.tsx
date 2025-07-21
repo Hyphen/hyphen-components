@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { DateInput } from './DateInput';
 import { Box } from '../Box/Box';
 

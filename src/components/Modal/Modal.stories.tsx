@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
 import { Modal } from './Modal';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from '../Button/Button';
 import { useOpenClose } from '../../hooks/useOpenClose/useOpenClose';
-import { userEvent, within, expect } from '@storybook/test';
+import { userEvent, within, expect } from 'storybook/test';
 
 const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',

@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { CheckboxInput } from './CheckboxInput';
 import { Box } from '../Box/Box';
 

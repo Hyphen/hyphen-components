@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextInputInset } from './TextInputInset';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { Box } from '../Box/Box';
 import { Icon } from '../Icon/Icon';
 

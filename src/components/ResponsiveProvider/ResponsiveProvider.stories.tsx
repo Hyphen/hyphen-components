@@ -1,6 +1,6 @@
 import React from 'react';
 import { ResponsiveProvider } from './ResponsiveProvider';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { useWindowSize } from '../../hooks/useWindowSize/useWindowSize';
 import { useBreakpoint } from '../../hooks/useBreakpoint/useBreakpoint';
 import { Box } from '../Box/Box';

@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import { RadioGroup } from './RadioGroup';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { Box } from '../Box/Box';
 
 const meta: Meta<typeof RadioGroup> = {

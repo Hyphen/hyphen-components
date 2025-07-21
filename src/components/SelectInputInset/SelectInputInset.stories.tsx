@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SelectInputInset } from './SelectInputInset';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { Box } from '../Box/Box';
 
 const meta: Meta<typeof SelectInputInset> = {

@@ -1,5 +1,5 @@
 import { Card } from './Card';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import React from 'react';
 import { Box } from '../Box/Box';
 import { Button } from '../Button/Button';

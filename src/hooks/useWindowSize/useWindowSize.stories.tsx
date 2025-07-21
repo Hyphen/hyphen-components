@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { useWindowSize } from './useWindowSize';
 import { Box } from '../../components/Box/Box';
 import { ResponsiveProvider } from '../../components/ResponsiveProvider/ResponsiveProvider';

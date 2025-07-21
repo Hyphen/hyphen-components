@@ -1,5 +1,5 @@
 import { Popover } from './Popover';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import React, { ChangeEvent } from 'react';
 import { useState } from 'react';
 import { Button } from '../Button/Button';

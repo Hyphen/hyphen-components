@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { Box } from '../Box/Box';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { Switch } from './Switch';
 
 const meta: Meta<typeof Switch> = {

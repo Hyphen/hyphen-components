@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { UseOpenCloseProps, useOpenClose } from './useOpenClose';
 import { Button } from '../../components/Button/Button';
 import { Box } from '../../components/Box/Box';
