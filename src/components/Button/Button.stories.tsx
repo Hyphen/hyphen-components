@@ -94,11 +94,13 @@ export const IconButton = () => (
 
 export const Loading = () => (
   <Box direction="row" gap="md">
-    <Button isLoading>Primary Loading</Button>
-    <Button variant="secondary" isLoading>
+    <Button isLoading aria-label="primary loading">
+      Primary Loading
+    </Button>
+    <Button variant="secondary" isLoading aria-label="secondary loading">
       Secondary Loading
     </Button>
-    <Button variant="tertiary" isLoading>
+    <Button variant="tertiary" isLoading aria-label="tertiary loading">
       Tertiary Loading
     </Button>
   </Box>

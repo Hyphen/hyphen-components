@@ -40,13 +40,13 @@ export const States = () => (
       isChecked={false}
     />
     <CheckboxInput
-      id="statesCHecked"
+      id="statesChecked"
       label="Checked"
       onChange={() => {}}
       isChecked={true}
     />
     <CheckboxInput
-      id="statesUnchecked"
+      id="statesIndeterminate"
       label="Indeterminate"
       onChange={() => {}}
       isChecked={true}
@@ -69,7 +69,7 @@ export const IndeterminateCheckboxes = () => {
       </Box>
       <Box gap="sm">
         <CheckboxInput
-          id="statesUnchecked"
+          id="intdeterminateParent"
           label="Parent"
           onChange={handleParentChange}
           isChecked={exampleOneChildOne || exampleOneChildTwo}
@@ -77,13 +77,13 @@ export const IndeterminateCheckboxes = () => {
         />
         <Box padding="0 0 0 sm" gap="sm">
           <CheckboxInput
-            id="statesUnchecked"
+            id="indeterminateChildOne"
             label="Child One"
             onChange={(event) => setExampleOneChildOne(event.target.checked)}
             isChecked={exampleOneChildOne}
           />
           <CheckboxInput
-            id="statesUnchecked"
+            id="indeterminateChildTwo"
             label="Child Two"
             onChange={(event) => setExampleOneChildTwo(event.target.checked)}
             isChecked={exampleOneChildTwo}
