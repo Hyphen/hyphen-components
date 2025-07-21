@@ -8,14 +8,14 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from './Drawer';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useRef, useState } from 'react';
 import { useOpenClose } from '../../hooks';
 import { Button } from '../Button/Button';
 import { Box } from '../Box/Box';
 import { RadioGroup } from '../RadioGroup/RadioGroup';
 import { WidthSize } from '../../types';
-import { userEvent, within, expect } from '@storybook/test';
+import { userEvent, within, expect } from 'storybook/test';
 
 const meta: Meta<typeof Drawer> = {
   title: 'Components/Drawer',

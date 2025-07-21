@@ -5,7 +5,7 @@ import '../src/styles/reset.scss';
 import '../src/styles/fonts.scss';
 
 import { Box } from '../src/components/Box/Box';
-import { Preview } from '@storybook/react';
+import { Preview } from '@storybook/react-vite';
 import { withThemeByClassName } from '@storybook/addon-themes';
 import hyphenTheme from './hyphenTheme';
 import { ResponsiveProvider } from '../src/components/ResponsiveProvider/ResponsiveProvider';

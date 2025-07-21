@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from './ThemeProvider';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { Box } from '../Box/Box';
 import { RadioGroup } from '../RadioGroup/RadioGroup';
 import { Theme } from './ThemeProvider';

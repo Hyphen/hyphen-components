@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DatePicker } from './DatePicker';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { Box } from '../Box/Box';
 import { Heading } from '../Heading/Heading';
 

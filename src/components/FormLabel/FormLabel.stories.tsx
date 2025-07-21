@@ -1,6 +1,6 @@
 import { FormLabel } from './FormLabel';
 
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import React from 'react';
 
 const meta: Meta<typeof FormLabel> = {

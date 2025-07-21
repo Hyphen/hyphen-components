@@ -6,7 +6,7 @@ import {
   TooltipProvider,
   TooltipPortal,
 } from './Tooltip';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { Button } from '../Button/Button';
 import { Badge } from '../Badge/Badge';
 

@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import React, { useState } from 'react';
 import { TextareaInput } from './TextareaInput';
 import { Box } from '../Box/Box';

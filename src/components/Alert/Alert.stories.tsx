@@ -2,7 +2,7 @@ import { Alert } from './Alert';
 import { AlertVariant } from './Alert.types';
 import { Button } from '../Button/Button';
 
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import React from 'react';
 import { useState } from 'react';
 

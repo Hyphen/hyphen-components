@@ -3,7 +3,7 @@ import {
   Theme,
   ThemeProvider,
 } from '../../components/ThemeProvider/ThemeProvider';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { Box } from '../../components/Box/Box';
 import { RadioGroup } from '../../components/RadioGroup/RadioGroup';
 import { useTheme } from '../../hooks/useTheme/useTheme';

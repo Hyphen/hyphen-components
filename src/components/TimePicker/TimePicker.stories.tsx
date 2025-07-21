@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import React, { ChangeEvent, useState } from 'react';
 import { TimePicker } from './TimePicker';
 import { Box } from '../Box/Box';

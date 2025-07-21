@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import { Badge, BadgeVariant } from './Badge';
 import React from 'react';
 import { Box } from '../Box/Box';
