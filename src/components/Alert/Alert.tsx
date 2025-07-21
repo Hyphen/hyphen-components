@@ -103,6 +103,7 @@ export const Alert: FC<AlertProps> = ({
           type="button"
           onClick={handleClose}
           onKeyUp={handleCloseKeyPress}
+          aria-label="dismiss"
         >
           {closeText || (
             <Icon name="remove" data-testid="alert-close-icon-test-id" />
