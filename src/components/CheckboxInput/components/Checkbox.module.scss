@@ -67,15 +67,18 @@ $lg-dimension: 36px;
   }
 
   input + div {
-    background: var(--form-control-background-color, var(--color-base-white));
-    color: var(--form-control-checkbox-color, var(--color-base-grey-500));
+    background: var(
+      --form-control-background-color,
+      var(--color-background-primary)
+    );
+    color: var(--form-control-checkbox-color, var(--color-border-checkbox));
   }
 
   input:checked + div,
   input:indeterminate + div {
     color: var(
       --form-control-checkbox-color-checked,
-      var(--color-base-primary-500)
+      var(--color-background-checkbox-checked)
     );
   }
 
