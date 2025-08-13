@@ -331,7 +331,7 @@ const SidebarHeader = React.forwardRef<
       ref={ref}
       data-sidebar="header"
       className={classNames(
-        'display-flex g-sm p-v-md p-h-md p-right-0-desktop overflow-hidden',
+        'display-flex g-sm p-v-md p-h-md p-right-0-desktop',
         className
       )}
       {...props}

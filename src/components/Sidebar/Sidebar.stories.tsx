@@ -182,7 +182,12 @@ export const SidebarExample = () => {
           <SidebarRail />
         </Sidebar>
         <SidebarInset>
-          {isMobile && <SidebarTrigger />}
+          {isMobile && (
+            <Box direction="row" gap="sm" alignItems="center">
+              <SidebarTrigger />
+              <CreateMenu />
+            </Box>
+          )}
           <Card height="100" padding="2xl">
             content
           </Card>
@@ -197,14 +202,10 @@ export const SidebarCollapsed = () => {
 
   const [activeTeam, setActiveTeam] = React.useState(data.teams[0]);
   const isMobile = useIsMobile();
-  const startOpen = localStorage.getItem(STORAGE_KEY) || 'false';
 
   return (
     <ResponsiveProvider>
-      <SidebarProvider
-        storageKey={STORAGE_KEY}
-        defaultOpen={startOpen === 'true'}
-      >
+      <SidebarProvider storageKey={STORAGE_KEY} defaultOpen={false}>
         <Sidebar side="left" collapsible="icon">
           <NavHeader activeTeam={activeTeam} setActiveTeam={setActiveTeam} />
           <SidebarContent>
@@ -215,7 +216,12 @@ export const SidebarCollapsed = () => {
           <SidebarRail />
         </Sidebar>
         <SidebarInset>
-          {isMobile && <SidebarTrigger />}
+          {isMobile && (
+            <Box direction="row" gap="sm" alignItems="center">
+              <SidebarTrigger />
+              <CreateMenu />
+            </Box>
+          )}
           <Card height="100" padding="2xl">
             content
           </Card>
@@ -244,75 +250,21 @@ const NavHeader = ({
   activeTeam: any;
   setActiveTeam: (team: any) => void;
 }) => {
-  const { state } = useSidebar();
+  const { state, isMobile } = useSidebar();
+
+  const isCollapsed = state === 'collapsed';
 
   return (
     <SidebarHeader>
       <SidebarMenu>
         <SidebarMenuItem>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <SidebarMenuButton style={{ padding: 'var(--size-spacing-xs)' }}>
-                <Box flex="auto" direction="row" gap="sm" alignItems="center">
-                  <Box
-                    background="black"
-                    borderColor="subtle"
-                    borderWidth="sm"
-                    width="24px"
-                    height="24px"
-                    minWidth="24px"
-                    minHeight="24px"
-                    alignItems="center"
-                    justifyContent="center"
-                    radius="sm"
-                    color="white"
-                    fontSize="xs"
-                    fontWeight="bold"
-                  >
-                    AC
-                  </Box>
-                  <span
-                    className="font-weight-semibold"
-                    style={{ whiteSpace: 'nowrap' }}
-                  >
-                    {activeTeam.name}
-                  </span>
-                </Box>
-                <Icon
-                  name="caret-up-down"
-                  className="group-data-collapsible-icon-hidden"
-                />
-              </SidebarMenuButton>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="start"
-              side={state === 'expanded' ? 'bottom' : 'right'}
-              sideOffset={4}
-            >
-              <DropdownMenuLabel className="text-xs text-muted-foreground">
-                Organizations
-              </DropdownMenuLabel>
-              {data.teams.map((team, index) => (
-                <DropdownMenuItem
-                  key={`team.name-${index}`}
-                  onClick={() => setActiveTeam(team)}
-                >
-                  {team.name}
-                  <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
-                </DropdownMenuItem>
-              ))}
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <a
-                  href="https://ux.hyphen.ai"
-                  className="display-flex flex-direction-row g-sm align-items-center"
-                >
-                  <Icon name="add" color="tertiary" />
-                  <span>Create Organization</span>
-                </a>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Box direction="row" alignItems="center" gap="sm">
+            <OrgSwitcher
+              activeTeam={activeTeam}
+              setActiveTeam={setActiveTeam}
+            />
+            {!isMobile && !isCollapsed && <CreateMenu />}
+          </Box>
         </SidebarMenuItem>
       </SidebarMenu>
     </SidebarHeader>
@@ -423,7 +375,7 @@ const NavFooter = () => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <SidebarMenuButton tooltip="Your Profile">
-                <Icon name="user" size="lg" color="tertiary" />
+                <Icon name="c-user" size="lg" color="tertiary" />
                 <Box flex="auto" direction="column" gap="2xs">
                   <span className="font-weight-semibold">{data.user.name}</span>
                   <span className="truncate font-size-xs font-color-secondary">
@@ -510,3 +462,165 @@ const NavFavorites = ({ favorites }: { favorites: typeof data.favorites }) => (
     </SidebarMenu>
   </SidebarGroup>
 );
+
+function CreateMenu() {
+  const menuItems = [
+    {
+      key: 'project',
+      to: `/#`,
+      label: 'Project',
+    },
+    {
+      key: 'app',
+      to: `/#`,
+      label: 'App',
+    },
+    {
+      key: 'deployment',
+      to: `/#`,
+      label: 'Deployment Policy',
+    },
+    {
+      key: 'feature-flag',
+      to: `/#`,
+      label: 'Feature Flag',
+    },
+    {
+      key: 'segment',
+      to: `/#`,
+      label: 'Segment',
+    },
+    {
+      key: 'short-link',
+      to: `/#`,
+      label: 'Short Link',
+    },
+    {
+      key: 'team',
+      to: `/#`,
+      label: 'Team',
+    },
+    {
+      key: 'invite-member',
+      to: `/#`,
+      label: 'Invite Member',
+    },
+  ] as Array<{ key: string; to: string; label: string }>;
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Box
+          as="button"
+          type="button"
+          color="base"
+          alignItems="center"
+          justifyContent="center"
+          padding="sm"
+          radius="sm"
+          hover={{
+            background: 'button-tertiary-hover',
+            color: 'button-tertiary-hover',
+          }}
+          borderWidth="0"
+          background="primary"
+          cursor="pointer"
+          shadow="xs"
+        >
+          <Icon name="add" />
+        </Box>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start" side="bottom" sideOffset={4}>
+        {menuItems.map(({ key, to, label }) => (
+          <DropdownMenuItem asChild key={key}>
+            <a href={to} className="navlink">
+              <span>{label}</span>
+            </a>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+const OrgSwitcher = ({
+  activeTeam,
+  setActiveTeam,
+}: {
+  activeTeam: any;
+  setActiveTeam: (team: any) => void;
+}) => {
+  const { state } = useSidebar();
+
+  const isCollapsed = state === 'collapsed';
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <SidebarMenuButton style={{ padding: 'var(--size-spacing-xs)' }}>
+          <Box flex="auto" direction="row" gap="sm" alignItems="center">
+            <Box
+              background="black"
+              borderColor="subtle"
+              borderWidth="sm"
+              width="24px"
+              height="24px"
+              minWidth="24px"
+              minHeight="24px"
+              alignItems="center"
+              justifyContent="center"
+              radius="sm"
+              color="white"
+              fontSize="xs"
+              fontWeight="bold"
+            >
+              AC
+            </Box>
+            {!isCollapsed && (
+              <span
+                className="font-weight-semibold"
+                style={{ whiteSpace: 'nowrap' }}
+              >
+                {activeTeam.name}
+              </span>
+            )}
+          </Box>
+          {!isCollapsed && (
+            <Icon
+              name="caret-up-down"
+              className="group-data-collapsible-icon-hidden"
+            />
+          )}
+        </SidebarMenuButton>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        align="start"
+        side={state === 'expanded' ? 'bottom' : 'right'}
+        sideOffset={4}
+      >
+        <DropdownMenuLabel className="text-xs text-muted-foreground">
+          Organizations
+        </DropdownMenuLabel>
+        {data.teams.map((team, index) => (
+          <DropdownMenuItem
+            key={`team.name-${index}`}
+            onClick={() => setActiveTeam(team)}
+          >
+            {team.name}
+            <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
+          </DropdownMenuItem>
+        ))}
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <a
+            href="https://ux.hyphen.ai"
+            className="display-flex flex-direction-row g-sm align-items-center"
+          >
+            <Icon name="add" color="tertiary" />
+            <span>Create Organization</span>
+          </a>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
