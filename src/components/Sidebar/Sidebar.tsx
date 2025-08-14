@@ -326,12 +326,17 @@ const SidebarHeader = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<'div'>
 >(({ className, ...props }, ref) => {
+  const { state } = useSidebar();
+
+  const isCollapsed = state === 'collapsed';
+
   return (
     <div
       ref={ref}
       data-sidebar="header"
       className={classNames(
         'display-flex g-sm p-v-md p-h-md p-right-0-desktop',
+        { 'overflow-hidden': isCollapsed },
         className
       )}
       {...props}
