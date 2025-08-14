@@ -576,14 +576,12 @@ const OrgSwitcher = ({
             >
               AC
             </Box>
-            {!isCollapsed && (
-              <span
-                className="font-weight-semibold"
-                style={{ whiteSpace: 'nowrap' }}
-              >
-                {activeTeam.name}
-              </span>
-            )}
+            <span
+              className="font-weight-semibold"
+              style={{ whiteSpace: 'nowrap' }}
+            >
+              {activeTeam.name}
+            </span>
           </Box>
           {!isCollapsed && (
             <Icon
