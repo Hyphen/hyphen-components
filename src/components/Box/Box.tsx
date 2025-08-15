@@ -25,6 +25,8 @@ import {
   ZIndexSize,
   BackgroundColor,
   BorderColor,
+  CssWhiteSpaceValue,
+  CssWordBreakValue,
 } from '../../types';
 import {
   CSSProperties,
@@ -250,6 +252,10 @@ export interface BoxProps {
    */
   textAlign?: CssTextAlignValue | ResponsiveProp<CssTextAlignValue>;
   /**
+   * Control the whitespace behavior of the Box
+   */
+  whiteSpace?: CssWhiteSpaceValue | ResponsiveProp<CssWhiteSpaceValue>;
+  /**
    * By default, a Box's items will all try to fit onto one line.
    * Change that and allow the items to wrap as needed wrap
    */
@@ -259,6 +265,10 @@ export interface BoxProps {
    * or a [width token](/?path=/docs/foundation-design-tokens--docs#width)
    */
   width?: DimensionSize | ResponsiveProp<DimensionSize> | string;
+  /**
+   * Control the word break behavior of the Box
+   */
+  wordBreak?: CssWordBreakValue | ResponsiveProp<CssWordBreakValue>;
   /**
    * ZIndex value for the element. Can be one of the predetermined token values.
    * Can be responsive.
@@ -315,7 +325,9 @@ export const Box: FC<BoxProps> = forwardRef(
       style = {},
       textAlign = undefined,
       wrap = undefined,
+      whiteSpace = undefined,
       width = undefined,
+      wordBreak = undefined,
       zIndex = undefined,
       ...restProps
     },
@@ -414,6 +426,8 @@ export const Box: FC<BoxProps> = forwardRef(
       generateResponsiveClasses('text-align', textAlign),
       generateResponsiveClasses('position', position),
       generateResponsiveClasses('z-index', zIndex),
+      generateResponsiveClasses('whitespace', whiteSpace),
+      generateResponsiveClasses('break', wordBreak),
       ...(hoverClasses ?? []),
       ...(focusClasses ?? []),
       {

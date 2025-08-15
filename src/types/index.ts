@@ -104,8 +104,8 @@ export type CssOverflowValue =
   | 'visible'
   | 'hidden'
   | 'clip'
-  | 'scroll'
   | 'auto'
+  | 'scroll'
   | 'inherit'
   | 'initial'
   | 'unset';
@@ -121,6 +121,15 @@ export type CssDisplayValue =
   | 'grid'
   | 'table-cell'
   | 'contents';
+
+export type CssWhiteSpaceValue =
+  | 'normal'
+  | 'nowrap'
+  | 'pre'
+  | 'pre-wrap'
+  | 'pre-line';
+
+export type CssWordBreakValue = 'normal' | 'break-all' | 'keep-all';
 
 export type CssTextAlignValue = 'left' | 'center' | 'right';
 
