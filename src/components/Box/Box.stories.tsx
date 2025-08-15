@@ -1203,7 +1203,7 @@ export const WordBreak = () => (
       <Box
         as="p"
         display="block"
-        wordBreak="break-all"
+        wordBreak="all"
         borderWidth="0 sm 0 sm"
         borderColor="danger"
       >
@@ -1216,7 +1216,7 @@ export const WordBreak = () => (
       <Box
         as="p"
         display="block"
-        wordBreak="keep-all"
+        wordBreak="keep"
         borderWidth="0 sm 0 sm"
         borderColor="danger"
       >

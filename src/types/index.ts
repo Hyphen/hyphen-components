@@ -129,7 +129,7 @@ export type CssWhiteSpaceValue =
   | 'pre-wrap'
   | 'pre-line';
 
-export type CssWordBreakValue = 'normal' | 'break-all' | 'keep-all';
+export type CssWordBreakValue = 'normal' | 'all' | 'keep';
 
 export type CssTextAlignValue = 'left' | 'center' | 'right';
 
