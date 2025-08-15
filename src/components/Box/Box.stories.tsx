@@ -9,6 +9,9 @@ const meta: Meta<typeof Box> = {
 
 export default meta;
 
+const placeholderText =
+  'Built by developers, for developers, Hyphen automates access management and connects your team with the services and cloud resources they need to ship great software.';
+
 export const Overview = () => (
   <Box gap="md">
     <Box
@@ -964,6 +967,71 @@ export const Shadow = () => (
   </Box>
 );
 
+export const WhiteSpace = () => (
+  <Box gap="lg">
+    <Box padding="md" gap="md" width="8xl" background="secondary">
+      <Box>Normal</Box>
+      <Box
+        as="p"
+        display="block"
+        whiteSpace="normal"
+        borderWidth="0 sm"
+        borderColor="danger"
+      >
+        {placeholderText}
+      </Box>
+    </Box>
+    <Box padding="md" gap="md" width="8xl" background="secondary">
+      <Box>Nowrap</Box>
+      <Box
+        as="p"
+        display="block"
+        whiteSpace="nowrap"
+        borderWidth="0 sm"
+        borderColor="danger"
+      >
+        {placeholderText}
+      </Box>
+    </Box>
+    <Box padding="md" gap="md" width="8xl" background="secondary">
+      <Box>Pre</Box>
+      <Box
+        as="p"
+        display="block"
+        whiteSpace="pre"
+        borderWidth="0 sm"
+        borderColor="danger"
+      >
+        {placeholderText}
+      </Box>
+    </Box>
+    <Box padding="md" gap="md" width="8xl" background="secondary">
+      <Box>Pre-wrap</Box>
+      <Box
+        as="p"
+        display="block"
+        whiteSpace="pre-wrap"
+        borderWidth="0 sm"
+        borderColor="danger"
+      >
+        {placeholderText}
+      </Box>
+    </Box>
+    <Box padding="md" gap="md" width="8xl" background="secondary">
+      <Box>Pre-line</Box>
+      <Box
+        as="p"
+        display="block"
+        whiteSpace="pre-line"
+        borderWidth="0 sm"
+        borderColor="danger"
+      >
+        {placeholderText}
+      </Box>
+    </Box>
+  </Box>
+);
+
 export const Width = () => (
   <Box background="secondary" gap="xs">
     <Box background="tertiary" width="227px">
@@ -1111,6 +1179,49 @@ export const WidthMin = () => (
     </Box>
     <Box background="tertiary" minWidth="50%">
       50%
+    </Box>
+  </Box>
+);
+
+export const WordBreak = () => (
+  <Box gap="lg">
+    <Box padding="3xl" gap="md" width="8xl" background="secondary">
+      <Box>Normal</Box>
+      <Box
+        as="p"
+        display="block"
+        wordBreak="normal"
+        borderWidth="0 sm 0 sm"
+        borderColor="danger"
+      >
+        {placeholderText}
+      </Box>
+    </Box>
+
+    <Box padding="3xl" gap="md" width="8xl" background="secondary">
+      <Box>Break-All</Box>
+      <Box
+        as="p"
+        display="block"
+        wordBreak="break-all"
+        borderWidth="0 sm 0 sm"
+        borderColor="danger"
+      >
+        {placeholderText}
+      </Box>
+    </Box>
+
+    <Box padding="3xl" gap="md" width="8xl" background="secondary">
+      <Box>Keep-All</Box>
+      <Box
+        as="p"
+        display="block"
+        wordBreak="keep-all"
+        borderWidth="0 sm 0 sm"
+        borderColor="danger"
+      >
+        {placeholderText}
+      </Box>
     </Box>
   </Box>
 );
