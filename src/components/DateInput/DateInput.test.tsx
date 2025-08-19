@@ -52,7 +52,7 @@ describe('DateInput', () => {
       expect(document.getElementsByClassName('PopoverContent').length).toBe(1);
     });
 
-    it('opens the Popover when the input is clicked', () => {
+    it('opens the Popover when the input is clicked', async () => {
       render(
         <DateInput
           textInputProps={{
@@ -70,10 +70,10 @@ describe('DateInput', () => {
 
       const popoverContainer =
         document.getElementsByClassName('PopoverContent');
-      waitFor(() =>
+      await waitFor(() =>
         expect(popoverContainer[0]).toHaveAttribute('data-side', 'bottom')
       );
-      waitFor(() =>
+      await waitFor(() =>
         expect(popoverContainer[0]).toHaveAttribute('data-align', 'start')
       );
     });
