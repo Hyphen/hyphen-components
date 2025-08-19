@@ -189,7 +189,7 @@ export const DateInput: FC<DateInputProps> = ({
           value={getTextInputValue()}
           readOnly
           onClick={handleOpen}
-          inputProps={{ style: { textAlign: 'left' } }}
+          inputProps={{ className: 'text-align-left' }}
           type="text"
           onChange={() =>
             null
