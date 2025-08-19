@@ -1,74 +1,69 @@
-@keyframes fadeIn {
-  0% {
+.PopoverContent {
+  background-color: var(
+    --color-background-popover,
+    var(--color-background-primary)
+  );
+  color: var(--color-font-popover, var(--color-font-base));
+  box-shadow: var(--size-box-shadow-sm);
+  padding: var(--size-spacing-lg);
+  border-radius: var(--size-border-radius-sm);
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.PopoverContent[data-side='top'] {
+  animation-name: slideUp;
+}
+.PopoverContent[data-side='bottom'] {
+  animation-name: slideDown;
+}
+.PopoverContent[data-side='left'] {
+  animation-name: slideLeft;
+}
+.PopoverContent[data-side='right'] {
+  animation-name: slideRight;
+}
+
+@keyframes slideDown {
+  from {
     opacity: 0;
+    transform: translateY(-7px);
   }
-
-  100% {
+  to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.popover {
-  z-index: var(--size-z-index-popover);
-  animation: fadeIn 0.2s;
-}
-
-.popover-arrow {
-  position: absolute;
-  width: 0.8rem;
-  height: 0.8rem;
-
-  &::before {
-    position: absolute;
-    transform: rotate(45deg);
-    z-index: -1;
-    background-color: inherit;
-    width: 0.8rem;
-    height: 0.8rem;
-    content: '';
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-[data-popper-placement*='bottom'] {
-  .popover-arrow {
-    top: -0.1rem;
-
-    &::before {
-      bottom: 0.25rem;
-      box-shadow: rgb(0 0 0 / 5%) -1px -1px 1px 0;
-    }
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
-[data-popper-placement*='top'] {
-  .popover-arrow {
-    bottom: -0.1rem;
-
-    &::before {
-      top: 0.25rem;
-      box-shadow: rgb(0 0 0 / 8%) 3px 3px 3px 0;
-    }
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-7px);
   }
-}
-
-[data-popper-placement*='left'] {
-  .popover-arrow {
-    right: -0.1rem;
-
-    &::before {
-      left: 0.25rem;
-      box-shadow: rgb(0 0 0 / 8%) 1px -1px 1px 0;
-    }
-  }
-}
-
-[data-popper-placement*='right'] {
-  .popover-arrow {
-    left: -0.1rem;
-
-    &::before {
-      right: 0.25rem;
-      box-shadow: rgb(0 0 0 / 5%) -2px 2px 2px 0;
-    }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
