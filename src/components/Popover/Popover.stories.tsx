@@ -26,7 +26,9 @@ export const Basic = () => {
         </PopoverTrigger>
         <PopoverPortal>
           <PopoverContent>
-            <p>Hello world!</p>
+            <Box width="100" maxWidth="8xl" padding="2xl">
+              Display content in a portal, triggered by a button.
+            </Box>
           </PopoverContent>
         </PopoverPortal>
       </Popover>
