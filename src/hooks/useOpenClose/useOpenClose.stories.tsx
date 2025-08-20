@@ -2,8 +2,13 @@ import React from 'react';
 import type { Meta } from '@storybook/react-vite';
 import { UseOpenCloseProps, useOpenClose } from './useOpenClose';
 import { Button } from '../../components/Button/Button';
+import {
+  Popover,
+  PopoverContent,
+  PopoverPortal,
+  PopoverTrigger,
+} from '../../components/Popover/Popover';
 import { Box } from '../../components/Box/Box';
-import { Popover } from '../../components/Popover/Popover';
 
 const meta: Meta<typeof useOpenClose> = {
   title: 'Hooks/useOpenClose',
@@ -16,26 +21,24 @@ export default meta;
 
 export const BasicUsage: React.FC<UseOpenCloseProps> = () => {
   const { isOpen, handleOpen, handleClose } = useOpenClose();
-  const popoverContent = (
-    <>
-      <Box padding="lg" gap="md">
-        <Box as="p">Hello!</Box>
-      </Box>
-    </>
-  );
+
   return (
-    <Popover
-      placement="right-end"
-      content={popoverContent}
-      isOpen={isOpen}
-      onClickOutside={handleClose}
-      contentContainerProps={{
-        padding: 'sm',
-      }}
-    >
-      <Button variant="primary" type="button" onClick={handleOpen}>
-        Open Popover
+    <Box gap="2xl" direction="row">
+      <Popover open={isOpen}>
+        <PopoverTrigger asChild>
+          <Button variant="primary" type="button" onClick={handleOpen}>
+            Open Popover
+          </Button>
+        </PopoverTrigger>
+        <PopoverPortal>
+          <PopoverContent onInteractOutside={handleClose}>
+            <p>Hello!</p>
+          </PopoverContent>
+        </PopoverPortal>
+      </Popover>
+      <Button variant="secondary" onClick={handleOpen}>
+        also opens
       </Button>
-    </Popover>
+    </Box>
   );
 };

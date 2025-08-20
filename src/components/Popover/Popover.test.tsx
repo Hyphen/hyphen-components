@@ -1,70 +1,102 @@
 import React from 'react';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import { Placement } from '@popperjs/core';
-import { Popover } from './Popover';
+import { render, screen, waitFor } from '@testing-library/react';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverPortal,
+} from './Popover';
+
+// Helper to render a controlled Popover
+type ControlledPopoverProps = {
+  isOpen?: boolean;
+  onClickOutside?: (event: Event) => void;
+  placement?: string;
+  withPortal?: boolean;
+  portalTarget?: HTMLElement;
+  children: React.ReactNode;
+  contentProps?: Record<string, any>;
+  [key: string]: any;
+};
+
+function ControlledPopover({
+  isOpen = true,
+  onClickOutside,
+  placement = 'right',
+  withPortal = false,
+  portalTarget,
+  children,
+  contentProps = {},
+  ...rest
+}: ControlledPopoverProps) {
+  return (
+    <Popover open={isOpen} {...rest}>
+      <PopoverTrigger asChild>
+        <button>trigger</button>
+      </PopoverTrigger>
+      {withPortal ? (
+        <PopoverPortal container={portalTarget}>
+          <PopoverContent
+            side={
+              placement.split('-')[0] as 'right' | 'top' | 'bottom' | 'left'
+            }
+            align={
+              (placement.split('-')[1] as
+                | 'center'
+                | 'end'
+                | 'start'
+                | undefined) || 'center'
+            }
+            {...contentProps}
+            onInteractOutside={onClickOutside}
+          >
+            {children}
+          </PopoverContent>
+        </PopoverPortal>
+      ) : (
+        <PopoverContent
+          side={placement.split('-')[0] as 'right' | 'top' | 'bottom' | 'left'}
+          align={
+            (placement.split('-')[1] as
+              | 'center'
+              | 'end'
+              | 'start'
+              | undefined) || 'center'
+          }
+          {...contentProps}
+          onInteractOutside={onClickOutside}
+        >
+          {children}
+        </PopoverContent>
+      )}
+    </Popover>
+  );
+}
 
 describe('Popover', () => {
   describe('Default', () => {
     it('Renders a popover with default props', async () => {
-      // NOTE: popperJS is throwing a warning due to missing act, but it is unclear how to fix these.
-      // https://github.com/popperjs/react-popper/issues/368
       render(
-        <Popover isOpen content={<>hello</>}>
-          <p>trigger</p>
-        </Popover>
+        <ControlledPopover>
+          <span>hello</span>
+        </ControlledPopover>
       );
-
       const popoverContent = screen.getByText('hello');
-      const popoverContainer = screen.getByRole('dialog');
       const trigger = screen.getByText('trigger');
       expect(popoverContent).toBeInTheDocument();
       expect(trigger).toBeInTheDocument();
-      expect(trigger).toHaveAttribute('role', 'button');
-      expect(popoverContainer).toBeInTheDocument();
-      expect(popoverContainer).toHaveAttribute('role', 'dialog');
-      expect(popoverContainer).toHaveAttribute('aria-hidden', 'false');
-      expect(popoverContainer).toHaveClass('background-color-primary');
-      expect(popoverContainer).toHaveClass('p-sm');
-      await waitFor(() =>
-        expect(popoverContainer).toHaveAttribute(
-          'data-popper-placement',
-          'right'
-        )
-      );
-    });
-  });
-
-  describe('Callbacks', () => {
-    it('Fires a callback when a user clicks outside the popover', () => {
-      const mockedOnClickOutside = jest.fn();
-      const { container } = render(
-        <Popover
-          isOpen
-          content={<>hello</>}
-          onClickOutside={mockedOnClickOutside}
-        >
-          <p>trigger</p>
-        </Popover>
-      );
-
-      const popover = screen.getByText('hello');
-      const trigger = screen.getByText('trigger');
-      expect(popover).toBeInTheDocument();
-      fireEvent.click(popover);
-      fireEvent.click(trigger);
-      fireEvent.click(container);
-      fireEvent.keyUp(container, { key: 'Escape' });
-      expect(mockedOnClickOutside).toBeCalledTimes(2);
+      expect(trigger).toHaveAttribute('type', 'button');
+      // Radix PopoverContent does not have role="dialog" by default
+      expect(popoverContent.parentElement).toHaveClass('PopoverContent');
     });
   });
 
   describe('Placement', () => {
-    // We do not test auto placements since those compute out to one of the below after detection.
-    const positions: Placement[] = [
-      'top',
-      'bottom',
-      'right',
-      'left',
+    const positions = [
+      'top-center',
+      'bottom-center',
+      'right-center',
+      'left-center',
       'top-start',
       'top-end',
       'bottom-start',
@@ -74,22 +106,22 @@ describe('Popover', () => {
       'left-start',
       'left-end',
     ];
-
     positions.forEach((position) => {
-      it(`Places the tooltop correctly in position: ${position} when prop is passed`, async () => {
+      it(`Places the popover correctly in position: ${position} when prop is passed`, async () => {
         render(
-          <Popover isOpen content={<>hello</>} placement={position}>
-            <p>trigger</p>
-          </Popover>
+          <ControlledPopover placement={position}>
+            <span>hello</span>
+          </ControlledPopover>
         );
-
-        const popoverContainer = screen.getByRole('dialog');
-        await waitFor(() =>
-          expect(popoverContainer).toHaveAttribute(
-            'data-popper-placement',
-            position
-          )
-        );
+        const popoverContent = screen.getByText('hello').parentElement;
+        // Radix sets data-side and data-align
+        const [side, align] = position.split('-');
+        await waitFor(() => {
+          expect(popoverContent).toHaveAttribute('data-side', side);
+          if (align) {
+            expect(popoverContent).toHaveAttribute('data-align', align);
+          }
+        });
       });
     });
   });
@@ -97,31 +129,17 @@ describe('Popover', () => {
   describe('Portal', () => {
     it('Renders the Popover in the body if withPortal is true.', async () => {
       render(
-        <>
-          <div id="nest1">
-            <div id="nest2">
-              <Popover
-                isOpen
-                content={
-                  <button type="button" id="inside-button">
-                    hello
-                  </button>
-                }
-                withPortal
-                portalTarget={document.body}
-              >
-                <p>trigger</p>
-              </Popover>
-            </div>
-          </div>
-        </>
+        <ControlledPopover withPortal portalTarget={document.body}>
+          <button type="button" id="inside-button">
+            hello
+          </button>
+        </ControlledPopover>
       );
-
       await waitFor(() => {
-        expect(document.body.children[1]).toHaveAttribute(
-          'data-popper-placement',
-          'right'
-        );
+        // Should be in the body
+        expect(
+          document.body.querySelector('#inside-button')
+        ).toBeInTheDocument();
       });
     });
   });

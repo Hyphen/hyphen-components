@@ -6,99 +6,16 @@ import * as Stories from './Popover.stories';
 
 # Popover
 
-Use popovers to show content of any kind behind the context of a specific trigger, some examples
-of uses for a popover include:
+Display content in a portal, triggered by a button.
 
-1. Dropdowns
-2. Tooltips
-3. Context Menus
+This component is extended from [Radix](https://www.radix-ui.com/primitives/docs/components/popover).
 
-<Canvas withSource="open" of={Stories.BasicUsage} />
+[API Reference](https://www.radix-ui.com/primitives/docs/components/popover#api-reference)
 
-The popover requires a `children` node that will act as a trigger, as well as a `content` prop that has the contents of the Popover.
+<Canvas of={Stories.Basic} />
 
-Use the `isOpen` prop to govern the state of the Popover. This is done by attaching a `onClick` event to the trigger element.
+## Side and Align
 
-By default the Popover will render with placement on the right, as well as a white background and some base padding on the container. All of these
-items, however are fully customizable.
+Control the alignment and side that the popover content will appear.
 
-## Props
-
-<ArgTypes of={Popover} />
-
-## Popover Styling
-
-Because the rendered Popover is powered by our `Box` component ([Read More](/?path=/docs/components-box-overview--background)) you
-can use all known box props to style it. The below example includes some of the basics, but is not representative of
-the entire gamut of styling options.
-
-<Canvas withSource="open" of={Stories.PopoverStyling} />
-
-## Placement
-
-Based on layout, it is beneficial to place the popover in a variety of positions relative to its trigger element.
-Note that in case where the popover is in danger of overflowing, the component will fallback to `auto` in order to
-prevent the content from getting cut off.
-
-<Canvas withSource="open" of={Stories.Placement} />
-
-## With a Portal
-
-Popovers in lots of cases need to break away from the HTML structure of their parent elements
-in order to maintain semantic order on the page. This can also help with z-index conflicts
-and ensure content isn't cut off in certain cases by the popover's parent container.
-
-To render the Popover outside in an element other than its parent container, we
-use a (React Portal)[https://reactjs.org/docs/portals.html].
-
-By default the element is portaled into the document `body` but you can use the `portalTarget` prop
-in order to render the element anywhere on the page.
-
-<Canvas withSource="open" of={Stories.WithAPortal} />
-
-## Hover Trigger
-
-In cases where small amounts of additional context are needed for a particular item,
-it might be beneficial to trigger the Popover on hover. Since the component is fully controlled
-this can be done easily by attaching mouse events to the trigger element as show below.
-
-NOTE: this should be use sparingly since context dependent on hover, isn't an optimal experience for mobile users.
-
-<Canvas withSource="open" of={Stories.HoverTrigger} />
-
-## Respond to Outside Clicks
-
-Since Popovers are by nature rendered on top of existing content, it
-is beneficial in most cases to close the Popover when a user clicks any item outside
-the trigger and popover content.
-
-Our component provides a `onClickOutside` prop that fires a callback whenever there is a click
-event outside the Popover content, OR, when the user taps the `Escape` key.
-You can use the callback to set `isOpen` to false.
-
-NOTE: the click event is attached to the `document.body`, but will not bubble up the event
-in cases where the click target includes the Popover trigger or content nodes.
-
-<Canvas withSource="open" of={Stories.RespondToOutsideClicks} />
-
-## Trapping Focus
-
-Trapping focus in a Popover is valuable in many cases to preserve accessibility. It consists
-of constraining the items available for focusing to ONLY the content of the Popover, hence preventing
-users from focusing on elements that might be behind or outside the Popover content.
-
-Use the `trapFocus` prop to constrain focus to popover content elements.
-
-<Canvas withSource="open" of={Stories.TrappingFocus} />
-
-## Without An Arrow
-
-Render the popover with no arrow by passing `hasArrow` false.
-
-<Canvas withSource="open" of={Stories.WithoutAnArrow} />
-
-## Offset Distance
-
-Place the popover closer or farther from its trigger with the `offsetFromTarget` prop.
-
-<Canvas withSource="open" of={Stories.OffsetDistance} />
+<Canvas of={Stories.SidesAndAlign} />

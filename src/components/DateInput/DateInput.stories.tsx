@@ -35,8 +35,8 @@ export const Default = () => {
   return (
     <DateInput
       datePickerProps={{
-        selected: selectedDate as Date,
-        onChange: setSelectedDate,
+        selected: selectedDate instanceof Date ? selectedDate : null,
+        onChange: (date: Date | [Date, Date] | null) => setSelectedDate(date),
       }}
       textInputProps={{
         placeholder: 'e.g. 11/02/2020',
@@ -91,7 +91,7 @@ export const WithMinAndMaxDates = () => {
   const min = new Date(2022, 6, 18);
   min.setDate(min.getDate() - 10);
   const max = new Date(2022, 6, 18);
-  max.setDate(max.getDate() + 100);
+  max.setDate(max.getDate() + 10);
   return (
     <DateInput
       datePickerProps={{

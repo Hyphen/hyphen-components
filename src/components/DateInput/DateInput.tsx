@@ -2,7 +2,13 @@ import React, { FC, useState } from 'react';
 import format from 'date-fns/format';
 import { DatePicker, DatePickerProps } from '../DatePicker/DatePicker';
 import { TextInput, TextInputProps } from '../TextInput/TextInput';
-import { Popover, PopoverProps } from '../Popover/Popover';
+import {
+  Popover,
+  PopoverContent,
+  PopoverPortal,
+  PopoverTrigger,
+} from '../Popover/Popover';
+import { useOpenClose } from '../../hooks';
 
 export interface DateInputProps {
   /**
@@ -48,7 +54,10 @@ export interface DateInputProps {
   /**
    * Props to pass down to the Popover component.
    */
-  popoverProps?: Omit<PopoverProps, 'children' | 'content' | 'isOpen'>;
+  popoverProps?: {
+    side: 'top' | 'bottom' | 'left' | 'right';
+    align: 'start' | 'center' | 'end';
+  };
   /**
    * Additional props to be spread to the `TextInput` element.
    */
@@ -60,11 +69,9 @@ const defaultDatePickerProps: Omit<DatePickerProps, 'onChange'> = {
   selectsRange: false,
 };
 
-const defaultPopoverProps: Omit<
-  PopoverProps,
-  'children' | 'content' | 'isOpen'
-> = {
-  placement: 'bottom',
+const defaultPopoverProps = {
+  align: 'start',
+  side: 'bottom',
 };
 
 const defaultTextInputProps: Omit<TextInputProps, 'id'> = {
@@ -77,16 +84,41 @@ export const DateInput: FC<DateInputProps> = ({
   dateFormat = 'MM/dd/yyyy',
   dateOptions = undefined,
   popoverProps = { ...defaultPopoverProps },
-  ...restProps
 }) => {
+  const { isOpen, handleClose, handleOpen } = useOpenClose();
+
+  // Internal state for selected date if not controlled
+  const isControlled = datePickerProps.selected !== undefined;
+  const [internalSelected, setInternalSelected] = useState<Date | null>(
+    Array.isArray(datePickerProps.selected)
+      ? datePickerProps.selected[0] ?? null
+      : datePickerProps.selected ?? null
+  );
+
+  // Use controlled or internal state
+  const selectedDate = isControlled
+    ? datePickerProps.selected
+    : internalSelected;
+
   const mergedDatePickerProps = {
     ...defaultDatePickerProps,
     ...datePickerProps,
+    selected: selectedDate,
   };
 
   const mergedPopoverProps = {
     ...defaultPopoverProps,
     ...popoverProps,
+    side: (popoverProps?.side ?? defaultPopoverProps.side) as
+      | 'top'
+      | 'bottom'
+      | 'left'
+      | 'right',
+    align: (popoverProps?.align ?? defaultPopoverProps.align) as
+      | 'start'
+      | 'center'
+      | 'end',
+    onInteractOutside: handleClose,
   };
 
   const mergedTextInputProps = {
@@ -97,93 +129,84 @@ export const DateInput: FC<DateInputProps> = ({
   const getTextInputValue = () => {
     const { selectsRange, startDate, endDate, selected } =
       mergedDatePickerProps;
-
-    const formattedStartDate = startDate
-      ? format(startDate, dateFormat, dateOptions)
+    // If selectsRange and selected is an array, use it for start/end
+    let rangeStart = startDate;
+    let rangeEnd = endDate;
+    if (selectsRange && Array.isArray(selected)) {
+      rangeStart = selected[0] ?? null;
+      rangeEnd = selected[1] ?? null;
+    }
+    const formattedStartDate = rangeStart
+      ? format(rangeStart, dateFormat, dateOptions)
       : '';
-    const formattedEndDate = endDate
-      ? format(endDate, dateFormat, dateOptions)
+    const formattedEndDate = rangeEnd
+      ? format(rangeEnd, dateFormat, dateOptions)
       : '';
-    const formattedSelectedDate = selected
-      ? format(selected, dateFormat, dateOptions)
-      : '';
-
+    const formattedSelectedDate =
+      selected && !selectsRange && !Array.isArray(selected)
+        ? format(selected, dateFormat, dateOptions)
+        : '';
     if (selectsRange) {
       return `${formattedStartDate}${
         formattedStartDate || formattedEndDate ? ' - ' : ''
       }${formattedEndDate}`;
     }
-
     return formattedSelectedDate;
-  };
-
-  const [isPopoverOpen, setPopoverOpen] = useState(false);
-
-  const handleTogglePopover = (newPopoverOpenState: boolean) => {
-    setPopoverOpen(newPopoverOpenState);
   };
 
   const handleDatePickerChange = (
     date: Date | [Date, Date] | null,
-    event?: React.SyntheticEvent<any, Event> // eslint-disable-line @typescript-eslint/no-explicit-any
+    event?: React.SyntheticEvent<any, Event>
   ) => {
-    mergedDatePickerProps.onChange(date, event);
-
-    if (!mergedDatePickerProps.selectsRange && date) setPopoverOpen(false);
-  };
-
-  /**
-   * This function is a one-off workaround to an edge case when detecting outside clicks.
-   * in Popover.tsx, outside clicks are detected by seeing if the clicked element is a child
-   * of the popover, which would mean it is NOT an outside click. However, when using min/max dates
-   * in the Datepicker, the month navigation elements are removed from the DOM when the max/min date has been reached.
-   * Because our outside click detector sees that the clicked element
-   * is not a child of the popover (it doesn't exist in the DOM anymore)
-   * It registers an outside click and closes the Popover.
-   * With this code we specifically guard against closing the popover
-   * if a user has clicked one of the month navigation arrows.
-   * */
-  const handleOnClickOutside = (event: MouseEvent | KeyboardEvent) => {
-    const target = event.target as Element;
-
-    if (target.classList.contains('react-datepicker__navigation')) {
-      return;
+    if (datePickerProps.onChange) {
+      datePickerProps.onChange(date, event);
     }
-
-    handleTogglePopover(false);
+    if (!isControlled) {
+      // If not controlled, update internal state
+      if (Array.isArray(date)) {
+        setInternalSelected(date[0] ?? null);
+      } else {
+        setInternalSelected(date);
+      }
+    }
+    // Close popover when a date is selected (single) or when end date is selected (range)
+    if (mergedDatePickerProps.selectsRange) {
+      if (Array.isArray(date) && date[0] && date[1]) {
+        handleClose();
+      }
+    } else if (date) {
+      handleClose();
+    }
   };
-
-  const renderDatePicker = () => (
-    <DatePicker
-      {...mergedDatePickerProps}
-      onChange={handleDatePickerChange}
-      selected={mergedDatePickerProps.selected}
-      selectsRange={mergedDatePickerProps.selectsRange}
-    />
-  );
 
   return (
-    <Popover
-      {...mergedPopoverProps}
-      isOpen={isPopoverOpen}
-      content={renderDatePicker()}
-      withPortal
-      portalTarget={document.body}
-      onClickOutside={handleOnClickOutside}
-    >
-      <TextInput
-        {...mergedTextInputProps}
-        id={mergedTextInputProps.id}
-        name={mergedTextInputProps.name}
-        label={mergedTextInputProps.label}
-        value={getTextInputValue()}
-        onChange={() =>
-          null
-        } /* Empty function since we hijack the onChange event */
-        onClick={() => handleTogglePopover(true)}
-        readOnly
-        {...restProps}
-      />
+    <Popover open={isOpen}>
+      <PopoverTrigger asChild>
+        <TextInput
+          id={mergedTextInputProps.id}
+          name={mergedTextInputProps.name}
+          label={mergedTextInputProps.label}
+          value={getTextInputValue()}
+          readOnly
+          onClick={handleOpen}
+          inputProps={{ className: 'text-align-left' }}
+          type="text"
+          onChange={() =>
+            null
+          } /* Empty function since we hijack the onChange event */
+          {...mergedTextInputProps}
+        />
+      </PopoverTrigger>
+      <PopoverPortal>
+        <PopoverContent {...mergedPopoverProps}>
+          <DatePicker
+            {...mergedDatePickerProps}
+            onChange={handleDatePickerChange}
+            selected={selectedDate}
+            selectsRange={mergedDatePickerProps.selectsRange}
+          />
+        </PopoverContent>
+      </PopoverPortal>
     </Popover>
   );
 };
