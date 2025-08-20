@@ -82,7 +82,7 @@ export const DateInput: FC<DateInputProps> = ({
   datePickerProps,
   textInputProps,
   dateFormat = 'MM/dd/yyyy',
-  dateOptions = {},
+  dateOptions = undefined,
   popoverProps = { ...defaultPopoverProps },
 }) => {
   const { isOpen, handleClose, handleOpen } = useOpenClose();
