@@ -1,4 +1,5 @@
 export * from './components/Alert/Alert';
+export * from './components/AspectRatio/AspectRatio';
 export * from './components/Badge/Badge';
 export * from './components/Box/Box';
 export * from './components/Button/Button';
