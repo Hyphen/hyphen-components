@@ -5,8 +5,7 @@ import { DatePicker } from './DatePicker';
 describe('DatePicker', () => {
   describe('Default', () => {
     it('renders a datepicker with default props', () => {
-      const mockedOnChange = jest.fn();
-      const { container } = render(<DatePicker onChange={mockedOnChange} />);
+      const { container } = render(<DatePicker />);
       const datePicker = container.querySelector('.rdp');
       expect(datePicker).toBeInTheDocument();
     });
@@ -14,13 +13,19 @@ describe('DatePicker', () => {
 
   describe('Callbacks', () => {
     it('Fires the expected callback when date is selected', () => {
-      const openToDate = new Date('1995, 11, 14');
-      const mockedOnChange = jest.fn();
-      render(<DatePicker onChange={mockedOnChange} openToDate={openToDate} />);
+      const defaultMonth = new Date('1995, 11, 14');
+      const mockedOnSelect = jest.fn();
+      render(
+        <DatePicker
+          mode="single"
+          onSelect={mockedOnSelect}
+          defaultMonth={defaultMonth}
+        />
+      );
       const fourteenth = screen.getByText('14');
       expect(fourteenth).toBeInTheDocument();
       fireEvent.click(fourteenth);
-      expect(mockedOnChange).toHaveBeenCalledTimes(1);
+      expect(mockedOnSelect).toHaveBeenCalledTimes(1);
     });
   });
 });
