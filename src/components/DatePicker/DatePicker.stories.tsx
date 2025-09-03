@@ -151,22 +151,6 @@ export const ShowMultipleMonths = () => {
   );
 };
 
-export const WithTimePicker = () => {
-  const [startDate, setStartDate] = useState<Date>(new Date('1993/09/28'));
-  return (
-    <Box gap="md">
-      <DatePicker
-        selected={startDate}
-        onChange={(date) => setStartDate(date as Date)}
-        showTimeSelect
-        timeIntervals={15}
-        timeCaption="Time"
-      />
-      <p>Selected Date: {startDate && startDate.toISOString()}</p>
-    </Box>
-  );
-};
-
 export const OpenByDefaultOnASpecificDate = () => {
   const [startDate, setStartDate] = useState<Date>(new Date('1993/09/28'));
   return (

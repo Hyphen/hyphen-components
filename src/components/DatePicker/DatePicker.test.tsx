@@ -7,7 +7,7 @@ describe('DatePicker', () => {
     it('renders a datepicker with default props', () => {
       const mockedOnChange = jest.fn();
       const { container } = render(<DatePicker onChange={mockedOnChange} />);
-      const datePicker = container.querySelector('.react-datepicker');
+      const datePicker = container.querySelector('.rdp');
       expect(datePicker).toBeInTheDocument();
     });
   });

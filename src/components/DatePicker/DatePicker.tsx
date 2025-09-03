@@ -1,11 +1,11 @@
-import React, { FC, SyntheticEvent, ReactNode } from 'react';
+import React, { FC, ReactNode, SyntheticEvent } from 'react';
 import classNames from 'classnames';
-import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
-import styles from './DatePicker.module.scss';
+import { DayPicker, DateRange } from 'react-day-picker';
+import './DatePicker.module.scss';
 
-export interface DatePickerProps extends ReactDatePickerProps<any, any> {
+export interface DatePickerProps {
   /**
-   * React children (to be rendered below the calendar dates).
+   * React children (rendered below the calendar).
    */
   children?: ReactNode;
   /**
@@ -15,48 +15,21 @@ export interface DatePickerProps extends ReactDatePickerProps<any, any> {
   /**
    * Callback that fires when a date is changed/selected.
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onChange: (
-    date: Date | [Date, Date] | null,
-    event?: React.SyntheticEvent<any> | undefined
-  ) => void;
+  onChange: (date: Date | [Date, Date] | null, event?: SyntheticEvent) => void;
   /**
-   * Callback that fires when a date is clicked.
-   */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onSelect?:
-    | ((date: Date, event: SyntheticEvent<any, Event> | undefined) => void)
-    | undefined;
-  /**
-   * Custom Class to be applied to a single day element based on a date.
-   */
-  dayClassName?: ((date: Date) => string | null) | undefined;
-  /**
-   * Custom Class to be applied to a single week element based on a date.
-   */
-  weekClassName?: ((date: Date) => string | null) | undefined;
-  /**
-   * Custom Class to be applied to a single month element based on a date.
-   */
-  monthClassName?: ((date: Date) => string | null) | undefined;
-  /**
-   * Custom Class to be applied to a specific time.
-   */
-  timeClassName?: ((date: Date) => string | null) | undefined;
-  /**
-   * Custom format for weekday.
+   * Custom format for weekday labels.
    */
   formatWeekDay?: (formattedDate: string) => string;
   /**
-   * Last allowable/shown date
+   * Last allowable/shown date.
    */
   maxDate?: Date | null;
   /**
-   * First allowable/shown date
+   * First allowable/shown date.
    */
   minDate?: Date | null;
   /**
-   * Months to be shown at one time
+   * Months to be shown at one time.
    */
   monthsShown?: number;
   /**
@@ -64,74 +37,106 @@ export interface DatePickerProps extends ReactDatePickerProps<any, any> {
    */
   openToDate?: Date;
   /**
-   * Currently selected date.
+   * Currently selected date (for single mode).
    */
   selected?: Date | null;
   /**
-   * Whether or not the picker will return a range of dates.
-   */
-  selectsRange?: boolean;
-  /**
-   * Start date in a range
+   * Start date in a range.
    */
   startDate?: Date | null;
   /**
-   * Show month picker in two columns
+   * End date in a range.
    */
-  showTwoColumnMonthYearPicker?: boolean;
+  endDate?: Date | null;
   /**
-   * See full month name in the month picker
+   * Whether the picker should select a range of dates.
    */
-  showFullMonthYearPicker?: boolean;
+  selectsRange?: boolean;
   /**
-   * Use the month picker
+   * Additional props to be spread to rendered element.
    */
-  showMonthYearPicker?: boolean;
-  /**
-   * Additional props to be spread to rendered element
-   */
-  [x: string]: any; // eslint-disable-line
+  [x: string]: unknown;
 }
 
 export const DatePicker: FC<DatePickerProps> = ({
   children = null,
-  dayClassName = undefined,
+  className = undefined,
+  formatWeekDay = (formattedDate) => formattedDate[0],
   maxDate = undefined,
   minDate = undefined,
   monthsShown = undefined,
   openToDate = undefined,
-  startDate = undefined,
   selected = undefined,
-  selectsRange = undefined,
-  showTwoColumnMonthYearPicker = false,
-  showFullMonthYearPicker = false,
-  showMonthYearPicker = false,
-  className = undefined,
-  formatWeekDay = (formattedDate) => formattedDate[0], // Make days show as 1 character.
+  startDate = undefined,
+  endDate = undefined,
+  selectsRange = false,
+  onChange,
   ...restProps
 }) => {
-  const datePickerClasses = classNames(styles['react-datepicker'], className);
+  const weekdayFormatter = (date: Date, locale?: string) =>
+    formatWeekDay(date.toLocaleDateString(locale, { weekday: 'long' }));
+
+  const pickerClass = classNames(className);
+
+  const commonProps = {
+    numberOfMonths: monthsShown,
+    defaultMonth: openToDate,
+    fromDate: minDate ?? undefined,
+    toDate: maxDate ?? undefined,
+    formatters: { formatWeekdayName: weekdayFormatter },
+    ...restProps,
+  } as const;
+
+  if (selectsRange) {
+    const rangeSelected: DateRange | undefined = {
+      from: startDate ?? undefined,
+      to: endDate ?? undefined,
+    };
+
+    const handleSelectRange = (
+      range: DateRange | undefined,
+      _selectedDay: Date,
+      _activeModifiers: unknown,
+      event?: SyntheticEvent
+    ) => {
+      const returnValue: [Date | null, Date | null] | null = range
+        ? [range.from ?? null, range.to ?? null]
+        : null;
+      onChange(returnValue as [Date, Date] | null, event);
+    };
+
+    return (
+      <div className={pickerClass}>
+        <DayPicker
+          mode="range"
+          selected={rangeSelected}
+          onSelect={handleSelectRange}
+          {...commonProps}
+        />
+        {children}
+      </div>
+    );
+  }
+
+  const handleSelectSingle = (
+    date: Date | undefined,
+    _selectedDay: Date,
+    _activeModifiers: unknown,
+    event?: SyntheticEvent
+  ) => {
+    onChange(date ?? null, event);
+  };
 
   return (
-    <ReactDatePicker
-      inline
-      calendarClassName={datePickerClasses}
-      formatWeekDay={formatWeekDay}
-      maxDate={maxDate}
-      minDate={minDate}
-      monthsShown={monthsShown}
-      openToDate={openToDate}
-      selected={selected}
-      startDate={startDate}
-      selectsRange={selectsRange}
-      showTwoColumnMonthYearPicker={showTwoColumnMonthYearPicker}
-      showFullMonthYearPicker={showFullMonthYearPicker}
-      showMonthYearPicker={showMonthYearPicker}
-      dayClassName={dayClassName}
-      {...restProps}
-    >
+    <div className={pickerClass}>
+      <DayPicker
+        mode="single"
+        selected={selected ?? undefined}
+        onSelect={handleSelectSingle}
+        {...commonProps}
+      />
       {children}
-    </ReactDatePicker>
+    </div>
   );
 };
 
