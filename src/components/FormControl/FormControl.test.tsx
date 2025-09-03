@@ -21,6 +21,6 @@ describe('FormControl', () => {
       </FormControl>
     );
 
-    expect(screen.queryByText('Label')).toBeNull();
+    expect(screen.queryByText('Label')).not.toBeInTheDocument();
   });
 });
