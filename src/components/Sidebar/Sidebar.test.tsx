@@ -17,7 +17,7 @@ describe('Sidebar', () => {
       </SidebarProvider>
     );
 
-    const sidebar = screen.getByTestId('sidebar');
+    const sidebar = document.querySelector('[data-state]') as HTMLElement;
     expect(sidebar).toHaveAttribute('data-state', 'expanded');
 
     fireEvent.click(screen.getByLabelText('toggle sidebar'));

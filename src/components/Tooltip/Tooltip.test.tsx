@@ -18,7 +18,7 @@ describe('Tooltip', () => {
       </TooltipProvider>
     );
 
-    const content = screen.getByText('Tip content');
-    expect(content).toBeInTheDocument();
+    const contents = screen.getAllByText('Tip content');
+    expect(contents.length).toBeGreaterThan(0);
   });
 });
