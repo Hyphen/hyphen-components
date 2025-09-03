@@ -10,14 +10,14 @@ describe('Sidebar', () => {
   test('toggles open state with trigger', () => {
     render(
       <SidebarProvider>
-        <Sidebar>
+        <Sidebar data-testid="sidebar">
           <div>Content</div>
         </Sidebar>
         <SidebarTrigger />
       </SidebarProvider>
     );
 
-    const sidebar = document.querySelector('[data-state]') as HTMLElement;
+    const sidebar = screen.getByTestId('sidebar');
     expect(sidebar).toHaveAttribute('data-state', 'expanded');
 
     fireEvent.click(screen.getByLabelText('toggle sidebar'));
