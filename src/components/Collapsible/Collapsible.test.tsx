@@ -15,7 +15,7 @@ describe('Collapsible', () => {
       </Collapsible>
     );
 
-    expect(screen.queryByText('Hidden content')).toBeNull();
+    expect(screen.queryByText('Hidden content')).not.toBeInTheDocument();
     fireEvent.click(screen.getByText('Toggle'));
     expect(await screen.findByText('Hidden content')).toBeInTheDocument();
   });
