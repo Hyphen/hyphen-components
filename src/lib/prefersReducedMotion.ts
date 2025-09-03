@@ -4,7 +4,10 @@ export const prefersReducedMotion = (() => {
 
   return () => {
     if (shouldReduceMotion === undefined) {
-      const mediaQuery = window?.matchMedia('(prefers-reduced-motion: reduce)');
+      const mediaQuery =
+        typeof window !== 'undefined'
+          ? window.matchMedia('(prefers-reduced-motion: reduce)')
+          : undefined;
       shouldReduceMotion = !mediaQuery || mediaQuery.matches;
     }
     return shouldReduceMotion;
