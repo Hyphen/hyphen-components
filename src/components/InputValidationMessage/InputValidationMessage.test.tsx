@@ -16,4 +16,3 @@ describe('InputValidationMessage', () => {
     expect(msg).toHaveClass('font-size-md');
   });
 });
-

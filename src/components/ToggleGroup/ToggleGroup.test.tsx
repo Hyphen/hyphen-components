@@ -17,4 +17,3 @@ describe('ToggleGroup', () => {
     expect(screen.getByText('Error')).toBeInTheDocument();
   });
 });
-

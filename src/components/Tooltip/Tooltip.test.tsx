@@ -22,4 +22,3 @@ describe('Tooltip', () => {
     expect(contents.length).toBeGreaterThan(0);
   });
 });
-

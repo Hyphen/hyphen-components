@@ -20,4 +20,3 @@ describe('Collapsible', () => {
     expect(await screen.findByText('Hidden content')).toBeInTheDocument();
   });
 });
-

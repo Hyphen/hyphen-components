@@ -11,4 +11,3 @@ describe('Toggle', () => {
     expect(button).toHaveAttribute('data-state', 'on');
   });
 });
-

@@ -10,4 +10,3 @@ describe('HelpText', () => {
     expect(text).toHaveClass('help-text');
   });
 });
-

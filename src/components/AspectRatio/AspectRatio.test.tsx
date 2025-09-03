@@ -16,4 +16,3 @@ describe('AspectRatio', () => {
     expect(wrapper.style.position).toBe('relative');
   });
 });
-

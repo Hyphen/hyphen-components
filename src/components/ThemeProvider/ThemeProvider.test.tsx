@@ -47,4 +47,3 @@ describe('ThemeProvider', () => {
     expect(localStorage.getItem('hyphen-ui-theme')).toBe('dark');
   });
 });
-

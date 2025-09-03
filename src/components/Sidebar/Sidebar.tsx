@@ -99,7 +99,7 @@ const SidebarProvider = forwardRef<
           localStorage.setItem(storageKey, `${newOpenState}`);
         }
       },
-      [setOpenProp, open]
+      [setOpenProp, open, storageKey]
     );
 
     // Toggle sidebar based on screen type

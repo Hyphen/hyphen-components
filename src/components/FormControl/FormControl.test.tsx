@@ -24,4 +24,3 @@ describe('FormControl', () => {
     expect(screen.queryByText('Label')).toBeNull();
   });
 });
-

@@ -1,10 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import {
-  Sidebar,
-  SidebarProvider,
-  SidebarTrigger,
-} from './Sidebar';
+import { Sidebar, SidebarProvider, SidebarTrigger } from './Sidebar';
 
 jest.mock('../../hooks/useIsMobile/useIsMobile', () => ({
   useIsMobile: () => false,
@@ -28,4 +24,3 @@ describe('Sidebar', () => {
     expect(sidebar).toHaveAttribute('data-state', 'collapsed');
   });
 });
-
