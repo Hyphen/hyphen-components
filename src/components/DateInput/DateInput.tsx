@@ -64,9 +64,9 @@ export interface DateInputProps {
   [x: string]: any; // eslint-disable-line
 }
 
-const defaultDatePickerProps: Omit<DatePickerProps, 'onChange'> = {
-  selected: null,
-  selectsRange: false,
+const defaultDatePickerProps: DatePickerProps = {
+  selected: undefined,
+  mode: 'single',
 };
 
 const defaultPopoverProps = {
@@ -89,10 +89,8 @@ export const DateInput: FC<DateInputProps> = ({
 
   // Internal state for selected date if not controlled
   const isControlled = datePickerProps.selected !== undefined;
-  const [internalSelected, setInternalSelected] = useState<Date | null>(
-    Array.isArray(datePickerProps.selected)
-      ? datePickerProps.selected[0] ?? null
-      : datePickerProps.selected ?? null
+  const [internalSelected, setInternalSelected] = useState<any>(
+    datePickerProps.selected
   );
 
   // Use controlled or internal state
@@ -100,7 +98,7 @@ export const DateInput: FC<DateInputProps> = ({
     ? datePickerProps.selected
     : internalSelected;
 
-  const mergedDatePickerProps = {
+  const mergedDatePickerProps: DatePickerProps = {
     ...defaultDatePickerProps,
     ...datePickerProps,
     selected: selectedDate,
@@ -127,51 +125,36 @@ export const DateInput: FC<DateInputProps> = ({
   };
 
   const getTextInputValue = () => {
-    const { selectsRange, startDate, endDate, selected } =
-      mergedDatePickerProps;
-    // If selectsRange and selected is an array, use it for start/end
-    let rangeStart = startDate;
-    let rangeEnd = endDate;
-    if (selectsRange && Array.isArray(selected)) {
-      rangeStart = selected[0] ?? null;
-      rangeEnd = selected[1] ?? null;
-    }
-    const formattedStartDate = rangeStart
-      ? format(rangeStart, dateFormat, dateOptions)
-      : '';
-    const formattedEndDate = rangeEnd
-      ? format(rangeEnd, dateFormat, dateOptions)
-      : '';
-    const formattedSelectedDate =
-      selected && !selectsRange && !Array.isArray(selected)
-        ? format(selected, dateFormat, dateOptions)
+    const { mode, selected } = mergedDatePickerProps as any;
+    if (mode === 'range') {
+      const { from, to } = (selected || {}) as {
+        from?: Date;
+        to?: Date;
+      };
+      const formattedStartDate = from
+        ? format(from, dateFormat, dateOptions)
         : '';
-    if (selectsRange) {
+      const formattedEndDate = to ? format(to, dateFormat, dateOptions) : '';
       return `${formattedStartDate}${
         formattedStartDate || formattedEndDate ? ' - ' : ''
       }${formattedEndDate}`;
     }
-    return formattedSelectedDate;
+    if (Array.isArray(selected)) {
+      return selected.map((d) => format(d, dateFormat, dateOptions)).join(', ');
+    }
+    return selected ? format(selected as Date, dateFormat, dateOptions) : '';
   };
 
-  const handleDatePickerChange = (
-    date: Date | [Date, Date] | null,
-    event?: React.SyntheticEvent<any, Event>
-  ) => {
-    if (datePickerProps.onChange) {
-      datePickerProps.onChange(date, event);
+  const handleDatePickerSelect = (date: any) => {
+    if (datePickerProps.onSelect) {
+      datePickerProps.onSelect(date);
     }
     if (!isControlled) {
-      // If not controlled, update internal state
-      if (Array.isArray(date)) {
-        setInternalSelected(date[0] ?? null);
-      } else {
-        setInternalSelected(date);
-      }
+      setInternalSelected(date);
     }
-    // Close popover when a date is selected (single) or when end date is selected (range)
-    if (mergedDatePickerProps.selectsRange) {
-      if (Array.isArray(date) && date[0] && date[1]) {
+    if (mergedDatePickerProps.mode === 'range') {
+      const { from, to } = (date || {}) as { from?: Date; to?: Date };
+      if (from && to) {
         handleClose();
       }
     } else if (date) {
@@ -201,9 +184,8 @@ export const DateInput: FC<DateInputProps> = ({
         <PopoverContent {...mergedPopoverProps}>
           <DatePicker
             {...mergedDatePickerProps}
-            onChange={handleDatePickerChange}
+            onSelect={handleDatePickerSelect}
             selected={selectedDate}
-            selectsRange={mergedDatePickerProps.selectsRange}
           />
         </PopoverContent>
       </PopoverPortal>

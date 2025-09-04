@@ -13,7 +13,7 @@ export default meta;
 export const Basic = () => (
   <DateInput
     datePickerProps={{
-      onChange() {},
+      onSelect() {},
     }}
     textInputProps={{
       id: 'exampleDateInput',
@@ -25,9 +25,7 @@ export const Basic = () => (
 );
 
 export const Default = () => {
-  const [selectedDate, setSelectedDate] = useState<Date | null | [Date, Date]>(
-    null
-  );
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const handleClear = () => {
     setSelectedDate(null);
   };
@@ -35,8 +33,8 @@ export const Default = () => {
   return (
     <DateInput
       datePickerProps={{
-        selected: selectedDate instanceof Date ? selectedDate : null,
-        onChange: (date: Date | [Date, Date] | null) => setSelectedDate(date),
+        selected: selectedDate,
+        onSelect: setSelectedDate,
       }}
       textInputProps={{
         placeholder: 'e.g. 11/02/2020',
@@ -50,27 +48,12 @@ export const Default = () => {
 };
 
 export const DateRange = () => {
-  const [startDate, setStartDate] = useState<Date | [Date, Date] | null>(null);
-  const [endDate, setEndDate] = useState<Date | [Date, Date] | null>(null);
-  const setDate = ([startDate, endDate]: [Date, Date]) => {
-    setStartDate(startDate);
-    setEndDate(endDate);
-  };
-  const handleClear = () => {
-    setStartDate(null);
-    setEndDate(null);
-  };
+  const [range, setRange] = useState<{ from?: Date; to?: Date } | undefined>();
+  const handleClear = () => setRange(undefined);
 
   return (
     <DateInput
-      datePickerProps={{
-        // @ts-ignore - Type compatibility with onChange.
-        onChange: setDate,
-        selected: startDate as Date,
-        selectsRange: true,
-        startDate: startDate as Date,
-        endDate: endDate as Date,
-      }}
+      datePickerProps={{ selected: range, onSelect: setRange, mode: 'range' }}
       textInputProps={{
         onClear: handleClear,
         id: 'myDateRangePicker',
@@ -82,9 +65,7 @@ export const DateRange = () => {
 };
 
 export const WithMinAndMaxDates = () => {
-  const [selectedDate, setSelectedDate] = useState<Date | [Date, Date] | null>(
-    null
-  );
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const handleClear = () => {
     setSelectedDate(null);
   };
@@ -95,10 +76,10 @@ export const WithMinAndMaxDates = () => {
   return (
     <DateInput
       datePickerProps={{
-        selected: selectedDate as Date,
-        maxDate: max,
-        minDate: min,
-        onChange: setSelectedDate,
+        selected: selectedDate,
+        fromDate: min,
+        toDate: max,
+        onSelect: setSelectedDate,
       }}
       textInputProps={{
         placeholder: 'e.g. 11/02/2020',
@@ -112,7 +93,7 @@ export const WithMinAndMaxDates = () => {
 };
 
 export const CustomDateFormat = () => {
-  const [selectedDate, setSelectedDate] = useState<Date | null | [Date, Date]>(
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(
     new Date('2020, 11, 3')
   );
   const handleClear = () => {
@@ -123,8 +104,8 @@ export const CustomDateFormat = () => {
       <DateInput
         dateFormat={'MMMM dd, yyyy'}
         datePickerProps={{
-          selected: selectedDate as Date,
-          onChange: setSelectedDate,
+          selected: selectedDate,
+          onSelect: setSelectedDate,
         }}
         textInputProps={{
           onClear: handleClear,
@@ -144,7 +125,7 @@ export const CustomDateFormat = () => {
 };
 
 export const InputBlurEvent = () => {
-  const [selectedDate, setSelectedDate] = useState<Date | [Date, Date] | null>(
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(
     new Date('2020, 11, 3')
   );
   const handleTextInputBlur = () => {
@@ -154,8 +135,8 @@ export const InputBlurEvent = () => {
     <DateInput
       dateFormat={'MMMM dd, yyyy'}
       datePickerProps={{
-        selected: selectedDate as Date,
-        onChange: setSelectedDate,
+        selected: selectedDate,
+        onSelect: setSelectedDate,
       }}
       textInputProps={{
         id: 'withCustomDateFormat',

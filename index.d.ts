@@ -11,3 +11,4 @@ declare module '@hyphen/hyphen-design-tokens/build/assets/icons/react';
 declare module '@hyphen/hyphen-design-tokens/build/assets/icons';
 declare module '@hyphen/hyphen-design-tokens/build/assets/images/';
 declare module '@hyphen/hyphen-design-tokens/build/assets/images/react/*';
+declare module 'react-day-picker';

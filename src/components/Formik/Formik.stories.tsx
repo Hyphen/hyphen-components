@@ -185,7 +185,7 @@ export const FormikForm = () =>
             sizes: null,
             timePicker: null,
             timePickerNative: null,
-            dateInput: '',
+            dateInput: null,
             message: '',
             country: '',
             availability: '99',
@@ -374,10 +374,10 @@ export const FormikForm = () =>
 
                 <DateInput
                   datePickerProps={{
-                    onChange: (date) => {
-                      setFieldValue('dateInput', date as Date);
+                    onSelect: (date: Date | undefined) => {
+                      setFieldValue('dateInput', date ?? null);
                     },
-                    selected: values.dateInput as unknown as Date,
+                    selected: values.dateInput ?? undefined,
                   }}
                   textInputProps={{
                     label: 'Date Input',

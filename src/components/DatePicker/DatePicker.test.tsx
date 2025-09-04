@@ -1,26 +1,43 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
+
+jest.mock(
+  'react-day-picker',
+  () => ({
+    DayPicker: jest.fn(() => null),
+  }),
+  { virtual: true }
+);
+
+// eslint-disable-next-line import/first
 import { DatePicker } from './DatePicker';
+// eslint-disable-next-line import/first
+import { DayPicker as MockDayPicker } from 'react-day-picker';
 
 describe('DatePicker', () => {
-  describe('Default', () => {
-    it('renders a datepicker with default props', () => {
-      const mockedOnChange = jest.fn();
-      const { container } = render(<DatePicker onChange={mockedOnChange} />);
-      const datePicker = container.querySelector('.react-datepicker');
-      expect(datePicker).toBeInTheDocument();
-    });
+  it('renders DayPicker', () => {
+    render(<DatePicker />);
+    expect(MockDayPicker).toHaveBeenCalledTimes(1);
   });
 
-  describe('Callbacks', () => {
-    it('Fires the expected callback when date is selected', () => {
-      const openToDate = new Date('1995, 11, 14');
-      const mockedOnChange = jest.fn();
-      render(<DatePicker onChange={mockedOnChange} openToDate={openToDate} />);
-      const fourteenth = screen.getByText('14');
-      expect(fourteenth).toBeInTheDocument();
-      fireEvent.click(fourteenth);
-      expect(mockedOnChange).toHaveBeenCalledTimes(1);
-    });
+  it('uses Button for navigation', () => {
+    render(<DatePicker />);
+    const props = (MockDayPicker as jest.Mock).mock.calls[0][0];
+    const { getByLabelText } = render(
+      props.components.Nav({
+        className: '',
+        style: {},
+        nextMonth: new Date(),
+        previousMonth: new Date(),
+        onNextClick: jest.fn(),
+        onPreviousClick: jest.fn(),
+      })
+    );
+    expect(getByLabelText('previous month')).toHaveClass(
+      'hyphen-components__variables__form-control'
+    );
+    expect(getByLabelText('next month')).toHaveClass(
+      'hyphen-components__variables__form-control'
+    );
   });
 });

@@ -1,5 +1,15 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+
+jest.mock(
+  'react-day-picker',
+  () => ({
+    DayPicker: jest.fn(() => null),
+  }),
+  { virtual: true }
+);
+
+// eslint-disable-next-line import/first
 import { DateInput } from './DateInput';
 
 describe('DateInput', () => {
@@ -12,7 +22,7 @@ describe('DateInput', () => {
             label: 'Select Date',
           }}
           datePickerProps={{
-            onChange: () => null,
+            onSelect: () => null,
           }}
         />
       );
@@ -32,12 +42,10 @@ describe('DateInput', () => {
             label: 'Select Date',
           }}
           datePickerProps={{
-            onChange: () => null,
-            openToDate: date,
-            startDate: date,
-            selected: date,
-            selectsRange: true,
-            endDate: null,
+            onSelect: () => null,
+            defaultMonth: date,
+            mode: 'range',
+            selected: { from: date },
           }}
         />
       );
@@ -60,7 +68,7 @@ describe('DateInput', () => {
             label: 'Select Date',
           }}
           datePickerProps={{
-            onChange: () => null,
+            onSelect: () => null,
           }}
         />
       );
@@ -90,8 +98,8 @@ describe('DateInput', () => {
             label: 'Select Date',
           }}
           datePickerProps={{
-            onChange: () => null,
-            openToDate: date,
+            onSelect: () => null,
+            defaultMonth: date,
             selected: date,
           }}
         />
@@ -113,11 +121,10 @@ describe('DateInput', () => {
             label: 'Select Date',
           }}
           datePickerProps={{
-            onChange: () => null,
-            openToDate: dateOne,
-            startDate: dateOne,
-            endDate: dateTwo,
-            selectsRange: true,
+            onSelect: () => null,
+            defaultMonth: dateOne,
+            selected: { from: dateOne, to: dateTwo },
+            mode: 'range',
           }}
         />
       );
@@ -128,7 +135,6 @@ describe('DateInput', () => {
     });
 
     it('formats one date if selecting range', async () => {
-      const dateOne = null;
       const dateTwo = new Date(1995, 11, 16);
       const { rerender } = render(
         <DateInput
@@ -138,11 +144,10 @@ describe('DateInput', () => {
             label: 'Select Date',
           }}
           datePickerProps={{
-            onChange: () => null,
-            openToDate: dateTwo,
-            startDate: dateOne,
-            endDate: dateTwo,
-            selectsRange: true,
+            onSelect: () => null,
+            defaultMonth: dateTwo,
+            selected: { to: dateTwo },
+            mode: 'range',
           }}
         />
       );
@@ -159,11 +164,10 @@ describe('DateInput', () => {
             label: 'Select Date',
           }}
           datePickerProps={{
-            onChange: () => null,
-            openToDate: dateTwo,
-            startDate: dateTwo,
-            endDate: dateOne,
-            selectsRange: true,
+            onSelect: () => null,
+            defaultMonth: dateTwo,
+            selected: { from: dateTwo },
+            mode: 'range',
           }}
         />
       );
