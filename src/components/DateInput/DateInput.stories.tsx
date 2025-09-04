@@ -27,7 +27,7 @@ export const Basic = () => (
 export const Default = () => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const handleClear = () => {
-    setSelectedDate(null);
+    setSelectedDate(undefined);
   };
 
   return (
@@ -67,7 +67,7 @@ export const DateRange = () => {
 export const WithMinAndMaxDates = () => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const handleClear = () => {
-    setSelectedDate(null);
+    setSelectedDate(undefined);
   };
   const min = new Date(2022, 6, 18);
   min.setDate(min.getDate() - 10);
@@ -97,7 +97,7 @@ export const CustomDateFormat = () => {
     new Date('2020, 11, 3')
   );
   const handleClear = () => {
-    setSelectedDate(null);
+    setSelectedDate(undefined);
   };
   return (
     <Box gap="md">
