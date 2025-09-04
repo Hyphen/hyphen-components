@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import format from 'date-fns/format';
-import { DatePicker, DatePickerProps } from '../DatePicker/DatePicker';
+import { Calendar, CalendarProps } from '../Calendar/Calendar';
 import { TextInput, TextInputProps } from '../TextInput/TextInput';
 import {
   Popover,
@@ -14,7 +14,7 @@ export interface DateInputProps {
   /**
    * Props object for DatePicker component.
    */
-  datePickerProps: DatePickerProps;
+  datePickerProps: CalendarProps;
   /**
    * Props object for TextInput component.
    */
@@ -64,7 +64,7 @@ export interface DateInputProps {
   [x: string]: any; // eslint-disable-line
 }
 
-const defaultDatePickerProps: DatePickerProps = {
+const defaultDatePickerProps: CalendarProps = {
   selected: undefined,
   mode: 'single',
 };
@@ -98,7 +98,7 @@ export const DateInput: FC<DateInputProps> = ({
     ? datePickerProps.selected
     : internalSelected;
 
-  const mergedDatePickerProps: DatePickerProps = {
+  const mergedDatePickerProps: CalendarProps = {
     ...defaultDatePickerProps,
     ...datePickerProps,
     selected: selectedDate,
@@ -182,7 +182,7 @@ export const DateInput: FC<DateInputProps> = ({
       </PopoverTrigger>
       <PopoverPortal>
         <PopoverContent {...mergedPopoverProps}>
-          <DatePicker
+          <Calendar
             {...mergedDatePickerProps}
             onSelect={handleDatePickerSelect}
             selected={selectedDate}

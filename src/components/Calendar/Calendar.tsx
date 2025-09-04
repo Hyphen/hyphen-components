@@ -3,9 +3,9 @@ import { DayPicker } from 'react-day-picker';
 
 import { Button } from '../Button/Button';
 
-import './DatePicker.module.scss';
+import './Calendar.module.scss';
 
-export type DatePickerProps = ComponentProps<typeof DayPicker>;
+export type CalendarProps = ComponentProps<typeof DayPicker>;
 
 const Nav = (props: any) => {
   const {
@@ -37,10 +37,7 @@ const Nav = (props: any) => {
   );
 };
 
-export const DatePicker: FC<DatePickerProps> = ({
-  components,
-  ...restProps
-}) => (
+export const Calendar: FC<CalendarProps> = ({ components, ...restProps }) => (
   <DayPicker
     components={{
       Nav,
@@ -50,4 +47,4 @@ export const DatePicker: FC<DatePickerProps> = ({
   />
 );
 
-export default DatePicker;
+export default Calendar;

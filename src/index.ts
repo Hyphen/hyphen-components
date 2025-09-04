@@ -8,7 +8,7 @@ export * from './components/CheckboxInput/components/Checkbox';
 export * from './components/CheckboxInput/CheckboxInput';
 export * from './components/Collapsible/Collapsible';
 export * from './components/DateInput/DateInput';
-export * from './components/DatePicker/DatePicker';
+export * from './components/Calendar/Calendar';
 export * from './components/Details/Details';
 export * from './components/Details/DetailsSummary';
 export * from './components/Drawer/Drawer';
