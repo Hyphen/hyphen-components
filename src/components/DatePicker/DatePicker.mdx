@@ -1,4 +1,4 @@
-import { Canvas, Meta, ArgTypes } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
 import { DatePicker } from './DatePicker';
 import * as Stories from './DatePicker.stories';
 
@@ -6,14 +6,7 @@ import * as Stories from './DatePicker.stories';
 
 # DatePicker
 
-The Datepicker lets users select a date by showing them a calendar.
-
-It is also used in combination with an input and popover by the [DateInput component](/?path=/docs/components-dateinput-overview--basic-usage).
-
-### It can be used for:
-
-- selecting a single date
-- selecting a start and end date
+A wrapper around `react-day-picker` that uses Hyphen's `Button` component for navigation.
 
 ## Props
 
@@ -21,32 +14,4 @@ It is also used in combination with an input and popover by the [DateInput compo
 
 ## Basic Example
 
-<Canvas of={Stories.BasicExample} />
-
-## Date Range
-
-<Canvas of={Stories.DateRange} />
-
-## Min/Max Dates
-
-<Canvas of={Stories.MinAndMaxDates} />
-
-## Month Picker
-
-<Canvas of={Stories.MonthPicker} />
-
-## Show Multiple Months
-
-<Canvas of={Stories.ShowMultipleMonths} />
-
-## With Time Picker
-
-<Canvas of={Stories.WithTimePicker} />
-
-## Open by default on a specific date
-
-<Canvas of={Stories.OpenByDefaultOnASpecificDate} />
-
-## With Children
-
-<Canvas of={Stories.WithChildren} />
+<Canvas of={Stories.Basic} />

@@ -100,7 +100,7 @@ export const DateInput: FC<DateInputProps> = ({
     ? datePickerProps.selected
     : internalSelected;
 
-  const mergedDatePickerProps = {
+  const mergedDatePickerProps: DatePickerProps = {
     ...defaultDatePickerProps,
     ...datePickerProps,
     selected: selectedDate,

@@ -1,5 +1,15 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+
+jest.mock(
+  'react-day-picker',
+  () => ({
+    DayPicker: jest.fn(() => null),
+  }),
+  { virtual: true }
+);
+
+// eslint-disable-next-line import/first
 import { DateInput } from './DateInput';
 
 describe('DateInput', () => {
