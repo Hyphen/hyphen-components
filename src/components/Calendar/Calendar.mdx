@@ -1,0 +1,17 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import { Calendar } from './Calendar';
+import * as Stories from './Calendar.stories';
+
+<Meta of={Stories} />
+
+# Calendar
+
+A wrapper around `react-day-picker` that uses Hyphen's `Button` component for navigation.
+
+## Props
+
+<ArgTypes of={Calendar} />
+
+## Basic Example
+
+<Canvas of={Stories.Basic} />
