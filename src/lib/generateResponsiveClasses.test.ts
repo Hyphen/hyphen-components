@@ -21,4 +21,13 @@ describe('generateResponsiveClasses', () => {
       'align-items-flex-end-hd',
     ]);
   });
+
+  test('it ignores undefined values in responsive object', () => {
+    const generatedClass = generateResponsiveClasses('align-items', {
+      tablet: undefined,
+      hd: 'flex-end',
+    });
+
+    expect(generatedClass).toEqual(['align-items-flex-end-hd']);
+  });
 });
