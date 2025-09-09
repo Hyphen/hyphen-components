@@ -68,3 +68,21 @@ describe('Responsive hooks', () => {
     ).toEqual(1);
   });
 });
+
+describe('Cleanup', () => {
+  it('clears pending resize timeout on unmount', () => {
+    jest.useFakeTimers();
+    const clearSpy = jest.spyOn(window, 'clearTimeout');
+    const { unmount } = render(
+      <ResponsiveProvider throttle={100}>
+        <div />
+      </ResponsiveProvider>
+    );
+    window.dispatchEvent(new Event('resize'));
+    expect(clearSpy).toHaveBeenCalledTimes(1);
+    unmount();
+    expect(clearSpy).toHaveBeenCalledTimes(2);
+    clearSpy.mockRestore();
+    jest.useRealTimers();
+  });
+});
