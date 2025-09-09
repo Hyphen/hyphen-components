@@ -16,7 +16,10 @@ export function generateResponsiveClasses(
 
   if (typeof value === 'object') {
     Object.keys(value).forEach((key) => {
-      const baseClass = `${classRoot}-${value[key as BreakpointSizeWithBase]}`;
+      const classValue = value[key as BreakpointSizeWithBase];
+      if (classValue === undefined || classValue === null) return;
+
+      const baseClass = `${classRoot}-${classValue}`;
       const responsiveClass =
         key === 'base' ? baseClass : `${baseClass}-${key}`;
 
