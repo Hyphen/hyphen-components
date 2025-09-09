@@ -53,7 +53,10 @@ export const ResponsiveProvider: React.FC<ResponsiveProviderProps> = ({
 
       window.addEventListener('resize', throttledResize);
 
-      return () => window.removeEventListener('resize', throttledResize);
+      return () => {
+        window.removeEventListener('resize', throttledResize);
+        clearTimeout(timeoutId);
+      };
     }
   }, [throttle]);
 
