@@ -32,13 +32,18 @@ export const AsChild = () => (
 );
 
 export const Variants = () => (
-  <Box gap="md" style={{ backgroundColor: 'var(--background-primary)' }}>
-    <Box gap="sm" direction="row" alignItems="flex-start">
-      <Button variant="primary">Primary</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="tertiary">Tertiary</Button>
-      <Button variant="danger">Danger</Button>
-    </Box>
+  <Box
+    gap="md"
+    background="primary"
+    direction="row"
+    alignItems="center"
+    fontSize="sm"
+  >
+    <Button variant="primary">Primary</Button>
+    <Button variant="secondary">Secondary</Button>
+    <Button variant="tertiary">Tertiary</Button>
+    <Button variant="danger">Danger</Button>
+    <Button variant="link">Link</Button>
   </Box>
 );
 
@@ -85,15 +90,16 @@ export const Icons = () => (
 );
 
 export const IconButton = () => (
-  <>
+  <Box gap="lg" direction="row" alignItems="center">
     <Button variant="tertiary" iconPrefix="add" aria-label="add" />
     <Button variant="tertiary" iconPrefix="dots" aria-label="open menu" />
     <Button variant="danger" iconPrefix="trash" aria-label="remove" />
-  </>
+    <Button variant="link" iconPrefix="chat" aria-label="chat" />
+  </Box>
 );
 
 export const Loading = () => (
-  <Box direction="row" gap="md">
+  <Box direction="row" gap="md" fontSize="sm">
     <Button isLoading aria-label="primary loading">
       Primary Loading
     </Button>
@@ -103,11 +109,14 @@ export const Loading = () => (
     <Button variant="tertiary" isLoading aria-label="tertiary loading">
       Tertiary Loading
     </Button>
+    <Button variant="link" isLoading aria-label="link loading">
+      Link Loading
+    </Button>
   </Box>
 );
 
 export const Disabled = () => (
-  <Box direction="row" gap="md">
+  <Box direction="row" gap="md" fontSize="sm">
     <Button variant="primary" isDisabled>
       Primary Disabled
     </Button>
@@ -116,6 +125,9 @@ export const Disabled = () => (
     </Button>
     <Button variant="tertiary" isDisabled>
       Tertiary Disabled
+    </Button>
+    <Button variant="link" isDisabled>
+      Link Disabled
     </Button>
   </Box>
 );
@@ -131,5 +143,15 @@ export const Shadow = () => (
     <Button variant="secondary" shadow="md">
       md shadow
     </Button>
+  </Box>
+);
+
+export const InlineLink = () => (
+  <Box display="block" as="p" fontSize="sm" color="base" width="8xl">
+    This is an example of a button used as an inline link.{' '}
+    <Button variant="link" size="md">
+      Inline Link Button
+    </Button>
+    . It will wrap with text.
   </Box>
 );

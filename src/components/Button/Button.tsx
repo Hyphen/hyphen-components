@@ -8,7 +8,12 @@ import classNames from 'classnames';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
 import styles from './Button.module.scss';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'danger';
+export type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'danger'
+  | 'link';
 
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
