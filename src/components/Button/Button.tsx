@@ -92,9 +92,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const disabled = isLoading || isDisabled;
 
-    const responsiveClasses = generateResponsiveClasses('size', size)
-      .map((c) => styles[c])
-      .filter(Boolean);
+    const responsiveClasses =
+      variant !== 'link'
+        ? generateResponsiveClasses('size', size)
+            .map((c) => styles[c])
+            .filter(Boolean)
+        : [];
 
     const buttonClasses = classNames(
       'hyphen-components__variables__form-control',
