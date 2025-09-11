@@ -8,7 +8,12 @@ import classNames from 'classnames';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
 import styles from './Button.module.scss';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'danger';
+export type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'danger'
+  | 'link';
 
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
@@ -87,9 +92,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const disabled = isLoading || isDisabled;
 
-    const responsiveClasses = generateResponsiveClasses('size', size)
-      .map((c) => styles[c])
-      .filter(Boolean);
+    const responsiveClasses =
+      variant !== 'link'
+        ? generateResponsiveClasses('size', size)
+            .map((c) => styles[c])
+            .filter(Boolean)
+        : [];
 
     const buttonClasses = classNames(
       'hyphen-components__variables__form-control',

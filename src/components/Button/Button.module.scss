@@ -245,6 +245,38 @@
     }
   }
 
+  &.link {
+    display: inline-flex;
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    padding: 0;
+    text-decoration: none;
+    font-size: inherit;
+    height: auto;
+
+    &:not(:disabled):hover {
+      text-decoration: underline;
+      text-underline-offset: var(--size-spacing-xs);
+    }
+
+    &:focus {
+      outline: 0;
+      box-shadow: var(--button-box-shadow-focus);
+    }
+
+    // Show focus styles on keyboard focus.
+    &:focus-visible {
+      outline: 0;
+      box-shadow: var(--button-box-shadow-focus);
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: 0;
+      box-shadow: none;
+    }
+  }
+
   &.size-sm {
     @extend %size-sm;
   }
