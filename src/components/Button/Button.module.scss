@@ -249,12 +249,13 @@
     display: inline-flex;
     color: inherit;
     padding: 0;
-    text-underline-offset: var(--size-spacing-xs);
+    text-decoration: none;
     font-size: inherit;
     height: auto;
 
     &:not(:disabled):hover {
       text-decoration: underline;
+      text-underline-offset: var(--size-spacing-xs);
     }
 
     &:focus {
