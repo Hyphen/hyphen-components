@@ -341,6 +341,7 @@ const DrawerHeader = React.forwardRef<HTMLDivElement, BoxProps>(
         justifyContent="space-between"
         alignItems="center"
         padding={{ base: '2xl 2xl 0 2xl', tablet: '3xl 3xl 0 3xl' }}
+        className={className}
         {...props}
       />
     );
@@ -349,8 +350,16 @@ const DrawerHeader = React.forwardRef<HTMLDivElement, BoxProps>(
 DrawerHeader.displayName = 'DrawerHeader';
 
 const DrawerTitle = React.forwardRef<HTMLDivElement, BoxProps>(
-  ({ ...props }, ref) => {
-    return <Box ref={ref} data-drawer="title" fontWeight="bold" {...props} />;
+  ({ className, ...props }, ref) => {
+    return (
+      <Box
+        ref={ref}
+        data-drawer="title"
+        fontWeight="bold"
+        className={className}
+        {...props}
+      />
+    );
   }
 );
 
@@ -401,6 +410,7 @@ const DrawerContent = React.forwardRef<HTMLDivElement, BoxProps>(
         alignItems="flex-start"
         padding={{ base: '2xl', tablet: '3xl' }}
         gap="md"
+        className={className}
         {...props}
       />
     );
