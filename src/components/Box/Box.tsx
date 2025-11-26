@@ -266,6 +266,10 @@ export interface BoxProps {
    */
   whiteSpace?: CssWhiteSpaceValue | ResponsiveProp<CssWhiteSpaceValue>;
   /**
+   * Control the word break behavior of the Box
+   */
+  wordBreak?: CssWordBreakValue | ResponsiveProp<CssWordBreakValue>;
+  /**
    * By default, a Box's items will all try to fit onto one line.
    * Change that and allow the items to wrap as needed wrap
    */
