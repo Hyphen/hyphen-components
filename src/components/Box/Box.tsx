@@ -27,6 +27,8 @@ import {
   BorderColor,
   CssWhiteSpaceValue,
   CssWordBreakValue,
+  TextWrap,
+  TextTransform,
 } from '../../types';
 import {
   CSSProperties,
@@ -252,6 +254,14 @@ export interface BoxProps {
    */
   textAlign?: CssTextAlignValue | ResponsiveProp<CssTextAlignValue>;
   /**
+   * Control the text transformation of the Box
+   */
+  textTransform?: TextTransform | ResponsiveProp<TextTransform>;
+  /**
+   * Control the text wrapping behavior of the Box
+   */
+  textWrap?: TextWrap | ResponsiveProp<TextWrap>;
+  /**
    * Control the whitespace behavior of the Box
    */
   whiteSpace?: CssWhiteSpaceValue | ResponsiveProp<CssWhiteSpaceValue>;
@@ -268,7 +278,6 @@ export interface BoxProps {
   /**
    * Control the word break behavior of the Box
    */
-  wordBreak?: CssWordBreakValue | ResponsiveProp<CssWordBreakValue>;
   /**
    * ZIndex value for the element. Can be one of the predetermined token values.
    * Can be responsive.
@@ -324,6 +333,8 @@ export const Box: FC<BoxProps> = forwardRef(
       shadow = undefined,
       style = {},
       textAlign = undefined,
+      textTransform = undefined,
+      textWrap = undefined,
       wrap = undefined,
       whiteSpace = undefined,
       width = undefined,
@@ -424,6 +435,8 @@ export const Box: FC<BoxProps> = forwardRef(
       cssShorthandToClasses('bw', borderWidth),
       generateResponsiveClasses('font-weight', fontWeight),
       generateResponsiveClasses('text-align', textAlign),
+      generateResponsiveClasses('transform', textTransform),
+      generateResponsiveClasses('text-wrap', textWrap),
       generateResponsiveClasses('position', position),
       generateResponsiveClasses('z-index', zIndex),
       generateResponsiveClasses('whitespace', whiteSpace),
@@ -646,6 +659,8 @@ export const boxPropsKeys: (keyof Pick<BoxProps, KnownKeys<BoxProps>>)[] = [
   'shadow',
   'style',
   'textAlign',
+  'textTransform',
+  'textWrap',
   'wrap',
   'width',
   'zIndex',
