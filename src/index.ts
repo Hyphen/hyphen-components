@@ -3,6 +3,7 @@ export * from './components/AspectRatio/AspectRatio';
 export * from './components/Badge/Badge';
 export * from './components/Box/Box';
 export * from './components/Button/Button';
+export * from './components/Calendar/Calendar';
 export * from './components/Card/Card';
 export * from './components/CheckboxInput/components/Checkbox';
 export * from './components/CheckboxInput/CheckboxInput';
