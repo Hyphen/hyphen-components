@@ -25,7 +25,7 @@ export const Default = () => {
   return (
     <div>
       <SelectInputNative
-        id="default Select"
+        id="defaultSelect"
         label="Label"
         onChange={(event) => {
           setValue(event.target.value);
@@ -234,21 +234,10 @@ export const Sizes = () => {
 };
 
 export const InteractionTest: StoryObj<typeof SelectInputNative> = {
-  render: () => {
-    const [value, setValue] = useState<string | null>(null);
-    return (
-      <SelectInputNative
-        id="interactionTest"
-        label="Choose a flavor"
-        onChange={(event) => setValue(event.target.value)}
-        options={options}
-        value={value}
-      />
-    );
-  },
+  render: Default,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const select = canvas.getByLabelText('Choose a flavor');
+    const select = canvas.getByLabelText('Label');
 
     // Select 'chocolate'
     await userEvent.selectOptions(select, 'chocolate');
