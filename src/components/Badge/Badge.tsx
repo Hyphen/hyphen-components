@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { FontSize, BaseSpacing, ResponsiveProp } from '../../types';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
 import styles from './Badge.module.scss';
-import { Box } from '../Box/Box';
+import { Box, BoxProps } from '../Box/Box';
 
 export type BadgeSize = 'sm' | 'md' | 'lg';
 
@@ -19,11 +19,7 @@ export type BadgeVariant =
   | 'hyphen';
 
 export type BadgeSizeAttributes = { fontSize: FontSize; padding: BaseSpacing };
-export interface BadgeProps {
-  /**
-   * Custom class to apply to the badge container div.
-   */
-  className?: string;
+export interface BadgeProps extends BoxProps {
   /**
    * The text message or ReactNode to be rendered in the badge.
    */
@@ -36,10 +32,6 @@ export interface BadgeProps {
    * The type/color of the badge to show.
    */
   variant?: BadgeVariant;
-  /**
-   * Additional props to be spread to rendered element
-   */
-  [x: string]: any; // eslint-disable-line
 }
 
 export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
@@ -49,6 +41,7 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
       message = '',
       variant = 'light-grey',
       size = 'md',
+      children,
       ...restProps
     },
     ref
@@ -70,10 +63,12 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
       <Box
         ref={ref}
         className={badgeClasses}
-        display="inline-block"
+        display="inline-flex"
+        alignItems="center"
+        direction="row"
         {...restProps}
       >
-        {message}
+        {children || message}
       </Box>
     );
   }
