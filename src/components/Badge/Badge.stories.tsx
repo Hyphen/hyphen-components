@@ -28,7 +28,7 @@ export const Variants = () => {
     <Box direction="row" gap="sm">
       {variants.map((variant) => (
         <Badge variant={variant} key={variant}>
-          variant
+          {variant}
         </Badge>
       ))}
     </Box>
