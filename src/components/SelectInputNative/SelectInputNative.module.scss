@@ -253,6 +253,17 @@
       var(--INTERNAL_form-control-line-height)
     );
 
+    option {
+      background-color: var(
+        --form-control-background-color,
+        var(--INTERNAL_form-control-background-color)
+      );
+      color: var(
+        --form-control-font-color,
+        var(--INTERNAL_form-control-font-color)
+      );
+    }
+
     &:focus {
       outline: none;
       border-color: var(
