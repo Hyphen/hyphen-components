@@ -21,7 +21,7 @@ export type BadgeVariant =
 export type BadgeSizeAttributes = { fontSize: FontSize; padding: BaseSpacing };
 export interface BadgeProps extends BoxProps {
   /**
-   * The text message or ReactNode to be rendered in the badge.
+   * DEPRECATED - Use children instead. The text message or ReactNode to be rendered in the badge.
    */
   message?: string | ReactNode;
   /**

@@ -27,7 +27,9 @@ export const Variants = () => {
   return (
     <Box direction="row" gap="sm">
       {variants.map((variant) => (
-        <Badge message={variant} variant={variant} key={variant} />
+        <Badge variant={variant} key={variant}>
+          variant
+        </Badge>
       ))}
     </Box>
   );
@@ -45,8 +47,9 @@ export const Sizes = () => (
           tablet: 'md',
           desktop: 'lg',
         }}
-        message="Responsive"
-      />
+      >
+        Responsive
+      </Badge>
     </Box>
   </>
 );
