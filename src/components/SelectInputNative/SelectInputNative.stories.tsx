@@ -246,3 +246,35 @@ export const InteractionTest: StoryObj<typeof SelectInputNative> = {
     await expect(select).toHaveValue('chocolate');
   },
 };
+
+export const InteractionDisabled: StoryObj<typeof SelectInputNative> = {
+  render: Disabled,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const select = canvas.getByLabelText('Label');
+
+    // Assert disabled
+    await expect(select).toBeDisabled();
+
+    // Attempt to select should fail (or we just verify it's disabled)
+    // userEvent.selectOptions throws on disabled elements, so we primarily verify state
+  },
+};
+
+export const InteractionChangePreSelected: StoryObj<typeof SelectInputNative> =
+  {
+    render: PreSelected,
+    play: async ({ canvasElement }) => {
+      const canvas = within(canvasElement);
+      const select = canvas.getByLabelText('Label');
+
+      // Assert initial value
+      await expect(select).toHaveValue('strawberry');
+
+      // Select 'vanilla'
+      await userEvent.selectOptions(select, 'vanilla');
+
+      // Assert new value
+      await expect(select).toHaveValue('vanilla');
+    },
+  };
