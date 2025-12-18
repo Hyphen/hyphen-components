@@ -82,7 +82,7 @@ export const WithCustomContent: Story = {
     <Alert {...args}>
       <p>
         This alert uses <strong>children</strong> for custom content. You can
-        include any JSX content here, including <a href="#">links</a>,{' '}
+        include any JSX content here, including <a href="/#">links</a>,{' '}
         <code>code snippets</code>, and more.
       </p>
     </Alert>
@@ -124,31 +124,33 @@ export const Variants: Story = {
   },
 };
 
-export const Closable: Story = {
-  render: () => {
-    const [isAlertShowing, setIsAlertShowing] = useState(true);
+export const ClosableAlert = () => {
+  const [isAlertShowing, setIsAlertShowing] = useState(true);
 
-    return (
-      <>
-        {isAlertShowing ? (
-          <Alert
-            title="Closable"
-            variant="info"
-            onClose={() => setIsAlertShowing(false)}
-            className="m-bottom-md"
-          >
-            This one works!
-          </Alert>
-        ) : (
-          <div className="m-bottom-md">
-            <Button onClick={() => setIsAlertShowing(true)} size="sm">
-              Give me the alert back!
-            </Button>
-          </div>
-        )}
-      </>
-    );
-  },
+  return (
+    <>
+      {isAlertShowing ? (
+        <Alert
+          title="Closable"
+          variant="info"
+          onClose={() => setIsAlertShowing(false)}
+          className="m-bottom-md"
+        >
+          Try closing me.
+        </Alert>
+      ) : (
+        <div className="m-bottom-md">
+          <Button onClick={() => setIsAlertShowing(true)} size="sm">
+            Give me the alert back!
+          </Button>
+        </div>
+      )}
+    </>
+  );
+};
+
+export const Closable: Story = {
+  render: () => ClosableAlert(),
   parameters: {
     controls: { disable: true },
   },

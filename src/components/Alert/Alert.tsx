@@ -142,7 +142,7 @@ const AlertComponent: FC<AlertProps> = ({
             {title}
           </Box>
         )}
-        {children ||
+        {children ??
           (message &&
             (typeof message === 'string' ? <p>{message}</p> : message))}
       </Box>
