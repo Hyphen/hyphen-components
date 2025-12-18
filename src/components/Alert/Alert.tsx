@@ -20,18 +20,9 @@ export interface AlertProps {
    */
   className?: string;
   /**
-   * Custom text to use as a close button.
-   */
-  closeText?: string;
-  /**
    * Whether the alert as an icon that corresponds to its variant (Success, warning, etc.).
    */
   hasIcon?: boolean;
-  /**
-   * Whether the alert can be closed by the user. If `true` it will render
-   * the 'close' icon on the right hand side of the alert.
-   */
-  isClosable?: boolean;
   /**
    * Renders a version of the alert with smaller padding.
    */
@@ -68,10 +59,8 @@ export interface AlertProps {
 const AlertComponent: FC<AlertProps> = ({
   children,
   className = '',
-  closeText = '',
   hasIcon = false,
   isCompact = false,
-  isClosable = false,
   message = '',
   onClose = undefined,
   render = undefined,
@@ -116,7 +105,7 @@ const AlertComponent: FC<AlertProps> = ({
   }, [hasIcon, variant]);
 
   const closeIcon = useMemo(() => {
-    if (!isClosable) return null;
+    if (!onClose) return null;
 
     return (
       <Box
@@ -130,13 +119,11 @@ const AlertComponent: FC<AlertProps> = ({
           onKeyUp={handleCloseKeyPress}
           aria-label="dismiss"
         >
-          {closeText || (
-            <Icon name="remove" data-testid="alert-close-icon-test-id" />
-          )}
+          <Icon name="remove" data-testid="alert-close-icon-test-id" />
         </button>
       </Box>
     );
-  }, [isClosable, closeText, handleClose, handleCloseKeyPress]);
+  }, [onClose, handleClose, handleCloseKeyPress]);
 
   const content = useMemo(() => {
     if (render) {
