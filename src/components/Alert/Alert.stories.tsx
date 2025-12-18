@@ -14,13 +14,15 @@ const meta: Meta<typeof Alert> = {
 export default meta;
 
 export const Overview = () => (
-  <Alert
-    title="Contact Created"
-    message="The contact was saved on December 3, 2020 at 6:10pm PDT"
-    variant="success"
-    isClosable
-    hasIcon
-  />
+  <Alert title="Contact Created" variant="success" isClosable hasIcon>
+    The contact was saved on December 3, 2020 at 6:10pm PDT
+  </Alert>
+);
+
+export const Compact = () => (
+  <Alert title="Contact Created" variant="success" isClosable hasIcon isCompact>
+    The contact was saved on December 3, 2020 at 6:10pm PDT
+  </Alert>
 );
 
 export const Variants = () =>
@@ -41,13 +43,14 @@ export const Variants = () =>
       <>
         {variants.map((variant: AlertVariant) => (
           <Alert
-            message={message(variant)}
             key={variant}
             title={variant.charAt(0).toUpperCase() + variant.slice(1)}
             variant={variant}
             hasIcon
             className="m-bottom-md"
-          />
+          >
+            {message(variant)}
+          </Alert>
         ))}
       </>
     );
@@ -61,20 +64,22 @@ export const Closable = () => {
     <>
       <Alert
         title="Won't Close"
-        message="Closable, but with no onClose callback so nothing happens when clicked."
         variant="warning"
         isClosable
         className="m-bottom-md"
-      />
+      >
+        Closable, but with no onClose callback so nothing happens when clicked.
+      </Alert>
       {isAlertTwoShowing ? (
         <Alert
           title="Closable"
-          message="This one works!"
           variant="info"
           isClosable
           onClose={() => setAlertTwoShowing(false)}
           className="m-bottom-md"
-        />
+        >
+          This one works!
+        </Alert>
       ) : (
         <div className="m-bottom-md">
           <Button onClick={() => setAlertTwoShowing(true)} size="sm">
@@ -84,12 +89,13 @@ export const Closable = () => {
       )}
       {isAlertThreeShowing ? (
         <Alert
-          message="With custom close text!"
           variant="info"
           isClosable
           onClose={() => setAlertThreeShowing(false)}
           closeText="Close me!"
-        />
+        >
+          With custom close text!
+        </Alert>
       ) : (
         <div className="m-bottom-md">
           <Button onClick={() => setAlertThreeShowing(true)} size="sm">
