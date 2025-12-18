@@ -3,7 +3,7 @@ import ReactModal from 'react-modal';
 import FocusLock from 'react-focus-lock';
 import { RemoveScroll } from 'react-remove-scroll';
 import classNames from 'classnames';
-import { CssOverflowValue } from '../../types';
+import { BackgroundColor, CssOverflowValue } from '../../types';
 import { getDimensionCss } from '../../lib/getDimensionCss';
 import { Box, BoxProps } from '../Box/Box';
 import { ModalFooter, ModalHeader, ModalBody } from './components';
@@ -44,6 +44,10 @@ export interface ModalProps {
    */
   fullScreenMobile?: boolean;
   /**
+   * Background color for the modal content using design tokens
+   */
+  background?: BackgroundColor;
+  /**
    * By default the first focusable element will receive focus when the dialog
    * opens but you can provide a ref to focus instead.
    *
@@ -82,6 +86,7 @@ export const ModalBaseComponent: React.FC<ModalProps> = forwardRef<
       ariaLabel,
       ariaLabelledBy,
       allowPinchZoom = false,
+      background = undefined,
       children,
       className,
       containerRef = undefined,
@@ -91,6 +96,7 @@ export const ModalBaseComponent: React.FC<ModalProps> = forwardRef<
       maxWidth = undefined,
       onDismiss,
       overflow = 'hidden',
+      style,
       ...restProps
     },
     ref
@@ -139,12 +145,13 @@ export const ModalBaseComponent: React.FC<ModalProps> = forwardRef<
               onRequestClose={onDismiss}
               ariaHideApp={false}
               parentSelector={parentElement ? () => parentElement : undefined}
-              style={{ content: { ...maxWidthCss.styles } }}
+              style={{ content: { ...maxWidthCss.styles, ...style } }}
               {...restProps}
             >
               <Box
                 aria-label={ariaLabel}
                 aria-labelledby={ariaLabelledBy}
+                background={background}
                 height="100"
                 padding={{ base: '2xl', tablet: '4xl' }}
                 gap="3xl"
