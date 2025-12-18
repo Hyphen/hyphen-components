@@ -72,6 +72,10 @@ export interface ModalProps {
    */
   overflow?: CssOverflowValue;
   /**
+   * Inline styles for the modal container
+   */
+  style?: React.CSSProperties;
+  /**
    * Allows spread props
    */
   [x: string]: any; // eslint-disable-line
