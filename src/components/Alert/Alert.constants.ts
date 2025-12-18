@@ -1,7 +1,6 @@
 import { IconName } from '../../types';
 import { AlertVariant } from './Alert.types';
 
-// eslint-disable-next-line import/prefer-default-export
 export const ALERT_VARIANTS: AlertVariant[] = [
   'info',
   'success',
