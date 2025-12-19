@@ -25,7 +25,13 @@ export type {
   HeightSize,
   LineHeightSize,
   SpacingSize,
+  TextDecorationLine,
+  TextDecorationStyle,
+  TextTransform,
+  TextWrap,
   WidthSize,
+  WhiteSpace,
+  WordBreak,
   ZIndexSize,
 } from '@hyphen/hyphen-design-tokens/build/types';
 

@@ -1855,3 +1855,143 @@ export const Omit = () => (
     </p>
   </Box>
 );
+
+export const TextWrap = () => {
+  const sampleText =
+    'This is a long line of text that demonstrates different text wrapping behaviors. The quick brown fox jumps over the lazy dog. Built by developers, for developers, Hyphen automates access management.';
+
+  return (
+    <Box gap="lg">
+      <Box gap="sm">
+        <Box fontWeight="bold">wrap (default)</Box>
+        <Box
+          textWrap="wrap"
+          maxWidth="300px"
+          padding="md"
+          background="tertiary"
+          borderWidth="sm"
+          borderColor="default"
+        >
+          {sampleText}
+        </Box>
+      </Box>
+
+      <Box gap="sm">
+        <Box fontWeight="bold">nowrap</Box>
+        <Box
+          textWrap="nowrap"
+          maxWidth="300px"
+          padding="md"
+          background="tertiary"
+          borderWidth="sm"
+          borderColor="default"
+          overflow="hidden"
+        >
+          {sampleText}
+        </Box>
+      </Box>
+
+      <Box gap="sm">
+        <Box fontWeight="bold">balance</Box>
+        <Box
+          textWrap="balance"
+          maxWidth="300px"
+          padding="md"
+          background="tertiary"
+          borderWidth="sm"
+          borderColor="default"
+        >
+          {sampleText}
+        </Box>
+      </Box>
+
+      <Box gap="sm">
+        <Box fontWeight="bold">pretty</Box>
+        <Box
+          textWrap="pretty"
+          maxWidth="300px"
+          padding="md"
+          background="tertiary"
+          borderWidth="sm"
+          borderColor="default"
+        >
+          {sampleText}
+        </Box>
+      </Box>
+
+      <Box gap="sm">
+        <Box fontWeight="bold">stable</Box>
+        <Box
+          textWrap="stable"
+          maxWidth="300px"
+          padding="md"
+          background="tertiary"
+          borderWidth="sm"
+          borderColor="default"
+        >
+          {sampleText}
+        </Box>
+      </Box>
+    </Box>
+  );
+};
+
+export const TextTransform = () => {
+  const sampleText = 'The Quick Brown Fox Jumps Over The Lazy Dog';
+
+  return (
+    <Box gap="lg">
+      <Box gap="sm">
+        <Box fontWeight="bold">uppercase</Box>
+        <Box
+          textTransform="uppercase"
+          padding="md"
+          background="tertiary"
+          borderWidth="sm"
+          borderColor="default"
+        >
+          {sampleText}
+        </Box>
+      </Box>
+
+      <Box gap="sm">
+        <Box fontWeight="bold">lowercase</Box>
+        <Box
+          textTransform="lowercase"
+          padding="md"
+          background="tertiary"
+          borderWidth="sm"
+          borderColor="default"
+        >
+          {sampleText}
+        </Box>
+      </Box>
+
+      <Box gap="sm">
+        <Box fontWeight="bold">capitalize</Box>
+        <Box
+          textTransform="capitalize"
+          padding="md"
+          background="tertiary"
+          borderWidth="sm"
+          borderColor="default"
+        >
+          {sampleText}
+        </Box>
+      </Box>
+
+      <Box gap="sm">
+        <Box fontWeight="bold">normal-case</Box>
+        <Box
+          textTransform="normal-case"
+          padding="md"
+          background="tertiary"
+          borderWidth="sm"
+          borderColor="default"
+        >
+          {sampleText}
+        </Box>
+      </Box>
+    </Box>
+  );
+};

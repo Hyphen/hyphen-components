@@ -57,9 +57,8 @@ describe('Badge', () => {
             desktop: 'lg',
             hd: 'sm',
           }}
-          message="badge"
         >
-          button
+          badge
         </Badge>
       );
 

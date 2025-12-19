@@ -22,6 +22,7 @@
 ## Branching & Commit Guidelines
 
 - Use descriptive branch names (e.g., `feature/`, `bugfix/`, `chore/`).
+- Commit messages must follow the [semantic-release](https://semantic-release.gitbook.io/semantic-release/) format (e.g., `feat:`, `fix:`, `chore:`, etc.).
 - Write clear, concise commit messages describing the change and why it was made.
 
 ## Release & Merge Process

@@ -7,6 +7,7 @@ import {
 } from '../../ToggleGroup/ToggleGroup';
 import { Box } from '../../Box/Box';
 import { HelpText } from '../../HelpText/HelpText';
+import { BaseSpacing, ResponsiveProp } from 'src/types';
 
 export interface FormikToggleGroupMultiProps {
   name: string;
@@ -20,6 +21,7 @@ export interface FormikToggleGroupMultiProps {
   label?: string;
   children?: React.ReactNode;
   variant: ToggleVariant;
+  gap?: BaseSpacing | ResponsiveProp<BaseSpacing>;
 }
 
 export const FormikToggleGroupMulti = ({
@@ -29,6 +31,7 @@ export const FormikToggleGroupMulti = ({
   label,
   children,
   variant,
+  gap,
   ...props
 }: FormikToggleGroupMultiProps) => {
   const [field, meta, helpers] = useField(name);
@@ -44,6 +47,7 @@ export const FormikToggleGroupMulti = ({
         {() => (
           <ToggleGroup
             {...props}
+            gap={gap}
             name={name}
             onValueChange={(selectedValues: string[]) => {
               helpers.setValue(selectedValues);
