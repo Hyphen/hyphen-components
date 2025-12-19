@@ -1,13 +1,20 @@
 import React from 'react';
 import { Box } from '../Box/Box';
-import { Button } from './Button';
+import { Button, ButtonSize, ButtonVariant } from './Button';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { allModes } from '../../modes';
 import { ICON_NAMES } from '@hyphen/hyphen-design-tokens/build/assets/icons';
+import { BoxShadowSize } from 'src/types';
 
-const BUTTON_VARIANTS = ['primary', 'secondary', 'tertiary', 'danger', 'link'];
-const BUTTON_SIZES = ['sm', 'md', 'lg'];
-const BUTTON_SHADOWS = ['xs', 'sm', 'md'];
+const BUTTON_VARIANTS: ButtonVariant[] = [
+  'primary',
+  'secondary',
+  'tertiary',
+  'danger',
+  'link',
+];
+const BUTTON_SIZES: ButtonSize[] = ['sm', 'md', 'lg'];
+const BUTTON_SHADOWS: BoxShadowSize[] = ['sm', 'md', 'lg', 'xl', '2xl'];
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
