@@ -1,0 +1,28 @@
+import { Canvas, Meta, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as Stories from './Calendar.stories';
+
+<Meta of={Stories} />
+
+# Calendar
+
+Calendar component for selecting dates and date ranges.
+
+This component is extended from [React DayPicker](https://daypicker.dev/).
+
+[API Reference](https://daypicker.dev/api)
+
+## Basic Usage
+
+<Canvas of={Stories.BasicUsage}   sourceState="shown"/>
+
+## Range Selection
+
+<Canvas of={Stories.RangeSelection} sourceState="shown" />
+
+## Month/Year Dropdown
+
+<Canvas of={Stories.Dropdown} sourceState="shown" />
+
+## Footer Content
+
+<Canvas of={Stories.FooterContent} sourceState="shown" />
