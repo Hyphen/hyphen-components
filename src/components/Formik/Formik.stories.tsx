@@ -375,7 +375,7 @@ export const FormikForm = () =>
                   mode="single"
                   required={true}
                   selected={values.dateInput}
-                  onSelect={(date: Date) => {
+                  onSelect={(date: Date | undefined) => {
                     setFieldValue('dateInput', date);
                   }}
                   month={values.dateInput}
