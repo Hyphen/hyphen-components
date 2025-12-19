@@ -45,7 +45,9 @@ export const BadgeTooltip = () => (
   <TooltipProvider delayDuration={100}>
     <Tooltip>
       <TooltipTrigger asChild>
-        <Badge as="button" message="hover" variant="blue" />
+        <Badge as="button" variant="blue">
+          hover
+        </Badge>
       </TooltipTrigger>
       <TooltipPortal>
         <TooltipContent>This is the tooltip content</TooltipContent>
