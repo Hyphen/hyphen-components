@@ -13,7 +13,7 @@ function Calendar({
 
   return (
     <DayPicker
-      className={className ?? 'p-lg bw-sm br-sm'}
+      className={className ? className : 'p-lg bw-sm br-sm'}
       captionLayout={captionLayout}
       style={
         {
