@@ -1,10 +1,10 @@
 import React from 'react';
+import { ICON_NAMES } from '@hyphen/hyphen-design-tokens/build/assets/icons';
 import { Box } from '../Box/Box';
 import { Button, ButtonSize, ButtonVariant } from './Button';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { allModes } from '../../modes';
-import { ICON_NAMES } from '@hyphen/hyphen-design-tokens/build/assets/icons';
-import { BoxShadowSize } from 'src/types';
+import { BoxShadowSize } from '../../types';
 
 const BUTTON_VARIANTS: ButtonVariant[] = [
   'primary',
@@ -263,14 +263,14 @@ export const Disabled: Story = {
 export const Shadow: Story = {
   render: () => (
     <Box direction="row" gap="md">
-      <Button variant="secondary" shadow="xs">
-        xs shadow
-      </Button>
       <Button variant="secondary" shadow="sm">
         sm shadow
       </Button>
       <Button variant="secondary" shadow="md">
         md shadow
+      </Button>
+      <Button variant="secondary" shadow="lg">
+        lg shadow
       </Button>
     </Box>
   ),
