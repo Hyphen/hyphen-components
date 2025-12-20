@@ -58,7 +58,6 @@ function Calendar({
         ),
         month_caption: classNames(
           'display-flex align-items-center justify-content-center font-size-sm h-4xl'
-          // defaultClassNames.month_caption
         ),
         weekday: classNames(
           defaultClassNames.weekday,
