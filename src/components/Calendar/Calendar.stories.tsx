@@ -17,7 +17,7 @@ const meta: Meta<typeof Calendar> = {
 export default meta;
 
 export const BasicUsage = () => {
-  const [date, setDate] = useState<Date | undefined>(new Date(2025, 12, 12));
+  const [date, setDate] = useState<Date | undefined>(new Date(2025, 11, 12));
 
   return (
     <Calendar
@@ -26,7 +26,7 @@ export const BasicUsage = () => {
       defaultMonth={date}
       onSelect={setDate}
       disabled={{
-        before: new Date(2025, 12, 12),
+        before: new Date(2025, 11, 12),
       }}
     />
   );
