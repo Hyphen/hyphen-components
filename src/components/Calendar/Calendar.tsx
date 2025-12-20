@@ -61,7 +61,7 @@ function Calendar({
           // defaultClassNames.month_caption
         ),
         weekday: classNames(
-          defaultClassNames.weekdays,
+          defaultClassNames.weekday,
           'font-weight-normal font-color-secondary'
         ),
         today: 'font-weight-bold',
