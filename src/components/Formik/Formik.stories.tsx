@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from 'react';
+import { Calendar } from '../Calendar/Calendar';
 import { Field, Form, Formik } from 'formik';
 import { FormikTextInput } from './FormikTextInput/FormikTextInput';
 import { FormikCheckboxInput } from './FormikCheckboxInput/FormikCheckboxInput';
@@ -20,7 +21,6 @@ import { Tooltip, TooltipContent, TooltipProvider } from '../Tooltip/Tooltip';
 import { TooltipTrigger } from '@radix-ui/react-tooltip';
 import { FormikToggleGroupMulti } from './FormikToggleGroupMulti/FormikToggleGroupMulti';
 import { Icon } from '../Icon/Icon';
-import Calendar from '../Calendar/Calendar';
 
 const meta = {
   title: 'Patterns/Formik Form',
