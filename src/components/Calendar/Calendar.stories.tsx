@@ -1,4 +1,4 @@
-import Calendar from './Calendar';
+import { Calendar } from './Calendar';
 
 import type { Meta } from '@storybook/react-vite';
 import React, { useState, ChangeEvent } from 'react';
