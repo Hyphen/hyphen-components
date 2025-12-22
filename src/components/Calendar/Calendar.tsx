@@ -114,4 +114,4 @@ function Calendar({
   );
 }
 
-export default Calendar;
+export { Calendar };
