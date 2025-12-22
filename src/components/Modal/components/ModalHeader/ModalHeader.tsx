@@ -12,6 +12,10 @@ export type ModalHeaderProps = {
    */
   title?: string;
   /**
+   * Modal's header content
+   */
+  children?: React.ReactNode;
+  /**
    * If defined, will render a 'x' close button on the right side of the ModalHeader
    */
   onDismiss?: (event?: React.SyntheticEvent) => void;
@@ -21,6 +25,7 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
   id,
   onDismiss,
   title = undefined,
+  children,
 }) => {
   const justifyContentValue =
     title === undefined && onDismiss ? 'flex-end' : 'space-between';
@@ -40,6 +45,7 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
           {title}
         </Box>
       )}
+      {children}
       {onDismiss && (
         <Button
           aria-label="close"
