@@ -37,7 +37,9 @@ export const BasicUsage = () => {
           id="titleBasic"
           title="The Modal Title"
           onDismiss={closeModal}
-        />
+        >
+          additional content in header
+        </Modal.Header>
         <Modal.Body>Modal content</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={closeModal} shadow="sm">
