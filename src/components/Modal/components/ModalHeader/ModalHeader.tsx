@@ -2,7 +2,10 @@ import React, { FC } from 'react';
 import { Box, BoxProps } from '../../../Box/Box';
 import { Button } from '../../../Button/Button';
 
-export type ModalHeaderProps = Omit<BoxProps, 'as' | 'radius'> & {
+export type ModalHeaderProps = Omit<
+  BoxProps,
+  'as' | 'radius' | 'justifyContent'
+> & {
   /**
    * id of the element containing the title, used by the Modal `aria-labelledby` prop
    */
@@ -26,17 +29,18 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
   onDismiss,
   direction = 'row',
   alignItems = 'center',
-  justifyContent = 'space-between',
   title = undefined,
   children,
   style,
   ...restProps
 }) => {
+  const justifyContentValue = title || children ? 'space-between' : 'flex-end';
+
   return (
     <Box
       direction={direction}
       alignItems={alignItems}
-      justifyContent={justifyContent}
+      justifyContent={justifyContentValue}
       gap="3xl"
       style={{
         flexShrink: 0,
@@ -44,14 +48,16 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
       }}
       {...restProps}
     >
-      <Box gap="xs">
-        {title && (
-          <Box as="h4" fontSize={{ base: 'md', tablet: 'lg' }} id={id}>
-            {title}
-          </Box>
-        )}
-        {children}
-      </Box>
+      {(title || children) && (
+        <Box gap="2xs">
+          {title && (
+            <Box as="h4" fontSize={{ base: 'md', tablet: 'lg' }} id={id}>
+              {title}
+            </Box>
+          )}
+          {children}
+        </Box>
+      )}
       {onDismiss && (
         <Button
           aria-label="close"
