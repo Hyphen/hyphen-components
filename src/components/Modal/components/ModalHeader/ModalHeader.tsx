@@ -12,7 +12,7 @@ export type ModalHeaderProps = {
    */
   title?: string;
   /**
-   * Modal's header content
+   * Additional content to render in the modal header, displayed alongside the title.
    */
   children?: React.ReactNode;
   /**
