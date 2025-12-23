@@ -1,14 +1,21 @@
 import React from 'react';
 import classNames from 'classnames';
-import { DayPicker, getDefaultClassNames, Matcher } from 'react-day-picker';
+import {
+  DayPicker,
+  DayPickerProps,
+  getDefaultClassNames,
+  Matcher,
+} from 'react-day-picker';
 import 'react-day-picker/style.css';
 import { Icon } from '../Icon/Icon';
+
+export type CalendarProps = DayPickerProps;
 
 function Calendar({
   captionLayout = 'label',
   className,
   ...props
-}: React.ComponentProps<typeof DayPicker>) {
+}: CalendarProps) {
   const defaultClassNames = getDefaultClassNames();
 
   return (
