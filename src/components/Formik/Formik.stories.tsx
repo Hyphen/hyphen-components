@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from 'react';
+import { Calendar } from '../Calendar/Calendar';
 import { Field, Form, Formik } from 'formik';
 import { FormikTextInput } from './FormikTextInput/FormikTextInput';
 import { FormikCheckboxInput } from './FormikCheckboxInput/FormikCheckboxInput';
@@ -6,7 +7,6 @@ import { FormikSelectInput } from './FormikSelectInput/FormikSelectInput';
 import { FormikSelectInputNative } from './FormikSelectInputNative/FormikSelectInputNative';
 import { FormikRadioGroup } from './FormikRadioGroup/FormikRadioGroup';
 import { FormikTextareaInput } from './FormikTextareaInput/FormikTextareaInput';
-import { DateInput } from '../DateInput/DateInput';
 import { FormikSwitch } from './FormikSwitch/FormikSwitch';
 import { Button } from '../Button/Button';
 import { Box } from '../Box/Box';
@@ -185,7 +185,7 @@ export const FormikForm = () =>
             sizes: null,
             timePicker: null,
             timePickerNative: null,
-            dateInput: '',
+            dateInput: new Date(2017, 4, 21),
             message: '',
             country: '',
             availability: '99',
@@ -194,7 +194,7 @@ export const FormikForm = () =>
           validate={handleValidation}
           onSubmit={handleSubmit}
         >
-          {({ isSubmitting, values, setFieldValue, handleBlur, errors }) => (
+          {({ isSubmitting, values, setFieldValue, errors }) => (
             <Form noValidate>
               <Box gap="3xl">
                 <Field
@@ -371,25 +371,14 @@ export const FormikForm = () =>
                     </ToggleGroupItem>
                   ))}
                 </FormikToggleGroupMulti>
-
-                <DateInput
-                  datePickerProps={{
-                    onChange: (date) => {
-                      setFieldValue('dateInput', date as Date);
-                    },
-                    selected: values.dateInput as unknown as Date,
+                <Calendar
+                  mode="single"
+                  required={true}
+                  selected={values.dateInput}
+                  onSelect={(date: Date | undefined) => {
+                    setFieldValue('dateInput', date);
                   }}
-                  textInputProps={{
-                    label: 'Date Input',
-                    name: 'dateInput',
-                    id: 'dateInput',
-                    error: errors.dateInput,
-                    isRequired: true,
-                    onClear: () => {
-                      setFieldValue('dateInput', null);
-                    },
-                    onBlur: handleBlur,
-                  }}
+                  month={values.dateInput}
                 />
                 <Button type="submit" isLoading={isSubmitting}>
                   Submit

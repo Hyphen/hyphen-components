@@ -34,6 +34,10 @@ jobs:
 
       - name: Publish
         run: |
-          npm publish --no-git-checks --ignore-scripts
+          if [[ "${{ github.event.release.prerelease }}" == "true" ]]; then
+            npm publish --no-git-checks --ignore-scripts --tag beta
+          else
+            npm publish --no-git-checks --ignore-scripts
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -709,7 +709,7 @@ export const FontColor = () => (
     <Box color="inverse">inverse</Box>
     <Box color="disabled">disabled</Box>
     <Box color="success">success</Box>
-    <Box color="warn">warn</Box>
+    <Box color="warning">warn</Box>
     <Box color="danger">danger</Box>
     <Box color="brand-yellow">brand-yellow</Box>
     <Box color="brand-orange">brand-orange</Box>

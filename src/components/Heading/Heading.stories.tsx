@@ -80,8 +80,8 @@ export const Colors = () => (
     <Heading as="h3" color="success">
       success
     </Heading>
-    <Heading as="h3" color="warn">
-      warn
+    <Heading as="h3" color="warning">
+      warning
     </Heading>
     <Heading as="h3" color="danger">
       danger
