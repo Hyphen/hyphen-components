@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { DayPicker, getDefaultClassNames } from 'react-day-picker';
+import { DayPicker, getDefaultClassNames, Matcher } from 'react-day-picker';
 import 'react-day-picker/style.css';
 import { Icon } from '../Icon/Icon';
 
@@ -115,3 +115,4 @@ function Calendar({
 }
 
 export { Calendar };
+export type { Matcher };
