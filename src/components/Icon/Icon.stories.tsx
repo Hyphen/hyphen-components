@@ -21,7 +21,7 @@ export const Sizes = () => (
       <Box>Size is set by the Icon's parent</Box>
     </Box>
     <Box direction="row" fontSize="xl" childGap="sm">
-      <Icon name="star" color="warn" />
+      <Icon name="star" color="warning" />
       <Box>Size is set by the Icon's parent</Box>
     </Box>
   </>
