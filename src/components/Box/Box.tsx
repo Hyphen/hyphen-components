@@ -355,6 +355,14 @@ export const Box: FC<BoxProps> = forwardRef(
     const minHeightCss = getDimensionCss('minh', minHeight);
     const minWidthCss = getDimensionCss('minw', minWidth);
 
+    const finalColor =
+      color ??
+      (background === 'warning' ||
+      background === 'danger' ||
+      background === 'info'
+        ? 'grey'
+        : undefined);
+
     const isFlexBox = typeof display === 'string' && display.includes('flex');
     const flexDirectionClasses = isFlexBox
       ? generateResponsiveClasses('flex-direction', direction)
@@ -451,7 +459,7 @@ export const Box: FC<BoxProps> = forwardRef(
         'flex-wrap': isFlexBox && wrap,
         'flex-nowrap': isFlexBox && wrap === false,
         [`background-color-${background}`]: background,
-        [`font-color-${color}`]: color,
+        [`font-color-${finalColor}`]: finalColor,
         [`border-color-${borderColor}`]: borderColor,
         [`cursor-${cursor}`]: cursor,
         [styles['box-transition']]: hover || focus,
