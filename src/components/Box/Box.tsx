@@ -49,6 +49,13 @@ import { getDimensionCss } from '../../lib/getDimensionCss';
 import { getElementType } from '../../lib/getElementType';
 import styles from './Box.module.scss';
 
+const AUTO_FONT_COLOR_BACKGROUNDS: BackgroundColor[] = [
+  'success',
+  'warning',
+  'danger',
+  'info',
+];
+
 export type HoverableBoxProperties =
   | 'color'
   | 'borderColor'
@@ -355,11 +362,14 @@ export const Box: FC<BoxProps> = forwardRef(
     const minHeightCss = getDimensionCss('minh', minHeight);
     const minWidthCss = getDimensionCss('minw', minWidth);
 
+    // `inverse` background uses a matching `inverse` font color instead of the
+    // generic auto-mapped colors in AUTO_FONT_COLOR_BACKGROUNDS, so it is
+    // intentionally handled separately here.
     const finalColor =
       color ??
-      (background === 'warning' ||
-      background === 'danger' ||
-      background === 'info'
+      (background === 'inverse'
+        ? 'inverse'
+        : AUTO_FONT_COLOR_BACKGROUNDS.includes(background)
         ? 'grey'
         : undefined);
 
