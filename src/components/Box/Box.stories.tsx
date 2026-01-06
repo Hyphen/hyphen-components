@@ -1,6 +1,11 @@
 import React from 'react';
 import type { Meta } from '@storybook/react-vite';
 import { Box } from './Box';
+import {
+  BACKGROUND_COLOR_OPTIONS,
+  BORDER_COLOR_OPTIONS,
+  FONT_COLOR_OPTIONS,
+} from '../../lib/tokens';
 
 const meta: Meta<typeof Box> = {
   title: 'Components/Box',
@@ -72,60 +77,11 @@ export const Overview = () => (
 export const Background = () => {
   return (
     <Box gap="md">
-      <Box background="primary" padding="md">
-        primary
-      </Box>
-      <Box background="secondary" padding="md">
-        secondary
-      </Box>
-      <Box background="tertiary" padding="md">
-        tertiary
-      </Box>
-      <Box background="info" padding="md">
-        info
-      </Box>
-      <Box background="warning" padding="md">
-        warning
-      </Box>
-      <Box background="danger" padding="md">
-        danger
-      </Box>
-      <Box background="inverse" color="inverse" padding="md">
-        inverse
-      </Box>
-      <Box background="brand-yellow" padding="md">
-        brand-yellow
-      </Box>
-      <Box background="brand-orange" padding="md">
-        brand-orange
-      </Box>
-      <Box background="brand-magenta" padding="md">
-        brand-magenta
-      </Box>
-      <Box color="white" background="brand-dark-grey" padding="md">
-        brand-dark-grey
-      </Box>
-      <Box background="brand-cyan" padding="md">
-        brand-cyan
-      </Box>
-      <Box background="brand-pink" padding="md">
-        brand-pink
-      </Box>
-      <Box background="brand-light-purple" padding="md">
-        brand-light-purple
-      </Box>
-      <Box color="white" background="brand-medium-purple" padding="md">
-        brand-medium-purple
-      </Box>
-      <Box color="white" background="brand-dark-purple" padding="md">
-        brand-dark-purple
-      </Box>
-      <Box color="white" background="chart-1" padding="md">
-        chart-1
-      </Box>
-      <Box color="white" background="chart-2" padding="md">
-        chart-2
-      </Box>
+      {BACKGROUND_COLOR_OPTIONS.map((color) => (
+        <Box key={color} background={color} padding="md">
+          {color}
+        </Box>
+      ))}
     </Box>
   );
 };
@@ -133,54 +89,11 @@ export const Background = () => {
 export const Border = () => {
   return (
     <Box gap="md">
-      <Box borderColor="default" borderWidth="sm" padding="md">
-        default
-      </Box>
-      <Box borderColor="subtle" borderWidth="sm" padding="md">
-        subtle
-      </Box>
-      <Box borderColor="hover" borderWidth="sm" padding="md">
-        hover
-      </Box>
-      <Box borderColor="active" borderWidth="sm" padding="md">
-        active
-      </Box>
-      <Box borderColor="info" borderWidth="sm" padding="md">
-        info
-      </Box>
-      <Box borderColor="warning" borderWidth="sm" padding="md">
-        warning
-      </Box>
-      <Box borderColor="danger" borderWidth="sm" padding="md">
-        danger
-      </Box>
-      <Box borderColor="brand-yellow" borderWidth="sm" padding="md">
-        brand-yellow
-      </Box>
-      <Box borderColor="brand-orange" borderWidth="sm" padding="md">
-        brand-orange
-      </Box>
-      <Box borderColor="brand-magenta" borderWidth="sm" padding="md">
-        brand-magenta
-      </Box>
-      <Box borderColor="brand-dark-grey" borderWidth="sm" padding="md">
-        brand-dark-grey
-      </Box>
-      <Box borderColor="brand-cyan" borderWidth="sm" padding="md">
-        brand-cyan
-      </Box>
-      <Box borderColor="brand-pink" borderWidth="sm" padding="md">
-        brand-pink
-      </Box>
-      <Box borderColor="brand-light-purple" borderWidth="sm" padding="md">
-        brand-light-purple
-      </Box>
-      <Box borderColor="brand-medium-purple" borderWidth="sm" padding="md">
-        brand-medium-purple
-      </Box>
-      <Box borderColor="brand-dark-purple" borderWidth="sm" padding="md">
-        brand-dark-purple
-      </Box>
+      {BORDER_COLOR_OPTIONS.map((color) => (
+        <Box key={color} borderColor={color} borderWidth="sm" padding="md">
+          {color}
+        </Box>
+      ))}
     </Box>
   );
 };
@@ -703,23 +616,11 @@ export const FlexAlignContent = () => (
 
 export const FontColor = () => (
   <>
-    <Box color="base">base</Box>
-    <Box color="secondary">secondary</Box>
-    <Box color="tertiary">tertiary</Box>
-    <Box color="inverse">inverse</Box>
-    <Box color="disabled">disabled</Box>
-    <Box color="success">success</Box>
-    <Box color="warning">warn</Box>
-    <Box color="danger">danger</Box>
-    <Box color="brand-yellow">brand-yellow</Box>
-    <Box color="brand-orange">brand-orange</Box>
-    <Box color="brand-magenta">brand-magenta</Box>
-    <Box color="brand-dark-grey">brand-dark-grey</Box>
-    <Box color="brand-cyan">brand-cyan</Box>
-    <Box color="brand-pink">brand-pink</Box>
-    <Box color="brand-light-purple">brand-light-purple</Box>
-    <Box color="brand-medium-purple">brand-medium-purple</Box>
-    <Box color="brand-dark-purple">brand-dark-purple</Box>
+    {FONT_COLOR_OPTIONS.map((color) => (
+      <Box key={color} color={color}>
+        {color}
+      </Box>
+    ))}
   </>
 );
 

@@ -49,6 +49,13 @@ import { getDimensionCss } from '../../lib/getDimensionCss';
 import { getElementType } from '../../lib/getElementType';
 import styles from './Box.module.scss';
 
+const AUTO_FONT_COLOR_BACKGROUNDS: BackgroundColor[] = [
+  'success',
+  'warning',
+  'danger',
+  'info',
+];
+
 export type HoverableBoxProperties =
   | 'color'
   | 'borderColor'
@@ -355,6 +362,17 @@ export const Box: FC<BoxProps> = forwardRef(
     const minHeightCss = getDimensionCss('minh', minHeight);
     const minWidthCss = getDimensionCss('minw', minWidth);
 
+    // `inverse` background uses a matching `inverse` font color instead of the
+    // generic auto-mapped colors in AUTO_FONT_COLOR_BACKGROUNDS, so it is
+    // intentionally handled separately here.
+    const finalColor =
+      color ??
+      (background === 'inverse'
+        ? 'inverse'
+        : AUTO_FONT_COLOR_BACKGROUNDS.includes(background)
+        ? 'grey'
+        : undefined);
+
     const isFlexBox = typeof display === 'string' && display.includes('flex');
     const flexDirectionClasses = isFlexBox
       ? generateResponsiveClasses('flex-direction', direction)
@@ -451,7 +469,7 @@ export const Box: FC<BoxProps> = forwardRef(
         'flex-wrap': isFlexBox && wrap,
         'flex-nowrap': isFlexBox && wrap === false,
         [`background-color-${background}`]: background,
-        [`font-color-${color}`]: color,
+        [`font-color-${finalColor}`]: finalColor,
         [`border-color-${borderColor}`]: borderColor,
         [`cursor-${cursor}`]: cursor,
         [styles['box-transition']]: hover || focus,
