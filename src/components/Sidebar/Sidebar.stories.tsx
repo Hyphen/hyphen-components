@@ -156,22 +156,17 @@ const data = {
   ],
 };
 
-// type Story = StoryObj<typeof Sidebar>;
-
 export const SidebarExample = () => {
   const [activeTeam, setActiveTeam] = React.useState(data.teams[0]);
   const isMobile = useIsMobile();
 
   const STORAGE_KEY = 'sidebar_expanded_storybook';
 
-  const startOpen = localStorage.getItem(STORAGE_KEY) || 'true';
+  const startExpanded = localStorage.getItem(STORAGE_KEY) !== 'false';
 
   return (
     <ResponsiveProvider>
-      <SidebarProvider
-        storageKey={STORAGE_KEY}
-        defaultOpen={startOpen === 'true'}
-      >
+      <SidebarProvider storageKey={STORAGE_KEY} defaultOpen={startExpanded}>
         <Sidebar side="left" collapsible="icon">
           <NavHeader activeTeam={activeTeam} setActiveTeam={setActiveTeam} />
           <SidebarContent>
