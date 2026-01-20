@@ -72,7 +72,7 @@ export const SelectInputNative: React.FC<SelectInputNativeProps> = ({
     disabled: true,
   };
   const optionsWithPlaceholder: SelectInputNativeOption[] = [
-    { ...placeholderOption },
+    placeholderOption,
     ...options,
   ];
 
