@@ -5,9 +5,23 @@ import { SelectInputNative } from './SelectInputNative';
 
 const selectOptions = [
   { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'strawberry', label: 'Strawberry', disabled: true },
   { value: 'vanilla', label: 'Vanilla' },
 ];
+test('option with disabled property is rendered as disabled', () => {
+  const mockedHandleChange = jest.fn();
+  render(
+    <SelectInputNative
+      id="testId"
+      label="Disabled Option Test"
+      onChange={mockedHandleChange}
+      options={selectOptions}
+      value={null}
+    />
+  );
+  const option = screen.getByText('Strawberry');
+  expect(option).toBeDisabled();
+});
 
 function getByTextWithMarkup(text: string) {
   // eslint-disable-next-line
