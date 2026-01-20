@@ -42,6 +42,7 @@ export const FormikForm = () =>
       { value: 'chocolate', label: 'Chocolate' },
       { value: 'strawberry', label: 'Strawberry' },
       { value: 'vanilla', label: 'Vanilla' },
+      { value: 'mint', label: 'Mint', disabled: true },
     ];
     const colorOptions = [
       { value: 'red', label: 'red' },

@@ -7,11 +7,17 @@ import { FormControl, FormControlProps } from '../FormControl/FormControl';
 import styles from './SelectInputNative.module.scss';
 
 export type SelectInputNativeSize = 'sm' | 'md' | 'lg';
+export interface SelectInputNativeOption {
+  value: string | number;
+  label: string | number;
+  disabled?: boolean;
+}
+
 export interface SelectInputNativeProps extends BoxProps, FormControlProps {
   /**
    * List of options for the select input.
    */
-  options: { value: string | number; label: string | number }[];
+  options: SelectInputNativeOption[];
   /**
    * onChange callback from select element.
    */
@@ -60,8 +66,15 @@ export const SelectInputNative: React.FC<SelectInputNativeProps> = ({
   size = 'md',
   ...restProps
 }) => {
-  const placeholderOption = { value: '', label: placeholder };
-  const optionsWithPlaceholder = [{ ...placeholderOption }, ...options];
+  const placeholderOption: SelectInputNativeOption = {
+    value: '',
+    label: placeholder,
+    disabled: true,
+  };
+  const optionsWithPlaceholder: SelectInputNativeOption[] = [
+    { ...placeholderOption },
+    ...options,
+  ];
 
   const responsiveClasses = generateResponsiveClasses('size', size);
 
@@ -107,7 +120,7 @@ export const SelectInputNative: React.FC<SelectInputNativeProps> = ({
               as="option"
               key={option.value}
               value={option.value}
-              disabled={option.value === ''}
+              disabled={option.disabled ?? false}
               hidden={option.value === ''}
               color={option.value === '' ? 'disabled' : 'base'}
             >
