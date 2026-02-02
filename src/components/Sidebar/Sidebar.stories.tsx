@@ -198,12 +198,14 @@ export const SidebarRightExample = () => {
 
   const STORAGE_KEY = 'sidebar_right_expanded_storybook';
 
-  const startExpanded =
-    localStorage.getItem(`${STORAGE_KEY}_right`) !== 'false';
+  const startExpanded = localStorage.getItem(STORAGE_KEY) !== 'false';
 
   return (
     <ResponsiveProvider>
-      <SidebarProvider storageKey={STORAGE_KEY} defaultOpen={startExpanded}>
+      <SidebarProvider
+        storageKey={{ right: STORAGE_KEY }}
+        defaultOpen={startExpanded}
+      >
         <SidebarInset>
           {isMobile && (
             <Box direction="row" gap="sm" alignItems="center">
