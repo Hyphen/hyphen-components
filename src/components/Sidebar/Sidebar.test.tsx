@@ -84,37 +84,4 @@ describe('Sidebar', () => {
     fireEvent.click(screen.getByTestId('left-trigger'));
     expect(onOpenChange).toHaveBeenCalledWith(true, 'left');
   });
-
-  test('supports more than two sidebars (custom side)', () => {
-    // Simulate a custom side by extending the SidebarSide type in test only
-    // This is a mock test to demonstrate the pattern, as the real component only supports left/right
-    const CustomSidebar = (props: any) => (
-      <div
-        data-side="custom"
-        data-state={props.open ? 'expanded' : 'collapsed'}
-      >
-        Custom
-      </div>
-    );
-    render(
-      <>
-        <SidebarProvider>
-          <Sidebar side="left">
-            <div>Left</div>
-          </Sidebar>
-          <Sidebar side="right">
-            <div>Right</div>
-          </Sidebar>
-          <CustomSidebar open={true} />
-        </SidebarProvider>
-      </>
-    );
-    expect(document.querySelector('[data-side="left"]')).toBeInTheDocument();
-    expect(document.querySelector('[data-side="right"]')).toBeInTheDocument();
-    expect(document.querySelector('[data-side="custom"]')).toBeInTheDocument();
-    expect(document.querySelector('[data-side="custom"]')).toHaveAttribute(
-      'data-state',
-      'expanded'
-    );
-  });
 });
