@@ -184,11 +184,113 @@ export const SidebarExample = () => {
             </Box>
           )}
           <Card height="100" padding="2xl">
-            content
+            <SidebarTrigger />
           </Card>
         </SidebarInset>
       </SidebarProvider>
     </ResponsiveProvider>
+  );
+};
+
+export const SidebarRightExample = () => {
+  const [activeTeam, setActiveTeam] = React.useState(data.teams[0]);
+  const isMobile = useIsMobile();
+
+  const STORAGE_KEY = 'sidebar_right_expanded_storybook';
+
+  const startExpanded = localStorage.getItem(STORAGE_KEY) !== 'false';
+
+  return (
+    <ResponsiveProvider>
+      <SidebarProvider
+        storageKey={{ right: STORAGE_KEY }}
+        defaultOpen={startExpanded}
+      >
+        <SidebarInset>
+          {isMobile && (
+            <Box direction="row" gap="sm" alignItems="center">
+              <SidebarTrigger side="right" iconName="cpu" />
+              <CreateMenu />
+            </Box>
+          )}
+          <Card height="100" padding="2xl">
+            <Box alignItems="flex-end" width="100">
+              <SidebarTrigger side="right" iconName="cpu" />
+            </Box>
+          </Card>
+        </SidebarInset>
+        <Sidebar side="right" collapsible="offcanvas">
+          <NavHeader activeTeam={activeTeam} setActiveTeam={setActiveTeam} />
+          <SidebarContent>
+            <Box width="100" background="inverse" color="inverse">
+              content
+            </Box>
+          </SidebarContent>
+          <NavFooter />
+          <SidebarRail />
+        </Sidebar>
+      </SidebarProvider>
+    </ResponsiveProvider>
+  );
+};
+
+export const SidebarBothSides = () => {
+  const [activeTeam, setActiveTeam] = React.useState(data.teams[0]);
+  const isMobile = useIsMobile();
+
+  const STORAGE_KEY = 'sidebar_dual_expanded_storybook';
+
+  return (
+    <ResponsiveProvider>
+      <SidebarProvider storageKey={STORAGE_KEY} defaultOpen>
+        <Sidebar side="left" collapsible="icon">
+          <NavHeader activeTeam={activeTeam} setActiveTeam={setActiveTeam} />
+          <SidebarContent>
+            <NavMain items={data.items} />
+            <NavFavorites favorites={data.favorites} />
+          </SidebarContent>
+          <NavFooter />
+          <SidebarRail />
+        </Sidebar>
+        <SidebarInset>
+          {isMobile && (
+            <Box width="100" direction="row" gap="sm" alignItems="center">
+              <Box flex="auto" direction="row" gap="sm" alignItems="center">
+                <SidebarTrigger side="left" />
+                <CreateMenu />
+              </Box>
+              <SidebarTrigger side="right" iconName="cpu" />
+            </Box>
+          )}
+          <Card height="100" padding="2xl">
+            <SidebarTrigger />
+            <SidebarTrigger side="right" iconName="cpu" />
+            <ContextContents />
+          </Card>
+        </SidebarInset>
+        <Sidebar side="right" collapsible="offcanvas">
+          <NavHeader activeTeam={activeTeam} setActiveTeam={setActiveTeam} />
+          <SidebarContent>
+            <NavMain items={data.items} />
+            <NavFavorites favorites={data.favorites} />
+          </SidebarContent>
+          <NavFooter />
+          <SidebarRail />
+        </Sidebar>
+      </SidebarProvider>
+    </ResponsiveProvider>
+  );
+};
+
+const ContextContents = () => {
+  const leftState = useSidebar('left');
+  const rightState = useSidebar('right');
+
+  return (
+    <Box direction="column" gap="sm">
+      <span>Left: {leftState.state}</span>
+      <span>Right: {rightState.state}</span>
+    </Box>
   );
 };
 
@@ -521,6 +623,7 @@ function CreateMenu() {
           background="primary"
           cursor="pointer"
           shadow="xs"
+          aria-label="Create new item..."
         >
           <Icon name="add" />
         </Box>
