@@ -294,6 +294,16 @@ const SidebarProvider = forwardRef<
 
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
+        const target = event.target as HTMLElement | null;
+        if (
+          target &&
+          (target.tagName === 'INPUT' ||
+            target.tagName === 'TEXTAREA' ||
+            target.tagName === 'SELECT' ||
+            target.isContentEditable)
+        ) {
+          return;
+        }
         const shortcutSide =
           event.key === SIDEBAR_KEYBOARD_SHORTCUT_LEFT
             ? 'left'

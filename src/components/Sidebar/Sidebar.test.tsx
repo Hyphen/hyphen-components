@@ -138,6 +138,38 @@ describe('Sidebar', () => {
     expect(onOpenChange).toHaveBeenCalledWith(true, 'left');
   });
 
+  test.each([
+    ['input', <input aria-label="input-field" />],
+    ['textarea', <textarea aria-label="textarea-field" />],
+    ['select', <select aria-label="select-field" />],
+    ['contenteditable', <div aria-label="editable-field" contentEditable />],
+  ])('ignores keyboard shortcuts for %s elements', (label, field) => {
+    render(
+      <SidebarProvider>
+        <Sidebar side="left">
+          <div>Left</div>
+        </Sidebar>
+        {field}
+      </SidebarProvider>
+    );
+
+    const leftSidebar = document.querySelector(
+      '[data-side="left"]'
+    ) as HTMLElement;
+
+    expect(leftSidebar).toHaveAttribute('data-state', 'expanded');
+
+    const target = screen.getByLabelText(/field/) as HTMLElement;
+    if (label === 'contenteditable') {
+      Object.defineProperty(target, 'isContentEditable', {
+        configurable: true,
+        value: true,
+      });
+    }
+    fireEvent.keyDown(target, { key: '[' });
+    expect(leftSidebar).toHaveAttribute('data-state', 'expanded');
+  });
+
   test('avoids re-rendering right consumers when left toggles', () => {
     const onRender = jest.fn();
     const RightConsumer = React.memo(
