@@ -623,6 +623,7 @@ function CreateMenu() {
           background="primary"
           cursor="pointer"
           shadow="xs"
+          aria-label="Create new item..."
         >
           <Icon name="add" />
         </Box>
