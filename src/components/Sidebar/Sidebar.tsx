@@ -101,6 +101,38 @@ const resolveStorageKey = (
   return side === 'left' ? 'sidebar_expanded' : 'sidebar_expanded_right';
 };
 
+const getSidebarWidth = (
+  state: SidebarContextSideState['state'],
+  collapsible: 'offcanvas' | 'icon' | 'none'
+) =>
+  state === 'collapsed' && collapsible === 'icon'
+    ? 'var(--sidebar-width-icon)'
+    : state === 'collapsed'
+    ? '0'
+    : 'var(--sidebar-width)';
+
+const getSidebarOffsetStyles = (
+  side: SidebarSide,
+  state: SidebarContextSideState['state'],
+  collapsible: 'offcanvas' | 'icon' | 'none'
+) => {
+  const isVisible = state === 'expanded' || collapsible === 'icon';
+  return {
+    left:
+      side === 'left'
+        ? isVisible
+          ? '0'
+          : 'calc(var(--sidebar-width)*-1)'
+        : undefined,
+    right:
+      side === 'right'
+        ? isVisible
+          ? '0'
+          : 'calc(var(--sidebar-width)*-1)'
+        : undefined,
+  };
+};
+
 const useSidebarSideState = ({
   side,
   isMobile,
@@ -395,12 +427,7 @@ const Sidebar = React.forwardRef<
               transitionDuration: 'var(--sidebar-transition-duration, 200ms)',
               animationDuration: 'var(--sidebar-transition-duration, 200ms)',
               transitionProperty: 'width',
-              width:
-                state === 'collapsed' && collapsible === 'icon'
-                  ? 'var(--sidebar-width-icon)'
-                  : state === 'collapsed'
-                  ? '0'
-                  : 'var(--sidebar-width)',
+              width: getSidebarWidth(state, collapsible),
               height: '100svh',
             }}
             className={classNames('position-relative', className)}
@@ -411,20 +438,7 @@ const Sidebar = React.forwardRef<
               className
             )}
             style={{
-              left:
-                side === 'left' &&
-                (state === 'expanded' || collapsible === 'icon')
-                  ? '0'
-                  : side === 'left'
-                  ? 'calc(var(--sidebar-width)*-1)'
-                  : undefined,
-              right:
-                side === 'right' &&
-                (state === 'expanded' || collapsible === 'icon')
-                  ? '0'
-                  : side === 'right'
-                  ? 'calc(var(--sidebar-width)*-1)'
-                  : undefined,
+              ...getSidebarOffsetStyles(side, state, collapsible),
               top: '0',
               bottom: '0',
               zIndex: 'var(--size-z-index-drawer)',
