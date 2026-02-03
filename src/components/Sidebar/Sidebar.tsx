@@ -43,12 +43,13 @@ interface SidebarContextSideState {
   toggleSidebar: () => void;
 }
 
-interface SidebarContextProps {
-  isMobile: boolean;
-  sides: Record<SidebarSide, SidebarContextSideState>;
-}
-
-const SidebarContext = React.createContext<SidebarContextProps | null>(null);
+const SidebarIsMobileContext = React.createContext<boolean | null>(null);
+const SidebarLeftContext = React.createContext<SidebarContextSideState | null>(
+  null
+);
+const SidebarRightContext = React.createContext<SidebarContextSideState | null>(
+  null
+);
 const SidebarSideContext = React.createContext<SidebarSide>('left');
 
 const resolveSideValue = (
@@ -183,15 +184,21 @@ const useSidebarSideState = ({
 };
 
 function useSidebar(sideOverride?: SidebarSide) {
-  const context = React.useContext(SidebarContext);
-  if (!context) {
+  const isMobile = React.useContext(SidebarIsMobileContext);
+  if (typeof isMobile !== 'boolean') {
     throw new Error('useSidebar must be used within a SidebarProvider.');
   }
   const contextSide = React.useContext(SidebarSideContext);
   const side = sideOverride ?? contextSide;
+  const sideContext = React.useContext(
+    side === 'left' ? SidebarLeftContext : SidebarRightContext
+  );
+  if (!sideContext) {
+    throw new Error('useSidebar must be used within a SidebarProvider.');
+  }
   return {
-    ...context.sides[side],
-    isMobile: context.isMobile,
+    ...sideContext,
+    isMobile,
     side,
   };
 }
@@ -279,40 +286,33 @@ const SidebarProvider = forwardRef<
       return () => window.removeEventListener('keydown', handleKeyDown);
     }, []);
 
-    const contextValue = useMemo<SidebarContextProps>(
-      () => ({
-        isMobile,
-        sides: {
-          left: leftState,
-          right: rightState,
-        },
-      }),
-      [isMobile, leftState, rightState]
-    );
-
     return (
-      <SidebarContext.Provider value={contextValue}>
-        <TooltipProvider delayDuration={0}>
-          <div
-            style={
-              {
-                '--sidebar-width': SIDEBAR_WIDTH,
-                '--sidebar-width-icon': SIDEBAR_WIDTH_ICON,
-                minBlockSize: '100svh',
-                ...style,
-              } as React.CSSProperties
-            }
-            className={classNames(
-              'display-flex w-100 background-color-secondary',
-              className
-            )}
-            ref={ref}
-            {...props}
-          >
-            {children}
-          </div>
-        </TooltipProvider>
-      </SidebarContext.Provider>
+      <SidebarIsMobileContext.Provider value={isMobile}>
+        <SidebarLeftContext.Provider value={leftState}>
+          <SidebarRightContext.Provider value={rightState}>
+            <TooltipProvider delayDuration={0}>
+              <div
+                style={
+                  {
+                    '--sidebar-width': SIDEBAR_WIDTH,
+                    '--sidebar-width-icon': SIDEBAR_WIDTH_ICON,
+                    minBlockSize: '100svh',
+                    ...style,
+                  } as React.CSSProperties
+                }
+                className={classNames(
+                  'display-flex w-100 background-color-secondary',
+                  className
+                )}
+                ref={ref}
+                {...props}
+              >
+                {children}
+              </div>
+            </TooltipProvider>
+          </SidebarRightContext.Provider>
+        </SidebarLeftContext.Provider>
+      </SidebarIsMobileContext.Provider>
     );
   }
 );

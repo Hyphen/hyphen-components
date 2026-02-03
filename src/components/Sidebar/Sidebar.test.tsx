@@ -1,6 +1,11 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import { Sidebar, SidebarProvider, SidebarTrigger } from './Sidebar';
+import {
+  Sidebar,
+  SidebarProvider,
+  SidebarTrigger,
+  useSidebar,
+} from './Sidebar';
 
 jest.mock('../../hooks/useIsMobile/useIsMobile', () => ({
   useIsMobile: () => false,
@@ -131,5 +136,34 @@ describe('Sidebar', () => {
     expect(onOpenChange).toHaveBeenCalledWith(false, 'left');
     fireEvent.click(screen.getByTestId('left-trigger'));
     expect(onOpenChange).toHaveBeenCalledWith(true, 'left');
+  });
+
+  test('avoids re-rendering right consumers when left toggles', () => {
+    const onRender = jest.fn();
+    const RightConsumer = React.memo(
+      ({ onRender: onRenderProp }: { onRender: jest.Mock }) => {
+        useSidebar('right');
+        onRenderProp();
+        return null;
+      }
+    );
+
+    render(
+      <SidebarProvider>
+        <Sidebar side="left" />
+        <Sidebar side="right" />
+        <RightConsumer onRender={onRender} />
+        <SidebarTrigger side="left" data-testid="left-trigger" />
+        <SidebarTrigger side="right" data-testid="right-trigger" />
+      </SidebarProvider>
+    );
+
+    expect(onRender).toHaveBeenCalledTimes(1);
+
+    fireEvent.click(screen.getByTestId('left-trigger'));
+    expect(onRender).toHaveBeenCalledTimes(1);
+
+    fireEvent.click(screen.getByTestId('right-trigger'));
+    expect(onRender).toHaveBeenCalledTimes(2);
   });
 });
