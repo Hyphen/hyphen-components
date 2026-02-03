@@ -1,6 +1,11 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import { Sidebar, SidebarProvider, SidebarTrigger } from './Sidebar';
+import {
+  Sidebar,
+  SidebarProvider,
+  SidebarTrigger,
+  useSidebar,
+} from './Sidebar';
 
 jest.mock('../../hooks/useIsMobile/useIsMobile', () => ({
   useIsMobile: () => false,
@@ -71,6 +76,54 @@ describe('Sidebar', () => {
     expect(rightSidebar).toHaveAttribute('data-state', 'collapsed');
   });
 
+  test('toggles left sidebar with keyboard shortcut', () => {
+    render(
+      <SidebarProvider>
+        <Sidebar side="left">
+          <div>Left</div>
+        </Sidebar>
+        <Sidebar side="right">
+          <div>Right</div>
+        </Sidebar>
+        <SidebarTrigger side="left" data-testid="left-trigger" />
+        <SidebarTrigger side="right" data-testid="right-trigger" />
+      </SidebarProvider>
+    );
+
+    const leftSidebar = document.querySelector(
+      '[data-side="left"]'
+    ) as HTMLElement;
+
+    expect(leftSidebar).toHaveAttribute('data-state', 'expanded');
+
+    fireEvent.keyDown(window, { key: '[' });
+    expect(leftSidebar).toHaveAttribute('data-state', 'collapsed');
+  });
+
+  test('toggles right sidebar with keyboard shortcut', () => {
+    render(
+      <SidebarProvider>
+        <Sidebar side="left">
+          <div>Left</div>
+        </Sidebar>
+        <Sidebar side="right">
+          <div>Right</div>
+        </Sidebar>
+        <SidebarTrigger side="left" data-testid="left-trigger" />
+        <SidebarTrigger side="right" data-testid="right-trigger" />
+      </SidebarProvider>
+    );
+
+    const rightSidebar = document.querySelector(
+      '[data-side="right"]'
+    ) as HTMLElement;
+
+    expect(rightSidebar).toHaveAttribute('data-state', 'expanded');
+
+    fireEvent.keyDown(window, { key: ']' });
+    expect(rightSidebar).toHaveAttribute('data-state', 'collapsed');
+  });
+
   test('calls onOpenChange callback when sidebar state changes', () => {
     const onOpenChange = jest.fn();
     render(
@@ -83,5 +136,66 @@ describe('Sidebar', () => {
     expect(onOpenChange).toHaveBeenCalledWith(false, 'left');
     fireEvent.click(screen.getByTestId('left-trigger'));
     expect(onOpenChange).toHaveBeenCalledWith(true, 'left');
+  });
+
+  test.each([
+    ['input', <input aria-label="input-field" />],
+    ['textarea', <textarea aria-label="textarea-field" />],
+    ['select', <select aria-label="select-field" />],
+    ['contenteditable', <div aria-label="editable-field" contentEditable />],
+  ])('ignores keyboard shortcuts for %s elements', (label, field) => {
+    render(
+      <SidebarProvider>
+        <Sidebar side="left">
+          <div>Left</div>
+        </Sidebar>
+        {field}
+      </SidebarProvider>
+    );
+
+    const leftSidebar = document.querySelector(
+      '[data-side="left"]'
+    ) as HTMLElement;
+
+    expect(leftSidebar).toHaveAttribute('data-state', 'expanded');
+
+    const target = screen.getByLabelText(/field/) as HTMLElement;
+    if (label === 'contenteditable') {
+      Object.defineProperty(target, 'isContentEditable', {
+        configurable: true,
+        value: true,
+      });
+    }
+    fireEvent.keyDown(target, { key: '[' });
+    expect(leftSidebar).toHaveAttribute('data-state', 'expanded');
+  });
+
+  test('avoids re-rendering right consumers when left toggles', () => {
+    const onRender = jest.fn();
+    const RightConsumer = React.memo(
+      ({ onRender: onRenderProp }: { onRender: jest.Mock }) => {
+        useSidebar('right');
+        onRenderProp();
+        return null;
+      }
+    );
+
+    render(
+      <SidebarProvider>
+        <Sidebar side="left" />
+        <Sidebar side="right" />
+        <RightConsumer onRender={onRender} />
+        <SidebarTrigger side="left" data-testid="left-trigger" />
+        <SidebarTrigger side="right" data-testid="right-trigger" />
+      </SidebarProvider>
+    );
+
+    expect(onRender).toHaveBeenCalledTimes(1);
+
+    fireEvent.click(screen.getByTestId('left-trigger'));
+    expect(onRender).toHaveBeenCalledTimes(1);
+
+    fireEvent.click(screen.getByTestId('right-trigger'));
+    expect(onRender).toHaveBeenCalledTimes(2);
   });
 });

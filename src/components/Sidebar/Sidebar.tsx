@@ -23,7 +23,8 @@ import {
 
 const SIDEBAR_WIDTH = '16rem';
 const SIDEBAR_WIDTH_ICON = '44px';
-const SIDEBAR_KEYBOARD_SHORTCUT = '[';
+const SIDEBAR_KEYBOARD_SHORTCUT_LEFT = '[';
+const SIDEBAR_KEYBOARD_SHORTCUT_RIGHT = ']';
 
 type SidebarSide = 'left' | 'right';
 
@@ -42,12 +43,13 @@ interface SidebarContextSideState {
   toggleSidebar: () => void;
 }
 
-interface SidebarContextProps {
-  isMobile: boolean;
-  sides: Record<SidebarSide, SidebarContextSideState>;
-}
-
-const SidebarContext = React.createContext<SidebarContextProps | null>(null);
+const SidebarIsMobileContext = React.createContext<boolean | null>(null);
+const SidebarLeftContext = React.createContext<SidebarContextSideState | null>(
+  null
+);
+const SidebarRightContext = React.createContext<SidebarContextSideState | null>(
+  null
+);
 const SidebarSideContext = React.createContext<SidebarSide>('left');
 
 const resolveSideValue = (
@@ -97,6 +99,38 @@ const resolveStorageKey = (
   }
 
   return side === 'left' ? 'sidebar_expanded' : 'sidebar_expanded_right';
+};
+
+const getSidebarWidth = (
+  state: SidebarContextSideState['state'],
+  collapsible: 'offcanvas' | 'icon' | 'none'
+) =>
+  state === 'collapsed' && collapsible === 'icon'
+    ? 'var(--sidebar-width-icon)'
+    : state === 'collapsed'
+    ? '0'
+    : 'var(--sidebar-width)';
+
+const getSidebarOffsetStyles = (
+  side: SidebarSide,
+  state: SidebarContextSideState['state'],
+  collapsible: 'offcanvas' | 'icon' | 'none'
+) => {
+  const isVisible = state === 'expanded' || collapsible === 'icon';
+  return {
+    left:
+      side === 'left'
+        ? isVisible
+          ? '0'
+          : 'calc(var(--sidebar-width)*-1)'
+        : undefined,
+    right:
+      side === 'right'
+        ? isVisible
+          ? '0'
+          : 'calc(var(--sidebar-width)*-1)'
+        : undefined,
+  };
 };
 
 const useSidebarSideState = ({
@@ -182,15 +216,21 @@ const useSidebarSideState = ({
 };
 
 function useSidebar(sideOverride?: SidebarSide) {
-  const context = React.useContext(SidebarContext);
-  if (!context) {
+  const isMobile = React.useContext(SidebarIsMobileContext);
+  if (typeof isMobile !== 'boolean') {
     throw new Error('useSidebar must be used within a SidebarProvider.');
   }
   const contextSide = React.useContext(SidebarSideContext);
   const side = sideOverride ?? contextSide;
+  const sideContext = React.useContext(
+    side === 'left' ? SidebarLeftContext : SidebarRightContext
+  );
+  if (!sideContext) {
+    throw new Error('useSidebar must be used within a SidebarProvider.');
+  }
   return {
-    ...context.sides[side],
-    isMobile: context.isMobile,
+    ...sideContext,
+    isMobile,
     side,
   };
 }
@@ -219,6 +259,12 @@ const SidebarProvider = forwardRef<
   ) => {
     const isMobile = useIsMobile();
     const lastToggledSideRef = React.useRef<SidebarSide>('left');
+    const leftToggleRef = React.useRef<
+      SidebarContextSideState['toggleSidebar'] | null
+    >(null);
+    const rightToggleRef = React.useRef<
+      SidebarContextSideState['toggleSidebar'] | null
+    >(null);
     const leftState = useSidebarSideState({
       side: 'left',
       isMobile,
@@ -238,54 +284,77 @@ const SidebarProvider = forwardRef<
       lastToggledSideRef,
     });
 
-    // Keydown event handler for toggling sidebar
+    useEffect(() => {
+      leftToggleRef.current = leftState.toggleSidebar;
+    }, [leftState.toggleSidebar]);
+
+    useEffect(() => {
+      rightToggleRef.current = rightState.toggleSidebar;
+    }, [rightState.toggleSidebar]);
+
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
-        if (event.key === SIDEBAR_KEYBOARD_SHORTCUT) {
-          event.preventDefault();
-          const sideToToggle = lastToggledSideRef.current;
-          (sideToToggle === 'left' ? leftState : rightState).toggleSidebar();
+        const target = event.target as HTMLElement | null;
+        if (
+          target &&
+          (target.tagName === 'INPUT' ||
+            target.tagName === 'TEXTAREA' ||
+            target.tagName === 'SELECT' ||
+            target.isContentEditable)
+        ) {
+          return;
         }
+        const shortcutSide =
+          event.key === SIDEBAR_KEYBOARD_SHORTCUT_LEFT
+            ? 'left'
+            : event.key === SIDEBAR_KEYBOARD_SHORTCUT_RIGHT
+            ? 'right'
+            : null;
+
+        if (!shortcutSide) {
+          return;
+        }
+
+        event.preventDefault();
+
+        const toggleSidebar =
+          shortcutSide === 'left'
+            ? leftToggleRef.current
+            : rightToggleRef.current;
+        toggleSidebar?.();
       };
 
       window.addEventListener('keydown', handleKeyDown);
       return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [leftState, rightState]);
-
-    const contextValue = useMemo<SidebarContextProps>(
-      () => ({
-        isMobile,
-        sides: {
-          left: leftState,
-          right: rightState,
-        },
-      }),
-      [isMobile, leftState, rightState]
-    );
+    }, []);
 
     return (
-      <SidebarContext.Provider value={contextValue}>
-        <TooltipProvider delayDuration={0}>
-          <div
-            style={
-              {
-                '--sidebar-width': SIDEBAR_WIDTH,
-                '--sidebar-width-icon': SIDEBAR_WIDTH_ICON,
-                minBlockSize: '100svh',
-                ...style,
-              } as React.CSSProperties
-            }
-            className={classNames(
-              'display-flex w-100 background-color-secondary',
-              className
-            )}
-            ref={ref}
-            {...props}
-          >
-            {children}
-          </div>
-        </TooltipProvider>
-      </SidebarContext.Provider>
+      <SidebarIsMobileContext.Provider value={isMobile}>
+        <SidebarLeftContext.Provider value={leftState}>
+          <SidebarRightContext.Provider value={rightState}>
+            <TooltipProvider delayDuration={0}>
+              <div
+                style={
+                  {
+                    '--sidebar-width': SIDEBAR_WIDTH,
+                    '--sidebar-width-icon': SIDEBAR_WIDTH_ICON,
+                    minBlockSize: '100svh',
+                    ...style,
+                  } as React.CSSProperties
+                }
+                className={classNames(
+                  'display-flex w-100 background-color-secondary',
+                  className
+                )}
+                ref={ref}
+                {...props}
+              >
+                {children}
+              </div>
+            </TooltipProvider>
+          </SidebarRightContext.Provider>
+        </SidebarLeftContext.Provider>
+      </SidebarIsMobileContext.Provider>
     );
   }
 );
@@ -368,12 +437,7 @@ const Sidebar = React.forwardRef<
               transitionDuration: 'var(--sidebar-transition-duration, 200ms)',
               animationDuration: 'var(--sidebar-transition-duration, 200ms)',
               transitionProperty: 'width',
-              width:
-                state === 'collapsed' && collapsible === 'icon'
-                  ? 'var(--sidebar-width-icon)'
-                  : state === 'collapsed'
-                  ? '0'
-                  : 'var(--sidebar-width)',
+              width: getSidebarWidth(state, collapsible),
               height: '100svh',
             }}
             className={classNames('position-relative', className)}
@@ -384,20 +448,7 @@ const Sidebar = React.forwardRef<
               className
             )}
             style={{
-              left:
-                side === 'left' &&
-                (state === 'expanded' || collapsible === 'icon')
-                  ? '0'
-                  : side === 'left'
-                  ? 'calc(var(--sidebar-width)*-1)'
-                  : undefined,
-              right:
-                side === 'right' &&
-                (state === 'expanded' || collapsible === 'icon')
-                  ? '0'
-                  : side === 'right'
-                  ? 'calc(var(--sidebar-width)*-1)'
-                  : undefined,
+              ...getSidebarOffsetStyles(side, state, collapsible),
               top: '0',
               bottom: '0',
               zIndex: 'var(--size-z-index-drawer)',
@@ -759,6 +810,10 @@ const SidebarRail = React.forwardRef<
   React.ComponentProps<'button'>
 >(({ className, ...props }, ref) => {
   const { open, toggleSidebar, side } = useSidebar();
+  const shortcutLabel =
+    side === 'left'
+      ? SIDEBAR_KEYBOARD_SHORTCUT_LEFT
+      : SIDEBAR_KEYBOARD_SHORTCUT_RIGHT;
 
   const caretIcon = open
     ? side === 'right'
@@ -775,7 +830,7 @@ const SidebarRail = React.forwardRef<
       aria-label="Toggle Sidebar"
       tabIndex={-1}
       onClick={toggleSidebar}
-      title="Toggle Sidebar ["
+      title={`Toggle Sidebar ${shortcutLabel}`}
       className={classNames(
         styles.rail,
         'hover-show-child background-color-transparent display-flex p-top-5xl p-left-xl p-right-0 justify-content-center position-absolute',
