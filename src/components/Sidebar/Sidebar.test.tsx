@@ -71,6 +71,54 @@ describe('Sidebar', () => {
     expect(rightSidebar).toHaveAttribute('data-state', 'collapsed');
   });
 
+  test('toggles left sidebar with keyboard shortcut', () => {
+    render(
+      <SidebarProvider>
+        <Sidebar side="left">
+          <div>Left</div>
+        </Sidebar>
+        <Sidebar side="right">
+          <div>Right</div>
+        </Sidebar>
+        <SidebarTrigger side="left" data-testid="left-trigger" />
+        <SidebarTrigger side="right" data-testid="right-trigger" />
+      </SidebarProvider>
+    );
+
+    const leftSidebar = document.querySelector(
+      '[data-side="left"]'
+    ) as HTMLElement;
+
+    expect(leftSidebar).toHaveAttribute('data-state', 'expanded');
+
+    fireEvent.keyDown(window, { key: '[' });
+    expect(leftSidebar).toHaveAttribute('data-state', 'collapsed');
+  });
+
+  test('toggles right sidebar with keyboard shortcut', () => {
+    render(
+      <SidebarProvider>
+        <Sidebar side="left">
+          <div>Left</div>
+        </Sidebar>
+        <Sidebar side="right">
+          <div>Right</div>
+        </Sidebar>
+        <SidebarTrigger side="left" data-testid="left-trigger" />
+        <SidebarTrigger side="right" data-testid="right-trigger" />
+      </SidebarProvider>
+    );
+
+    const rightSidebar = document.querySelector(
+      '[data-side="right"]'
+    ) as HTMLElement;
+
+    expect(rightSidebar).toHaveAttribute('data-state', 'expanded');
+
+    fireEvent.keyDown(window, { key: ']' });
+    expect(rightSidebar).toHaveAttribute('data-state', 'collapsed');
+  });
+
   test('calls onOpenChange callback when sidebar state changes', () => {
     const onOpenChange = jest.fn();
     render(

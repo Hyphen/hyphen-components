@@ -23,7 +23,8 @@ import {
 
 const SIDEBAR_WIDTH = '16rem';
 const SIDEBAR_WIDTH_ICON = '44px';
-const SIDEBAR_KEYBOARD_SHORTCUT = '[';
+const SIDEBAR_KEYBOARD_SHORTCUT_LEFT = '[';
+const SIDEBAR_KEYBOARD_SHORTCUT_RIGHT = ']';
 
 type SidebarSide = 'left' | 'right';
 
@@ -219,6 +220,12 @@ const SidebarProvider = forwardRef<
   ) => {
     const isMobile = useIsMobile();
     const lastToggledSideRef = React.useRef<SidebarSide>('left');
+    const leftToggleRef = React.useRef<
+      SidebarContextSideState['toggleSidebar']
+    >(() => undefined);
+    const rightToggleRef = React.useRef<
+      SidebarContextSideState['toggleSidebar']
+    >(() => undefined);
     const leftState = useSidebarSideState({
       side: 'left',
       isMobile,
@@ -238,19 +245,39 @@ const SidebarProvider = forwardRef<
       lastToggledSideRef,
     });
 
-    // Keydown event handler for toggling sidebar
+    useEffect(() => {
+      leftToggleRef.current = leftState.toggleSidebar;
+    }, [leftState.toggleSidebar]);
+
+    useEffect(() => {
+      rightToggleRef.current = rightState.toggleSidebar;
+    }, [rightState.toggleSidebar]);
+
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
-        if (event.key === SIDEBAR_KEYBOARD_SHORTCUT) {
-          event.preventDefault();
-          const sideToToggle = lastToggledSideRef.current;
-          (sideToToggle === 'left' ? leftState : rightState).toggleSidebar();
+        const shortcutSide =
+          event.key === SIDEBAR_KEYBOARD_SHORTCUT_LEFT
+            ? 'left'
+            : event.key === SIDEBAR_KEYBOARD_SHORTCUT_RIGHT
+            ? 'right'
+            : null;
+
+        if (!shortcutSide) {
+          return;
         }
+
+        event.preventDefault();
+
+        const toggleSidebar =
+          shortcutSide === 'left'
+            ? leftToggleRef.current
+            : rightToggleRef.current;
+        toggleSidebar();
       };
 
       window.addEventListener('keydown', handleKeyDown);
       return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [leftState, rightState]);
+    }, []);
 
     const contextValue = useMemo<SidebarContextProps>(
       () => ({
@@ -759,6 +786,10 @@ const SidebarRail = React.forwardRef<
   React.ComponentProps<'button'>
 >(({ className, ...props }, ref) => {
   const { open, toggleSidebar, side } = useSidebar();
+  const shortcutLabel =
+    side === 'left'
+      ? SIDEBAR_KEYBOARD_SHORTCUT_LEFT
+      : SIDEBAR_KEYBOARD_SHORTCUT_RIGHT;
 
   const caretIcon = open
     ? side === 'right'
@@ -775,7 +806,7 @@ const SidebarRail = React.forwardRef<
       aria-label="Toggle Sidebar"
       tabIndex={-1}
       onClick={toggleSidebar}
-      title="Toggle Sidebar ["
+      title={`Toggle Sidebar ${shortcutLabel}`}
       className={classNames(
         styles.rail,
         'hover-show-child background-color-transparent display-flex p-top-5xl p-left-xl p-right-0 justify-content-center position-absolute',
