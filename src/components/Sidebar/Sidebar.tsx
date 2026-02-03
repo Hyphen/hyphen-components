@@ -260,11 +260,11 @@ const SidebarProvider = forwardRef<
     const isMobile = useIsMobile();
     const lastToggledSideRef = React.useRef<SidebarSide>('left');
     const leftToggleRef = React.useRef<
-      SidebarContextSideState['toggleSidebar']
-    >(() => undefined);
+      SidebarContextSideState['toggleSidebar'] | null
+    >(null);
     const rightToggleRef = React.useRef<
-      SidebarContextSideState['toggleSidebar']
-    >(() => undefined);
+      SidebarContextSideState['toggleSidebar'] | null
+    >(null);
     const leftState = useSidebarSideState({
       side: 'left',
       isMobile,
@@ -321,7 +321,7 @@ const SidebarProvider = forwardRef<
           shortcutSide === 'left'
             ? leftToggleRef.current
             : rightToggleRef.current;
-        toggleSidebar();
+        toggleSidebar?.();
       };
 
       window.addEventListener('keydown', handleKeyDown);
