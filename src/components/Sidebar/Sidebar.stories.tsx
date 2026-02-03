@@ -209,19 +209,22 @@ export const SidebarRightExample = () => {
         <SidebarInset>
           {isMobile && (
             <Box direction="row" gap="sm" alignItems="center">
-              <SidebarTrigger side="right" />
+              <SidebarTrigger side="right" iconName="cpu" />
               <CreateMenu />
             </Box>
           )}
           <Card height="100" padding="2xl">
-            <SidebarTrigger side="right" />
+            <Box alignItems="flex-end" width="100">
+              <SidebarTrigger side="right" iconName="cpu" />
+            </Box>
           </Card>
         </SidebarInset>
         <Sidebar side="right" collapsible="offcanvas">
           <NavHeader activeTeam={activeTeam} setActiveTeam={setActiveTeam} />
           <SidebarContent>
-            <NavMain items={data.items} />
-            <NavFavorites favorites={data.favorites} />
+            <Box width="100" background="inverse" color="inverse">
+              content
+            </Box>
           </SidebarContent>
           <NavFooter />
           <SidebarRail />
@@ -256,12 +259,12 @@ export const SidebarBothSides = () => {
                 <SidebarTrigger side="left" />
                 <CreateMenu />
               </Box>
-              <SidebarTrigger side="right" />
+              <SidebarTrigger side="right" iconName="cpu" />
             </Box>
           )}
           <Card height="100" padding="2xl">
             <SidebarTrigger />
-            <SidebarTrigger iconName="cpu" side="right" />
+            <SidebarTrigger side="right" iconName="cpu" />
             <ContextContents />
           </Card>
         </SidebarInset>

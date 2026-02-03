@@ -349,6 +349,11 @@ const Sidebar = React.forwardRef<
           color="base"
           fontSize="sm"
           position="relative"
+          style={
+            side === 'right' && collapsible === 'offcanvas'
+              ? { overflowX: 'hidden' }
+              : undefined
+          }
           data-state={state}
           data-collapsible={collapsible}
           data-side={side}
@@ -413,7 +418,12 @@ const Sidebar = React.forwardRef<
           >
             <div
               data-sidebar="sidebar"
-              className="display-flex h-100 w-100 flex-direction-column background-color-secondary font-color-base"
+              className={classNames(
+                'display-flex h-100 w-100 flex-direction-column background-color-secondary font-color-base',
+                {
+                  'p-right-lg-desktop': side === 'right',
+                }
+              )}
             >
               {children}
             </div>
