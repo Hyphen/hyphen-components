@@ -22,6 +22,7 @@ import {
 } from '../Tooltip/Tooltip';
 
 const SIDEBAR_WIDTH = '16rem';
+const SIDEBAR_RIGHT_WIDTH = '24rem';
 const SIDEBAR_WIDTH_ICON = '44px';
 const SIDEBAR_KEYBOARD_SHORTCUT_LEFT = '[';
 const SIDEBAR_KEYBOARD_SHORTCUT_RIGHT = ']';
@@ -343,7 +344,7 @@ const SidebarProvider = forwardRef<
                   } as React.CSSProperties
                 }
                 className={classNames(
-                  'display-flex w-100 background-color-secondary',
+                  'display-flex w-100 background-color-secondary overflow-hidden',
                   className
                 )}
                 ref={ref}
@@ -372,6 +373,7 @@ const Sidebar = React.forwardRef<
     ref
   ) => {
     const { isMobile, state, openMobile, setOpenMobile } = useSidebar(side);
+    const sidebarWidth = side === 'right' ? SIDEBAR_RIGHT_WIDTH : SIDEBAR_WIDTH;
 
     if (isMobile) {
       return (
@@ -397,9 +399,12 @@ const Sidebar = React.forwardRef<
               'group display-flex h-100 font-size-xs flex-direction-column background-color-secondary font-color-base',
               className
             )}
-            style={{
-              width: 'var(--sidebar-width)',
-            }}
+            style={
+              {
+                '--sidebar-width': sidebarWidth,
+                width: 'var(--sidebar-width)',
+              } as React.CSSProperties
+            }
             ref={ref}
             {...props}
           >
@@ -419,9 +424,9 @@ const Sidebar = React.forwardRef<
           fontSize="sm"
           position="relative"
           style={
-            side === 'right' && collapsible === 'offcanvas'
-              ? { overflowX: 'hidden' }
-              : undefined
+            {
+              '--sidebar-width': sidebarWidth,
+            } as React.CSSProperties
           }
           data-state={state}
           data-collapsible={collapsible}
@@ -846,9 +851,10 @@ const SidebarRail = React.forwardRef<
         top: '20px',
         bottom: '20px',
         right: side === 'left' ? '-14px' : undefined,
-        left: side === 'right' ? '-14px' : undefined,
+        left: side === 'right' ? '-18px' : undefined,
         width: '10px',
       }}
+      type="button"
       {...props}
     >
       <Box
