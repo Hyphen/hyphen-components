@@ -22,6 +22,7 @@ import {
 } from '../Tooltip/Tooltip';
 
 const SIDEBAR_WIDTH = '16rem';
+const SIDEBAR_RIGHT_WIDTH = '24rem';
 const SIDEBAR_WIDTH_ICON = '44px';
 const SIDEBAR_KEYBOARD_SHORTCUT_LEFT = '[';
 const SIDEBAR_KEYBOARD_SHORTCUT_RIGHT = ']';
@@ -343,7 +344,7 @@ const SidebarProvider = forwardRef<
                   } as React.CSSProperties
                 }
                 className={classNames(
-                  'display-flex w-100 background-color-secondary',
+                  'display-flex w-100 background-color-secondary overflow-hidden',
                   className
                 )}
                 ref={ref}
@@ -372,6 +373,7 @@ const Sidebar = React.forwardRef<
     ref
   ) => {
     const { isMobile, state, openMobile, setOpenMobile } = useSidebar(side);
+    const sidebarWidth = side === 'right' ? SIDEBAR_RIGHT_WIDTH : SIDEBAR_WIDTH;
 
     if (isMobile) {
       return (
@@ -381,7 +383,16 @@ const Sidebar = React.forwardRef<
             onDismiss={() => setOpenMobile(false)}
             placement={side}
           >
-            <Box data-sidebar="sidebar" data-mobile="true" height="100">
+            <Box
+              data-sidebar="sidebar"
+              data-mobile="true"
+              height="100"
+              style={
+                {
+                  '--sidebar-width': sidebarWidth,
+                } as React.CSSProperties
+              }
+            >
               {children}
             </Box>
           </Drawer>
@@ -397,9 +408,12 @@ const Sidebar = React.forwardRef<
               'group display-flex h-100 font-size-xs flex-direction-column background-color-secondary font-color-base',
               className
             )}
-            style={{
-              width: 'var(--sidebar-width)',
-            }}
+            style={
+              {
+                '--sidebar-width': sidebarWidth,
+                width: 'var(--sidebar-width)',
+              } as React.CSSProperties
+            }
             ref={ref}
             {...props}
           >
@@ -420,8 +434,12 @@ const Sidebar = React.forwardRef<
           position="relative"
           style={
             side === 'right' && collapsible === 'offcanvas'
-              ? { overflowX: 'hidden' }
-              : undefined
+              ? ({
+                  '--sidebar-width': sidebarWidth,
+                } as React.CSSProperties)
+              : ({
+                  '--sidebar-width': sidebarWidth,
+                } as React.CSSProperties)
           }
           data-state={state}
           data-collapsible={collapsible}
