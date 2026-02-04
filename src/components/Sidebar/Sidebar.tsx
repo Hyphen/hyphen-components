@@ -383,16 +383,7 @@ const Sidebar = React.forwardRef<
             onDismiss={() => setOpenMobile(false)}
             placement={side}
           >
-            <Box
-              data-sidebar="sidebar"
-              data-mobile="true"
-              height="100"
-              style={
-                {
-                  '--sidebar-width': sidebarWidth,
-                } as React.CSSProperties
-              }
-            >
+            <Box data-sidebar="sidebar" data-mobile="true" height="100">
               {children}
             </Box>
           </Drawer>
@@ -433,13 +424,9 @@ const Sidebar = React.forwardRef<
           fontSize="sm"
           position="relative"
           style={
-            side === 'right' && collapsible === 'offcanvas'
-              ? ({
-                  '--sidebar-width': sidebarWidth,
-                } as React.CSSProperties)
-              : ({
-                  '--sidebar-width': sidebarWidth,
-                } as React.CSSProperties)
+            {
+              '--sidebar-width': sidebarWidth,
+            } as React.CSSProperties
           }
           data-state={state}
           data-collapsible={collapsible}
@@ -864,9 +851,10 @@ const SidebarRail = React.forwardRef<
         top: '20px',
         bottom: '20px',
         right: side === 'left' ? '-14px' : undefined,
-        left: side === 'right' ? '-14px' : undefined,
+        left: side === 'right' ? '-18px' : undefined,
         width: '10px',
       }}
+      type="button"
       {...props}
     >
       <Box
