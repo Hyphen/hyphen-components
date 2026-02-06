@@ -40,9 +40,6 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "jest": {
-    "testEnvironment": "jsdom"
-  },
   "peerDependencies": {
     "react": ">=16"
   },
