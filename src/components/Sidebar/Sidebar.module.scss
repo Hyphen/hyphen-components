@@ -4,6 +4,10 @@
   border-right: 2px solid transparent;
 }
 
+.rail:focus:not(:focus-visible) {
+  outline: none;
+}
+
 .rail:hover {
   border-right: 2px solid var(--color-border-sidebar-rail-hover);
 }
