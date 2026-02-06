@@ -203,7 +203,7 @@ const useSidebarSideState = ({
     } else {
       setOpen((value) => !value);
     }
-  }, [isMobile, setOpen, side, lastToggledSideRef]);
+  }, [isMobile, setOpen, side, setOpenMobile, lastToggledSideRef]);
 
   const state = open ? 'expanded' : 'collapsed';
 
@@ -644,7 +644,6 @@ const SidebarMenuButton = React.forwardRef<
   React.ComponentProps<'button'> & {
     asChild?: boolean;
     isActive?: boolean;
-    icon?: IconName;
     tooltip?: string | React.ComponentProps<typeof TooltipContent>;
   }
 >(
