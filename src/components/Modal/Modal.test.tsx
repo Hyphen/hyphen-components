@@ -1,70 +1,168 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  act,
+} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Modal } from './Modal';
 
 describe('Modal', () => {
-  test('renders its children', () => {
-    const { getByText } = render(
-      <Modal isOpen onDismiss={() => {}} ariaLabel="testDefault">
-        test modal
-      </Modal>
-    );
-    expect(getByText('test modal')).toBeInTheDocument();
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
-  test('it open and closes based on isOpen prop', () => {
-    const { queryByText, getByText, rerender } = render(
-      <Modal isOpen={false} onDismiss={() => {}} ariaLabel="testIsOpen">
-        test modal
-      </Modal>
-    );
+  describe('Basic rendering', () => {
+    test('renders its children', () => {
+      const { getByText } = render(
+        <Modal isOpen onDismiss={() => {}} ariaLabel="testDefault">
+          test modal
+        </Modal>
+      );
+      expect(getByText('test modal')).toBeInTheDocument();
+    });
 
-    expect(queryByText('test modal')).toBe(null);
+    test('does not render when isOpen is false', () => {
+      const { queryByText } = render(
+        <Modal isOpen={false} onDismiss={() => {}} ariaLabel="testClosed">
+          test modal
+        </Modal>
+      );
+      expect(queryByText('test modal')).not.toBeInTheDocument();
+    });
 
-    rerender(
-      <Modal isOpen onDismiss={() => {}} ariaLabel="testIsOpen">
-        test modal
-      </Modal>
-    );
+    test('it open and closes based on isOpen prop', () => {
+      const { queryByText, getByText, rerender } = render(
+        <Modal isOpen={false} onDismiss={() => {}} ariaLabel="testIsOpen">
+          test modal
+        </Modal>
+      );
 
-    expect(getByText('test modal')).toBeInTheDocument();
-  });
+      expect(queryByText('test modal')).toBe(null);
 
-  test('Subcomponents', () => {
-    const { getByText } = render(
-      <Modal isOpen onDismiss={() => {}} ariaLabel="testSubcomponents">
-        <Modal.Header
-          id="titleFooterBody"
-          title="The Modal Title"
+      rerender(
+        <Modal isOpen onDismiss={() => {}} ariaLabel="testIsOpen">
+          test modal
+        </Modal>
+      );
+
+      expect(getByText('test modal')).toBeInTheDocument();
+    });
+
+    test('applies custom className', () => {
+      render(
+        <Modal
+          isOpen
           onDismiss={() => {}}
-        />
-        <Modal.Body>Modal body content</Modal.Body>
-        <Modal.Footer>This is content in the modal footer</Modal.Footer>
-      </Modal>
-    );
+          ariaLabel="testClassName"
+          className="custom-modal"
+        >
+          content
+        </Modal>
+      );
 
-    expect(getByText('The Modal Title')).toBeInTheDocument();
-    expect(getByText('Modal body content')).toBeInTheDocument();
-    expect(
-      getByText('This is content in the modal footer')
-    ).toBeInTheDocument();
+      const modal = screen.getByRole('dialog');
+      expect(modal).toHaveClass('custom-modal');
+    });
   });
 
-  test('applies maxWidth styles', () => {
-    const { getByLabelText } = render(
-      <Modal
-        isOpen
-        onDismiss={() => {}}
-        ariaLabel="testMaxWidth"
-        maxWidth="500px"
-      >
-        test modal
-      </Modal>
-    );
+  describe('Subcomponents', () => {
+    test('renders Modal.Header with title', () => {
+      const { getByText } = render(
+        <Modal isOpen onDismiss={() => {}} ariaLabel="testSubcomponents">
+          <Modal.Header id="titleFooterBody" title="The Modal Title" />
+        </Modal>
+      );
 
-    expect(getByLabelText('testMaxWidth').parentElement).toHaveStyle(
-      'max-width: 500px'
-    );
+      expect(getByText('The Modal Title')).toBeInTheDocument();
+    });
+
+    test('renders Modal.Header with children', () => {
+      render(
+        <Modal isOpen onDismiss={() => {}} ariaLabel="testHeaderChildren">
+          <Modal.Header id="header-id">
+            <span>Custom header content</span>
+          </Modal.Header>
+        </Modal>
+      );
+
+      expect(screen.getByText('Custom header content')).toBeInTheDocument();
+    });
+
+    test('renders Modal.Header with title and children', () => {
+      render(
+        <Modal isOpen onDismiss={() => {}} ariaLabel="testHeaderBoth">
+          <Modal.Header id="header-id" title="Main Title">
+            <span>Subtitle</span>
+          </Modal.Header>
+        </Modal>
+      );
+
+      expect(screen.getByText('Main Title')).toBeInTheDocument();
+      expect(screen.getByText('Subtitle')).toBeInTheDocument();
+    });
+
+    test('renders Modal.Header with close button when onDismiss is provided', () => {
+      const handleDismiss = jest.fn();
+      render(
+        <Modal isOpen onDismiss={() => {}} ariaLabel="testCloseButton">
+          <Modal.Header
+            id="header-id"
+            title="Title"
+            onDismiss={handleDismiss}
+          />
+        </Modal>
+      );
+
+      const closeButton = screen.getByLabelText('close');
+      expect(closeButton).toBeInTheDocument();
+      fireEvent.click(closeButton);
+      expect(handleDismiss).toHaveBeenCalled();
+    });
+
+    test('renders Modal.Body', () => {
+      const { getByText } = render(
+        <Modal isOpen onDismiss={() => {}} ariaLabel="testBody">
+          <Modal.Body>Modal body content</Modal.Body>
+        </Modal>
+      );
+
+      expect(getByText('Modal body content')).toBeInTheDocument();
+    });
+
+    test('renders Modal.Footer', () => {
+      const { getByText } = render(
+        <Modal isOpen onDismiss={() => {}} ariaLabel="testFooter">
+          <Modal.Footer>This is content in the modal footer</Modal.Footer>
+        </Modal>
+      );
+
+      expect(
+        getByText('This is content in the modal footer')
+      ).toBeInTheDocument();
+    });
+
+    test('renders all subcomponents together', () => {
+      const { getByText } = render(
+        <Modal isOpen onDismiss={() => {}} ariaLabel="testSubcomponents">
+          <Modal.Header
+            id="titleFooterBody"
+            title="The Modal Title"
+            onDismiss={() => {}}
+          />
+          <Modal.Body>Modal body content</Modal.Body>
+          <Modal.Footer>This is content in the modal footer</Modal.Footer>
+        </Modal>
+      );
+
+      expect(getByText('The Modal Title')).toBeInTheDocument();
+      expect(getByText('Modal body content')).toBeInTheDocument();
+      expect(
+        getByText('This is content in the modal footer')
+      ).toBeInTheDocument();
+    });
   });
 
   describe('Styling', () => {
