@@ -20,7 +20,7 @@ import { GroupBase } from 'react-select/dist/declarations/src/types';
 
 type SelectOption = {
   value: string;
-  label: string;
+  label: ReactNode;
   [key: string]: unknown;
 };
 type SelectGroupOptions = GroupBase<SelectOption>;

@@ -239,8 +239,8 @@ export const Width = () => {
   return (
     <DrawerProvider defaultIsOpen={false}>
       <Box gap="md" direction="row">
-        {widths.map((width: string, index: number) => (
-          <DrawerTrigger asChild key={index}>
+        {widths.map((width: string) => (
+          <DrawerTrigger asChild key={width}>
             <Button
               variant="primary"
               onClick={() => handleClick(width as WidthSize)}
