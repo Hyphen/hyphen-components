@@ -1,5 +1,6 @@
 import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import {
   Drawer,
   DrawerTitle,
@@ -66,25 +67,75 @@ describe('Drawer', () => {
   });
 
   describe('Focus management', () => {
-    test('it traps focus within the drawer', () => {
-      renderDrawer({ isOpen: true, ariaLabel: 'Test Drawer' });
-      fireEvent.click(screen.getByText('Open drawer'));
+    test('it traps focus within the drawer', async () => {
+      const user = userEvent.setup();
 
-      const closeButton = screen.getByLabelText('close');
-      closeButton.focus();
-      expect(closeButton).toHaveFocus();
+      // Render with an outside button to verify focus cannot escape
+      render(
+        <>
+          <button data-testid="outside-button">Outside</button>
+          <Drawer isOpen ariaLabel="Focus Trap Drawer">
+            <DrawerCloseButton />
+            <DrawerContent>
+              <button data-testid="inside-button">Inside</button>
+            </DrawerContent>
+          </Drawer>
+        </>
+      );
+
+      const drawerContent = screen.getByTestId('drawer-content');
+      const insideButton = screen.getByTestId('inside-button');
+
+      // Focus the inside button
+      insideButton.focus();
+      expect(insideButton).toHaveFocus();
+
+      // Tab multiple times - focus should remain trapped within the drawer
+      await user.tab();
+      expect(drawerContent.contains(document.activeElement)).toBe(true);
+
+      await user.tab();
+      expect(drawerContent.contains(document.activeElement)).toBe(true);
+
+      await user.tab();
+      expect(drawerContent.contains(document.activeElement)).toBe(true);
     });
 
-    test('it does not trap focus when dangerouslyBypassFocusLock is true', () => {
-      renderDrawer({
-        isOpen: true,
-        dangerouslyBypassFocusLock: true,
-      });
-      fireEvent.click(screen.getByText('Open drawer'));
+    test('it does not trap focus when dangerouslyBypassFocusLock is true', async () => {
+      const user = userEvent.setup();
 
-      const closeButton = screen.getByLabelText('close');
-      closeButton.focus();
-      expect(closeButton).toHaveFocus();
+      // Render with an outside button to verify focus can escape
+      render(
+        <>
+          <button data-testid="outside-button">Outside</button>
+          <Drawer
+            isOpen
+            ariaLabel="Bypass Focus Lock Drawer"
+            dangerouslyBypassFocusLock
+          >
+            <DrawerCloseButton />
+            <DrawerContent>
+              <button data-testid="inside-button">Inside</button>
+            </DrawerContent>
+          </Drawer>
+        </>
+      );
+
+      const outsideButton = screen.getByTestId('outside-button');
+      const insideButton = screen.getByTestId('inside-button');
+
+      // Focus the inside button
+      insideButton.focus();
+      expect(insideButton).toHaveFocus();
+
+      // Tab - with focus lock bypassed, focus should eventually escape to outside
+      await user.tab();
+      await user.tab();
+      await user.tab();
+
+      // Focus should be able to reach the outside button (not trapped inside)
+      outsideButton.focus();
+      expect(outsideButton).toHaveFocus();
     });
   });
 

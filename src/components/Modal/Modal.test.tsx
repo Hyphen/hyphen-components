@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Modal } from './Modal';
 
 describe('Modal', () => {
@@ -301,10 +302,9 @@ describe('Modal', () => {
   });
 
   describe('Focus management', () => {
-    test('traps focus within the modal', async () => {
+    test('focus is placed inside the modal when opened', async () => {
       render(
         <Modal isOpen onDismiss={() => {}} ariaLabel="Focus Trap Modal">
-          <Modal.Header id="header" title="Title" onDismiss={() => {}} />
           <Modal.Body>
             <button>First button</button>
             <button>Second button</button>
@@ -312,15 +312,52 @@ describe('Modal', () => {
         </Modal>
       );
 
-      // Focus should be trapped within the modal
+      const dialog = screen.getByRole('dialog');
       const firstButton = screen.getByText('First button');
       const secondButton = screen.getByText('Second button');
 
+      // Verify focusable elements are present
       expect(firstButton).toBeInTheDocument();
       expect(secondButton).toBeInTheDocument();
+
+      // Focus should be within the modal (FocusLock sets focus inside)
+      await waitFor(() => {
+        expect(dialog.contains(document.activeElement)).toBe(true);
+      });
     });
 
-    test('accepts initialFocusRef prop and focuses the referenced element', async () => {
+    test('tabbing cycles focus within the modal', async () => {
+      const user = userEvent.setup();
+      render(
+        <Modal isOpen onDismiss={() => {}} ariaLabel="Focus Trap Modal">
+          <Modal.Body>
+            <button data-testid="btn1">First button</button>
+            <button data-testid="btn2">Second button</button>
+          </Modal.Body>
+        </Modal>
+      );
+
+      const dialog = screen.getByRole('dialog');
+
+      // Wait for focus lock to activate
+      await waitFor(() => {
+        expect(dialog.contains(document.activeElement)).toBe(true);
+      });
+
+      // Tab multiple times - focus should remain within the modal
+      await user.tab();
+      expect(dialog.contains(document.activeElement)).toBe(true);
+
+      await user.tab();
+      expect(dialog.contains(document.activeElement)).toBe(true);
+
+      await user.tab();
+      expect(dialog.contains(document.activeElement)).toBe(true);
+    });
+
+    test('accepts initialFocusRef prop and focuses the referenced element', () => {
+      jest.useFakeTimers();
+
       const TestComponent = () => {
         const ref = React.useRef<HTMLDivElement>(null);
         return (
@@ -345,12 +382,13 @@ describe('Modal', () => {
       expect(focusTarget).toBeInTheDocument();
 
       // The Modal uses a setTimeout (100ms) to focus the initialFocusRef element
-      await waitFor(
-        () => {
-          expect(focusTarget).toHaveFocus();
-        },
-        { timeout: 200 }
-      );
+      act(() => {
+        jest.advanceTimersByTime(100);
+      });
+
+      expect(focusTarget).toHaveFocus();
+
+      jest.useRealTimers();
     });
   });
 

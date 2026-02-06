@@ -259,11 +259,4 @@ describe('Calendar', () => {
       expect(calendarGrid).toBeInTheDocument();
     });
   });
-
-  describe('Exports', () => {
-    test('exports Matcher type', () => {
-      // This is a type test - we just verify Calendar is exported
-      expect(Calendar).toBeDefined();
-    });
-  });
 });
