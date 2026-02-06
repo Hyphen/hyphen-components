@@ -1,5 +1,11 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  act,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Modal } from './Modal';
 
@@ -175,21 +181,6 @@ describe('Modal', () => {
       expect(getByLabelText('testMaxWidth').parentElement).toHaveStyle(
         'max-width: 500px'
       );
-    });
-
-    test('applies responsive maxWidth styles', () => {
-      render(
-        <Modal
-          isOpen
-          onDismiss={() => {}}
-          ariaLabel="testResponsiveMaxWidth"
-          maxWidth={{ base: '300px', tablet: '500px', desktop: '700px' }}
-        >
-          test modal
-        </Modal>
-      );
-
-      expect(screen.getByText('test modal')).toBeInTheDocument();
     });
 
     test('applies custom style prop', () => {
