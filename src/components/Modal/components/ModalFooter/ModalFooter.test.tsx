@@ -59,10 +59,10 @@ describe('ModalFooter', () => {
   });
 
   test('applies custom styles', () => {
-    const customStyle = { backgroundColor: 'red' };
+    const customStyle = { backgroundColor: '#cacaca' };
     const { container } = render(
       <ModalFooter style={customStyle}>test modal</ModalFooter>
     );
-    expect(container.firstChild).toHaveStyle('background-color: red');
+    expect(container.firstChild).toHaveStyle('background-color: #cacaca');
   });
 });
