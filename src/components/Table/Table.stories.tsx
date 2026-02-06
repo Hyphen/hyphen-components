@@ -3,7 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { Table } from './Table';
 import { Button } from '../Button/Button';
 import { Badge } from '../Badge/Badge';
-import type { Column as ColumnType } from '../../types';
+import type {
+  Column as ColumnType,
+  Cell,
+  Row,
+  EventWithColumnKey,
+} from '../../types';
 
 const meta: Meta<typeof Table> = {
   title: 'Components/Table',
@@ -11,6 +16,13 @@ const meta: Meta<typeof Table> = {
 };
 
 export default meta;
+
+type SortDirection = 'ascending' | 'descending';
+type SortedColumn = {
+  dataKey?: string;
+  sortDirection?: SortDirection;
+};
+type SortableRow = Record<string, string | number>;
 
 export const Column = () =>
   (() => {
@@ -94,7 +106,7 @@ export const Column = () =>
       {
         heading: 'Type',
         dataKey: 'type',
-        render: (cell: any) => <code style={codePreviewStyle}>{cell}</code>,
+        render: (cell: string) => <code style={codePreviewStyle}>{cell}</code>,
       },
       { heading: 'Description', dataKey: 'description' },
     ];
@@ -109,12 +121,15 @@ export const CommonExample = () =>
       {
         heading: 'Customer',
         dataKey: 'customerInfo',
-        render: (_cell: any, row: any) => (
-          <div>
-            <div>{row.name}</div>
-            <div className="font-color-base">{row.email}</div>
-          </div>
-        ),
+        render: (_cell?: Cell, row?: Row) => {
+          const customerRow = row as { name?: string; email?: string } | undefined;
+          return (
+            <div>
+              <div>{customerRow?.name}</div>
+              <div className="font-color-base">{customerRow?.email}</div>
+            </div>
+          );
+        },
       },
       { heading: 'Phone', dataKey: 'phone', width: 125 },
       { heading: 'Plan', dataKey: 'plan', width: 125 },
@@ -164,31 +179,37 @@ export const Loading = () =>
   })();
 
 export const Sortable = () => {
-  // @ts-ignore
-  const sortDescending = (arrOfObj, key) =>
+  const sortDescending = (arrOfObj: SortableRow[], key: string) =>
     [...arrOfObj].sort((a, b) => (b[key] > a[key] ? 1 : -1));
-  // @ts-ignore
-  const sortAscending = (arrOfObj, key) =>
+  const sortAscending = (arrOfObj: SortableRow[], key: string) =>
     [...arrOfObj].sort((a, b) => (a[key] > b[key] ? 1 : -1));
-  const getNewSortDirection = (event: any, currentSortedColumn: any) => {
+  const getNewSortDirection = (
+    sortedKey: string,
+    currentSortedColumn: SortedColumn
+  ) => {
     if (
-      event.sortedKey === currentSortedColumn.dataKey &&
+      sortedKey === currentSortedColumn.dataKey &&
       currentSortedColumn.sortDirection === 'ascending'
     )
       return 'descending';
     return 'ascending';
   };
-  const initialData = [
+  const initialData: SortableRow[] = [
     { id: 1, color: 'red', flavor: 'vanilla' },
     { id: 2, color: 'green', flavor: 'strawberry' },
     { id: 3, color: 'blue', flavor: 'chocolate' },
   ];
-  const [sortedColumn, setSortedColumn] = useState<any>({});
-  const [tableData, setTableData] = useState(initialData);
-  const handleSort = (event: any) => {
-    const newSortDirection = getNewSortDirection(event, sortedColumn);
+  const [sortedColumn, setSortedColumn] = useState<SortedColumn>({});
+  const [tableData, setTableData] = useState<SortableRow[]>(initialData);
+  const handleSort = (event: EventWithColumnKey) => {
+    const sortedKey =
+      typeof event.sortedKey === 'string' ? event.sortedKey : undefined;
+    if (!sortedKey) {
+      return;
+    }
+    const newSortDirection = getNewSortDirection(sortedKey, sortedColumn);
     setSortedColumn({
-      dataKey: event.sortedKey,
+      dataKey: sortedKey,
       sortDirection: newSortDirection,
     });
   };
@@ -218,38 +239,45 @@ export const Sortable = () => {
 };
 
 export const SortablewithDefaultSortedColumn = () => {
-  // @ts-ignore
-  const sortDescending = (arrOfObj, key) =>
+  const sortDescending = (arrOfObj: SortableRow[], key: string) =>
     [...arrOfObj].sort((a, b) => (b[key] > a[key] ? 1 : -1));
-  // @ts-ignore
-  const sortAscending = (arrOfObj, key) =>
+  const sortAscending = (arrOfObj: SortableRow[], key: string) =>
     [...arrOfObj].sort((a, b) => (a[key] > b[key] ? 1 : -1));
-  const getNewSortDirection = (event: any, currentSortedColumn: any) => {
+  const getNewSortDirection = (
+    sortedKey: string,
+    currentSortedColumn: SortedColumn
+  ) => {
     if (
-      event.sortedKey === currentSortedColumn.dataKey &&
+      sortedKey === currentSortedColumn.dataKey &&
       currentSortedColumn.sortDirection === 'ascending'
     )
       return 'descending';
     return 'ascending';
   };
-  const initialData = [
+  const initialData: SortableRow[] = [
     { id: 1, color: 'red', flavor: 'vanilla' },
     { id: 2, color: 'green', flavor: 'strawberry' },
     { id: 3, color: 'blue', flavor: 'chocolate' },
   ];
-  const [sortedColumn, setSortedColumn] = useState<any>({
+  const [sortedColumn, setSortedColumn] = useState<SortedColumn>({
     dataKey: 'color',
     sortDirection: 'descending',
   });
-  const [tableData, setTableData] = useState([
-    ...(sortedColumn.sortDirecton === 'ascending'
-      ? sortAscending(initialData, sortedColumn.dataKey)
-      : sortDescending(initialData, sortedColumn.dataKey)),
+  const initialSortKey = sortedColumn.dataKey ?? 'color';
+  const [tableData, setTableData] = useState<SortableRow[]>([
+    ...(sortedColumn.sortDirection === 'ascending'
+      ? sortAscending(initialData, initialSortKey)
+      : sortDescending(initialData, initialSortKey)),
   ]);
-  const handleSort = (event: any) => {
-    const newSortDirection = getNewSortDirection(event, sortedColumn);
+  const handleSort = (event: EventWithColumnKey) => {
+    const sortedKey =
+      typeof event.sortedKey === 'string' ? event.sortedKey : undefined;
+    if (!sortedKey) {
+      return;
+    }
+    const newSortDirection = getNewSortDirection(sortedKey, sortedColumn);
     setSortedColumn({
-      dataKey: event.sortedKey,
+      dataKey: sortedKey,
       sortDirection: newSortDirection,
     });
   };
@@ -279,31 +307,37 @@ export const SortablewithDefaultSortedColumn = () => {
 };
 
 export const SortableAndLoading = () => {
-  // @ts-ignore
-  const sortDescending = (arrOfObj, key) =>
+  const sortDescending = (arrOfObj: SortableRow[], key: string) =>
     [...arrOfObj].sort((a, b) => (b[key] > a[key] ? 1 : -1));
-  // @ts-ignore
-  const sortAscending = (arrOfObj, key) =>
+  const sortAscending = (arrOfObj: SortableRow[], key: string) =>
     [...arrOfObj].sort((a, b) => (a[key] > b[key] ? 1 : -1));
-  const getNewSortDirection = (event: any, currentSortedColumn: any) => {
+  const getNewSortDirection = (
+    sortedKey: string,
+    currentSortedColumn: SortedColumn
+  ) => {
     if (
-      event.sortedKey === currentSortedColumn.dataKey &&
+      sortedKey === currentSortedColumn.dataKey &&
       currentSortedColumn.sortDirection === 'ascending'
     )
       return 'descending';
     return 'ascending';
   };
-  const initialData = [
+  const initialData: SortableRow[] = [
     { id: 1, color: 'red', flavor: 'vanilla' },
     { id: 2, color: 'green', flavor: 'strawberry' },
     { id: 3, color: 'blue', flavor: 'chocolate' },
   ];
-  const [sortedColumn, setSortedColumn] = useState<any>({});
-  const [tableData, setTableData] = useState(initialData);
-  const handleSort = (event: any) => {
-    const newSortDirection = getNewSortDirection(event, sortedColumn);
+  const [sortedColumn, setSortedColumn] = useState<SortedColumn>({});
+  const [tableData, setTableData] = useState<SortableRow[]>(initialData);
+  const handleSort = (event: EventWithColumnKey) => {
+    const sortedKey =
+      typeof event.sortedKey === 'string' ? event.sortedKey : undefined;
+    if (!sortedKey) {
+      return;
+    }
+    const newSortDirection = getNewSortDirection(sortedKey, sortedColumn);
     setSortedColumn({
-      dataKey: event.sortedKey,
+      dataKey: sortedKey,
       sortDirection: newSortDirection,
     });
   };
@@ -652,13 +686,25 @@ export const TruncateOverflow = () =>
 
 export const CustomActions = () =>
   (() => {
-    const renderFlavor = (cell: any, row: any, index: number) => {
-      const rows = [{ href: cell.href, name: cell.name, id: row.id, index }];
+    const renderFlavor = (cell?: Cell, row?: Row, index?: number) => {
+      const flavorCell = cell as { href?: string; name?: string } | undefined;
+      const flavorRow = row as { id?: number } | undefined;
+      const rows = [
+        {
+          href: flavorCell?.href ?? '',
+          name: flavorCell?.name ?? '',
+          id: flavorRow?.id ?? 0,
+          index,
+        },
+      ];
       const columns = [
         {
           heading: 'Url',
           dataKey: 'href',
-          render: (cell: any) => <a href={cell}>{cell}</a>,
+          render: (cell?: Cell) => {
+            const href = typeof cell === 'string' ? cell : '';
+            return <a href={href}>{href}</a>;
+          },
         },
         { heading: 'Name', dataKey: 'name' },
         { heading: 'ID', dataKey: 'id' },
@@ -672,7 +718,6 @@ export const CustomActions = () =>
       {
         heading: 'Based on the cell/row',
         dataKey: 'flavor',
-        // @ts-ignore
         render: renderFlavor,
       },
       { heading: 'Any custom JSX', render: () => <Button>Do anything</Button> },
@@ -706,7 +751,12 @@ export const EmptyCellPlaceholder = () =>
       {
         heading: 'Price',
         dataKey: 'price',
-        render: (cell: any) => (cell ? `$${cell}` : null),
+        render: (cell?: Cell) => {
+          if (typeof cell === 'number' || typeof cell === 'string') {
+            return cell ? `$${cell}` : null;
+          }
+          return null;
+        },
         emptyCellPlaceholder: '$0.00',
       },
     ];

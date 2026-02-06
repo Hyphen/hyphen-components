@@ -5,7 +5,7 @@ import { Column } from '../types';
 export const getColumnKeys = (columns: Column[]): Key[] => {
   const INTERNAL_KEY_PREFIX = 'columnKeyPrefix';
   const columnKeys: React.Key[] = [];
-  const keys: Record<any, boolean> = {};
+  const keys: Record<string, boolean> = {};
 
   columns.forEach((column) => {
     const { key, dataKey } = column || {};
@@ -15,10 +15,10 @@ export const getColumnKeys = (columns: Column[]): Key[] => {
 
     let mergedKey = key || shapedDataKey || INTERNAL_KEY_PREFIX;
 
-    while (keys[mergedKey as any]) {
+    while (keys[String(mergedKey)]) {
       mergedKey = `${mergedKey}_next`;
     }
-    keys[mergedKey as any] = true;
+    keys[String(mergedKey)] = true;
 
     columnKeys.push(mergedKey);
   });

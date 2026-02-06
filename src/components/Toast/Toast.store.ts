@@ -90,7 +90,7 @@ const createReducer =
     handlers: THandlers
   ) =>
   (state: TState = initialState, action: TAction) => {
-    if (handlers.hasOwnProperty(action.type)) {
+    if (Object.prototype.hasOwnProperty.call(handlers, action.type)) {
       // eslint-disable-line
       return handlers[action.type](state, action);
     }

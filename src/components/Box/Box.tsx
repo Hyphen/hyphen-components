@@ -549,8 +549,8 @@ export const Box: FC<BoxProps> = forwardRef(
         'base',
       ];
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const findMatchingBreakpoint = (
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         responsiveObj: ResponsiveProp<any>,
         key: BreakpointSizeWithBase
       ): string => {
@@ -589,10 +589,11 @@ export const Box: FC<BoxProps> = forwardRef(
     /**
      * Shallow merges existing classes of child node with a className based on the childGap value.
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const decorateChildren = (
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       child: string | number | ReactElement<any>,
       i: number,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       array: ReactElement<any>[]
     ) => {
       if (

@@ -139,10 +139,13 @@ describe('Sidebar', () => {
   });
 
   test.each([
-    ['input', <input aria-label="input-field" />],
-    ['textarea', <textarea aria-label="textarea-field" />],
-    ['select', <select aria-label="select-field" />],
-    ['contenteditable', <div aria-label="editable-field" contentEditable />],
+    ['input', <input aria-label="input-field" key="input" />],
+    ['textarea', <textarea aria-label="textarea-field" key="textarea" />],
+    ['select', <select aria-label="select-field" key="select" />],
+    [
+      'contenteditable',
+      <div aria-label="editable-field" contentEditable key="contenteditable" />,
+    ],
   ])('ignores keyboard shortcuts for %s elements', (label, field) => {
     render(
       <SidebarProvider>

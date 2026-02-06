@@ -189,14 +189,14 @@ describe('Modal', () => {
           isOpen
           onDismiss={() => {}}
           ariaLabel="testStyle"
-          style={{ backgroundColor: 'red' }}
+          style={{ backgroundColor: '#cacaca' }}
         >
           test modal
         </Modal>
       );
 
       expect(getByLabelText('testStyle').parentElement).toHaveStyle(
-        'background-color: red'
+        'background-color: #cacaca'
       );
     });
 

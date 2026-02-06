@@ -93,7 +93,7 @@ export const BORDER_COLOR_OPTIONS = Object.keys(
 // export const BORDER_COLOR_VALUES = designTokens.color.border;
 
 export const FONT_SIZE_OPTIONS = Object.keys(
-  (designTokens.size as any)['font-size']
+  designTokens.size['font-size']
 ) as FontSize[];
 // export const FONT_SIZE_VALUES = Object.values(designTokens.size['font-size']);
 
@@ -103,7 +103,7 @@ export const FONT_FAMILY_OPTIONS = Object.keys(
 // export const FONT_FAMILY_VALUES = designTokens.assets['font-family'];
 
 export const FONT_WEIGHT_OPTIONS = Object.keys(
-  (designTokens.size as any)['font-weight']
+  designTokens.size['font-weight']
 ) as FontWeight[];
 // export const FONT_WEIGHT_VALUES = designTokens.size['font-weight'];
 
@@ -112,7 +112,7 @@ export const HEADING_SIZE_OPTIONS = Object.keys(
 ) as HeadingSize[];
 
 export const HEIGHT_OPTIONS = Object.keys(
-  (designTokens.size as any).dimension
+  designTokens.size.dimension
 ) as HeightSize[];
 // export const HEIGHT_VALUES = designTokens.size.dimension;
 
@@ -127,7 +127,7 @@ export const SPACING_OPTIONS = Object.keys(
 // export const SPACING_VALUES = designTokens.size.spacing;
 
 export const WIDTH_OPTIONS = Object.keys(
-  (designTokens.size as any).dimension
+  designTokens.size.dimension
 ) as WidthSize[];
 // export const WIDTH_VALUES = designTokens.size.dimension;
 

@@ -340,12 +340,16 @@ interface NavItem {
   }[];
 }
 
+type Team = {
+  name: string;
+};
+
 const NavHeader = ({
   activeTeam,
   setActiveTeam,
 }: {
-  activeTeam: any;
-  setActiveTeam: (team: any) => void;
+  activeTeam: Team;
+  setActiveTeam: (team: Team) => void;
 }) => {
   const { state, isMobile } = useSidebar();
 
@@ -645,8 +649,8 @@ const OrgSwitcher = ({
   activeTeam,
   setActiveTeam,
 }: {
-  activeTeam: any;
-  setActiveTeam: (team: any) => void;
+  activeTeam: Team;
+  setActiveTeam: (team: Team) => void;
 }) => {
   const { state } = useSidebar();
 

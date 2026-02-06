@@ -258,10 +258,11 @@ describe('Toast', () => {
     test('Async Success', async () => {
       render(<ToastContainer />);
 
-      const myPromise = new Promise(async (resolve) => {
+      const myPromise = new Promise((resolve) => {
         // eslint-disable-line no-async-promise-executor
-        await wait(1000);
-        resolve('yay');
+        wait(1000).then(() => {
+          resolve('yay');
+        });
       });
 
       act(() => {
@@ -287,10 +288,11 @@ describe('Toast', () => {
     test('Async Error', async () => {
       render(<ToastContainer />);
 
-      const myPromise = new Promise(async (_resolve, reject) => {
+      const myPromise = new Promise((_resolve, reject) => {
         // eslint-disable-line no-async-promise-executor
-        await wait(1000);
-        reject('boo'); // eslint-disable-line prefer-promise-reject-errors
+        wait(1000).then(() => {
+          reject('boo'); // eslint-disable-line prefer-promise-reject-errors
+        });
       });
 
       act(() => {

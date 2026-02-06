@@ -18,7 +18,7 @@ describe('Button', () => {
       expect(button).toHaveAttribute('aria-disabled', 'true');
       expect(button).toBeDisabled();
 
-      rerender(<Button isLoading={false} children="Loading Button" />);
+      rerender(<Button isLoading={false}>Loading Button</Button>);
       expect(button).not.toHaveAttribute('aria-disabled');
       expect(button).not.toBeDisabled();
     });
@@ -32,7 +32,7 @@ describe('Button', () => {
       expect(button).toHaveAttribute('aria-disabled', 'true');
       expect(button).toBeDisabled();
 
-      rerender(<Button isDisabled={false} children="Disabled Button" />);
+      rerender(<Button isDisabled={false}>Disabled Button</Button>);
       expect(button).not.toHaveAttribute('aria-disabled');
       expect(button).not.toBeDisabled();
     });

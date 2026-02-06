@@ -41,7 +41,7 @@ export const Colors = () => (
 );
 
 export const UnknownIcon = () => (
-  <Icon name={'does-not-exist' as any} className="font-size-2xl" />
+  <Icon name={'does-not-exist' as IconName} className="font-size-2xl" />
 );
 
 export const AvailableIcons = () => (

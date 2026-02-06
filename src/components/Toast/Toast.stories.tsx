@@ -4,6 +4,7 @@ import { ToastContainer, ToastPosition, toast } from './';
 import { Button } from '../Button/Button';
 import { Table } from '../Table/Table';
 import { Box } from '../Box/Box';
+import { Cell, Column as ColumnType } from 'src/types';
 
 const meta: Meta<typeof ToastContainer> = {
   title: 'Components/Toast',
@@ -84,12 +85,12 @@ export const Column = () =>
         description: 'Whether to render a compact toast (smaller padding)',
       },
     ];
-    const columnConfig = [
+    const columnConfig: ColumnType[] = [
       { heading: 'Name', dataKey: 'name' },
       {
         heading: 'Type',
         dataKey: 'type',
-        render: (cell: any) => <code style={codePreviewStyle}>{cell}</code>,
+        render: (cell?: Cell) => <code style={codePreviewStyle}>{cell}</code>,
       },
       { heading: 'Description', dataKey: 'description' },
     ];
