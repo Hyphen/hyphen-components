@@ -14,18 +14,13 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: [
-    '@typescript-eslint',
-    'react',
-    'react-hooks',
-    'import',
-  ],
+  plugins: ['@typescript-eslint', 'react', 'react-hooks', 'import'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
-    'eslint-config-prettier',
+    'prettier',
   ],
   settings: {
     react: {
@@ -41,10 +36,13 @@ module.exports = {
     'react/display-name': 'off',
 
     // Allow unused vars with underscore prefix
-    '@typescript-eslint/no-unused-vars': ['warn', {
-      argsIgnorePattern: '^_',
-      varsIgnorePattern: '^_',
-    }],
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+      },
+    ],
 
     // Allow explicit any in some cases (component library needs flexibility)
     '@typescript-eslint/no-explicit-any': 'warn',
