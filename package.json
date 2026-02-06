@@ -25,7 +25,7 @@
     "start": "dts watch",
     "storybook": "storybook dev -p 6006",
     "test": "dts test --passWithNoTests",
-    "test-watch": "dts test --watch",
+    "test-watch": "dts test --coverage --watch",
     "semantic-release": "semantic-release",
     "prepare": "npm run build",
     "chromatic": "npx chromatic --project-token=chpt_8fddffb5556f0b7 --only-changed"
