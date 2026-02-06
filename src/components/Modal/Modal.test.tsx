@@ -1,23 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { Modal, ModalProps } from './Modal';
-
-const defaultProps: ModalProps = {
-  isOpen: true,
-  onDismiss: jest.fn(),
-  ariaLabel: 'Test Modal',
-};
-
-const renderModal = (props: Partial<ModalProps> = {}) => {
-  return render(
-    <Modal {...defaultProps} {...props}>
-      <Modal.Header id="modal-title" title="Modal Title" />
-      <Modal.Body>Modal body content</Modal.Body>
-      <Modal.Footer>Footer content</Modal.Footer>
-    </Modal>
-  );
-};
+import { Modal } from './Modal';
 
 describe('Modal', () => {
   beforeEach(() => {
@@ -118,7 +101,11 @@ describe('Modal', () => {
       const handleDismiss = jest.fn();
       render(
         <Modal isOpen onDismiss={() => {}} ariaLabel="testCloseButton">
-          <Modal.Header id="header-id" title="Title" onDismiss={handleDismiss} />
+          <Modal.Header
+            id="header-id"
+            title="Title"
+            onDismiss={handleDismiss}
+          />
         </Modal>
       );
 
@@ -333,7 +320,7 @@ describe('Modal', () => {
       expect(secondButton).toBeInTheDocument();
     });
 
-    test('accepts initialFocusRef prop', () => {
+    test('accepts initialFocusRef prop and focuses the referenced element', async () => {
       const TestComponent = () => {
         const ref = React.useRef<HTMLDivElement>(null);
         return (
@@ -344,7 +331,7 @@ describe('Modal', () => {
             initialFocusRef={ref}
           >
             <Modal.Body>
-              <div ref={ref} tabIndex={-1}>
+              <div ref={ref} tabIndex={-1} data-testid="focus-target">
                 Focus target
               </div>
             </Modal.Body>
@@ -353,12 +340,22 @@ describe('Modal', () => {
       };
 
       render(<TestComponent />);
-      expect(screen.getByText('Focus target')).toBeInTheDocument();
+
+      const focusTarget = screen.getByTestId('focus-target');
+      expect(focusTarget).toBeInTheDocument();
+
+      // The Modal uses a setTimeout (100ms) to focus the initialFocusRef element
+      await waitFor(
+        () => {
+          expect(focusTarget).toHaveFocus();
+        },
+        { timeout: 200 }
+      );
     });
   });
 
   describe('onDismiss behavior', () => {
-    test('onDismiss callback is passed to ReactModal', () => {
+    test('calls onDismiss when Escape key is pressed', async () => {
       const handleDismiss = jest.fn();
       render(
         <Modal isOpen onDismiss={handleDismiss} ariaLabel="Escape Modal">
@@ -366,14 +363,24 @@ describe('Modal', () => {
         </Modal>
       );
 
-      // Verify the modal is rendered and dismissable
       expect(screen.getByText('content')).toBeInTheDocument();
+
+      // Simulate pressing Escape key - react-modal listens on the dialog
+      fireEvent.keyDown(screen.getByRole('dialog'), {
+        key: 'Escape',
+        code: 'Escape',
+        keyCode: 27,
+      });
+
+      await waitFor(() => {
+        expect(handleDismiss).toHaveBeenCalledTimes(1);
+      });
     });
   });
 
   describe('fullScreenMobile', () => {
     test('applies fullscreen class when fullScreenMobile is true', () => {
-      render(
+      const { baseElement } = render(
         <Modal
           isOpen
           onDismiss={() => {}}
@@ -384,12 +391,15 @@ describe('Modal', () => {
         </Modal>
       );
 
-      // The modal should render with fullscreen behavior
       expect(screen.getByText('content')).toBeInTheDocument();
+
+      // The overlay is rendered in a portal, so query from baseElement (document.body)
+      const overlay = baseElement.querySelector('.ReactModal__Overlay');
+      expect(overlay).toHaveClass('fullscreen');
     });
 
     test('does not apply fullscreen class when fullScreenMobile is false', () => {
-      render(
+      const { baseElement } = render(
         <Modal
           isOpen
           onDismiss={() => {}}
@@ -400,8 +410,11 @@ describe('Modal', () => {
         </Modal>
       );
 
-      // The modal should render without fullscreen behavior
       expect(screen.getByText('content')).toBeInTheDocument();
+
+      // The overlay is rendered in a portal, so query from baseElement (document.body)
+      const overlay = baseElement.querySelector('.ReactModal__Overlay');
+      expect(overlay).not.toHaveClass('fullscreen');
     });
   });
 
@@ -519,7 +532,12 @@ describe('Modal', () => {
     test('allows overriding default props', () => {
       render(
         <Modal isOpen onDismiss={() => {}} ariaLabel="test">
-          <Modal.Body flex="none" overflow="hidden" height="50" data-testid="modal-body">
+          <Modal.Body
+            flex="none"
+            overflow="hidden"
+            height="50"
+            data-testid="modal-body"
+          >
             Body content
           </Modal.Body>
         </Modal>

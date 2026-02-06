@@ -141,7 +141,9 @@ describe('Calendar', () => {
     test('disables specific dates via disabled prop', () => {
       const testDate = new Date(2024, 5, 1); // June 2024
       const disabledDate = new Date(2024, 5, 11); // June 11, 2024
-      const { container } = render(<Calendar defaultMonth={testDate} disabled={[disabledDate]} />);
+      const { container } = render(
+        <Calendar defaultMonth={testDate} disabled={[disabledDate]} />
+      );
 
       // The disabled day cell should have the disabled data attribute
       const disabledCell = container.querySelector('[data-disabled="true"]');
@@ -158,7 +160,9 @@ describe('Calendar', () => {
       );
 
       // Multiple dates should be disabled
-      const disabledCells = container.querySelectorAll('[data-disabled="true"]');
+      const disabledCells = container.querySelectorAll(
+        '[data-disabled="true"]'
+      );
       expect(disabledCells.length).toBeGreaterThan(0);
     });
   });
@@ -182,8 +186,12 @@ describe('Calendar', () => {
       );
 
       // With dropdown, month and year should be selectable
-      expect(screen.getByRole('combobox', { name: /month/i })).toBeInTheDocument();
-      expect(screen.getByRole('combobox', { name: /year/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('combobox', { name: /month/i })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('combobox', { name: /year/i })
+      ).toBeInTheDocument();
     });
   });
 
@@ -231,10 +239,7 @@ describe('Calendar', () => {
       const handleMonthChange = jest.fn();
       const testDate = new Date(2024, 5, 15); // June 2024
       render(
-        <Calendar
-          defaultMonth={testDate}
-          onMonthChange={handleMonthChange}
-        />
+        <Calendar defaultMonth={testDate} onMonthChange={handleMonthChange} />
       );
 
       const nextButton = screen.getByRole('button', { name: /next/i });

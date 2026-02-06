@@ -371,7 +371,9 @@ describe('DropdownMenu', () => {
         </DropdownMenu>
       );
 
-      const subtrigger = screen.getByText('More Options').closest('[role="menuitem"]');
+      const subtrigger = screen
+        .getByText('More Options')
+        .closest('[role="menuitem"]');
       // The Icon component uses data-testid with "icon-testid--" prefix
       const icon = subtrigger?.querySelector('svg');
       expect(icon).toBeInTheDocument();
@@ -394,7 +396,9 @@ describe('DropdownMenu', () => {
         </DropdownMenu>
       );
 
-      const subtrigger = screen.getByText('Inset Submenu').closest('[role="menuitem"]');
+      const subtrigger = screen
+        .getByText('Inset Submenu')
+        .closest('[role="menuitem"]');
       expect(subtrigger).toHaveClass('p-left-md');
     });
   });
@@ -418,19 +422,6 @@ describe('DropdownMenu', () => {
         'br-sm',
         'bw-sm'
       );
-    });
-
-    test('applies custom sideOffset', () => {
-      render(
-        <DropdownMenu open>
-          <DropdownMenuTrigger>Open</DropdownMenuTrigger>
-          <DropdownMenuContent sideOffset={10}>
-            <DropdownMenuItem>Item</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-
-      expect(screen.getByText('Item')).toBeInTheDocument();
     });
 
     test('applies custom className to content', () => {

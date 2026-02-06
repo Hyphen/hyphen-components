@@ -1,6 +1,5 @@
 import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import {
   Drawer,
   DrawerTitle,
@@ -384,7 +383,9 @@ describe('Drawer', () => {
         </Drawer>
       );
 
-      expect(screen.getByText('Header').closest('[data-drawer="header"]')).toHaveClass('custom-header');
+      expect(
+        screen.getByText('Header').closest('[data-drawer="header"]')
+      ).toHaveClass('custom-header');
     });
   });
 
@@ -421,26 +422,52 @@ describe('Drawer', () => {
   });
 
   describe('Overlay behavior', () => {
-    test('hideOverlay prevents overlay from rendering', () => {
-      render(
-        <Drawer isOpen ariaLabel="No Overlay Drawer" hideOverlay>
-          <DrawerContent>No Overlay Content</DrawerContent>
-        </Drawer>
-      );
-
-      expect(screen.getByText('No Overlay Content')).toBeInTheDocument();
-    });
-
-    test('closeOnOverlayClick is true by default', async () => {
+    test('closeOnOverlayClick calls onDismiss when overlay is clicked', async () => {
       const handleDismiss = jest.fn();
-      render(
-        <Drawer isOpen ariaLabel="Overlay Click Drawer" onDismiss={handleDismiss}>
+      const { baseElement } = render(
+        <Drawer
+          isOpen
+          ariaLabel="Overlay Click Drawer"
+          onDismiss={handleDismiss}
+        >
           <DrawerContent>Content</DrawerContent>
         </Drawer>
       );
 
-      // The overlay click is handled by react-modal's onRequestClose
       expect(screen.getByText('Content')).toBeInTheDocument();
+
+      // Find the overlay element and click it
+      const overlay = baseElement.querySelector('.ReactModal__Overlay');
+      expect(overlay).toBeInTheDocument();
+      fireEvent.click(overlay!);
+
+      await waitFor(() => {
+        expect(handleDismiss).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    test('closeOnOverlayClick=false prevents onDismiss when overlay is clicked', async () => {
+      const handleDismiss = jest.fn();
+      const { baseElement } = render(
+        <Drawer
+          isOpen
+          ariaLabel="Overlay Click Drawer"
+          onDismiss={handleDismiss}
+          closeOnOverlayClick={false}
+        >
+          <DrawerContent>Content</DrawerContent>
+        </Drawer>
+      );
+
+      expect(screen.getByText('Content')).toBeInTheDocument();
+
+      // Find the overlay element and click it
+      const overlay = baseElement.querySelector('.ReactModal__Overlay');
+      expect(overlay).toBeInTheDocument();
+      fireEvent.click(overlay!);
+
+      // onDismiss should NOT be called when closeOnOverlayClick is false
+      expect(handleDismiss).not.toHaveBeenCalled();
     });
   });
 
