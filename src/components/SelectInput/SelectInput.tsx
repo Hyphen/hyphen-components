@@ -18,21 +18,21 @@ import { InputValidationMessage } from '../InputValidationMessage/InputValidatio
 import styles from './SelectInput.module.scss';
 import { GroupBase } from 'react-select/dist/declarations/src/types';
 
-type SelectOptions = {
+type SelectOption = {
   value: string;
   label: string;
   [key: string]: unknown;
 };
-type SelectGroupOptions = GroupBase<SelectOptions>;
+type SelectGroupOptions = GroupBase<SelectOption>;
 export type SelectInputOptions = OptionsOrGroups<
-  SelectOptions,
+  SelectOption,
   SelectGroupOptions
 >;
 
 export type SimulatedEventPayloadType = {
   target: {
     name: string;
-    value: OnChangeValue<SelectInputOptions, boolean>;
+    value: OnChangeValue<SelectOption, boolean>;
   };
 };
 
@@ -145,7 +145,9 @@ export interface SelectInputProps {
   [x: string]: any; // eslint-disable-line
 }
 
-type AsyncOptions = (inputValue: string) => Promise<SelectInputOptions>;
+type AsyncOptions = (
+  inputValue: string
+) => Promise<OptionsOrGroups<SelectOption, SelectGroupOptions>>;
 type AsyncSelectInputProps = SelectInputProps & {
   /**
    * Load the input asynchronously.
@@ -206,7 +208,7 @@ export function SelectInput(props: SelectInputProps): JSX.Element {
     ...restProps
   } = props;
 
-  const handleChange = (values: OnChangeValue<SelectInputOptions, boolean>) => {
+  const handleChange = (values: OnChangeValue<SelectOption, boolean>) => {
     const simulatedEventPayloadType: SimulatedEventPayloadType = {
       target: {
         name,
@@ -249,9 +251,7 @@ export function SelectInput(props: SelectInputProps): JSX.Element {
   };
 
   const ClearIndicator = (
-    props: ClearIndicatorProps<
-      OptionsOrGroups<SelectOptions, SelectGroupOptions>
-    >
+    props: ClearIndicatorProps<SelectOption, boolean, SelectGroupOptions>
   ) => (
     <components.ClearIndicator {...props}>
       <Icon name="remove" />
