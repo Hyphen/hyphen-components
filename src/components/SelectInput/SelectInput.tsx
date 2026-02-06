@@ -18,7 +18,11 @@ import { InputValidationMessage } from '../InputValidationMessage/InputValidatio
 import styles from './SelectInput.module.scss';
 import { GroupBase } from 'react-select/dist/declarations/src/types';
 
-type SelectOptions = any;
+type SelectOptions = {
+  value: string;
+  label: string;
+  [key: string]: unknown;
+};
 type SelectGroupOptions = GroupBase<SelectOptions>;
 export type SelectInputOptions = OptionsOrGroups<
   SelectOptions,

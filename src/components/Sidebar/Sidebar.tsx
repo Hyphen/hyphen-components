@@ -198,7 +198,11 @@ const useSidebarSideState = ({
 
   const toggleSidebar = useCallback(() => {
     lastToggledSideRef.current = side;
-    isMobile ? setOpenMobile((value) => !value) : setOpen((value) => !value);
+    if (isMobile) {
+      setOpenMobile((value) => !value);
+    } else {
+      setOpen((value) => !value);
+    }
   }, [isMobile, setOpen, side, lastToggledSideRef]);
 
   const state = open ? 'expanded' : 'collapsed';
@@ -645,7 +649,7 @@ const SidebarMenuButton = React.forwardRef<
   }
 >(
   (
-    { asChild = false, isActive = false, icon, tooltip, className, ...props },
+    { asChild = false, isActive = false, tooltip, className, ...props },
     ref
   ) => {
     const Comp = asChild ? Slot : 'button';

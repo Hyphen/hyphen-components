@@ -16,7 +16,7 @@ export interface FormikSelectInputProps
     errors: FormikErrors<FormikValues>;
   };
   onChange?: SelectInputProps['onChange'];
-  error?: any[] | string;
+  error?: string | Array<{ label?: string }>;
 }
 
 export const FormikSelectInput: React.FC<FormikSelectInputProps> = ({
@@ -29,13 +29,14 @@ export const FormikSelectInput: React.FC<FormikSelectInputProps> = ({
   error: errorProp,
   ...props
 }) => {
-  let errorMessage;
-  const error = errorProp ?? (getIn(touched, name) && getIn(errors, name));
+  let errorMessage: string | undefined;
+  const error: unknown =
+    errorProp ?? (getIn(touched, name) && getIn(errors, name));
 
   if (typeof error === 'string') {
     errorMessage = error;
-  } else if (error && typeof error !== 'string') {
-    errorMessage = error?.find((err: any) => err?.label)?.label;
+  } else if (Array.isArray(error)) {
+    errorMessage = error.find((err) => err?.label)?.label;
   }
 
   return (

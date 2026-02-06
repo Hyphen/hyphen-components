@@ -21,7 +21,6 @@ export const Default = () => {
         id="defaultTimePickerNative"
         name="defaultTimePickerNative"
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
-          console.log(event.target.value);
           setValue(event.target.value);
         }}
         label="Pick a Time"

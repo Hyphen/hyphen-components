@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { Calendar } from '../Calendar/Calendar';
-import { Field, Form, Formik } from 'formik';
+import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { FormikTextInput } from './FormikTextInput/FormikTextInput';
 import { FormikCheckboxInput } from './FormikCheckboxInput/FormikCheckboxInput';
 import { FormikSelectInput } from './FormikSelectInput/FormikSelectInput';
@@ -35,6 +35,28 @@ const meta = {
 };
 
 export default meta;
+
+type FormValues = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  areTermsChecked: boolean;
+  areTermsChecked2: boolean;
+  flavor: string | null;
+  flavor2: string | null;
+  colors: Array<{ value: string; label: string }>;
+  colors2: string;
+  sizes: string | null;
+  timePicker: string | null;
+  timePickerNative: string | null;
+  dateInput: Date | undefined;
+  message: string;
+  country: string;
+  availability: string;
+  locations: string[];
+  meal: string;
+};
 
 export const FormikForm = () =>
   (() => {
@@ -94,8 +116,8 @@ export const FormikForm = () =>
         downtime: '5.26 minutes/year',
       },
     ];
-    const handleValidation = (values: Record<string, any>) => {
-      const errors: Record<string, string> = {};
+    const handleValidation = (values: FormValues) => {
+      const errors: Partial<Record<keyof FormValues, string>> = {};
       if (!values.firstName) {
         errors.firstName = 'required';
       }
@@ -151,8 +173,8 @@ export const FormikForm = () =>
       return errors;
     };
     const handleSubmit = (
-      values: Record<string, any>,
-      { setSubmitting }: any
+      values: FormValues,
+      { setSubmitting }: FormikHelpers<FormValues>
     ) => {
       // Make API calls here
       setTimeout(() => {
@@ -163,8 +185,8 @@ export const FormikForm = () =>
         );
       }, 2000);
     };
-    const formatOutput = (
-      values: Record<string, any>,
+    const formatOutput = <T extends Record<string, unknown>>(
+      values: T,
       isSubmitting?: boolean
     ) => {
       return { ...values, isSubmitting };
@@ -191,6 +213,7 @@ export const FormikForm = () =>
             country: '',
             availability: '99',
             locations: [] as string[],
+            meal: '',
           }}
           validate={handleValidation}
           onSubmit={handleSubmit}

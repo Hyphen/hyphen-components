@@ -15,7 +15,7 @@ export interface FormikToggleGroupProps {
   form: {
     touched: FormikTouched<FormikValues>;
     errors: FormikErrors<FormikValues>;
-    setFieldValue: (field: string, value: any) => void;
+    setFieldValue: (field: string, value: string) => void;
   };
   options: Array<{
     id: string;
