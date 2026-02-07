@@ -26,6 +26,8 @@ const PopoverContent = forwardRef<
   );
 });
 
+PopoverContent.displayName = 'PopoverContent';
+
 export {
   Popover,
   PopoverTrigger,

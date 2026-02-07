@@ -35,6 +35,8 @@ export const DetailsBaseComponent: React.FC<DetailsProps> = React.forwardRef<
   );
 });
 
+DetailsBaseComponent.displayName = 'Details';
+
 export interface DetailsStatic {
   Summary: typeof DetailsSummary;
 }

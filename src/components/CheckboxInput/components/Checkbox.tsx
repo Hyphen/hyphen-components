@@ -174,3 +174,5 @@ export const Checkbox: React.FC<CheckboxProps> = React.forwardRef(
     );
   }
 );
+
+Checkbox.displayName = 'Checkbox';

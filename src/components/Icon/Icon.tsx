@@ -59,3 +59,5 @@ export const Icon: FC<IconProps> = forwardRef<SVGSVGElement, IconProps>(
     );
   }
 );
+
+Icon.displayName = 'Icon';

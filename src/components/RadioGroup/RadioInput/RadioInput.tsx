@@ -146,3 +146,5 @@ export const RadioInput = React.forwardRef<HTMLDivElement, RadioInputProps>(
     );
   }
 );
+
+RadioInput.displayName = 'RadioInput';

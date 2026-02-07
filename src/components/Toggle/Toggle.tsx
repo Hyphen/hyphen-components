@@ -30,4 +30,6 @@ const Toggle = forwardRef<
   </TogglePrimitive.Root>
 ));
 
+Toggle.displayName = 'Toggle';
+
 export { Toggle };

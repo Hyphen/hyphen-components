@@ -130,7 +130,7 @@ const DrawerTrigger = React.forwardRef<
     />
   );
 });
-DrawerTrigger.displayName = 'SidebarTrigger';
+DrawerTrigger.displayName = 'DrawerTrigger';
 
 export type DrawerPlacementType = 'left' | 'right' | 'top' | 'bottom';
 export interface DrawerProps {
@@ -331,6 +331,8 @@ const Drawer: React.FC<DrawerProps> = forwardRef<HTMLDivElement, DrawerProps>(
   }
 );
 
+Drawer.displayName = 'Drawer';
+
 const DrawerHeader = React.forwardRef<HTMLDivElement, BoxProps>(
   ({ className, ...props }, ref) => {
     return (
@@ -362,6 +364,8 @@ const DrawerTitle = React.forwardRef<HTMLDivElement, BoxProps>(
     );
   }
 );
+
+DrawerTitle.displayName = 'DrawerTitle';
 
 const DrawerCloseButton = forwardRef<
   HTMLButtonElement,
@@ -416,6 +420,8 @@ const DrawerContent = React.forwardRef<HTMLDivElement, BoxProps>(
     );
   }
 );
+
+DrawerContent.displayName = 'DrawerContent';
 
 export {
   Drawer,

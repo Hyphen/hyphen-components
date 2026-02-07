@@ -54,6 +54,8 @@ const ToggleGroup = forwardRef<
   )
 );
 
+ToggleGroup.displayName = 'ToggleGroup';
+
 type ToggleGroupItemProps = React.ComponentPropsWithoutRef<
   typeof ToggleGroupPrimitive.Item
 > & {

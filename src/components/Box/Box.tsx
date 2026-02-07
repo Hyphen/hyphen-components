@@ -644,6 +644,8 @@ export const Box: FC<BoxProps> = forwardRef(
   }
 );
 
+Box.displayName = 'Box';
+
 export const boxPropsKeys: (keyof Pick<BoxProps, KnownKeys<BoxProps>>)[] = [
   'as',
   'alignItems',

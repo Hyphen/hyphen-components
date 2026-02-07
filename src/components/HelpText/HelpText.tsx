@@ -31,3 +31,5 @@ export const HelpText = forwardRef<HTMLDivElement, HelpTextProps>(
     </Box>
   )
 );
+
+HelpText.displayName = 'HelpText';
