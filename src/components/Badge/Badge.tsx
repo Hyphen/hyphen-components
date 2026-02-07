@@ -1,6 +1,6 @@
 import React, { ReactNode, forwardRef } from 'react';
 import classNames from 'classnames';
-import { FontSize, BaseSpacing, ResponsiveProp } from '../../types';
+import { ResponsiveProp } from '../../types';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
 import styles from './Badge.module.scss';
 import { Box, BoxProps } from '../Box/Box';
@@ -16,16 +16,16 @@ export type BadgeVariant =
   | 'blue'
   | 'red'
   | 'purple'
+  | 'orange'
   | 'hyphen';
 
-export type BadgeSizeAttributes = { fontSize: FontSize; padding: BaseSpacing };
 export interface BadgeProps extends BoxProps {
   /**
    * @deprecated Use children instead. The text message or ReactNode to be rendered in the badge.
    */
   message?: string | ReactNode;
   /**
-   * The size of the button.
+   * The size of the badge.
    */
   size?: BadgeSize | ResponsiveProp<BadgeSize>;
   /**
@@ -73,3 +73,5 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
     );
   }
 );
+
+Badge.displayName = 'Badge';
