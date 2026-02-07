@@ -11,6 +11,7 @@ export const BADGE_VARIANTS: BadgeVariant[] = [
   'blue',
   'red',
   'purple',
+  'orange',
   'hyphen',
 ];
 
