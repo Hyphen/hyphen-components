@@ -211,3 +211,5 @@ export const TextareaInputInset: ForwardRefExoticComponent<TextareaInputInsetPro
       );
     }
   );
+
+TextareaInputInset.displayName = 'TextareaInputInset';

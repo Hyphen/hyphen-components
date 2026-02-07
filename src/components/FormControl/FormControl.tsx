@@ -76,3 +76,5 @@ export const FormControl = React.forwardRef<HTMLDivElement, FormControlProps>(
     );
   }
 );
+
+FormControl.displayName = 'FormControl';

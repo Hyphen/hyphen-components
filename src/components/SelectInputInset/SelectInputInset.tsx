@@ -233,3 +233,5 @@ export const SelectInputInset: ForwardRefExoticComponent<SelectInputInsetProps> 
       );
     }
   );
+
+SelectInputInset.displayName = 'SelectInputInset';

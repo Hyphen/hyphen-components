@@ -259,3 +259,5 @@ export const TextInputInset: ForwardRefExoticComponent<TextInputInsetProps> =
       );
     }
   );
+
+TextInputInset.displayName = 'TextInputInset';

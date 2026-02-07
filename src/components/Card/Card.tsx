@@ -40,6 +40,8 @@ export const CardBaseComponent: React.FC<CardProps> = React.forwardRef(
   }
 );
 
+CardBaseComponent.displayName = 'Card';
+
 export interface CardStatic {
   Header: typeof CardHeader;
   Section: typeof CardSection;

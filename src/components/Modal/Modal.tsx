@@ -170,6 +170,8 @@ export const ModalBaseComponent: React.FC<ModalProps> = forwardRef<
   }
 );
 
+ModalBaseComponent.displayName = 'Modal';
+
 export interface ModalStatic {
   Body: typeof ModalBody;
   Header: typeof ModalHeader;
