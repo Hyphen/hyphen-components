@@ -11,6 +11,7 @@ export const BADGE_VARIANTS: BadgeVariant[] = [
   'blue',
   'red',
   'purple',
+  'orange',
   'hyphen',
 ];
 
@@ -25,7 +26,7 @@ describe('Badge', () => {
 
   describe('Variants', () => {
     BADGE_VARIANTS.map((variant) =>
-      describe(`${BADGE_VARIANTS}`, () => {
+      describe(`${variant}`, () => {
         test(`it has a ${variant} class applied to it`, () => {
           render(<Badge variant={variant} message={`${variant} Badge`} />);
           const badge = screen.getByText(`${variant} Badge`);
@@ -38,7 +39,7 @@ describe('Badge', () => {
 
   describe('Sizes', () => {
     BADGE_SIZES.map((size) =>
-      describe(`${BADGE_SIZES}`, () => {
+      describe(`${size}`, () => {
         test(`it has a ${size} class applied to it`, () => {
           render(<Badge size={size} message={`${size} Badge`} />);
           const badge = screen.getByText(`${size} Badge`);

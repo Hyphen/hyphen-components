@@ -93,6 +93,12 @@
     color: var(--color-base-white);
   }
 
+  &.orange {
+    background: var(--color-background-brand-orange);
+    border-color: var(--color-border-brand-orange);
+    color: var(--color-base-white);
+  }
+
   &.hyphen {
     background: var(--color-background-brand-gradient);
     border-color: var(--color-base-yellow-500);

@@ -12,6 +12,7 @@ const BADGE_VARIANTS: BadgeVariant[] = [
   'green',
   'yellow',
   'red',
+  'orange',
   'hyphen',
 ];
 
