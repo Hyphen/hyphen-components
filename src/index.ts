@@ -55,3 +55,5 @@ export * from './components/Toggle/Toggle';
 export * from './components/ToggleGroup/ToggleGroup';
 export * from './components/Tooltip/Tooltip';
 export * from './hooks';
+export * from './types';
+export * from './lib';
