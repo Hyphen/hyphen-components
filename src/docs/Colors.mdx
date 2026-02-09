@@ -32,19 +32,6 @@ import designTokens from '@hyphen/hyphen-design-tokens/build/json/variables.json
     }, {})}
   />
   <ColorItem
-    title="color-base-primary"
-    subtitle="Primary"
-    colors={Object.keys(designTokens.color.base.primary).reduce(
-      (acc, item, i) => {
-        acc[item] = Object.keys(designTokens.color.base.primary).map(
-          (g) => designTokens.color.base.primary[g].value
-        )[i];
-        return acc;
-      },
-      {}
-    )}
-  />
-  <ColorItem
     title="color-base-red"
     subtitle="Red"
     colors={Object.keys(designTokens.color.base.red).reduce((acc, item, i) => {

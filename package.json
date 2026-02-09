@@ -58,7 +58,7 @@
   ],
   "dependencies": {
     "@emotion/react": "^11.14.0",
-    "@hyphen/hyphen-design-tokens": "^6.1.0",
+    "@hyphen/hyphen-design-tokens": "^7.0.1",
     "@radix-ui/react-aspect-ratio": "^1.1.8",
     "@radix-ui/react-collapsible": "^1.1.12",
     "@radix-ui/react-dropdown-menu": "^2.1.16",

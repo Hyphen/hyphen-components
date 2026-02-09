@@ -13,13 +13,13 @@
 
     &:focus {
       outline: 0;
-      box-shadow: 0 0 0 2px var(--color-base-primary-light);
+      box-shadow: 0 0 0 2px var(--color-base-grey-200);
     }
 
     //Show focus styles on keyboard focus.
     &:focus-visible {
       outline: 0;
-      box-shadow: 0 0 0 2px var(--color-base-primary-light);
+      box-shadow: 0 0 0 2px var(--color-base-grey-200);
     }
 
     // Hide focus styles if they are not needed, for example,

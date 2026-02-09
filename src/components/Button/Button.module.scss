@@ -1,7 +1,7 @@
 @import '@hyphen/hyphen-design-tokens/build/scss/variables';
 
 :root {
-  --button-box-shadow-focus: 0 0 0 4px var(--color-base-primary-200);
+  --button-box-shadow-focus: 0 0 0 4px var(--color-base-grey-300);
   --button-neutral-box-shadow-focus: 0 0 0 4px var(--color-base-grey-200);
   --button-danger-box-shadow-focus: 0 0 0 4px var(--color-base-danger-200);
 }
