@@ -125,7 +125,7 @@ $lg-dimension: 36px;
   input:checked:disabled + div {
     color: var(
       --form-control-checkbox-color-checked-disabled,
-      var(--color-base-primary-200)
+      var(--color-base-grey-200)
     );
   }
 
