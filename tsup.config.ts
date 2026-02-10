@@ -1,14 +1,57 @@
 import { defineConfig } from 'tsup';
 import { Plugin } from 'esbuild';
+import { createRequire } from 'module';
+import path from 'path';
+import fs from 'fs/promises';
+import postcss from 'postcss';
+import postcssModules from 'postcss-modules';
+import sass from 'sass';
 
-// Plugin to ignore SCSS imports (CSS is handled by webpack separately)
-const ignoreScssPlugin: Plugin = {
-  name: 'ignore-scss',
+const require = createRequire(import.meta.url);
+const { generateScopedName } = require('./scripts/cssModulesNaming.cjs');
+
+const cssModulesPlugin: Plugin = {
+  name: 'css-modules',
   setup(build) {
-    build.onResolve({ filter: /\.scss$/ }, (args) => ({
-      path: args.path,
-      namespace: 'ignore-scss',
-    }));
+    build.onResolve({ filter: /\.scss$/ }, (args) => {
+      if (args.path.endsWith('.module.scss')) {
+        return;
+      }
+
+      return {
+        path: args.path,
+        namespace: 'ignore-scss',
+      };
+    });
+
+    build.onLoad({ filter: /\.module\.scss$/ }, async (args) => {
+      const source = await fs.readFile(args.path, 'utf8');
+      const result = sass.compileString(source, {
+        loadPaths: [
+          path.dirname(args.path),
+          path.resolve(process.cwd(), 'node_modules'),
+        ],
+        url: new URL(`file://${args.path}`),
+      });
+
+      let exportedClasses: Record<string, string> = {};
+      await postcss([
+        postcssModules({
+          generateScopedName: (name: string, filename: string) =>
+            generateScopedName(name, filename),
+          getJSON: (_filename: string, json: Record<string, string>) => {
+            exportedClasses = json;
+          },
+        }),
+      ]).process(result.css, { from: args.path });
+
+      return {
+        contents: `export default ${JSON.stringify(exportedClasses)};`,
+        loader: 'js',
+        resolveDir: path.dirname(args.path),
+      };
+    });
+
     build.onLoad({ filter: /.*/, namespace: 'ignore-scss' }, () => ({
       contents: '',
       loader: 'js',
@@ -28,7 +71,7 @@ export default defineConfig([
     banner: { js: "'use client';" },
     external: ['react', 'react-dom'],
     outExtension: () => ({ js: '.js' }),
-    esbuildPlugins: [ignoreScssPlugin],
+    esbuildPlugins: [cssModulesPlugin],
   },
   // CJS Production build (minified)
   {
@@ -42,7 +85,7 @@ export default defineConfig([
     banner: { js: "'use client';" },
     external: ['react', 'react-dom'],
     outExtension: () => ({ js: '.js' }),
-    esbuildPlugins: [ignoreScssPlugin],
+    esbuildPlugins: [cssModulesPlugin],
   },
   // ESM build
   {
@@ -55,7 +98,7 @@ export default defineConfig([
     banner: { js: "'use client';" },
     external: ['react', 'react-dom'],
     outExtension: () => ({ js: '.js' }),
-    esbuildPlugins: [ignoreScssPlugin],
+    esbuildPlugins: [cssModulesPlugin],
   },
   // Type declarations only
   {

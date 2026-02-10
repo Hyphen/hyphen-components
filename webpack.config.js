@@ -14,6 +14,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin")
 const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { generateScopedName } = require('./scripts/cssModulesNaming.cjs');
 
 const rules = [];
 
@@ -26,7 +27,8 @@ const injectCssModulesInJS = {
       loader: 'css-loader',
       options: {
         modules: {
-          localIdentName: '[local]__[hash:base64:5]',
+          getLocalIdent: (context, _localIdentName, localName) =>
+            generateScopedName(localName, context.resourcePath),
         },
         sourceMap: true,
       },
@@ -47,7 +49,8 @@ const extractCssModulesToCss = {
       options: {
         sourceMap: true,
         modules: {
-          localIdentName: '[local]__[hash:base64:5]',
+          getLocalIdent: (context, _localIdentName, localName) =>
+            generateScopedName(localName, context.resourcePath),
         },
       },
     },
