@@ -238,11 +238,20 @@ export const SidebarBothSides = () => {
   const [activeTeam, setActiveTeam] = React.useState(data.teams[0]);
   const isMobile = useIsMobile();
 
-  const STORAGE_KEY = 'sidebar_dual_expanded_storybook';
+  const RIGHT_KEY = 'sidebar_dual_expanded_storybook_right';
+  const LEFT_KEY = 'sidebar_dual_expanded_storybook_left';
+
+  const defaultOpen = {
+    left: localStorage.getItem(LEFT_KEY) !== 'false',
+    right: localStorage.getItem(RIGHT_KEY) !== 'false',
+  };
 
   return (
     <ResponsiveProvider>
-      <SidebarProvider storageKey={STORAGE_KEY} defaultOpen>
+      <SidebarProvider
+        storageKey={{ left: LEFT_KEY, right: RIGHT_KEY }}
+        defaultOpen={defaultOpen}
+      >
         <Sidebar side="left" collapsible="icon">
           <NavHeader activeTeam={activeTeam} setActiveTeam={setActiveTeam} />
           <SidebarContent>
