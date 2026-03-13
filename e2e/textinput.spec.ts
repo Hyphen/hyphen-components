@@ -49,7 +49,7 @@ test.describe('TextInput', () => {
   test('help text is displayed below the input', async ({ page }) => {
     await page.goto(storyUrl('components-textinput--with-help-text'));
     await expect(
-      page.getByText('We willl use this phone number to contact you via text')
+      page.getByText('We will use this phone number to contact you via text')
     ).toBeVisible();
   });
 
