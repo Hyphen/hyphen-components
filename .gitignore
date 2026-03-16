@@ -6,6 +6,7 @@ dist
 
 # testing
 /coverage
+/test-results
 
 # production
 /coverage
