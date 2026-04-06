@@ -8,6 +8,10 @@ import { Box, BoxProps } from '../Box/Box';
 export type BadgeSize = 'sm' | 'md' | 'lg';
 
 export type BadgeVariant =
+  | 'default'
+  | 'secondary'
+  | 'danger'
+  | 'outline'
   | 'light-grey'
   | 'dark-grey'
   | 'inverse'
@@ -39,7 +43,7 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
     {
       className = '',
       message = '',
-      variant = 'light-grey',
+      variant = 'default',
       size = 'md',
       children,
       ...restProps
