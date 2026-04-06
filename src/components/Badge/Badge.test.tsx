@@ -22,7 +22,7 @@ export const BADGE_VARIANTS: BadgeVariant[] = [
 export const BADGE_SIZES: BadgeSize[] = ['sm', 'md', 'lg'];
 
 describe('Badge', () => {
-  test('Label correctly renders with base props', () => {
+  test('Badge correctly renders with base props', () => {
     render(<Badge message="hello" />);
     const badge = screen.getByText('hello');
     expect(badge).toBeInTheDocument();
