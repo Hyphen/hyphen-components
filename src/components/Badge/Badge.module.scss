@@ -42,13 +42,37 @@
 .badge {
   border-style: solid;
   border-width: var(--size-border-width-sm);
-  font-weight: var(--size-font-weight-semibold);
+  font-weight: var(--size-font-weight-medium);
   line-height: var(--size-line-height-base);
 
   &.inverse {
     background-color: var(--color-background-inverse);
     border-color: var(--color-background-inverse);
     color: var(--color-font-inverse);
+  }
+
+  &.default {
+    background-color: var(--color-background-badge-default);
+    border-color: var(--color-border-badge-default);
+    color: var(--color-font-badge-default);
+  }
+
+  &.secondary {
+    background-color: var(--color-background-badge-secondary);
+    border-color: var(--color-border-badge-secondary);
+    color: var(--color-font-badge-secondary);
+  }
+
+  &.danger {
+    background-color: var(--color-background-badge-danger);
+    border-color: var(--color-border-badge-danger);
+    color: var(--color-font-badge-danger);
+  }
+
+  &.outline {
+    background-color: var(--color-background-badge-outline);
+    border-color: var(--color-border-badge-outline);
+    color: var(--color-font-badge-outline);
   }
 
   &.purple {

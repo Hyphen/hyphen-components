@@ -2,8 +2,16 @@ import { Badge, BadgeVariant } from './Badge';
 import React from 'react';
 import { Box } from '../Box/Box';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { allModes } from '../../modes';
 
-const BADGE_VARIANTS: BadgeVariant[] = [
+const SEMANTIC_BADGE_VARIANTS: BadgeVariant[] = [
+  'default',
+  'secondary',
+  'danger',
+  'outline',
+];
+
+const FIXED_COLOR_BADGE_VARIANTS: BadgeVariant[] = [
   'light-grey',
   'dark-grey',
   'inverse',
@@ -14,6 +22,11 @@ const BADGE_VARIANTS: BadgeVariant[] = [
   'red',
   'orange',
   'hyphen',
+];
+
+const BADGE_VARIANTS: BadgeVariant[] = [
+  ...SEMANTIC_BADGE_VARIANTS,
+  ...FIXED_COLOR_BADGE_VARIANTS,
 ];
 
 const BADGE_SIZES = ['sm', 'md', 'lg'];
@@ -47,11 +60,19 @@ const meta: Meta<typeof Badge> = {
     },
   },
   args: {
-    variant: 'light-grey',
+    variant: 'default',
     size: 'md',
     message: '',
     className: '',
     children: undefined,
+  },
+  parameters: {
+    chromatic: {
+      modes: {
+        light: allModes['light'],
+        dark: allModes['dark'],
+      },
+    },
   },
 };
 
@@ -68,7 +89,22 @@ export const Overview: Story = {
 export const Variants: Story = {
   render: () => (
     <Box direction="row" gap="sm">
-      {BADGE_VARIANTS.map((variant) => (
+      {SEMANTIC_BADGE_VARIANTS.map((variant) => (
+        <Badge variant={variant} key={variant}>
+          {variant}
+        </Badge>
+      ))}
+    </Box>
+  ),
+  parameters: {
+    controls: { disable: true },
+  },
+};
+
+export const FixedColorVariants: Story = {
+  render: () => (
+    <Box direction="row" gap="sm" flexWrap="wrap">
+      {FIXED_COLOR_BADGE_VARIANTS.map((variant) => (
         <Badge variant={variant} key={variant}>
           {variant}
         </Badge>

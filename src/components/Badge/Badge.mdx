@@ -17,12 +17,21 @@ Badges are used to display the status of an object or of an action that’s been
 ## Variants
 
 Badges come in different variants based on the kind of message being delivered to the user.
+If the `variant` prop is omitted, the badge uses the theme-aware `default` variant.
 
 <Canvas of={Stories.Variants} />
 
+Fixed-color badge variants remain available when you want the same color treatment regardless of theme.
+
+<Canvas of={Stories.FixedColorVariants} />
+
+Use the theme preview below to compare the semantic badge variants in light and dark mode.
+
+<Canvas of={Stories.ThemePreview} />
+
 ## Sizes
 
-Set the size of the badge to `sm`, `md`, `lg` or `xl`. `md` is the default size. A `ResponsiveProp` object may also be used
+Set the size of the badge to `sm`, `md`, or `lg`. `md` is the default size. A `ResponsiveProp` object may also be used
 so the badge can be a different size per breakpoint.
 
 <Canvas of={Stories.Sizes} />

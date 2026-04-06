@@ -3,6 +3,10 @@ import { render, screen } from '@testing-library/react';
 import { Badge, BadgeSize, BadgeVariant } from './Badge';
 
 export const BADGE_VARIANTS: BadgeVariant[] = [
+  'default',
+  'secondary',
+  'danger',
+  'outline',
   'light-grey',
   'dark-grey',
   'inverse',
@@ -22,6 +26,15 @@ describe('Badge', () => {
     render(<Badge message="hello" />);
     const badge = screen.getByText('hello');
     expect(badge).toBeInTheDocument();
+    expect(badge.getAttribute('class')).toContain('default');
+  });
+
+  test('it applies the default variant when none is provided', () => {
+    render(<Badge>Badge</Badge>);
+    const badge = screen.getByText('Badge');
+
+    expect(badge.getAttribute('class')).toContain('default');
+    expect(badge.getAttribute('class')).not.toContain('light-grey');
   });
 
   describe('Variants', () => {
