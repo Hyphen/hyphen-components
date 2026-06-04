@@ -13,7 +13,7 @@
 
 ### 1. Install
 
-`npm install @hyphen/hyphen-components`
+`pnpm add @hyphen/hyphen-components`
 
 ### 2. Import Global CSS
 
