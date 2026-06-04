@@ -146,6 +146,5 @@
     "webpack": "^5.94.0",
     "webpack-cli": "^5.1.4",
     "webpack-fix-style-only-entries": "^0.6.1"
-  },
-  "pnpm": {}
+  }
 }
