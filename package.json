@@ -93,6 +93,7 @@
     "@storybook/addon-a11y": "10.4.2",
     "@storybook/addon-docs": "10.4.2",
     "@storybook/addon-themes": "10.4.2",
+    "@storybook/addon-vitest": "10.4.2",
     "@storybook/react-vite": "10.4.2",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
@@ -146,6 +147,10 @@
     "vite": "^6.4.2",
     "webpack": "^5.94.0",
     "webpack-cli": "^5.1.4",
-    "webpack-fix-style-only-entries": "^0.6.1"
+    "webpack-fix-style-only-entries": "^0.6.1",
+    "vitest": "^4.1.8",
+    "playwright": "^1.60.0",
+    "@vitest/browser-playwright": "^4.1.8",
+    "@vitest/coverage-v8": "^4.1.8"
   }
 }

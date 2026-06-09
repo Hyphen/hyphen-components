@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react-vite';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Table } from './Table';
 import { Button } from '../Button/Button';
 import { Badge } from '../Badge/Badge';
@@ -208,20 +208,16 @@ export const Sortable = () => {
       return;
     }
     const newSortDirection = getNewSortDirection(sortedKey, sortedColumn);
+    const sortedData =
+      newSortDirection === 'ascending'
+        ? sortAscending(tableData, sortedKey)
+        : sortDescending(tableData, sortedKey);
     setSortedColumn({
       dataKey: sortedKey,
       sortDirection: newSortDirection,
     });
+    setTableData(sortedData);
   };
-  useEffect(() => {
-    if (sortedColumn.dataKey && sortedColumn.sortDirection) {
-      const sortedData =
-        sortedColumn.sortDirection === 'ascending'
-          ? sortAscending(tableData, sortedColumn.dataKey)
-          : sortDescending(tableData, sortedColumn.dataKey);
-      setTableData(sortedData);
-    }
-  }, [sortedColumn, tableData]);
   const columnConfig = [
     { heading: 'ID', dataKey: 'id', isSortable: true },
     { heading: 'Color', dataKey: 'color', isSortable: true },
@@ -276,20 +272,16 @@ export const SortablewithDefaultSortedColumn = () => {
       return;
     }
     const newSortDirection = getNewSortDirection(sortedKey, sortedColumn);
+    const sortedData =
+      newSortDirection === 'ascending'
+        ? sortAscending(tableData, sortedKey)
+        : sortDescending(tableData, sortedKey);
     setSortedColumn({
       dataKey: sortedKey,
       sortDirection: newSortDirection,
     });
+    setTableData(sortedData);
   };
-  useEffect(() => {
-    if (sortedColumn.dataKey && sortedColumn.sortDirection) {
-      const sortedData =
-        sortedColumn.sortDirection === 'ascending'
-          ? sortAscending(tableData, sortedColumn.dataKey)
-          : sortDescending(tableData, sortedColumn.dataKey);
-      setTableData(sortedData);
-    }
-  }, [sortedColumn, tableData]);
   const columnConfig = [
     { heading: 'ID', dataKey: 'id', isSortable: true },
     { heading: 'Color', dataKey: 'color', isSortable: true },
@@ -336,20 +328,16 @@ export const SortableAndLoading = () => {
       return;
     }
     const newSortDirection = getNewSortDirection(sortedKey, sortedColumn);
+    const sortedData =
+      newSortDirection === 'ascending'
+        ? sortAscending(tableData, sortedKey)
+        : sortDescending(tableData, sortedKey);
     setSortedColumn({
       dataKey: sortedKey,
       sortDirection: newSortDirection,
     });
+    setTableData(sortedData);
   };
-  useEffect(() => {
-    if (sortedColumn.dataKey && sortedColumn.sortDirection) {
-      const sortedData =
-        sortedColumn.sortDirection === 'ascending'
-          ? sortAscending(tableData, sortedColumn.dataKey)
-          : sortDescending(tableData, sortedColumn.dataKey);
-      setTableData(sortedData);
-    }
-  }, [sortedColumn, tableData]);
   const columnConfig = [
     { heading: 'ID', dataKey: 'id', isSortable: true },
     { heading: 'Color', dataKey: 'color', isSortable: true },
