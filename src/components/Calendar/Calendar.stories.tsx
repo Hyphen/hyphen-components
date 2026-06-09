@@ -2,7 +2,7 @@ import { Calendar } from './Calendar';
 
 import type { Meta } from '@storybook/react-vite';
 import React, { useState, ChangeEvent } from 'react';
-import { type DateRange } from 'react-day-picker';
+import { type DateRange } from '@daypicker/react';
 import { TextInput } from '../TextInput/TextInput';
 import { format, isValid, parse } from 'date-fns';
 

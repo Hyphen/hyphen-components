@@ -76,7 +76,6 @@ describe('Calendar', () => {
         />
       );
 
-      // In react-day-picker v9, we need to click the button inside the day cell
       const dayButton = screen.getByRole('button', { name: /June 16th/i });
       fireEvent.click(dayButton);
 
@@ -213,6 +212,13 @@ describe('Calendar', () => {
       expect(calendarRoot).toHaveStyle({
         '--rdp-accent-color': 'var(--color-font-base)',
       });
+    });
+
+    test('applies table width class to the month grid', () => {
+      const { container } = render(<Calendar />);
+      const monthGrid = container.querySelector('.rdp-month_grid');
+
+      expect(monthGrid).toHaveClass('w-100');
     });
   });
 
