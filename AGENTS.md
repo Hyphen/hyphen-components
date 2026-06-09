@@ -3,13 +3,13 @@
 ## Testing instructions
 
 - Find the CI plan in the .github/workflows folder.
-- From the package root you can just call `npm test`. The commit should pass all tests before you merge.
+- From the package root you can just call `pnpm test`. The commit should pass all tests before you merge.
 - Fix any test or type errors until the whole suite is green.
 - Add or update tests for the code you change, even if nobody asked.
 
 ## PR instructions
 
-- Always run `npm lint` and `npm test` before committing.
+- Always run `pnpm lint` and `pnpm test` before committing.
 
 ## Code Review Checklist
 
