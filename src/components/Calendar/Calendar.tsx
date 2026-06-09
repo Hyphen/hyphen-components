@@ -2,11 +2,11 @@ import React from 'react';
 import classNames from 'classnames';
 import {
   DayPicker,
-  DayPickerProps,
   getDefaultClassNames,
-  Matcher,
-} from 'react-day-picker';
-import 'react-day-picker/style.css';
+  type DayPickerProps,
+  type Matcher,
+} from '@daypicker/react';
+import '@daypicker/react/style.css';
 import { Icon } from '../Icon/Icon';
 
 export type CalendarProps = DayPickerProps;
@@ -74,11 +74,10 @@ function Calendar({
         selected: classNames(
           'font-color-inverse background-color-inverse hover:font-color-inverse'
         ),
-        month_grid: classNames(defaultClassNames.month_grid, 'm-top-lg'),
+        month_grid: classNames(defaultClassNames.month_grid, 'm-top-lg w-100'),
         day: classNames(defaultClassNames.day, 'hover:font-color-base'),
         day_button: classNames(defaultClassNames.day_button),
         range_middle: classNames(defaultClassNames.range_middle),
-        table: classNames('w-100'),
         dropdowns: classNames(defaultClassNames.dropdowns, 'h-100'),
         caption_label: classNames(defaultClassNames.caption_label, 'g-2xs'),
       }}
