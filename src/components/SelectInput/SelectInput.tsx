@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import Select, {
   components,
   ClearIndicatorProps,
+  GroupBase,
   OptionsOrGroups,
   OnChangeValue,
 } from 'react-select';
@@ -16,7 +17,6 @@ import { Icon } from '../Icon/Icon';
 import { FormLabel } from '../FormLabel/FormLabel';
 import { InputValidationMessage } from '../InputValidationMessage/InputValidationMessage';
 import styles from './SelectInput.module.scss';
-import { GroupBase } from 'react-select/dist/declarations/src/types';
 
 type SelectOption = {
   value: string;
