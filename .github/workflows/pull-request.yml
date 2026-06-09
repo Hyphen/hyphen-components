@@ -32,7 +32,7 @@ jobs:
           version: 10.20.0
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '20.19'
           cache: pnpm
       - name: Set up .npmrc
         run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
@@ -50,7 +50,7 @@ jobs:
           version: 10.20.0
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '20.19'
           cache: pnpm
       - name: Set up .npmrc
         run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
@@ -68,7 +68,7 @@ jobs:
           version: 10.20.0
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '20.19'
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -84,7 +84,7 @@ jobs:
           version: 10.20.0
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '20.19'
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -103,7 +103,7 @@ jobs:
           version: 10.20.0
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '20.19'
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
