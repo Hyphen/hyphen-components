@@ -8,6 +8,7 @@ const config: StorybookConfig = {
     '@storybook/addon-themes',
     '@storybook/addon-a11y',
     '@storybook/addon-docs',
+    '@storybook/addon-vitest'
   ],
 
   // https://storybook.js.org/docs/react/configure/typescript#mainjs-configuration
