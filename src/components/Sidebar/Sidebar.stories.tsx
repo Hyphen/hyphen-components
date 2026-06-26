@@ -699,12 +699,14 @@ const NavMixed = () => {
           <Collapsible className="group/collapsible" asChild>
             <SidebarMenuItem>
               <SidebarMenuNavLinkRow>
-                <SidebarMenuNavLink asChild tooltip="Projects">
-                  <a href="#">
-                    <Icon name="block" color="tertiary" size="lg" />
-                    <span>Projects</span>
-                  </a>
-                </SidebarMenuNavLink>
+                <CollapsibleTrigger asChild>
+                  <SidebarMenuNavLink asChild tooltip="Projects">
+                    <a href="#">
+                      <Icon name="block" color="tertiary" size="lg" />
+                      <span>Projects</span>
+                    </a>
+                  </SidebarMenuNavLink>
+                </CollapsibleTrigger>
                 <CollapsibleTrigger asChild>
                   <SidebarMenuButton
                     className="group-data-collapsible-icon-hidden"
