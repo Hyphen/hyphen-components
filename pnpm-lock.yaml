@@ -15,8 +15,8 @@ importers:
         specifier: ^11.14.0
         version: 11.14.0(@types/react@18.3.5)(react@18.3.1)
       '@hyphen/hyphen-design-tokens':
-        specifier: ^7.6.0
-        version: 7.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^7.7.0
+        version: 7.7.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-aspect-ratio':
         specifier: ^1.1.9
         version: 1.1.9(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -998,8 +998,8 @@ packages:
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
     deprecated: Use @eslint/object-schema instead
 
-  '@hyphen/hyphen-design-tokens@7.6.0':
-    resolution: {integrity: sha512-OQAlniTWtBG/t6lYIHCUirJSYjsShqD9C7IBfGV7ihdHW/hrD+I7drq5yafAq12Tn3eSDVzDakHhd9N3VNu+SA==}
+  '@hyphen/hyphen-design-tokens@7.7.0':
+    resolution: {integrity: sha512-jaiXnhmgXP4e42SfzUo9KAjGQRJXKmL8B/IEQPmdP/xRgqVIhgHECJCu6cW9AJ/dhz6/z56A5XDzSUM69eRQnA==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
@@ -7694,7 +7694,7 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.3': {}
 
-  '@hyphen/hyphen-design-tokens@7.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@hyphen/hyphen-design-tokens@7.7.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
