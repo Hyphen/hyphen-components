@@ -661,7 +661,7 @@ const NavMainWithLinks = ({ items }: { items: NavItem[] }) => {
 
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel>Nav Link Variant</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) =>
           item.items && state === 'expanded' ? (
@@ -687,7 +687,15 @@ const NavMainWithLinks = ({ items }: { items: NavItem[] }) => {
                     </a>
                   </SidebarMenuNavLink>
                   <CollapsibleTrigger asChild>
-                    <SidebarMenuButton className="w-auto flex-shrink-0 group-data-collapsible-icon-hidden">
+                    <SidebarMenuButton
+                      className="group-data-collapsible-icon-hidden"
+                      style={{
+                        width: 'auto',
+                        flex: '0 0 auto',
+                        borderLeft:
+                          '1px solid var(--color-border-default)',
+                      }}
+                    >
                       <Icon
                         name="caret-sm-right"
                         className="transform data-[state=open]:rotate-90"
@@ -774,6 +782,7 @@ export const SidebarNavLinkVariant = () => {
         <Sidebar side="left" collapsible="icon">
           <NavHeader activeTeam={activeTeam} setActiveTeam={setActiveTeam} />
           <SidebarContent>
+            <NavMain items={data.items} />
             <NavMainWithLinks items={data.items} />
             <NavFavorites favorites={data.favorites} />
           </SidebarContent>
