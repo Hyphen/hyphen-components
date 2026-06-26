@@ -656,95 +656,23 @@ function CreateMenu() {
   );
 }
 
-const NavMainWithLinks = ({ items }: { items: NavItem[] }) => {
+const navLinkVariantProjects = [
+  { title: 'Project Alpha', url: '#' },
+  { title: 'Project Beta', url: '#' },
+  { title: 'Project Gamma', url: '#' },
+];
+
+const NavMixed = () => {
   const { state } = useSidebar();
 
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Nav Link Variant</SidebarGroupLabel>
+      <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) =>
-          item.items && state === 'expanded' ? (
-            <Collapsible
-              key={item.title}
-              className="group/collapsible"
-              asChild
-            >
-              <SidebarMenuItem>
-                <SidebarMenuNavLinkRow>
-                  <SidebarMenuNavLink
-                    asChild
-                    isActive={item.isActive}
-                    tooltip={item.title}
-                  >
-                    <a href={item.url}>
-                      <Icon
-                        name={item.icon as IconName}
-                        color="tertiary"
-                        size="lg"
-                      />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuNavLink>
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuButton
-                      className="group-data-collapsible-icon-hidden"
-                      style={{
-                        width: 'auto',
-                        flex: '0 0 auto',
-                        borderLeft:
-                          '1px solid var(--color-border-default)',
-                      }}
-                    >
-                      <Icon
-                        name="caret-sm-right"
-                        className="transform data-[state=open]:rotate-90"
-                      />
-                    </SidebarMenuButton>
-                  </CollapsibleTrigger>
-                </SidebarMenuNavLinkRow>
-                <CollapsibleContent>
-                  <SidebarMenuSub>
-                    {item.items?.map((subItem, idx) => (
-                      <SidebarMenuSubItem key={`${subItem.title}-${idx}`}>
-                        <SidebarMenuSubButton asChild>
-                          <a href={subItem.url}>
-                            <span>{subItem.title}</span>
-                          </a>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
-                  </SidebarMenuSub>
-                </CollapsibleContent>
-              </SidebarMenuItem>
-            </Collapsible>
-          ) : item.items && state === 'collapsed' ? (
-            <DropdownMenu key={item.title}>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton tooltip={item.title}>
-                  <Icon
-                    name={item.icon as IconName}
-                    color="tertiary"
-                    size="lg"
-                  />
-                  {item.title}
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent side="right" align="start" sideOffset={4}>
-                <DropdownMenuItem>
-                  <a href={item.url}>{item.title}</a>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                {item.items.map((subItem, idx) => (
-                  <DropdownMenuItem key={`${subItem.title}-${idx}`}>
-                    <a href={subItem.url}>
-                      <span>{subItem.title}</span>
-                    </a>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ) : (
+        {/* Standard items (no subitems) */}
+        {data.items
+          .filter((item) => !item.items)
+          .map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton
                 asChild
@@ -760,10 +688,146 @@ const NavMainWithLinks = ({ items }: { items: NavItem[] }) => {
                   <span>{item.title}</span>
                 </a>
               </SidebarMenuButton>
-              {item.count && <SidebarMenuBadge>{item.count}</SidebarMenuBadge>}
+              {item.count && (
+                <SidebarMenuBadge>{item.count}</SidebarMenuBadge>
+              )}
             </SidebarMenuItem>
-          )
+          ))}
+
+        {/* Projects — nav-link variant: label navigates, caret toggles */}
+        {state === 'expanded' ? (
+          <Collapsible className="group/collapsible" asChild>
+            <SidebarMenuItem>
+              <SidebarMenuNavLinkRow>
+                <SidebarMenuNavLink asChild tooltip="Projects">
+                  <a href="#">
+                    <Icon name="block" color="tertiary" size="lg" />
+                    <span>Projects</span>
+                  </a>
+                </SidebarMenuNavLink>
+                <CollapsibleTrigger asChild>
+                  <SidebarMenuButton
+                    className="group-data-collapsible-icon-hidden"
+                    style={{
+                      width: 'auto',
+                      flex: '0 0 auto',
+                      borderLeft: '1px solid var(--color-border-default)',
+                    }}
+                  >
+                    <Icon
+                      name="caret-sm-right"
+                      className="transform data-[state=open]:rotate-90"
+                    />
+                  </SidebarMenuButton>
+                </CollapsibleTrigger>
+              </SidebarMenuNavLinkRow>
+              <CollapsibleContent>
+                <SidebarMenuSub>
+                  {navLinkVariantProjects.map((project, idx) => (
+                    <SidebarMenuSubItem key={idx}>
+                      <SidebarMenuSubButton asChild>
+                        <a href={project.url}>
+                          <span>{project.title}</span>
+                        </a>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                  ))}
+                </SidebarMenuSub>
+              </CollapsibleContent>
+            </SidebarMenuItem>
+          </Collapsible>
+        ) : (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <SidebarMenuButton tooltip="Projects">
+                <Icon name="block" color="tertiary" size="lg" />
+                Projects
+              </SidebarMenuButton>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent side="right" align="start" sideOffset={4}>
+              <DropdownMenuItem>
+                <a href="#">Projects</a>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              {navLinkVariantProjects.map((project, idx) => (
+                <DropdownMenuItem key={idx}>
+                  <a href={project.url}>
+                    <span>{project.title}</span>
+                  </a>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         )}
+
+        {/* Settings — standard collapsible: entire button is the trigger */}
+        {data.items
+          .filter((item) => item.items)
+          .map((item) =>
+            state === 'expanded' ? (
+              <Collapsible
+                key={item.title}
+                className="group/collapsible"
+                asChild
+              >
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton tooltip={item.title}>
+                      <Icon
+                        name={item.icon as IconName}
+                        color="tertiary"
+                        size="lg"
+                      />
+                      {item.title}
+                      <Icon
+                        name="caret-sm-right"
+                        className="m-left-auto transform data-[state=open]:rotate-90"
+                      />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      {item.items?.map((subItem, idx) => (
+                        <SidebarMenuSubItem key={idx}>
+                          <SidebarMenuSubButton asChild>
+                            <a href={subItem.url}>
+                              <span>{subItem.title}</span>
+                            </a>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      ))}
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
+                </SidebarMenuItem>
+              </Collapsible>
+            ) : (
+              <DropdownMenu key={item.title}>
+                <DropdownMenuTrigger asChild>
+                  <SidebarMenuButton tooltip={item.title}>
+                    <Icon
+                      name={item.icon as IconName}
+                      color="tertiary"
+                      size="lg"
+                    />
+                    {item.title}
+                    <Icon
+                      name="caret-sm-right"
+                      className="m-left-auto transform data-[state=open]:rotate-90"
+                    />
+                  </SidebarMenuButton>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent side="right" align="start" sideOffset={4}>
+                  {item.items?.map((subItem, idx) => (
+                    <DropdownMenuItem key={idx}>
+                      <a href={subItem.url}>
+                        <span>{subItem.title}</span>
+                      </a>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )
+          )}
       </SidebarMenu>
     </SidebarGroup>
   );
@@ -782,8 +846,7 @@ export const SidebarNavLinkVariant = () => {
         <Sidebar side="left" collapsible="icon">
           <NavHeader activeTeam={activeTeam} setActiveTeam={setActiveTeam} />
           <SidebarContent>
-            <NavMain items={data.items} />
-            <NavMainWithLinks items={data.items} />
+            <NavMixed />
             <NavFavorites favorites={data.favorites} />
           </SidebarContent>
           <NavFooter />
