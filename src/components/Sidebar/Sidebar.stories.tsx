@@ -15,6 +15,8 @@ import {
   SidebarMenuSub,
   SidebarMenuSubItem,
   SidebarMenuButton,
+  SidebarMenuNavLink,
+  SidebarMenuNavLinkRow,
   SidebarMenuSubButton,
   SidebarMenuAction,
   SidebarMenuBadge,
@@ -653,6 +655,146 @@ function CreateMenu() {
     </DropdownMenu>
   );
 }
+
+const NavMainWithLinks = ({ items }: { items: NavItem[] }) => {
+  const { state } = useSidebar();
+
+  return (
+    <SidebarGroup>
+      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarMenu>
+        {items.map((item) =>
+          item.items && state === 'expanded' ? (
+            <Collapsible
+              key={item.title}
+              className="group/collapsible"
+              asChild
+            >
+              <SidebarMenuItem>
+                <SidebarMenuNavLinkRow>
+                  <SidebarMenuNavLink
+                    asChild
+                    isActive={item.isActive}
+                    tooltip={item.title}
+                  >
+                    <a href={item.url}>
+                      <Icon
+                        name={item.icon as IconName}
+                        color="tertiary"
+                        size="lg"
+                      />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuNavLink>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton className="w-auto flex-shrink-0 group-data-collapsible-icon-hidden">
+                      <Icon
+                        name="caret-sm-right"
+                        className="transform data-[state=open]:rotate-90"
+                      />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                </SidebarMenuNavLinkRow>
+                <CollapsibleContent>
+                  <SidebarMenuSub>
+                    {item.items?.map((subItem, idx) => (
+                      <SidebarMenuSubItem key={`${subItem.title}-${idx}`}>
+                        <SidebarMenuSubButton asChild>
+                          <a href={subItem.url}>
+                            <span>{subItem.title}</span>
+                          </a>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    ))}
+                  </SidebarMenuSub>
+                </CollapsibleContent>
+              </SidebarMenuItem>
+            </Collapsible>
+          ) : item.items && state === 'collapsed' ? (
+            <DropdownMenu key={item.title}>
+              <DropdownMenuTrigger asChild>
+                <SidebarMenuButton tooltip={item.title}>
+                  <Icon
+                    name={item.icon as IconName}
+                    color="tertiary"
+                    size="lg"
+                  />
+                  {item.title}
+                </SidebarMenuButton>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent side="right" align="start" sideOffset={4}>
+                <DropdownMenuItem>
+                  <a href={item.url}>{item.title}</a>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                {item.items.map((subItem, idx) => (
+                  <DropdownMenuItem key={`${subItem.title}-${idx}`}>
+                    <a href={subItem.url}>
+                      <span>{subItem.title}</span>
+                    </a>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <SidebarMenuItem key={item.title}>
+              <SidebarMenuButton
+                asChild
+                isActive={item.isActive}
+                tooltip={item.title}
+              >
+                <a href={item.url}>
+                  <Icon
+                    name={item.icon as IconName}
+                    color="tertiary"
+                    size="lg"
+                  />
+                  <span>{item.title}</span>
+                </a>
+              </SidebarMenuButton>
+              {item.count && <SidebarMenuBadge>{item.count}</SidebarMenuBadge>}
+            </SidebarMenuItem>
+          )
+        )}
+      </SidebarMenu>
+    </SidebarGroup>
+  );
+};
+
+export const SidebarNavLinkVariant = () => {
+  const [activeTeam, setActiveTeam] = React.useState(data.teams[0]);
+  const isMobile = useIsMobile();
+
+  const STORAGE_KEY = 'sidebar_nav_link_variant_storybook';
+  const startExpanded = localStorage.getItem(STORAGE_KEY) !== 'false';
+
+  return (
+    <ResponsiveProvider>
+      <SidebarProvider storageKey={STORAGE_KEY} defaultOpen={startExpanded}>
+        <Sidebar side="left" collapsible="icon">
+          <NavHeader activeTeam={activeTeam} setActiveTeam={setActiveTeam} />
+          <SidebarContent>
+            <NavMainWithLinks items={data.items} />
+            <NavFavorites favorites={data.favorites} />
+          </SidebarContent>
+          <NavFooter />
+          <SidebarRail />
+        </Sidebar>
+        <SidebarInset>
+          {isMobile && (
+            <Box direction="row" gap="sm" alignItems="center">
+              <SidebarTrigger />
+              <CreateMenu />
+            </Box>
+          )}
+          <Card height="100" padding="2xl">
+            <SidebarTrigger />
+          </Card>
+        </SidebarInset>
+      </SidebarProvider>
+    </ResponsiveProvider>
+  );
+};
 
 const OrgSwitcher = ({
   activeTeam,

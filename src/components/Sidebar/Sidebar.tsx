@@ -698,6 +698,74 @@ const SidebarMenuButton = React.forwardRef<
 );
 SidebarMenuButton.displayName = 'SidebarMenuButton';
 
+const SidebarMenuNavLinkRow = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<'div'>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    data-sidebar="menu-nav-link-row"
+    className={classNames('display-flex align-items-center w-100', className)}
+    {...props}
+  />
+));
+SidebarMenuNavLinkRow.displayName = 'SidebarMenuNavLinkRow';
+
+const SidebarMenuNavLink = React.forwardRef<
+  HTMLAnchorElement,
+  React.ComponentProps<'a'> & {
+    asChild?: boolean;
+    isActive?: boolean;
+    tooltip?: string | React.ComponentProps<typeof TooltipContent>;
+  }
+>(
+  (
+    { asChild = false, isActive = false, tooltip, className, ...props },
+    ref
+  ) => {
+    const Comp = asChild ? Slot : 'a';
+    const { isMobile, state, side } = useSidebar();
+
+    const link = (
+      <Comp
+        ref={ref}
+        data-sidebar="menu-nav-link"
+        data-active={isActive}
+        className={classNames(
+          'display-flex flex-auto p-sm br-sm g-lg flex-direction-row align-items-center font-size-sm td-none font-weight-medium text-align-left hover:background-color-tertiary font-color-base cursor-pointer',
+          {
+            'background-color-tertiary': isActive,
+            'background-color-transparent': !isActive,
+          },
+          className
+        )}
+        {...props}
+      />
+    );
+
+    if (!tooltip) {
+      return link;
+    }
+
+    if (typeof tooltip === 'string') {
+      tooltip = { children: tooltip };
+    }
+
+    return (
+      <Tooltip>
+        <TooltipTrigger asChild>{link}</TooltipTrigger>
+        <TooltipContent
+          side={side === 'right' ? 'left' : 'right'}
+          align="center"
+          hidden={state !== 'collapsed' || isMobile}
+          {...tooltip}
+        />
+      </Tooltip>
+    );
+  }
+);
+SidebarMenuNavLink.displayName = 'SidebarMenuNavLink';
+
 const SidebarGroup = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<'div'>
@@ -923,6 +991,8 @@ export {
   SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuNavLink,
+  SidebarMenuNavLinkRow,
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
