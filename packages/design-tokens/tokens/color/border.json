@@ -1,0 +1,155 @@
+{
+  "color": {
+    "border": {
+      "default": {
+        "value": "{color.base.grey.200}",
+        "darkValue": "{color.base.grey.500}"
+      },
+      "subtle": {
+        "value": "{color.base.grey.100}",
+        "darkValue": "{color.base.grey.600}"
+      },
+      "transparent": {
+        "value": "transparent",
+        "darkValue": "transparent"
+      },
+      "hover": {
+        "value": "{color.base.grey.300}",
+        "darkValue": "{color.base.grey.600}"
+      },
+      "active": {
+        "value": "{color.base.grey.400}",
+        "darkValue": "{color.base.grey.700}"
+      },
+      "danger": {
+        "value": "{color.base.red.300}",
+        "darkValue": "{color.base.red.200}"
+      },
+      "warning": {
+        "value": "{color.base.yellow.300}",
+        "darkValue": "{color.base.yellow.200}"
+      },
+      "inverse": {
+        "value": "{color.base.grey.700}",
+        "darkValue": "{color.base.grey.200}"
+      },
+      "info": {
+        "value": "{color.base.blue.200}",
+        "darkValue": "{color.base.blue.200}"
+      },
+      "success": {
+        "value": "{color.base.green.200}",
+        "darkValue": "{color.base.green.200}"
+      },
+      "button-primary": {
+        "value": "{color.base.grey.800}",
+        "darkValue": "{color.base.white}"
+      },
+      "button-primary-hover": {
+        "value": "{color.base.grey.700}",
+        "darkValue": "{color.base.grey.100}"
+      },
+      "button-primary-active": {
+        "value": "{color.base.grey.800}",
+        "darkValue": "{color.base.grey.100}"
+      },
+      "button-secondary": {
+        "value": "{color.base.grey.200}",
+        "darkValue": "{color.base.grey.300}"
+      },
+      "button-secondary-hover": {
+        "value": "{color.base.grey.200}",
+        "darkValue": "{color.base.grey.300}"
+      },
+      "button-secondary-active": {
+        "value": "{color.base.grey.300}",
+        "darkValue": "{color.base.grey.400}"
+      },
+      "button-tertiary": {
+        "value": "transparent",
+        "darkValue": "transparent"
+      },
+      "button-tertiary-hover": {
+        "value": "transparent",
+        "darkValue": "transparent"
+      },
+      "button-tertiary-active": {
+        "value": "transparent",
+        "darkValue": "transparent"
+      },
+      "badge-default": {
+        "value": "{color.base.grey.800}",
+        "darkValue": "{color.base.white}"
+      },
+      "badge-secondary": {
+        "value": "{color.base.grey.100}",
+        "darkValue": "{color.base.grey.700}"
+      },
+      "badge-danger": {
+        "value": "{color.base.red.100}",
+        "darkValue": "{color.base.red.800}"
+      },
+      "badge-outline": {
+        "value": "{color.base.grey.200}",
+        "darkValue": "{color.base.grey.600}"
+      },
+      "sidebar-rail-hover": {
+        "value": "{color.base.grey.200}",
+        "darkValue": "{color.base.grey.400}"
+      },
+      "toast": {
+        "value": "{color.base.grey.800}",
+        "darkValue": "{color.base.grey.100}"
+      },
+      "toast-error": {
+        "value": "{color.base.red.600}"
+      },
+      "checkbox": {
+        "value": "{color.base.grey.400}",
+        "darkValue": "{color.base.grey.400}"
+      },
+      "brand-yellow": {
+        "value": "#ffd200"
+      },
+      "brand-orange": {
+        "value": "#ff911e"
+      },
+      "brand-magenta": {
+        "value": "#ff3278"
+      },
+      "brand-dark-grey": {
+        "value": "#323237"
+      },
+      "brand-cyan": {
+        "value": "#00b4ff"
+      },
+      "brand-pink": {
+        "value": "#dc50ff"
+      },
+      "brand-light-purple": {
+        "value": "#b47dff"
+      },
+      "brand-medium-purple": {
+        "value": "#4b32aa"
+      },
+      "brand-dark-purple": {
+        "value": "#1e1e5a"
+      },
+      "black": {
+        "value": "{color.base.black}"
+      },
+      "white": {
+        "value": "{color.base.white}"
+      },
+      "green": {
+        "value": "{color.base.green.500}"
+      },
+      "red": {
+        "value": "{color.base.red.500}"
+      },
+      "purple": {
+        "value": "{color.base.purple.500}"
+      }
+    }
+  }
+}
