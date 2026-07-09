@@ -5,13 +5,11 @@ node_modules
 dist
 
 # testing
-/coverage
+coverage
 
 # production
-/coverage
-/dist
-/build
-/storybook-static
+build
+storybook-static
 
 # IDEs
 .vscode
