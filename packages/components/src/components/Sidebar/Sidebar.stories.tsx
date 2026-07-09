@@ -50,6 +50,19 @@ const meta: Meta<typeof Sidebar> = {
   parameters: {
     layout: 'fullscreen',
     overrideDecorator: true,
+    // The sidebar examples fill 100svh, so render them in a fixed-height
+    // iframe on the docs page instead of inline at full height.
+    docs: {
+      story: {
+        inline: false,
+        height: '640px',
+      },
+      // Scopes the docs-page CSS in Sidebar.mdx (which forces a desktop-width
+      // viewport on the story iframes) to this page's Canvas blocks only.
+      canvas: {
+        className: 'sidebar-docs-canvas',
+      },
+    },
     chromatic: {
       modes: {
         light: allModes['light'],

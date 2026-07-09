@@ -243,9 +243,26 @@ function useSidebar(sideOverride?: SidebarSide) {
 const SidebarProvider = forwardRef<
   HTMLDivElement,
   React.ComponentProps<'div'> & {
+    /**
+     * Initial open state for uncontrolled usage. Pass a boolean for both
+     * sides, or `{ left, right }` to set each side independently.
+     */
     defaultOpen?: SidebarOpenValue;
+    /**
+     * Controlled open state. Pass a boolean for both sides, or
+     * `{ left, right }` to control each side independently.
+     */
     open?: SidebarOpenValue;
+    /**
+     * localStorage key(s) the open state is written to when a sidebar is
+     * toggled. A string applies to the left sidebar, with `_right` appended
+     * for the right sidebar; pass `{ left, right }` to set each explicitly.
+     */
     storageKey?: SidebarStorageKey;
+    /**
+     * Called when a sidebar is toggled, with the new open state and which
+     * side was toggled.
+     */
     onOpenChange?: (open: boolean, side?: SidebarSide) => void;
   }
 >(
@@ -368,7 +385,15 @@ SidebarProvider.displayName = 'SidebarProvider';
 const Sidebar = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<'div'> & {
+    /**
+     * Which edge of the viewport the sidebar is attached to.
+     */
     side?: 'left' | 'right';
+    /**
+     * Collapse behavior when the sidebar is toggled closed: slide fully out
+     * of view (`offcanvas`), collapse to a narrow icon strip (`icon`), or
+     * stay at full width (`none`).
+     */
     collapsible?: 'offcanvas' | 'icon' | 'none';
   }
 >(
@@ -498,7 +523,14 @@ Sidebar.displayName = 'Sidebar';
 const SidebarTrigger = React.forwardRef<
   React.ElementRef<typeof Button>,
   React.ComponentProps<typeof Button> & {
+    /**
+     * Which sidebar to toggle. Defaults to the side of the containing
+     * Sidebar, or `left` outside of one.
+     */
     side?: SidebarSide;
+    /**
+     * Icon shown on the trigger button.
+     */
     iconName?: IconName;
   }
 >(({ className, onClick, side, iconName = 'dock-left', ...props }, ref) => {
@@ -642,8 +674,18 @@ SidebarMenuItem.displayName = 'SidebarMenuItem';
 const SidebarMenuButton = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<'button'> & {
+    /**
+     * Render the child element (e.g. a router link) instead of a `button`.
+     */
     asChild?: boolean;
+    /**
+     * Marks the item as the current page.
+     */
     isActive?: boolean;
+    /**
+     * Tooltip shown when the sidebar is collapsed to icons (desktop only).
+     * Pass a string, or TooltipContent props for full control.
+     */
     tooltip?: string | React.ComponentProps<typeof TooltipContent>;
   }
 >(
