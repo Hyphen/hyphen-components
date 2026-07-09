@@ -1,0 +1,198 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { Alert } from '../Alert/Alert';
+import * as Stories from './Sidebar.stories';
+
+<Meta of={Stories} />
+
+# Sidebar
+
+A composable, collapsible app sidebar for primary navigation. Use it to build an application sidebar with a header, scrollable content, grouped menus, and a footer, all wired to expand/collapse state that persists across visits and adapts to mobile automatically.
+
+<Canvas of={Stories.SidebarExample} />
+
+## Anatomy
+
+The Sidebar is composed from small building blocks. Compose only the pieces you need:
+
+| Component              | Purpose                                                                                            |
+| ---------------------- | -------------------------------------------------------------------------------------------------- |
+| `SidebarProvider`      | Provides sidebar state (left and right) and keyboard shortcuts. Wrap your whole layout in it.       |
+| `Sidebar`              | The sidebar container itself. Configure `side` and `collapsible` behavior.                          |
+| `SidebarHeader`        | Sticky top region, typically an org/team switcher.                                                  |
+| `SidebarContent`       | The scrollable middle region of the sidebar.                                                        |
+| `SidebarFooter`        | Sticky bottom region, typically the user menu.                                                      |
+| `SidebarGroup`         | A section within `SidebarContent`.                                                                  |
+| `SidebarGroupLabel`    | Label for a group. Hidden automatically when collapsed to icons.                                    |
+| `SidebarMenu`          | A menu (`ul`) of navigation items.                                                                  |
+| `SidebarMenuItem`      | A single item (`li`) within a `SidebarMenu`.                                                        |
+| `SidebarMenuButton`    | The interactive element of an item. Supports `asChild`, `isActive`, and a collapsed-state `tooltip`.|
+| `SidebarMenuAction`    | A secondary action button rendered at the edge of a menu item (e.g. a "more" menu).                 |
+| `SidebarMenuBadge`     | A badge (e.g. a count) rendered at the edge of a menu item.                                         |
+| `SidebarMenuSub`       | A nested sub-menu, typically inside a `Collapsible`.                                                |
+| `SidebarMenuSubItem`   | A single item within a `SidebarMenuSub`.                                                            |
+| `SidebarMenuSubButton` | The interactive element of a sub-menu item. Supports `asChild` and `isActive`.                      |
+| `SidebarTrigger`       | A button that toggles the sidebar. Place it in your page content or mobile header.                  |
+| `SidebarRail`          | A slim hover target on the sidebar edge for toggling with the mouse.                                |
+| `SidebarInset`         | The `main` content area that sits alongside the sidebar.                                            |
+| `useSidebar`           | Hook for reading and controlling sidebar state from your own components.                            |
+
+A typical app sidebar composition looks like this:
+
+```tsx
+<SidebarProvider>
+  <Sidebar side="left" collapsible="icon">
+    <SidebarHeader>{/* org switcher */}</SidebarHeader>
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Platform</SidebarGroupLabel>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild isActive tooltip="Dashboard">
+              <a href="/">
+                <Icon name="dashboard" />
+                <span>Dashboard</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
+    </SidebarContent>
+    <SidebarFooter>{/* user menu */}</SidebarFooter>
+    <SidebarRail />
+  </Sidebar>
+  <SidebarInset>
+    <SidebarTrigger />
+    {/* page content */}
+  </SidebarInset>
+</SidebarProvider>
+```
+
+## Usage Guidelines
+
+- Wrap the entire layout — sidebar and page content — in a single `SidebarProvider`. One provider manages both a left and a right sidebar.
+- Wrap your app (or the layout) in `ResponsiveProvider` so `useIsMobile` can detect the viewport; below the `desktop` breakpoint the sidebar renders inside a [Drawer](/docs/components-drawer--docs) and is toggled with `SidebarTrigger`.
+- Use `SidebarMenuButton asChild` to render your router's link component (or an `a` tag) so navigation items are real links.
+- Give menu buttons a `tooltip` so labels remain discoverable when the sidebar is collapsed to icons.
+- Set `isActive` on the menu button for the current route.
+- Include a `SidebarRail` so users can toggle the sidebar by clicking its edge.
+
+## Collapsible Behavior
+
+The `collapsible` prop on `Sidebar` controls what happens when the sidebar is toggled closed:
+
+- `offcanvas` (default) — the sidebar slides fully out of view.
+- `icon` — the sidebar collapses to a narrow icon strip; menu button tooltips appear on hover.
+- `none` — the sidebar cannot collapse and stays at full width.
+
+## Right Sidebar
+
+Set `side="right"` to render a sidebar on the opposite edge, useful for contextual panels. A right sidebar is wider by default (`24rem` vs `16rem`). Use `SidebarTrigger side="right"` to toggle it from within your content.
+
+<Canvas of={Stories.SidebarRightExample} />
+
+## Left and Right Together
+
+One `SidebarProvider` manages both sides independently. Pass per-side values to `defaultOpen` and `storageKey` as objects with `left` and `right` keys.
+
+<Canvas of={Stories.SidebarBothSides} />
+
+## Collapsed by Default
+
+Pass `defaultOpen={false}` to the provider to start collapsed.
+
+<Canvas of={Stories.SidebarCollapsed} />
+
+## State Persistence
+
+Whenever the user toggles a sidebar, the provider writes the new state to `localStorage` under the resolved `storageKey` (a string key applies to the left sidebar, with `_right` appended for the right sidebar; pass an object to set each side explicitly). Reading the stored value back is left to your app — pass it to `defaultOpen` on mount:
+
+```tsx
+const startExpanded = localStorage.getItem('sidebar_expanded') !== 'false';
+
+<SidebarProvider storageKey="sidebar_expanded" defaultOpen={startExpanded}>
+  ...
+</SidebarProvider>;
+```
+
+## Controlled Sidebar
+
+Pass `open` (boolean, or `{ left, right }`) to control the sidebar yourself, and use `onOpenChange(open, side)` to respond to toggle requests. Omit `open` for uncontrolled behavior with `defaultOpen`.
+
+## Keyboard Shortcuts
+
+- <kbd>[</kbd> toggles the left sidebar.
+- <kbd>]</kbd> toggles the right sidebar.
+
+Shortcuts are ignored while focus is in an input, textarea, select, or content-editable element.
+
+## useSidebar
+
+Call `useSidebar()` inside a `SidebarProvider` to read or control sidebar state from your own components. Inside a `Sidebar` it resolves to that sidebar's side; elsewhere pass the side explicitly: `useSidebar('right')`.
+
+It returns:
+
+| Property        | Type                          | Description                                        |
+| --------------- | ----------------------------- | -------------------------------------------------- |
+| `state`         | `'expanded' \| 'collapsed'`   | Current visual state.                              |
+| `open`          | `boolean`                     | Whether the (desktop) sidebar is open.             |
+| `setOpen`       | `(open: boolean) => void`     | Set the desktop open state.                        |
+| `openMobile`    | `boolean`                     | Whether the mobile drawer is open.                 |
+| `setOpenMobile` | `(open: boolean) => void`     | Set the mobile drawer state.                       |
+| `toggleSidebar` | `() => void`                  | Toggle the sidebar (desktop or mobile as needed).  |
+| `isMobile`      | `boolean`                     | Whether the viewport is below the desktop breakpoint. |
+| `side`          | `'left' \| 'right'`           | Which side this state refers to.                   |
+
+## Props
+
+### SidebarProvider
+
+| Prop           | Type                                                | Default             | Description                                                       |
+| -------------- | --------------------------------------------------- | ------------------- | ----------------------------------------------------------------- |
+| `defaultOpen`  | `boolean \| { left?: boolean; right?: boolean }`    | `true`              | Initial open state for uncontrolled usage.                        |
+| `open`         | `boolean \| { left?: boolean; right?: boolean }`    | —                   | Controlled open state.                                            |
+| `onOpenChange` | `(open: boolean, side?: 'left' \| 'right') => void` | —                   | Called when a sidebar is toggled.                                 |
+| `storageKey`   | `string \| { left?: string; right?: string }`       | `'sidebar_expanded'`| `localStorage` key(s) the new state is written to on toggle.      |
+
+### Sidebar
+
+| Prop          | Type                              | Default       | Description                              |
+| ------------- | --------------------------------- | ------------- | ---------------------------------------- |
+| `side`        | `'left' \| 'right'`               | `'left'`      | Which edge the sidebar is attached to.   |
+| `collapsible` | `'offcanvas' \| 'icon' \| 'none'` | `'offcanvas'` | Collapse behavior when toggled closed.   |
+
+### SidebarTrigger
+
+Extends [Button](/docs/components-button--docs).
+
+| Prop       | Type                | Default       | Description                                                     |
+| ---------- | ------------------- | ------------- | --------------------------------------------------------------- |
+| `side`     | `'left' \| 'right'` | context side  | Which sidebar to toggle.                                        |
+| `iconName` | `IconName`          | `'dock-left'` | Icon shown on the trigger button.                               |
+
+### SidebarMenuButton
+
+| Prop       | Type                                                | Default | Description                                                        |
+| ---------- | --------------------------------------------------- | ------- | ------------------------------------------------------------------ |
+| `asChild`  | `boolean`                                           | `false` | Render the child element (e.g. a link) instead of a `button`.      |
+| `isActive` | `boolean`                                           | `false` | Marks the item as the current page.                                |
+| `tooltip`  | `string \| TooltipContent props`                    | —       | Tooltip shown when the sidebar is collapsed to icons (desktop only).|
+
+All components forward refs and accept the standard props of the elements they render (`className`, `style`, event handlers, etc.).
+
+## Theming
+
+The sidebar exposes CSS custom properties you can override on `SidebarProvider` (via `style`) or a parent element:
+
+| Custom Property                | Default    | Description                                     |
+| ------------------------------ | ---------- | ----------------------------------------------- |
+| `--sidebar-width`              | `16rem`    | Expanded width (`24rem` for a right sidebar).   |
+| `--sidebar-width-icon`         | `44px`     | Width when collapsed to icons.                  |
+| `--sidebar-transition-duration`| `200ms`    | Expand/collapse animation duration.             |
+| `--sidebar-transition-timing`  | `linear`   | Expand/collapse animation timing function.      |
+
+## Accessibility
+
+- `SidebarTrigger` renders a real button with an `aria-label` of "Toggle left sidebar" / "Toggle right sidebar".
+- `SidebarRail` is removed from the tab order (`tabIndex={-1}`) since `SidebarTrigger` and the keyboard shortcuts cover keyboard users; it exposes an `aria-label` and a `title` with the shortcut.
+- `SidebarMenu` and `SidebarMenuSub` render semantic lists, and `asChild` lets menu items render real links for correct link semantics.
+- On mobile the sidebar renders inside a [Drawer](/docs/components-drawer--docs), which traps focus and closes with <kbd>Esc</kbd>.
