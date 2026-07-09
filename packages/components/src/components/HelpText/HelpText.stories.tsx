@@ -21,8 +21,15 @@ export const BelowAnInput: Story = {
   render: () => (
     <Box gap="2xs">
       <label htmlFor="help-text-example">Email address</label>
-      <input id="help-text-example" type="email" />
-      <HelpText>We will only use this to send your receipt.</HelpText>
+      <input
+        id="help-text-example"
+        type="email"
+        aria-describedby="help-text-example-hint"
+      />
+      {/* HelpText doesn't forward an id, so associate via a wrapper. */}
+      <div id="help-text-example-hint">
+        <HelpText>We will only use this to send your receipt.</HelpText>
+      </div>
     </Box>
   ),
 };

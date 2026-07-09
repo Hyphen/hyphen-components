@@ -2,7 +2,6 @@ import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect } from 'storybook/test';
 import { FormControl } from './FormControl';
-import { TextInput } from '../TextInput/TextInput';
 
 const meta = {
   component: FormControl,
@@ -81,30 +80,13 @@ export const HiddenLabel: Story = {
   },
   render: (args) => (
     <FormControl {...args}>
-      <input id={args.id} type="search" />
+      <input id={args.id} type="search" aria-label={args.label} />
     </FormControl>
   ),
   play: async ({ canvas }) => {
     // hideLabel suppresses the visible FormLabel entirely.
     await expect(canvas.queryByText('Search')).not.toBeInTheDocument();
+    // The input must still be accessible via its aria-label.
+    await expect(canvas.getByLabelText('Search')).toBeVisible();
   },
-};
-
-export const WrappingLibraryInput: Story = {
-  args: {
-    id: 'city',
-    label: 'City',
-    helpText: 'The city you currently live in.',
-  },
-  render: (args) => (
-    <FormControl {...args}>
-      <TextInput
-        id={args.id}
-        label={args.label}
-        hideLabel
-        value="Amsterdam"
-        onChange={() => {}}
-      />
-    </FormControl>
-  ),
 };
