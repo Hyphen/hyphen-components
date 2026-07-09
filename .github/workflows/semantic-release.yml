@@ -2,6 +2,11 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to publish (e.g. v7.8.0). Defaults to the committed package versions.'
+        required: false
+        type: string
   release:
     types: [published]
 
@@ -11,7 +16,7 @@ permissions:
 
 jobs:
   release:
-    name: Release Package
+    name: Release Packages
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -29,16 +34,35 @@ jobs:
       - name: install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Both packages release in lockstep: the git tag is the single source
+      # of truth for the version. Setting versions before publish also makes
+      # pnpm rewrite the workspace:^ dependency to ^<version>.
+      - name: set package versions from release tag
+        run: |
+          TAG="${{ github.event.release.tag_name || inputs.tag }}"
+          if [[ -n "$TAG" ]]; then
+            VERSION="${TAG#v}"
+            echo "Setting all package versions to $VERSION"
+            pnpm -r exec npm pkg set version="$VERSION"
+          else
+            echo "No tag available; publishing with committed package versions"
+          fi
+
       - name: test
         run: pnpm test
 
       - name: build
         run: pnpm build
 
+      # pnpm (not npm) must do the publishing: only pnpm rewrites the
+      # workspace:^ protocol to a real semver range in the published
+      # manifests. -r publishes in dependency order (design-tokens first)
+      # and skips the private workspace root. --no-git-checks is required
+      # because release events check out a detached tag.
       - name: Publish
         run: |
           if [[ "${{ github.event.release.prerelease }}" == "true" ]]; then
-            npm publish --ignore-scripts --tag beta --access public
+            pnpm publish -r --access public --tag beta --no-git-checks --ignore-scripts
           else
-            npm publish --ignore-scripts --access public
+            pnpm publish -r --access public --no-git-checks --ignore-scripts
           fi

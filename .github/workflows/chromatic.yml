@@ -19,12 +19,15 @@ jobs:
           version: 10.20.0
       - uses: actions/setup-node@v4
         with:
-          node-version: '20.19'
+          node-version: '22'
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Build design tokens
+        run: pnpm build-tokens
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           onlyChanged: true # Required option to enable TurboSnap
+          workingDir: packages/components

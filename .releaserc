@@ -1,9 +1,6 @@
 {
   "branches": ["main", { "name": "beta", "prerelease": true }],
   "plugins": [
-    "@semantic-release/npm",
-    "@semantic-release/github",
-    "@semantic-release/release-notes-generator",
     ["@semantic-release/commit-analyzer", {
       "preset": "angular",
       "releaseRules": [
@@ -17,6 +14,15 @@
         { "type": "feat", "release": "minor" },
         { "type": "fix", "release": "patch" }
       ]
-    }]
+    }],
+    "@semantic-release/release-notes-generator",
+    ["@semantic-release/exec", {
+      "prepareCmd": "pnpm -r exec npm pkg set version=${nextRelease.version}"
+    }],
+    ["@semantic-release/git", {
+      "assets": ["packages/components/package.json", "packages/design-tokens/package.json"],
+      "message": "chore(release): ${nextRelease.version} [skip ci]"
+    }],
+    "@semantic-release/github"
   ]
 }

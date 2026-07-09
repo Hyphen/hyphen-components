@@ -1,15 +1,23 @@
 # AGENTS.md
 
+## Repository layout
+
+- This is a pnpm workspace monorepo with two published packages:
+  - `packages/components` — `@hyphen/hyphen-components`, the React component library.
+  - `packages/design-tokens` — `@hyphen/hyphen-design-tokens`, the design token source (token JSON in `tokens/`, icon/logo SVGs in `assets/`) and its Style Dictionary build.
+- Components consume the tokens package via a `workspace:^` dependency; the tokens `build/` output must exist before component tests or Storybook run. The root scripts handle this ordering — prefer them over per-package scripts.
+- Both packages share one version and are published together by the Release workflow (version comes from the GitHub release tag).
+
 ## Testing instructions
 
 - Find the CI plan in the .github/workflows folder.
-- From the package root you can just call `pnpm test`. The commit should pass all tests before you merge.
+- From the repo root you can just call `pnpm test` (it builds the design tokens first, then runs every package's tests). The commit should pass all tests before you merge.
 - Fix any test or type errors until the whole suite is green.
 - Add or update tests for the code you change, even if nobody asked.
 
 ## PR instructions
 
-- Always run `pnpm lint` and `pnpm test` before committing.
+- Always run `pnpm lint` and `pnpm test` from the repo root before committing.
 
 ## Code Review Checklist
 

@@ -1,0 +1,415 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import designTokens from '@hyphen/hyphen-design-tokens/build/json/variables.json';
+
+<Meta title="Foundation/Design Tokens" />
+
+# Design Tokens
+
+Design tokens are an abstraction of design decisions made to construct and maintain an application design system. Spacing, color, typography, styles and animation are represented as data, in our case json. They’re used in place of hard-coded values in order to ensure flexibility and unity across all our product experiences.
+
+Design tokens are directly integrated into our component library and cover properties like spacing, color and component state.
+
+We use [Style Dictionary](https://amzn.github.io/style-dictionary/) to generate style definitions across all platforms from a single source - removing roadblocks, errors, and inefficiencies across our workflow.
+
+## Source on Github
+
+[Hyphen Design Tokens](https://github.com/Hyphen/hyphen-components/tree/main/packages/design-tokens) are available as an [npm package](https://www.npmjs.com/package/@hyphen/hyphen-design-tokens) so that you can create a Hyphen unified product experience for your platform of choice.
+
+## Border Radius
+
+Use these tokens for `border-radius`. They are defined in `rem`, which means they will scale when adjusting the root font size. Pixel values are calculated with a root font size of `16px`.
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>prop value</th>
+      <th>value</th>
+      <th>px</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(designTokens.size['border-radius']).map(
+      ([name, entry], i) => (
+        <tr key={i}>
+          <td>
+            <code>{`size-border-radius-${name}`}</code>
+          </td>
+          <td>
+            <code>{name}</code>
+          </td>
+          <td>{entry.value}</td>
+          <td>{name !== 'circle' ? entry.original.value * 16 : ''}</td>
+        </tr>
+      )
+    )}
+  </tbody>
+</table>
+
+## Border Width
+
+Use these tokens for `border-width`.
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>prop value</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(designTokens.size['border-width']).map(
+      ([name, entry], i) => (
+        <tr key={i}>
+          <td>
+            <code>{`size-border-width-${name}`}</code>
+          </td>
+          <td>
+            <code>{name}</code>
+          </td>
+          <td>{entry.value}</td>
+        </tr>
+      )
+    )}
+  </tbody>
+</table>
+
+## Box Shadow
+
+Used these tokens to set the outer shadow of an element.
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>prop value</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(designTokens.size['box-shadow']).map(([name, entry], i) => (
+      <tr key={i}>
+        <td>
+          <code>{`size-box-shadow-${name}`}</code>
+        </td>
+        <td>
+          <code>{name}</code>
+        </td>
+        <td>{entry.original.value}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+## Breakpoints
+
+Hyphen components follow a "mobile-first" approach, where styles are set with mobile devices considered first. Then styling adjustments are made as each minimum viewport width &mdash; the breakpoint &mdash; is reached.
+
+The following breakpoints are used in utility classes, but you can use them to modify your application depending on the user's viewport size.
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(designTokens.size.breakpoint).map(([name, entry], i) => (
+      <tr key={i}>
+        <td>
+          <code>{`size-breakpoint-${name}`}</code>
+        </td>
+        <td>{entry.original.value}px</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+## Dimension
+
+Dimension tokens are intended for use with `width` and `height` properties. They are defined in `rem`, which means they will scale when adjusting the root font size. Pixel values are calculated with a root font size of `16px`.
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>prop value</th>
+      <th>value</th>
+      <th>px</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(designTokens.size.dimension).map(([name, entry], i) => {
+      return (
+        <tr key={i}>
+          <td>
+            <code>{`size-dimension-${name}`}</code>
+          </td>
+          <td>
+            <code>{name}</code>
+          </td>
+          <td>{entry.value}</td>
+          <td>
+            {name === 'base'
+              ? '16'
+              : ['inherit', 'auto', 'fit', 'min', 'max'].includes(name)
+              ? ''
+              : entry.original.value * 16}
+          </td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table>
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>prop value</th>
+      <th>value</th>
+      <th>px</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(designTokens.size.percentage).map(([name, entry], i) => {
+      return (
+        <tr key={i}>
+          <td>
+            <code>{`size-percentage-${name}`}</code>
+          </td>
+          <td>
+            <code>{name}</code>
+          </td>
+          <td>{entry.original.value}%</td>
+          <td>
+            {name === 'base'
+              ? '16'
+              : ['inherit', 'auto'].includes(name)
+              ? ''
+              : entry.original.value * 16}
+          </td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table>
+
+## Font Family
+
+Use these tokens for `font-family`.
+
+<table>
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>prop value</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(designTokens.assets['font-family']).map(
+      ([name, entry], i) => (
+        <tr key={i}>
+          <td>
+            <code>{`asset-font-family-${name}`}</code>
+          </td>
+          <td>
+            <code>{name}</code>
+          </td>
+          <td>{entry.value}</td>
+        </tr>
+      )
+    )}
+  </tbody>
+</table>
+
+## Font Size
+
+Use these tokens for `font-size`. They are defined in `rem`, which means they will scale when adjusting the root font size. Pixel values are calculated with a root font size of `16px`.
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>prop value</th>
+      <th>value</th>
+      <th>px</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(designTokens.size['font-size']).map(([name, entry], i) => (
+      <tr key={i}>
+        <td>
+          <code>{`size-font-size-${name}`}</code>
+        </td>
+        <td>
+          <code>{name}</code>
+        </td>
+        <td>{entry.value}</td>
+        <td>
+          {name === 'base'
+            ? '16'
+            : name === 'inherit'
+            ? ''
+            : entry.original.value * 16}
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+## Font Weight
+
+Use these tokens for `font-weight`.
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>prop value</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(designTokens.size['font-weight']).map(
+      ([name, entry], i) => (
+        <tr key={i}>
+          <td>
+            <code>{`size-font-weight-${name}`}</code>
+          </td>
+          <td>
+            <code>{name}</code>
+          </td>
+          <td>{entry.original.value}</td>
+        </tr>
+      )
+    )}
+  </tbody>
+</table>
+
+## Heading Size
+
+Use these tokens for the `font-size` of Headings. They are defined in `rem`, which means they will scale when adjusting the root font size. Pixel values are calculated with a root font size of `16px`.
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>prop value</th>
+      <th>value</th>
+      <th>px</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(designTokens.size.heading).map(([name, entry], i) => (
+      <tr key={i}>
+        <td>
+          <code>{`size-heading-${name}`}</code>
+        </td>
+        <td>
+          <code>{name}</code>
+        </td>
+        <td>{entry.value}</td>
+        <td>
+          {name === 'base'
+            ? '16'
+            : name === 'inherit'
+            ? ''
+            : entry.original.value * 16}
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+## Line Height
+
+Used these tokens to set the line-heights of elements.
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>prop value</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(designTokens.size['line-height']).map(
+      ([name, entry], i) => (
+        <tr key={i}>
+          <td>
+            <code>{`size-line-height-${name}`}</code>
+          </td>
+          <td>
+            <code>{name}</code>
+          </td>
+          <td>{entry.original.value}</td>
+        </tr>
+      )
+    )}
+  </tbody>
+</table>
+
+## Spacing
+
+Spacing tokens are intended for use with `margin` and `padding` properties. They are defined in `rem`, which means they will scale when adjusting the root font size. Pixel values are calculated with a root font size of `16px`.
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>prop value</th>
+      <th>value</th>
+      <th>px</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(designTokens.size.spacing).map(([name, entry], i) => {
+      return (
+        <tr key={i}>
+          <td>
+            <code>{`size-spacing-${name}`}</code>
+          </td>
+          <td>
+            <code>{name}</code>
+          </td>
+          <td>{entry.value}</td>
+          <td>
+            {name === 'base'
+              ? '16'
+              : ['inherit', 'auto'].includes(name)
+              ? ''
+              : entry.original.value * 16}
+          </td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table>
+
+## Z-Index
+
+Used these tokens to set the z-index order of layering elements.
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th>token name</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(designTokens.size['z-index']).map(([name, entry], i) => (
+      <tr key={i}>
+        <td>
+          <code>{`size-z-index-${name}`}</code>
+        </td>
+        <td>{entry.original.value}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>

@@ -1,0 +1,41 @@
+{
+  "name": "@hyphen/hyphen-design-tokens",
+  "version": "7.7.0",
+  "description": "Design tokens that power all Hyphen UIs.",
+  "main": "build/json/variables.json",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "jest",
+    "clean": "rm -rf build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hyphen/hyphen-components.git",
+    "directory": "packages/design-tokens"
+  },
+  "author": "Matthew Osborn <matthew.osborn@hyphen.ai>",
+  "license": "MIT",
+  "private": false,
+  "engines": {
+    "node": ">=22"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.27.1",
+    "@babel/plugin-transform-react-jsx": "^7.27.1",
+    "@svgr/core": "^5.5.0",
+    "babel-preset-env": "^1.7.0",
+    "fs-extra": "^9.0.1",
+    "jest": "^29.7.0",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0",
+    "style-dictionary": "^5.5.0"
+  }
+}
