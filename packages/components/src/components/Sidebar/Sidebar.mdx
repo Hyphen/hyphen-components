@@ -1,5 +1,10 @@
-import { Canvas, Meta } from '@storybook/addon-docs/blocks';
-import { Alert } from '../Alert/Alert';
+import { Canvas, Meta, ArgTypes } from '@storybook/addon-docs/blocks';
+import {
+  SidebarProvider,
+  Sidebar,
+  SidebarTrigger,
+  SidebarMenuButton,
+} from './Sidebar';
 import * as Stories from './Sidebar.stories';
 
 <Meta of={Stories} />
@@ -144,40 +149,25 @@ It returns:
 
 ## Props
 
+All components forward refs and accept the standard props of the elements they render (`className`, `style`, event handlers, etc.).
+
 ### SidebarProvider
 
-| Prop           | Type                                                | Default             | Description                                                       |
-| -------------- | --------------------------------------------------- | ------------------- | ----------------------------------------------------------------- |
-| `defaultOpen`  | `boolean \| { left?: boolean; right?: boolean }`    | `true`              | Initial open state for uncontrolled usage.                        |
-| `open`         | `boolean \| { left?: boolean; right?: boolean }`    | —                   | Controlled open state.                                            |
-| `onOpenChange` | `(open: boolean, side?: 'left' \| 'right') => void` | —                   | Called when a sidebar is toggled.                                 |
-| `storageKey`   | `string \| { left?: string; right?: string }`       | `'sidebar_expanded'`| `localStorage` key(s) the new state is written to on toggle.      |
+<ArgTypes of={SidebarProvider} />
 
 ### Sidebar
 
-| Prop          | Type                              | Default       | Description                              |
-| ------------- | --------------------------------- | ------------- | ---------------------------------------- |
-| `side`        | `'left' \| 'right'`               | `'left'`      | Which edge the sidebar is attached to.   |
-| `collapsible` | `'offcanvas' \| 'icon' \| 'none'` | `'offcanvas'` | Collapse behavior when toggled closed.   |
+<ArgTypes of={Sidebar} />
 
 ### SidebarTrigger
 
 Extends [Button](/docs/components-button--docs).
 
-| Prop       | Type                | Default       | Description                                                     |
-| ---------- | ------------------- | ------------- | --------------------------------------------------------------- |
-| `side`     | `'left' \| 'right'` | context side  | Which sidebar to toggle.                                        |
-| `iconName` | `IconName`          | `'dock-left'` | Icon shown on the trigger button.                               |
+<ArgTypes of={SidebarTrigger} />
 
 ### SidebarMenuButton
 
-| Prop       | Type                                                | Default | Description                                                        |
-| ---------- | --------------------------------------------------- | ------- | ------------------------------------------------------------------ |
-| `asChild`  | `boolean`                                           | `false` | Render the child element (e.g. a link) instead of a `button`.      |
-| `isActive` | `boolean`                                           | `false` | Marks the item as the current page.                                |
-| `tooltip`  | `string \| TooltipContent props`                    | —       | Tooltip shown when the sidebar is collapsed to icons (desktop only).|
-
-All components forward refs and accept the standard props of the elements they render (`className`, `style`, event handlers, etc.).
+<ArgTypes of={SidebarMenuButton} />
 
 ## Theming
 

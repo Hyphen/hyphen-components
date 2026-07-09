@@ -50,6 +50,14 @@ const meta: Meta<typeof Sidebar> = {
   parameters: {
     layout: 'fullscreen',
     overrideDecorator: true,
+    // The sidebar examples fill 100svh, so render them in a fixed-height
+    // iframe on the docs page instead of inline at full height.
+    docs: {
+      story: {
+        inline: false,
+        height: '540px',
+      },
+    },
     chromatic: {
       modes: {
         light: allModes['light'],
