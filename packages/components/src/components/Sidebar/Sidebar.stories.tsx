@@ -55,7 +55,7 @@ const meta: Meta<typeof Sidebar> = {
     docs: {
       story: {
         inline: false,
-        height: '540px',
+        height: '640px',
       },
     },
     chromatic: {
