@@ -2,6 +2,7 @@
   "name": "@hyphen/hyphen-design-tokens",
   "version": "7.7.0",
   "description": "Design tokens that power all Hyphen UIs.",
+  "main": "build/json/variables.json",
   "files": [
     "build"
   ],
