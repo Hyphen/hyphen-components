@@ -68,7 +68,7 @@
       },
       "button-secondary-active": {
         "value": "{color.base.grey.100}",
-        "darkValue": "{color.base.grey.700}"
+        "darkValue": "{color.base.grey.800}"
       },
       "button-tertiary": {
         "value": "transparent",
