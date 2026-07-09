@@ -9,6 +9,20 @@ import * as Stories from './Sidebar.stories';
 
 <Meta of={Stories} />
 
+{/*
+  The embedded stories render in iframes, and the iframe is the story's
+  viewport. Keep it at least as wide as the desktop breakpoint (992px) so
+  the examples show the desktop sidebar instead of the mobile drawer,
+  scrolling horizontally when the docs column is narrower.
+*/}
+
+<style>
+  {`
+    .sbdocs-content .docs-story { overflow-x: auto; }
+    .sbdocs-content .docs-story iframe { min-width: 1100px; }
+  `}
+</style>
+
 # Sidebar
 
 A composable, collapsible app sidebar for primary navigation. Use it to build an application sidebar with a header, scrollable content, grouped menus, and a footer, all wired to expand/collapse state that persists across visits and adapts to mobile automatically.
