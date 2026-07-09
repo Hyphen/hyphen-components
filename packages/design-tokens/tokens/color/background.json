@@ -64,7 +64,7 @@
       },
       "button-secondary-hover": {
         "value": "{color.base.grey.50}",
-        "darkValue": "{color.base.grey.600}"
+        "darkValue": "{color.base.grey.700}"
       },
       "button-secondary-active": {
         "value": "{color.base.grey.100}",
