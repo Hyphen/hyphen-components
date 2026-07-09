@@ -125,20 +125,20 @@ import { IconName } from '@hyphen/hyphen-design-tokens/build/types';
 
 ## Local Development
 
-To build tokens locally run `pnpm run build`. NOTE: you will need a local `.env` file with a Figma access token assigned to `FIGMA_PERSONAL_ACCESS_TOKEN`. See [HOW TO GET A FIGMA ACCESS TOKEN](https://www.figma.com/developers/api#authentication). If you are still unsure how to get a working access token, or the process is not working for you, please reach out to one of our library owners.
+This package lives in the [hyphen-components monorepo](https://github.com/Hyphen/hyphen-components) as `packages/design-tokens`. To build tokens locally run `pnpm --filter @hyphen/hyphen-design-tokens build` from the repo root (or `pnpm build-tokens`). The build is fully offline and deterministic from the committed sources in `tokens/` and `assets/`.
 
-In order to test any local changes you'll need to build tokens, and symlink your local package into any project that consumes it. See [pnpm link](https://pnpm.io/cli/link), [npm link](https://docs.npmjs.com/cli/link) or [yarn link](https://classic.yarnpkg.com/en/docs/cli/link/) for more details.
+`@hyphen/hyphen-components` consumes this package through a workspace dependency, so local token changes are picked up by the component library (and its Storybook) as soon as the tokens are rebuilt — no linking or publishing needed.
 
 ## Updating Icons
 
 The build process handles the following:
 
-- mapping any svg icons in the `/icons` folder into the appropriate build directory
+- mapping any svg icons in the `assets/icons` folder into the appropriate build directory
 - updating the `IconName` type based on the file names in the directory.
 - Creating corresponding react components for each svg, and transpiling the resulting JSX with babel.
 - Regenerating the icons index map for use in react applications.
 
-As a developer, to update icons all that needs to be done is add them to the `/icons` folder with the name that you want the icon to have. Please follow
+As a developer, to update icons all that needs to be done is add them to the `assets/icons` folder with the name that you want the icon to have. Please follow
 these rules when exporting and adding icons:
 
 - SVGs should be exported with a size of 16x16px since this will be the size of our default viewbox.
