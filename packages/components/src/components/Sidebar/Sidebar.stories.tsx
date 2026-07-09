@@ -57,6 +57,11 @@ const meta: Meta<typeof Sidebar> = {
         inline: false,
         height: '640px',
       },
+      // Scopes the docs-page CSS in Sidebar.mdx (which forces a desktop-width
+      // viewport on the story iframes) to this page's Canvas blocks only.
+      canvas: {
+        className: 'sidebar-docs-canvas',
+      },
     },
     chromatic: {
       modes: {

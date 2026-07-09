@@ -13,13 +13,14 @@ import * as Stories from './Sidebar.stories';
   The embedded stories render in iframes, and the iframe is the story's
   viewport. Keep it at least as wide as the desktop breakpoint (992px) so
   the examples show the desktop sidebar instead of the mobile drawer,
-  scrolling horizontally when the docs column is narrower.
+  scrolling horizontally when the docs column is narrower. Scoped to this
+  page's Canvas blocks via the sidebar-docs-canvas class.
 */}
 
 <style>
   {`
-    .sbdocs-content .docs-story { overflow-x: auto; }
-    .sbdocs-content .docs-story iframe { min-width: 1100px; }
+    .sidebar-docs-canvas .docs-story { overflow-x: auto; }
+    .sidebar-docs-canvas .docs-story iframe { min-width: 1100px; }
   `}
 </style>
 
@@ -126,7 +127,12 @@ Pass `defaultOpen={false}` to the provider to start collapsed.
 Whenever the user toggles a sidebar, the provider writes the new state to `localStorage` under the resolved `storageKey` (a string key applies to the left sidebar, with `_right` appended for the right sidebar; pass an object to set each side explicitly). Reading the stored value back is left to your app — pass it to `defaultOpen` on mount:
 
 ```tsx
-const startExpanded = localStorage.getItem('sidebar_expanded') !== 'false';
+// Guard the read so it is safe in SSR environments (e.g. Next.js),
+// where localStorage does not exist on the server.
+const startExpanded =
+  typeof window !== 'undefined'
+    ? localStorage.getItem('sidebar_expanded') !== 'false'
+    : true;
 
 <SidebarProvider storageKey="sidebar_expanded" defaultOpen={startExpanded}>
   ...
