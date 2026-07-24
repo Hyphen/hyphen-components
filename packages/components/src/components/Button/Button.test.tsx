@@ -306,6 +306,16 @@ describe('Button', () => {
         const spinnerElement = document.getElementsByClassName('spinner')[0];
         expect(spinnerElement).toBeInTheDocument();
       });
+
+      test('renders white spinning indicator when button is success', () => {
+        renderButton({
+          isLoading: true,
+          variant: 'success',
+          children: 'Button is loading',
+        });
+        const spinnerElement = document.getElementsByClassName('spinner')[0];
+        expect(spinnerElement).toBeInTheDocument();
+      });
     });
 
     describe('Disabled and Loading', () => {
@@ -330,6 +340,7 @@ describe('Button', () => {
         'secondary',
         'tertiary',
         'danger',
+        'success',
       ];
       variants.forEach((variant) => {
         test(`renders component with variant: ${variant} when passed`, () => {

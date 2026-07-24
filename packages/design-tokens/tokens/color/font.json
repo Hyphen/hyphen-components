@@ -106,6 +106,15 @@
       "button-danger-active": {
         "value": "{color.base.white}"
       },
+      "button-success": {
+        "value": "{color.base.white}"
+      },
+      "button-success-hover": {
+        "value": "{color.base.white}"
+      },
+      "button-success-active": {
+        "value": "{color.base.white}"
+      },
       "badge-default": {
         "value": "{color.base.white}",
         "darkValue": "{color.base.grey.800}"

@@ -94,6 +94,18 @@
         "value": "{color.base.red.700}",
         "darkValue": "{color.base.red.700}"
       },
+      "button-success": {
+        "value": "{color.base.green.600}",
+        "darkValue": "{color.base.green.600}"
+      },
+      "button-success-hover": {
+        "value": "{color.base.green.700}",
+        "darkValue": "{color.base.green.700}"
+      },
+      "button-success-active": {
+        "value": "{color.base.green.800}",
+        "darkValue": "{color.base.green.800}"
+      },
       "badge-default": {
         "value": "{color.base.grey.800}",
         "darkValue": "{color.base.white}"

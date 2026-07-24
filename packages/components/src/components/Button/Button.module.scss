@@ -3,7 +3,8 @@
 :root {
   --button-box-shadow-focus: 0 0 0 4px var(--color-base-grey-300);
   --button-neutral-box-shadow-focus: 0 0 0 4px var(--color-base-grey-200);
-  --button-danger-box-shadow-focus: 0 0 0 4px var(--color-base-danger-200);
+  --button-danger-box-shadow-focus: 0 0 0 4px var(--color-base-red-200);
+  --button-success-box-shadow-focus: 0 0 0 4px var(--color-base-green-200);
 }
 
 @mixin size-sm {
@@ -237,6 +238,36 @@
     &:focus-visible {
       outline: 0;
       box-shadow: var(--button-danger-box-shadow-focus);
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: 0;
+      box-shadow: none;
+    }
+  }
+
+  &.success {
+    background-color: var(--color-background-button-success);
+    color: var(--color-font-button-success);
+
+    &:not(:disabled):hover {
+      background-color: var(--color-background-button-success-hover);
+      color: var(--color-font-button-success-hover);
+    }
+
+    &:not(:disabled):active {
+      background-color: var(--color-background-button-success-active);
+      color: var(--color-font-button-success-active);
+    }
+
+    &:focus {
+      outline: 0;
+      box-shadow: var(--button-success-box-shadow-focus);
+    }
+
+    &:focus-visible {
+      outline: 0;
+      box-shadow: var(--button-success-box-shadow-focus);
     }
 
     &:focus:not(:focus-visible) {

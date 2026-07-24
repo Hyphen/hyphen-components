@@ -5,6 +5,7 @@ export const BUTTON_VARIANTS: ButtonVariant[] = [
   'secondary',
   'tertiary',
   'danger',
+  'success',
 ];
 
 export const BUTTON_SIZES: ButtonSize[] = ['sm', 'md', 'lg'];
