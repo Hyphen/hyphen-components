@@ -11,6 +11,7 @@ const BUTTON_VARIANTS: ButtonVariant[] = [
   'secondary',
   'tertiary',
   'danger',
+  'success',
   'link',
 ];
 const BUTTON_SIZES: ButtonSize[] = ['sm', 'md', 'lg'];

@@ -13,6 +13,7 @@ export type ButtonVariant =
   | 'secondary'
   | 'tertiary'
   | 'danger'
+  | 'success'
   | 'link';
 
 export type ButtonSize = 'sm' | 'md' | 'lg';
