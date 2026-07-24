@@ -1,6 +1,6 @@
 import React from 'react';
 import { BUTTON_SIZES, BUTTON_VARIANTS } from './Button.constants';
-import { Button, ButtonVariant } from './Button';
+import { Button } from './Button';
 import { fireEvent, render, screen } from '@testing-library/react';
 
 const renderButton = (props = {}) => render(<Button {...props} />);
@@ -307,7 +307,7 @@ describe('Button', () => {
         expect(spinnerElement).toBeInTheDocument();
       });
 
-      test('renders white spinning indicator when button is success', () => {
+      test('renders the spinning indicator when button is success', () => {
         renderButton({
           isLoading: true,
           variant: 'success',
@@ -335,14 +335,7 @@ describe('Button', () => {
         expect(getButton('primary')).toHaveClass('primary');
       });
 
-      const variants: ButtonVariant[] = [
-        'primary',
-        'secondary',
-        'tertiary',
-        'danger',
-        'success',
-      ];
-      variants.forEach((variant) => {
+      BUTTON_VARIANTS.forEach((variant) => {
         test(`renders component with variant: ${variant} when passed`, () => {
           renderButton({ variant, children: variant });
           expect(getButton(variant)).toHaveClass(variant);
