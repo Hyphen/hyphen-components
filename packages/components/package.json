@@ -19,7 +19,7 @@
     "directory": "packages/components"
   },
   "scripts": {
-    "build": "cross-env IS_PUBLISHING=true tsup && cross-env IS_PUBLISHING=true webpack --config webpack.config.js && node scripts/create-cjs-shim.js",
+    "build": "cross-env IS_PUBLISHING=true tsup && cross-env IS_PUBLISHING=true webpack --config webpack.config.js && node scripts/create-cjs-shim.js && node scripts/copy-design-md.js",
     "build-storybook": "storybook build",
     "build-storybook-docs": "storybook build --docs",
     "storybook-docs": "storybook dev --docs",

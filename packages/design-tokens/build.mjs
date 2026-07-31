@@ -215,6 +215,28 @@ const styleDictionary = new StyleDictionary({
         },
       ],
     },
+    // Source for the generated DESIGN.md. Deliberately separate from the `json`
+    // platform: that one omits `size/unitless`, so font weights, line heights,
+    // z-indexes and box shadows come out as "400rem"/"0rem". DESIGN.md needs the
+    // same per-category transforms the CSS platform uses.
+    designMd: {
+      transforms: [
+        "attribute/cti",
+        "name/kebab",
+        "color/css",
+        "size/remAuto",
+        "size/breakpoint",
+        "size/percentage",
+        "size/unitless",
+      ],
+      buildPath: "build/json/",
+      files: [
+        {
+          destination: "design-md.json",
+          format: "json",
+        },
+      ],
+    },
     js: {
       transforms: [
         "attribute/cti",
@@ -279,3 +301,14 @@ const { default: generateTokenTypes } = await import(
 generateTokenTypes();
 console.log("\n==============================================");
 console.log("\nToken types generated!");
+
+// Generate the repo-root DESIGN.md from the built dictionary. Imported here for
+// the same reason as generateTokenTypes: it reads build output.
+const { default: generateDesignMd } = await import(
+  "./utils/generateDesignMd/generateDesignMd.js"
+);
+const designMd = generateDesignMd();
+console.log("\n==============================================");
+console.log(
+  `\nDESIGN.md ${designMd.changed ? "generated" : "already up to date"}!`,
+);
