@@ -30,4 +30,7 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           onlyChanged: true # Required option to enable TurboSnap
+          # Design-token assets are compiled into ignored build output before
+          # Storybook runs, so TurboSnap cannot trace their source files.
+          externals: packages/design-tokens/assets/**
           workingDir: packages/components
