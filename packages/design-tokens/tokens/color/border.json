@@ -138,8 +138,8 @@
         "darkValue": "{color.base.yellow.500}"
       },
       "badge-outline-brand": {
-        "value": "#ffc2d8",
-        "darkValue": "#7a1e42"
+        "value": "{color.base.orange.200}",
+        "darkValue": "{color.base.orange.700}"
       },
       "sidebar-rail-hover": {
         "value": "{color.base.grey.200}",

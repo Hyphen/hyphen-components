@@ -167,8 +167,8 @@
         "darkValue": "{color.background.brand-gradient}"
       },
       "badge-soft-brand": {
-        "value": "#fff0f5",
-        "darkValue": "#3d0f24"
+        "value": "{color.base.orange.50}",
+        "darkValue": "{color.base.orange.900}"
       },
       "toggle-group-item-hover": {
         "value": "rgba(0, 0, 0, 0.1)",

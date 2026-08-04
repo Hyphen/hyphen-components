@@ -23,8 +23,8 @@ The new set is six tokens per hue, for each of `grey`, `blue`, `green`, `yellow`
 | `color.font.badge-solid-{hue}` | `solid` |
 | `color.font.badge-soft-{hue}` | `soft`, `surface`, `outline` |
 
-`color.background.badge-solid-brand` resolves to the Hyphen gradient; the other `brand` tokens are a flat brand
-tint.
+`color.background.badge-solid-brand` resolves to the Hyphen gradient; the other `brand` tokens derive from the
+`orange` scale below, so `brand` matches `orange` for every variant except `solid`.
 
 ## Additive changes
 

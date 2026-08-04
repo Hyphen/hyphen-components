@@ -176,8 +176,8 @@
         "darkValue": "{color.base.white}"
       },
       "badge-soft-brand": {
-        "value": "#c70c50",
-        "darkValue": "#ff8ab8"
+        "value": "{color.base.orange.700}",
+        "darkValue": "{color.base.orange.200}"
       },
       "toast": {
         "value": "{color.base.grey.50}",
