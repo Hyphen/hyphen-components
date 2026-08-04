@@ -14,7 +14,8 @@
       "lg": { "value": 0.625 },
       "xl": { "value": 0.75 },
       "2xl": { "value": 1 },
-      "3xl": { "value": 2 }
+      "3xl": { "value": 2 },
+      "full": { "value": 9999 }
     }
   }
 }

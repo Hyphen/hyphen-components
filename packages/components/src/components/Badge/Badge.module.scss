@@ -3,7 +3,6 @@
 @mixin size-sm {
   font-size: var(--size-font-size-xs);
   padding: var(--size-spacing-2xs) var(--size-spacing-sm);
-  border-radius: var(--size-border-radius-lg);
 }
 
 %size-sm {
@@ -16,7 +15,6 @@
 @mixin size-md {
   font-size: var(--size-font-size-sm);
   padding: var(--size-spacing-xs) var(--size-spacing-md);
-  border-radius: var(--size-border-radius-xl);
 }
 
 %size-md {
@@ -29,7 +27,6 @@
 @mixin size-lg {
   font-size: var(--size-font-size-md);
   padding: var(--size-spacing-sm) var(--size-spacing-lg);
-  border-radius: var(--size-border-radius-2xl);
 }
 
 %size-lg {
@@ -39,94 +36,98 @@
   @extend %size-lg;
 }
 
+// Each color class declares the six semantic values that the variants below consume,
+// so styles stay at 8 colors + 4 variants instead of all 32 combinations.
+@mixin badge-color($color) {
+  --badge-solid-background: var(--color-background-badge-solid-#{$color});
+  --badge-solid-border: var(--color-border-badge-solid-#{$color});
+  --badge-solid-font: var(--color-font-badge-solid-#{$color});
+  --badge-soft-background: var(--color-background-badge-soft-#{$color});
+  --badge-soft-font: var(--color-font-badge-soft-#{$color});
+  --badge-outline-border: var(--color-border-badge-outline-#{$color});
+}
+
 .badge {
   border-style: solid;
   border-width: var(--size-border-width-sm);
   font-weight: var(--size-font-weight-medium);
   line-height: var(--size-line-height-base);
 
-  &.inverse {
-    background-color: var(--color-background-inverse);
-    border-color: var(--color-background-inverse);
-    color: var(--color-font-inverse);
+  &.color-grey {
+    @include badge-color('grey');
   }
 
-  &.default {
-    background-color: var(--color-background-badge-default);
-    border-color: var(--color-border-badge-default);
-    color: var(--color-font-badge-default);
+  &.color-blue {
+    @include badge-color('blue');
   }
 
-  &.secondary {
-    background-color: var(--color-background-badge-secondary);
-    border-color: var(--color-border-badge-secondary);
-    color: var(--color-font-badge-secondary);
+  &.color-green {
+    @include badge-color('green');
   }
 
-  &.danger {
-    background-color: var(--color-background-badge-danger);
-    border-color: var(--color-border-badge-danger);
-    color: var(--color-font-badge-danger);
+  &.color-yellow {
+    @include badge-color('yellow');
+  }
+
+  &.color-red {
+    @include badge-color('red');
+  }
+
+  &.color-purple {
+    @include badge-color('purple');
+  }
+
+  &.color-orange {
+    @include badge-color('orange');
+  }
+
+  &.color-brand {
+    @include badge-color('brand');
+  }
+
+  // `background` rather than `background-color` so the brand gradient renders under `solid`.
+  &.solid {
+    background: var(--badge-solid-background);
+    border-color: var(--badge-solid-border);
+    color: var(--badge-solid-font);
+  }
+
+  &.soft {
+    background: var(--badge-soft-background);
+    border-color: transparent;
+    color: var(--badge-soft-font);
+  }
+
+  &.surface {
+    background: var(--badge-soft-background);
+    border-color: var(--badge-outline-border);
+    color: var(--badge-soft-font);
   }
 
   &.outline {
-    background-color: var(--color-background-badge-outline);
-    border-color: var(--color-border-badge-outline);
-    color: var(--color-font-badge-outline);
+    background: transparent;
+    border-color: var(--badge-outline-border);
+    color: var(--badge-soft-font);
   }
 
-  &.purple {
-    background-color: var(--color-base-purple-500);
-    border-color: var(--color-base-purple-600);
-    color: var(--color-base-white);
+  &.radius-none {
+    border-radius: var(--size-border-radius-0);
   }
 
-  &.green {
-    background-color: var(--color-base-green-500);
-    border-color: var(--color-base-green-600);
-    color: var(--color-base-white);
+  &.radius-sm {
+    border-radius: var(--size-border-radius-sm);
   }
 
-  &.red {
-    background-color: var(--color-base-red-500);
-    border-color: var(--color-base-red-600);
-    color: var(--color-base-white);
+  &.radius-md {
+    border-radius: var(--size-border-radius-md);
   }
 
-  &.blue {
-    background-color: var(--color-base-blue-500);
-    border-color: var(--color-base-blue-600);
-    color: var(--color-base-white);
+  &.radius-lg {
+    border-radius: var(--size-border-radius-lg);
   }
 
-  &.yellow {
-    background-color: var(--color-base-yellow-400);
-    border-color: var(--color-base-yellow-500);
-    color: var(--color-base-black);
-  }
-
-  &.light-grey {
-    background-color: var(--color-base-grey-200);
-    border-color: var(--color-base-grey-200);
-    color: var(--color-base-grey-600);
-  }
-
-  &.dark-grey {
-    background-color: var(--color-base-grey-400);
-    border-color: var(--color-base-grey-400);
-    color: var(--color-base-white);
-  }
-
-  &.orange {
-    background: var(--color-background-brand-orange);
-    border-color: var(--color-border-brand-orange);
-    color: var(--color-base-white);
-  }
-
-  &.hyphen {
-    background: var(--color-background-brand-gradient);
-    border-color: var(--color-base-yellow-500);
-    color: var(--color-base-white);
+  &.radius-full {
+    border-radius: var(--size-border-radius-full);
   }
 
   &.size-sm {

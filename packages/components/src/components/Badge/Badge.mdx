@@ -16,14 +16,31 @@ Badges are used to display the status of an object or of an action that’s been
 
 ## Variants
 
-Badges come in different variants based on the kind of message being delivered to the user.
-If the `variant` prop is omitted, the badge uses the theme-aware `default` variant.
+The `variant` prop sets the badge's visual style, independent of its color. `soft` is the default.
 
 <Canvas of={Stories.Variants} />
 
-Fixed-color badge variants remain available when you want the same color treatment regardless of theme.
+## Colors
 
-<Canvas of={Stories.FixedColorVariants} />
+The `color` prop sets the badge's color, independent of its variant. Every color is theme-aware and has its own
+dark mode values. `grey` is the default.
+
+<Canvas of={Stories.Colors} />
+
+`color` also accepts the semantic names `danger`, `success`, `warning` and `info`, which map onto the `red`,
+`green`, `yellow` and `blue` hues. Prefer these when the badge communicates a state rather than a color, so the
+meaning survives a future retheme.
+
+<Canvas of={Stories.SemanticColors} />
+
+The `brand` color renders the Hyphen gradient when paired with `variant="solid"`; its other variants use a flat
+brand tint.
+
+## Radius
+
+Set `radius` to `none`, `sm`, `md`, `lg`, or `full`. `full` is the default, giving the badge a pill shape.
+
+<Canvas of={Stories.Radii} />
 
 ## Sizes
 

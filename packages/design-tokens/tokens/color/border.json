@@ -77,21 +77,69 @@
         "value": "transparent",
         "darkValue": "transparent"
       },
-      "badge-default": {
+      "badge-solid-grey": {
         "value": "{color.base.grey.800}",
         "darkValue": "{color.base.white}"
       },
-      "badge-secondary": {
-        "value": "{color.base.grey.100}",
-        "darkValue": "{color.base.grey.700}"
-      },
-      "badge-danger": {
-        "value": "{color.base.red.100}",
-        "darkValue": "{color.base.red.800}"
-      },
-      "badge-outline": {
+      "badge-outline-grey": {
         "value": "{color.base.grey.200}",
         "darkValue": "{color.base.grey.600}"
+      },
+      "badge-solid-blue": {
+        "value": "{color.base.blue.600}",
+        "darkValue": "{color.base.blue.600}"
+      },
+      "badge-outline-blue": {
+        "value": "{color.base.blue.200}",
+        "darkValue": "{color.base.blue.700}"
+      },
+      "badge-solid-green": {
+        "value": "{color.base.green.600}",
+        "darkValue": "{color.base.green.600}"
+      },
+      "badge-outline-green": {
+        "value": "{color.base.green.200}",
+        "darkValue": "{color.base.green.700}"
+      },
+      "badge-solid-yellow": {
+        "value": "{color.base.yellow.500}",
+        "darkValue": "{color.base.yellow.500}"
+      },
+      "badge-outline-yellow": {
+        "value": "{color.base.yellow.200}",
+        "darkValue": "{color.base.yellow.700}"
+      },
+      "badge-solid-red": {
+        "value": "{color.base.red.600}",
+        "darkValue": "{color.base.red.600}"
+      },
+      "badge-outline-red": {
+        "value": "{color.base.red.200}",
+        "darkValue": "{color.base.red.700}"
+      },
+      "badge-solid-purple": {
+        "value": "{color.base.purple.600}",
+        "darkValue": "{color.base.purple.600}"
+      },
+      "badge-outline-purple": {
+        "value": "{color.base.purple.200}",
+        "darkValue": "{color.base.purple.700}"
+      },
+      "badge-solid-orange": {
+        "value": "{color.base.orange.600}",
+        "darkValue": "{color.base.orange.600}"
+      },
+      "badge-outline-orange": {
+        "value": "{color.base.orange.200}",
+        "darkValue": "{color.base.orange.700}"
+      },
+      "badge-solid-brand": {
+        "value": "{color.base.yellow.500}",
+        "darkValue": "{color.base.yellow.500}"
+      },
+      "badge-outline-brand": {
+        "value": "#ffc2d8",
+        "darkValue": "#7a1e42"
       },
       "sidebar-rail-hover": {
         "value": "{color.base.grey.200}",

@@ -1,33 +1,36 @@
-import { Badge, BadgeVariant } from './Badge';
+import {
+  Badge,
+  BadgeHue,
+  BadgeRadius,
+  BadgeSemanticColor,
+  BadgeVariant,
+} from './Badge';
 import React from 'react';
 import { Box } from '../Box/Box';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { allModes } from '../../modes';
 
-const SEMANTIC_BADGE_VARIANTS: BadgeVariant[] = [
-  'default',
-  'secondary',
-  'danger',
-  'outline',
-];
+const BADGE_VARIANTS: BadgeVariant[] = ['solid', 'soft', 'surface', 'outline'];
 
-const FIXED_COLOR_BADGE_VARIANTS: BadgeVariant[] = [
-  'light-grey',
-  'dark-grey',
-  'inverse',
-  'purple',
+const BADGE_HUES: BadgeHue[] = [
+  'grey',
   'blue',
   'green',
   'yellow',
   'red',
+  'purple',
   'orange',
-  'hyphen',
+  'brand',
 ];
 
-const BADGE_VARIANTS: BadgeVariant[] = [
-  ...SEMANTIC_BADGE_VARIANTS,
-  ...FIXED_COLOR_BADGE_VARIANTS,
+const BADGE_SEMANTIC_COLORS: BadgeSemanticColor[] = [
+  'danger',
+  'success',
+  'warning',
+  'info',
 ];
+
+const BADGE_RADII: BadgeRadius[] = ['none', 'sm', 'md', 'lg', 'full'];
 
 const BADGE_SIZES = ['sm', 'md', 'lg'];
 
@@ -38,7 +41,18 @@ const meta: Meta<typeof Badge> = {
     variant: {
       control: 'select',
       options: BADGE_VARIANTS,
-      description: 'The type/color of the badge to show',
+      description: 'The visual style of the badge',
+    },
+    color: {
+      control: 'select',
+      options: [...BADGE_HUES, ...BADGE_SEMANTIC_COLORS],
+      description:
+        'The color of the badge. Semantic names map onto a hue: danger, success, warning, info',
+    },
+    radius: {
+      control: 'select',
+      options: BADGE_RADII,
+      description: "The roundness of the badge's corners",
     },
     size: {
       control: 'select',
@@ -60,7 +74,9 @@ const meta: Meta<typeof Badge> = {
     },
   },
   args: {
-    variant: 'default',
+    variant: 'soft',
+    color: 'grey',
+    radius: 'full',
     size: 'md',
     message: '',
     className: '',
@@ -89,8 +105,8 @@ export const Overview: Story = {
 export const Variants: Story = {
   render: () => (
     <Box direction="row" gap="sm">
-      {SEMANTIC_BADGE_VARIANTS.map((variant) => (
-        <Badge variant={variant} key={variant}>
+      {BADGE_VARIANTS.map((variant) => (
+        <Badge variant={variant} color="blue" key={variant}>
           {variant}
         </Badge>
       ))}
@@ -101,12 +117,46 @@ export const Variants: Story = {
   },
 };
 
-export const FixedColorVariants: Story = {
+export const Colors: Story = {
   render: () => (
-    <Box direction="row" gap="sm" flexWrap="wrap">
-      {FIXED_COLOR_BADGE_VARIANTS.map((variant) => (
-        <Badge variant={variant} key={variant}>
-          {variant}
+    <Box direction="column" gap="sm">
+      {BADGE_VARIANTS.map((variant) => (
+        <Box direction="row" gap="sm" wrap key={variant}>
+          {BADGE_HUES.map((color) => (
+            <Badge variant={variant} color={color} key={color}>
+              {color}
+            </Badge>
+          ))}
+        </Box>
+      ))}
+    </Box>
+  ),
+  parameters: {
+    controls: { disable: true },
+  },
+};
+
+export const SemanticColors: Story = {
+  render: () => (
+    <Box direction="row" gap="sm" wrap>
+      {BADGE_SEMANTIC_COLORS.map((color) => (
+        <Badge color={color} key={color}>
+          {color}
+        </Badge>
+      ))}
+    </Box>
+  ),
+  parameters: {
+    controls: { disable: true },
+  },
+};
+
+export const Radii: Story = {
+  render: () => (
+    <Box direction="row" gap="sm" wrap>
+      {BADGE_RADII.map((radius) => (
+        <Badge radius={radius} variant="surface" color="blue" key={radius}>
+          {radius}
         </Badge>
       ))}
     </Box>

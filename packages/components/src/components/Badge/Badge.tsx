@@ -7,33 +7,55 @@ import { Box, BoxProps } from '../Box/Box';
 
 export type BadgeSize = 'sm' | 'md' | 'lg';
 
-export type BadgeVariant =
-  | 'default'
-  | 'secondary'
-  | 'danger'
-  | 'outline'
-  | 'light-grey'
-  | 'dark-grey'
-  | 'inverse'
+export type BadgeVariant = 'solid' | 'soft' | 'surface' | 'outline';
+
+export type BadgeHue =
+  | 'grey'
+  | 'blue'
   | 'green'
   | 'yellow'
-  | 'blue'
   | 'red'
   | 'purple'
   | 'orange'
-  | 'hyphen';
+  | 'brand';
 
-export interface BadgeProps extends BoxProps {
+export type BadgeSemanticColor = 'danger' | 'success' | 'warning' | 'info';
+
+export type BadgeColor = BadgeHue | BadgeSemanticColor;
+
+export type BadgeRadius = 'none' | 'sm' | 'md' | 'lg' | 'full';
+
+/**
+ * Semantic color names resolve to a hue, so `color="danger"` and `color="red"` render identically.
+ * Retheming a semantic color is a change here rather than at every call site.
+ */
+const BADGE_COLOR_ALIASES: Record<BadgeSemanticColor, BadgeHue> = {
+  danger: 'red',
+  success: 'green',
+  warning: 'yellow',
+  info: 'blue',
+};
+
+export interface BadgeProps extends Omit<BoxProps, 'color' | 'radius'> {
+  /**
+   * The color of the badge. Accepts a hue, or one of the semantic names
+   * (`danger`, `success`, `warning`, `info`) which map onto `red`, `green`, `yellow` and `blue`.
+   */
+  color?: BadgeColor;
   /**
    * @deprecated Use children instead. The text message or ReactNode to be rendered in the badge.
    */
   message?: string | ReactNode;
   /**
+   * The roundness of the badge's corners.
+   */
+  radius?: BadgeRadius;
+  /**
    * The size of the badge.
    */
   size?: BadgeSize | ResponsiveProp<BadgeSize>;
   /**
-   * The type/color of the badge to show.
+   * The visual style of the badge. Use `color` to set its color.
    */
   variant?: BadgeVariant;
 }
@@ -42,8 +64,10 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
   (
     {
       className = '',
+      color = 'grey',
       message = '',
-      variant = 'default',
+      radius = 'full',
+      variant = 'soft',
       size = 'md',
       children,
       ...restProps
@@ -54,13 +78,15 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
       (c) => styles[c]
     );
 
+    const hue = BADGE_COLOR_ALIASES[color as BadgeSemanticColor] ?? color;
+
     const badgeClasses: string = classNames(
       styles.badge,
       className,
       responsiveClasses,
-      {
-        [styles[variant]]: variant,
-      }
+      styles[variant],
+      styles[`color-${hue}`],
+      styles[`radius-${radius}`]
     );
 
     return (
