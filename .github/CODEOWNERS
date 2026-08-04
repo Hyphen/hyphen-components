@@ -1,7 +1,8 @@
 # https://help.github.com/en/articles/about-code-owners
 
-# These owners will be the default owners for everything in
-# the repo. Unless a later match takes precedence,
-# @osbornm will be requested for
-# review when someone opens a pull request.
-
+# Dependency-policy changes require maintainer review.
+/.github/CODEOWNERS @osbornm @nathanyoung
+/.github/workflows/ @osbornm @nathanyoung
+/package.json @osbornm @nathanyoung
+/pnpm-lock.yaml @osbornm @nathanyoung
+/pnpm-workspace.yaml @osbornm @nathanyoung
