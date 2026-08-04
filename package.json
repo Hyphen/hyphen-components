@@ -2,7 +2,7 @@
   "name": "hyphen-components-monorepo",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@10.20.0",
+  "packageManager": "pnpm@11.20.0",
   "license": "MIT",
   "author": {
     "name": "@hyphen"
