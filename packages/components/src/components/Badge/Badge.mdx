@@ -42,6 +42,30 @@ Set `radius` to `none`, `sm`, `md`, `lg`, or `full`. `full` is the default, givi
 
 <Canvas of={Stories.Radii} />
 
+## With icons
+
+Nest an `Icon`, a `Spinner`, or any other graphic alongside the badge's text. Its position in the markup is its
+position in the badge — put it before the text for a leading icon, after for a trailing one. No extra props are
+needed.
+
+```jsx
+<Badge variant="solid" color="green">
+  <Icon name="check" />
+  Verified
+</Badge>
+
+<Badge variant="outline" color="yellow">
+  Favorite
+  <Icon name="star" />
+</Badge>
+```
+
+Nested graphics are scaled to the badge's text size and inherit its text color, so they stay in proportion at
+every `size` and in both themes. The badge also tightens its padding on whichever side carries a graphic rather
+than text, and a badge containing only an icon is padded evenly.
+
+<Canvas of={Stories.WithIcons} />
+
 ## Sizes
 
 Set the size of the badge to `sm`, `md`, or `lg`. `md` is the default size. A `ResponsiveProp` object may also be used

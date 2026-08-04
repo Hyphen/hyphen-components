@@ -1,8 +1,23 @@
 @import '@hyphen/hyphen-design-tokens/build/scss/variables';
 
+// Trims the padding on whichever side carries a graphic rather than a text label,
+// so a nested icon doesn't sit as far from the edge as text would.
+@mixin graphic-padding($value) {
+  &:has(> :first-child:not(.label)) {
+    padding-left: $value;
+  }
+
+  &:has(> :last-child:not(.label)) {
+    padding-right: $value;
+  }
+}
+
 @mixin size-sm {
   font-size: var(--size-font-size-xs);
   padding: var(--size-spacing-2xs) var(--size-spacing-sm);
+  gap: var(--size-spacing-xs);
+
+  @include graphic-padding(var(--size-spacing-xs));
 }
 
 %size-sm {
@@ -15,6 +30,9 @@
 @mixin size-md {
   font-size: var(--size-font-size-sm);
   padding: var(--size-spacing-xs) var(--size-spacing-md);
+  gap: var(--size-spacing-xs);
+
+  @include graphic-padding(var(--size-spacing-sm));
 }
 
 %size-md {
@@ -27,6 +45,9 @@
 @mixin size-lg {
   font-size: var(--size-font-size-md);
   padding: var(--size-spacing-sm) var(--size-spacing-lg);
+  gap: var(--size-spacing-sm);
+
+  @include graphic-padding(var(--size-spacing-md));
 }
 
 %size-lg {
@@ -52,6 +73,20 @@
   border-width: var(--size-border-width-sm);
   font-weight: var(--size-font-weight-medium);
   line-height: var(--size-line-height-base);
+
+  // Scale any nested graphic to the current text size. Icons are already sized in `em`,
+  // so this is what makes a Spinner (fixed pixel dimensions) track the badge instead.
+  svg {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+  }
+
+  // Spinner renders its svg inside a span; keep that wrapper from adding line-box height.
+  > span:not(.label) {
+    display: inline-flex;
+    align-items: center;
+  }
 
   &.color-grey {
     @include badge-color('grey');

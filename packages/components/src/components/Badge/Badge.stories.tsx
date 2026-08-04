@@ -3,10 +3,13 @@ import {
   BadgeHue,
   BadgeRadius,
   BadgeSemanticColor,
+  BadgeSize,
   BadgeVariant,
 } from './Badge';
 import React from 'react';
 import { Box } from '../Box/Box';
+import { Icon } from '../Icon/Icon';
+import { Spinner } from '../Spinner/Spinner';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { allModes } from '../../modes';
 
@@ -158,6 +161,49 @@ export const Radii: Story = {
         <Badge radius={radius} variant="surface" color="blue" key={radius}>
           {radius}
         </Badge>
+      ))}
+    </Box>
+  ),
+  parameters: {
+    controls: { disable: true },
+  },
+};
+
+export const WithIcons: Story = {
+  render: () => (
+    <Box direction="column" alignItems="flex-start" gap="md">
+      <Box direction="row" gap="sm" alignItems="center" wrap>
+        <Badge variant="solid" color="green">
+          <Icon name="check" />
+          Verified
+        </Badge>
+        <Badge variant="outline" color="yellow">
+          Favorite
+          <Icon name="star" />
+        </Badge>
+        <Badge variant="soft" color="danger">
+          <Spinner />
+          Deleting
+        </Badge>
+        <Badge variant="surface" color="blue">
+          <Icon name="settings" />
+        </Badge>
+      </Box>
+      {BADGE_SIZES.map((size) => (
+        <Box direction="row" gap="sm" alignItems="center" key={size}>
+          <Badge size={size as BadgeSize} variant="solid" color="green">
+            <Icon name="check" />
+            {size}
+          </Badge>
+          <Badge size={size as BadgeSize} variant="outline">
+            {size}
+            <Icon name="star" />
+          </Badge>
+          <Badge size={size as BadgeSize} variant="soft" color="danger">
+            <Spinner />
+            {size}
+          </Badge>
+        </Box>
       ))}
     </Box>
   ),

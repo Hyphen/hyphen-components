@@ -1,4 +1,4 @@
-import React, { ReactNode, forwardRef } from 'react';
+import React, { Children, ReactNode, forwardRef } from 'react';
 import classNames from 'classnames';
 import { ResponsiveProp } from '../../types';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
@@ -35,6 +35,20 @@ const BADGE_COLOR_ALIASES: Record<BadgeSemanticColor, BadgeHue> = {
   warning: 'yellow',
   info: 'blue',
 };
+
+/**
+ * Wraps bare text in an element so the stylesheet can tell a label from a nested graphic.
+ * Text nodes are invisible to `:first-child` / `:last-child`, so without this an icon could
+ * not be identified as leading or trailing.
+ */
+const renderBadgeChildren = (children: ReactNode) =>
+  Children.map(children, (child) =>
+    typeof child === 'string' || typeof child === 'number' ? (
+      <span className={styles.label}>{child}</span>
+    ) : (
+      child
+    )
+  );
 
 export interface BadgeProps extends Omit<BoxProps, 'color' | 'radius'> {
   /**
@@ -98,7 +112,7 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
         direction="row"
         {...restProps}
       >
-        {children || message}
+        {renderBadgeChildren(children || message)}
       </Box>
     );
   }
