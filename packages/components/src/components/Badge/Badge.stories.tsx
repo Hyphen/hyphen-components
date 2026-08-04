@@ -62,18 +62,13 @@ const meta: Meta<typeof Badge> = {
       options: BADGE_SIZES,
       description: 'The size of the badge',
     },
-    message: {
-      control: 'text',
-      description:
-        'The text message to be rendered in the badge (deprecated, use children instead)',
-    },
     className: {
       control: 'text',
       description: 'Custom class to apply to the badge',
     },
     children: {
       control: 'text',
-      description: 'Badge content (preferred over message)',
+      description: 'Badge content',
     },
   },
   args: {
@@ -81,7 +76,6 @@ const meta: Meta<typeof Badge> = {
     color: 'grey',
     radius: 'full',
     size: 'md',
-    message: '',
     className: '',
     children: undefined,
   },
@@ -101,7 +95,7 @@ type Story = StoryObj<typeof Badge>;
 
 export const Overview: Story = {
   args: {
-    message: 'Hello world!',
+    children: 'Hello world!',
   },
 };
 
@@ -215,9 +209,9 @@ export const WithIcons: Story = {
 export const Sizes: Story = {
   render: () => (
     <Box direction="column" alignItems="flex-start" gap="md">
-      <Badge size="sm" message="Small" />
-      <Badge size="md" message="Medium" />
-      <Badge size="lg" message="Large" />
+      <Badge size="sm">Small</Badge>
+      <Badge size="md">Medium</Badge>
+      <Badge size="lg">Large</Badge>
       <Badge
         size={{
           base: 'sm',

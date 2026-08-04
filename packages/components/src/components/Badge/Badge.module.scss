@@ -1,7 +1,15 @@
 @import '@hyphen/hyphen-design-tokens/build/scss/variables';
 
-// Trims the padding on whichever side carries a graphic rather than a text label,
-// so a nested icon doesn't sit as far from the edge as text would.
+/*
+ * Trims the padding on whichever side carries a graphic rather than a text label,
+ * so a nested icon does not sit as far from the edge as text would.
+ *
+ * Block comments are deliberate throughout this file: postcss-loader runs before
+ * sass-loader (webpack applies loaders right to left), so PostCSS parses this file
+ * as plain CSS, where `//` is not a comment. A `;` or an apostrophe inside a `//`
+ * comment breaks the production build while Storybook, which compiles Sass first,
+ * keeps working.
+ */
 @mixin graphic-padding($value) {
   &:has(> :first-child:not(.label)) {
     padding-left: $value;
@@ -57,8 +65,10 @@
   @extend %size-lg;
 }
 
-// Each color class declares the six semantic values that the variants below consume,
-// so styles stay at 8 colors + 4 variants instead of all 32 combinations.
+/*
+ * Each color class declares the six semantic values that the variants below consume,
+ * so styles stay at 8 colors + 4 variants instead of all 32 combinations.
+ */
 @mixin badge-color($color) {
   --badge-solid-background: var(--color-background-badge-solid-#{$color});
   --badge-solid-border: var(--color-border-badge-solid-#{$color});
@@ -74,15 +84,17 @@
   font-weight: var(--size-font-weight-medium);
   line-height: var(--size-line-height-base);
 
-  // Scale any nested graphic to the current text size. Icons are already sized in `em`,
-  // so this is what makes a Spinner (fixed pixel dimensions) track the badge instead.
+  /*
+   * Scale any nested graphic to the current text size. Icons are already sized in `em`,
+   * so this is what makes a Spinner (fixed pixel dimensions) track the badge instead.
+   */
   svg {
     width: 1em;
     height: 1em;
     flex-shrink: 0;
   }
 
-  // Spinner renders its svg inside a span; keep that wrapper from adding line-box height.
+  /* Spinner renders its svg inside a span. Keep that wrapper from adding line-box height. */
   > span:not(.label) {
     display: inline-flex;
     align-items: center;
@@ -120,7 +132,7 @@
     @include badge-color('brand');
   }
 
-  // `background` rather than `background-color` so the brand gradient renders under `solid`.
+  /* `background` rather than `background-color` so the brand gradient renders under `solid`. */
   &.solid {
     background: var(--badge-solid-background);
     border-color: var(--badge-solid-border);

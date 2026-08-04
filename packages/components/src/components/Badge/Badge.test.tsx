@@ -49,7 +49,7 @@ const getBadge = (text: string): HTMLElement =>
 
 describe('Badge', () => {
   test('Badge correctly renders with base props', () => {
-    render(<Badge message="hello" />);
+    render(<Badge>hello</Badge>);
     const badge = getBadge('hello');
     expect(badge).toBeInTheDocument();
     expect(badge.getAttribute('class')).toContain('soft');
@@ -64,11 +64,18 @@ describe('Badge', () => {
     expect(badge.getAttribute('class')).toContain('radius-full');
   });
 
+  test('it renders falsy but valid children such as 0', () => {
+    render(<Badge>{0}</Badge>);
+
+    expect(screen.getByText('0')).toBeInTheDocument();
+    expect(getBadge('0')).toBeInTheDocument();
+  });
+
   describe('Variants', () => {
     BADGE_VARIANTS.map((variant) =>
       describe(`${variant}`, () => {
         test(`it has a ${variant} class applied to it`, () => {
-          render(<Badge variant={variant} message={`${variant} Badge`} />);
+          render(<Badge variant={variant}>{`${variant} Badge`}</Badge>);
           const badge = getBadge(`${variant} Badge`);
 
           expect(badge.getAttribute('class')).toContain(variant);
@@ -81,7 +88,7 @@ describe('Badge', () => {
     BADGE_HUES.map((color) =>
       describe(`${color}`, () => {
         test(`it has a color-${color} class applied to it`, () => {
-          render(<Badge color={color} message={`${color} Badge`} />);
+          render(<Badge color={color}>{`${color} Badge`}</Badge>);
           const badge = getBadge(`${color} Badge`);
 
           expect(badge.getAttribute('class')).toContain(`color-${color}`);
@@ -94,7 +101,7 @@ describe('Badge', () => {
         Object.entries(BADGE_SEMANTIC_COLORS) as [BadgeSemanticColor, BadgeHue][]
       ).map(([semanticColor, hue]) =>
         test(`${semanticColor} resolves to the ${hue} hue`, () => {
-          render(<Badge color={semanticColor} message={`${semanticColor} Badge`} />);
+          render(<Badge color={semanticColor}>{`${semanticColor} Badge`}</Badge>);
           const badge = getBadge(`${semanticColor} Badge`);
 
           expect(badge.getAttribute('class')).toContain(`color-${hue}`);
@@ -117,7 +124,7 @@ describe('Badge', () => {
     BADGE_RADII.map((radius) =>
       describe(`${radius}`, () => {
         test(`it has a radius-${radius} class applied to it`, () => {
-          render(<Badge radius={radius} message={`${radius} Badge`} />);
+          render(<Badge radius={radius}>{`${radius} Badge`}</Badge>);
           const badge = getBadge(`${radius} Badge`);
 
           expect(badge.getAttribute('class')).toContain(`radius-${radius}`);
@@ -206,7 +213,7 @@ describe('Badge', () => {
     BADGE_SIZES.map((size) =>
       describe(`${size}`, () => {
         test(`it has a ${size} class applied to it`, () => {
-          render(<Badge size={size} message={`${size} Badge`} />);
+          render(<Badge size={size}>{`${size} Badge`}</Badge>);
           const badge = getBadge(`${size} Badge`);
 
           expect(badge.getAttribute('class')).toContain(`size-${size}`);

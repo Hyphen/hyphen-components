@@ -903,7 +903,7 @@ export const ComponentAsColumnHeader = () =>
     const columnConfig: ColumnType[] = [
       { heading: 'ID', dataKey: 'id' },
       { heading: 'Color', dataKey: 'color' },
-      { heading: <Badge message="Status" />, dataKey: 'status' },
+      { heading: <Badge>Status</Badge>, dataKey: 'status' },
     ];
     const tableData = [
       {

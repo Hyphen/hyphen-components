@@ -57,10 +57,6 @@ export interface BadgeProps extends Omit<BoxProps, 'color' | 'radius'> {
    */
   color?: BadgeColor;
   /**
-   * @deprecated Use children instead. The text message or ReactNode to be rendered in the badge.
-   */
-  message?: string | ReactNode;
-  /**
    * The roundness of the badge's corners.
    */
   radius?: BadgeRadius;
@@ -79,7 +75,6 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
     {
       className = '',
       color = 'grey',
-      message = '',
       radius = 'full',
       variant = 'soft',
       size = 'md',
@@ -112,7 +107,7 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
         direction="row"
         {...restProps}
       >
-        {renderBadgeChildren(children || message)}
+        {renderBadgeChildren(children)}
       </Box>
     );
   }
