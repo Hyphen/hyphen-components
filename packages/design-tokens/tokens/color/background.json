@@ -202,6 +202,26 @@
         "value": "{color.base.orange.100}",
         "darkValue": "{color.base.orange.900}"
       },
+      "alert-default": {
+        "value": "{color.base.grey.100}",
+        "darkValue": "{color.base.grey.600}"
+      },
+      "alert-info": {
+        "value": "{color.base.blue.100}",
+        "darkValue": "{color.base.blue.900}"
+      },
+      "alert-success": {
+        "value": "{color.base.green.100}",
+        "darkValue": "{color.base.green.900}"
+      },
+      "alert-warning": {
+        "value": "{color.base.yellow.100}",
+        "darkValue": "{color.base.yellow.900}"
+      },
+      "alert-danger": {
+        "value": "{color.base.red.100}",
+        "darkValue": "{color.base.red.900}"
+      },
       "toggle-group-item-hover": {
         "value": "rgba(0, 0, 0, 0.1)",
         "darkValue": "rgba(255, 255, 255, .1)"

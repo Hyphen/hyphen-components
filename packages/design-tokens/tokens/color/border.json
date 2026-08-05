@@ -173,6 +173,26 @@
         "value": "{color.base.orange.200}",
         "darkValue": "{color.base.orange.700}"
       },
+      "alert-default": {
+        "value": "{color.base.grey.300}",
+        "darkValue": "{color.base.grey.400}"
+      },
+      "alert-info": {
+        "value": "{color.base.blue.300}",
+        "darkValue": "{color.base.blue.700}"
+      },
+      "alert-success": {
+        "value": "{color.base.green.300}",
+        "darkValue": "{color.base.green.700}"
+      },
+      "alert-warning": {
+        "value": "{color.base.yellow.300}",
+        "darkValue": "{color.base.yellow.700}"
+      },
+      "alert-danger": {
+        "value": "{color.base.red.300}",
+        "darkValue": "{color.base.red.700}"
+      },
       "sidebar-rail-hover": {
         "value": "{color.base.grey.200}",
         "darkValue": "{color.base.grey.400}"

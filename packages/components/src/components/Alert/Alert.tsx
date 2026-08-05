@@ -16,6 +16,10 @@ import { ALERT_ICONS_MAP } from './Alert.constants';
 
 export interface AlertProps {
   /**
+   * The alert's contents.
+   */
+  children?: ReactNode;
+  /**
    * Custom class to apply to the alert.
    */
   className?: string;
@@ -27,10 +31,6 @@ export interface AlertProps {
    * Renders a version of the alert with smaller padding.
    */
   isCompact?: boolean;
-  /**
-   * @deprecated Use children instead. The text message or ReactNode to be rendered in the alert.
-   */
-  message?: string | ReactNode;
   /**
    * Whether the alert can be closed by the user. If `true` it will render
    * the 'close' icon on the right hand side of the alert.
@@ -61,7 +61,6 @@ const AlertComponent: FC<AlertProps> = ({
   className = '',
   hasIcon = false,
   isCompact = false,
-  message = '',
   onClose = undefined,
   render = undefined,
   title = '',
@@ -95,7 +94,7 @@ const AlertComponent: FC<AlertProps> = ({
     if (!hasIcon) return null;
 
     return (
-      <Box fontSize="md" className={styles[`alert__icon__${variant}`]}>
+      <Box fontSize="md">
         <Icon
           name={ALERT_ICONS_MAP[variant].icon}
           data-testid={`alert-icon-${variant}-test-id`}
@@ -108,11 +107,7 @@ const AlertComponent: FC<AlertProps> = ({
     if (!onClose) return null;
 
     return (
-      <Box
-        margin="0 0 0 auto"
-        color="secondary"
-        className={styles['close-icon']}
-      >
+      <Box margin="0 0 0 auto" className={styles['close-icon']}>
         <button
           type="button"
           onClick={handleClose}
@@ -131,7 +126,7 @@ const AlertComponent: FC<AlertProps> = ({
     }
 
     return (
-      <Box display="block" childGap={message && title ? '2xs' : undefined}>
+      <Box display="block" childGap={children && title ? '2xs' : undefined}>
         {title && (
           <Box
             as="h4"
@@ -142,12 +137,10 @@ const AlertComponent: FC<AlertProps> = ({
             {title}
           </Box>
         )}
-        {children ??
-          (message &&
-            (typeof message === 'string' ? <p>{message}</p> : message))}
+        {children}
       </Box>
     );
-  }, [render, message, title, children]);
+  }, [render, title, children]);
 
   return (
     <Box
