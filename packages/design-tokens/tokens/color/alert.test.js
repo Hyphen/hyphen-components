@@ -29,10 +29,30 @@ describe('alert color tokens', () => {
         );
       });
 
-      test('border matches the badge surface border', () => {
-        expect(border[`alert-${variant}`]).toEqual(
-          border[`badge-surface-${color}`]
-        );
+      /*
+       * `default` is the one deliberate break from badge surface. A badge is small enough
+       * to read as a single chip, so its grey border can sit at (dark mode) or near (light
+       * mode) its own fill. An alert is a large container whose edge has to be findable,
+       * and grey-on-grey has no hue difference to help, so it takes more luminance
+       * separation than the colored variants to look equally visible.
+       */
+      const borderDivergesFromBadge = variant === 'default';
+
+      test(`border ${
+        borderDivergesFromBadge
+          ? 'is a step darker than the badge surface border'
+          : 'matches the badge surface border'
+      }`, () => {
+        const assertion = expect(border[`alert-${variant}`]);
+
+        if (borderDivergesFromBadge) {
+          assertion.toEqual({
+            value: '{color.base.grey.300}',
+            darkValue: '{color.base.grey.400}',
+          });
+        } else {
+          assertion.toEqual(border[`badge-surface-${color}`]);
+        }
       });
 
       test('font matches the badge soft font used by the surface variant', () => {
