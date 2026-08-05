@@ -16,14 +16,56 @@ Badges are used to display the status of an object or of an action that’s been
 
 ## Variants
 
-Badges come in different variants based on the kind of message being delivered to the user.
-If the `variant` prop is omitted, the badge uses the theme-aware `default` variant.
+The `variant` prop sets the badge's visual style, independent of its color. `soft` is the default.
 
 <Canvas of={Stories.Variants} />
 
-Fixed-color badge variants remain available when you want the same color treatment regardless of theme.
+## Colors
 
-<Canvas of={Stories.FixedColorVariants} />
+The `color` prop sets the badge's color, independent of its variant. Every color is theme-aware and has its own
+dark mode values. `grey` is the default.
+
+<Canvas of={Stories.Colors} />
+
+`color` also accepts the semantic names `danger`, `success`, `warning` and `info`, which map onto the `red`,
+`green`, `yellow` and `blue` hues. Prefer these when the badge communicates a state rather than a color, so the
+meaning survives a future retheme.
+
+<Canvas of={Stories.SemanticColors} />
+
+The `brand` color renders the Hyphen gradient when paired with `variant="solid"`. Its other variants are tinted
+with the brand orange, so `brand` and `orange` look the same for `soft`, `surface` and `outline` — `solid` is what
+distinguishes them.
+
+## Radius
+
+Set `radius` to `none`, `sm`, `md`, `lg`, or `full`. `full` is the default, giving the badge a pill shape.
+
+<Canvas of={Stories.Radii} />
+
+## With icons
+
+Nest an `Icon`, a `Spinner`, or any other graphic alongside the badge's text. Its position in the markup is its
+position in the badge — put it before the text for a leading icon, after for a trailing one. No extra props are
+needed.
+
+```jsx
+<Badge variant="solid" color="green">
+  <Icon name="check" />
+  Verified
+</Badge>
+
+<Badge variant="outline" color="yellow">
+  Favorite
+  <Icon name="star" />
+</Badge>
+```
+
+Nested graphics are scaled to the badge's text size and inherit its text color, so they stay in proportion at
+every `size` and in both themes. The badge also tightens its padding on whichever side carries a graphic rather
+than text, and a badge containing only an icon is padded evenly.
+
+<Canvas of={Stories.WithIcons} />
 
 ## Sizes
 

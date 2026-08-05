@@ -45,7 +45,7 @@ export const BadgeTooltip = () => (
   <TooltipProvider delayDuration={100}>
     <Tooltip>
       <TooltipTrigger asChild>
-        <Badge as="button" variant="blue">
+        <Badge as="button" color="blue">
           hover
         </Badge>
       </TooltipTrigger>

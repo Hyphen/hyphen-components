@@ -10,7 +10,7 @@ import { FormikTextareaInput } from './FormikTextareaInput/FormikTextareaInput';
 import { FormikSwitch } from './FormikSwitch/FormikSwitch';
 import { Button } from '../Button/Button';
 import { Box } from '../Box/Box';
-import { FormikTimePickerNative } from './FormikTimePickerNative/FormikTimePickerNative';
+import { FormikTimePicker } from './FormikTimePicker/FormikTimePicker';
 import { FormikSelectInputInset } from './FormikSelectInputInset/FormikSelectInputInset';
 import { FormikTextareaInputInset } from './FormikTextareaInputInset/FormikTextareaInputInset';
 import { FormikTextInputInset } from './FormikTextInputInset/FormikTextInputInset';
@@ -49,7 +49,6 @@ type FormValues = {
   colors2: string;
   sizes: string | null;
   timePicker: string | null;
-  timePickerNative: string | null;
   dateInput: Date | undefined;
   message: string;
   country: string;
@@ -207,7 +206,6 @@ export const FormikForm = () =>
             colors2: '',
             sizes: null,
             timePicker: null,
-            timePickerNative: null,
             dateInput: new Date(2017, 4, 21),
             message: '',
             country: '',
@@ -306,10 +304,10 @@ export const FormikForm = () =>
                   isRequired
                 />
                 <Field
-                  label="Select Time With Native Select"
+                  label="Select Time"
                   name="timePicker"
                   id="timePicker"
-                  component={FormikTimePickerNative}
+                  component={FormikTimePicker}
                   isRequired
                 />
                 <Field

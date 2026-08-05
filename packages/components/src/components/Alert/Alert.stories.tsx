@@ -2,6 +2,7 @@ import { Alert } from './Alert';
 import { AlertVariant } from './Alert.types';
 import { Button } from '../Button/Button';
 import { ALERT_VARIANTS } from './Alert.constants';
+import { allModes } from '../../modes';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
@@ -20,10 +21,9 @@ const meta: Meta<typeof Alert> = {
       control: 'text',
       description: 'The title for the alert',
     },
-    message: {
+    children: {
       control: 'text',
-      description:
-        'The text message to be rendered in the alert (deprecated, use children instead)',
+      description: 'The content to be rendered in the alert',
     },
     hasIcon: {
       control: 'boolean',
@@ -47,6 +47,14 @@ const meta: Meta<typeof Alert> = {
     variant: 'default',
     hasIcon: false,
     isCompact: false,
+  },
+  parameters: {
+    chromatic: {
+      modes: {
+        light: allModes['light'],
+        dark: allModes['dark'],
+      },
+    },
   },
 };
 

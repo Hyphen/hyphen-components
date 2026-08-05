@@ -21,7 +21,6 @@ export interface FormikTimePickerProps
 export const FormikTimePicker: FC<FormikTimePickerProps> = ({
   field: { name, onBlur, onChange: formikOnChange, value },
   form: { touched, errors },
-  options,
   onChange,
   ...props
 }) => (
@@ -32,6 +31,5 @@ export const FormikTimePicker: FC<FormikTimePickerProps> = ({
     onChange={onChange ?? formikOnChange}
     value={value}
     error={getIn(touched, name) && getIn(errors, name)}
-    options={options}
   />
 );

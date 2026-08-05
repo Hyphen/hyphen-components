@@ -77,21 +77,121 @@
         "value": "transparent",
         "darkValue": "transparent"
       },
-      "badge-default": {
+      "badge-solid-grey": {
         "value": "{color.base.grey.800}",
         "darkValue": "{color.base.white}"
       },
-      "badge-secondary": {
-        "value": "{color.base.grey.100}",
-        "darkValue": "{color.base.grey.700}"
+      "badge-surface-grey": {
+        "value": "{color.base.grey.300}",
+        "darkValue": "{color.base.grey.400}"
       },
-      "badge-danger": {
-        "value": "{color.base.red.100}",
-        "darkValue": "{color.base.red.800}"
-      },
-      "badge-outline": {
+      "badge-outline-grey": {
         "value": "{color.base.grey.200}",
         "darkValue": "{color.base.grey.600}"
+      },
+      "badge-solid-blue": {
+        "value": "{color.base.blue.600}",
+        "darkValue": "{color.base.blue.600}"
+      },
+      "badge-surface-blue": {
+        "value": "{color.base.blue.300}",
+        "darkValue": "{color.base.blue.700}"
+      },
+      "badge-outline-blue": {
+        "value": "{color.base.blue.200}",
+        "darkValue": "{color.base.blue.700}"
+      },
+      "badge-solid-green": {
+        "value": "{color.base.green.600}",
+        "darkValue": "{color.base.green.600}"
+      },
+      "badge-surface-green": {
+        "value": "{color.base.green.300}",
+        "darkValue": "{color.base.green.700}"
+      },
+      "badge-outline-green": {
+        "value": "{color.base.green.200}",
+        "darkValue": "{color.base.green.700}"
+      },
+      "badge-solid-yellow": {
+        "value": "{color.base.yellow.500}",
+        "darkValue": "{color.base.yellow.500}"
+      },
+      "badge-surface-yellow": {
+        "value": "{color.base.yellow.300}",
+        "darkValue": "{color.base.yellow.700}"
+      },
+      "badge-outline-yellow": {
+        "value": "{color.base.yellow.200}",
+        "darkValue": "{color.base.yellow.700}"
+      },
+      "badge-solid-red": {
+        "value": "{color.base.red.600}",
+        "darkValue": "{color.base.red.600}"
+      },
+      "badge-surface-red": {
+        "value": "{color.base.red.300}",
+        "darkValue": "{color.base.red.700}"
+      },
+      "badge-outline-red": {
+        "value": "{color.base.red.200}",
+        "darkValue": "{color.base.red.700}"
+      },
+      "badge-solid-purple": {
+        "value": "{color.base.purple.600}",
+        "darkValue": "{color.base.purple.600}"
+      },
+      "badge-surface-purple": {
+        "value": "{color.base.purple.300}",
+        "darkValue": "{color.base.purple.700}"
+      },
+      "badge-outline-purple": {
+        "value": "{color.base.purple.200}",
+        "darkValue": "{color.base.purple.700}"
+      },
+      "badge-solid-orange": {
+        "value": "{color.base.orange.600}",
+        "darkValue": "{color.base.orange.600}"
+      },
+      "badge-surface-orange": {
+        "value": "{color.base.orange.300}",
+        "darkValue": "{color.base.orange.700}"
+      },
+      "badge-outline-orange": {
+        "value": "{color.base.orange.200}",
+        "darkValue": "{color.base.orange.700}"
+      },
+      "badge-solid-brand": {
+        "value": "{color.base.yellow.500}",
+        "darkValue": "{color.base.yellow.500}"
+      },
+      "badge-surface-brand": {
+        "value": "{color.base.orange.300}",
+        "darkValue": "{color.base.orange.700}"
+      },
+      "badge-outline-brand": {
+        "value": "{color.base.orange.200}",
+        "darkValue": "{color.base.orange.700}"
+      },
+      "alert-default": {
+        "value": "{color.base.grey.300}",
+        "darkValue": "{color.base.grey.400}"
+      },
+      "alert-info": {
+        "value": "{color.base.blue.300}",
+        "darkValue": "{color.base.blue.700}"
+      },
+      "alert-success": {
+        "value": "{color.base.green.300}",
+        "darkValue": "{color.base.green.700}"
+      },
+      "alert-warning": {
+        "value": "{color.base.yellow.300}",
+        "darkValue": "{color.base.yellow.700}"
+      },
+      "alert-danger": {
+        "value": "{color.base.red.300}",
+        "darkValue": "{color.base.red.700}"
       },
       "sidebar-rail-hover": {
         "value": "{color.base.grey.200}",

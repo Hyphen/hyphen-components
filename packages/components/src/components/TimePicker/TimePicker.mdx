@@ -6,13 +6,12 @@ import * as Stories from './TimePicker.stories';
 
 # TimePicker
 
-Use a TimePicker when you want users to select from a list of a available times agnostic of date.
+Use a TimePicker when you want users to select from a list of available times, agnostic of date.
 
-_NOTE:_ This component is abstracted from the [SelectInput](?path=/docs/components-selectinput-overview--default-story)
+_NOTE:_ This component is abstracted from the [SelectInputNative](?path=/docs/components-selectinputnative-overview--default-story)
 and as such includes the same underlying props interface with an added method for generating the time options automatically.
 
-_ABOUT TIME FORMAT:_ While the `value` prop technically returns `{ label: string; value: string; }` the value returned will always
-be a JS ISO date string, like this: `2016-07-13T18:46:01.933Z`.
+_ABOUT TIME FORMAT:_ The value returned will always be a JS ISO date string, like this: `2016-07-13T18:46:01.933Z`.
 
 ## Props
 
@@ -52,13 +51,6 @@ NOTE: that the option values are always returned as ISO strings regardless of th
 The example below is shown in military (24-hour) time.
 
 <Canvas of={Stories.WithCustomDateDisplay} />
-
-## With Open Menu
-
-The menu can be rendered open with the `menuIsOpen` prop. We do this here to confirm option generation
-via our UI visual snapshot testing (Chromatic).
-
-<Canvas of={Stories.WithOpenMenu} />
 
 ## Help Text
 
