@@ -10,12 +10,12 @@ import { TimePicker, TimePickerProps } from '../../TimePicker/TimePicker';
 
 export interface FormikTimePickerProps
   extends Omit<TimePickerProps, 'onChange'> {
-  field: FieldAttributes<HTMLTextAreaElement>;
+  field: FieldAttributes<HTMLSelectElement>;
   form: {
     touched: FormikTouched<FormikValues>;
     errors: FormikErrors<FormikValues>;
   };
-  onChange: TimePickerProps['onChange'];
+  onChange?: TimePickerProps['onChange'];
 }
 
 export const FormikTimePicker: FC<FormikTimePickerProps> = ({

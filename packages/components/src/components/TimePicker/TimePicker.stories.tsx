@@ -20,7 +20,7 @@ export const Default = () => {
       <TimePicker
         id="defaultTimePicker"
         name="defaultTimePicker"
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        onChange={(event: ChangeEvent<HTMLSelectElement>) => {
           setValue(event.target.value);
         }}
         label="Pick a Time"
@@ -37,7 +37,7 @@ export const WithASpecificInterval = () => {
       <TimePicker
         id="intervalTimePicker"
         name="intervalTimePicker"
-        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+        onChange={(event: ChangeEvent<HTMLSelectElement>) =>
           setValue(event.target.value)
         }
         value={value}
@@ -55,7 +55,7 @@ export const WithMinAndMaxTimes = () => {
       <TimePicker
         id="startEnd"
         name="startEnd"
-        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+        onChange={(event: ChangeEvent<HTMLSelectElement>) =>
           setValue(event.target.value)
         }
         value={value}
@@ -74,7 +74,7 @@ export const WithCustomDateDisplay = () => {
       <TimePicker
         id="customDate"
         name="customDate"
-        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+        onChange={(event: ChangeEvent<HTMLSelectElement>) =>
           setValue(event.target.value)
         }
         value={value}
@@ -98,7 +98,7 @@ export const HelpText = () => {
       <TimePicker
         id="helpText"
         name="helpText"
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        onChange={(event: ChangeEvent<HTMLSelectElement>) => {
           setValue(event.target.value);
         }}
         label="Pick a Time"
@@ -118,7 +118,7 @@ export const Sizes = () => {
       <TimePicker
         id="smTimePicker"
         name="smTimePicker"
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        onChange={(event: ChangeEvent<HTMLSelectElement>) => {
           setValue(event.target.value);
         }}
         label="Small"
@@ -128,7 +128,7 @@ export const Sizes = () => {
       <TimePicker
         id="mdTimePicker"
         name="mdTimePicker"
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        onChange={(event: ChangeEvent<HTMLSelectElement>) => {
           setValue1(event.target.value);
         }}
         label="Medium"
@@ -138,7 +138,7 @@ export const Sizes = () => {
       <TimePicker
         id="lgTimePicker"
         name="lgTimePicker"
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        onChange={(event: ChangeEvent<HTMLSelectElement>) => {
           setValue2(event.target.value);
         }}
         label="Large"

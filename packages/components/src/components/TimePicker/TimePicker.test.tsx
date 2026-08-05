@@ -61,6 +61,55 @@ describe('TimePicker', () => {
         expect(screen.queryByText(time)).toBe(null);
       });
     });
+
+    it('supports intervals shorter than one minute', () => {
+      render(
+        <TimePicker
+          name="timePicker"
+          id="timePicker"
+          onChange={() => null}
+          value={null}
+          label="Select Time"
+          interval={45}
+          startTime={{ hour: 1, minute: 0 }}
+          endTime={{ hour: 1, minute: 2 }}
+          dateDisplayOptions={{
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
+          }}
+        />
+      );
+
+      expect(screen.getByText('01:00:00')).toBeInTheDocument();
+      expect(screen.getByText('01:00:45')).toBeInTheDocument();
+      expect(screen.getByText('01:01:30')).toBeInTheDocument();
+    });
+  });
+
+  describe('Selected value', () => {
+    it('selects a matching time from a previous date', () => {
+      const savedValue = new Date(2020, 0, 1, 13, 0, 0, 123).toISOString();
+      const expectedValue = new Date();
+      expectedValue.setHours(13, 0, 0, 0);
+
+      render(
+        <TimePicker
+          name="timePicker"
+          id="timePicker"
+          onChange={() => null}
+          value={savedValue}
+          label="Select Time"
+          startTime={{ hour: 13, minute: 0 }}
+          endTime={{ hour: 14, minute: 0 }}
+        />
+      );
+
+      expect(screen.getByLabelText('Select Time')).toHaveValue(
+        expectedValue.toISOString()
+      );
+    });
   });
 
   describe('Custom Date Display', () => {

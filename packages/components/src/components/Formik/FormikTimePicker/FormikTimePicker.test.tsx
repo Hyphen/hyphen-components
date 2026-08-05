@@ -90,9 +90,15 @@ describe('FormikTimePicker', () => {
 
     describe('Single select, pre-selected', () => {
       test('it renders with value pre-selected', () => {
-        render(renderForm('2020-10-23T04:30:00.120Z', {}));
+        const initialValue = new Date(2020, 0, 1, 0, 0, 0, 120).toISOString();
+        const expectedValue = new Date();
+        expectedValue.setHours(0, 0, 0, 0);
 
-        expect(screen.getByText('12:00 AM')).toBeInTheDocument();
+        render(renderForm(initialValue, {}));
+
+        expect(screen.getByLabelText(testLabelName)).toHaveValue(
+          expectedValue.toISOString()
+        );
       });
     });
 
@@ -169,6 +175,16 @@ describe('FormikTimePicker', () => {
         await fireEvent.change(getByLabelText(testLabelName));
 
         expect(mockedHandleChange).toBeCalledTimes(1);
+      });
+
+      test('it uses Formik onChange when no custom callback is provided', () => {
+        render(renderForm(undefined, {}));
+        const select = screen.getByLabelText(testLabelName);
+        const option = screen.getByText('12:15 AM') as HTMLOptionElement;
+
+        fireEvent.change(select, { target: { value: option.value } });
+
+        expect(select).toHaveValue(option.value);
       });
     });
   });
