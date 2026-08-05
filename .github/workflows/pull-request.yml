@@ -34,7 +34,7 @@ jobs:
       - name: Verify dependency policy
         run: |
           test "$(pnpm --version)" = "11.20.0"
-          test "$(pnpm config get minimumReleaseAge)" = "1440"
+          test "$(pnpm config get minimumReleaseAge)" = "10080"
           test "$(pnpm config get minimumReleaseAgeStrict)" = "true"
           test "$(pnpm config get minimumReleaseAgeIgnoreMissingTime)" = "false"
           test "$(pnpm config get trustLockfile)" = "false"
