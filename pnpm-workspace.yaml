@@ -3,12 +3,19 @@ packages:
 
 overrides:
   handlebars: 4.7.9
+  # Patched releases for GHSA-rgw5-rvv9-x895 (Dependabot alert 216).
+  brace-expansion@1.1.17: 1.1.18
+  brace-expansion@5.0.8: 5.0.9
 
 # Quarantine newly published dependency versions for 7 days. Keep lockfile
 # verification enabled so this policy also applies to frozen CI installs.
 minimumReleaseAge: 10080
 minimumReleaseAgeStrict: true
 minimumReleaseAgeIgnoreMissingTime: false
+# Allow these security patches through the seven-day quarantine.
+minimumReleaseAgeExclude:
+  - 'brace-expansion@1.1.18'
+  - 'brace-expansion@5.0.9'
 trustLockfile: false
 ignoreScripts: true
 
