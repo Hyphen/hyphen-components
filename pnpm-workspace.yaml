@@ -3,12 +3,17 @@ packages:
 
 overrides:
   handlebars: 4.7.9
+  # Patched release for GHSA-7p8r-x3mc-p8w7 (Dependabot alert 222).
+  fast-uri@3.1.4: 3.1.5
 
 # Quarantine newly published dependency versions for 7 days. Keep lockfile
 # verification enabled so this policy also applies to frozen CI installs.
 minimumReleaseAge: 10080
 minimumReleaseAgeStrict: true
 minimumReleaseAgeIgnoreMissingTime: false
+# Allow this security patch through the seven-day quarantine.
+minimumReleaseAgeExclude:
+  - 'fast-uri@3.1.5'
 trustLockfile: false
 ignoreScripts: true
 
