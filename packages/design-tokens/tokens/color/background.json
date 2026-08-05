@@ -106,21 +106,101 @@
         "value": "{color.base.green.800}",
         "darkValue": "{color.base.green.800}"
       },
-      "badge-default": {
+      "badge-solid-grey": {
         "value": "{color.base.grey.800}",
         "darkValue": "{color.base.white}"
       },
-      "badge-secondary": {
+      "badge-soft-grey": {
         "value": "{color.base.grey.100}",
         "darkValue": "{color.base.grey.600}"
       },
-      "badge-danger": {
+      "badge-surface-grey": {
+        "value": "{color.base.grey.100}",
+        "darkValue": "{color.base.grey.600}"
+      },
+      "badge-solid-blue": {
+        "value": "{color.base.blue.500}",
+        "darkValue": "{color.base.blue.500}"
+      },
+      "badge-soft-blue": {
+        "value": "{color.base.blue.50}",
+        "darkValue": "{color.base.blue.900}"
+      },
+      "badge-surface-blue": {
+        "value": "{color.base.blue.100}",
+        "darkValue": "{color.base.blue.900}"
+      },
+      "badge-solid-green": {
+        "value": "{color.base.green.500}",
+        "darkValue": "{color.base.green.500}"
+      },
+      "badge-soft-green": {
+        "value": "{color.base.green.50}",
+        "darkValue": "{color.base.green.900}"
+      },
+      "badge-surface-green": {
+        "value": "{color.base.green.100}",
+        "darkValue": "{color.base.green.900}"
+      },
+      "badge-solid-yellow": {
+        "value": "{color.base.yellow.400}",
+        "darkValue": "{color.base.yellow.400}"
+      },
+      "badge-soft-yellow": {
+        "value": "{color.base.yellow.50}",
+        "darkValue": "{color.base.yellow.900}"
+      },
+      "badge-surface-yellow": {
+        "value": "{color.base.yellow.100}",
+        "darkValue": "{color.base.yellow.900}"
+      },
+      "badge-solid-red": {
+        "value": "{color.base.red.500}",
+        "darkValue": "{color.base.red.500}"
+      },
+      "badge-soft-red": {
         "value": "{color.base.red.50}",
         "darkValue": "{color.base.red.900}"
       },
-      "badge-outline": {
-        "value": "transparent",
-        "darkValue": "transparent"
+      "badge-surface-red": {
+        "value": "{color.base.red.100}",
+        "darkValue": "{color.base.red.900}"
+      },
+      "badge-solid-purple": {
+        "value": "{color.base.purple.500}",
+        "darkValue": "{color.base.purple.500}"
+      },
+      "badge-soft-purple": {
+        "value": "{color.base.purple.50}",
+        "darkValue": "{color.base.purple.900}"
+      },
+      "badge-surface-purple": {
+        "value": "{color.base.purple.100}",
+        "darkValue": "{color.base.purple.900}"
+      },
+      "badge-solid-orange": {
+        "value": "{color.base.orange.500}",
+        "darkValue": "{color.base.orange.500}"
+      },
+      "badge-soft-orange": {
+        "value": "{color.base.orange.50}",
+        "darkValue": "{color.base.orange.900}"
+      },
+      "badge-surface-orange": {
+        "value": "{color.base.orange.100}",
+        "darkValue": "{color.base.orange.900}"
+      },
+      "badge-solid-brand": {
+        "value": "{color.background.brand-gradient}",
+        "darkValue": "{color.background.brand-gradient}"
+      },
+      "badge-soft-brand": {
+        "value": "{color.base.orange.50}",
+        "darkValue": "{color.base.orange.900}"
+      },
+      "badge-surface-brand": {
+        "value": "{color.base.orange.100}",
+        "darkValue": "{color.base.orange.900}"
       },
       "toggle-group-item-hover": {
         "value": "rgba(0, 0, 0, 0.1)",

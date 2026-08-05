@@ -115,21 +115,69 @@
       "button-success-active": {
         "value": "{color.base.white}"
       },
-      "badge-default": {
+      "badge-solid-grey": {
         "value": "{color.base.white}",
         "darkValue": "{color.base.grey.800}"
       },
-      "badge-secondary": {
+      "badge-soft-grey": {
         "value": "{color.base.grey.700}",
         "darkValue": "{color.base.grey.100}"
       },
-      "badge-danger": {
-        "value": "{color.base.red.600}",
-        "darkValue": "{color.base.red.400}"
+      "badge-solid-blue": {
+        "value": "{color.base.white}",
+        "darkValue": "{color.base.white}"
       },
-      "badge-outline": {
-        "value": "{color.base.grey.700}",
-        "darkValue": "{color.base.grey.100}"
+      "badge-soft-blue": {
+        "value": "{color.base.blue.700}",
+        "darkValue": "{color.base.blue.200}"
+      },
+      "badge-solid-green": {
+        "value": "{color.base.white}",
+        "darkValue": "{color.base.white}"
+      },
+      "badge-soft-green": {
+        "value": "{color.base.green.700}",
+        "darkValue": "{color.base.green.200}"
+      },
+      "badge-solid-yellow": {
+        "value": "{color.base.black}",
+        "darkValue": "{color.base.black}"
+      },
+      "badge-soft-yellow": {
+        "value": "{color.base.yellow.700}",
+        "darkValue": "{color.base.yellow.200}"
+      },
+      "badge-solid-red": {
+        "value": "{color.base.white}",
+        "darkValue": "{color.base.white}"
+      },
+      "badge-soft-red": {
+        "value": "{color.base.red.700}",
+        "darkValue": "{color.base.red.200}"
+      },
+      "badge-solid-purple": {
+        "value": "{color.base.white}",
+        "darkValue": "{color.base.white}"
+      },
+      "badge-soft-purple": {
+        "value": "{color.base.purple.700}",
+        "darkValue": "{color.base.purple.200}"
+      },
+      "badge-solid-orange": {
+        "value": "{color.base.white}",
+        "darkValue": "{color.base.white}"
+      },
+      "badge-soft-orange": {
+        "value": "{color.base.orange.700}",
+        "darkValue": "{color.base.orange.200}"
+      },
+      "badge-solid-brand": {
+        "value": "{color.base.white}",
+        "darkValue": "{color.base.white}"
+      },
+      "badge-soft-brand": {
+        "value": "{color.base.orange.700}",
+        "darkValue": "{color.base.orange.200}"
       },
       "toast": {
         "value": "{color.base.grey.50}",
