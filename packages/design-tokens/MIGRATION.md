@@ -11,17 +11,24 @@ four tokens below were removed.
 | `color.{background,border,font}.badge-danger` | `…background.badge-soft-red`, `…border.badge-outline-red`, `…font.badge-soft-red` |
 | `color.{background,border,font}.badge-outline` | `…border.badge-outline-grey`, `…font.badge-soft-grey` (no background — `outline` is transparent) |
 
-The new set is six tokens per hue, for each of `grey`, `blue`, `green`, `yellow`, `red`, `purple`, `orange` and
+The new set is eight tokens per hue, for each of `grey`, `blue`, `green`, `yellow`, `red`, `purple`, `orange` and
 `brand` — all with `darkValue`s, so every badge color is now theme-aware:
 
 | Token | Consumed by |
 | --- | --- |
 | `color.background.badge-solid-{hue}` | `solid` |
-| `color.background.badge-soft-{hue}` | `soft`, `surface` |
+| `color.background.badge-soft-{hue}` | `soft` |
+| `color.background.badge-surface-{hue}` | `surface` |
 | `color.border.badge-solid-{hue}` | `solid` |
-| `color.border.badge-outline-{hue}` | `surface`, `outline` |
+| `color.border.badge-surface-{hue}` | `surface` |
+| `color.border.badge-outline-{hue}` | `outline` |
 | `color.font.badge-solid-{hue}` | `solid` |
 | `color.font.badge-soft-{hue}` | `soft`, `surface`, `outline` |
+
+`surface` sits one step up the base scale from `soft` in light mode — background `{hue}.100` against `{hue}.300`
+border, versus `soft`'s `{hue}.50` — so the two read as distinct and the border stays visible. `grey` is the
+exception and matches `soft`, since its background is already `grey.100` where every other hue starts at `.50`.
+In dark mode `surface` and `soft` share the same values.
 
 `color.background.badge-solid-brand` resolves to the Hyphen gradient; the other `brand` tokens derive from the
 `orange` scale below, so `brand` matches `orange` for every variant except `solid`.

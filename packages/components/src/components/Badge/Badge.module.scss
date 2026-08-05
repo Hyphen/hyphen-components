@@ -75,6 +75,8 @@
   --badge-solid-font: var(--color-font-badge-solid-#{$color});
   --badge-soft-background: var(--color-background-badge-soft-#{$color});
   --badge-soft-font: var(--color-font-badge-soft-#{$color});
+  --badge-surface-background: var(--color-background-badge-surface-#{$color});
+  --badge-surface-border: var(--color-border-badge-surface-#{$color});
   --badge-outline-border: var(--color-border-badge-outline-#{$color});
 }
 
@@ -146,8 +148,8 @@
   }
 
   &.surface {
-    background: var(--badge-soft-background);
-    border-color: var(--badge-outline-border);
+    background: var(--badge-surface-background);
+    border-color: var(--badge-surface-border);
     color: var(--badge-soft-font);
   }
 
