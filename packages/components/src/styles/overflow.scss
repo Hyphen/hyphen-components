@@ -1,3 +1,5 @@
+@use '@hyphen/hyphen-design-tokens/build/scss/variables' as *;
+
 .overflow-visible { overflow: visible; }
 .overflow-hidden { overflow: hidden; }
 .overflow-clip { overflow: clip; }

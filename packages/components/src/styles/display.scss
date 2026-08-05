@@ -1,4 +1,4 @@
-@import '@hyphen/hyphen-design-tokens/build/scss/variables.scss';
+@use '@hyphen/hyphen-design-tokens/build/scss/variables' as *;
 
 .display-inherit {
   display: inherit;

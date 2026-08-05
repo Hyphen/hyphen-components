@@ -1,5 +1,5 @@
-@import '../../../styles/mixins';
-@import '@hyphen/hyphen-design-tokens/build/scss/variables';
+@use '../../../styles/mixins' as *;
+@use '@hyphen/hyphen-design-tokens/build/scss/variables' as *;
 
 $sm-dimension: 16px;
 $md-dimension: 20px;

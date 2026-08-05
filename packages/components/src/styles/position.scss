@@ -1,3 +1,5 @@
+@use '@hyphen/hyphen-design-tokens/build/scss/variables' as *;
+
 .position-absolute { position: absolute; }
 .position-fixed { position: fixed; }
 .position-relative { position: relative; }
