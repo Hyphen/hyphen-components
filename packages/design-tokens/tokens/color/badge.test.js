@@ -26,15 +26,31 @@ const BADGE_COLORS = [
 const MIN_BORDER_CONTRAST = 1.2;
 
 const resolve = (reference) => {
-  const path = reference.replace(/[{}]/g, '').split('.');
-  const value = path.reduce((node, key) => node[key], { color: baseTokens.color })
-    .value;
+  if (typeof reference !== 'string') {
+    throw new Error(
+      `Expected a token reference or hex color, got: ${reference}`
+    );
+  }
 
-  if (typeof value !== 'string' || !value.startsWith('#')) {
+  /*
+   * Both files mix `{color.base.*}` references with literal hex (the `brand-*` entries),
+   * so a value that is already a color resolves to itself rather than being walked as
+   * though it were a path.
+   */
+  if (reference.startsWith('#')) {
+    return reference;
+  }
+
+  const path = reference.replace(/[{}]/g, '').split('.');
+  const resolved = path.reduce((node, key) => node?.[key], {
+    color: baseTokens.color,
+  });
+
+  if (typeof resolved?.value !== 'string' || !resolved.value.startsWith('#')) {
     throw new Error(`${reference} did not resolve to a hex color`);
   }
 
-  return value;
+  return resolved.value;
 };
 
 const relativeLuminance = (hex) => {
@@ -70,7 +86,12 @@ describe('badge surface tokens', () => {
       ['light', 'value'],
       ['dark', 'darkValue'],
     ])('%s border stays distinguishable from its fill', (_mode, key) => {
-      const ratio = contrast(resolve(edge[key]), resolve(fill[key]));
+      /*
+       * Optional chaining rather than an explicit presence check: a missing token reaches
+       * `resolve` as undefined and fails there with a clear message, and Jest already names
+       * the color and mode in the failing test, so a hand-written guard would only repeat it.
+       */
+      const ratio = contrast(resolve(edge?.[key]), resolve(fill?.[key]));
 
       expect(ratio).toBeGreaterThanOrEqual(MIN_BORDER_CONTRAST);
     });
