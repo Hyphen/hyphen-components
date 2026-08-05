@@ -16,7 +16,7 @@ export default meta;
 export const Default = () => {
   const [value, setValue] = useState<string | null>(null);
   return (
-    <Box height="360px">
+    <Box>
       <TimePicker
         id="defaultTimePicker"
         name="defaultTimePicker"
@@ -30,70 +30,71 @@ export const Default = () => {
   );
 };
 
-export const WithASpecificInterval = () => (
-  <Box height="360px">
-    <TimePicker
-      id="intervalTimePicker"
-      name="intervalTimePicker"
-      onChange={() => {}}
-      label="Pick a Time"
-      interval={3600}
-    />
-  </Box>
-);
-
-export const WithMinAndMaxTimes = () => (
-  <Box height="360px">
-    <TimePicker
-      id="startEnd"
-      name="startEnd"
-      onChange={() => {}}
-      label="Pick a Time"
-      startTime={{ hour: 9, minute: 0 }}
-      endTime={{ hour: 15, minute: 31 }}
-    />
-  </Box>
-);
-
-export const WithCustomDateDisplay = () => (
-  <Box height="360px">
-    <TimePicker
-      id="customDate"
-      name="customDate"
-      onChange={() => {}}
-      label="Pick a Time"
-      startTime={{ hour: 9, minute: 0 }}
-      endTime={{ hour: 15, minute: 31 }}
-      dateDisplayOptions={{ hour12: false, hour: '2-digit', minute: '2-digit' }}
-    />
-  </Box>
-);
-
-export const WithOpenMenu = () => {
+export const WithASpecificInterval = () => {
   const [value, setValue] = useState<string | null>(null);
   return (
-    <Box height="260px">
+    <Box>
       <TimePicker
-        id="openMenu"
-        name="openMenu"
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
-          setValue(event.target.value);
-        }}
-        label="Pick a Time"
+        id="intervalTimePicker"
+        name="intervalTimePicker"
+        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          setValue(event.target.value)
+        }
         value={value}
-        menuIsOpen
+        label="Pick a Time"
         interval={3600}
+      />
+    </Box>
+  );
+};
+
+export const WithMinAndMaxTimes = () => {
+  const [value, setValue] = useState<string | null>(null);
+  return (
+    <Box>
+      <TimePicker
+        id="startEnd"
+        name="startEnd"
+        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          setValue(event.target.value)
+        }
+        value={value}
+        label="Pick a Time"
         startTime={{ hour: 9, minute: 0 }}
-        endTime={{ hour: 13, minute: 1 }}
+        endTime={{ hour: 15, minute: 31 }}
+      />
+    </Box>
+  );
+};
+
+export const WithCustomDateDisplay = () => {
+  const [value, setValue] = useState<string | null>(null);
+  return (
+    <Box>
+      <TimePicker
+        id="customDate"
+        name="customDate"
+        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          setValue(event.target.value)
+        }
+        value={value}
+        label="Pick a Time"
+        startTime={{ hour: 9, minute: 0 }}
+        endTime={{ hour: 15, minute: 31 }}
+        dateDisplayOptions={{
+          hour12: false,
+          hour: '2-digit',
+          minute: '2-digit',
+        }}
       />
     </Box>
   );
 };
 
 export const HelpText = () => {
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string | null>(null);
   return (
-    <Box height="360px">
+    <Box>
       <TimePicker
         id="helpText"
         name="helpText"
@@ -109,11 +110,11 @@ export const HelpText = () => {
 };
 
 export const Sizes = () => {
-  const [value, setValue] = useState<string>();
-  const [value1, setValue1] = useState<string>();
-  const [value2, setValue2] = useState<string>();
+  const [value, setValue] = useState<string | null>(null);
+  const [value1, setValue1] = useState<string | null>(null);
+  const [value2, setValue2] = useState<string | null>(null);
   return (
-    <Box gap="md" height="360px">
+    <Box gap="md">
       <TimePicker
         id="smTimePicker"
         name="smTimePicker"

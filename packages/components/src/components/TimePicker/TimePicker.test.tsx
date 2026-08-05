@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, render } from '@testing-library/react';
+import { screen, render, fireEvent } from '@testing-library/react';
 import { TimePicker } from './TimePicker';
 
 describe('TimePicker', () => {
@@ -12,8 +12,6 @@ describe('TimePicker', () => {
           onChange={() => null}
           value={null}
           label="Select Time"
-          menuIsOpen
-          maxMenuHeight={2000}
         />
       );
 
@@ -43,8 +41,6 @@ describe('TimePicker', () => {
           onChange={() => null}
           value={null}
           label="Select Time"
-          menuIsOpen
-          maxMenuHeight={2000}
           interval={3600}
           startTime={{ hour: 9, minute: 0 }}
           endTime={{ hour: 12, minute: 0 }}
@@ -76,8 +72,6 @@ describe('TimePicker', () => {
           onChange={() => null}
           value={null}
           label="Select Time"
-          menuIsOpen
-          maxMenuHeight={2000}
           dateDisplayOptions={{ hour12: false }}
           startTime={{ hour: 13, minute: 0 }}
           endTime={{ hour: 15, minute: 1 }}
@@ -92,6 +86,32 @@ describe('TimePicker', () => {
       expectedTimes.forEach((time) => {
         expect(screen.queryByText(time)).toBeInTheDocument();
       });
+    });
+  });
+
+  describe('Callback Handling', () => {
+    it('it fires an onchange callback with the correct value', async () => {
+      const mockedHandleChange = jest.fn(() => {}); // eslint-disable-line
+
+      render(
+        <TimePicker
+          name="timePicker"
+          id="timePicker"
+          onChange={mockedHandleChange}
+          value={null}
+          label="Select Time"
+          dateDisplayOptions={{ hour12: false }}
+          startTime={{ hour: 13, minute: 0 }}
+          endTime={{ hour: 15, minute: 1 }}
+          interval={3600}
+        />
+      );
+
+      const timePicker = screen.getByLabelText('Select Time');
+
+      fireEvent.change(timePicker, { target: { value: 'hello' } });
+
+      expect(mockedHandleChange).toBeCalledTimes(1);
     });
   });
 });
