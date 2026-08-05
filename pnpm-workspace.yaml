@@ -16,3 +16,4 @@ ignoreScripts: true
 allowBuilds:
   esbuild: true
   core-js: false
+  '@parcel/watcher': true
