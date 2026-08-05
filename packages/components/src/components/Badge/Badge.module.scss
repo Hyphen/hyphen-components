@@ -1,4 +1,4 @@
-@import '@hyphen/hyphen-design-tokens/build/scss/variables';
+@use '@hyphen/hyphen-design-tokens/build/scss/variables' as *;
 
 /*
  * Trims the padding on whichever side carries a graphic rather than a text label,

@@ -1,3 +1,5 @@
+@use '@hyphen/hyphen-design-tokens/build/scss/variables' as *;
+
 .ws-normal { white-space: normal; }
 .ws-nowrap { white-space: nowrap; }
 .ws-pre { white-space: pre; }

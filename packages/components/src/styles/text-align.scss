@@ -1,3 +1,5 @@
+@use '@hyphen/hyphen-design-tokens/build/scss/variables' as *;
+
 .text-align-left { text-align: left; }
 .text-align-right { text-align: right; }
 .text-align-center { text-align: center; }

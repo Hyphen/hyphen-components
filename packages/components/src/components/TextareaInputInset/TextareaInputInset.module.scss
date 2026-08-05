@@ -1,4 +1,4 @@
-@import '@hyphen/hyphen-design-tokens/build/scss/variables';
+@use '@hyphen/hyphen-design-tokens/build/scss/variables' as *;
 
 @mixin floating-label-minimize-md {
   opacity: 0.75;

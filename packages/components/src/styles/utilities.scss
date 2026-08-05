@@ -1,13 +1,14 @@
+@use './animation';
+@use './cursor';
+@use './display';
+@use './flex';
+@use './overflow';
+@use './text-align';
+@use './white-space';
+@use './position';
+@use './transform';
+
 @import '@hyphen/hyphen-design-tokens/build/utilities/utilities.css';
-@import './animation';
-@import './cursor';
-@import './display';
-@import './flex';
-@import './overflow';
-@import './text-align';
-@import './white-space';
-@import './position';
-@import './transform';
 
 .sr-only {
   position: absolute;

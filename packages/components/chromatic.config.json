@@ -3,5 +3,6 @@
   "autoAcceptChanges": "main",
   "exitOnceUploaded": true,
   "onlyChanged": true,
+  "storybookBaseDir": "packages/components",
   "zip": true
 }
