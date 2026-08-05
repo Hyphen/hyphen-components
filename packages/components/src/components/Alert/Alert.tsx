@@ -95,7 +95,7 @@ const AlertComponent: FC<AlertProps> = ({
     if (!hasIcon) return null;
 
     return (
-      <Box fontSize="md" className={styles[`alert__icon__${variant}`]}>
+      <Box fontSize="md">
         <Icon
           name={ALERT_ICONS_MAP[variant].icon}
           data-testid={`alert-icon-${variant}-test-id`}
@@ -108,11 +108,7 @@ const AlertComponent: FC<AlertProps> = ({
     if (!onClose) return null;
 
     return (
-      <Box
-        margin="0 0 0 auto"
-        color="secondary"
-        className={styles['close-icon']}
-      >
+      <Box margin="0 0 0 auto" className={styles['close-icon']}>
         <button
           type="button"
           onClick={handleClose}

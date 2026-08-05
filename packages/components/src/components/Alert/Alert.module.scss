@@ -1,20 +1,35 @@
+/*
+ * Each variant class declares the three semantic values the base `.alert` block consumes.
+ * The values mirror the Badge `surface` variant, so an Alert and a surface Badge of the
+ * same semantic colour read as the same tint in both light and dark mode.
+ */
+@mixin alert-variant($variant) {
+  --alert-background: var(--color-background-alert-#{$variant});
+  --alert-border: var(--color-border-alert-#{$variant});
+  --alert-font: var(--color-font-alert-#{$variant});
+}
+
 .alert {
   border-width: var(--size-border-width-sm);
   border-style: solid;
   box-shadow: var(--size-box-shadow-0);
   font-family: var(--assets-font-family-body);
+  background: var(--alert-background);
+  border-color: var(--alert-border);
+  color: var(--alert-font);
 
+  /* Icon and close button share the variant font colour so the whole alert reads as one tint. */
   .close-icon {
     > button {
       border: 0;
       background: none;
       cursor: pointer;
       padding: 0;
-      color: var(--color-base-grey-600);
+      color: inherit;
       font: inherit;
 
       &:hover {
-        color: var(--color-base-grey-600);
+        color: inherit;
       }
     }
   }
@@ -25,50 +40,30 @@
 }
 
 .alert__default {
-  color: var(--color-base-grey-500);
-  background: var(--color-base-grey-100);
-  border-color: var(--color-base-grey-200);
+  @include alert-variant('default');
 }
 
 .alert__info {
-  color: var(--color-base-grey-500);
-  background: var(--color-base-blue-50);
-  border-color: var(--color-base-blue-200);
+  @include alert-variant('info');
 }
 
 .alert__success {
-  color: var(--color-base-grey-500);
-  background: var(--color-base-green-50);
-  border-color: var(--color-base-green-200);
+  @include alert-variant('success');
 }
 
+/*
+ * `--alert-warning-background-color` stays supported as a consumer-facing override so
+ * existing usages that recolour only the warning background keep working.
+ */
 .alert__warning {
-  color: var(--color-base-grey-500);
-  background: var(
+  --alert-background: var(
     --alert-warning-background-color,
-    var(--color-base-yellow-50)
+    var(--color-background-alert-warning)
   );
-  border-color: var(--color-base-yellow-200);
+  --alert-border: var(--color-border-alert-warning);
+  --alert-font: var(--color-font-alert-warning);
 }
 
 .alert__danger {
-  color: var(--color-base-grey-500);
-  background: var(--color-base-red-50);
-  border-color: var(--color-base-red-200);
-}
-
-.alert__icon__default {
-  color: var(--color-base-grey-600);
-}
-.alert__icon__info {
-  color: var(--color-base-blue-500);
-}
-.alert__icon__success {
-  color: var(--color-base-green-500);
-}
-.alert__icon__warning {
-  color: var(--color-base-yellow-500);
-}
-.alert__icon__danger {
-  color: var(--color-base-red-500);
+  @include alert-variant('danger');
 }

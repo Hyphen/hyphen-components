@@ -2,6 +2,7 @@ import { Alert } from './Alert';
 import { AlertVariant } from './Alert.types';
 import { Button } from '../Button/Button';
 import { ALERT_VARIANTS } from './Alert.constants';
+import { allModes } from '../../modes';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
@@ -47,6 +48,14 @@ const meta: Meta<typeof Alert> = {
     variant: 'default',
     hasIcon: false,
     isCompact: false,
+  },
+  parameters: {
+    chromatic: {
+      modes: {
+        light: allModes['light'],
+        dark: allModes['dark'],
+      },
+    },
   },
 };
 
