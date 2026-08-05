@@ -5,14 +5,21 @@ overrides:
   handlebars: 4.7.9
   # Patched release for GHSA-7p8r-x3mc-p8w7 (Dependabot alert 222).
   fast-uri@3.1.4: 3.1.5
+  # Patched releases for GHSA-rgw5-rvv9-x895 (Dependabot alert 216).
+  'brace-expansion@<1.1.18': 1.1.18
+  'brace-expansion@>=5.0.0 <5.0.9': 5.0.9
 
 # Quarantine newly published dependency versions for 7 days. Keep lockfile
 # verification enabled so this policy also applies to frozen CI installs.
 minimumReleaseAge: 10080
 minimumReleaseAgeStrict: true
 minimumReleaseAgeIgnoreMissingTime: false
-# Allow this security patch through the seven-day quarantine.
+# Allow these security patches through the release-age quarantine.
+# TODO: Remove the brace-expansion exemptions after 2026-08-06 and the
+# fast-uri exemption after 2026-08-10, when the releases mature.
 minimumReleaseAgeExclude:
+  - 'brace-expansion@1.1.18'
+  - 'brace-expansion@5.0.9'
   - 'fast-uri@3.1.5'
 trustLockfile: false
 ignoreScripts: true
