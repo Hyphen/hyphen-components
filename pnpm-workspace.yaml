@@ -1,12 +1,13 @@
 packages:
   - 'packages/*'
 
-# Quarantine newly published dependency versions for 24 hours. Keep lockfile
+# Quarantine newly published dependency versions for 7 days. Keep lockfile
 # verification enabled so this policy also applies to frozen CI installs.
-minimumReleaseAge: 1440
+minimumReleaseAge: 10080
 minimumReleaseAgeStrict: true
 minimumReleaseAgeIgnoreMissingTime: false
 trustLockfile: false
+ignoreScripts: true
 
 # esbuild needs its binary setup; core-js only uses postinstall messaging.
 allowBuilds:
