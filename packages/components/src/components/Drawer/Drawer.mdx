@@ -67,12 +67,11 @@ When `placement` is set to `top` or `bottom`, the `width` prop is ignored and th
 
 In cases where content in the drawer is supplemental to content on the main area of the page, use `hideOverlay` to allow for interaction between the areas (e.g. copy-and-paste text from main area into a form in the drawer).
 
-<Alert
-  variant="warning"
-  title="Focus Management"
-  hasIcon
-  message="If you decide to use `hideOverlay`, then you must also manage focus. Focus and page scrolling will not be locked if `hideOverlay` is true. Also, the 'Esc' key button will no longer automatically close the Drawer."
-/>
+<Alert variant="warning" title="Focus Management" hasIcon>
+  If you decide to use `hideOverlay`, then you must also manage focus. Focus and
+  page scrolling will not be locked if `hideOverlay` is true. Also, the 'Esc' key
+  button will no longer automatically close the Drawer.
+</Alert>
 
 <Canvas withSource="open" of={Stories.HiddenOverlay} />
 
@@ -81,11 +80,10 @@ In cases where content in the drawer is supplemental to content on the main area
 
 By default the first focusable element will receive focus when the drawer opens, but you can provide a ref to focus instead.
 
-<Alert
-  hasIcon
-  message="Without the initialFocusRef prop, the drawer will automatically focus on the first focusable element in it's children."
-  variant="info"
-/>
+<Alert hasIcon variant="info">
+  Without the initialFocusRef prop, the drawer will automatically focus on the
+  first focusable element in it's children.
+</Alert>
 
 <Canvas withSource="open" of={Stories.InitialFocusRef} />
 
@@ -93,10 +91,10 @@ By default the first focusable element will receive focus when the drawer opens,
 
 Render the Drawer within a containing div using `containerRef`.
 
-<Alert
-  hasIcon
-  message="When choosing to use a Drawer within a containing div, use dangerouslyBypassScrollLock to allow the content outside of the containing div to remain interactive."
-  variant="info"
-/>
+<Alert hasIcon variant="info">
+  When choosing to use a Drawer within a containing div, use
+  dangerouslyBypassScrollLock to allow the content outside of the containing div
+  to remain interactive.
+</Alert>
 
 <Canvas withSource="open" of={Stories.ContainedDrawer} />

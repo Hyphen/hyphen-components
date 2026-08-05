@@ -21,10 +21,9 @@ const meta: Meta<typeof Alert> = {
       control: 'text',
       description: 'The title for the alert',
     },
-    message: {
+    children: {
       control: 'text',
-      description:
-        'The text message to be rendered in the alert (deprecated, use children instead)',
+      description: 'The content to be rendered in the alert',
     },
     hasIcon: {
       control: 'boolean',
