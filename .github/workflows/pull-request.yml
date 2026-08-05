@@ -38,6 +38,7 @@ jobs:
           test "$(pnpm config get minimumReleaseAgeStrict)" = "true"
           test "$(pnpm config get minimumReleaseAgeIgnoreMissingTime)" = "false"
           test "$(pnpm config get trustLockfile)" = "false"
+          test "$(pnpm config get ignoreScripts)" = "true"
       - name: Verify lockfile
         run: pnpm install --frozen-lockfile
   lint-js:
