@@ -23,7 +23,6 @@ export * from './components/Formik/FormikSelectInputNative/FormikSelectInputNati
 export * from './components/Formik/FormikTextInput/FormikTextInput';
 export * from './components/Formik/FormikTextareaInput/FormikTextareaInput';
 export * from './components/Formik/FormikTimePicker/FormikTimePicker';
-export * from './components/Formik/FormikTimePickerNative/FormikTimePickerNative';
 export * from './components/Formik/FormikSwitch/FormikSwitch';
 export * from './components/Formik/FormikToggleGroup/FormikToggleGroup';
 export * from './components/Formik/FormikToggleGroupMulti/FormikToggleGroupMulti';
@@ -49,7 +48,6 @@ export * from './components/TextInput/TextInput';
 export * from './components/TextInputInset/TextInputInset';
 export * from './components/ThemeProvider/ThemeProvider';
 export * from './components/TimePicker/TimePicker';
-export * from './components/TimePickerNative/TimePickerNative';
 export * from './components/Toast';
 export * from './components/Toggle/Toggle';
 export * from './components/ToggleGroup/ToggleGroup';

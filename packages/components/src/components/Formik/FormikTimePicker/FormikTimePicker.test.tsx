@@ -1,12 +1,10 @@
 import React from 'react';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
-import selectEvent from 'react-select-event';
 import { Formik, Form, Field, FormikValues, getIn, setIn } from 'formik';
 import { FormikTimePicker } from './FormikTimePicker';
 
 const testLabelName = 'test select';
 
-type Option = { value: string; label: string };
 const handleValidation = (testValueKey: string) => (values: FormikValues) =>
   getIn(values, testValueKey)?.length > 1
     ? {}
@@ -17,10 +15,9 @@ const renderForm = (
   props: {
     placeholder?: string;
     hideLabel?: boolean;
-    isMulti?: boolean;
     isRequired?: unknown;
     isDisabled?: boolean;
-    onChange?: jest.Mock<void, [any]>; // eslint-disable-line
+    onChange?: jest.Mock<void, [React.ChangeEvent<HTMLSelectElement>]>; // eslint-disable-line
     interval?: number;
   },
   testValueKey = testLabelName
@@ -33,7 +30,7 @@ const renderForm = (
     onSubmit={() => {}} // eslint-disable-line
   >
     {() => (
-      <Form>
+      <Form noValidate>
         <Field
           label={testValueKey}
           name={testValueKey}
@@ -93,62 +90,39 @@ describe('FormikTimePicker', () => {
 
     describe('Single select, pre-selected', () => {
       test('it renders with value pre-selected', () => {
-        render(
-          renderForm(
-            { label: '12:00 AM', value: '2020-10-23T04:30:00.120Z' },
-            {}
-          )
-        );
+        const initialValue = new Date(2020, 0, 1, 0, 0, 0, 120).toISOString();
+        const expectedValue = new Date();
+        expectedValue.setHours(0, 0, 0, 0);
 
-        expect(screen.getByText('12:00 AM')).toBeInTheDocument();
+        render(renderForm(initialValue, {}));
+
+        expect(screen.getByLabelText(testLabelName)).toHaveValue(
+          expectedValue.toISOString()
+        );
       });
     });
 
-    describe('Multi select, no selection', () => {
-      test('it renders input with a label, and with a default placeholder', () => {
-        render(renderForm(undefined, { isMulti: true }));
-
-        expect(screen.getByLabelText(testLabelName)).toBeInTheDocument();
-        expect(screen.getByText('HH:MM')).toBeInTheDocument();
-      });
-    });
-
-    describe('Multi select, with multiple items selected', () => {
-      test('it renders input with a label, and with two items selected', () => {
-        render(
-          renderForm(
-            [
-              { label: '12:00 AM', value: '2020-10-23T04:30:00.120Z' },
-              { label: '12:15 AM', value: '2020-10-23T04:45:00.120Z' },
-            ],
-            { isMulti: true }
-          )
-        );
-
-        expect(screen.getByLabelText(testLabelName)).toBeInTheDocument();
-        expect(screen.queryByText('HH:MM')).toBeNull();
-        expect(screen.getByText('12:00 AM')).toBeInTheDocument();
-        expect(screen.getByText('12:15 AM')).toBeInTheDocument();
+    describe('Is Required', () => {
+      test('it sets aria-required on the input', () => {
+        render(renderForm(undefined, { isRequired: true }));
+        const inputElement = screen.getByLabelText(testLabelName);
+        expect(inputElement).toHaveAttribute('aria-required', 'true');
       });
     });
 
     describe('Is Disabled', () => {
       test('it disables the input', () => {
-        const { container } = render(
-          renderForm(undefined, { isDisabled: true })
-        );
+        render(renderForm(undefined, { isDisabled: true }));
 
-        const disabledInput = container.querySelector(
-          '.react-select__control[aria-disabled="true"]'
-        );
-
-        expect(disabledInput).toBeInTheDocument();
+        expect(screen.getByLabelText(testLabelName)).toBeDisabled();
       });
     });
 
     describe('Is Invalid, with a helpful message', () => {
       test('it renders the helpful message', async () => {
-        const { getByText } = render(renderForm([], { isRequired: true }));
+        const { getByText } = render(
+          renderForm(undefined, { isRequired: true })
+        );
         const submitButton = getByText('submit');
 
         fireEvent.click(submitButton);
@@ -178,34 +152,17 @@ describe('FormikTimePicker', () => {
   describe('Callback Handling', () => {
     describe('onChange', () => {
       test("Custom onChange event fires callback function, overwriting Formik's onChange", async () => {
-        let value: Option | undefined;
+        let value: string | undefined;
         const mockedHandleChange = jest.fn((event) => {
-          value = event.target.value;
+          event.persist();
         });
 
-        const { getByLabelText, container, getByText } = render(
+        const { getByLabelText } = render(
           renderForm(value, { onChange: mockedHandleChange })
         );
         const selectInput = getByLabelText(testLabelName);
-        /**
-         * This class is specific to react-select, combined with our custom classNamePrefix prop.
-         * While this is an implementation detail there appears to be
-         * no clearer path to test our own component which depends on react-select
-         */
-        const selectInputWrapper = container.querySelector(
-          '.react-select__control'
-        );
-
-        fireEvent.focus(selectInput);
-        if (selectInputWrapper) {
-          fireEvent.mouseDown(selectInputWrapper);
-        }
-        const option = await waitFor(() => getByText('12:00 AM'), {
-          container,
-        });
-        fireEvent.click(option);
+        fireEvent.change(selectInput, { target: { value: 'hello' } });
         expect(mockedHandleChange).toHaveBeenCalledTimes(1);
-        expect(value?.label).toEqual('12:00 AM');
       });
 
       test('it fires onChange callback on change', async () => {
@@ -215,9 +172,19 @@ describe('FormikTimePicker', () => {
           renderForm(undefined, { onChange: mockedHandleChange })
         );
 
-        await selectEvent.select(getByLabelText(testLabelName), '12:00 AM');
+        await fireEvent.change(getByLabelText(testLabelName));
 
         expect(mockedHandleChange).toBeCalledTimes(1);
+      });
+
+      test('it uses Formik onChange when no custom callback is provided', () => {
+        render(renderForm(undefined, {}));
+        const select = screen.getByLabelText(testLabelName);
+        const option = screen.getByText('12:15 AM') as HTMLOptionElement;
+
+        fireEvent.change(select, { target: { value: option.value } });
+
+        expect(select).toHaveValue(option.value);
       });
     });
   });

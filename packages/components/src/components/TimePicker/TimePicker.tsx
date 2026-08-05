@@ -1,7 +1,11 @@
 import React, { FC } from 'react';
-import { SelectInput, SelectInputProps } from '../SelectInput/SelectInput';
+import {
+  SelectInputNative,
+  SelectInputNativeProps,
+} from '../SelectInputNative/SelectInputNative';
 
-export type TimePickerProps = Omit<SelectInputProps, 'options'> & {
+export interface TimePickerProps
+  extends Omit<SelectInputNativeProps, 'options'> {
   /**
    * Options to govern the display of the option labels in the select.
    * This is a direct passthrough to the second argument of JS `toLocaleTimeString`.
@@ -26,7 +30,11 @@ export type TimePickerProps = Omit<SelectInputProps, 'options'> & {
    * Start hour and minute
    */
   startTime?: { hour: number; minute: number };
-};
+  /**
+   *  Should be ISO timestamp as returned by `onChange`, and matching value of option object.
+   */
+  value: SelectInputNativeProps['value'];
+}
 
 export const TimePicker: FC<TimePickerProps> = ({
   id,
@@ -62,22 +70,44 @@ export const TimePicker: FC<TimePickerProps> = ({
         value: currentTime.toISOString(),
         label: currentTime.toLocaleTimeString(locales, dateDisplayOptions),
       });
-      currentTime.setSeconds(first.getSeconds() + interval);
+      currentTime.setSeconds(currentTime.getSeconds() + interval);
     }
 
     return timeOptions;
   };
 
+  const options = generateTimes();
+  let valueDate: Date | undefined;
+
+  if (typeof value === 'string') {
+    valueDate = new Date(value);
+  } else if (typeof value === 'number') {
+    valueDate = new Date(value);
+  }
+
+  const matchingOption =
+    valueDate && !Number.isNaN(valueDate.getTime())
+      ? options.find(({ value: optionValue }) => {
+          const optionDate = new Date(optionValue);
+
+          return (
+            optionDate.getHours() === valueDate.getHours() &&
+            optionDate.getMinutes() === valueDate.getMinutes() &&
+            optionDate.getSeconds() === valueDate.getSeconds()
+          );
+        })
+      : undefined;
+
   return (
-    <SelectInput
+    <SelectInputNative
       {...restProps}
       id={id}
       name={name}
       label={label}
       onChange={onChange}
-      options={generateTimes()}
+      options={options}
       placeholder={placeholder}
-      value={value}
+      value={matchingOption?.value ?? value}
     />
   );
 };
