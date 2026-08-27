@@ -78,7 +78,14 @@ interface ModalOwnProps {
 }
 
 export type ModalProps = ModalOwnProps &
-  Omit<ReactModal.Props, keyof ModalOwnProps | 'onRequestClose'>;
+  Omit<
+    ReactModal.Props,
+    | keyof ModalOwnProps
+    | 'ariaHideApp'
+    | 'onRequestClose'
+    | 'overlayClassName'
+    | 'parentSelector'
+  >;
 
 export const ModalBaseComponent = forwardRef<
   HTMLDivElement,
