@@ -108,6 +108,23 @@ describe('CheckboxInput', () => {
     expect(checkbox.checked).toEqual(false);
   });
 
+  test.each([0, ''])('forwards the falsy value %p to the input', (value) => {
+    render(
+      <CheckboxInput
+        id="testCheckbox"
+        label="test checkbox"
+        isChecked={false}
+        onChange={() => null}
+        value={value}
+      />
+    );
+
+    expect(screen.getByRole('checkbox')).toHaveAttribute(
+      'value',
+      String(value)
+    );
+  });
+
   test('assigns the "aria-labelledby" attribute and calls FormLabel with expected props', () => {
     const { getByLabelText } = render(
       <CheckboxInput
