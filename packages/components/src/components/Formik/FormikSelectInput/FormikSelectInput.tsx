@@ -6,10 +6,14 @@ import {
   FormikValues,
   getIn,
 } from 'formik';
-import { SelectInput, SelectInputProps } from '../../SelectInput/SelectInput';
+import {
+  AsyncSelectInputProps,
+  SelectInput,
+  SelectInputProps,
+  SyncSelectInputProps,
+} from '../../SelectInput/SelectInput';
 
-export interface FormikSelectInputProps
-  extends Omit<SelectInputProps, 'onChange'> {
+interface FormikSelectInputOwnProps {
   field: FieldAttributes<HTMLSelectElement>;
   form: {
     touched: FormikTouched<FormikValues>;
@@ -19,15 +23,24 @@ export interface FormikSelectInputProps
   error?: string | Array<{ label?: string }>;
 }
 
+type FormikControlledSelectProps =
+  | keyof FormikSelectInputOwnProps
+  | 'name'
+  | 'onBlur'
+  | 'value';
+
+export type FormikSelectInputProps = FormikSelectInputOwnProps &
+  (
+    | Omit<AsyncSelectInputProps, FormikControlledSelectProps>
+    | Omit<SyncSelectInputProps, FormikControlledSelectProps>
+  );
+
 export const FormikSelectInput: React.FC<FormikSelectInputProps> = ({
   field: { name, onBlur, onChange: formikOnChange, value },
   form: { touched, errors },
   onChange,
-  id,
-  label,
-  options,
   error: errorProp,
-  ...props
+  ...selectProps
 }) => {
   let errorMessage: string | undefined;
   const error: unknown =
@@ -41,15 +54,12 @@ export const FormikSelectInput: React.FC<FormikSelectInputProps> = ({
 
   return (
     <SelectInput
-      id={id}
-      label={label}
-      options={options}
+      {...selectProps}
       name={name}
       onBlur={onBlur}
       onChange={onChange ?? formikOnChange}
       value={value}
       error={errorMessage}
-      {...props}
     />
   );
 };
