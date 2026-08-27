@@ -138,7 +138,7 @@ export const Checkbox = React.forwardRef<HTMLDivElement, CheckboxProps>(
       required: isRequired,
       type: 'checkbox',
       ref: inputRef,
-      ...(value && { value }),
+      ...(value !== undefined && { value }),
     };
 
     const responsiveClasses = generateResponsiveClasses('size', size);

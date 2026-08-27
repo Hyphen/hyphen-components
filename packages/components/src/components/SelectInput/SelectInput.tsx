@@ -133,6 +133,12 @@ interface SelectInputOwnProps {
   size?: TextInputSize;
 }
 
+type ReactSelectAsyncProps = AsyncCreatableProps<
+  SelectOption,
+  boolean,
+  SelectGroupOptions
+>;
+
 type ControlledReactSelectProps =
   | 'aria-label'
   | 'aria-labelledby'
@@ -147,7 +153,7 @@ type ControlledReactSelectProps =
 
 type SelectInputBaseProps = SelectInputOwnProps &
   Omit<
-    AsyncCreatableProps<SelectOption, boolean, SelectGroupOptions>,
+    ReactSelectAsyncProps,
     keyof SelectInputOwnProps | ControlledReactSelectProps
   >;
 
@@ -166,11 +172,11 @@ export type AsyncSelectInputProps = SelectInputBaseProps & {
   /**
    * If cacheOptions is passed, then the loaded data will be cached.
    */
-  cacheOptions?: boolean;
+  cacheOptions?: ReactSelectAsyncProps['cacheOptions'];
   /**
    * The default set of options to show before the user starts searching.
    */
-  defaultOptions?: boolean;
+  defaultOptions?: ReactSelectAsyncProps['defaultOptions'];
 };
 
 export type SyncSelectInputProps = SelectInputBaseProps & {
@@ -182,6 +188,8 @@ export type SyncSelectInputProps = SelectInputBaseProps & {
    * Options for dropdown list.
    */
   options: SelectInputOptions;
+  cacheOptions?: never;
+  defaultOptions?: never;
 };
 
 export type SelectInputProps = AsyncSelectInputProps | SyncSelectInputProps;
@@ -211,6 +219,8 @@ export function SelectInput(props: SelectInputProps): JSX.Element {
     placeholder = undefined,
     requiredIndicator = ' *',
     size = 'md',
+    cacheOptions,
+    defaultOptions,
     ...restProps
   } = props;
 
@@ -268,13 +278,17 @@ export function SelectInput(props: SelectInputProps): JSX.Element {
     isCreatable && isAsync
       ? AsyncCreatableSelect
       : isCreatable
-      ? CreatableSelect
-      : isAsync
-      ? AsyncSelect
-      : Select;
+        ? CreatableSelect
+        : isAsync
+          ? AsyncSelect
+          : Select;
 
   const selectOptions = isAsync
-    ? ({ loadOptions: options } as { loadOptions: AsyncOptions })
+    ? {
+        loadOptions: options as AsyncOptions,
+        cacheOptions,
+        defaultOptions,
+      }
     : ({ options } as { options: SelectInputOptions });
 
   return (
