@@ -9,7 +9,7 @@ import * as Stories from './Box.stories';
 A `<Box>` is a layout component to build UIs with consistent padding and spacing between elements.
 
 - Its content is arranged in a specified `direction`, with 'column' being the default
-- Renders a `<div />` element by default, but can be changed using `as`
+- Renders a `<div />` element by default, but can be changed using `as`. The element is never inferred from other props, so links must set `as="a"` alongside `href`
 - Allows you to specify the spacing between child elements using `gap`
 - Many props accept `ResponsiveProp` that take an object with keys that correspond to [breakpoint tokens](?path=/docs/foundation-design-tokens--docs#breakpoints).
 

@@ -296,7 +296,11 @@ export type BoxElement = ElementType;
 
 export type BoxProps<T extends BoxElement = 'div'> = BoxOwnProps & {
   /**
-   * The element type to be rendered.
+   * The element type to be rendered. Defaults to `div`.
+   *
+   * The element is no longer inferred from other props: passing `href` alone
+   * renders a `div` with an inert `href` attribute rather than an anchor, so
+   * links must set `as="a"` explicitly.
    */
   as?: T;
 } & Omit<ComponentPropsWithoutRef<T>, keyof BoxOwnProps | 'as'>;
