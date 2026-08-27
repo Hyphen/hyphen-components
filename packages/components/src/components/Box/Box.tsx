@@ -661,59 +661,58 @@ export const Box = forwardRef(BoxBaseComponent as never) as BoxComponent;
 
 Box.displayName = 'Box';
 
-export const boxPropsKeys = [
-  'as',
-  'alignItems',
-  'alignContent',
-  'alignSelf',
-  'background',
-  'borderColor',
-  'borderWidth',
-  'className',
-  'childGap',
-  'children',
-  'color',
-  'columnGap',
-  'cursor',
-  'direction',
-  'display',
-  'flex',
-  'focus',
-  'fontFamily',
-  'fontSize',
-  'fontWeight',
-  'gap',
-  'height',
-  'hover',
-  'justifyContent',
-  'margin',
-  'maxHeight',
-  'minHeight',
-  'maxWidth',
-  'minWidth',
-  'overflow',
-  'padding',
-  'position',
-  'radius',
-  'rowGap',
-  'shadow',
-  'style',
-  'textAlign',
-  'textTransform',
-  'textWrap',
-  'whiteSpace',
-  'wrap',
-  'width',
-  'wordBreak',
-  'zIndex',
-] as const satisfies readonly (keyof BoxOwnProps | 'as')[];
-
 // `boxPropsKeys` drives runtime prop routing (see SelectInputNative), so a key
 // missing from the list silently forwards a Box prop to the rendered element.
-// This fails to compile until every `BoxOwnProps` key is listed above.
-type AssertTrue<T extends true> = T;
-export type BoxPropsKeysAreExhaustive = AssertTrue<
-  Exclude<keyof BoxOwnProps, (typeof boxPropsKeys)[number]> extends never
-    ? true
-    : false
->;
+// `Record` requires an entry for every `BoxOwnProps` key, so omitting one here
+// fails to compile.
+const boxPropsKeyMap: Record<keyof BoxOwnProps | 'as', true> = {
+  as: true,
+  alignItems: true,
+  alignContent: true,
+  alignSelf: true,
+  background: true,
+  borderColor: true,
+  borderWidth: true,
+  className: true,
+  childGap: true,
+  children: true,
+  color: true,
+  columnGap: true,
+  cursor: true,
+  direction: true,
+  display: true,
+  flex: true,
+  focus: true,
+  fontFamily: true,
+  fontSize: true,
+  fontWeight: true,
+  gap: true,
+  height: true,
+  hover: true,
+  justifyContent: true,
+  margin: true,
+  maxHeight: true,
+  minHeight: true,
+  maxWidth: true,
+  minWidth: true,
+  overflow: true,
+  padding: true,
+  position: true,
+  radius: true,
+  rowGap: true,
+  shadow: true,
+  style: true,
+  textAlign: true,
+  textTransform: true,
+  textWrap: true,
+  whiteSpace: true,
+  wrap: true,
+  width: true,
+  wordBreak: true,
+  zIndex: true,
+};
+
+export const boxPropsKeys = Object.keys(boxPropsKeyMap) as (
+  | keyof BoxOwnProps
+  | 'as'
+)[];
