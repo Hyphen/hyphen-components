@@ -147,7 +147,7 @@ export declare type ResponsiveProp<T> = {
 
 export type Row = UnknownPropertiesObjType;
 
-export type Cell = string | number | { [key: string]: unknown } | unknown[];
+export type Cell = Row[string];
 
 export declare type Column = {
   /**

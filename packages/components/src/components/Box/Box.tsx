@@ -428,10 +428,7 @@ const BoxBaseComponent = <T extends BoxElement = 'div'>(
         ? Object.entries(values).map(
             ([key, value]) =>
               cssPropertyMap[key].transformer(
-                `${stateKey}:${
-                  cssPropertyMap[key as keyof BoxOwnProps['focus' | 'hover']]
-                    .classPrefix
-                }`,
+                `${stateKey}:${cssPropertyMap[key].classPrefix}`,
                 value
               ) // eslint-disable-line max-len
           )
@@ -700,7 +697,9 @@ export const boxPropsKeys: (keyof BoxOwnProps | 'as')[] = [
   'textAlign',
   'textTransform',
   'textWrap',
+  'whiteSpace',
   'wrap',
   'width',
+  'wordBreak',
   'zIndex',
 ];

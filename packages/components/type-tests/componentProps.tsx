@@ -6,6 +6,7 @@ import { CheckboxInput } from '../src/components/CheckboxInput/CheckboxInput';
 import { Details } from '../src/components/Details/Details';
 import { Drawer } from '../src/components/Drawer/Drawer';
 import { Icon } from '../src/components/Icon/Icon';
+import { Modal } from '../src/components/Modal/Modal';
 
 type Assert<T extends true> = T;
 type ExcludesKey<T, K extends PropertyKey> = K extends keyof T ? false : true;
@@ -40,6 +41,7 @@ const validComponents = (
     <Details isOpen ref={detailsRef} />
     <Drawer isOpen ariaLabel="Drawer" ref={drawerRef} />
     <Icon name="user" ref={iconRef} />
+    <Modal isOpen onDismiss={() => undefined} />
   </>
 );
 
@@ -58,9 +60,19 @@ const linkWithoutAs = <Box href="/docs" />;
 // @ts-expect-error type is not valid on the default div element.
 const buttonWithoutAs = <Badge type="button" />;
 
+const modalWithOnRequestClose = (
+  <Modal
+    isOpen
+    onDismiss={() => undefined}
+    // @ts-expect-error Modal close behavior is controlled by onDismiss.
+    onRequestClose={() => undefined}
+  />
+);
+
 void validComponents;
 void alertWithMessage;
 void badgeWithMessage;
 void boxWithMessage;
 void linkWithoutAs;
 void buttonWithoutAs;
+void modalWithOnRequestClose;

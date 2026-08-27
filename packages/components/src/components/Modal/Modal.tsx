@@ -78,7 +78,7 @@ interface ModalOwnProps {
 }
 
 export type ModalProps = ModalOwnProps &
-  Omit<ReactModal.Props, keyof ModalOwnProps>;
+  Omit<ReactModal.Props, keyof ModalOwnProps | 'onRequestClose'>;
 
 export const ModalBaseComponent = forwardRef<
   HTMLDivElement,
@@ -142,6 +142,7 @@ export const ModalBaseComponent = forwardRef<
         <RemoveScroll allowPinchZoom={allowPinchZoom} enabled={isOpen}>
           <Box ref={ref}>
             <ReactModal
+              {...restProps}
               isOpen={isOpen}
               overlayClassName={overlayClassnames}
               className={contentClassnames}
@@ -149,7 +150,6 @@ export const ModalBaseComponent = forwardRef<
               ariaHideApp={false}
               parentSelector={parentElement ? () => parentElement : undefined}
               style={{ content: { ...maxWidthCss.styles, ...style } }}
-              {...restProps}
             >
               <Box
                 aria-label={ariaLabel}

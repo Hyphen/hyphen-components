@@ -7,7 +7,7 @@ import {
   act,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Modal } from './Modal';
+import { Modal, ModalProps } from './Modal';
 
 describe('Modal', () => {
   beforeEach(() => {
@@ -404,6 +404,36 @@ describe('Modal', () => {
       await waitFor(() => {
         expect(handleDismiss).toHaveBeenCalledTimes(1);
       });
+    });
+
+    test('does not allow passthrough props to override onDismiss', async () => {
+      const handleDismiss = jest.fn();
+      const handleRequestClose = jest.fn();
+      const unsupportedProps = {
+        onRequestClose: handleRequestClose,
+      } as unknown as Partial<ModalProps>;
+
+      render(
+        <Modal
+          {...unsupportedProps}
+          isOpen
+          onDismiss={handleDismiss}
+          ariaLabel="Escape Modal"
+        >
+          content
+        </Modal>
+      );
+
+      fireEvent.keyDown(screen.getByRole('dialog'), {
+        key: 'Escape',
+        code: 'Escape',
+        keyCode: 27,
+      });
+
+      await waitFor(() => {
+        expect(handleDismiss).toHaveBeenCalledTimes(1);
+      });
+      expect(handleRequestClose).not.toHaveBeenCalled();
     });
   });
 
