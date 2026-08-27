@@ -661,7 +661,7 @@ export const Box = forwardRef(BoxBaseComponent as never) as BoxComponent;
 
 Box.displayName = 'Box';
 
-export const boxPropsKeys: (keyof BoxOwnProps | 'as')[] = [
+export const boxPropsKeys = [
   'as',
   'alignItems',
   'alignContent',
@@ -706,4 +706,14 @@ export const boxPropsKeys: (keyof BoxOwnProps | 'as')[] = [
   'width',
   'wordBreak',
   'zIndex',
-];
+] as const satisfies readonly (keyof BoxOwnProps | 'as')[];
+
+// `boxPropsKeys` drives runtime prop routing (see SelectInputNative), so a key
+// missing from the list silently forwards a Box prop to the rendered element.
+// This fails to compile until every `BoxOwnProps` key is listed above.
+type AssertTrue<T extends true> = T;
+export type BoxPropsKeysAreExhaustive = AssertTrue<
+  Exclude<keyof BoxOwnProps, (typeof boxPropsKeys)[number]> extends never
+    ? true
+    : false
+>;
