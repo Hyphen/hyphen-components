@@ -229,6 +229,24 @@ describe('SelectInput', () => {
           expect(loadOptions).toHaveBeenCalledTimes(1);
         });
       });
+
+      it('renders default options before searching', async () => {
+        render(
+          <SelectInput
+            id="testId"
+            onChange={jest.fn()}
+            label="Select Label"
+            options={jest.fn(() => Promise.resolve([]))}
+            value={null}
+            isAsync
+            defaultOptions={selectOptions}
+          />
+        );
+
+        await selectEvent.openMenu(screen.getByLabelText('Select Label'));
+
+        expect(screen.getByText('Vanilla')).toBeInTheDocument();
+      });
     });
 
     describe('Multi select, no selection', () => {

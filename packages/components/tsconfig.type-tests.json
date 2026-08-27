@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": false,
+    "rootDir": ".",
+    "sourceMap": false
+  },
+  "include": [
+    "type-tests/**/*.tsx",
+    "types",
+    "index.d.ts"
+  ]
+}
