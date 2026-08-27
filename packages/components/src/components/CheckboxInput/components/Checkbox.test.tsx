@@ -41,6 +41,25 @@ describe('Checkbox', () => {
     });
   });
 
+  describe('Value', () => {
+    test.each([0, ''])('preserves the falsy value %p', (value) => {
+      render(
+        <Checkbox
+          id="testCheckbox"
+          label="test checkbox"
+          onChange={jest.fn(() => null)}
+          isChecked={false}
+          value={value}
+        />
+      );
+
+      expect(screen.getByRole('checkbox')).toHaveAttribute(
+        'value',
+        String(value)
+      );
+    });
+  });
+
   describe('Indeterminate', () => {
     test('It renders an indeterminate icon if isIndeterminate is true and checkbox is checked', () => {
       render(

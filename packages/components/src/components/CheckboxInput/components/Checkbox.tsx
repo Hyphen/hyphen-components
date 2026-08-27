@@ -132,7 +132,7 @@ export const Checkbox: React.FC<CheckboxProps> = React.forwardRef(
       required: isRequired,
       type: 'checkbox',
       ref: inputRef,
-      ...(value && { value }),
+      value,
     };
 
     const responsiveClasses = generateResponsiveClasses('size', size);
