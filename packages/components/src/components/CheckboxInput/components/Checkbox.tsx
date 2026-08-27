@@ -41,6 +41,10 @@ export interface CheckboxProps
    */
   labelledby?: string;
   /**
+   * The checkbox input's name attribute.
+   */
+  name?: string;
+  /**
    * If the input should be disabled and not focusable.
    */
   isDisabled?: boolean;
@@ -75,7 +79,7 @@ export interface CheckboxProps
   value?: string | number;
 }
 
-export const Checkbox: React.FC<CheckboxProps> = React.forwardRef(
+export const Checkbox = React.forwardRef<HTMLDivElement, CheckboxProps>(
   (
     {
       className = '',
@@ -84,6 +88,7 @@ export const Checkbox: React.FC<CheckboxProps> = React.forwardRef(
       isChecked,
       label,
       labelledby,
+      name = undefined,
       onChange,
       error = false,
       isDisabled = false,
@@ -124,6 +129,7 @@ export const Checkbox: React.FC<CheckboxProps> = React.forwardRef(
       'aria-labelledby': labelledby,
       'aria-required': isRequired,
       id,
+      name,
       checked: !!isChecked,
       disabled: isDisabled,
       onBlur: handleBlur,

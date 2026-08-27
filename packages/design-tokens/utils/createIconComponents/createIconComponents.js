@@ -39,7 +39,7 @@ async function createIconComponents() {
 
     const reactComponent = await svgr(
       icons[iconName],
-      { icon: true },
+      { icon: true, ref: true },
       { componentName },
     );
 

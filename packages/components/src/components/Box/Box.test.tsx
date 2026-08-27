@@ -20,6 +20,18 @@ import {
 describe('Box', () => {
   const renderBox = (props = {}) => render(<Box {...props}>Test Box</Box>);
 
+  test('accepts attributes for the element selected by as', () => {
+    const buttonRef = React.createRef<HTMLButtonElement>();
+
+    render(
+      <Box as="button" type="button" disabled ref={buttonRef}>
+        Action
+      </Box>
+    );
+
+    expect(buttonRef.current).toBeDisabled();
+  });
+
   describe('aria attributes', () => {
     test('aria-label is applied if set', () => {
       const { getByLabelText } = renderBox({ 'aria-label': 'test label' });

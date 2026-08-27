@@ -44,8 +44,7 @@ export type Breakpoint = {
 
 export type DimensionSize = WidthSize | HeightSize;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type UnknownPropertiesObjType = { [key: string]: any };
+export type UnknownPropertiesObjType = Record<string, unknown>;
 
 export interface FlexProperty {
   flexGrow?: number | string;

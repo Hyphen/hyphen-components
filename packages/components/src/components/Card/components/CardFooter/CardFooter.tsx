@@ -5,10 +5,6 @@ export interface CardFooterProps extends BoxProps {
    * Contents of the Footer.
    */
   children?: ReactNode;
-  /**
-   * Additional props to be spread to rendered element
-   */
-  [x: string]: any; // eslint-disable-line
 }
 
 export const CardFooter: FC<CardFooterProps> = ({

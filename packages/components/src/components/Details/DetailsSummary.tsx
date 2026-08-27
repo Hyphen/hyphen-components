@@ -2,12 +2,15 @@ import React, { MouseEvent, KeyboardEvent } from 'react';
 import { ENTER, SPACE } from '../../constants/keyCodes';
 import { Box, BoxProps } from '../Box/Box';
 
-export interface DetailsSummaryProps extends BoxProps {
+interface DetailsSummaryOwnProps {
   isDetailsOpen: boolean;
   onToggle?: (
     event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>
   ) => void;
 }
+
+export type DetailsSummaryProps = DetailsSummaryOwnProps &
+  Omit<BoxProps<'summary'>, keyof DetailsSummaryOwnProps | 'as'>;
 
 export const DetailsSummary: React.FC<DetailsSummaryProps> = ({
   children,

@@ -33,6 +33,7 @@ export const FormikCheckboxInput: React.FC<FormikCheckboxInputProps> = ({
     {...props}
     id={id}
     label={label}
+    name={name}
     error={getIn(touched, name) && getIn(errors, name)}
     isChecked={value}
     onBlur={onBlur}

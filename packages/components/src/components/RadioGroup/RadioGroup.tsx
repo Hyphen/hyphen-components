@@ -1,11 +1,17 @@
-import React, { FC, ChangeEvent, FocusEvent, ReactNode } from 'react';
+import React, {
+  FC,
+  ChangeEvent,
+  ComponentPropsWithoutRef,
+  FocusEvent,
+  ReactNode,
+} from 'react';
 import classNames from 'classnames';
 import { Box } from '../Box/Box';
 import { InputValidationMessage } from '../InputValidationMessage/InputValidationMessage';
 import { RadioInput, RadioInputProps } from './RadioInput/RadioInput'; // eslint-disable-line import/no-cycle
 import styles from './RadioGroup.module.scss';
 
-export interface RadioGroupProps {
+interface RadioGroupOwnProps {
   /**
    * Radio group name.
    */
@@ -72,11 +78,10 @@ export interface RadioGroupProps {
    * The value of selected radio input.
    */
   value?: string;
-  /**
-   * Additional props to be spread to rendered element
-   */
-  [x: string]: any; // eslint-disable-line
 }
+
+export type RadioGroupProps = RadioGroupOwnProps &
+  Omit<ComponentPropsWithoutRef<'div'>, keyof RadioGroupOwnProps>;
 
 export const RadioGroup: FC<RadioGroupProps> = ({
   name,

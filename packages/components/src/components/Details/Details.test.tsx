@@ -185,5 +185,13 @@ describe('Details', () => {
       const summary = screen.getByRole('button');
       expect(summary).toHaveClass('m-top-lg');
     });
+
+    it('forwards its ref to the details element', () => {
+      const ref = React.createRef<HTMLDetailsElement>();
+
+      render(<Details isOpen={false} ref={ref} />);
+
+      expect(ref.current).toBe(screen.getByRole('group'));
+    });
   });
 });

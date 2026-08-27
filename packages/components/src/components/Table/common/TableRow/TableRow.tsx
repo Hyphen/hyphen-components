@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import classNames from 'classnames';
 import styles from './TableRow.module.scss';
-import { Column, EventWithColumnKey, Row } from '../../../../types';
+import { Cell, Column, EventWithColumnKey, Row } from '../../../../types';
 import { getColumnKeys } from '../../../../lib/getColumnKeys';
 import TableBodyCell from '../../TableBody/TableBodyCell/TableBodyCell';
 import { TableHeaderCell } from '../../TableHead/TableHeaderCell/TableHeaderCell';
@@ -96,10 +96,12 @@ export const TableRow: FC<TableRowProps> = ({
   const renderCellContent = (column: Column): ReactNode => {
     if (column.render) {
       const cellValue = column.dataKey && row ? row[column.dataKey] : undefined;
-      return column.render(cellValue, row, rowIndex);
+      return column.render(cellValue as Cell, row, rowIndex);
     }
 
-    return column.dataKey && row ? row[column.dataKey] : null;
+    return column.dataKey && row
+      ? (row[column.dataKey] as ReactNode)
+      : null;
   };
 
   const getCellClassName = (column: Column): string | undefined => {

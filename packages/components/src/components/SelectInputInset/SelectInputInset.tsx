@@ -6,7 +6,6 @@ import React, {
   FocusEvent,
   ForwardRefExoticComponent,
   ReactNode,
-  HTMLProps,
 } from 'react';
 import classNames from 'classnames';
 import { ResponsiveProp } from '../../types';
@@ -36,11 +35,15 @@ export interface SelectInputInsetProps {
   /**
    * Callback function to call on change event.
    */
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
   /**
    * Value of selected option. Should match the value key in the option object.
    */
   value: string | number | null;
+  /**
+   * The select's autocomplete behavior.
+   */
+  autoComplete?: boolean | string;
   /**
    * Automatically focus the input when the page is loaded.
    */
@@ -61,7 +64,7 @@ export interface SelectInputInsetProps {
   /**
    * Props passed directly to the input element of the component
    */
-  inputProps?: BoxProps & HTMLProps<HTMLInputElement>;
+  inputProps?: Omit<BoxProps<'select'>, 'as'>;
   /**
    * The input's disabled attribute
    */
@@ -77,7 +80,7 @@ export interface SelectInputInsetProps {
   /**
    * Callback function to call on blur event.
    */
-  onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (event: FocusEvent<HTMLSelectElement>) => void;
   /**
    * Callback function to call when input us cleared. When this is passed,
    * the input will display an icon on the right side, for triggering this callback.
@@ -88,7 +91,7 @@ export interface SelectInputInsetProps {
   /**
    * Callback function to call on focus event.
    */
-  onFocus?: (event: FocusEvent<HTMLInputElement>) => void;
+  onFocus?: (event: FocusEvent<HTMLSelectElement>) => void;
   /**
    * The input placeholder attribute.
    */
@@ -101,10 +104,6 @@ export interface SelectInputInsetProps {
    * The size of the text input.
    */
   size?: SelectInputInsetSize | ResponsiveProp<SelectInputInsetSize>;
-  /**
-   * Additional props to be spread to rendered element
-   */
-  [x: string]: any; // eslint-disable-line
 }
 
 export const SelectInputInset: ForwardRefExoticComponent<SelectInputInsetProps> =

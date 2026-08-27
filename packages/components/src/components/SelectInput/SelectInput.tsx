@@ -7,7 +7,9 @@ import Select, {
   OptionsOrGroups,
   OnChangeValue,
 } from 'react-select';
-import AsyncCreatableSelect from 'react-select/async-creatable';
+import AsyncCreatableSelect, {
+  AsyncCreatableProps,
+} from 'react-select/async-creatable';
 import AsyncSelect from 'react-select/async';
 import CreatableSelect from 'react-select/creatable';
 import { ResponsiveProp } from '../../types';
@@ -42,7 +44,7 @@ export type TextInputSize =
   | 'lg'
   | ResponsiveProp<'sm' | 'md' | 'lg'>;
 
-export interface SelectInputProps {
+interface SelectInputOwnProps {
   /**
    * The id attribute of the input.
    */
@@ -59,10 +61,6 @@ export interface SelectInputProps {
    * The value(s) of select.
    */
   value: any | any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
-  /**
-   * Options for dropdown list.
-   */
-  options: SelectInputOptions | AsyncOptions;
   /**
    * Autofocus select input on render.
    */
@@ -84,10 +82,6 @@ export interface SelectInputProps {
    * Visually hide the label.
    */
   hideLabel?: boolean;
-  /**
-   * Load the input asynchronously.
-   */
-  isAsync?: boolean;
   /**
    * If the input value is clearable programmatically.
    */
@@ -137,18 +131,30 @@ export interface SelectInputProps {
    * The size of the text input.
    */
   size?: TextInputSize;
-  /**
-   * Additional props to be spread. These will be applied specifically to
-   * the `react-select` component that powers the select. For full docs on
-   * react-select props, [Click Here](https://react-select.com/props)
-   */
-  [x: string]: any; // eslint-disable-line
 }
+
+type ControlledReactSelectProps =
+  | 'aria-label'
+  | 'aria-labelledby'
+  | 'cacheOptions'
+  | 'classNamePrefix'
+  | 'components'
+  | 'defaultOptions'
+  | 'inputId'
+  | 'loadOptions'
+  | 'options'
+  | 'styles';
+
+type SelectInputBaseProps = SelectInputOwnProps &
+  Omit<
+    AsyncCreatableProps<SelectOption, boolean, SelectGroupOptions>,
+    keyof SelectInputOwnProps | ControlledReactSelectProps
+  >;
 
 type AsyncOptions = (
   inputValue: string
 ) => Promise<OptionsOrGroups<SelectOption, SelectGroupOptions>>;
-type AsyncSelectInputProps = SelectInputProps & {
+export type AsyncSelectInputProps = SelectInputBaseProps & {
   /**
    * Load the input asynchronously.
    */
@@ -167,7 +173,7 @@ type AsyncSelectInputProps = SelectInputProps & {
   defaultOptions?: boolean;
 };
 
-type SyncSelectInputProps = SelectInputProps & {
+export type SyncSelectInputProps = SelectInputBaseProps & {
   /**
    * Load the input synchronously.
    */
@@ -178,8 +184,8 @@ type SyncSelectInputProps = SelectInputProps & {
   options: SelectInputOptions;
 };
 
-export function SelectInput(props: AsyncSelectInputProps): JSX.Element;
-export function SelectInput(props: SyncSelectInputProps): JSX.Element;
+export type SelectInputProps = AsyncSelectInputProps | SyncSelectInputProps;
+
 export function SelectInput(props: SelectInputProps): JSX.Element {
   const {
     id,

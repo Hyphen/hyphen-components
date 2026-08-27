@@ -1,12 +1,12 @@
 import { FontColor, FontSize, IconName, ResponsiveProp } from '../../types';
-import React, { FC, forwardRef } from 'react';
+import React, { ComponentPropsWithoutRef, forwardRef } from 'react';
 
 import { Box } from '../Box/Box';
 import classNames from 'classnames';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
 import icons from '@hyphen/hyphen-design-tokens/build/assets/icons/react';
 
-export interface IconProps {
+interface IconOwnProps {
   className?: string;
   /**
    * A color token identifier to use for the text color.
@@ -20,13 +20,12 @@ export interface IconProps {
    * Name of the icon
    */
   name: IconName;
-  /**
-   * Additional props to be spread to rendered element
-   */
-  [x: string]: any; // eslint-disable-line
 }
 
-export const Icon: FC<IconProps> = forwardRef<SVGSVGElement, IconProps>(
+export type IconProps = IconOwnProps &
+  Omit<ComponentPropsWithoutRef<'svg'>, keyof IconOwnProps>;
+
+export const Icon = forwardRef<SVGSVGElement, IconProps>(
   ({ className = undefined, name, color, size, ...restProps }, ref) => {
     const IconComponent = icons[name];
 

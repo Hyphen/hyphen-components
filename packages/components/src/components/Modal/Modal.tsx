@@ -9,7 +9,7 @@ import { Box, BoxProps } from '../Box/Box';
 import { ModalFooter, ModalHeader, ModalBody } from './components';
 import styles from './Modal.module.scss';
 
-export interface ModalProps {
+interface ModalOwnProps {
   /**
    * Handle zoom/pinch gestures on iOS devices when scroll locking is enabled.
    */
@@ -75,13 +75,12 @@ export interface ModalProps {
    * Inline styles for the modal container
    */
   style?: React.CSSProperties;
-  /**
-   * Allows spread props
-   */
-  [x: string]: any; // eslint-disable-line
 }
 
-export const ModalBaseComponent: React.FC<ModalProps> = forwardRef<
+export type ModalProps = ModalOwnProps &
+  Omit<ReactModal.Props, keyof ModalOwnProps>;
+
+export const ModalBaseComponent = forwardRef<
   HTMLDivElement,
   ModalProps
 >(

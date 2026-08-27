@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
 import { ResponsiveProp } from '../../types';
-import { Box, BoxProps } from '../Box/Box';
+import { Box } from '../Box/Box';
 import { FormControl, FormControlProps } from '../FormControl/FormControl';
 import styles from './SelectInputNative.module.scss';
 
@@ -13,7 +13,7 @@ export interface SelectInputNativeOption {
   disabled?: boolean;
 }
 
-export interface SelectInputNativeProps extends BoxProps, FormControlProps {
+interface SelectInputNativeOwnProps {
   /**
    * List of options for the select input.
    */
@@ -31,6 +31,10 @@ export interface SelectInputNativeProps extends BoxProps, FormControlProps {
    */
   name?: string;
   /**
+   * Placeholder option displayed before a value is selected.
+   */
+  placeholder?: string;
+  /**
    * Visual indicator that the field is required, that gets appended to the label
    */
   requiredIndicator?: React.ReactNode;
@@ -42,11 +46,10 @@ export interface SelectInputNativeProps extends BoxProps, FormControlProps {
    * Whether the input is autofocused on initial render.
    */
   autoFocus?: HTMLSelectElement['autofocus'];
-  /**
-   * Additional props to be spread.
-   */
-  [x: string]: any; // eslint-disable-line
 }
+
+export type SelectInputNativeProps = SelectInputNativeOwnProps &
+  Omit<FormControlProps, keyof SelectInputNativeOwnProps>;
 
 export const SelectInputNative: React.FC<SelectInputNativeProps> = ({
   autoFocus = false,

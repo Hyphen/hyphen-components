@@ -108,6 +108,26 @@ describe('CheckboxInput', () => {
     expect(checkbox.checked).toEqual(false);
   });
 
+  test('submits its name and value with a form', () => {
+    const { getByLabelText } = render(
+      <form>
+        <CheckboxInput
+          id="terms"
+          label="Accept terms"
+          name="terms"
+          value="accepted"
+          isChecked
+          onChange={() => null}
+        />
+      </form>
+    );
+    const checkbox = getByLabelText('Accept terms') as HTMLInputElement;
+    const form = checkbox.closest('form') as HTMLFormElement;
+
+    expect(checkbox).toHaveAttribute('name', 'terms');
+    expect(new FormData(form).get('terms')).toBe('accepted');
+  });
+
   test('assigns the "aria-labelledby" attribute and calls FormLabel with expected props', () => {
     const { getByLabelText } = render(
       <CheckboxInput

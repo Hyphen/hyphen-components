@@ -22,6 +22,14 @@ describe('Icon', () => {
     expect(icon.getAttribute('class')).toBe('testClass');
   });
 
+  test('forwards its ref to the svg element', () => {
+    const ref = React.createRef<SVGSVGElement>();
+
+    render(<Icon name="user" ref={ref} />);
+
+    expect(ref.current).toBe(screen.getByTestId('icon-testid--user'));
+  });
+
   test('fallback', () => {
     render(<Icon name={'does-not-exist' as 'user'} />);
     const icon = screen.getByText('???');

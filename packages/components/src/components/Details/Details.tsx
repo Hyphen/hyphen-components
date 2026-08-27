@@ -4,14 +4,17 @@ import { DetailsSummary } from './DetailsSummary';
 import styles from './Details.module.scss';
 import { Box, BoxProps } from '../Box/Box';
 
-export interface DetailsProps extends BoxProps {
+interface DetailsOwnProps {
   /**
    * Whether the details below the summary are opened. Directly corresponds to `open` property in <details> element.
    */
   isOpen: boolean;
 }
 
-export const DetailsBaseComponent: React.FC<DetailsProps> = React.forwardRef<
+export type DetailsProps = DetailsOwnProps &
+  Omit<BoxProps<'details'>, keyof DetailsOwnProps | 'as' | 'open'>;
+
+export const DetailsBaseComponent = React.forwardRef<
   HTMLDetailsElement,
   DetailsProps
 >(({ children, className, display = 'block', isOpen, ...restProps }, ref) => {

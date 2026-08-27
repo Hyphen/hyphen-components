@@ -7,9 +7,13 @@ export interface CardProps extends BoxProps {
    * The Card's contents.
    */
   children?: ReactNode;
+  /**
+   * Whether the card uses its subdued background.
+   */
+  subdued?: boolean;
 }
 
-export const CardBaseComponent: React.FC<CardProps> = React.forwardRef(
+export const CardBaseComponent = React.forwardRef<HTMLDivElement, CardProps>(
   (
     {
       children,

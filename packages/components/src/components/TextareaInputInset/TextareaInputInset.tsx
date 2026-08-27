@@ -4,8 +4,7 @@ import React, {
   FocusEvent,
   ForwardRefExoticComponent,
   ReactNode,
-  HTMLProps,
-  InputHTMLAttributes,
+  TextareaHTMLAttributes,
 } from 'react';
 import classNames from 'classnames';
 import { ResponsiveProp } from '../../types';
@@ -30,11 +29,15 @@ export interface TextareaInputInsetProps {
   /**
    * Callback function to call on change event.
    */
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   /**
    * The text value of the input. Required since our Input is a controlled component.
    */
-  value: InputHTMLAttributes<HTMLInputElement>['value'];
+  value: TextareaHTMLAttributes<HTMLTextAreaElement>['value'];
+  /**
+   * The textarea's autocomplete behavior.
+   */
+  autoComplete?: boolean | string;
   /**
    * Automatically focus the input when the page is loaded.
    */
@@ -55,7 +58,7 @@ export interface TextareaInputInsetProps {
   /**
    * Props passed directly to the input element of the component
    */
-  inputProps?: BoxProps & HTMLProps<HTMLInputElement>;
+  inputProps?: Omit<BoxProps<'textarea'>, 'as'>;
   /**
    * The input's disabled attribute
    */
@@ -76,11 +79,11 @@ export interface TextareaInputInsetProps {
   /**
    * Callback function to call on blur event.
    */
-  onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (event: FocusEvent<HTMLTextAreaElement>) => void;
   /**
    * Callback function to call on focus event.
    */
-  onFocus?: (event: FocusEvent<HTMLInputElement>) => void;
+  onFocus?: (event: FocusEvent<HTMLTextAreaElement>) => void;
   /**
    * The input placeholder attribute.
    */
@@ -109,14 +112,6 @@ export interface TextareaInputInsetProps {
    * An input helper rendered after the input field value
    */
   suffix?: ReactNode;
-  /**
-   * The input 'type' value. Defaults to type 'text'.
-   */
-  type?: InputHTMLAttributes<HTMLInputElement>['type'];
-  /**
-   * Additional props to be spread to rendered element
-   */
-  [x: string]: any; // eslint-disable-line
 }
 
 export const TextareaInputInset: ForwardRefExoticComponent<TextareaInputInsetProps> =
@@ -144,7 +139,6 @@ export const TextareaInputInset: ForwardRefExoticComponent<TextareaInputInsetPro
         resize = 'vertical',
         rows = 5,
         size = 'md',
-        type = 'text',
       },
       ref
     ) => {
@@ -180,7 +174,6 @@ export const TextareaInputInset: ForwardRefExoticComponent<TextareaInputInsetPro
         placeholder,
         required: isRequired,
         rows,
-        type,
         value,
       };
 

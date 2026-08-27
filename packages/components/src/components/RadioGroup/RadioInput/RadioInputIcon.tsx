@@ -22,10 +22,6 @@ export interface RadioIconProps extends BoxProps {
    * If the input should be disabled and not focusable.
    */
   isDisabled?: RadioInputProps['isDisabled'];
-  /**
-   * Additional props to be spread to rendered element
-   */
-  [x: string]: any; // eslint-disable-line
 }
 
 export const RadioInputIcon: React.FC<RadioIconProps> = ({

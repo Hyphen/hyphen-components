@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from 'react';
 import { Box, BoxProps } from '../../../Box/Box';
 import { Heading } from '../../../Heading/Heading';
 
-export interface CardHeaderProps extends BoxProps {
+interface CardHeaderOwnProps {
   /**
    * The title of the card
    */
@@ -12,6 +12,9 @@ export interface CardHeaderProps extends BoxProps {
    */
   description?: ReactNode;
 }
+
+export type CardHeaderProps = CardHeaderOwnProps &
+  Omit<BoxProps<'div'>, keyof CardHeaderOwnProps | 'as'>;
 
 export const CardHeader: FC<CardHeaderProps> = ({
   children,

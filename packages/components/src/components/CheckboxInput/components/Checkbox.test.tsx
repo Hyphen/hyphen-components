@@ -195,6 +195,7 @@ describe('Checkbox', () => {
       const checkboxInputContainer = screen
         .getByRole('checkbox')
         .closest('div');
+      expect(screen.getByRole('checkbox')).toHaveAttribute('name', 'mockName');
       expect(checkboxInputContainer).toHaveClass('hidden');
     });
   });

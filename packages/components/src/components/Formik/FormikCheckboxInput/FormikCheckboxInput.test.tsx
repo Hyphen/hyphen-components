@@ -54,6 +54,15 @@ describe('FormikCheckboxInput', () => {
         expect(checkbox.disabled).toBe(false);
         expect(checkbox.getAttribute('aria-invalid')).toBe('false');
       });
+
+      test('passes the Formik field name to the checkbox input', () => {
+        const { getByLabelText } = render(renderForm(true, {}));
+        const checkbox = getByLabelText(testLabelName) as HTMLInputElement;
+        const form = checkbox.closest('form') as HTMLFormElement;
+
+        expect(checkbox).toHaveAttribute('name', testLabelName);
+        expect(new FormData(form).has(testLabelName)).toBe(true);
+      });
     });
 
     describe('With initial value true', () => {
