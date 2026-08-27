@@ -6,7 +6,6 @@ import React, {
   FocusEvent,
   ForwardRefExoticComponent,
   ReactNode,
-  HTMLProps,
   InputHTMLAttributes,
 } from 'react';
 import classNames from 'classnames';
@@ -39,6 +38,10 @@ export interface TextInputInsetProps {
    */
   value: InputHTMLAttributes<HTMLInputElement>['value'];
   /**
+   * The input's autocomplete behavior.
+   */
+  autoComplete?: boolean | string;
+  /**
    * Automatically focus the input when the page is loaded.
    */
   autoFocus?: boolean;
@@ -58,7 +61,7 @@ export interface TextInputInsetProps {
   /**
    * Props passed directly to the input element of the component
    */
-  inputProps?: BoxProps & HTMLProps<HTMLInputElement>;
+  inputProps?: Omit<BoxProps<'input'>, 'as'>;
   /**
    * The input's disabled attribute
    */
@@ -115,10 +118,6 @@ export interface TextInputInsetProps {
    * The input 'type' value. Defaults to type 'text'.
    */
   type?: InputHTMLAttributes<HTMLInputElement>['type'];
-  /**
-   * Additional props to be spread to rendered element
-   */
-  [x: string]: any; // eslint-disable-line
 }
 
 export const TextInputInset: ForwardRefExoticComponent<TextInputInsetProps> =

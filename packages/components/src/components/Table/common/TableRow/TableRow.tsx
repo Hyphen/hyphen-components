@@ -93,13 +93,31 @@ export const TableRow: FC<TableRowProps> = ({
     className
   );
 
+  const isRenderableCell = (value: unknown): value is ReactNode => {
+    if (value === null || value === undefined) return true;
+
+    const valueType = typeof value;
+    if (
+      valueType === 'string' ||
+      valueType === 'number' ||
+      valueType === 'boolean'
+    ) {
+      return true;
+    }
+
+    if (Array.isArray(value)) return value.every(isRenderableCell);
+
+    return React.isValidElement(value);
+  };
+
   const renderCellContent = (column: Column): ReactNode => {
     if (column.render) {
       const cellValue = column.dataKey && row ? row[column.dataKey] : undefined;
       return column.render(cellValue, row, rowIndex);
     }
 
-    return column.dataKey && row ? row[column.dataKey] : null;
+    const cellValue = column.dataKey && row ? row[column.dataKey] : null;
+    return isRenderableCell(cellValue) ? cellValue : null;
   };
 
   const getCellClassName = (column: Column): string | undefined => {

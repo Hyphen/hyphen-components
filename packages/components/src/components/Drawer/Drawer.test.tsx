@@ -584,6 +584,14 @@ describe('Drawer', () => {
   });
 
   describe('Ref forwarding', () => {
+    test('forwards ref to the Drawer container', () => {
+      const ref = React.createRef<HTMLDivElement>();
+
+      render(<Drawer isOpen={false} ariaLabel="Drawer" ref={ref} />);
+
+      expect(ref.current).toBeInstanceOf(HTMLDivElement);
+    });
+
     test('forwards ref to DrawerProvider container', () => {
       const ref = React.createRef<HTMLDivElement>();
       render(

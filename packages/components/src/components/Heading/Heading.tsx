@@ -1,4 +1,4 @@
-import { FC, ReactNode, createElement } from 'react';
+import { FC, HTMLAttributes, ReactNode, createElement } from 'react';
 import { FontColor, HeadingSize, ResponsiveProp } from '../../types';
 import {
   HEADING_DEFAULT_SIZE_MAP,
@@ -10,7 +10,7 @@ import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
 import { getElementType } from '../../lib/getElementType';
 import styles from './Heading.module.scss';
 
-export interface HeadingProps {
+interface HeadingOwnProps {
   /**
    * The DOM tag or react component to use for the element.
    * Select the appropriate semantic element (h1-h6).
@@ -36,11 +36,10 @@ export interface HeadingProps {
    * [here](https://github.com/Hyphen/hyphen-components/blob/main/packages/design-tokens/tokens/size/font.json).
    */
   size?: HeadingSize | ResponsiveProp<HeadingSize>;
-  /**
-   * Additional props to be spread to rendered element
-   */
-  [x: string]: any; // eslint-disable-line
 }
+
+export type HeadingProps = HeadingOwnProps &
+  Omit<HTMLAttributes<HTMLHeadingElement>, keyof HeadingOwnProps>;
 
 export const Heading: FC<HeadingProps> = ({
   as = 'h4',

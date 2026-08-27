@@ -4,7 +4,7 @@ import {
   CssOverflowValue,
   ResponsiveProp,
 } from '../../types';
-import { Box } from './Box';
+import { Box, boxPropsKeys } from './Box';
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import {
@@ -19,6 +19,18 @@ import {
 
 describe('Box', () => {
   const renderBox = (props = {}) => render(<Box {...props}>Test Box</Box>);
+
+  test('accepts attributes for the element selected by as', () => {
+    const buttonRef = React.createRef<HTMLButtonElement>();
+
+    render(
+      <Box as="button" type="button" disabled ref={buttonRef}>
+        Action
+      </Box>
+    );
+
+    expect(buttonRef.current).toBeDisabled();
+  });
 
   describe('aria attributes', () => {
     test('aria-label is applied if set', () => {
@@ -52,6 +64,17 @@ describe('Box', () => {
   test('renders with proper hover classes', () => {
     const { getByText } = renderBox({ hover: { background: 'primary' } });
     expect(getByText('Test Box')).toHaveClass('hover:background-color-primary');
+  });
+
+  test('renders hover classes that are not supported by focus', () => {
+    const { getByText } = renderBox({ hover: { fontSize: 'lg' } });
+    expect(getByText('Test Box')).toHaveClass('hover:font-size-lg');
+  });
+
+  test('lists all text wrapping props as Box props', () => {
+    expect(boxPropsKeys).toEqual(
+      expect.arrayContaining(['whiteSpace', 'wordBreak'])
+    );
   });
 
   test('renders with proper focus classes', () => {

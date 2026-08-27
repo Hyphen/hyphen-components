@@ -3,7 +3,6 @@ import React, {
   ChangeEvent,
   FocusEvent,
   ForwardRefExoticComponent,
-  HTMLProps,
   InputHTMLAttributes,
   KeyboardEvent,
   MouseEvent,
@@ -11,7 +10,7 @@ import React, {
   forwardRef,
 } from 'react';
 
-import { FormControl } from '../FormControl/FormControl';
+import { FormControl, FormControlProps } from '../FormControl/FormControl';
 import { Icon } from '../Icon/Icon';
 import { ResponsiveProp } from '../../types';
 import classNames from 'classnames';
@@ -21,7 +20,7 @@ import { getAutoCompleteValue } from '../../lib/getAutoCompleteValue';
 import styles from './TextInput.module.scss';
 
 export type TextInputSizeType = 'sm' | 'md' | 'lg';
-export interface TextInputProps {
+interface TextInputOwnProps {
   /**
    * The input's id attribute. Used to programmatically tie the input with its label.
    */
@@ -38,6 +37,10 @@ export interface TextInputProps {
    * The text value of the input. Required since our Input is a controlled component.
    */
   value: InputHTMLAttributes<HTMLInputElement>['value'];
+  /**
+   * The input's autocomplete behavior.
+   */
+  autoComplete?: boolean | string;
   /**
    * Automatically focus the input when the page is loaded.
    */
@@ -62,7 +65,7 @@ export interface TextInputProps {
   /**
    * Props passed directly to the input element of the component
    */
-  inputProps?: BoxProps & HTMLProps<HTMLInputElement>;
+  inputProps?: Omit<BoxProps<'input'>, 'as'>;
   /**
    * The input's disabled attribute
    */
@@ -119,11 +122,10 @@ export interface TextInputProps {
    * The input 'type' value. Defaults to type 'text'.
    */
   type?: InputHTMLAttributes<HTMLInputElement>['type'];
-  /**
-   * Additional props to be spread to rendered element
-   */
-  [x: string]: any; // eslint-disable-line
 }
+
+export type TextInputProps = TextInputOwnProps &
+  Omit<FormControlProps, keyof TextInputOwnProps>;
 
 export const TextInput: ForwardRefExoticComponent<TextInputProps> = forwardRef<
   HTMLDivElement,

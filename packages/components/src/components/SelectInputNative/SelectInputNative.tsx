@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
 import { ResponsiveProp } from '../../types';
-import { Box, BoxProps } from '../Box/Box';
+import { Box, BoxOwnProps, BoxProps, boxPropsKeys } from '../Box/Box';
 import { FormControl, FormControlProps } from '../FormControl/FormControl';
 import styles from './SelectInputNative.module.scss';
 
@@ -13,7 +13,7 @@ export interface SelectInputNativeOption {
   disabled?: boolean;
 }
 
-export interface SelectInputNativeProps extends BoxProps, FormControlProps {
+interface SelectInputNativeOwnProps {
   /**
    * List of options for the select input.
    */
@@ -25,11 +25,36 @@ export interface SelectInputNativeProps extends BoxProps, FormControlProps {
   /**
    * Value of selected option. Should match the value key in the option object.
    */
-  value: string | number | null;
+  value: React.ComponentPropsWithoutRef<'select'>['value'] | null;
+  /**
+   * Props passed directly to the select element of the component.
+   */
+  inputProps?: Omit<
+    BoxProps<'select'>,
+    | 'aria-label'
+    | 'aria-labelledby'
+    | 'aria-required'
+    | 'as'
+    | 'autoFocus'
+    | 'children'
+    | 'color'
+    | 'defaultValue'
+    | 'disabled'
+    | 'id'
+    | 'name'
+    | 'onChange'
+    | 'required'
+    | 'size'
+    | 'value'
+  >;
   /**
    * The input's 'name' attribute.
    */
   name?: string;
+  /**
+   * Placeholder option displayed before a value is selected.
+   */
+  placeholder?: string;
   /**
    * Visual indicator that the field is required, that gets appended to the label
    */
@@ -42,11 +67,37 @@ export interface SelectInputNativeProps extends BoxProps, FormControlProps {
    * Whether the input is autofocused on initial render.
    */
   autoFocus?: HTMLSelectElement['autofocus'];
-  /**
-   * Additional props to be spread.
-   */
-  [x: string]: any; // eslint-disable-line
 }
+
+type SelectInputNativeFormControlProps = Pick<
+  FormControlProps,
+  | 'error'
+  | 'helpText'
+  | 'hideLabel'
+  | 'id'
+  | 'isDisabled'
+  | 'isRequired'
+  | 'label'
+>;
+
+type SelectInputNativeElementProps = Omit<
+  React.ComponentPropsWithoutRef<'select'>,
+  | keyof SelectInputNativeOwnProps
+  | keyof SelectInputNativeFormControlProps
+  | keyof BoxOwnProps
+  | 'aria-label'
+  | 'aria-labelledby'
+  | 'aria-required'
+  | 'children'
+  | 'dangerouslySetInnerHTML'
+  | 'defaultValue'
+  | 'size'
+>;
+
+export type SelectInputNativeProps = SelectInputNativeOwnProps &
+  SelectInputNativeFormControlProps &
+  Omit<BoxOwnProps, 'children'> &
+  SelectInputNativeElementProps;
 
 export const SelectInputNative: React.FC<SelectInputNativeProps> = ({
   autoFocus = false,
@@ -55,6 +106,7 @@ export const SelectInputNative: React.FC<SelectInputNativeProps> = ({
   helpText,
   error,
   id,
+  inputProps = {},
   isDisabled,
   isRequired,
   name,
@@ -66,6 +118,17 @@ export const SelectInputNative: React.FC<SelectInputNativeProps> = ({
   size = 'md',
   ...restProps
 }) => {
+  const isBoxProp = (key: string) =>
+    boxPropsKeys.includes(key as keyof BoxOwnProps);
+  const formControlProps = Object.fromEntries(
+    Object.entries(restProps).filter(([key]) => isBoxProp(key))
+  ) as Omit<BoxOwnProps, 'children'>;
+  const selectProps = Object.fromEntries(
+    Object.entries(restProps).filter(([key]) => !isBoxProp(key))
+  ) as SelectInputNativeElementProps;
+  const selectIsDisabled = isDisabled || selectProps.disabled;
+  const selectIsRequired = isRequired || selectProps.required;
+
   const placeholderOption: SelectInputNativeOption = {
     value: '',
     label: placeholder,
@@ -83,7 +146,7 @@ export const SelectInputNative: React.FC<SelectInputNativeProps> = ({
     styles['select-input-native-wrapper'],
     ...responsiveClasses.map((className) => styles[className]),
     {
-      [styles.disabled]: isDisabled,
+      [styles.disabled]: selectIsDisabled,
       [styles.error]: error,
     }
   );
@@ -95,25 +158,27 @@ export const SelectInputNative: React.FC<SelectInputNativeProps> = ({
       id={id}
       error={error}
       helpText={helpText}
-      isDisabled={isDisabled}
-      isRequired={isRequired}
+      isDisabled={selectIsDisabled}
+      isRequired={selectIsRequired}
       requiredIndicator={requiredIndicator}
-      {...restProps}
+      {...formControlProps}
     >
       <Box className={selectWrapperClasses}>
         <Box
           as="select"
+          {...inputProps}
+          {...selectProps}
           aria-label={label}
           aria-labelledby={label && !hideLabel ? `${id}Label` : undefined}
-          aria-required={isRequired}
+          aria-required={selectIsRequired}
           value={value ?? ''}
           onChange={onChange}
           color={!value ? 'disabled' : 'base'}
           autoFocus={autoFocus}
-          disabled={isDisabled}
+          disabled={selectIsDisabled}
           name={name}
           id={id}
-          required={isRequired}
+          required={selectIsRequired}
         >
           {optionsWithPlaceholder.map((option) => (
             <Box

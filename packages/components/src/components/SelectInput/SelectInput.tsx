@@ -278,10 +278,10 @@ export function SelectInput(props: SelectInputProps): JSX.Element {
     isCreatable && isAsync
       ? AsyncCreatableSelect
       : isCreatable
-      ? CreatableSelect
-      : isAsync
-      ? AsyncSelect
-      : Select;
+        ? CreatableSelect
+        : isAsync
+          ? AsyncSelect
+          : Select;
 
   const selectOptions = isAsync
     ? {

@@ -48,5 +48,21 @@ describe('TableRow', () => {
       const element = document.getElementsByClassName('string-class')[0];
       expect(element).toBeInTheDocument();
     });
+
+    test('renders a placeholder instead of a non-renderable row value', () => {
+      render(
+        <TableRow
+          row={{ metadata: { state: 'ready' }, action: <button>Open</button> }}
+          columns={[
+            { heading: 'Metadata', dataKey: 'metadata' },
+            { heading: 'Action', dataKey: 'action' },
+          ]}
+          emptyCellPlaceholder="--"
+        />
+      );
+
+      expect(screen.getByText('--')).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Open' })).toBeInTheDocument();
+    });
   });
 });

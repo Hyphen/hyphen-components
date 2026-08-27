@@ -1726,7 +1726,7 @@ export const Focus = () => (
       focus={{
         shadow: 'lg',
       }}
-      tabIndex="0"
+      tabIndex={0}
       style={{ outline: 'none' }}
     >
       Card focus effect

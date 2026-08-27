@@ -44,8 +44,7 @@ export type Breakpoint = {
 
 export type DimensionSize = WidthSize | HeightSize;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type UnknownPropertiesObjType = { [key: string]: any };
+export type UnknownPropertiesObjType = Record<string, unknown>;
 
 export interface FlexProperty {
   flexGrow?: number | string;
@@ -148,7 +147,7 @@ export declare type ResponsiveProp<T> = {
 
 export type Row = UnknownPropertiesObjType;
 
-export type Cell = string | number | { [key: string]: unknown } | unknown[];
+export type Cell = Row[string];
 
 export declare type Column = {
   /**

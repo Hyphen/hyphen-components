@@ -9,7 +9,7 @@ import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
 import styles from './TextareaInput.module.scss';
 
 export type TextareaInputSize = 'sm' | 'md' | 'lg';
-export interface TextareaInputProps extends Omit<BoxProps, 'as' | 'width'> {
+interface TextareaInputOwnProps {
   /**
    * The input's id attribute. Used to programmatically tie the input with its label.
    */
@@ -96,11 +96,10 @@ export interface TextareaInputProps extends Omit<BoxProps, 'as' | 'width'> {
    * The size of the text input.
    */
   size?: TextareaInputSize | ResponsiveProp<TextareaInputSize>;
-  /**
-   * Additional props to be spread to rendered element
-   */
-  [x: string]: any; // eslint-disable-line
 }
+
+export type TextareaInputProps = TextareaInputOwnProps &
+  Omit<BoxProps<'div'>, keyof TextareaInputOwnProps | 'as' | 'width'>;
 
 export const TextareaInput: FC<TextareaInputProps> = ({
   id,

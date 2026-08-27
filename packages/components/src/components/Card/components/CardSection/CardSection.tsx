@@ -4,7 +4,7 @@ import React, { FC, ReactNode } from 'react';
 import classNames from 'classnames';
 import styles from '../../Card.module.scss';
 
-export interface CardSectionProps extends BoxProps {
+interface CardSectionOwnProps {
   /**
    * Any valid background color token, or a `url()` for an image
    */
@@ -41,11 +41,10 @@ export interface CardSectionProps extends BoxProps {
    * Title for the section.
    */
   title?: ReactNode;
-  /**
-   * Additional props to be spread to rendered element
-   */
-  [x: string]: any; // eslint-disable-line
 }
+
+export type CardSectionProps = CardSectionOwnProps &
+  Omit<BoxProps<'div'>, keyof CardSectionOwnProps | 'as'>;
 
 export const CardSection: FC<CardSectionProps> = ({
   background = undefined,

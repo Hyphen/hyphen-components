@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { cssShorthandToClasses } from '../../lib/cssShorthandToClasses';
 import { InputValidationMessage } from '../InputValidationMessage/InputValidationMessage';
 import { FormLabel } from '../FormLabel/FormLabel';
-import { Box } from '../Box/Box';
+import { Box, BoxProps } from '../Box/Box';
 import { Checkbox, CheckboxSize, CheckboxProps } from './components/Checkbox';
 
 const labelMarginSizeMap = {
@@ -28,7 +28,7 @@ const computedResponsiveSize = (
 
   return labelMarginSizeMap[size || 'md'] as string;
 };
-export interface CheckboxInputProps {
+interface CheckboxInputOwnProps {
   /**
    * The id attribute of the input.
    */
@@ -77,6 +77,10 @@ export interface CheckboxInputProps {
    */
   isRequired?: boolean;
   /**
+   * The name attribute of the checkbox input element.
+   */
+  name?: CheckboxProps['name'];
+  /**
    * Callback function when input is blurred.
    */
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
@@ -96,11 +100,10 @@ export interface CheckboxInputProps {
    * Value of the checkbox input element.
    */
   value?: CheckboxProps['value'];
-  /**
-   * Additional props to be spread to rendered element
-   */
-  [x: string]: any; // eslint-disable-line
 }
+
+export type CheckboxInputProps = CheckboxInputOwnProps &
+  Omit<BoxProps<'div'>, keyof CheckboxInputOwnProps | 'as'>;
 
 export const CheckboxInput: React.FC<CheckboxInputProps> = ({
   id,
@@ -114,6 +117,7 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
   isDisabled = false,
   isIndeterminate = false,
   isRequired = false,
+  name = undefined,
   onBlur = undefined,
   onFocus = undefined,
   requiredIndicator = ' *',
@@ -138,6 +142,7 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
     isChecked: !!isChecked,
     isDisabled,
     isIndeterminate,
+    name,
     onBlur: handleBlur,
     onChange: handleChange,
     onFocus: handleFocus,

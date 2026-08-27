@@ -31,9 +31,11 @@ import {
   TextTransform,
 } from '../../types';
 import {
+  ComponentPropsWithoutRef,
+  ComponentPropsWithRef,
   CSSProperties,
   Children,
-  FC,
+  ElementType,
   ReactElement,
   ReactNode,
   cloneElement,
@@ -41,12 +43,10 @@ import {
   forwardRef,
 } from 'react';
 
-import { KnownKeys } from '../../types/lib.types';
 import classNames from 'classnames';
 import { cssShorthandToClasses } from '../../lib/cssShorthandToClasses';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
 import { getDimensionCss } from '../../lib/getDimensionCss';
-import { getElementType } from '../../lib/getElementType';
 import styles from './Box.module.scss';
 
 const AUTO_FONT_COLOR_BACKGROUNDS: BackgroundColor[] = [
@@ -61,11 +61,7 @@ export type HoverableBoxProperties =
   | 'borderColor'
   | 'shadow'
   | 'background';
-export interface BoxProps {
-  /**
-   * The element type to be rendered.
-   */
-  as?: string;
+export interface BoxOwnProps {
   /**
    * How to align the contents along the cross axis.
    */
@@ -146,11 +142,11 @@ export interface BoxProps {
    * `* shadow`
    */
   focus?: {
-    background?: BoxProps['background'];
-    borderColor?: BoxProps['borderColor'];
-    borderWidth?: BoxProps['borderWidth'];
-    color?: BoxProps['color'];
-    shadow?: BoxProps['shadow'];
+    background?: BoxOwnProps['background'];
+    borderColor?: BoxOwnProps['borderColor'];
+    borderWidth?: BoxOwnProps['borderWidth'];
+    color?: BoxOwnProps['color'];
+    shadow?: BoxOwnProps['shadow'];
   };
   /**
    * The [font family token](/?path=/docs/foundation-design-tokens--docs#font-family) identifier for the Box's text
@@ -179,12 +175,12 @@ export interface BoxProps {
    * `* shadow`
    */
   hover?: {
-    background?: BoxProps['background'];
-    borderColor?: BoxProps['borderColor'];
-    borderWidth?: BoxProps['borderWidth'];
-    color?: BoxProps['color'];
-    fontSize?: BoxProps['fontSize'];
-    shadow?: BoxProps['shadow'];
+    background?: BoxOwnProps['background'];
+    borderColor?: BoxOwnProps['borderColor'];
+    borderWidth?: BoxOwnProps['borderWidth'];
+    color?: BoxOwnProps['color'];
+    fontSize?: BoxOwnProps['fontSize'];
+    shadow?: BoxOwnProps['shadow'];
   };
   /**
    * Sets the gaps (gutters) between rows and columns.
@@ -294,20 +290,41 @@ export interface BoxProps {
    * Can be responsive.
    */
   zIndex?: ZIndexSize | ResponsiveProp<ZIndexSize>;
-  /**
-   * Additional props to be spread to rendered element
-   */
-  [x: string]: any; // eslint-disable-line
 }
+
+export type BoxElement = ElementType;
+
+export type BoxProps<T extends BoxElement = 'div'> = BoxOwnProps & {
+  /**
+   * The element type to be rendered. Defaults to `div`.
+   *
+   * The element is no longer inferred from other props: passing `href` alone
+   * renders a `div` with an inert `href` attribute rather than an anchor, so
+   * links must set `as="a"` explicitly.
+   */
+  as?: T;
+} & Omit<ComponentPropsWithoutRef<T>, keyof BoxOwnProps | 'as'>;
+
+export type BoxRef<T extends BoxElement> = ComponentPropsWithRef<T>['ref'];
+
+type BoxComponent = {
+  <T extends BoxElement>(
+    props: BoxProps<T> & { as: T; ref?: BoxRef<T> }
+  ): ReactElement | null;
+  (props: BoxProps<'div'> & { ref?: BoxRef<'div'> }): ReactElement | null;
+  displayName?: string;
+};
 
 /**
  * A `<Box>` is a layout component to build UIs with consistent padding and spacing between
  * elements.
  */
-export const Box: FC<BoxProps> = forwardRef(
-  (
-    {
-      as = 'div',
+const BoxBaseComponent = <T extends BoxElement = 'div'>(
+  props: BoxProps<T>,
+  ref: BoxRef<T>
+) => {
+    const {
+      as,
       alignItems = undefined,
       alignContent = undefined,
       alignSelf = undefined,
@@ -352,9 +369,7 @@ export const Box: FC<BoxProps> = forwardRef(
       wordBreak = undefined,
       zIndex = undefined,
       ...restProps
-    },
-    ref
-  ) => {
+    } = props as BoxOwnProps & { as?: T };
     const heightCss = getDimensionCss('h', height);
     const widthCss = getDimensionCss('w', width);
     const maxHeightCss = getDimensionCss('mh', maxHeight);
@@ -369,7 +384,7 @@ export const Box: FC<BoxProps> = forwardRef(
       color ??
       (background === 'inverse'
         ? 'inverse'
-        : AUTO_FONT_COLOR_BACKGROUNDS.includes(background)
+        : background && AUTO_FONT_COLOR_BACKGROUNDS.includes(background)
         ? 'grey'
         : undefined);
 
@@ -411,16 +426,13 @@ export const Box: FC<BoxProps> = forwardRef(
 
     const getStatefulClasses = (
       stateKey: 'hover' | 'focus',
-      values: BoxProps['hover' | 'hover']
+      values: BoxOwnProps['hover' | 'focus']
     ) =>
       values // eslint-disable-line
         ? Object.entries(values).map(
             ([key, value]) =>
               cssPropertyMap[key].transformer(
-                `${stateKey}:${
-                  cssPropertyMap[key as keyof BoxProps['focus' | 'hover']]
-                    .classPrefix
-                }`,
+                `${stateKey}:${cssPropertyMap[key].classPrefix}`,
                 value
               ) // eslint-disable-line max-len
           )
@@ -629,7 +641,7 @@ export const Box: FC<BoxProps> = forwardRef(
       );
     }
 
-    const element = getElementType(Box, { as });
+    const element = as ?? 'div';
 
     return createElement(
       element,
@@ -641,52 +653,66 @@ export const Box: FC<BoxProps> = forwardRef(
       },
       children !== null && children !== undefined ? decoratedChildren : null
     );
-  }
-);
+};
+
+// React.forwardRef cannot preserve a generic `as` parameter, so restore the
+// polymorphic call signature after wrapping the implementation.
+export const Box = forwardRef(BoxBaseComponent as never) as BoxComponent;
 
 Box.displayName = 'Box';
 
-export const boxPropsKeys: (keyof Pick<BoxProps, KnownKeys<BoxProps>>)[] = [
-  'as',
-  'alignItems',
-  'alignContent',
-  'alignSelf',
-  'background',
-  'borderColor',
-  'borderWidth',
-  'className',
-  'childGap',
-  'children',
-  'color',
-  'columnGap',
-  'cursor',
-  'direction',
-  'display',
-  'flex',
-  'focus',
-  'fontFamily',
-  'fontSize',
-  'fontWeight',
-  'gap',
-  'height',
-  'hover',
-  'justifyContent',
-  'margin',
-  'maxHeight',
-  'minHeight',
-  'maxWidth',
-  'minWidth',
-  'overflow',
-  'padding',
-  'position',
-  'radius',
-  'rowGap',
-  'shadow',
-  'style',
-  'textAlign',
-  'textTransform',
-  'textWrap',
-  'wrap',
-  'width',
-  'zIndex',
-];
+// `boxPropsKeys` drives runtime prop routing (see SelectInputNative), so a key
+// missing from the list silently forwards a Box prop to the rendered element.
+// `Record` requires an entry for every `BoxOwnProps` key, so omitting one here
+// fails to compile.
+const boxPropsKeyMap: Record<keyof BoxOwnProps | 'as', true> = {
+  as: true,
+  alignItems: true,
+  alignContent: true,
+  alignSelf: true,
+  background: true,
+  borderColor: true,
+  borderWidth: true,
+  className: true,
+  childGap: true,
+  children: true,
+  color: true,
+  columnGap: true,
+  cursor: true,
+  direction: true,
+  display: true,
+  flex: true,
+  focus: true,
+  fontFamily: true,
+  fontSize: true,
+  fontWeight: true,
+  gap: true,
+  height: true,
+  hover: true,
+  justifyContent: true,
+  margin: true,
+  maxHeight: true,
+  minHeight: true,
+  maxWidth: true,
+  minWidth: true,
+  overflow: true,
+  padding: true,
+  position: true,
+  radius: true,
+  rowGap: true,
+  shadow: true,
+  style: true,
+  textAlign: true,
+  textTransform: true,
+  textWrap: true,
+  whiteSpace: true,
+  wrap: true,
+  width: true,
+  wordBreak: true,
+  zIndex: true,
+};
+
+export const boxPropsKeys = Object.keys(boxPropsKeyMap) as (
+  | keyof BoxOwnProps
+  | 'as'
+)[];

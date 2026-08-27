@@ -139,7 +139,7 @@ export const Switch: FC<SwitchProps> = ({
     alignItems: helpText ? 'flex-start' : ('center' as BoxProps['alignItems']),
     isFieldRequired: isRequired,
     requiredIndicator,
-    size,
+    ...(typeof size === 'string' && { size }),
   };
 
   return (

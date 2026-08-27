@@ -106,7 +106,11 @@ export const Column = () =>
       {
         heading: 'Type',
         dataKey: 'type',
-        render: (cell: string) => <code style={codePreviewStyle}>{cell}</code>,
+        render: (cell?: Cell) => (
+          <code style={codePreviewStyle}>
+            {typeof cell === 'string' || typeof cell === 'number' ? cell : null}
+          </code>
+        ),
       },
       { heading: 'Description', dataKey: 'description' },
     ];

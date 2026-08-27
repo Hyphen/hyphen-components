@@ -4,7 +4,7 @@ import { Box, BoxProps } from '../Box/Box';
 import styles from './FormLabel.module.scss';
 import { HelpText } from '../HelpText/HelpText';
 
-export interface FormLabelProps extends BoxProps {
+interface FormLabelOwnProps {
   /**
    * Content to be rendered inside the label.
    */
@@ -38,10 +38,13 @@ export interface FormLabelProps extends BoxProps {
    */
   requiredIndicator?: ReactNode;
   /**
-   * Additional props to be spread to rendered element
+   * The label size.
    */
-  [x: string]: any; // eslint-disable-line
+  size?: 'sm' | 'md' | 'lg';
 }
+
+export type FormLabelProps = FormLabelOwnProps &
+  Omit<BoxProps<'label'>, keyof FormLabelOwnProps | 'as' | 'htmlFor'>;
 
 export const FormLabel: FC<FormLabelProps> = ({
   children,

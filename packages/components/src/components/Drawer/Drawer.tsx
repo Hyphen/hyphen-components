@@ -211,7 +211,7 @@ export interface DrawerProps {
    */
   width?: DimensionSize | CssDimensionValue;
 }
-const Drawer: React.FC<DrawerProps> = forwardRef<HTMLDivElement, DrawerProps>(
+const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
   (
     {
       ariaLabel = undefined,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentPropsWithoutRef } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import {
   Popover,
@@ -8,15 +8,14 @@ import {
 } from './Popover';
 
 // Helper to render a controlled Popover
-type ControlledPopoverProps = {
+type ControlledPopoverProps = ComponentPropsWithoutRef<typeof Popover> & {
   isOpen?: boolean;
   onClickOutside?: (event: Event) => void;
   placement?: string;
   withPortal?: boolean;
   portalTarget?: HTMLElement;
   children: React.ReactNode;
-  contentProps?: Record<string, any>;
-  [key: string]: any;
+  contentProps?: ComponentPropsWithoutRef<typeof PopoverContent>;
 };
 
 function ControlledPopover({

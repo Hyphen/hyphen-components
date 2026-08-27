@@ -9,7 +9,7 @@ import {
 import { TimePicker, TimePickerProps } from '../../TimePicker/TimePicker';
 
 export interface FormikTimePickerProps
-  extends Omit<TimePickerProps, 'onChange'> {
+  extends Omit<TimePickerProps, 'form' | 'onChange'> {
   field: FieldAttributes<HTMLSelectElement>;
   form: {
     touched: FormikTouched<FormikValues>;

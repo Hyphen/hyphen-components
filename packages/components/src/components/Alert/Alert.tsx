@@ -8,13 +8,13 @@ import React, {
   memo,
 } from 'react';
 import classNames from 'classnames';
-import { Box } from '../Box/Box';
+import { Box, BoxProps } from '../Box/Box';
 import { Icon } from '../Icon/Icon';
 import styles from './Alert.module.scss';
 import { AlertVariant } from './Alert.types';
 import { ALERT_ICONS_MAP } from './Alert.constants';
 
-export interface AlertProps {
+interface AlertOwnProps {
   /**
    * The alert's contents.
    */
@@ -50,11 +50,10 @@ export interface AlertProps {
    * The type/color of the alert to show.
    */
   variant?: AlertVariant;
-  /**
-   * Additional props to be spread to rendered element
-   */
-  [x: string]: any; // eslint-disable-line
 }
+
+export type AlertProps = AlertOwnProps &
+  Omit<BoxProps<'div'>, keyof AlertOwnProps | 'as'>;
 
 const AlertComponent: FC<AlertProps> = ({
   children,

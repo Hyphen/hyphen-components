@@ -48,6 +48,18 @@ const getBadge = (text: string): HTMLElement =>
   screen.getByText(text).closest('.badge') as HTMLElement;
 
 describe('Badge', () => {
+  test('accepts attributes and refs for the element selected by as', () => {
+    const buttonRef = React.createRef<HTMLButtonElement>();
+
+    render(
+      <Badge as="button" type="button" disabled ref={buttonRef}>
+        Action
+      </Badge>
+    );
+
+    expect(buttonRef.current).toBeDisabled();
+  });
+
   test('Badge correctly renders with base props', () => {
     render(<Badge>hello</Badge>);
     const badge = getBadge('hello');

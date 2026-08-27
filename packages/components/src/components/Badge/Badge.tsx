@@ -1,9 +1,14 @@
-import React, { Children, ReactNode, forwardRef } from 'react';
+import React, {
+  Children,
+  ReactElement,
+  ReactNode,
+  forwardRef,
+} from 'react';
 import classNames from 'classnames';
 import { ResponsiveProp } from '../../types';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
 import styles from './Badge.module.scss';
-import { Box, BoxProps } from '../Box/Box';
+import { Box, BoxElement, BoxProps, BoxRef } from '../Box/Box';
 
 export type BadgeSize = 'sm' | 'md' | 'lg';
 
@@ -50,7 +55,7 @@ const renderBadgeChildren = (children: ReactNode) =>
     )
   );
 
-export interface BadgeProps extends Omit<BoxProps, 'color' | 'radius'> {
+interface BadgeOwnProps {
   /**
    * The color of the badge. Accepts a hue, or one of the semantic names
    * (`danger`, `success`, `warning`, `info`) which map onto `red`, `green`, `yellow` and `blue`.
@@ -70,9 +75,22 @@ export interface BadgeProps extends Omit<BoxProps, 'color' | 'radius'> {
   variant?: BadgeVariant;
 }
 
-export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
-  (
-    {
+export type BadgeProps<T extends BoxElement = 'div'> = BadgeOwnProps &
+  Omit<BoxProps<T>, keyof BadgeOwnProps>;
+
+type BadgeComponent = {
+  <T extends BoxElement>(
+    props: BadgeProps<T> & { as: T; ref?: BoxRef<T> }
+  ): ReactElement | null;
+  (props: BadgeProps<'div'> & { ref?: BoxRef<'div'> }): ReactElement | null;
+  displayName?: string;
+};
+
+const BadgeBaseComponent = <T extends BoxElement = 'div'>(
+  props: BadgeProps<T>,
+  ref: BoxRef<T>
+) => {
+    const {
       className = '',
       color = 'grey',
       radius = 'full',
@@ -80,9 +98,7 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
       size = 'md',
       children,
       ...restProps
-    },
-    ref
-  ) => {
+    } = props as BadgeOwnProps & Omit<BoxProps<T>, keyof BadgeOwnProps>;
     const responsiveClasses = generateResponsiveClasses('size', size).map(
       (c) => styles[c]
     );
@@ -98,19 +114,35 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
       styles[`radius-${radius}`]
     );
 
+    const boxProps = {
+      className: badgeClasses,
+      display: 'inline-flex',
+      alignItems: 'center',
+      direction: 'row',
+      ...restProps,
+    } as BoxProps<T>;
+
+    const badgeChildren = renderBadgeChildren(children);
+
+    if (boxProps.as) {
+      const boxPropsWithAs = boxProps as BoxProps<T> & { as: T };
+
+      return (
+        <Box<T> ref={ref} {...boxPropsWithAs}>
+          {badgeChildren}
+        </Box>
+      );
+    }
+
     return (
-      <Box
-        ref={ref}
-        className={badgeClasses}
-        display="inline-flex"
-        alignItems="center"
-        direction="row"
-        {...restProps}
-      >
-        {renderBadgeChildren(children)}
+      <Box ref={ref as BoxRef<'div'>} {...(boxProps as BoxProps<'div'>)}>
+        {badgeChildren}
       </Box>
     );
-  }
-);
+};
+
+// React.forwardRef cannot preserve a generic `as` parameter, so restore the
+// polymorphic call signature after wrapping the implementation.
+export const Badge = forwardRef(BadgeBaseComponent as never) as BadgeComponent;
 
 Badge.displayName = 'Badge';
