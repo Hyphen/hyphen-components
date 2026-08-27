@@ -12,7 +12,7 @@ import {
 } from '../../SelectInputNative/SelectInputNative';
 
 export interface FormikSelectInputNativeProps
-  extends Omit<SelectInputNativeProps, 'onChange'> {
+  extends Omit<SelectInputNativeProps, 'form' | 'onChange'> {
   field: FieldAttributes<HTMLSelectElement>;
   form: {
     touched: FormikTouched<FormikValues>;

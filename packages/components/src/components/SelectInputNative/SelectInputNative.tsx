@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { generateResponsiveClasses } from '../../lib/generateResponsiveClasses';
 import { ResponsiveProp } from '../../types';
-import { Box } from '../Box/Box';
+import { Box, BoxOwnProps, BoxProps, boxPropsKeys } from '../Box/Box';
 import { FormControl, FormControlProps } from '../FormControl/FormControl';
 import styles from './SelectInputNative.module.scss';
 
@@ -25,7 +25,28 @@ interface SelectInputNativeOwnProps {
   /**
    * Value of selected option. Should match the value key in the option object.
    */
-  value: string | number | null;
+  value: React.ComponentPropsWithoutRef<'select'>['value'] | null;
+  /**
+   * Props passed directly to the select element of the component.
+   */
+  inputProps?: Omit<
+    BoxProps<'select'>,
+    | 'aria-label'
+    | 'aria-labelledby'
+    | 'aria-required'
+    | 'as'
+    | 'autoFocus'
+    | 'children'
+    | 'color'
+    | 'defaultValue'
+    | 'disabled'
+    | 'id'
+    | 'name'
+    | 'onChange'
+    | 'required'
+    | 'size'
+    | 'value'
+  >;
   /**
    * The input's 'name' attribute.
    */
@@ -48,8 +69,35 @@ interface SelectInputNativeOwnProps {
   autoFocus?: HTMLSelectElement['autofocus'];
 }
 
+type SelectInputNativeFormControlProps = Pick<
+  FormControlProps,
+  | 'error'
+  | 'helpText'
+  | 'hideLabel'
+  | 'id'
+  | 'isDisabled'
+  | 'isRequired'
+  | 'label'
+>;
+
+type SelectInputNativeElementProps = Omit<
+  React.ComponentPropsWithoutRef<'select'>,
+  | keyof SelectInputNativeOwnProps
+  | keyof SelectInputNativeFormControlProps
+  | keyof BoxOwnProps
+  | 'aria-label'
+  | 'aria-labelledby'
+  | 'aria-required'
+  | 'children'
+  | 'dangerouslySetInnerHTML'
+  | 'defaultValue'
+  | 'size'
+>;
+
 export type SelectInputNativeProps = SelectInputNativeOwnProps &
-  Omit<FormControlProps, keyof SelectInputNativeOwnProps>;
+  SelectInputNativeFormControlProps &
+  Omit<BoxOwnProps, 'children'> &
+  SelectInputNativeElementProps;
 
 export const SelectInputNative: React.FC<SelectInputNativeProps> = ({
   autoFocus = false,
@@ -58,6 +106,7 @@ export const SelectInputNative: React.FC<SelectInputNativeProps> = ({
   helpText,
   error,
   id,
+  inputProps = {},
   isDisabled,
   isRequired,
   name,
@@ -69,6 +118,17 @@ export const SelectInputNative: React.FC<SelectInputNativeProps> = ({
   size = 'md',
   ...restProps
 }) => {
+  const isBoxProp = (key: string) =>
+    boxPropsKeys.includes(key as keyof BoxOwnProps);
+  const formControlProps = Object.fromEntries(
+    Object.entries(restProps).filter(([key]) => isBoxProp(key))
+  ) as Omit<BoxOwnProps, 'children'>;
+  const selectProps = Object.fromEntries(
+    Object.entries(restProps).filter(([key]) => !isBoxProp(key))
+  ) as SelectInputNativeElementProps;
+  const selectIsDisabled = isDisabled || selectProps.disabled;
+  const selectIsRequired = isRequired || selectProps.required;
+
   const placeholderOption: SelectInputNativeOption = {
     value: '',
     label: placeholder,
@@ -86,7 +146,7 @@ export const SelectInputNative: React.FC<SelectInputNativeProps> = ({
     styles['select-input-native-wrapper'],
     ...responsiveClasses.map((className) => styles[className]),
     {
-      [styles.disabled]: isDisabled,
+      [styles.disabled]: selectIsDisabled,
       [styles.error]: error,
     }
   );
@@ -98,25 +158,27 @@ export const SelectInputNative: React.FC<SelectInputNativeProps> = ({
       id={id}
       error={error}
       helpText={helpText}
-      isDisabled={isDisabled}
-      isRequired={isRequired}
+      isDisabled={selectIsDisabled}
+      isRequired={selectIsRequired}
       requiredIndicator={requiredIndicator}
-      {...restProps}
+      {...formControlProps}
     >
       <Box className={selectWrapperClasses}>
         <Box
           as="select"
+          {...inputProps}
+          {...selectProps}
           aria-label={label}
           aria-labelledby={label && !hideLabel ? `${id}Label` : undefined}
-          aria-required={isRequired}
+          aria-required={selectIsRequired}
           value={value ?? ''}
           onChange={onChange}
           color={!value ? 'disabled' : 'base'}
           autoFocus={autoFocus}
-          disabled={isDisabled}
+          disabled={selectIsDisabled}
           name={name}
           id={id}
-          required={isRequired}
+          required={selectIsRequired}
         >
           {optionsWithPlaceholder.map((option) => (
             <Box

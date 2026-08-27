@@ -7,6 +7,7 @@ import { Details } from '../src/components/Details/Details';
 import { Drawer } from '../src/components/Drawer/Drawer';
 import { Icon } from '../src/components/Icon/Icon';
 import { Modal } from '../src/components/Modal/Modal';
+import { SelectInputNative } from '../src/components/SelectInputNative/SelectInputNative';
 
 type Assert<T extends true> = T;
 type ExcludesKey<T, K extends PropertyKey> = K extends keyof T ? false : true;
@@ -42,6 +43,15 @@ const validComponents = (
     <Drawer isOpen ariaLabel="Drawer" ref={drawerRef} />
     <Icon name="user" ref={iconRef} />
     <Modal isOpen onDismiss={() => undefined} />
+    <SelectInputNative
+      id="flavor"
+      label="Flavor"
+      options={[]}
+      value={null}
+      onChange={() => undefined}
+      form="settings-form"
+      onFocus={(event) => event.currentTarget.checkValidity()}
+    />
   </>
 );
 

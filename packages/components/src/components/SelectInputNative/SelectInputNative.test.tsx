@@ -102,6 +102,30 @@ describe('SelectInputNative', () => {
 
       expect(mockedHandleBlur).toBeCalledTimes(1);
     });
+
+    test('it forwards native select attributes to the select element', () => {
+      render(
+        <SelectInputNative
+          id="testId"
+          label="native attributes"
+          onChange={() => undefined}
+          options={selectOptions}
+          value={null}
+          form="settings-form"
+          disabled
+          required
+          data-testid="native-select"
+          inputProps={{ title: 'Select a flavor' }}
+        />
+      );
+
+      const select = screen.getByTestId('native-select');
+      expect(select).toHaveAttribute('form', 'settings-form');
+      expect(select).toHaveAttribute('title', 'Select a flavor');
+      expect(select).toBeDisabled();
+      expect(select).toBeRequired();
+      expect(select.parentElement).not.toHaveAttribute('form');
+    });
   });
 
   describe('States', () => {

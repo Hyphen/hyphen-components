@@ -99,8 +99,11 @@ export const TableRow: FC<TableRowProps> = ({
       return column.render(cellValue, row, rowIndex);
     }
 
-    return column.dataKey && row
-      ? (row[column.dataKey] as ReactNode)
+    const cellValue = column.dataKey && row ? row[column.dataKey] : null;
+    return typeof cellValue === 'string' ||
+      typeof cellValue === 'number' ||
+      React.isValidElement(cellValue)
+      ? cellValue
       : null;
   };
 
