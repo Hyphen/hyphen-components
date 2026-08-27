@@ -20,4 +20,17 @@ const asyncSelect = (
   />
 );
 
+const syncSelectWithDefaultOptions = (
+  // @ts-expect-error defaultOptions is only supported by async selects.
+  <SelectInput
+    id="sync-select"
+    label="Sync select"
+    onChange={() => undefined}
+    options={defaultOptions}
+    value={null}
+    defaultOptions={defaultOptions}
+  />
+);
+
 void asyncSelect;
+void syncSelectWithDefaultOptions;

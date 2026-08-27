@@ -188,6 +188,8 @@ export type SyncSelectInputProps = SelectInputBaseProps & {
    * Options for dropdown list.
    */
   options: SelectInputOptions;
+  cacheOptions?: never;
+  defaultOptions?: never;
 };
 
 export type SelectInputProps = AsyncSelectInputProps | SyncSelectInputProps;
@@ -217,6 +219,8 @@ export function SelectInput(props: SelectInputProps): JSX.Element {
     placeholder = undefined,
     requiredIndicator = ' *',
     size = 'md',
+    cacheOptions,
+    defaultOptions,
     ...restProps
   } = props;
 
@@ -280,7 +284,11 @@ export function SelectInput(props: SelectInputProps): JSX.Element {
       : Select;
 
   const selectOptions = isAsync
-    ? ({ loadOptions: options } as { loadOptions: AsyncOptions })
+    ? {
+        loadOptions: options as AsyncOptions,
+        cacheOptions,
+        defaultOptions,
+      }
     : ({ options } as { options: SelectInputOptions });
 
   return (
