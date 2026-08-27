@@ -93,6 +93,10 @@ export interface CheckboxInputProps {
    */
   size?: CheckboxSize;
   /**
+   * Value of the checkbox input element.
+   */
+  value?: CheckboxProps['value'];
+  /**
    * Additional props to be spread to rendered element
    */
   [x: string]: any; // eslint-disable-line
@@ -114,6 +118,7 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
   onFocus = undefined,
   requiredIndicator = ' *',
   size = 'md',
+  value = undefined,
   ...restProps
 }) => {
   const handleBlur = (event: React.FocusEvent<HTMLInputElement>): void => {
@@ -138,6 +143,7 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
     onFocus: handleFocus,
     isRequired,
     size,
+    value,
     label,
     className: classNames(
       'hyphen-components__variables__form-control',

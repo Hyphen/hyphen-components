@@ -58,6 +58,22 @@ describe('Checkbox', () => {
         String(value)
       );
     });
+
+    test('uses the browser default when value is omitted', () => {
+      render(
+        <Checkbox
+          id="testCheckbox"
+          label="test checkbox"
+          onChange={jest.fn(() => null)}
+          isChecked={false}
+        />
+      );
+
+      const checkbox = screen.getByRole('checkbox') as HTMLInputElement;
+
+      expect(checkbox).not.toHaveAttribute('value');
+      expect(checkbox.value).toBe('on');
+    });
   });
 
   describe('Indeterminate', () => {
