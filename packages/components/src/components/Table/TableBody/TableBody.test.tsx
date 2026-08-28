@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import type { Column } from '../../../types';
 import { TableBody } from './TableBody';
 
 const columns = [
@@ -12,6 +13,18 @@ const rows = [
   { id: 1, color: 'red', flavor: 'vanilla' },
   { id: 2, color: 'blue', flavor: 'chocolate' },
   { id: 3, color: 'green', flavor: 'strawberry' },
+];
+
+const inputColumns: Column<(typeof rows)[number]>[] = [
+  {
+    dataKey: 'color',
+    render: (_cell, row) => (
+      <input
+        aria-label={`Color for row ${row?.id}`}
+        defaultValue={row?.color}
+      />
+    ),
+  },
 ];
 
 describe('TableBody', () => {
@@ -34,5 +47,29 @@ describe('TableBody', () => {
 
     const tableBody = screen.getByRole('rowgroup');
     expect(tableBody).toHaveClass('my-custom-class');
+  });
+
+  test('It preserves row identity when rows are reordered', () => {
+    const { rerender } = render(
+      <table>
+        <TableBody columns={inputColumns} rows={rows} rowKey="id" />
+      </table>
+    );
+
+    fireEvent.change(screen.getByLabelText('Color for row 1'), {
+      target: { value: 'purple' },
+    });
+
+    rerender(
+      <table>
+        <TableBody
+          columns={inputColumns}
+          rows={[...rows].reverse()}
+          rowKey="id"
+        />
+      </table>
+    );
+
+    expect(screen.getByLabelText('Color for row 1')).toHaveValue('purple');
   });
 });

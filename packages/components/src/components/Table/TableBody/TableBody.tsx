@@ -57,6 +57,7 @@ export interface TableBodyProps<TRow extends object = Row> {
 export const TableBody = <TRow extends object = Row,>({
   columns,
   rows,
+  rowKey,
   align = 'left',
   className = '',
   emptyCellPlaceholder = '',
@@ -83,7 +84,7 @@ export const TableBody = <TRow extends object = Row,>({
           row={row}
           rowIndex={rowIndex}
           align={align}
-          key={rowIndex}
+          key={String(row[rowKey])}
           emptyCellPlaceholder={emptyCellPlaceholder}
           truncateOverflow={truncateOverflow}
           isBorderless={isBorderless}
