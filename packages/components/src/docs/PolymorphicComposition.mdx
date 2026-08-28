@@ -1,0 +1,184 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="About/Polymorphic Composition" />
+
+# Polymorphic composition
+
+Polymorphic composition changes the element a component renders without
+giving up Hyphen styles. Use it to preserve the correct HTML semantics when a
+component needs to act as a link, button, section, or router component.
+
+Hyphen components expose two composition APIs:
+
+| Goal | API | Use with |
+| --- | --- | --- |
+| Choose the element or component that Hyphen renders | `as` | `Box`, `Badge` |
+| Apply Hyphen behavior and styles to an existing child | `asChild` | `Button` and compound component triggers or items that expose the prop |
+
+## Render another element with `as`
+
+`Box` renders a `div` by default. `Badge` does the same. Set `as` when another
+element is more appropriate:
+
+```tsx
+<Box as="main" padding="2xl">
+  <PageContent />
+</Box>
+
+<Box as="a" href="/docs" color="info">
+  Read the documentation
+</Box>
+
+<Badge as="a" href="/releases" color="info">
+  Beta
+</Badge>
+```
+
+The target element determines the accepted DOM props and ref type. For
+example, `href` is valid with `as="a"`, while `type` and `disabled` are valid
+with `as="button"`:
+
+```tsx
+import { useRef } from 'react';
+
+const buttonRef = useRef<HTMLButtonElement>(null);
+
+<Box as="button" type="button" disabled ref={buttonRef}>
+  Retry
+</Box>;
+```
+
+The element is never inferred from another prop. This is intentionally a type
+error because the default element is still a `div`:
+
+```tsx
+// Invalid: href does not turn the Box into an anchor.
+<Box href="/docs">Read the documentation</Box>
+
+// Valid: the element and its props agree.
+<Box as="a" href="/docs">Read the documentation</Box>
+```
+
+### Router and custom components
+
+`as` also accepts React components. Put props for the rendered component on
+the Hyphen component:
+
+```tsx
+import { Link } from 'react-router-dom';
+
+<Box as={Link} to="/settings" padding="sm md">
+  Settings
+</Box>;
+```
+
+The rendered component must pass `className`, `style`, event handlers, and
+other received props to its underlying element. It must also forward its ref
+when the Hyphen component receives one.
+
+## Compose an existing child with `asChild`
+
+Use `asChild` when a component needs to provide behavior or styles while its
+child owns the rendered element. This is the usual pattern for a link that
+looks like a button:
+
+```tsx
+import { Link } from 'react-router-dom';
+
+<Button asChild variant="primary">
+  <Link to="/projects/new">Create project</Link>
+</Button>;
+```
+
+Navigation props such as `to` and `href` belong on the child. Hyphen props
+such as `variant`, `size`, and `iconPrefix` stay on `Button`.
+
+The same pattern lets compound component triggers reuse an existing control
+without adding another DOM element:
+
+```tsx
+<Tooltip>
+  <TooltipTrigger asChild>
+    <Button variant="tertiary" aria-label="More information">
+      <Icon name="info" />
+    </Button>
+  </TooltipTrigger>
+  <TooltipContent>Deployment status</TooltipContent>
+</Tooltip>
+```
+
+An `asChild` component expects exactly one element that:
+
+- accepts and forwards the injected props;
+- merges the injected `className` instead of replacing it;
+- forwards its ref to the underlying element;
+- preserves the intended keyboard and accessibility behavior.
+
+For a custom child, use `forwardRef` and spread the remaining props:
+
+```tsx
+import { ComponentPropsWithoutRef, forwardRef } from 'react';
+
+type AppLinkProps = ComponentPropsWithoutRef<'a'> & {
+  trackingId: string;
+};
+
+const AppLink = forwardRef<HTMLAnchorElement, AppLinkProps>(
+  ({ trackingId, ...props }, ref) => (
+    <a ref={ref} data-tracking-id={trackingId} {...props} />
+  )
+);
+
+<Button asChild>
+  <AppLink href="/docs" trackingId="docs-link">
+    Read the documentation
+  </AppLink>
+</Button>;
+```
+
+## Preserve semantic HTML
+
+Choose the element based on behavior, not appearance:
+
+- use a `button` for an action on the current page;
+- use an anchor or router link for navigation;
+- use landmarks such as `main`, `nav`, and `section` for page structure;
+- do not nest interactive elements.
+
+```tsx
+// Invalid: this creates an anchor inside a button.
+<Button>
+  <a href="/settings">Settings</a>
+</Button>
+
+// Valid: one anchor receives the Button styles.
+<Button asChild>
+  <a href="/settings">Settings</a>
+</Button>
+```
+
+Native `disabled` behavior only exists on controls such as `button`. If a link
+is unavailable, prefer not rendering it. If it must remain visible, use
+`aria-disabled`, prevent navigation, and keep its focus behavior deliberate.
+
+## Extract reusable prop objects
+
+Use `satisfies` when moving polymorphic props into an object. It validates the
+target element's props and preserves literal token values without adding
+`as const` to every property:
+
+```tsx
+import type { BoxProps } from '@hyphen/hyphen-components';
+
+const documentationLinkProps = {
+  as: 'a',
+  href: '/docs',
+  color: 'info',
+  padding: 'sm md',
+} satisfies BoxProps<'a'>;
+
+<Box {...documentationLinkProps}>Read the documentation</Box>;
+```
+
+Use `BoxOwnProps` instead when the object contains only Hyphen style and
+layout props and the caller will choose the rendered element.
