@@ -105,4 +105,22 @@ describe('TableBody', () => {
 
     expect(duplicateKeyWarnings).toHaveLength(0);
   });
+
+  test('It handles nullish row values at runtime', () => {
+    const rowsWithNullishValues = [undefined, null] as unknown as typeof rows;
+
+    expect(() =>
+      render(
+        <table>
+          <TableBody
+            columns={columns}
+            rows={rowsWithNullishValues}
+            rowKey="id"
+          />
+        </table>
+      )
+    ).not.toThrow();
+
+    expect(screen.getAllByRole('row')).toHaveLength(2);
+  });
 });

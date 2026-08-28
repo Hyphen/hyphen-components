@@ -77,7 +77,7 @@ export const TableBody = <TRow extends object = Row,>({
   );
 
   const getRowKey = (row: TRow, rowIndex: number): string => {
-    const keyValue = row[rowKey];
+    const keyValue = row?.[rowKey];
 
     if (
       typeof keyValue === 'string' ||

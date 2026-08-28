@@ -6,7 +6,7 @@ export const getColumnKeys = <TRow extends object = Row>(
   columns: Column<TRow>[]
 ): Key[] => {
   const INTERNAL_KEY_PREFIX = 'columnKeyPrefix';
-  const columnKeys: React.Key[] = [];
+  const columnKeys: Key[] = [];
   const keys: Record<string, boolean> = {};
 
   columns.forEach((column) => {
