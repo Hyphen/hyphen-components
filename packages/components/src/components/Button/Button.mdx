@@ -75,4 +75,16 @@ The interface should make it clear why the button is disabled and what needs to 
 
 ## As Child
 
-Apply the `asChild` prop to apply the button styles to a child element.
+Apply the `asChild` prop to apply the button styles to one child element. This
+keeps navigation semantic when a link needs to look like a button and prevents
+nested interactive elements.
+
+```tsx
+<Button asChild>
+  <a href="/settings">Settings</a>
+</Button>
+```
+
+Place navigation props on the child and Button props on `Button`. See
+[Polymorphic Composition](?path=/docs/about-polymorphic-composition--docs) for
+router links, custom ref-forwarding children, and accessibility guidance.
