@@ -39,6 +39,8 @@ example, `href` is valid with `as="a"`, while `type` and `disabled` are valid
 with `as="button"`:
 
 ```tsx
+import { useRef } from 'react';
+
 const buttonRef = useRef<HTMLButtonElement>(null);
 
 <Box as="button" type="button" disabled ref={buttonRef}>
