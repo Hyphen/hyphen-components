@@ -1,15 +1,15 @@
-import React, { FC, Key, KeyboardEvent, MouseEvent, ReactNode } from 'react';
+import React, { Key, KeyboardEvent, MouseEvent, ReactNode } from 'react';
 import classNames from 'classnames';
 import { Box } from '../../../Box/Box';
 import { Icon } from '../../../Icon/Icon';
-import { Column, EventWithColumnKey } from '../../../../types';
+import { Column, EventWithColumnKey, Row } from '../../../../types';
 import styles from './TableHeaderCell.module.scss';
 
-export interface TableHeaderCellProps {
+export interface TableHeaderCellProps<TRow extends object = Row> {
   /**
    * Title to display for the column.
    */
-  column: Column;
+  column: Column<TRow>;
   /**
    * Text alignment for all table cells. Can be superseded by passing the same prop into the `Column` object
    * for a specific column.
@@ -69,7 +69,7 @@ export interface TableHeaderCellProps {
 }
 
 // eslint-disable-line import/prefer-default-export
-export const TableHeaderCell: FC<TableHeaderCellProps> = ({
+export const TableHeaderCell = <TRow extends object = Row,>({
   column,
   align = 'left',
   className = undefined,
@@ -83,7 +83,7 @@ export const TableHeaderCell: FC<TableHeaderCellProps> = ({
   sticky = undefined,
   truncateOverflow = false,
   width = undefined,
-}) => {
+}: TableHeaderCellProps<TRow>) => {
   const isColumnSorted = (columnDataKey: Key | undefined): boolean =>
     !!sortedColumn && sortedColumn.dataKey === columnDataKey;
 

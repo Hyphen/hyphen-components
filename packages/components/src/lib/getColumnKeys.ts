@@ -1,8 +1,10 @@
 import { Key } from 'react';
-import { Column } from '../types';
+import { Column, Row } from '../types';
 
 // eslint-disable-next-line import/prefer-default-export
-export const getColumnKeys = (columns: Column[]): Key[] => {
+export const getColumnKeys = <TRow extends object = Row>(
+  columns: Column<TRow>[]
+): Key[] => {
   const INTERNAL_KEY_PREFIX = 'columnKeyPrefix';
   const columnKeys: React.Key[] = [];
   const keys: Record<string, boolean> = {};

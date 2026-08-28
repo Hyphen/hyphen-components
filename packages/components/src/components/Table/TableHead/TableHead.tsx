@@ -1,13 +1,13 @@
-import React, { FC } from 'react';
+import React from 'react';
 import classNames from 'classnames';
-import { Column, EventWithColumnKey } from '../../../types';
+import { Column, EventWithColumnKey, Row } from '../../../types';
 import { TableRow } from '../common/TableRow/TableRow';
 
-export interface TableHeadProps {
+export interface TableHeadProps<TRow extends object = Row> {
   /**
    * The table columns to be rendered
    */
-  columns: Column[];
+  columns: Column<TRow>[];
   /**
    * Text alignment for all table cells. Can be superseded by passing the same prop into the `Column` object
    * for a specific column.
@@ -47,7 +47,7 @@ export interface TableHeadProps {
   truncateOverflow?: boolean;
 }
 
-export const TableHead: FC<TableHeadProps> = ({
+export const TableHead = <TRow extends object = Row,>({
   columns,
   align = 'left',
   className = '',
@@ -57,7 +57,7 @@ export const TableHead: FC<TableHeadProps> = ({
   onSort = undefined,
   sortedColumn = undefined,
   truncateOverflow = false,
-}) => {
+}: TableHeadProps<TRow>) => {
   const tableHeadClasses = classNames(className);
 
   return (

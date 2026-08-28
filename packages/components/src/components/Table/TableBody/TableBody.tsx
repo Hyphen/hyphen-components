@@ -1,22 +1,22 @@
-import React, { FC, Key } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import styles from './TableBody.module.scss';
 import { Column, Row } from '../../../types';
 import { TableRow } from '../common/TableRow/TableRow';
 
-export interface TableBodyProps {
+export interface TableBodyProps<TRow extends object = Row> {
   /**
    * The table columns to be rendered
    */
-  columns: Column[];
+  columns: Column<TRow>[];
   /**
    * The unique key to identify a React node for each row.
    */
-  rowKey: Key;
+  rowKey: Extract<keyof TRow, string>;
   /**
    * The table rows to be rendered
    */
-  rows: Row[];
+  rows: TRow[];
   /**
    * Text alignment for all table cells. Can be superseded by passing the same prop into the `Column` object
    * for a specific column.
@@ -54,7 +54,7 @@ export interface TableBodyProps {
   truncateOverflow?: boolean;
 }
 
-export const TableBody: FC<TableBodyProps> = ({
+export const TableBody = <TRow extends object = Row,>({
   columns,
   rows,
   align = 'left',
@@ -65,7 +65,7 @@ export const TableBody: FC<TableBodyProps> = ({
   isCompact = false,
   isStriped = false,
   truncateOverflow = false,
-}) => {
+}: TableBodyProps<TRow>) => {
   const tableBodyClasses = classNames(
     styles['table-body'],
     {

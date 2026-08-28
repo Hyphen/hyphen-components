@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import { Column, Row, EventWithColumnKey } from '../../types';
 import { Spinner } from '../Spinner/Spinner';
@@ -6,20 +6,20 @@ import styles from './Table.module.scss';
 import { TableBody } from './TableBody/TableBody';
 import { TableHead } from './TableHead/TableHead';
 
-export interface TableProps {
+export interface TableProps<TRow extends object = Row> {
   /**
    * Columns for the table. See Column definition below for details.
    */
-  columns: Column[];
+  columns: Column<TRow>[];
   /**
    * The data rows to be displayed
    */
-  rows: Row[];
+  rows: TRow[];
   /**
    * Key that represents a unique value for a row. This is necessary in
    * order to supply React with a node key on each row.
    */
-  rowKey: string;
+  rowKey: Extract<keyof TRow, string>;
   /**
    * Additional classes to add.
    */
@@ -90,7 +90,7 @@ export interface TableProps {
   truncateOverflow?: boolean;
 }
 
-export const Table: FC<TableProps> = ({
+export const Table = <TRow extends object = Row,>({
   columns,
   rows,
   rowKey,
@@ -108,7 +108,7 @@ export const Table: FC<TableProps> = ({
   sortedColumn = undefined,
   useFixedTableLayout = false,
   truncateOverflow = false,
-}) => {
+}: TableProps<TRow>) => {
   const containerClasses = classNames(styles.container, {
     [styles['full-height']]: !!isScrollable?.y,
   });
