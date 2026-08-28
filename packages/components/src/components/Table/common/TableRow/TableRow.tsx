@@ -123,7 +123,9 @@ export const TableRow = <TRow extends object = Row,>({
   const getCellClassName = (column: Column<TRow>): string | undefined => {
     if (column.cellClassName) {
       if (typeof column.cellClassName === 'function') {
-        return column.cellClassName(column, row, rowIndex);
+        const cellValue =
+          column.dataKey && row ? row[column.dataKey] : undefined;
+        return column.cellClassName(cellValue, row, rowIndex);
       }
       return column.cellClassName;
     }

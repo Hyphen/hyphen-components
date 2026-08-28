@@ -72,4 +72,37 @@ describe('TableBody', () => {
 
     expect(screen.getByLabelText('Color for row 1')).toHaveValue('purple');
   });
+
+  test('It avoids duplicate keys when row key values cannot be used', () => {
+    const consoleError = jest.spyOn(console, 'error').mockImplementation();
+    const rowsWithoutUsableKeys = [
+      { id: undefined, color: 'red' },
+      { id: undefined, color: 'blue' },
+      { id: null, color: 'green' },
+      { id: null, color: 'yellow' },
+      { id: {}, color: 'black' },
+      { id: {}, color: 'white' },
+    ];
+
+    render(
+      <table>
+        <TableBody
+          columns={[{ dataKey: 'color' }]}
+          rows={rowsWithoutUsableKeys}
+          rowKey="id"
+        />
+      </table>
+    );
+
+    const duplicateKeyWarnings = consoleError.mock.calls.filter((call) =>
+      call.some(
+        (argument) =>
+          typeof argument === 'string' &&
+          argument.includes('Encountered two children with the same key')
+      )
+    );
+    consoleError.mockRestore();
+
+    expect(duplicateKeyWarnings).toHaveLength(0);
+  });
 });

@@ -76,6 +76,20 @@ export const TableBody = <TRow extends object = Row,>({
     className
   );
 
+  const getRowKey = (row: TRow, rowIndex: number): string => {
+    const keyValue = row[rowKey];
+
+    if (
+      typeof keyValue === 'string' ||
+      typeof keyValue === 'number' ||
+      typeof keyValue === 'bigint'
+    ) {
+      return `row-key-${String(keyValue)}`;
+    }
+
+    return `row-index-${rowIndex}`;
+  };
+
   return (
     <tbody className={tableBodyClasses}>
       {rows.map((row, rowIndex) => (
@@ -84,7 +98,7 @@ export const TableBody = <TRow extends object = Row,>({
           row={row}
           rowIndex={rowIndex}
           align={align}
-          key={String(row[rowKey])}
+          key={getRowKey(row, rowIndex)}
           emptyCellPlaceholder={emptyCellPlaceholder}
           truncateOverflow={truncateOverflow}
           isBorderless={isBorderless}
