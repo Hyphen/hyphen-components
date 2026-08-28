@@ -30,6 +30,26 @@ An example showcasing the props required to render a list of customers in a tabl
 
 <Canvas of={Stories.CommonExample} />
 
+## TypeScript row types
+
+`Table` accepts interfaces and infers its row type from `rows`. Type separately declared columns with `Column<TRow>[]` to validate `dataKey` values and type the `row` argument passed to render callbacks.
+
+```tsx
+interface Customer {
+  id: string;
+  name: string;
+}
+
+const columns: Column<Customer>[] = [
+  {
+    dataKey: 'name',
+    render: (_cell, row) => row?.name,
+  },
+];
+
+<Table columns={columns} rows={customers} rowKey="id" />;
+```
+
 ## Loading
 
 Use the `isLoading` prop on the `<Table />` component to display an overlay that prevents user interaction. Useful for when

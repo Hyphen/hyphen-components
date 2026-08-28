@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 import styles from './TableRow.module.scss';
 import { Column, EventWithColumnKey, Row } from '../../../../types';
@@ -6,11 +6,11 @@ import { getColumnKeys } from '../../../../lib/getColumnKeys';
 import TableBodyCell from '../../TableBody/TableBodyCell/TableBodyCell';
 import { TableHeaderCell } from '../../TableHead/TableHeaderCell/TableHeaderCell';
 
-export interface TableRowProps {
+export interface TableRowProps<TRow extends object = Row> {
   /**
    * The table columns to be rendered
    */
-  columns: Column[];
+  columns: Column<TRow>[];
   /**
    * Text alignment for all table cells. Can be superseded by passing the same prop into the `Column` object
    * for a specific column.
@@ -52,7 +52,7 @@ export interface TableRowProps {
   /**
    * The specific row to be rendered.
    */
-  row?: Row;
+  row?: TRow;
   /**
    * The unique key to identify a React node for each row.
    */
@@ -71,7 +71,7 @@ export interface TableRowProps {
   truncateOverflow?: boolean;
 }
 
-export const TableRow: FC<TableRowProps> = ({
+export const TableRow = <TRow extends object = Row,>({
   columns,
   align = 'left',
   className = '',
@@ -86,7 +86,7 @@ export const TableRow: FC<TableRowProps> = ({
   row = undefined,
   rowIndex = undefined,
   truncateOverflow = false,
-}) => {
+}: TableRowProps<TRow>) => {
   const tableRowClasses = classNames(
     styles['table-row'],
     { [styles.hoverable]: isHoverable },
@@ -110,7 +110,7 @@ export const TableRow: FC<TableRowProps> = ({
     return React.isValidElement(value);
   };
 
-  const renderCellContent = (column: Column): ReactNode => {
+  const renderCellContent = (column: Column<TRow>): ReactNode => {
     if (column.render) {
       const cellValue = column.dataKey && row ? row[column.dataKey] : undefined;
       return column.render(cellValue, row, rowIndex);
@@ -120,10 +120,12 @@ export const TableRow: FC<TableRowProps> = ({
     return isRenderableCell(cellValue) ? cellValue : null;
   };
 
-  const getCellClassName = (column: Column): string | undefined => {
+  const getCellClassName = (column: Column<TRow>): string | undefined => {
     if (column.cellClassName) {
       if (typeof column.cellClassName === 'function') {
-        return column.cellClassName(column, row, rowIndex);
+        const cellValue =
+          column.dataKey && row ? row[column.dataKey] : undefined;
+        return column.cellClassName(cellValue, row, rowIndex);
       }
       return column.cellClassName;
     }

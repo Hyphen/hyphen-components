@@ -149,7 +149,7 @@ export type Row = UnknownPropertiesObjType;
 
 export type Cell = Row[string];
 
-export declare type Column = {
+export declare type Column<TRow extends object = Row> = {
   /**
    * Text alignment for column cells (including header alignment). Cells will default to left if not defined.
    */
@@ -159,11 +159,11 @@ export declare type Column = {
    */
   cellClassName?:
     | string
-    | ((cell?: Cell, row?: Row, rowIndex?: number) => string);
+    | ((cell?: Cell, row?: TRow, rowIndex?: number) => string);
   /**
    * The key value to be rendered based on the table `rows`.
    */
-  dataKey?: string;
+  dataKey?: Extract<keyof TRow, string>;
   /**
    * Placeholder for empty cells Applies only to the cells of the particular column with this prop.
    */
@@ -189,7 +189,7 @@ export declare type Column = {
    * Render method for column cell data. Provides ability to render any aspect of the cell/row with custom
    * markup.
    */
-  render?: (cell?: Cell, row?: Row, rowIndex?: number) => ReactNode;
+  render?: (cell?: Cell, row?: TRow, rowIndex?: number) => ReactNode;
   /**
    * Whether the column is stuck to the left or right.
    */

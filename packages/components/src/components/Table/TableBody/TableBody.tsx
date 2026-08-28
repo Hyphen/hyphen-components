@@ -1,22 +1,22 @@
-import React, { FC, Key } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import styles from './TableBody.module.scss';
 import { Column, Row } from '../../../types';
 import { TableRow } from '../common/TableRow/TableRow';
 
-export interface TableBodyProps {
+export interface TableBodyProps<TRow extends object = Row> {
   /**
    * The table columns to be rendered
    */
-  columns: Column[];
+  columns: Column<TRow>[];
   /**
    * The unique key to identify a React node for each row.
    */
-  rowKey: Key;
+  rowKey: Extract<keyof TRow, string>;
   /**
    * The table rows to be rendered
    */
-  rows: Row[];
+  rows: TRow[];
   /**
    * Text alignment for all table cells. Can be superseded by passing the same prop into the `Column` object
    * for a specific column.
@@ -54,9 +54,10 @@ export interface TableBodyProps {
   truncateOverflow?: boolean;
 }
 
-export const TableBody: FC<TableBodyProps> = ({
+export const TableBody = <TRow extends object = Row,>({
   columns,
   rows,
+  rowKey,
   align = 'left',
   className = '',
   emptyCellPlaceholder = '',
@@ -65,7 +66,7 @@ export const TableBody: FC<TableBodyProps> = ({
   isCompact = false,
   isStriped = false,
   truncateOverflow = false,
-}) => {
+}: TableBodyProps<TRow>) => {
   const tableBodyClasses = classNames(
     styles['table-body'],
     {
@@ -75,6 +76,20 @@ export const TableBody: FC<TableBodyProps> = ({
     className
   );
 
+  const getRowKey = (row: TRow, rowIndex: number): string => {
+    const keyValue = row?.[rowKey];
+
+    if (
+      typeof keyValue === 'string' ||
+      typeof keyValue === 'number' ||
+      typeof keyValue === 'bigint'
+    ) {
+      return `row-key-${String(keyValue)}`;
+    }
+
+    return `row-index-${rowIndex}`;
+  };
+
   return (
     <tbody className={tableBodyClasses}>
       {rows.map((row, rowIndex) => (
@@ -83,7 +98,7 @@ export const TableBody: FC<TableBodyProps> = ({
           row={row}
           rowIndex={rowIndex}
           align={align}
-          key={rowIndex}
+          key={getRowKey(row, rowIndex)}
           emptyCellPlaceholder={emptyCellPlaceholder}
           truncateOverflow={truncateOverflow}
           isBorderless={isBorderless}

@@ -33,7 +33,7 @@ describe('TableRow', () => {
       render(
         <TableRow row={row} rowIndex={rowIndex} columns={customClassCell} />
       );
-      expect(func).toHaveBeenCalledWith(customClassCell[0], row, rowIndex);
+      expect(func).toHaveBeenCalledWith(row.id, row, rowIndex);
       const element = document.getElementsByClassName('my-custom-class')[0];
       expect(element).toBeInTheDocument();
     });
