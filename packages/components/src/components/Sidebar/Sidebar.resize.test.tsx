@@ -289,7 +289,6 @@ test('mobile uses its drawer without resize controls', () => {
   ).not.toBeInTheDocument();
 });
 
-
 test('pointer movement clamps at both bounds and lost capture cancels', () => {
   render(<Example />);
   const rail = screen.getByRole('button', { name: /Resize or toggle/ });
@@ -303,3 +302,67 @@ test('pointer movement clamps at both bounds and lost capture cancels', () => {
   expect(width()).toBe('320px');
   expect(document.body.style.cursor).toBe('');
 });
+
+test('resizes without ResizeObserver and removes its window listener on unmount', () => {
+  Object.defineProperty(window, 'ResizeObserver', {
+    configurable: true,
+    writable: true,
+    value: undefined,
+  });
+  const removeListener = jest.spyOn(window, 'removeEventListener');
+  const { unmount } = render(<Example />);
+  const rail = screen.getByRole('button', { name: /Resize or toggle/ });
+  drag(rail, 500, 300);
+  expect(width()).toBe('584px');
+  act(() => {
+    containerWidth = 600;
+    window.dispatchEvent(new Event('resize'));
+  });
+  expect(width()).toBe('400px');
+  act(() => {
+    containerWidth = 1800;
+    window.dispatchEvent(new Event('resize'));
+  });
+  expect(width()).toBe('584px');
+  unmount();
+  expect(removeListener).toHaveBeenCalledWith('resize', expect.any(Function));
+});
+
+test.each(['left', 'right'] as const)(
+  'the %s caret inherits the resize cursor only when expanded',
+  (side) => {
+    render(<Example side={side} collapsible="icon" />);
+    const rail = screen.getByRole('button', {
+      name: `Resize or toggle ${side} sidebar`,
+    });
+    const caret = rail.firstElementChild;
+    expect(rail).toHaveStyle({ cursor: 'col-resize' });
+    expect(caret).not.toHaveClass('cursor-w-resize');
+    expect(caret).not.toHaveClass('cursor-e-resize');
+    fireEvent.click(rail);
+    expect(caret).toHaveClass(
+      side === 'left' ? 'cursor-e-resize' : 'cursor-w-resize'
+    );
+  }
+);
+
+test.each(['release', 'cancel'])(
+  'keyboard activation toggles after drag %s without a pointer click',
+  (ending) => {
+    render(<Example />);
+    const rail = screen.getByRole('button', { name: /Resize or toggle/ });
+    fireEvent.pointerDown(rail, { pointerId: 1, button: 0, clientX: 500 });
+    fireEvent.pointerMove(rail, { pointerId: 1, clientX: 300 });
+    if (ending === 'release') {
+      fireEvent.pointerUp(rail, { pointerId: 1, clientX: 300 });
+    } else {
+      fireEvent.pointerCancel(rail, { pointerId: 1 });
+    }
+    // Native button keyboard activation has detail 0 and no pointerdown.
+    fireEvent.click(rail, { detail: 0 });
+    expect(document.querySelector('[data-side="right"]')).toHaveAttribute(
+      'data-state',
+      'collapsed'
+    );
+  }
+);

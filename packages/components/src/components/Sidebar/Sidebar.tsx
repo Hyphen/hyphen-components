@@ -429,11 +429,10 @@ const Sidebar = React.forwardRef<
     ref
   ) => {
     const { isMobile, state, openMobile, setOpenMobile } = useSidebar(side);
-    const rootRef = React.useRef<HTMLDivElement>(null);
+    const rootRef = React.useRef<HTMLDivElement | null>(null);
     const setRootRef = React.useCallback(
       (node: HTMLDivElement | null) => {
-        (rootRef as React.MutableRefObject<HTMLDivElement | null>).current =
-          node;
+        rootRef.current = node;
         if (typeof ref === 'function') ref(node);
         else if (ref) ref.current = node;
       },
@@ -964,9 +963,11 @@ const SidebarRail = React.forwardRef<
           'hover-show-child background-color-transparent display-flex p-top-5xl p-left-xl p-right-0 justify-content-center position-absolute',
           {
             'cursor-w-resize':
-              (open && side === 'left') || (!open && side === 'right'),
+              !resize?.enabled &&
+              ((open && side === 'left') || (!open && side === 'right')),
             'cursor-e-resize':
-              (!open && side === 'left') || (open && side === 'right'),
+              !resize?.enabled &&
+              ((!open && side === 'left') || (open && side === 'right')),
           },
           className
         )}
@@ -999,9 +1000,11 @@ const SidebarRail = React.forwardRef<
             'hover-child',
             {
               'cursor-w-resize':
-                (open && side === 'left') || (!open && side === 'right'),
+                !resize?.enabled &&
+              ((open && side === 'left') || (!open && side === 'right')),
               'cursor-e-resize':
-                (!open && side === 'left') || (open && side === 'right'),
+                !resize?.enabled &&
+              ((!open && side === 'left') || (open && side === 'right')),
             },
             className
           )}
