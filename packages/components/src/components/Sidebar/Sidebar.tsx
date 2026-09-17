@@ -332,6 +332,14 @@ const SidebarProvider = forwardRef<
         ) {
           return;
         }
+        // Leave Cmd/Ctrl combinations (e.g. Cmd+[ for back) to the browser.
+        // AltGraph also sets ctrlKey on Windows and types [ or ] on some layouts.
+        if (
+          event.metaKey ||
+          (event.ctrlKey && !event.getModifierState('AltGraph'))
+        ) {
+          return;
+        }
         const shortcutSide =
           event.key === SIDEBAR_KEYBOARD_SHORTCUT_LEFT
             ? 'left'
