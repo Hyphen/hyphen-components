@@ -47,3 +47,9 @@ Use Group to stack consecutive messages from one sender with a smaller gap than 
 <ArgTypes of={Message} />
 
 Conversation examples also use Marker for dates and system notes. Keep timeline markers outside Message groups; in MessageScroller, give them stable Item IDs without `scrollAnchor`.
+
+## Support joins and leaves
+
+Use Marker separators for support handoff events between message rows. The example shows Hyphen Support joining, a support reply, the support session ending, and the agent resuming.
+
+<Canvas of={Stories.SupportJoinsAndLeaves} />

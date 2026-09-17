@@ -41,6 +41,51 @@ export const Conversation = () => (
   </Box>
 );
 
+/** Support handoff events sit between messages instead of appearing as sender bubbles. */
+export const SupportJoinsAndLeaves = () => (
+  <Box width="100" maxWidth="600px" gap="2xl">
+    <Message align="end">
+      <Message.Content maxWidth="80%">
+        <Box background="secondary" radius="md" padding="xl">
+          Can someone help me review this deployment?
+        </Box>
+        <Message.Footer>10:42</Message.Footer>
+      </Message.Content>
+    </Message>
+    <Marker variant="separator">
+      <Marker.Content>Hyphen Support joined</Marker.Content>
+    </Marker>
+    <Message align="start">
+      <Message.Content>
+        <Message.Header fontWeight="semibold">Alex (support)</Message.Header>
+        <Box>
+          I’ve reviewed the deployment. All instances are healthy and serving
+          traffic.
+        </Box>
+        <Message.Footer>10:43</Message.Footer>
+      </Message.Content>
+    </Message>
+    <Message align="end">
+      <Message.Content maxWidth="80%">
+        <Box background="secondary" radius="md" padding="xl">
+          Thanks, that’s everything I needed.
+        </Box>
+        <Message.Footer>10:44</Message.Footer>
+      </Message.Content>
+    </Message>
+    <Marker variant="separator">
+      <Marker.Content>Hyphen Support session ended</Marker.Content>
+    </Marker>
+    <Message align="start">
+      <Message.Content>
+        <Message.Header fontWeight="semibold">Hyphen</Message.Header>
+        <Box>I’m here if you need anything else.</Box>
+        <Message.Footer>10:45</Message.Footer>
+      </Message.Content>
+    </Message>
+  </Box>
+);
+
 const DemoAvatar = ({ name, initials }: { name: string; initials: string }) => (
   <Box
     role="img"
