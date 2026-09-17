@@ -1,0 +1,40 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as Stories from './Marker.stories';
+
+<Meta of={Stories} />
+
+# Marker
+
+Marker displays conversation notes, progress, and labeled dividers using Hyphen tokens. Inspired by [shadcn Marker](https://ui.shadcn.com/docs/components/base/marker), it supports `default`, `border`, and `separator` variants. Compose `Marker.Icon` and `Marker.Content` inside the root; named exports `MarkerIcon` and `MarkerContent` are also available. Every part accepts Box props and forwards its ref.
+
+<Canvas of={Stories.Variants} />
+
+## Status and decorative icons
+
+Icons are hidden from assistive technology; put the meaning in Content. Set `role="status"` for progress that should be announced. Static notes have no role by default. Labeled separators keep their text accessible and do not use `role="separator"`.
+
+<Canvas of={Stories.StatusAndIcons} />
+
+## Links and buttons
+
+Use Hyphen's `as="a"` with `href`, or `as="button"` with `type="button"`, to give actions native keyboard and accessibility behavior. The root preserves element-specific props and ref types. It does not require Base UI or a `render` prop.
+
+<Canvas of={Stories.LinksAndButtons} />
+
+## Long labels
+
+Labels wrap within narrow containers, including long unbroken identifiers.
+
+<Canvas of={Stories.LongLabels} />
+
+## Conversation timelines
+
+Place date or unread markers between Message rows or groups. Inside MessageScroller.Content, wrap each marker in a MessageScroller.Item with a stable `messageId`. Leave `scrollAnchor` off: a system note or date is not a new user turn.
+
+```tsx
+<MessageScroller.Item messageId="date-today">
+  <Marker variant="separator">
+    <Marker.Content>Today</Marker.Content>
+  </Marker>
+</MessageScroller.Item>
+```

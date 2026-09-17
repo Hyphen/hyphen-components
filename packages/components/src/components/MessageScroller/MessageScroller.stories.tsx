@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import type { Meta } from '@storybook/react-vite';
 import { Box } from '../Box/Box';
 import { Button } from '../Button/Button';
+import { Marker } from '../Marker/Marker';
+import { Spinner } from '../Spinner/Spinner';
 import { Message } from '../Message/Message';
 import { MessageScroller } from './MessageScroller';
 
@@ -14,19 +16,24 @@ export const AnchoredConversation = () => {
   const [turn, setTurn] = useState(0);
   const [reply, setReply] = useState('');
   const [older, setOlder] = useState(false);
+  const [checking, setChecking] = useState(false);
   const timer = useRef<ReturnType<typeof setInterval>>();
   useEffect(() => () => clearInterval(timer.current), []);
   const send = () => {
     clearInterval(timer.current);
     setTurn((value) => value + 1);
     setReply('');
+    setChecking(true);
     let count = 0;
     timer.current = setInterval(() => {
       setReply(
         (text) =>
           `${text}The deployment is healthy and all instances are serving traffic. `
       );
-      if (++count === 20) clearInterval(timer.current);
+      if (++count === 20) {
+        clearInterval(timer.current);
+        setChecking(false);
+      }
     }, 100);
   };
   return (
@@ -42,9 +49,17 @@ export const AnchoredConversation = () => {
             <MessageScroller.Content>
               {older && (
                 <MessageScroller.Item messageId="older">
+                  <Marker variant="separator">
+                    <Marker.Content>Yesterday</Marker.Content>
+                  </Marker>
                   <Box height="200px">Earlier history</Box>
                 </MessageScroller.Item>
               )}
+              <MessageScroller.Item messageId="date-today">
+                <Marker variant="separator">
+                  <Marker.Content>Today</Marker.Content>
+                </Marker>
+              </MessageScroller.Item>
               <MessageScroller.Item messageId="initial" scrollAnchor>
                 <Message align="end">
                   <Message.Content
@@ -75,10 +90,29 @@ export const AnchoredConversation = () => {
                     </Message.Content>
                   </Message>
                   {index < turn - 1 && (
-                    <Box padding="xl 0">The previous check is complete.</Box>
+                    <Marker>
+                      <Marker.Icon>✓</Marker.Icon>
+                      <Marker.Content>
+                        The previous check is complete.
+                      </Marker.Content>
+                    </Marker>
                   )}
                 </MessageScroller.Item>
               ))}
+              {turn > 0 && (
+                <MessageScroller.Item messageId="check-status">
+                  <Marker variant="border" role="status">
+                    <Marker.Icon>
+                      {checking ? <Spinner size="sm" /> : '✓'}
+                    </Marker.Icon>
+                    <Marker.Content>
+                      {checking
+                        ? 'Checking deployment…'
+                        : 'Deployment check complete'}
+                    </Marker.Content>
+                  </Marker>
+                </MessageScroller.Item>
+              )}
               {turn > 0 && (
                 <MessageScroller.Item messageId="stream">
                   <Message>

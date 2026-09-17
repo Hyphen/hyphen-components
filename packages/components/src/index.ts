@@ -57,3 +57,5 @@ export * from './components/Message/Message';
 export * from './components/MessageScroller/MessageScroller';
 export * from './types';
 export * from './lib';
+
+export * from './components/Marker/Marker';

@@ -4,6 +4,7 @@ import { Box } from '../Box/Box';
 import { Button } from '../Button/Button';
 import { allModes } from '../../modes';
 import { Message } from './Message';
+import { Marker } from '../Marker/Marker';
 
 export default {
   title: 'Components/Message',
@@ -15,6 +16,9 @@ export default {
 
 export const Conversation = () => (
   <Box gap="2xl" maxWidth="600px">
+    <Marker variant="separator">
+      <Marker.Content>Today</Marker.Content>
+    </Marker>
     <Message align="end">
       <Message.Content maxWidth="80%">
         <Box background="secondary" radius="md" padding="xl">
@@ -23,6 +27,10 @@ export const Conversation = () => (
         <Message.Footer>10:42</Message.Footer>
       </Message.Content>
     </Message>
+    <Marker>
+      <Marker.Icon>✓</Marker.Icon>
+      <Marker.Content>Deployment check complete</Marker.Content>
+    </Marker>
     <Message>
       <Message.Content>
         <Message.Header fontWeight="semibold">Hyphen</Message.Header>
@@ -55,6 +63,9 @@ DemoAvatar.displayName = 'DemoAvatar';
 /** The same composition on either side; align is the only layout difference. */
 export const StartAndEndAlignment = () => (
   <Box gap="2xl" width="100" maxWidth="640px">
+    <Marker variant="separator">
+      <Marker.Content>Today</Marker.Content>
+    </Marker>
     <Message align="start">
       <Message.Content maxWidth="80%">
         <Message.Header fontWeight="semibold">Riley · Received</Message.Header>
@@ -81,6 +92,9 @@ export const BottomAnchoredAvatars = () => {
   const [expanded, setExpanded] = React.useState(false);
   return (
     <Box gap="2xl" width="100" maxWidth="640px">
+      <Marker variant="separator">
+        <Marker.Content>Today</Marker.Content>
+      </Marker>
       <Message align="start">
         <Message.Avatar>
           <DemoAvatar name="Riley" initials="RL" />
@@ -134,7 +148,10 @@ export const BottomAnchoredAvatars = () => {
 export const HeaderAndFooter = () => {
   const [liked, setLiked] = React.useState(false);
   return (
-    <Box width="100" maxWidth="640px">
+    <Box width="100" maxWidth="640px" gap="2xl">
+      <Marker variant="border">
+        <Marker.Content>Riley updated the design review</Marker.Content>
+      </Marker>
       <Message align="start">
         <Message.Avatar>
           <DemoAvatar name="Riley" initials="RL" />
@@ -173,6 +190,9 @@ export const FooterFollowsMessageSide = () => {
   const [liked, setLiked] = React.useState({ start: false, end: false });
   return (
     <Box width="100" maxWidth="640px" gap="2xl">
+      <Marker variant="separator">
+        <Marker.Content>Today</Marker.Content>
+      </Marker>
       {(['start', 'end'] as const).map((align) => (
         <Message key={align} align={align}>
           <Message.Content maxWidth="80%">
@@ -215,6 +235,9 @@ export const FooterFollowsMessageSide = () => {
 /** Empty avatar slots reserve the same space until the sender's last message. */
 export const ConsecutiveMessageGroups = () => (
   <Box width="100" maxWidth="640px" gap="2xl">
+    <Marker variant="separator">
+      <Marker.Content>Today</Marker.Content>
+    </Marker>
     <Message.Group role="group" aria-label="Messages from Riley">
       <Message align="start">
         <Message.Avatar width="32px" aria-hidden="true" />
@@ -245,6 +268,9 @@ export const ConsecutiveMessageGroups = () => (
         </Message.Content>
       </Message>
     </Message.Group>
+    <Marker variant="separator">
+      <Marker.Content>New messages</Marker.Content>
+    </Marker>
     <Message.Group role="group" aria-label="Messages from you">
       <Message align="end">
         <Message.Avatar width="32px" aria-hidden="true" />
