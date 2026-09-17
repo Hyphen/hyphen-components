@@ -26,3 +26,21 @@
   ) {
   display: none;
 }
+
+.resizeDescription {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+// Widen the hit area without moving the existing visible rail.
+.rail[data-resizable]::before {
+  content: '';
+  position: absolute;
+  inset: 0 -7px;
+}

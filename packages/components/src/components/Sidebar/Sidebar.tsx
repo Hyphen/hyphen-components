@@ -15,6 +15,11 @@ import { IconName } from 'src/types';
 import { Icon } from '../Icon/Icon';
 import styles from './Sidebar.module.scss';
 import {
+  SidebarResizeContext,
+  SidebarResizeProps,
+  useSidebarResize,
+} from './useSidebarResize';
+import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -369,6 +374,7 @@ const SidebarProvider = forwardRef<
                   className
                 )}
                 ref={ref}
+                data-sidebar-provider=""
                 {...props}
               >
                 {children}
@@ -384,38 +390,77 @@ SidebarProvider.displayName = 'SidebarProvider';
 
 const Sidebar = React.forwardRef<
   HTMLDivElement,
-  React.ComponentProps<'div'> & {
-    /**
-     * Which edge of the viewport the sidebar is attached to.
-     */
-    side?: 'left' | 'right';
-    /**
-     * Collapse behavior when the sidebar is toggled closed: slide fully out
-     * of view (`offcanvas`), collapse to a narrow icon strip (`icon`), or
-     * stay at full width (`none`).
-     */
-    collapsible?: 'offcanvas' | 'icon' | 'none';
-  }
+  React.ComponentProps<'div'> &
+    SidebarResizeProps & {
+      /**
+       * Which edge of the viewport the sidebar is attached to.
+       */
+      side?: 'left' | 'right';
+      /**
+       * Collapse behavior when the sidebar is toggled closed: slide fully out
+       * of view (`offcanvas`), collapse to a narrow icon strip (`icon`), or
+       * stay at full width (`none`).
+       */
+      collapsible?: 'offcanvas' | 'icon' | 'none';
+    }
 >(
   (
-    { side = 'left', collapsible = 'offcanvas', className, children, ...props },
+    {
+      side = 'left',
+      collapsible = 'offcanvas',
+      className,
+      children,
+      resizable,
+      defaultWidth,
+      minWidth,
+      maxWidth,
+      widthStorageKey,
+      ...props
+    },
     ref
   ) => {
     const { isMobile, state, openMobile, setOpenMobile } = useSidebar(side);
-    const sidebarWidth = side === 'right' ? SIDEBAR_RIGHT_WIDTH : SIDEBAR_WIDTH;
+    const rootRef = React.useRef<HTMLDivElement>(null);
+    const setRootRef = React.useCallback(
+      (node: HTMLDivElement | null) => {
+        (rootRef as React.MutableRefObject<HTMLDivElement | null>).current =
+          node;
+        if (typeof ref === 'function') ref(node);
+        else if (ref) ref.current = node;
+      },
+      [ref]
+    );
+    const resize = useSidebarResize({
+      resizable,
+      defaultWidth,
+      minWidth,
+      maxWidth,
+      widthStorageKey,
+      side,
+      isMobile,
+      expanded: state === 'expanded' || collapsible === 'none',
+      rootRef,
+    });
+    const sidebarWidth = resizable
+      ? `${resize.width}px`
+      : side === 'right'
+        ? SIDEBAR_RIGHT_WIDTH
+        : SIDEBAR_WIDTH;
 
     if (isMobile) {
       return (
         <SidebarSideContext.Provider value={side}>
-          <Drawer
-            isOpen={openMobile}
-            onDismiss={() => setOpenMobile(false)}
-            placement={side}
-          >
-            <Box data-sidebar="sidebar" data-mobile="true" height="100">
-              {children}
-            </Box>
-          </Drawer>
+          <SidebarResizeContext.Provider value={resize}>
+            <Drawer
+              isOpen={openMobile}
+              onDismiss={() => setOpenMobile(false)}
+              placement={side}
+            >
+              <Box data-sidebar="sidebar" data-mobile="true" height="100">
+                {children}
+              </Box>
+            </Drawer>
+          </SidebarResizeContext.Provider>
         </SidebarSideContext.Provider>
       );
     }
@@ -423,97 +468,106 @@ const Sidebar = React.forwardRef<
     if (collapsible === 'none') {
       return (
         <SidebarSideContext.Provider value={side}>
-          <div
-            className={classNames(
-              'group display-flex h-100 font-size-xs flex-direction-column background-color-secondary font-color-base',
-              className
-            )}
-            style={
-              {
-                '--sidebar-width': sidebarWidth,
-                width: 'var(--sidebar-width)',
-              } as React.CSSProperties
-            }
-            ref={ref}
-            {...props}
-          >
-            {children}
-          </div>
+          <SidebarResizeContext.Provider value={resize}>
+            <div
+              className={classNames(
+                'group display-flex h-100 font-size-xs flex-direction-column background-color-secondary font-color-base',
+                className
+              )}
+              style={
+                {
+                  '--sidebar-width': sidebarWidth,
+                  width: 'var(--sidebar-width)',
+                  ...(resizable ? { position: 'relative', flexShrink: 0 } : {}),
+                } as React.CSSProperties
+              }
+              ref={setRootRef}
+              {...props}
+            >
+              {children}
+            </div>
+          </SidebarResizeContext.Provider>
         </SidebarSideContext.Provider>
       );
     }
 
     return (
       <SidebarSideContext.Provider value={side}>
-        <Box
-          ref={ref}
-          background="primary"
-          display={{ base: 'none', desktop: 'block' }}
-          color="base"
-          fontSize="sm"
-          position="relative"
-          style={
-            {
-              '--sidebar-width': sidebarWidth,
-            } as React.CSSProperties
-          }
-          data-state={state}
-          data-collapsible={collapsible}
-          data-side={side}
-          className="group"
-        >
-          <div
-            style={{
-              animationTimingFunction:
-                'var(--sidebar-transition-timing, linear)',
-              transitionTimingFunction:
-                'var(--sidebar-transition-timing, linear)',
-              transitionDuration: 'var(--sidebar-transition-duration, 200ms)',
-              animationDuration: 'var(--sidebar-transition-duration, 200ms)',
-              transitionProperty: 'width',
-              width: getSidebarWidth(state, collapsible),
-              height: '100svh',
-            }}
-            className={classNames('position-relative', className)}
-          />
-          <div
-            className={classNames(
-              'position-absolute display-none display-flex-desktop ',
-              className
-            )}
-            style={{
-              ...getSidebarOffsetStyles(side, state, collapsible),
-              top: '0',
-              bottom: '0',
-              zIndex: 'var(--size-z-index-drawer)',
-              animationTimingFunction:
-                'var(--sidebar-transition-timing, linear)',
-              transitionTimingFunction:
-                'var(--sidebar-transition-timing, linear)',
-              transitionDuration: 'var(--sidebar-transition-duration, 200ms)',
-              animationDuration: 'var(--sidebar-transition-duration, 200ms)',
-              transitionProperty: 'left, right, width',
-              width:
-                state === 'collapsed' && collapsible === 'icon'
-                  ? 'var(--sidebar-width-icon)'
-                  : 'var(--sidebar-width)',
-              height: '100svh',
-            }}
-            {...props}
+        <SidebarResizeContext.Provider value={resize}>
+          <Box
+            ref={setRootRef}
+            background="primary"
+            display={{ base: 'none', desktop: 'block' }}
+            color="base"
+            fontSize="sm"
+            position="relative"
+            style={
+              {
+                '--sidebar-width': sidebarWidth,
+              } as React.CSSProperties
+            }
+            data-state={state}
+            data-collapsible={collapsible}
+            data-side={side}
+            className="group"
           >
             <div
-              data-sidebar="sidebar"
+              style={{
+                animationTimingFunction:
+                  'var(--sidebar-transition-timing, linear)',
+                transitionTimingFunction:
+                  'var(--sidebar-transition-timing, linear)',
+                transitionDuration: resize.dragging
+                  ? '0ms'
+                  : 'var(--sidebar-transition-duration, 200ms)',
+                animationDuration: 'var(--sidebar-transition-duration, 200ms)',
+                transitionProperty: 'width',
+                width: getSidebarWidth(state, collapsible),
+                height: '100svh',
+              }}
+              className={classNames('position-relative', className)}
+            />
+            <div
               className={classNames(
-                'display-flex h-100 w-100 flex-direction-column background-color-secondary font-color-base',
-                {
-                  'p-right-lg-desktop': side === 'right',
-                }
+                'position-absolute display-none display-flex-desktop ',
+                className
               )}
+              style={{
+                ...getSidebarOffsetStyles(side, state, collapsible),
+                top: '0',
+                bottom: '0',
+                zIndex: 'var(--size-z-index-drawer)',
+                animationTimingFunction:
+                  'var(--sidebar-transition-timing, linear)',
+                transitionTimingFunction:
+                  'var(--sidebar-transition-timing, linear)',
+                transitionDuration: resize.dragging
+                  ? '0ms'
+                  : 'var(--sidebar-transition-duration, 200ms)',
+                animationDuration: 'var(--sidebar-transition-duration, 200ms)',
+                transitionProperty: 'left, right, width',
+                width:
+                  state === 'collapsed' && collapsible === 'icon'
+                    ? 'var(--sidebar-width-icon)'
+                    : 'var(--sidebar-width)',
+                height: '100svh',
+              }}
+              {...props}
             >
-              {children}
+              <div
+                data-sidebar="sidebar"
+                className={classNames(
+                  'display-flex h-100 w-100 flex-direction-column background-color-secondary font-color-base',
+                  {
+                    'p-right-lg-desktop': side === 'right',
+                  }
+                )}
+              >
+                {children}
+              </div>
             </div>
-          </div>
-        </Box>
+          </Box>
+        </SidebarResizeContext.Provider>
       </SidebarSideContext.Provider>
     );
   }
@@ -860,6 +914,8 @@ const SidebarRail = React.forwardRef<
   React.ComponentProps<'button'>
 >(({ className, ...props }, ref) => {
   const { open, toggleSidebar, side } = useSidebar();
+  const resize = React.useContext(SidebarResizeContext);
+  const descriptionId = React.useId();
   const shortcutLabel =
     side === 'left'
       ? SIDEBAR_KEYBOARD_SHORTCUT_LEFT
@@ -870,52 +926,32 @@ const SidebarRail = React.forwardRef<
       ? 'caret-sm-right'
       : 'caret-sm-left'
     : side === 'right'
-    ? 'caret-sm-left'
-    : 'caret-sm-right';
+      ? 'caret-sm-left'
+      : 'caret-sm-right';
 
   return (
-    <button
-      ref={ref}
-      data-sidebar="rail"
-      aria-label="Toggle Sidebar"
-      tabIndex={-1}
-      onClick={toggleSidebar}
-      title={`Toggle Sidebar ${shortcutLabel}`}
-      className={classNames(
-        styles.rail,
-        'hover-show-child background-color-transparent display-flex p-top-5xl p-left-xl p-right-0 justify-content-center position-absolute',
-        {
-          'cursor-w-resize':
-            (open && side === 'left') || (!open && side === 'right'),
-          'cursor-e-resize':
-            (!open && side === 'left') || (open && side === 'right'),
-        },
-        className
-      )}
-      style={{
-        top: '20px',
-        bottom: '20px',
-        right: side === 'left' ? '-14px' : undefined,
-        left: side === 'right' ? '-18px' : undefined,
-        width: '10px',
-      }}
-      type="button"
-      {...props}
-    >
-      <Box
-        radius="xl"
-        background="primary"
-        color="secondary"
-        borderWidth="sm"
-        padding="xs"
-        margin="0"
-        shadow="xs"
-        width="3xl"
-        height="3xl"
-        alignItems="center"
-        justifyContent="center"
+    <>
+      <button
+        ref={ref}
+        data-sidebar="rail"
+        data-resizable={resize?.enabled || undefined}
+        aria-label={
+          resize?.enabled
+            ? `Resize or toggle ${side} sidebar`
+            : 'Toggle Sidebar'
+        }
+        aria-describedby={resize?.enabled ? descriptionId : undefined}
+        tabIndex={resize?.enabled ? 0 : -1}
+        {...(resize?.enabled ? resize.railProps : {})}
+        onClick={toggleSidebar}
+        title={
+          resize?.enabled
+            ? `Drag to resize; click to toggle (${shortcutLabel})`
+            : `Toggle Sidebar ${shortcutLabel}`
+        }
         className={classNames(
-          'hover-child',
+          styles.rail,
+          'hover-show-child background-color-transparent display-flex p-top-5xl p-left-xl p-right-0 justify-content-center position-absolute',
           {
             'cursor-w-resize':
               (open && side === 'left') || (!open && side === 'right'),
@@ -924,10 +960,53 @@ const SidebarRail = React.forwardRef<
           },
           className
         )}
+        style={{
+          top: '20px',
+          bottom: '20px',
+          right: side === 'left' ? '-14px' : undefined,
+          left: side === 'right' ? '-18px' : undefined,
+          width: '10px',
+          ...(resize?.enabled
+            ? { cursor: 'col-resize', touchAction: 'none' }
+            : {}),
+        }}
+        type="button"
+        {...props}
       >
-        <Icon name={caretIcon} />
-      </Box>
-    </button>
+        <Box
+          radius="xl"
+          background="primary"
+          color="secondary"
+          borderWidth="sm"
+          padding="xs"
+          margin="0"
+          shadow="xs"
+          width="3xl"
+          height="3xl"
+          alignItems="center"
+          justifyContent="center"
+          className={classNames(
+            'hover-child',
+            {
+              'cursor-w-resize':
+                (open && side === 'left') || (!open && side === 'right'),
+              'cursor-e-resize':
+                (!open && side === 'left') || (open && side === 'right'),
+            },
+            className
+          )}
+        >
+          <Icon name={caretIcon} />
+        </Box>
+      </button>
+      {resize?.enabled && (
+        <span id={descriptionId} className={styles.resizeDescription}>
+          Width {Math.round(resize.width)} pixels. Use left and right arrows to
+          resize, Home for minimum, End for maximum, and Enter or Space to
+          toggle.
+        </span>
+      )}
+    </>
   );
 });
 SidebarRail.displayName = 'SidebarRail';
