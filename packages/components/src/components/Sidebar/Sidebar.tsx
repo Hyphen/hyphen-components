@@ -5,6 +5,7 @@ import React, {
   useEffect,
   forwardRef,
 } from 'react';
+import { useId } from '@radix-ui/react-id';
 import { Slot } from '@radix-ui/react-slot';
 import classNames from 'classnames';
 import { Button } from '../Button/Button';
@@ -915,7 +916,8 @@ const SidebarRail = React.forwardRef<
 >(({ className, ...props }, ref) => {
   const { open, toggleSidebar, side } = useSidebar();
   const resize = React.useContext(SidebarResizeContext);
-  const descriptionId = React.useId();
+  // React.useId requires React 18; Radix's useId also supports 16.8 and 17.
+  const descriptionId = useId();
   const shortcutLabel =
     side === 'left'
       ? SIDEBAR_KEYBOARD_SHORTCUT_LEFT
