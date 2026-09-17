@@ -1,0 +1,16 @@
+import { Canvas, Meta, ArgTypes } from '@storybook/addon-docs/blocks';
+import { Message } from './Message';
+import * as Stories from './Message.stories';
+
+<Meta of={Stories} />
+
+# Message
+
+Message composes a conversation row. Use `align="start"` for received messages and `align="end"` for sent messages. Content owns the visible surface: existing bubbles, rich text, attachments, and actions can retain their styling. Every part accepts Box props and forwards its ref.
+
+Compose `Message.Avatar` and `Message.Content` within Message. Place `Message.Header` and `Message.Footer` inside Content; their alignment can be customized with Box props. `Message.Group` stacks related messages. All parts are also available as named exports, such as `MessageContent`.
+
+Message has no live-region role by itself. Put messages inside MessageScroller.Content to announce new rows, and give interactive actions accessible labels.
+
+<Canvas of={Stories.Conversation} />
+<ArgTypes of={Message} />

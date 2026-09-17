@@ -1,0 +1,45 @@
+import { Canvas, Meta, ArgTypes } from '@storybook/addon-docs/blocks';
+import { MessageScroller } from './MessageScroller';
+import * as Stories from './MessageScroller.stories';
+
+<Meta of={Stories} />
+
+# Message Scroller
+
+An independent Hyphen implementation inspired by [shadcn's conversation patterns](https://ui.shadcn.com/docs/components/base/message-scroller), with no shadcn runtime dependency.
+
+MessageScroller is a provider and adds no DOM. Give its Viewport a bounded height or a flex parent with `minHeight="0"`. Place one Content inside it. Wrap messages, history markers, and other transcript rows in Item with a stable `messageId`. These IDs must remain stable when optimistic messages are accepted by the server; use a client-generated correlation ID where available. Nested items inside cards are supported.
+
+```tsx
+<MessageScroller
+  key={conversationId}
+  ready={!isLoading}
+  defaultScrollPosition="end"
+>
+  <MessageScroller.Viewport height="400px">
+    <MessageScroller.Content>
+      {messages.map((message) => (
+        <MessageScroller.Item
+          key={message.id}
+          messageId={message.id}
+          scrollAnchor={message.role === 'user'}
+        >
+          <Message>{message.content}</Message>
+        </MessageScroller.Item>
+      ))}
+    </MessageScroller.Content>
+  </MessageScroller.Viewport>
+  <MessageScroller.Button />
+</MessageScroller>
+```
+
+Newly appended anchors move near the top, retaining `scrollPreviousItemPeek` pixels of context (64 by default). Trailing space lets a short turn reach that position and shrinks as the response grows. Streaming does not push the anchored prompt offscreen. Jump to latest, or scroll down to the live edge, to follow subsequent content growth. Scrolling, keyboard navigation, pointer interaction, and text selection pause following. Prepending history preserves the first visible identified row. Use `followOutput={false}` to disable following growth entirely.
+
+`defaultScrollPosition` supports `start` (default), `end`, and `last-anchor`. Use `ready={false}` during initial loading and key the provider by conversation ID to reset it when switching threads. Keep one Viewport and Content mounted per provider. Changing initial-position options after mounting does not reset the conversation; remount with a new key instead.
+
+`useMessageScroller()` provides `scrollToStart`, `scrollToEnd`, and `scrollToMessage`. Commands return false if the viewport or requested mounted item is unavailable. Options include `behavior` and, for message targets, `align`: start, center, end, or nearest. There is no virtualization or pending navigation to unmounted rows. `useMessageScrollerScrollable()` exposes start/end booleans, also available on Viewport via `data-scrollable`. End ignores the empty anchor spacer.
+
+The viewport is a keyboard-focusable region labelled “Messages”; customize `aria-label` for multiple conversations. Content uses `role="log"` and announces additions. Pass `aria-busy` when batching streamed announcements. Scroll buttons leave the tab order when inactive. Smooth commands respect reduced motion. ResizeObserver handles streamed text, images, and panel resizing; MutationObserver observes message changes. Both are disconnected on unmount.
+
+<Canvas of={Stories.AnchoredConversation} />
+<ArgTypes of={MessageScroller} />
