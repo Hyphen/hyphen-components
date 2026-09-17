@@ -177,6 +177,19 @@ test('keyboard resizing respects bounds and container changes preserve preferred
   expect(width()).toBe('200px');
 });
 
+test.each(['altKey', 'ctrlKey', 'metaKey', 'shiftKey'])(
+  'leaves %s arrow and Home/End keys to the browser',
+  (modifier) => {
+    render(<Example />);
+    const rail = screen.getByRole('button', { name: /Resize or toggle/ });
+    for (const key of ['ArrowLeft', 'ArrowRight', 'Home', 'End']) {
+      expect(fireEvent.keyDown(rail, { key, [modifier]: true })).toBe(true);
+    }
+    expect(width()).toBe('384px');
+    expect(localStorage.getItem('width-right')).toBeNull();
+  }
+);
+
 test('left and right widths are independent', () => {
   render(
     <SidebarProvider>

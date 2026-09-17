@@ -170,7 +170,10 @@ export function useSidebarResize({
       }
     },
     onKeyDown: (event) => {
-      if (!enabled) return;
+      // Leave modified keys to the browser, e.g. Cmd/Alt+Arrow for history.
+      const modified =
+        event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
+      if (!enabled || modified) return;
       let next: number;
       switch (event.key) {
         case 'ArrowLeft':
