@@ -8,9 +8,40 @@ import * as Stories from './Message.stories';
 
 Message composes a conversation row. Use `align="start"` for received messages and `align="end"` for sent messages. Content owns the visible surface: existing bubbles, rich text, attachments, and actions can retain their styling. Every part accepts Box props and forwards its ref.
 
-Compose `Message.Avatar` and `Message.Content` within Message. Place `Message.Header` and `Message.Footer` inside Content; their alignment can be customized with Box props. `Message.Group` stacks related messages. All parts are also available as named exports, such as `MessageContent`.
+Compose `Message.Avatar` and `Message.Content` within Message. Place `Message.Header` and `Message.Footer` inside Content. Header and footer follow the message side automatically; Box props can override those defaults. `Message.Group` stacks related messages. All parts are also available as named exports, such as `MessageContent`.
 
 Message has no live-region role by itself. Put messages inside MessageScroller.Content to announce new rows, and give interactive actions accessible labels.
 
 <Canvas of={Stories.Conversation} />
+
+## Start and end alignment
+
+Set `align="start"` on received messages and `align="end"` on sent messages. The row, avatar side, sender name, and footer follow that choice. Use the same content composition on either side.
+
+<Canvas of={Stories.StartAndEndAlignment} />
+
+## Bottom-anchored avatars
+
+The avatar aligns with the bottom of the message surface, above the footer and its gap. Footer sizing is observed so wrapped actions and expanded delivery details remain clear of the avatar. Expand the delivery details below to try it. Keep one footer as the last child of `Message.Content`; with no footer, the avatar aligns with the content's bottom edge.
+
+<Canvas of={Stories.BottomAnchoredAvatars} />
+
+## Header and footer slots
+
+Use Header for the sender's name or other identity information. Footer holds timestamps, delivery status, and message actions. Actions are ordinary accessible buttons; the example's Like button toggles its pressed state.
+
+<Canvas of={Stories.HeaderAndFooter} />
+
+## Footer alignment and actions
+
+Footer inherits the message side. An `align="end"` row keeps metadata and actions at the end even when a narrow viewport wraps them. Neither footer below has an explicit alignment override. Like and Save are interactive in both rows.
+
+<Canvas of={Stories.FooterFollowsMessageSide} />
+
+## Consecutive message groups
+
+Use Group to stack consecutive messages from one sender with a smaller gap than the surrounding conversation. Reserve avatar space with an empty, equally sized Avatar on earlier messages, then show the avatar and footer on the last message. Group does not infer sender identity or hide repeated metadata; the caller controls those choices.
+
+<Canvas of={Stories.ConsecutiveMessageGroups} />
+
 <ArgTypes of={Message} />
