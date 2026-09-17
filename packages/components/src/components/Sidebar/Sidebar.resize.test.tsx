@@ -49,6 +49,12 @@ function width(side = 'right') {
     .querySelector<HTMLElement>(`[data-side="${side}"]`)!
     .style.getPropertyValue('--sidebar-width');
 }
+function transitionDuration(side = 'right') {
+  return (
+    document.querySelector(`[data-side="${side}"]`)!
+      .firstElementChild as HTMLElement
+  ).style.transitionDuration;
+}
 function drag(rail: HTMLElement, from: number, to: number) {
   fireEvent.pointerDown(rail, { pointerId: 1, button: 0, clientX: from });
   fireEvent.pointerMove(rail, { pointerId: 1, clientX: to });
@@ -100,6 +106,32 @@ test.each(['left', 'right'] as const)(
     expect(document.body.style.userSelect).toBe('');
   }
 );
+
+test('restores a saved width without animating to it', () => {
+  localStorage.setItem('width-right', '700');
+  const commits: { width: string; duration: string }[] = [];
+  render(
+    <React.Profiler
+      id="sidebar"
+      onRender={() =>
+        commits.push({ width: width(), duration: transitionDuration() })
+      }
+    >
+      <Example />
+    </React.Profiler>
+  );
+  const animatedWidthChanges = commits.filter(
+    (commit, i) =>
+      i > 0 &&
+      commit.width !== commits[i - 1].width &&
+      commit.duration !== '0ms'
+  );
+  expect(animatedWidthChanges).toEqual([]);
+  expect(width()).toBe('700px');
+  expect(transitionDuration()).toBe(
+    'var(--sidebar-transition-duration, 200ms)'
+  );
+});
 
 test('a click with movement under the threshold toggles and reopening preserves width', () => {
   render(<Example />);

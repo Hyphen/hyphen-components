@@ -517,9 +517,9 @@ const Sidebar = React.forwardRef<
                   'var(--sidebar-transition-timing, linear)',
                 transitionTimingFunction:
                   'var(--sidebar-transition-timing, linear)',
-                transitionDuration: resize.dragging
-                  ? '0ms'
-                  : 'var(--sidebar-transition-duration, 200ms)',
+                transitionDuration: resize.animate
+                  ? 'var(--sidebar-transition-duration, 200ms)'
+                  : '0ms',
                 animationDuration: 'var(--sidebar-transition-duration, 200ms)',
                 transitionProperty: 'width',
                 width: getSidebarWidth(state, collapsible),
@@ -541,9 +541,9 @@ const Sidebar = React.forwardRef<
                   'var(--sidebar-transition-timing, linear)',
                 transitionTimingFunction:
                   'var(--sidebar-transition-timing, linear)',
-                transitionDuration: resize.dragging
-                  ? '0ms'
-                  : 'var(--sidebar-transition-duration, 200ms)',
+                transitionDuration: resize.animate
+                  ? 'var(--sidebar-transition-duration, 200ms)'
+                  : '0ms',
                 animationDuration: 'var(--sidebar-transition-duration, 200ms)',
                 transitionProperty: 'left, right, width',
                 width:

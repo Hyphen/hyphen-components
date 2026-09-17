@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useIsomorphicLayoutEffect } from '../../hooks/useIsomorphicLayoutEffect/useIsomorphicLayoutEffect';
 
 export interface SidebarResizeProps {
   /** Enable desktop resizing with SidebarRail. Disabled by default. */
@@ -47,8 +48,10 @@ export function useSidebarResize({
   const minimum = Math.min(Math.max(0, minWidth), maximum);
   const clamp = (value: number) => Math.max(minimum, Math.min(maximum, value));
   const width = clamp(preferredWidth);
+  const [settledWidth, setSettledWidth] = useState(width);
 
-  useEffect(() => {
+  // Restore and measure before paint so the first frame uses the saved width.
+  useIsomorphicLayoutEffect(() => {
     if (!resizable) return;
     let savedWidth = initialWidth;
     try {
@@ -62,7 +65,7 @@ export function useSidebarResize({
     setPreferredWidth(savedWidth);
   }, [resizable, initialWidth, widthStorageKey]);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!resizable || isMobile) return;
     const container = rootRef.current?.closest('[data-sidebar-provider]');
     if (!container) return;
@@ -73,6 +76,16 @@ export function useSidebarResize({
     observer.observe(container);
     return () => observer.disconnect();
   }, [resizable, isMobile, rootRef]);
+
+  // Only expanding and collapsing animate. A width change (restore, container
+  // cap, keyboard, drag release) is committed with transitions off; flushing
+  // styles at that width lets the next render turn them back on without the
+  // browser animating from the old width.
+  useIsomorphicLayoutEffect(() => {
+    if (dragging || width === settledWidth) return;
+    rootRef.current?.getBoundingClientRect();
+    setSettledWidth(width);
+  }, [dragging, width, settledWidth, rootRef]);
 
   useEffect(() => {
     if (!enabled) {
@@ -181,7 +194,12 @@ export function useSidebarResize({
     },
   };
 
-  return { width, dragging, enabled, railProps };
+  return {
+    width,
+    animate: !dragging && width === settledWidth,
+    enabled,
+    railProps,
+  };
 }
 
 export const SidebarResizeContext = React.createContext<ReturnType<
