@@ -206,3 +206,21 @@ The sidebar exposes CSS custom properties you can override on `SidebarProvider` 
 - `SidebarRail` is removed from the tab order (`tabIndex={-1}`) since `SidebarTrigger` and the keyboard shortcuts cover keyboard users; it exposes an `aria-label` and a `title` with the shortcut.
 - `SidebarMenu` and `SidebarMenuSub` render semantic lists, and `asChild` lets menu items render real links for correct link semantics.
 - On mobile the sidebar renders inside a [Drawer](/docs/components-drawer--docs), which traps focus and closes with <kbd>Esc</kbd>.
+
+## Resizable sidebars
+
+Opt in with `resizable` and include a `SidebarRail`. Either side can resize independently on desktop. Drag the rail to resize; click to toggle. Keyboard users can focus the rail, move it with Left/Right arrows (10px), use Home/End for limits, and Enter/Space to toggle. Mobile drawers keep their existing behavior.
+
+```tsx
+<Sidebar side="right" resizable defaultWidth={384} minWidth={320} maxWidth={960}
+  widthStorageKey="agent-panel-width">
+  <SidebarContent>{/* content */}</SidebarContent>
+  <SidebarRail />
+</Sidebar>
+```
+
+Widths are pixels. Defaults are 256px on the left, 384px on the right, a 256px minimum, and a 960px maximum. Rendered width is additionally capped at two-thirds of the `SidebarProvider` container; fitting the container takes precedence over the minimum. Temporary container constraints and collapse do not overwrite the preferred expanded width.
+
+`widthStorageKey` is optional. Supply a distinct key per panel to restore its preferred width across reloads. Without a key, width lasts until the sidebar unmounts. Existing sidebars remain unchanged unless `resizable` is enabled.
+
+<Canvas of={Stories.ResizableBothSides} />
