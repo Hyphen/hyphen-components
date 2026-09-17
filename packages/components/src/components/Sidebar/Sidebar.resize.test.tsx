@@ -289,19 +289,42 @@ test('mobile uses its drawer without resize controls', () => {
   ).not.toBeInTheDocument();
 });
 
-test('pointer movement clamps at both bounds and lost capture cancels', () => {
+test('pointer movement clamps at both bounds', () => {
   render(<Example />);
   const rail = screen.getByRole('button', { name: /Resize or toggle/ });
   drag(rail, 500, -1000);
   expect(width()).toBe('960px');
   drag(rail, 500, 1500);
   expect(width()).toBe('320px');
-  fireEvent.pointerDown(rail, { button: 0, clientX: 500 });
-  fireEvent.pointerMove(rail, { clientX: 400 });
-  fireEvent.lostPointerCapture(rail);
-  expect(width()).toBe('320px');
-  expect(document.body.style.cursor).toBe('');
 });
+
+test.each(['left', 'right'] as const)(
+  'keeps the last dragged %s width when capture ends before pointerup',
+  (side) => {
+    render(<Example side={side} />);
+    const rail = screen.getByRole('button', {
+      name: `Resize or toggle ${side} sidebar`,
+    });
+    const endX = side === 'left' ? 700 : 300;
+    fireEvent.pointerDown(rail, { pointerId: 1, button: 0, clientX: 500 });
+    // Do not pause for a render between the last move and losing capture.
+    act(() => {
+      fireEvent.pointerMove(rail, { pointerId: 1, clientX: endX });
+      fireEvent.lostPointerCapture(rail, { pointerId: 1 });
+    });
+    expect(width(side)).toBe('584px');
+    expect(localStorage.getItem(`width-${side}`)).toBe('584');
+    expect(document.body.style.cursor).toBe('');
+    expect(document.body.style.userSelect).toBe('');
+    fireEvent.pointerUp(rail, { pointerId: 1, clientX: endX });
+    fireEvent.click(rail, { detail: 1 });
+    expect(width(side)).toBe('584px');
+    expect(document.querySelector(`[data-side="${side}"]`)).toHaveAttribute(
+      'data-state',
+      'expanded'
+    );
+  }
+);
 
 test('resizes without ResizeObserver and removes its window listener on unmount', () => {
   Object.defineProperty(window, 'ResizeObserver', {

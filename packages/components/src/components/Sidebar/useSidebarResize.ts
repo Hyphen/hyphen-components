@@ -121,6 +121,12 @@ export function useSidebarResize({
       // A storage failure must not interrupt the interaction.
     }
   };
+  const finish = () => {
+    if (!gesture.current) return;
+    if (gesture.current.moved) persist();
+    gesture.current = null;
+    setDragging(false);
+  };
   const cancel = () => {
     if (!gesture.current) return;
     setPreferredWidth(gesture.current.preferred);
@@ -158,14 +164,16 @@ export function useSidebarResize({
         update(
           start.width + (side === 'left' ? 1 : -1) * (event.clientX - start.x)
         );
-        persist();
       }
-      gesture.current = null;
-      setDragging(false);
+      finish();
       event.currentTarget.releasePointerCapture(event.pointerId);
     },
     onPointerCancel: cancel,
-    onLostPointerCapture: cancel,
+    // Capture can end before pointerup reaches the rail. Keep the last move
+    // instead of treating release as a cancelled drag and restoring its start.
+    onLostPointerCapture: (event) => {
+      if (gesture.current?.id === event.pointerId) finish();
+    },
     onClickCapture: (event) => {
       if (suppressClick.current && event.detail !== 0) {
         event.preventDefault();
