@@ -10,7 +10,7 @@ MessageScroller coordinates a conversation's scroll position as messages arrive,
 
 <Canvas of={Stories.AnchoredConversation} />
 
-Send a prompt to start a streamed response, load earlier history, and use the jump button to try the scrolling behavior.
+The initial conversation fits without scrolling. Send a prompt to start a streamed response, load earlier history, and use the jump button to try the scrolling behavior.
 
 ## Components
 
@@ -65,7 +65,7 @@ Use one Viewport and Content per provider. Observers and event listeners rebind 
 
 ## Anchoring and reading behavior
 
-Newly appended anchors move near the top, retaining `scrollPreviousItemPeek` pixels of context (64 by default). Trailing space lets a short turn reach that position and shrinks as the response grows. Streaming does not push the anchored prompt offscreen. Jump to latest, or scroll down to the live edge, to follow subsequent content growth. Scrolling, keyboard navigation, pointer interaction, and text selection pause following. Prepending history preserves the first visible identified row. Use `followOutput={false}` to disable following growth entirely.
+Conversations that fit inside the viewport stay unscrolled, without extra trailing space. Once the transcript overflows, newly appended anchors move near the top, retaining `scrollPreviousItemPeek` pixels of context (64 by default). Trailing space lets a short turn reach that position and shrinks as the response grows. Streaming does not push the anchored prompt offscreen. Jump to latest, or scroll down to the live edge, to follow subsequent content growth. Scrolling, keyboard navigation, pointer interaction, and text selection pause following. Prepending history preserves the first visible identified row. Use `followOutput={false}` to disable following growth entirely.
 
 `defaultScrollPosition` supports `start` (default), `end`, and `last-anchor`. Use `ready={false}` during initial loading and key the provider by conversation ID to reset it when switching threads. Use one Viewport and Content per provider. Observers and event listeners rebind if either DOM node mounts later or is replaced. Changing initial-position options after mounting does not reset the conversation; remount with a new key instead.
 

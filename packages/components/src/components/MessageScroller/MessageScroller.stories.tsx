@@ -72,7 +72,7 @@ export const AnchoredConversation = () => {
                 </Message>
               </MessageScroller.Item>
               <MessageScroller.Item messageId="initial-reply">
-                <Box height="400px">Here is the deployment report.</Box>
+                <Box>Here is the deployment report.</Box>
               </MessageScroller.Item>
               {Array.from({ length: turn }, (_, index) => (
                 <MessageScroller.Item
