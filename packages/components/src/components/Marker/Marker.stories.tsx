@@ -2,6 +2,7 @@ import React from 'react';
 import type { Meta } from '@storybook/react-vite';
 import { Box } from '../Box/Box';
 import { Spinner } from '../Spinner/Spinner';
+import { Icon } from '../Icon/Icon';
 import { allModes } from '../../modes';
 import { Marker } from './Marker';
 
@@ -36,7 +37,9 @@ export const StatusAndIcons = () => (
       <Marker.Content>Checking deployment health…</Marker.Content>
     </Marker>
     <Marker>
-      <Marker.Icon>✓</Marker.Icon>
+      <Marker.Icon>
+        <Icon name="check" size="sm" />
+      </Marker.Icon>
       <Marker.Content>All instances are healthy</Marker.Content>
     </Marker>
   </Box>
@@ -75,7 +78,9 @@ export const LongLabels = () => (
       </Marker.Content>
     </Marker>
     <Marker variant="border">
-      <Marker.Icon>✓</Marker.Icon>
+      <Marker.Icon>
+        <Icon name="check" size="sm" />
+      </Marker.Icon>
       <Marker.Content>
         deployment-production-eu-west-application-worker-health-check-completed-successfully
       </Marker.Content>
