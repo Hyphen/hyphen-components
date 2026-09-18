@@ -5,7 +5,31 @@ import * as Stories from './Marker.stories';
 
 # Marker
 
-Marker displays conversation notes, progress, and labeled dividers using Hyphen tokens. Inspired by [shadcn Marker](https://ui.shadcn.com/docs/components/base/marker), it supports `default`, `border`, and `separator` variants. Compose `Marker.Icon` and `Marker.Content` inside the root; named exports `MarkerIcon` and `MarkerContent` are also available. Every part accepts Box props and forwards its ref.
+Marker displays conversation events that do not belong to a sender's message bubble: dates, unread boundaries, progress notes, and support joining or leaving. It uses Hyphen text, spacing, and border tokens.
+
+## Components
+
+| Component | Description | Placement |
+| --- | --- | --- |
+| `Marker` | The root row. Chooses the layout through `variant` and carries any semantics such as `role="status"`. Renders a `div` by default; use `as="a"` or `as="button"` for native interactive markers. | Between Message rows or groups, or inside its own MessageScroller.Item. |
+| `Marker.Icon` | An optional, non-shrinking decorative slot for an icon or Spinner. Always hidden from assistive technology with `aria-hidden="true"`; the adjacent content must convey the meaning. | Inside Marker, usually before Content. |
+| `Marker.Content` | The marker's readable label or custom content. Renders a `span` and wraps long text and unbroken identifiers within the available width. | Inside Marker, alongside an optional Icon. |
+
+Every part accepts Box props and forwards its ref. `Marker.Icon` and `Marker.Content` are also exported as `MarkerIcon` and `MarkerContent`.
+
+## Variants
+
+| `variant` | Description | Example |
+| --- | --- | --- |
+| `default` | An inline note within a full-width row, without divider lines. This is the default. | A completed check or streaming progress. |
+| `border` | The same row with a decorative bottom border. | A status update separating the next part of the transcript. |
+| `separator` | A centered label with decorative divider lines on both sides. | A date, unread boundary, or support handoff event. |
+
+```tsx
+<Marker variant="separator">
+  <Marker.Content>Hyphen Support joined</Marker.Content>
+</Marker>
+```
 
 <Canvas of={Stories.Variants} />
 

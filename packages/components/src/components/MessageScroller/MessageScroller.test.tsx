@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import {
   MessageScroller,
   MessageScrollerProps,
@@ -228,4 +228,53 @@ test('resets positioning when switching conversations and respects reduced motio
   });
   view.rerender(<Chat key="two" />);
   expect(screen.getByRole('region').scrollTop).toBe(200);
+});
+
+test('default scroll buttons show decorative icons with accessible names', () => {
+  render(<Chat defaultScrollPosition="start" />);
+  const down = screen.getByRole('button', { name: 'Jump to latest' });
+  expect(down.textContent).toBe('');
+  expect(within(down).getByTestId('prefixIcon')).toHaveAttribute(
+    'aria-hidden',
+    'true'
+  );
+  expect(within(down).getByTestId('prefixIcon')).toHaveAttribute(
+    'focusable',
+    'false'
+  );
+  fireEvent.click(down);
+  expect(screen.getByRole('region').scrollTop).toBe(200);
+  const up = screen.getByRole('button', { name: 'Scroll up' });
+  expect(up.textContent).toBe('');
+  expect(within(up).getByTestId('prefixIcon')).toHaveAttribute(
+    'aria-hidden',
+    'true'
+  );
+  expect(down).toHaveAttribute('tabindex', '-1');
+  fireEvent.click(up);
+  expect(screen.getByRole('region').scrollTop).toBe(0);
+});
+
+test('custom button content supplies its own name and can opt into an icon', () => {
+  render(
+    <MessageScroller>
+      <MessageScroller.Viewport>
+        <MessageScroller.Content>History</MessageScroller.Content>
+      </MessageScroller.Viewport>
+      <MessageScroller.Button>Latest messages</MessageScroller.Button>
+      <MessageScroller.Button
+        iconPrefix="arrow-down"
+        aria-label="Go to newest message"
+      />
+    </MessageScroller>
+  );
+  const textButton = screen.getByRole('button', { name: 'Latest messages' });
+  expect(textButton).not.toHaveAttribute('aria-label');
+  expect(
+    within(textButton).queryByTestId('prefixIcon')
+  ).not.toBeInTheDocument();
+  const customIconButton = screen.getByRole('button', {
+    name: 'Go to newest message',
+  });
+  expect(within(customIconButton).getAllByTestId('prefixIcon')).toHaveLength(1);
 });

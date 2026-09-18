@@ -6,11 +6,41 @@ import * as Stories from './Message.stories';
 
 # Message
 
-Message composes a conversation row. Use `align="start"` for received messages and `align="end"` for sent messages. Content owns the visible surface: existing bubbles, rich text, attachments, and actions can retain their styling. Every part accepts Box props and forwards its ref.
+Message composes a single conversation row, including the sender's avatar, message body, metadata, and actions. It controls alignment and spacing while letting the caller choose the visible surface: a bubble, rich text, attachments, or custom content.
 
-Compose `Message.Avatar` and `Message.Content` within Message. Place `Message.Header` and `Message.Footer` inside Content. Header and footer follow the message side automatically; Box props can override those defaults. `Message.Group` stacks related messages. All parts are also available as named exports, such as `MessageContent`.
+## Components
 
-Message has no live-region role by itself. Put messages inside MessageScroller.Content to announce new rows, and give interactive actions accessible labels.
+| Component | Description | Placement |
+| --- | --- | --- |
+| `Message` | The root row. `align="start"` (default) places a received message at the start; `align="end"` places a sent message at the end and moves the avatar to that side. Provides the alignment inherited by Header and Footer. | Inside the conversation or a `Message.Group`. |
+| `Message.Avatar` | A non-shrinking slot for an image, initials, or another sender representation. Anchors to the bottom of the message surface and reserves space above the footer, including when footer content wraps or expands. It does not render an avatar image itself. | Beside `Message.Content`, inside `Message`. |
+| `Message.Content` | Stacks the sender header, body, and footer with a small gap. Set width constraints here and supply the body or bubble styling yourself. It adds no default bubble background or padding. | Inside `Message`. |
+| `Message.Header` | A row for the sender's name and identity metadata. Aligns its children to the message side by default. Supports Box props such as `gap`, `wrap`, and `alignItems`. | Before the body, inside `Message.Content`. |
+| `Message.Footer` | A row for timestamps, delivery status, and actions such as Copy or Like. Metadata and wrapping actions follow the message side. Measures its height so the avatar stays clear of the footer. | Keep one Footer as the last child of `Message.Content`. |
+| `Message.Group` | Stacks consecutive messages with a small gap. The caller decides which messages share a sender and when to repeat the avatar, header, or footer. | Around multiple `Message` rows. |
+
+Every part accepts Box props and forwards its ref. Dot notation groups related parts; the same components are available as named exports: `MessageRoot`, `MessageAvatar`, `MessageContent`, `MessageHeader`, `MessageFooter`, and `MessageGroup`.
+
+## Composition
+
+```tsx
+<Message.Group>
+  <Message align="start">
+    <Message.Avatar>
+      <img src={sender.avatarUrl} alt={sender.name} width={32} height={32} />
+    </Message.Avatar>
+    <Message.Content maxWidth="80%">
+      <Message.Header>{sender.name}</Message.Header>
+      <Box background="secondary" radius="md" padding="xl">
+        {message.text}
+      </Box>
+      <Message.Footer>{message.sentAtLabel}</Message.Footer>
+    </Message.Content>
+  </Message>
+</Message.Group>
+```
+
+Message has no live-region role by itself. Put messages inside MessageScroller.Content to announce new rows, and give interactive actions accessible labels. Use Marker between rows or groups for dates and system events such as support joining or leaving.
 
 <Canvas of={Stories.Conversation} />
 
@@ -45,8 +75,6 @@ Use Group to stack consecutive messages from one sender with a smaller gap than 
 <Canvas of={Stories.ConsecutiveMessageGroups} />
 
 <ArgTypes of={Message} />
-
-Conversation examples also use Marker for dates and system notes. Keep timeline markers outside Message groups; in MessageScroller, give them stable Item IDs without `scrollAnchor`.
 
 ## Support joins and leaves
 

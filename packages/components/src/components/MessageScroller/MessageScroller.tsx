@@ -494,6 +494,27 @@ export const MessageScrollerButton = React.forwardRef<
         type="button"
         size="sm"
         variant="secondary"
+        iconPrefix={
+          children == null
+            ? direction === 'end'
+              ? 'arrow-down'
+              : 'arrow-up'
+            : undefined
+        }
+        aria-label={
+          children == null
+            ? direction === 'end'
+              ? 'Jump to latest'
+              : 'Scroll up'
+            : undefined
+        }
+        title={
+          children == null
+            ? direction === 'end'
+              ? 'Jump to latest'
+              : 'Scroll up'
+            : undefined
+        }
         {...props}
         disabled={disabled || !active}
         tabIndex={active ? props.tabIndex : -1}
@@ -512,7 +533,7 @@ export const MessageScrollerButton = React.forwardRef<
           }
         }}
       >
-        {children ?? (direction === 'end' ? 'Jump to latest' : 'Scroll up')}
+        {children}
       </Button>
     );
   }
