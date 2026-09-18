@@ -7,6 +7,8 @@ import * as Stories from './Marker.stories';
 
 Marker displays conversation events that do not belong to a sender's message bubble: dates, unread boundaries, progress notes, and support joining or leaving. It uses Hyphen text, spacing, and border tokens.
 
+<Canvas of={Stories.Variants} />
+
 ## Components
 
 | Component | Description | Placement |
@@ -30,8 +32,6 @@ Every part accepts Box props and forwards its ref. `Marker.Icon` and `Marker.Con
   <Marker.Content>Hyphen Support joined</Marker.Content>
 </Marker>
 ```
-
-<Canvas of={Stories.Variants} />
 
 ## Status and decorative icons
 

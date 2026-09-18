@@ -8,6 +8,8 @@ import * as Stories from './Message.stories';
 
 Message composes a single conversation row, including the sender's avatar, message body, metadata, and actions. It controls alignment and spacing while letting the caller choose the visible surface: a bubble, rich text, attachments, or custom content.
 
+<Canvas of={Stories.Conversation} />
+
 ## Components
 
 | Component | Description | Placement |
@@ -41,8 +43,6 @@ Every part accepts Box props and forwards its ref. Dot notation groups related p
 ```
 
 Message has no live-region role by itself. Put messages inside MessageScroller.Content to announce new rows, and give interactive actions accessible labels. Use Marker between rows or groups for dates and system events such as support joining or leaving.
-
-<Canvas of={Stories.Conversation} />
 
 ## Start and end alignment
 

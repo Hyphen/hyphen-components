@@ -8,6 +8,10 @@ import * as Stories from './MessageScroller.stories';
 
 MessageScroller coordinates a conversation's scroll position as messages arrive, responses stream, and earlier history loads. It supplies the scrolling behavior; Message and Marker supply the transcript rows.
 
+<Canvas of={Stories.AnchoredConversation} />
+
+Send a prompt to start a streamed response, load earlier history, and use the jump button to try the scrolling behavior.
+
 ## Components
 
 | Component | Description | Placement |
@@ -80,11 +84,6 @@ Command options include `behavior` (`auto`, `instant`, or `smooth`). `scrollToMe
 
 The viewport is a keyboard-focusable region labelled “Messages”; customize `aria-label` for multiple conversations. Content uses `role="log"` and announces additions. Pass `aria-busy` when batching streamed announcements. Scroll buttons leave the tab order when inactive. Smooth commands respect reduced motion. ResizeObserver handles streamed text, images, and panel resizing; MutationObserver observes message changes. Both are disconnected on unmount.
 
-## Interactive example
-
-Send a prompt to start a streamed response, load earlier history, and use the jump button to try the scrolling behavior.
-
-<Canvas of={Stories.AnchoredConversation} />
 <ArgTypes of={MessageScroller} />
 
 Conversation examples also use Marker for dates and system notes. Keep timeline markers outside Message groups; in MessageScroller, give them stable Item IDs without `scrollAnchor`.
