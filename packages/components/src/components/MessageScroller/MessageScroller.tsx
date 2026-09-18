@@ -240,13 +240,16 @@ const MessageScrollerRoot = ({
       const paddingBottom =
         parseFloat(getComputedStyle(node).paddingBottom) || 0;
       // Keep the end inset scrollable even when there is no user-turn anchor.
-      const spaceHeight = Math.max(
-        0,
-        scrollMargin,
-        anchor
-          ? anchorTop + node.clientHeight - naturalBottom - paddingBottom
-          : 0
-      );
+      const spaceHeight =
+        naturalBottom + paddingBottom + scrollMargin <= node.clientHeight
+          ? 0
+          : Math.max(
+              0,
+              scrollMargin,
+              anchor
+                ? anchorTop + node.clientHeight - naturalBottom - paddingBottom
+                : 0
+            );
       const height = `${spaceHeight}px`;
       if (space.style.height !== height) space.style.height = height;
 

@@ -17,7 +17,7 @@ test('does not reinterpret saved history as a new turn in StrictMode', () => {
   expect(screen.getByRole('region').scrollTop).toBe(200);
 });
 
-test('anchors the first prompt after an empty conversation loads', () => {
+test('keeps the first prompt unscrolled when the conversation fits', () => {
   height = 0;
   const FirstChat = ({ sent = false }: { sent?: boolean }) => (
     <MessageScroller defaultScrollPosition="end" scrollPreviousItemPeek={20}>
@@ -36,8 +36,36 @@ test('anchors the first prompt after an empty conversation loads', () => {
   height = 140;
   view.rerender(<FirstChat sent />);
   flush();
-  expect(screen.getByRole('region').scrollTop).toBe(80);
+  const viewport = screen.getByRole('region');
+  expect(viewport.scrollTop).toBe(0);
+  expect(viewport.scrollHeight).toBe(viewport.clientHeight);
 });
+
+test.each(['end', 'last-anchor'] as const)(
+  'does not add overflow to saved history that fits when opening at %s',
+  (defaultScrollPosition) => {
+    height = 140;
+    render(
+      <MessageScroller defaultScrollPosition={defaultScrollPosition}>
+        <MessageScroller.Viewport>
+          <MessageScroller.Content>
+            <MessageScroller.Item messageId="first" scrollAnchor data-top="0">
+              First prompt
+            </MessageScroller.Item>
+            <MessageScroller.Item messageId="second" scrollAnchor data-top="100">
+              Second prompt
+            </MessageScroller.Item>
+          </MessageScroller.Content>
+        </MessageScroller.Viewport>
+        <MessageScroller.Button />
+      </MessageScroller>
+    );
+    const viewport = screen.getByRole('region');
+    expect(viewport.scrollHeight).toBe(viewport.clientHeight);
+    expect(viewport.scrollTop).toBe(0);
+    expect(viewport).not.toHaveAttribute('data-scrollable');
+  }
+);
 const rect = (top: number, h: number) => ({
   top,
   bottom: top + h,
