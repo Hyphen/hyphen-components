@@ -278,3 +278,175 @@ test('custom button content supplies its own name and can opt into an icon', () 
   });
   expect(within(customIconButton).getAllByTestId('prefixIcon')).toHaveLength(1);
 });
+
+test('initializes when viewport and content mount after the provider', () => {
+  const DelayedChat = ({ shown = false }: { shown?: boolean }) => (
+    <MessageScroller defaultScrollPosition="end">
+      {shown && (
+        <MessageScroller.Viewport>
+          <MessageScroller.Content>
+            <MessageScroller.Item messageId="saved">Saved</MessageScroller.Item>
+          </MessageScroller.Content>
+        </MessageScroller.Viewport>
+      )}
+    </MessageScroller>
+  );
+  const view = render(<DelayedChat />);
+  view.rerender(<DelayedChat shown />);
+  expect(screen.getByRole('region').scrollTop).toBe(200);
+});
+
+test.each(['viewport', 'content'])(
+  'rebinds observation when the %s is replaced',
+  (part) => {
+    const observed: Element[] = [];
+    const disconnect = jest.fn();
+    global.ResizeObserver = class {
+      constructor(callback: () => void) {
+        resize = callback;
+      }
+      observe(node: Element) {
+        observed.push(node);
+      }
+      unobserve() {}
+      disconnect = disconnect;
+    } as unknown as typeof ResizeObserver;
+    const ReplaceableChat = ({ version = 0 }: { version?: number }) => (
+      <MessageScroller defaultScrollPosition="end">
+        <MessageScroller.Viewport
+          key={part === 'viewport' ? version : 'viewport'}
+        >
+          <MessageScroller.Content
+            key={part === 'content' ? version : 'content'}
+          >
+            <MessageScroller.Item messageId="saved">Saved</MessageScroller.Item>
+          </MessageScroller.Content>
+        </MessageScroller.Viewport>
+      </MessageScroller>
+    );
+    const view = render(<ReplaceableChat />);
+    const oldNode = screen.getByRole(part === 'viewport' ? 'region' : 'log');
+    view.rerender(<ReplaceableChat version={1} />);
+    const nextNode = screen.getByRole(part === 'viewport' ? 'region' : 'log');
+    expect(nextNode).not.toBe(oldNode);
+    expect(observed).toContain(nextNode);
+    expect(disconnect).toHaveBeenCalled();
+    const viewport = screen.getByRole('region');
+    fireEvent.wheel(viewport);
+    viewport.scrollTop = 70;
+    fireEvent.scroll(viewport);
+    flush();
+    height = 500;
+    flush();
+    expect(viewport.scrollTop).toBe(70);
+  }
+);
+
+test('preserves the visible row when options change during a history prepend', () => {
+  const view = render(<Chat />);
+  const viewport = screen.getByRole('region');
+  fireEvent.wheel(viewport);
+  viewport.scrollTop = 120;
+  fireEvent.scroll(viewport);
+  flush();
+  height = 500;
+  view.rerender(<Chat prepend scrollEdgeThreshold={12} />);
+  flush();
+  expect(viewport.scrollTop).toBe(220);
+});
+
+test('nearest navigation to a visible message pauses following without moving', () => {
+  const NearestCommand = () => {
+    const { scrollToMessage } = useMessageScroller();
+    return (
+      <button onClick={() => scrollToMessage('visible', { align: 'nearest' })}>
+        Read visible
+      </button>
+    );
+  };
+  render(
+    <MessageScroller defaultScrollPosition="end">
+      <MessageScroller.Viewport>
+        <MessageScroller.Content>
+          <MessageScroller.Item messageId="visible" data-top="250">
+            Visible
+          </MessageScroller.Item>
+        </MessageScroller.Content>
+      </MessageScroller.Viewport>
+      <NearestCommand />
+    </MessageScroller>
+  );
+  const viewport = screen.getByRole('region');
+  expect(viewport.scrollTop).toBe(200);
+  fireEvent.click(screen.getByRole('button', { name: 'Read visible' }));
+  expect(viewport.scrollTop).toBe(200);
+  height = 500;
+  flush();
+  expect(viewport.scrollTop).toBe(200);
+});
+
+test('reserves the end margin for initial position, jump and following without an anchor', () => {
+  render(
+    <MessageScroller defaultScrollPosition="end" scrollMargin={24}>
+      <MessageScroller.Viewport>
+        <MessageScroller.Content>
+          <MessageScroller.Item messageId="saved">Saved</MessageScroller.Item>
+        </MessageScroller.Content>
+      </MessageScroller.Viewport>
+      <MessageScroller.Button />
+    </MessageScroller>
+  );
+  const viewport = screen.getByRole('region');
+  expect(viewport.scrollTop).toBe(224);
+  expect((viewport.lastElementChild as HTMLElement).style.height).toBe('24px');
+  height = 500;
+  flush();
+  expect(viewport.scrollTop).toBe(324);
+  fireEvent.wheel(viewport);
+  viewport.scrollTop = 100;
+  fireEvent.scroll(viewport);
+  flush();
+  fireEvent.click(screen.getByRole('button', { name: 'Jump to latest' }));
+  expect(viewport.scrollTop).toBe(324);
+  expect(
+    screen.queryByRole('button', { name: 'Jump to latest' })
+  ).not.toBeInTheDocument();
+});
+
+test('coalesces scroll measurements and cancels queued work on unmount', () => {
+  const view = render(<Chat defaultScrollPosition="start" />);
+  const viewport = screen.getByRole('region');
+  const measure = jest.spyOn(viewport, 'getBoundingClientRect');
+  const schedule = jest.spyOn(window, 'requestAnimationFrame');
+  measure.mockClear();
+  schedule.mockClear();
+  viewport.scrollTop = 20;
+  fireEvent.scroll(viewport);
+  viewport.scrollTop = 40;
+  fireEvent.scroll(viewport);
+  expect(measure).not.toHaveBeenCalled();
+  expect(schedule).toHaveBeenCalledTimes(1);
+  act(() => {
+    jest.runOnlyPendingTimers();
+  });
+  expect(measure).toHaveBeenCalled();
+  measure.mockClear();
+  fireEvent.scroll(viewport);
+  view.unmount();
+  act(() => {
+    jest.runOnlyPendingTimers();
+  });
+  expect(measure).not.toHaveBeenCalled();
+});
+
+test('scroll edge detection reads changed viewport padding without an observer callback', () => {
+  render(<Chat defaultScrollPosition="start" />);
+  const viewport = screen.getByRole('region');
+  viewport.style.paddingBottom = '40px';
+  viewport.scrollTop = 200;
+  fireEvent.scroll(viewport);
+  act(() => {
+    jest.runOnlyPendingTimers();
+  });
+  expect(screen.getByRole('button', { name: 'Jump to latest' })).toBeVisible();
+});

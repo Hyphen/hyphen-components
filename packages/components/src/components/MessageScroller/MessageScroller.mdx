@@ -26,7 +26,7 @@ Viewport, Content, and Item accept Box props and forward their refs. Button acce
 
 ## Composition
 
-Keep one Viewport and Content mounted per provider. Item IDs must remain stable when optimistic messages are accepted by the server; use a client-generated correlation ID where available. Keep dates and support handoff markers as Items without `scrollAnchor` so they do not start a new turn.
+Use one Viewport and Content per provider. Observers and event listeners rebind if either DOM node mounts later or is replaced. Item IDs must remain stable when optimistic messages are accepted by the server; use a client-generated correlation ID where available. Keep dates and support handoff markers as Items without `scrollAnchor` so they do not start a new turn.
 
 ```tsx
 <MessageScroller
@@ -67,7 +67,7 @@ Keep one Viewport and Content mounted per provider. Item IDs must remain stable 
 
 Newly appended anchors move near the top, retaining `scrollPreviousItemPeek` pixels of context (64 by default). Trailing space lets a short turn reach that position and shrinks as the response grows. Streaming does not push the anchored prompt offscreen. Jump to latest, or scroll down to the live edge, to follow subsequent content growth. Scrolling, keyboard navigation, pointer interaction, and text selection pause following. Prepending history preserves the first visible identified row. Use `followOutput={false}` to disable following growth entirely.
 
-`defaultScrollPosition` supports `start` (default), `end`, and `last-anchor`. Use `ready={false}` during initial loading and key the provider by conversation ID to reset it when switching threads. Keep one Viewport and Content mounted per provider. Changing initial-position options after mounting does not reset the conversation; remount with a new key instead.
+`defaultScrollPosition` supports `start` (default), `end`, and `last-anchor`. Use `ready={false}` during initial loading and key the provider by conversation ID to reset it when switching threads. Use one Viewport and Content per provider. Observers and event listeners rebind if either DOM node mounts later or is replaced. Changing initial-position options after mounting does not reset the conversation; remount with a new key instead.
 
 ## Hooks for custom controls
 
@@ -82,7 +82,7 @@ Command options include `behavior` (`auto`, `instant`, or `smooth`). `scrollToMe
 
 ## Accessibility and resizing
 
-The viewport is a keyboard-focusable region labelled “Messages”; customize `aria-label` for multiple conversations. Content uses `role="log"` and announces additions. Pass `aria-busy` when batching streamed announcements. Scroll buttons leave the tab order when inactive. Smooth commands respect reduced motion. ResizeObserver handles streamed text, images, and panel resizing; MutationObserver observes message changes. Both are disconnected on unmount.
+The viewport is a keyboard-focusable region labelled “Messages”; customize `aria-label` for multiple conversations. Content uses `role="log"` and announces additions. Pass `aria-busy` when batching streamed announcements. Scroll buttons leave the tab order when inactive. Smooth commands respect reduced motion. Scroll events are measured at most once per animation frame; pending scroll and content measurement frames are cancelled during cleanup. ResizeObserver handles streamed text, images, and panel resizing; MutationObserver observes message changes. Both are disconnected on unmount.
 
 <ArgTypes of={MessageScroller} />
 

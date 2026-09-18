@@ -34,8 +34,10 @@ export interface MessageScrollOptions {
 }
 
 interface ScrollerContext {
-  viewport: React.MutableRefObject<HTMLDivElement | null>;
-  content: React.MutableRefObject<HTMLDivElement | null>;
+  viewport: HTMLDivElement | null;
+  setViewport: (node: HTMLDivElement | null) => void;
+  content: HTMLDivElement | null;
+  setContent: (node: HTMLDivElement | null) => void;
   spacer: React.MutableRefObject<HTMLDivElement | null>;
   scrollToStart: (options?: MessageScrollOptions) => boolean;
   scrollToEnd: (options?: MessageScrollOptions) => boolean;
@@ -68,28 +70,32 @@ const MessageScrollerRoot = ({
   scrollPreviousItemPeek = 64,
   scrollEdgeThreshold = 8,
 }: MessageScrollerProps) => {
-  const viewport = useRef<HTMLDivElement | null>(null);
-  const content = useRef<HTMLDivElement | null>(null);
+  const [viewportNode, setViewportNode] = useState<HTMLDivElement | null>(null);
+  const [contentNode, setContentNode] = useState<HTMLDivElement | null>(null);
   const spacer = useRef<HTMLDivElement | null>(null);
   const following = useRef(false);
   const initialized = useRef(false);
   const history = useRef<{ ids: string[]; anchor?: string }>({ ids: [] });
+  const visibleRef = useRef<{ id: string; top: number; scrollTop: number }>();
   const [scrollable, setScrollable] = useState({ start: false, end: false });
   const refresh = useRef<() => void>(() => undefined);
 
-  const move = useCallback((top: number, behavior: ScrollBehavior = 'auto') => {
-    const node = viewport.current;
-    if (!node) return false;
-    const reducedMotion = window.matchMedia?.(
-      '(prefers-reduced-motion: reduce)'
-    ).matches;
-    node.scrollTo({
-      top: Math.max(0, top),
-      behavior: reducedMotion ? 'auto' : behavior,
-    });
-    refresh.current();
-    return true;
-  }, []);
+  const move = useCallback(
+    (top: number, behavior: ScrollBehavior = 'auto') => {
+      const node = viewportNode;
+      if (!node) return false;
+      const reducedMotion = window.matchMedia?.(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
+      node.scrollTo({
+        top: Math.max(0, top),
+        behavior: reducedMotion ? 'auto' : behavior,
+      });
+      refresh.current();
+      return true;
+    },
+    [viewportNode]
+  );
 
   const scrollToStart = useCallback(
     (options?: MessageScrollOptions) => {
@@ -101,10 +107,10 @@ const MessageScrollerRoot = ({
 
   const scrollToEnd = useCallback(
     (options?: MessageScrollOptions) => {
-      following.current = true;
-      const node = viewport.current;
-      const list = content.current;
+      const node = viewportNode;
+      const list = contentNode;
       if (!node || !list) return false;
+      following.current = true;
       const bottom =
         list.getBoundingClientRect().bottom -
         node.getBoundingClientRect().top -
@@ -113,19 +119,19 @@ const MessageScrollerRoot = ({
       return move(
         bottom -
           node.clientHeight +
-          (parseFloat(getComputedStyle(node).paddingBottom) || 0),
+          (parseFloat(getComputedStyle(node).paddingBottom) || 0) +
+          scrollMargin,
         options?.behavior
       );
     },
-    [move]
+    [move, viewportNode, contentNode, scrollMargin]
   );
 
   const scrollToMessage = useCallback(
     (id: string, options?: MessageScrollOptions) => {
-      const node = viewport.current;
+      const node = viewportNode;
       const item = Array.from(
-        content.current?.querySelectorAll<HTMLElement>('[data-message-id]') ??
-          []
+        contentNode?.querySelectorAll<HTMLElement>('[data-message-id]') ?? []
       ).find((row) => row.dataset.messageId === id);
       if (!node || !item) return false;
       const rect = item.getBoundingClientRect();
@@ -135,13 +141,13 @@ const MessageScrollerRoot = ({
         node.clientTop +
         node.scrollTop;
       const align = options?.align ?? 'start';
+      following.current = false;
       if (
         align === 'nearest' &&
         top >= node.scrollTop &&
         top + rect.height <= node.scrollTop + node.clientHeight
       )
         return true;
-      following.current = false;
       return move(
         top -
           (align === 'center'
@@ -152,18 +158,24 @@ const MessageScrollerRoot = ({
         options?.behavior
       );
     },
-    [move, scrollMargin]
+    [move, scrollMargin, viewportNode, contentNode]
   );
 
   useClientLayoutEffect(() => {
-    const node = viewport.current;
-    const list = content.current;
+    const node = viewportNode;
+    const list = contentNode;
     const space = spacer.current;
-    if (!node || !list || !space) return;
+    if (!node || !list || !space) {
+      setScrollable((current) =>
+        current.start || current.end ? { start: false, end: false } : current
+      );
+      return;
+    }
     let frame = 0;
+    let scrollFrame = 0;
     let previousIds = history.current.ids;
     let previousAnchor = history.current.anchor;
-    let visible: { id: string; top: number } | undefined;
+    let visible = visibleRef.current;
     let lastScrollTop = node.scrollTop;
     let userScrolling = false;
 
@@ -180,19 +192,25 @@ const MessageScrollerRoot = ({
           topOf(row) + row.getBoundingClientRect().height > node.scrollTop
       );
       visible = item
-        ? { id: item.dataset.messageId!, top: topOf(item) - node.scrollTop }
+        ? {
+            id: item.dataset.messageId!,
+            top: topOf(item) - node.scrollTop,
+            scrollTop: node.scrollTop,
+          }
         : undefined;
+      visibleRef.current = visible;
     };
     const distanceToEnd = () =>
       topOf(list) +
       list.getBoundingClientRect().height +
-      (parseFloat(getComputedStyle(node).paddingBottom) || 0) -
+      (parseFloat(getComputedStyle(node).paddingBottom) || 0) +
+      scrollMargin -
       node.clientHeight -
       node.scrollTop;
-    const updateState = () => {
+    const updateState = (endDistance = distanceToEnd()) => {
       const next = {
         start: node.scrollTop > scrollEdgeThreshold,
-        end: distanceToEnd() > scrollEdgeThreshold,
+        end: endDistance > scrollEdgeThreshold,
       };
       setScrollable((current) =>
         current.start === next.start && current.end === next.end
@@ -201,7 +219,7 @@ const MessageScrollerRoot = ({
       );
       remember();
     };
-    refresh.current = updateState;
+    refresh.current = () => updateState();
 
     const measure = () => {
       frame = 0;
@@ -221,12 +239,14 @@ const MessageScrollerRoot = ({
       // response grows, the space shrinks without moving the reader.
       const paddingBottom =
         parseFloat(getComputedStyle(node).paddingBottom) || 0;
-      const spaceHeight = anchor
-        ? Math.max(
-            0,
-            anchorTop + node.clientHeight - naturalBottom - paddingBottom
-          )
-        : 0;
+      // Keep the end inset scrollable even when there is no user-turn anchor.
+      const spaceHeight = Math.max(
+        0,
+        scrollMargin,
+        anchor
+          ? anchorTop + node.clientHeight - naturalBottom - paddingBottom
+          : 0
+      );
       const height = `${spaceHeight}px`;
       if (space.style.height !== height) space.style.height = height;
 
@@ -257,7 +277,11 @@ const MessageScrollerRoot = ({
         ids.indexOf(previousIds[0]) > 0
       ) {
         const item = items.find((row) => row.dataset.messageId === visible?.id);
-        if (item) move(topOf(item) - visible.top);
+        if (item) {
+          // A scroll may arrive before the next measurement frame. Include that
+          // movement when preserving a snapshot taken before a same-frame prepend.
+          move(topOf(item) - visible.top + node.scrollTop - visible.scrollTop);
+        }
       } else if (following.current && followOutput) {
         scrollToEnd();
       }
@@ -293,14 +317,29 @@ const MessageScrollerRoot = ({
         interrupt();
     };
     const onScroll = () => {
-      if (
-        userScrolling &&
-        node.scrollTop > lastScrollTop &&
-        distanceToEnd() <= scrollEdgeThreshold
-      )
-        following.current = true;
-      lastScrollTop = node.scrollTop;
-      updateState();
+      if (scrollFrame) return;
+      scrollFrame = requestAnimationFrame(() => {
+        scrollFrame = 0;
+        const scrollTop = node.scrollTop;
+        // Read current styles once per scroll frame: viewport/ancestor style
+        // changes are not all covered by the transcript's mutation observer.
+        const endDistance = distanceToEnd();
+        if (
+          userScrolling &&
+          scrollTop > lastScrollTop &&
+          endDistance <= scrollEdgeThreshold
+        )
+          following.current = true;
+        lastScrollTop = scrollTop;
+        if (frame) {
+          // Process pending transcript changes before replacing the visible-row
+          // snapshot with measurements from the newly prepended content.
+          cancelAnimationFrame(frame);
+          measure();
+        } else {
+          updateState(endDistance);
+        }
+      });
     };
     const onSelection = () => {
       const selection = window.getSelection();
@@ -335,6 +374,7 @@ const MessageScrollerRoot = ({
     measure();
     return () => {
       cancelAnimationFrame(frame);
+      cancelAnimationFrame(scrollFrame);
       resize?.disconnect();
       mutation.disconnect();
       node.removeEventListener('scroll', onScroll);
@@ -347,6 +387,8 @@ const MessageScrollerRoot = ({
       refresh.current = () => undefined;
     };
   }, [
+    viewportNode,
+    contentNode,
     ready,
     defaultScrollPosition,
     followOutput,
@@ -360,15 +402,24 @@ const MessageScrollerRoot = ({
 
   const value = useMemo(
     () => ({
-      viewport,
-      content,
+      viewport: viewportNode,
+      setViewport: setViewportNode,
+      content: contentNode,
+      setContent: setContentNode,
       spacer,
       scrollToStart,
       scrollToEnd,
       scrollToMessage,
       scrollable,
     }),
-    [scrollToStart, scrollToEnd, scrollToMessage, scrollable]
+    [
+      viewportNode,
+      contentNode,
+      scrollToStart,
+      scrollToEnd,
+      scrollToMessage,
+      scrollable,
+    ]
   );
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };
@@ -386,10 +437,10 @@ export const MessageScrollerViewport = React.forwardRef<
   const context = useScrollerContext();
   const setRef = useCallback(
     (node: HTMLDivElement | null) => {
-      context.viewport.current = node;
+      context.setViewport(node);
       assignRef(ref, node);
     },
-    [context.viewport, ref]
+    [context.setViewport, ref]
   );
   const edges = [
     context.scrollable.start && 'start',
@@ -427,13 +478,13 @@ export const MessageScrollerContent = React.forwardRef<
   HTMLDivElement,
   BoxProps
 >((props, ref) => {
-  const { content } = useScrollerContext();
+  const { setContent } = useScrollerContext();
   const setRef = useCallback(
     (node: HTMLDivElement | null) => {
-      content.current = node;
+      setContent(node);
       assignRef(ref, node);
     },
-    [content, ref]
+    [setContent, ref]
   );
   return (
     <Box
