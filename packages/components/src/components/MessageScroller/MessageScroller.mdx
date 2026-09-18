@@ -1,0 +1,89 @@
+import { Canvas, Meta, ArgTypes } from '@storybook/addon-docs/blocks';
+import { MessageScroller } from './MessageScroller';
+import * as Stories from './MessageScroller.stories';
+
+<Meta of={Stories} />
+
+# Message Scroller
+
+MessageScroller coordinates a conversation's scroll position as messages arrive, responses stream, and earlier history loads. It supplies the scrolling behavior; Message and Marker supply the transcript rows.
+
+<Canvas of={Stories.AnchoredConversation} />
+
+Send a prompt to start a streamed response, load earlier history, and use the jump button to try the scrolling behavior.
+
+## Components
+
+| Component | Description | Placement |
+| --- | --- | --- |
+| `MessageScroller` | The provider for the conversation's scroll state and commands. Renders no DOM element. Sets initial positioning, response following, and history preservation. There is no separate `MessageScrollerProvider` export. | Around the Viewport and any scroll controls. Key it by conversation ID to reset state when switching threads. |
+| `MessageScroller.Viewport` | The actual scrollable element. A keyboard-focusable region labelled “Messages” by default. Owns the scroll position and the invisible trailing space that lets a short new turn reach its anchor position. | One per `MessageScroller`; give it a bounded height or a bounded flex parent with `minHeight="0"`. |
+| `MessageScroller.Content` | The transcript container whose size and rows are observed. Stacks children with a `2xl` gap by default. Uses `role="log"` and `aria-relevant="additions"` for new-message announcements. | One inside the Viewport, containing the transcript Items. |
+| `MessageScroller.Item` | Identifies a transcript row with a required, stable `messageId`. Set `scrollAnchor` on user turns that should move near the top when appended; it defaults to `false`. IDs also support navigation and preserving position when history is prepended. | Inside Content, directly or nested within other transcript layout. Wrap messages, dates, and system markers. |
+| `MessageScroller.Button` | A scroll control built on Button. Defaults to a down-arrow icon with the accessible label “Jump to latest”, `direction="end"`, and `behavior="smooth"`. `direction="start"` uses an up-arrow icon labelled “Scroll up”. Hides and disables itself when that direction has no remaining content. Pass children for a custom visible label, or override `aria-label` for an icon button. Accepts Button props. | Anywhere inside the provider, including outside the Viewport. Position it with the surrounding layout. |
+
+Viewport, Content, and Item accept Box props and forward their refs. Button accepts Button props and forwards its button ref. Named exports are also available: `MessageScrollerViewport`, `MessageScrollerContent`, `MessageScrollerItem`, and `MessageScrollerButton`.
+
+## Composition
+
+Use one Viewport and Content per provider. Observers and event listeners rebind if either DOM node mounts later or is replaced. Item IDs must remain stable when optimistic messages are accepted by the server; use a client-generated correlation ID where available. Keep dates and support handoff markers as Items without `scrollAnchor` so they do not start a new turn.
+
+```tsx
+<MessageScroller
+  key={conversationId}
+  ready={!isLoading}
+  defaultScrollPosition="end"
+>
+  <MessageScroller.Viewport height="400px">
+    <MessageScroller.Content>
+      {messages.map((message) => (
+        <MessageScroller.Item
+          key={message.id}
+          messageId={message.id}
+          scrollAnchor={message.role === 'user'}
+        >
+          <Message>{message.content}</Message>
+        </MessageScroller.Item>
+      ))}
+    </MessageScroller.Content>
+  </MessageScroller.Viewport>
+  <MessageScroller.Button />
+</MessageScroller>
+```
+
+## Provider options
+
+| Prop | Default | Purpose |
+| --- | --- | --- |
+| `defaultScrollPosition` | `"start"` | Initial position: `"start"`, `"end"`, or `"last-anchor"`. |
+| `ready` | `true` | Set to `false` while the initial saved messages are loading; positioning begins when ready. |
+| `followOutput` | `true` | Follow growing content after the reader reaches or jumps to the live edge. |
+| `preserveScrollOnPrepend` | `true` | Keep the first visible identified row in place when earlier history is inserted. |
+| `scrollMargin` | `0` | Pixel inset used when positioning message targets and the content end. |
+| `scrollPreviousItemPeek` | `64` | Pixels of previous context retained above a newly appended anchor. |
+| `scrollEdgeThreshold` | `8` | Pixel tolerance for deciding whether the viewport is at an edge. |
+
+## Anchoring and reading behavior
+
+Newly appended anchors move near the top, retaining `scrollPreviousItemPeek` pixels of context (64 by default). Trailing space lets a short turn reach that position and shrinks as the response grows. Streaming does not push the anchored prompt offscreen. Jump to latest, or scroll down to the live edge, to follow subsequent content growth. Scrolling, keyboard navigation, pointer interaction, and text selection pause following. Prepending history preserves the first visible identified row. Use `followOutput={false}` to disable following growth entirely.
+
+`defaultScrollPosition` supports `start` (default), `end`, and `last-anchor`. Use `ready={false}` during initial loading and key the provider by conversation ID to reset it when switching threads. Use one Viewport and Content per provider. Observers and event listeners rebind if either DOM node mounts later or is replaced. Changing initial-position options after mounting does not reset the conversation; remount with a new key instead.
+
+## Hooks for custom controls
+
+Both hooks must be called from a component rendered inside `MessageScroller`.
+
+| Hook | Returns | Use |
+| --- | --- | --- |
+| `useMessageScroller()` | `scrollToStart(options?)`, `scrollToEnd(options?)`, and `scrollToMessage(messageId, options?)`. | Build custom navigation. Commands return `false` when the viewport or requested mounted item is unavailable. `scrollToEnd` enables following subsequent growth; navigating to the start or a message pauses it. |
+| `useMessageScrollerScrollable()` | `{ start: boolean, end: boolean }`. | Show or enable controls based on whether more transcript content exists in each direction. The end calculation ignores the empty anchor spacer. |
+
+Command options include `behavior` (`auto`, `instant`, or `smooth`). `scrollToMessage` also accepts `align` (`start`, `center`, `end`, or `nearest`), defaulting to `start`. There is no virtualization or pending navigation to unmounted rows. Viewport also exposes the available directions as space-separated values on its `data-scrollable` attribute; the attribute is omitted when neither direction is available.
+
+## Accessibility and resizing
+
+The viewport is a keyboard-focusable region labelled “Messages”; customize `aria-label` for multiple conversations. Content uses `role="log"` and announces additions. Pass `aria-busy` when batching streamed announcements. Scroll buttons leave the tab order when inactive. Smooth commands respect reduced motion. Scroll events are measured at most once per animation frame; pending scroll and content measurement frames are cancelled during cleanup. ResizeObserver handles streamed text, images, and panel resizing; MutationObserver observes message changes. Both are disconnected on unmount.
+
+<ArgTypes of={MessageScroller} />
+
+Conversation examples also use Marker for dates and system notes. Keep timeline markers outside Message groups; in MessageScroller, give them stable Item IDs without `scrollAnchor`.

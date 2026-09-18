@@ -1,0 +1,64 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as Stories from './Marker.stories';
+
+<Meta of={Stories} />
+
+# Marker
+
+Marker displays conversation events that do not belong to a sender's message bubble: dates, unread boundaries, progress notes, and support joining or leaving. It uses Hyphen text, spacing, and border tokens.
+
+<Canvas of={Stories.Variants} />
+
+## Components
+
+| Component | Description | Placement |
+| --- | --- | --- |
+| `Marker` | The root row. Chooses the layout through `variant` and carries any semantics such as `role="status"`. Renders a `div` by default; use `as="a"` or `as="button"` for native interactive markers. | Between Message rows or groups, or inside its own MessageScroller.Item. |
+| `Marker.Icon` | An optional, non-shrinking decorative slot for an icon or Spinner. Always hidden from assistive technology with `aria-hidden="true"`; the adjacent content must convey the meaning. | Inside Marker, usually before Content. |
+| `Marker.Content` | The marker's readable label or custom content. Renders a `span` and wraps long text and unbroken identifiers within the available width. | Inside Marker, alongside an optional Icon. |
+
+Every part accepts Box props and forwards its ref. `Marker.Icon` and `Marker.Content` are also exported as `MarkerIcon` and `MarkerContent`.
+
+## Variants
+
+| `variant` | Description | Example |
+| --- | --- | --- |
+| `default` | An inline note within a full-width row, without divider lines. This is the default. | A completed check or streaming progress. |
+| `border` | The same row with a decorative bottom border. | A status update separating the next part of the transcript. |
+| `separator` | A centered label with decorative divider lines on both sides. | A date, unread boundary, or support handoff event. |
+
+```tsx
+<Marker variant="separator">
+  <Marker.Content>Hyphen Support joined</Marker.Content>
+</Marker>
+```
+
+## Status and decorative icons
+
+Icons are hidden from assistive technology; put the meaning in Content. Set `role="status"` for progress that should be announced. Static notes have no role by default. Labeled separators keep their text accessible and do not use `role="separator"`.
+
+<Canvas of={Stories.StatusAndIcons} />
+
+## Links and buttons
+
+Use Hyphen's `as="a"` with `href`, or `as="button"` with `type="button"`, to give actions native keyboard and accessibility behavior. The root preserves element-specific props and ref types. It does not require Base UI or a `render` prop.
+
+<Canvas of={Stories.LinksAndButtons} />
+
+## Long labels
+
+Labels wrap within narrow containers, including long unbroken identifiers.
+
+<Canvas of={Stories.LongLabels} />
+
+## Conversation timelines
+
+Place date or unread markers between Message rows or groups. Inside MessageScroller.Content, wrap each marker in a MessageScroller.Item with a stable `messageId`. Leave `scrollAnchor` off: a system note or date is not a new user turn.
+
+```tsx
+<MessageScroller.Item messageId="date-today">
+  <Marker variant="separator">
+    <Marker.Content>Today</Marker.Content>
+  </Marker>
+</MessageScroller.Item>
+```
