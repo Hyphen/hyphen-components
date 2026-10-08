@@ -746,3 +746,39 @@ const OrgSwitcher = ({
     </DropdownMenu>
   );
 };
+
+export const ResizableBothSides = () => (
+  <SidebarProvider>
+    <Sidebar
+      side="left"
+      collapsible="icon"
+      resizable
+      widthStorageKey="storybook-sidebar-left-width"
+    >
+      <SidebarHeader>Resizable navigation</SidebarHeader>
+      <SidebarRail />
+    </Sidebar>
+    <SidebarInset>
+      <Card height="100" padding="2xl">
+        <SidebarTrigger />
+        <SidebarTrigger side="right" />
+        <p>
+          Drag either rail to resize, or click to collapse. Focus a rail and use
+          arrow keys to resize.
+        </p>
+      </Card>
+    </SidebarInset>
+    <Sidebar
+      side="right"
+      resizable
+      defaultWidth={384}
+      minWidth={320}
+      maxWidth={960}
+      widthStorageKey="storybook-sidebar-right-width"
+    >
+      <SidebarHeader>Resizable agent panel</SidebarHeader>
+      <SidebarRail />
+    </Sidebar>
+  </SidebarProvider>
+);
+ResizableBothSides.displayName = 'ResizableBothSides';

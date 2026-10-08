@@ -1,0 +1,42 @@
+.marker {
+  &.border {
+    border-bottom: var(--size-border-width-sm) solid var(--color-border-default);
+  }
+
+  &.separator {
+    text-align: center;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1 0 16px;
+      border-top: var(--size-border-width-sm) solid var(--color-border-default);
+    }
+  }
+
+  &:is(a, button) {
+    background: transparent;
+    border: 0;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: start;
+
+    &:hover {
+      color: var(--color-font-base);
+    }
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.content {
+  overflow-wrap: anywhere;
+}

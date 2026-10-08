@@ -124,6 +124,52 @@ describe('Sidebar', () => {
     expect(rightSidebar).toHaveAttribute('data-state', 'collapsed');
   });
 
+  test.each([
+    ['Cmd', { metaKey: true }],
+    ['Ctrl', { ctrlKey: true }],
+  ])('leaves %s+[ and ] to the browser', (_label, modifier) => {
+    render(
+      <SidebarProvider>
+        <Sidebar side="left">
+          <div>Left</div>
+        </Sidebar>
+        <Sidebar side="right">
+          <div>Right</div>
+        </Sidebar>
+      </SidebarProvider>
+    );
+
+    expect(fireEvent.keyDown(window, { key: '[', ...modifier })).toBe(true);
+    expect(fireEvent.keyDown(window, { key: ']', ...modifier })).toBe(true);
+    expect(document.querySelector('[data-side="left"]')).toHaveAttribute(
+      'data-state',
+      'expanded'
+    );
+    expect(document.querySelector('[data-side="right"]')).toHaveAttribute(
+      'data-state',
+      'expanded'
+    );
+  });
+
+  test.each([
+    ['AltGraph', { ctrlKey: true, altKey: true, modifierAltGraph: true }],
+    ['Option', { altKey: true }],
+  ])('toggles when [ is typed with %s', (_label, modifier) => {
+    render(
+      <SidebarProvider>
+        <Sidebar side="left">
+          <div>Left</div>
+        </Sidebar>
+      </SidebarProvider>
+    );
+
+    fireEvent.keyDown(window, { key: '[', ...modifier });
+    expect(document.querySelector('[data-side="left"]')).toHaveAttribute(
+      'data-state',
+      'collapsed'
+    );
+  });
+
   test('calls onOpenChange callback when sidebar state changes', () => {
     const onOpenChange = jest.fn();
     render(

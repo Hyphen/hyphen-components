@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 16 16">
+    <g fill="currentColor">
+        <path
+            d="M16,3V13c0,1.105-.895,2-2,2H2c-1.105,0-2-.895-2-2V3C0,1.895,.895,1,2,1H14c1.105,0,2,.895,2,2ZM2,13H14V3H2V13Z"
+            fill="currentColor"></path>
+        <rect data-color="color-2" x="3" y="9" width="10" height="3" fill="currentColor"></rect>
+    </g>
+</svg>
