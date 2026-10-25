@@ -118,8 +118,8 @@ importers:
         specifier: 10.4.2
         version: 10.4.2(storybook@10.4.2(@testing-library/dom@10.4.1)(@types/react@18.3.31)(prettier@3.9.6)(react@18.3.1))
       '@storybook/addon-vitest':
-        specifier: 10.4.2
-        version: 10.4.2(@vitest/browser-playwright@4.1.10)(@vitest/browser@4.1.10)(@vitest/runner@4.1.11)(react@18.3.1)(storybook@10.4.2(@testing-library/dom@10.4.1)(@types/react@18.3.31)(prettier@3.9.6)(react@18.3.1))(vitest@4.1.11)
+        specifier: 10.6.2
+        version: 10.6.2(@vitest/browser-playwright@4.1.10)(@vitest/browser@4.1.10)(@vitest/runner@4.1.11)(react@18.3.1)(storybook@10.4.2(@testing-library/dom@10.4.1)(@types/react@18.3.31)(prettier@3.9.6)(react@18.3.1))(vitest@4.1.11)
       '@storybook/react-vite':
         specifier: 10.4.2
         version: 10.4.2(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(esbuild@0.27.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.62.3)(storybook@10.4.2(@testing-library/dom@10.4.1)(@types/react@18.3.31)(prettier@3.9.6)(react@18.3.1))(supports-color@8.1.1)(typescript@5.9.3)(vite@6.4.3(@types/node@22.20.1)(jiti@2.7.0)(sass@1.102.0)(terser@5.49.0)(yaml@2.9.0))(webpack@5.109.2)
@@ -2315,14 +2315,14 @@ packages:
     peerDependencies:
       storybook: ^10.4.2
 
-  '@storybook/addon-vitest@10.4.2':
-    resolution: {integrity: sha512-gq1ZVr0IOLgiS2PzaJqHxKLczwrXvA5g3W2k/FVJA19fJNFNUut1IyQCQRSJTXLLXbnNaa8I0wjGGc2BoLarJg==}
+  '@storybook/addon-vitest@10.6.2':
+    resolution: {integrity: sha512-gyyBzncvUyEgWQR3LinnGuI4UsWIUYLyw1u8i244aTxmY4uxCYjsDmUNkaSr8xQzNz8nh2Ckh3G4bO4SvJ6nJQ==}
     peerDependencies:
-      '@vitest/browser': ^3.0.0 || ^4.0.0
-      '@vitest/browser-playwright': ^4.0.0
-      '@vitest/runner': ^3.0.0 || ^4.0.0
-      storybook: ^10.4.2
-      vitest: ^3.0.0 || ^4.0.0
+      '@vitest/browser': ^3.0.0 || ^4.0.0 || ^5.0.0
+      '@vitest/browser-playwright': ^4.0.0 || ^5.0.0
+      '@vitest/runner': ^3.0.0 || ^4.0.0 || ^5.0.0
+      storybook: ^10.6.2
+      vitest: ^3.0.0 || ^4.0.0 || ^5.0.0
     peerDependenciesMeta:
       '@vitest/browser':
         optional: true
@@ -2362,6 +2362,11 @@ packages:
 
   '@storybook/icons@2.1.0':
     resolution: {integrity: sha512-Fxh9vYpX9bQqFeHRiY8h2ApeRGDzRSMLwJwNZ/AIRqnyOKHxRKL+yFe+ctEkVJmuptRE9u1Hrn8ZZNHyfDKKNg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  '@storybook/icons@2.2.0':
+    resolution: {integrity: sha512-FpUB/xizIrV1ILhCIYFo+TtQNN9YEoLjfcnAW0JtOXL+BcM2aisSysI0B54JMWDnljriXySBHgN6ps4s9lb75A==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -9847,10 +9852,10 @@ snapshots:
       storybook: 10.4.2(@testing-library/dom@10.4.1)(@types/react@18.3.31)(prettier@3.9.6)(react@18.3.1)
       ts-dedent: 2.3.0
 
-  '@storybook/addon-vitest@10.4.2(@vitest/browser-playwright@4.1.10)(@vitest/browser@4.1.10)(@vitest/runner@4.1.11)(react@18.3.1)(storybook@10.4.2(@testing-library/dom@10.4.1)(@types/react@18.3.31)(prettier@3.9.6)(react@18.3.1))(vitest@4.1.11)':
+  '@storybook/addon-vitest@10.6.2(@vitest/browser-playwright@4.1.10)(@vitest/browser@4.1.10)(@vitest/runner@4.1.11)(react@18.3.1)(storybook@10.4.2(@testing-library/dom@10.4.1)(@types/react@18.3.31)(prettier@3.9.6)(react@18.3.1))(vitest@4.1.11)':
     dependencies:
       '@storybook/global': 5.0.0
-      '@storybook/icons': 2.1.0(react@18.3.1)
+      '@storybook/icons': 2.2.0(react@18.3.1)
       storybook: 10.4.2(@testing-library/dom@10.4.1)(@types/react@18.3.31)(prettier@3.9.6)(react@18.3.1)
     optionalDependencies:
       '@vitest/browser': 4.1.10(vite@6.4.3(@types/node@22.20.1)(jiti@2.7.0)(sass@1.102.0)(terser@5.49.0)(yaml@2.9.0))(vitest@4.1.11)
@@ -9884,6 +9889,10 @@ snapshots:
   '@storybook/global@5.0.0': {}
 
   '@storybook/icons@2.1.0(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
+
+  '@storybook/icons@2.2.0(react@18.3.1)':
     dependencies:
       react: 18.3.1
 
@@ -13128,7 +13137,7 @@ snapshots:
       chalk: 4.1.2
       ci-info: 4.4.0
       graceful-fs: 4.2.11
-      picomatch: 4.0.5
+      picomatch: 4.0.7
 
   jest-validate@29.7.0:
     dependencies:
