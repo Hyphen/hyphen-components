@@ -128,7 +128,7 @@
     "sass": "^1.77.8",
     "sass-loader": "^13.3.3",
     "size-limit": "^11.2.0",
-    "storybook": "10.4.2",
+    "storybook": "10.6.2",
     "ts-jest": "^29.4.6",
     "tslib": "^2.8.1",
     "tsup": "^8.0.0",
