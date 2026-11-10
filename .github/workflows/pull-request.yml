@@ -29,7 +29,7 @@ jobs:
           install: false
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
           cache: pnpm
       - name: Verify dependency policy
         run: |
@@ -51,7 +51,7 @@ jobs:
           install: false
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -67,7 +67,7 @@ jobs:
           install: false
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -83,7 +83,7 @@ jobs:
           install: false
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -99,7 +99,7 @@ jobs:
           install: false
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -118,7 +118,7 @@ jobs:
           install: false
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile

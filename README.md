@@ -44,8 +44,8 @@ pnpm storybook        # run the component Storybook locally
 ```
 
 The component workspace uses TypeScript 6.0 and targets ES2020, matching the
-component bundle. Local development uses Node.js 22.13+ on the 22.x line or
-Node.js 24+, as required by ESLint 10.
+component bundle. Local development uses Node.js 24.11+ on the 24.x line or
+Node.js 26.x. CI uses Node.js 24, matching Hyphen App and the release workflow.
 
 ### Dependency release policy
 
