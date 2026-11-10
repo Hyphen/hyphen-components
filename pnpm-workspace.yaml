@@ -8,6 +8,8 @@ overrides:
   # Patched releases for GHSA-q2hr-2g5m-vwhr.
   'brace-expansion@<1.1.21': 1.1.21
   'brace-expansion@>=5.0.0 <5.0.12': 5.0.12
+  # Patch Jest's NYC config loader dependency for GHSA-2883-xcg3-v3hh.
+  '@istanbuljs/load-nyc-config@1.1.0>js-yaml': 3.15.2
 
 # Quarantine newly published dependency versions for 7 days. Keep lockfile
 # verification enabled so this policy also applies to frozen CI installs.
