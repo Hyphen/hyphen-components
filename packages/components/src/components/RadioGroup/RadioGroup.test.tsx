@@ -54,7 +54,7 @@ describe('RadioGroup', () => {
         );
         const radioInput = screen.getByLabelText('Blue');
         fireEvent.click(radioInput);
-        expect(mockedHandleChangeWithValue).toBeCalledTimes(1);
+        expect(mockedHandleChangeWithValue).toHaveBeenCalledTimes(1);
         expect(value).toBe('blue');
       });
     });
@@ -73,7 +73,7 @@ describe('RadioGroup', () => {
         );
         const radioInput = screen.getByLabelText('Blue');
         fireEvent.focus(radioInput);
-        expect(mockedHandleFocus).toBeCalledTimes(1);
+        expect(mockedHandleFocus).toHaveBeenCalledTimes(1);
       });
     });
 
@@ -91,7 +91,7 @@ describe('RadioGroup', () => {
         );
         const radioInput = screen.getByLabelText('Blue');
         fireEvent.blur(radioInput);
-        expect(mockedHandleBlur).toBeCalledTimes(1);
+        expect(mockedHandleBlur).toHaveBeenCalledTimes(1);
       });
     });
   });

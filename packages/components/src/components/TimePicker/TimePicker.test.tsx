@@ -160,7 +160,7 @@ describe('TimePicker', () => {
 
       fireEvent.change(timePicker, { target: { value: 'hello' } });
 
-      expect(mockedHandleChange).toBeCalledTimes(1);
+      expect(mockedHandleChange).toHaveBeenCalledTimes(1);
     });
   });
 });

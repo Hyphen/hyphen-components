@@ -173,7 +173,7 @@ describe('FormikTimePicker', () => {
 
         await fireEvent.change(getByLabelText(testLabelName));
 
-        expect(mockedHandleChange).toBeCalledTimes(1);
+        expect(mockedHandleChange).toHaveBeenCalledTimes(1);
       });
 
       test('it uses Formik onChange when no custom callback is provided', () => {

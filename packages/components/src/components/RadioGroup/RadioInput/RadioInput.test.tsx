@@ -44,7 +44,7 @@ describe('RadioInput', () => {
         );
         const radioInput = screen.getByLabelText('Chocolate');
         fireEvent.click(radioInput);
-        expect(mockedHandleChange).toBeCalledTimes(1);
+        expect(mockedHandleChange).toHaveBeenCalledTimes(1);
         expect(value).toBe('chocolate');
       });
     });
@@ -64,7 +64,7 @@ describe('RadioInput', () => {
         );
         const radioInput = screen.getByLabelText('Chocolate');
         fireEvent.focus(radioInput);
-        expect(mockedHandleFocus).toBeCalledTimes(1);
+        expect(mockedHandleFocus).toHaveBeenCalledTimes(1);
       });
     });
 
@@ -83,7 +83,7 @@ describe('RadioInput', () => {
         );
         const radioInput = screen.getByLabelText('Chocolate');
         fireEvent.blur(radioInput);
-        expect(mockedHandleBlur).toBeCalledTimes(1);
+        expect(mockedHandleBlur).toHaveBeenCalledTimes(1);
       });
     });
   });

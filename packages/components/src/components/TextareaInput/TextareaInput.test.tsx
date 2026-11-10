@@ -77,7 +77,7 @@ describe('TextareaInput', () => {
         render(<TextareaInput {...baseProps} onFocus={mockedHandleFocus} />);
         const inputElement = screen.getByDisplayValue(baseProps.value);
         fireEvent.focus(inputElement);
-        expect(mockedHandleFocus).toBeCalledTimes(1);
+        expect(mockedHandleFocus).toHaveBeenCalledTimes(1);
       });
     });
 
@@ -88,7 +88,7 @@ describe('TextareaInput', () => {
         const inputElement = screen.getByDisplayValue(baseProps.value);
         fireEvent.focus(inputElement);
         fireEvent.blur(inputElement);
-        expect(mockedHandleBlur).toBeCalledTimes(1);
+        expect(mockedHandleBlur).toHaveBeenCalledTimes(1);
       });
     });
   });

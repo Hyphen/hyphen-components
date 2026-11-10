@@ -162,7 +162,7 @@ describe('Checkbox', () => {
       );
       const checkbox = getByLabelText('test checkbox');
       fireEvent.click(checkbox);
-      expect(mockedHandleChange).toBeCalledTimes(1);
+      expect(mockedHandleChange).toHaveBeenCalledTimes(1);
       expect(value).toBe(false);
     });
   });

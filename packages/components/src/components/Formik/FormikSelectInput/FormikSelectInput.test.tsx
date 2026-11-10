@@ -203,7 +203,7 @@ describe('FormikSelectInput', () => {
 
         await selectEvent.select(getByLabelText('onchange test'), 'Vanilla');
 
-        expect(mockedHandleChange).toBeCalledTimes(1);
+        expect(mockedHandleChange).toHaveBeenCalledTimes(1);
       });
     });
   });

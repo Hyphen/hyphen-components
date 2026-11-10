@@ -57,7 +57,7 @@ describe('SelectInputNative', () => {
 
       await fireEvent.change(getByLabelText('onchange test'));
 
-      expect(mockedHandleChange).toBeCalledTimes(1);
+      expect(mockedHandleChange).toHaveBeenCalledTimes(1);
     });
 
     test('it fires onFocus callback on focus', () => {
@@ -78,7 +78,7 @@ describe('SelectInputNative', () => {
       const select = screen.getByLabelText('onfocus test');
       fireEvent.focus(select);
 
-      expect(mockedHandleFocus).toBeCalledTimes(1);
+      expect(mockedHandleFocus).toHaveBeenCalledTimes(1);
     });
 
     test('it fires onBlur callback on blur', () => {
@@ -100,7 +100,7 @@ describe('SelectInputNative', () => {
       const select = screen.getByLabelText('onblur test');
       fireEvent.blur(select);
 
-      expect(mockedHandleBlur).toBeCalledTimes(1);
+      expect(mockedHandleBlur).toHaveBeenCalledTimes(1);
     });
 
     test('it forwards native select attributes to the select element', () => {
