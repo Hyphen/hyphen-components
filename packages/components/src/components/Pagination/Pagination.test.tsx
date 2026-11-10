@@ -215,7 +215,7 @@ describe('Pagination', () => {
       if (nextButton) fireEvent.click(nextButton);
       if (pageFour) fireEvent.click(pageFour);
 
-      expect(mockedHandleChange).toBeCalledTimes(3);
+      expect(mockedHandleChange).toHaveBeenCalledTimes(3);
       expect(mockedHandleChange.mock.calls[0][0]).toBe(1);
       expect(mockedHandleChange.mock.calls[1][0]).toBe(3);
       expect(mockedHandleChange.mock.calls[2][0]).toBe(4);

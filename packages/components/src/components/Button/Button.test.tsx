@@ -135,7 +135,7 @@ describe('Button', () => {
         const buttonElement = getButton('Click');
         fireEvent.click(buttonElement);
         expect(mockedHandleClick).toHaveBeenCalledTimes(1);
-        expect(mockedNavigate).not.toBeCalled();
+        expect(mockedNavigate).not.toHaveBeenCalled();
       });
     });
 

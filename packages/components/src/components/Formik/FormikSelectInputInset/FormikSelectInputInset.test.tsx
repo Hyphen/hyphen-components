@@ -146,7 +146,7 @@ describe('FormikSelectInputInset', () => {
         );
         const combobox = getByRole('combobox');
         fireEvent.change(combobox, { target: { value: 'vanilla' } });
-        expect(mockedHandleChange).toBeCalledTimes(1);
+        expect(mockedHandleChange).toHaveBeenCalledTimes(1);
       });
     });
   });

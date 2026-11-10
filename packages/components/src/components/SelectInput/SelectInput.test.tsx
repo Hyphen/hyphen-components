@@ -47,7 +47,7 @@ describe('SelectInput', () => {
 
       await selectEvent.select(getByLabelText('onchange test'), 'Vanilla');
 
-      expect(mockedHandleChange).toBeCalledTimes(1);
+      expect(mockedHandleChange).toHaveBeenCalledTimes(1);
     });
 
     it('it fires onFocus callback on focus', () => {
@@ -68,7 +68,7 @@ describe('SelectInput', () => {
 
       fireEvent.focus(screen.getByRole('combobox'));
 
-      expect(mockedHandleFocus).toBeCalledTimes(1);
+      expect(mockedHandleFocus).toHaveBeenCalledTimes(1);
     });
 
     it('it fires onBlur callback on blur', () => {
@@ -89,7 +89,7 @@ describe('SelectInput', () => {
 
       fireEvent.blur(screen.getByRole('combobox'));
 
-      expect(mockedHandleBlur).toBeCalledTimes(1);
+      expect(mockedHandleBlur).toHaveBeenCalledTimes(1);
     });
   });
 

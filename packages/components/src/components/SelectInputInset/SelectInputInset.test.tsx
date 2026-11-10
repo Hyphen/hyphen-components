@@ -27,7 +27,7 @@ describe('SelectInputInset', () => {
 
       await fireEvent.change(getByLabelText('onchange test'));
 
-      expect(mockedHandleChange).toBeCalledTimes(1);
+      expect(mockedHandleChange).toHaveBeenCalledTimes(1);
     });
 
     test('it fires onFocus callback on focus', () => {
@@ -48,7 +48,7 @@ describe('SelectInputInset', () => {
       const select = screen.getByLabelText('onfocus test');
       fireEvent.focus(select);
 
-      expect(mockedHandleFocus).toBeCalledTimes(1);
+      expect(mockedHandleFocus).toHaveBeenCalledTimes(1);
     });
 
     test('it fires onBlur callback on blur', () => {
@@ -70,7 +70,7 @@ describe('SelectInputInset', () => {
       const select = screen.getByLabelText('onblur test');
       fireEvent.blur(select);
 
-      expect(mockedHandleBlur).toBeCalledTimes(1);
+      expect(mockedHandleBlur).toHaveBeenCalledTimes(1);
     });
   });
 
