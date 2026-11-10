@@ -281,7 +281,7 @@ importers:
         specifier: 4.1.12
         version: 4.1.12(@types/node@22.20.1)(@vitest/browser-playwright@4.1.12)(@vitest/coverage-v8@4.1.12)(jsdom@26.1.0(supports-color@8.1.1))(vite@8.3.7(@types/node@22.20.1)(esbuild@0.27.7)(jiti@2.7.0)(sass@1.102.0)(terser@5.49.0)(yaml@2.9.0))
       webpack:
-        specifier: ^5.94.0
+        specifier: ^5.101.0
         version: 5.109.2(cssnano@6.1.2(postcss@8.5.25))(csso@5.0.5)(esbuild@0.27.7)(lightningcss@1.33.0)(postcss@8.5.25)(uglify-js@3.19.3)(webpack-cli@7.3.1)
       webpack-cli:
         specifier: ^7.3.1
