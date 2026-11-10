@@ -70,7 +70,6 @@ describe('Pagination', () => {
         />
       );
       const expectedPages = ['1', '2', '3', '4', '5'];
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const pages: any[] = [];
 
       expectedPages.forEach((_page, i) => {

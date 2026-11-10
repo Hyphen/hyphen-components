@@ -214,7 +214,7 @@ describe('Checkbox', () => {
 
   describe('Hidden', () => {
     test('the radio input is hidden', () => {
-      const mockedHandleChange = jest.fn(() => {}); // eslint-disable-line
+      const mockedHandleChange = jest.fn(() => {});
 
       render(
         <Checkbox

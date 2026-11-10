@@ -1,6 +1,5 @@
 import { ResponsiveProp, BreakpointSizeWithBase } from '../types';
 
-// eslint-disable-next-line
 export function generateResponsiveClasses(
   classRoot: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

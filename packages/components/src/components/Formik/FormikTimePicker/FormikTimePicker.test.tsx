@@ -11,13 +11,13 @@ const handleValidation = (testValueKey: string) => (values: FormikValues) =>
     : setIn({}, testValueKey, 'input is required');
 
 const renderForm = (
-  initialValue: any, // eslint-disable-line
+  initialValue: any,
   props: {
     placeholder?: string;
     hideLabel?: boolean;
     isRequired?: unknown;
     isDisabled?: boolean;
-    onChange?: jest.Mock<void, [React.ChangeEvent<HTMLSelectElement>]>; // eslint-disable-line
+    onChange?: jest.Mock<void, [React.ChangeEvent<HTMLSelectElement>]>;
     interval?: number;
   },
   testValueKey = testLabelName
@@ -26,8 +26,8 @@ const renderForm = (
     initialValues={{
       [testLabelName]: initialValue,
     }}
-    validate={props.isRequired ? handleValidation(testValueKey) : undefined} // eslint-disable-line
-    onSubmit={() => {}} // eslint-disable-line
+    validate={props.isRequired ? handleValidation(testValueKey) : undefined}
+    onSubmit={() => {}}
   >
     {() => (
       <Form noValidate>

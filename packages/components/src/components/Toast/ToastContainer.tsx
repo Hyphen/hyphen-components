@@ -78,7 +78,7 @@ export interface ToastContainerProps {
   /**
    * Props spread into main container.
    */
-  [x: string]: unknown; // eslint-disable-line
+  [x: string]: unknown;
 }
 
 const DEFAULT_OFFSET = 16;

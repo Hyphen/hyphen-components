@@ -3,7 +3,6 @@ import { ExtendedToastOptions, Toast, ToastPosition } from './Toast.types';
 import { useToastStore, dispatch, ToastStoreActionType } from './Toast.store';
 import { toast } from './toast';
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useToasts = (toastOptions?: ExtendedToastOptions) => {
   const { toasts, pausedAt } = useToastStore(toastOptions);
 
@@ -27,11 +26,10 @@ export const useToasts = (toastOptions?: ExtendedToastOptions) => {
         }
         return undefined;
       }
-      return setTimeout(() => toast.dismiss(t.id), durationLeft); // eslint-disable-line consistent-return
+      return setTimeout(() => toast.dismiss(t.id), durationLeft);
     });
 
     return () => {
-      // eslint-disable-line consistent-return
       timeouts.forEach((timeout) => timeout && clearTimeout(timeout));
     };
   }, [toasts, pausedAt]);

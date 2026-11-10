@@ -21,8 +21,8 @@ export interface FormikSwitchProps {
 export const FormikSwitch: React.FC<FormikSwitchProps> = ({
   field: {
     name,
-    onBlur, // eslint-disable-line no-unused-vars
-    onChange, // eslint-disable-line no-unused-vars
+    onBlur,
+    onChange,
     value,
   },
   form: { touched, errors },
@@ -32,7 +32,7 @@ export const FormikSwitch: React.FC<FormikSwitchProps> = ({
     error={getIn(touched, name) && getIn(errors, name)}
     isChecked={value}
     onBlur={onBlur}
-    onChange={onChange} // eslint-disable-line
+    onChange={onChange}
     {...props}
   />
 );

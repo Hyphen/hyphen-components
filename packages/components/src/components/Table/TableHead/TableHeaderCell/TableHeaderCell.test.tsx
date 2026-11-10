@@ -160,7 +160,6 @@ describe('TableHeaderCell', () => {
 
     describe('Sticky', () => {
       test('it renders as a <th> element with correct classes and attributes if sticky is passed as a prop with "left" as its value', () => {
-        // eslint-disable-line max-len
         render(<TableHeaderCell column={column} sticky="left" />);
 
         const tableColumnHeader = screen.getByRole('columnheader');
@@ -172,7 +171,6 @@ describe('TableHeaderCell', () => {
       });
 
       test('it renders as a <th> element with correct classes and attributes if sticky is passed as a prop with "right" as its value', () => {
-        // eslint-disable-line max-len
         render(<TableHeaderCell column={column} sticky="right" />);
 
         const tableColumnHeader = screen.getByRole('columnheader');

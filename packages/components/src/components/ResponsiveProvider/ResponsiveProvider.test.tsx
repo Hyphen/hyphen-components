@@ -7,7 +7,7 @@ import { useBreakpoint } from '../../hooks/useBreakpoint/useBreakpoint';
 describe('Default', () => {
   test('calls resize when initially mounted', async () => {
     const mockEventListener = jest.spyOn(window, 'addEventListener');
-    mockEventListener.mockImplementation(() => {}); // eslint-disable-line
+    mockEventListener.mockImplementation(() => {});
 
     render(
       <ResponsiveProvider>
@@ -24,7 +24,7 @@ describe('Default', () => {
 describe('Responsive hooks', () => {
   it('registers one resize handler with useWindowSize', () => {
     const mockEventListener = jest.spyOn(window, 'addEventListener');
-    mockEventListener.mockImplementation(() => {}); // eslint-disable-line
+    mockEventListener.mockImplementation(() => {});
 
     const Component = () => {
       useWindowSize();
@@ -47,7 +47,7 @@ describe('Responsive hooks', () => {
 
   it('registers one resize handler with useBreakpoint', () => {
     const mockEventListener = jest.spyOn(window, 'addEventListener');
-    mockEventListener.mockImplementation(() => {}); // eslint-disable-line
+    mockEventListener.mockImplementation(() => {});
 
     const Component = () => {
       useBreakpoint();

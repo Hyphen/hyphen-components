@@ -45,7 +45,7 @@ describe('Toast', () => {
       right: 0,
       x: 0,
       y: 0,
-      toJSON: () => {}, // eslint-disable-line
+      toJSON: () => {},
     }));
   });
 
@@ -259,7 +259,6 @@ describe('Toast', () => {
       render(<ToastContainer />);
 
       const myPromise = new Promise((resolve) => {
-        // eslint-disable-line no-async-promise-executor
         wait(1000).then(() => {
           resolve('yay');
         });
@@ -289,9 +288,8 @@ describe('Toast', () => {
       render(<ToastContainer />);
 
       const myPromise = new Promise((_resolve, reject) => {
-        // eslint-disable-line no-async-promise-executor
         wait(1000).then(() => {
-          reject('boo'); // eslint-disable-line prefer-promise-reject-errors
+          reject('boo');
         });
       });
 

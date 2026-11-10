@@ -196,7 +196,7 @@ describe('Table', () => {
       test('if action is triggered, function is called', () => {
         const mockHandleClick = jest.fn();
         const tableDataWithClickableButton = [
-          { id: 1, color: null, flavor: <Button onClick={mockHandleClick}>Click me</Button> }, // eslint-disable-line
+          { id: 1, color: null, flavor: <Button onClick={mockHandleClick}>Click me</Button> },
           { id: 2, color: 'blue', flavor: 'chocolate' },
           { id: 3, color: 'green', flavor: 'strawberry' },
         ];

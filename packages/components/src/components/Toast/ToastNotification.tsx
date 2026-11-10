@@ -82,7 +82,6 @@ const renderToastIcon = (toast: Toast) => {
       <Spinner />
     );
 
-  // eslint-disable-next-line consistent-return
   return (
     <Box justifyContent="center" height="100">
       {icon}
@@ -96,7 +95,6 @@ const renderDismissIcon = (
 ) => {
   if (!toast.canDismiss) return;
 
-  // eslint-disable-next-line consistent-return
   return (
     <Box
       as="button"

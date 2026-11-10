@@ -13,7 +13,6 @@ const labelMarginSizeMap = {
 };
 
 const computedResponsiveSize = (
-  // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
   size: CheckboxInputProps['size']
 ) => {
   if (size && !(typeof size === 'string') && typeof size === 'object') {

@@ -14,11 +14,10 @@ type FormProps = {
   isRequired?: boolean;
   maxLength?: string;
   autoComplete?: boolean | string | string[];
-  onChange?: jest.Mock<void, [any]>; // eslint-disable-line
+  onChange?: jest.Mock<void, [any]>;
   autoFocus?: boolean;
 };
 
-// eslint-disable-next-line
 const renderForm = (
   initialValue: any,
   props: FormProps,
@@ -28,8 +27,8 @@ const renderForm = (
     initialValues={{
       [testLabelName]: initialValue,
     }}
-    validate={props.isRequired ? handleValidation(testValueKey) : undefined} // eslint-disable-line
-    onSubmit={() => {}} // eslint-disable-line
+    validate={props.isRequired ? handleValidation(testValueKey) : undefined}
+    onSubmit={() => {}}
   >
     {() => (
       <Form noValidate>

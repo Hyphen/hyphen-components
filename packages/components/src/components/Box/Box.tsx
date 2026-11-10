@@ -428,13 +428,13 @@ const BoxBaseComponent = <T extends BoxElement = 'div'>(
       stateKey: 'hover' | 'focus',
       values: BoxOwnProps['hover' | 'focus']
     ) =>
-      values // eslint-disable-line
+      values
         ? Object.entries(values).map(
             ([key, value]) =>
               cssPropertyMap[key].transformer(
                 `${stateKey}:${cssPropertyMap[key].classPrefix}`,
                 value
-              ) // eslint-disable-line max-len
+              )
           )
         : undefined;
 

@@ -25,8 +25,8 @@ const renderForm = (
     initialValues={{
       [testLabelName]: initialValue,
     }}
-    onSubmit={props.handleSubmit} // eslint-disable-line
-    validate={props.isRequired ? handleValidation(testValueKey) : undefined} // eslint-disable-line
+    onSubmit={props.handleSubmit}
+    validate={props.isRequired ? handleValidation(testValueKey) : undefined}
   >
     {() => (
       <Form noValidate>

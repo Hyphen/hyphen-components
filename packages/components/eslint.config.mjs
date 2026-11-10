@@ -14,7 +14,6 @@ export default defineConfig([
     languageOptions: {
       globals: { ...globals.browser, ...globals.node, ...globals.jest },
     },
-    linterOptions: { reportUnusedDisableDirectives: 'off' },
     plugins: {
       '@eslint-react': react,
       'react-hooks': reactHooks,

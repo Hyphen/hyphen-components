@@ -189,7 +189,7 @@ export type ModalWithStaticComponents = typeof ModalBaseComponent & ModalStatic;
 // Actual component is wrapped in an IIFE for the export
 // To allow tree-shaking even with static properties (subcomponents in this case).
 export const Modal = (() => {
-  const Modal = ModalBaseComponent as ModalWithStaticComponents; // eslint-disable-line no-shadow
+  const Modal = ModalBaseComponent as ModalWithStaticComponents;
   Modal.Body = ModalBody;
   Modal.Footer = ModalFooter;
   Modal.Header = ModalHeader;
