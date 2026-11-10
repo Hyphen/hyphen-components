@@ -103,7 +103,11 @@ export default defineConfig([
   // Type declarations only
   {
     entry: { index: 'src/index.ts' },
-    dts: { only: true },
+    dts: {
+      only: true,
+      // tsup 8 injects baseUrl when generating declarations.
+      compilerOptions: { ignoreDeprecations: '6.0' },
+    },
     clean: false,
   },
 ]);
