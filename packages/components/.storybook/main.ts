@@ -10,7 +10,7 @@ const config: StorybookConfig = {
   // @hyphen/hyphen-design-tokens is a workspace package, so Vite resolves it
   // outside node_modules and skips the CommonJS interop it applied when the
   // package came from the registry. Its build/assets output is CJS, so opt it
-  // back in for both the dev server (optimizeDeps) and static builds (rollup).
+  // back in for the dev server. Rolldown handles CJS in static builds.
   viteFinal: async (viteConfig) =>
     mergeConfig(viteConfig, {
       optimizeDeps: {
@@ -19,11 +19,6 @@ const config: StorybookConfig = {
           '@hyphen/hyphen-design-tokens/build/assets/icons/react',
           '@hyphen/hyphen-design-tokens/build/assets/images/react',
         ],
-      },
-      build: {
-        commonjsOptions: {
-          include: [/node_modules/, /design-tokens[\\/]build[\\/]/],
-        },
       },
     }),
 
