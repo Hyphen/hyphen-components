@@ -38,10 +38,13 @@ from the repo root:
 ```sh
 pnpm install          # install all workspace dependencies
 pnpm build            # build design tokens, then components
-pnpm test             # build tokens, then run all test suites
+pnpm test             # build tokens, then run component type checks and unit tests
 pnpm lint             # lint all packages
 pnpm storybook        # run the component Storybook locally
 ```
+
+The component workspace uses TypeScript 6.0 and targets ES2020, matching the
+component bundle.
 
 ### Dependency release policy
 

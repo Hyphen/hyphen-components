@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormikToggleGroupMulti, Sidebar } from '../src';
 import { Alert, AlertProps } from '../src/components/Alert/Alert';
 import { Badge, BadgeProps } from '../src/components/Badge/Badge';
 import { Box, BoxProps } from '../src/components/Box/Box';
@@ -68,6 +69,12 @@ const validComponents = (
       initialFocusRef={dialogFocusRef}
     />
     <Icon name="user" ref={iconRef} />
+    <FormikToggleGroupMulti
+      name="filters"
+      options={[{ id: 'open', value: 'open', label: 'Open' }]}
+      variant="outline"
+      gap="sm"
+    />
     <Modal
       isOpen
       onDismiss={() => undefined}
@@ -83,6 +90,7 @@ const validComponents = (
       form="settings-form"
       onFocus={(event) => event.currentTarget.checkValidity()}
     />
+    <Sidebar side="right" collapsible="icon" />
     <Table
       columns={interfaceTableColumns}
       rows={interfaceTableRows}

@@ -40,7 +40,7 @@ import {
   DropdownMenuTrigger,
 } from '../DropdownMenu/DropdownMenu';
 import { Box } from '../Box/Box';
-import { IconName } from 'src/types';
+import type { IconName } from '../../types';
 import { useIsMobile } from '../../hooks/useIsMobile/useIsMobile';
 import { ResponsiveProvider } from '../ResponsiveProvider/ResponsiveProvider';
 

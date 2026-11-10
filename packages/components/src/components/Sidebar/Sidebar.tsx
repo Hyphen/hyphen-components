@@ -12,7 +12,7 @@ import { Button } from '../Button/Button';
 import { Drawer } from '../Drawer/Drawer';
 import { useIsMobile } from '../../hooks/useIsMobile/useIsMobile';
 import { Box } from '../Box/Box';
-import { IconName } from 'src/types';
+import type { IconName } from '../../types';
 import { Icon } from '../Icon/Icon';
 import styles from './Sidebar.module.scss';
 import {
