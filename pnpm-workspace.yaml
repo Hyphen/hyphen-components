@@ -16,9 +16,26 @@ overrides:
 minimumReleaseAge: 10080
 minimumReleaseAgeStrict: true
 minimumReleaseAgeIgnoreMissingTime: false
-# Vite 6.4.6 fixes GHSA-p4f5-76q4-ffq7. Remove after 2026-11-16 11:07 UTC.
+# Vite 8.3.7 and its Rolldown release fix GHSA-p4f5-76q4-ffq7.
+# Remove after 2026-11-16 10:26 UTC.
 minimumReleaseAgeExclude:
-  - 'vite@6.4.6'
+  - 'vite@8.3.7'
+  - 'rolldown@1.2.18'
+  - '@rolldown/binding-android-arm-eabi@1.2.18'
+  - '@rolldown/binding-android-arm64@1.2.18'
+  - '@rolldown/binding-darwin-arm64@1.2.18'
+  - '@rolldown/binding-darwin-x64@1.2.18'
+  - '@rolldown/binding-freebsd-x64@1.2.18'
+  - '@rolldown/binding-linux-arm-gnueabihf@1.2.18'
+  - '@rolldown/binding-linux-arm64-gnu@1.2.18'
+  - '@rolldown/binding-linux-arm64-musl@1.2.18'
+  - '@rolldown/binding-linux-ppc64-gnu@1.2.18'
+  - '@rolldown/binding-linux-s390x-gnu@1.2.18'
+  - '@rolldown/binding-linux-x64-gnu@1.2.18'
+  - '@rolldown/binding-linux-x64-musl@1.2.18'
+  - '@rolldown/binding-openharmony-arm64@1.2.18'
+  - '@rolldown/binding-win32-arm64-msvc@1.2.18'
+  - '@rolldown/binding-win32-x64-msvc@1.2.18'
 trustLockfile: false
 ignoreScripts: true
 
