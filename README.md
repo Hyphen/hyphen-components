@@ -48,14 +48,14 @@ component bundle.
 
 ### Dependency release policy
 
-pnpm will not resolve dependency versions published within the previous 24
-hours. This policy covers direct and transitive dependencies and is verified
+pnpm will not resolve dependency versions published within the previous seven
+days. This policy covers direct and transitive dependencies and is verified
 against the lockfile in CI.
 
 If an urgent security fix cannot wait for the quarantine period, add only the
 exact package version to `minimumReleaseAgeExclude` in `pnpm-workspace.yaml`.
-Explain the exception in the pull request and remove it after the 24-hour
-window has passed. Do not add package-wide or scope-wide exclusions.
+Explain the exception in the pull request and remove it once the version is
+seven days old. Do not add package-wide or scope-wide exclusions.
 
 Changing a color, icon, or any other token is now a normal PR to this
 repo: edit the sources in `packages/design-tokens` (token JSON in
