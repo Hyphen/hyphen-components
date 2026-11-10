@@ -73,6 +73,8 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build
         run: pnpm build
+      - name: Verify CSS module class names
+        run: pnpm --filter @hyphen/hyphen-components exec node scripts/verify-css-modules.cjs
   build-storybook:
     name: Build Storybook
     runs-on: ubuntu-latest
