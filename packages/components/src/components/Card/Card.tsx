@@ -57,7 +57,7 @@ export type CardWithStaticComponents = typeof CardBaseComponent & CardStatic;
 // Actual component is wrapped in an IIFE for the export
 // To allow tree-shaking even with static properties (subcomponents in this case).
 export const Card = (() => {
-  const Card = CardBaseComponent as CardWithStaticComponents; // eslint-disable-line no-shadow
+  const Card = CardBaseComponent as CardWithStaticComponents;
 
   Card.Header = CardHeader;
   Card.Section = CardSection;

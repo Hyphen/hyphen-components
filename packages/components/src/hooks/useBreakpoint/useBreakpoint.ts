@@ -32,7 +32,6 @@ export const useBreakpoint = (): BreakpointState => {
       );
 
     setBreakpoint(activeBreakpoint || { ...defaultBreakpoint });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     windowSize.innerWidth,
     windowSize.innerHeight,

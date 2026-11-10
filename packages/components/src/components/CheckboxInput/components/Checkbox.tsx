@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { ResponsiveProp } from '../../../types';
 import { generateResponsiveClasses } from '../../../lib/generateResponsiveClasses';
 import { Box, BoxProps } from '../../Box/Box';
-import { CheckboxIcon } from './CheckboxIcon'; // eslint-disable-line import/no-cycle
+import { CheckboxIcon } from './CheckboxIcon';
 import styles from './Checkbox.module.scss';
 
 type BaseSize = 'sm' | 'md' | 'lg';

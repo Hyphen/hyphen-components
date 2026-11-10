@@ -50,7 +50,7 @@ export type DetailsWithStaticComponents = typeof DetailsBaseComponent &
 // Actual component is wrapped in an IIFE for the export
 // To allow tree-shaking even with static properties (subcomponents in this case).
 export const Details = (() => {
-  const Details = DetailsBaseComponent as DetailsWithStaticComponents; // eslint-disable-line no-shadow
+  const Details = DetailsBaseComponent as DetailsWithStaticComponents;
   Details.Summary = DetailsSummary;
   return Details;
 })();

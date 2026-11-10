@@ -82,7 +82,6 @@ const renderToastIcon = (toast: Toast) => {
       <Spinner />
     );
 
-  // eslint-disable-next-line consistent-return
   return (
     <Box justifyContent="center" height="100">
       {icon}
@@ -96,7 +95,6 @@ const renderDismissIcon = (
 ) => {
   if (!toast.canDismiss) return;
 
-  // eslint-disable-next-line consistent-return
   return (
     <Box
       as="button"
@@ -116,7 +114,6 @@ const renderDismissIcon = (
   );
 };
 
-// eslint-disable-next-line import/prefer-default-export
 export const ToastNotification: React.FC<ToastNotificationProps> = React.memo(
   ({ toast, position = 'top-center', style, children, onDismiss }) => {
     const message = (

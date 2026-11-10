@@ -179,7 +179,6 @@ export const FormikForm = () =>
       setTimeout(() => {
         setSubmitting(false);
         alert(
-          // eslint-disable-line no-alert
           `Submitted Successfully ->  ${JSON.stringify(values, null, 2)}`
         );
       }, 2000);

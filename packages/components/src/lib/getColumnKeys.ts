@@ -1,7 +1,6 @@
 import { Key } from 'react';
 import { Column, Row } from '../types';
 
-// eslint-disable-next-line import/prefer-default-export
 export const getColumnKeys = <TRow extends object = Row>(
   columns: Column<TRow>[]
 ): Key[] => {

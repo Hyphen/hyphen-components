@@ -70,7 +70,6 @@ describe('Pagination', () => {
         />
       );
       const expectedPages = ['1', '2', '3', '4', '5'];
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const pages: any[] = [];
 
       expectedPages.forEach((_page, i) => {
@@ -149,10 +148,7 @@ describe('Pagination', () => {
         />
       );
 
-      let ellipsisFound: HTMLElement[] = [];
-
-      ellipsisFound = screen.queryAllByText('...');
-      expect(ellipsisFound.length).toBe(1);
+      expect(screen.queryAllByText('...')).toHaveLength(1);
 
       rerender(
         <Pagination
@@ -165,8 +161,8 @@ describe('Pagination', () => {
         />
       );
 
-      ellipsisFound = screen.queryAllByText('...');
-      expect(ellipsisFound.length).toBe(2);
+      const ellipsisFound = screen.queryAllByText('...');
+      expect(ellipsisFound).toHaveLength(2);
 
       const buttonsFound = screen.queryAllByRole('button');
       expect(buttonsFound.length).toBe(8);

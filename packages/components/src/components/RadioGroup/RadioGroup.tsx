@@ -8,7 +8,7 @@ import React, {
 import classNames from 'classnames';
 import { Box } from '../Box/Box';
 import { InputValidationMessage } from '../InputValidationMessage/InputValidationMessage';
-import { RadioInput, RadioInputProps } from './RadioInput/RadioInput'; // eslint-disable-line import/no-cycle
+import { RadioInput, RadioInputProps } from './RadioInput/RadioInput';
 import styles from './RadioGroup.module.scss';
 
 interface RadioGroupOwnProps {

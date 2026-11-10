@@ -3,11 +3,11 @@ import { render, screen } from '@testing-library/react';
 import { FormLabel } from './FormLabel';
 
 beforeEach(() => {
-  console.error = jest.fn(); // eslint-disable-line no-console
+  console.error = jest.fn();
 });
 
 afterEach(() => {
-  (console.error as jest.Mock).mockRestore(); // eslint-disable-line no-console
+  (console.error as jest.Mock).mockRestore();
 });
 
 describe('FormLabel', () => {

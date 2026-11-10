@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { render } from '@testing-library/react';
 import { CardFooter } from './CardFooter';
