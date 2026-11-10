@@ -7,7 +7,7 @@ import {
 } from '../../ToggleGroup/ToggleGroup';
 import { Box } from '../../Box/Box';
 import { HelpText } from '../../HelpText/HelpText';
-import { BaseSpacing, ResponsiveProp } from 'src/types';
+import type { BaseSpacing, ResponsiveProp } from '../../../types';
 
 export interface FormikToggleGroupMultiProps {
   name: string;

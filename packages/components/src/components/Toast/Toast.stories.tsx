@@ -4,7 +4,7 @@ import { ToastContainer, ToastPosition, toast } from './';
 import { Button } from '../Button/Button';
 import { Table } from '../Table/Table';
 import { Box } from '../Box/Box';
-import { Cell, Column as ColumnType } from 'src/types';
+import type { Cell, Column as ColumnType } from '../../types';
 
 const meta: Meta<typeof ToastContainer> = {
   title: 'Components/Toast',

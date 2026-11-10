@@ -8,7 +8,6 @@
   "compilerOptions": {
     "allowImportingTsExtensions": false,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".", // This must be specified if "paths" is.
     "module": "esnext",
     "lib": [
       "dom",
@@ -42,14 +41,6 @@
     "forceConsistentCasingInFileNames": true,
     // `dts build` ignores this option, but it is commonly used when type-checking separately with `tsc`
     "noEmit": true,
-    // "paths": {
-    //   "@hyphen/hyphen-design/tokens": ["./node_modules/@hyphen/hyphen-design-tokens"] // This mapping is relative to "baseUrl"
-    // },
-    // Downleveling is TypeScript’s term for transpiling to an older version of JavaScript.
-    // This flag is to enable support for a more accurate implementation
-    // of how modern JavaScript iterates through new concepts in older JavaScript runtimes.
-    "downlevelIteration": true,
-    "target": "es5",
     "types": [
       "@testing-library/jest-dom"
     ],

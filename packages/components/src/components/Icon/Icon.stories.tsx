@@ -1,6 +1,6 @@
 import { Box } from '../Box/Box';
 import { ICON_NAMES } from '@hyphen/hyphen-design-tokens/build/assets/icons';
-import { IconName } from 'src/types';
+import type { IconName } from '../../types';
 import { Icon } from './Icon';
 import type { Meta } from '@storybook/react-vite';
 import React from 'react';
