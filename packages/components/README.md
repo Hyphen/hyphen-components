@@ -33,16 +33,18 @@ import '@hyphen/hyphen-components/dist/css/reset.css' // A Basic CSS Reset -- OP
 
 ### 3. Usage
 
+For React 18 and newer, mount your app with `createRoot`.
+
 ```jsx
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Box } from '@hyphen/hyphen-components';
 
 function App() {
   return <Box>Hello World</Box>;
 }
 
-ReactDOM.render(<App />, document.querySelector('#app'));
+createRoot(document.getElementById('app')).render(<App />);
 ```
 
 ## Documentation

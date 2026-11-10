@@ -25,7 +25,7 @@ const meta: Meta<typeof Drawer> = {
 export default meta;
 type Story = StoryObj<typeof Drawer>;
 
-const drawerContent: JSX.Element[] = [];
+const drawerContent: React.ReactElement[] = [];
 for (let i = 0; i < 50; i++) {
   drawerContent.push(<Box key={i}>Drawer content&hellip;</Box>);
 }

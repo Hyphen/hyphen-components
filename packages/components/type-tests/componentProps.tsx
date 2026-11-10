@@ -25,6 +25,8 @@ export type BoxExcludesMessage = Assert<ExcludesKey<BoxProps, 'message'>>;
 const buttonRef = React.createRef<HTMLButtonElement>();
 const detailsRef = React.createRef<HTMLDetailsElement>();
 const drawerRef = React.createRef<HTMLDivElement>();
+const dialogContainerRef = React.createRef<HTMLDivElement>();
+const dialogFocusRef = React.createRef<HTMLDivElement>();
 const iconRef = React.createRef<SVGSVGElement>();
 
 interface InterfaceTableRow {
@@ -58,9 +60,20 @@ const validComponents = (
       onChange={() => undefined}
     />
     <Details isOpen ref={detailsRef} />
-    <Drawer isOpen ariaLabel="Drawer" ref={drawerRef} />
+    <Drawer
+      isOpen
+      ariaLabel="Drawer"
+      ref={drawerRef}
+      containerRef={dialogContainerRef}
+      initialFocusRef={dialogFocusRef}
+    />
     <Icon name="user" ref={iconRef} />
-    <Modal isOpen onDismiss={() => undefined} />
+    <Modal
+      isOpen
+      onDismiss={() => undefined}
+      containerRef={dialogContainerRef}
+      initialFocusRef={dialogFocusRef}
+    />
     <SelectInputNative
       id="flavor"
       label="Flavor"

@@ -17,7 +17,7 @@ export const AnchoredConversation = () => {
   const [reply, setReply] = useState('');
   const [older, setOlder] = useState(false);
   const [checking, setChecking] = useState(false);
-  const timer = useRef<ReturnType<typeof setInterval>>();
+  const timer = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
   useEffect(() => () => clearInterval(timer.current), []);
   const send = () => {
     clearInterval(timer.current);

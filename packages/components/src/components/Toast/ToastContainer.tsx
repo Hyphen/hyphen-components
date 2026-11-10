@@ -47,7 +47,7 @@ export interface ToastContainerProps {
    * This can be used to render custom toasts, although we recommend using the standard version,
    * unless absolutely necessary.
    */
-  children?: (t: Toast) => JSX.Element;
+  children?: (t: Toast) => React.ReactElement;
   /**
    * Style object for the toast container if needed.
    */
@@ -85,7 +85,7 @@ const DEFAULT_OFFSET = 16;
 
 const renderNotification = (
   currentToast: Toast,
-  children: ((t: Toast) => JSX.Element) | undefined,
+  children: ((t: Toast) => React.ReactElement) | undefined,
   containerPosition: ToastContainerProps['position']
 ) => {
   const toastPosition = currentToast.position || containerPosition;
