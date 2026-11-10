@@ -1,10 +1,8 @@
-import { readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
 import postcss from 'postcss';
 import postcssModules from 'postcss-modules';
-import { compileString } from 'sass';
+import { compile } from 'sass';
 import { defineConfig, type TsdownPlugin, type UserConfig } from 'tsdown';
 
 const require = createRequire(import.meta.url);
@@ -20,10 +18,8 @@ const cssModulesPlugin: TsdownPlugin = {
         return { code: '', moduleType: 'js' };
       }
 
-      const source = await readFile(id, 'utf8');
-      const { css } = compileString(source, {
+      const { css } = compile(id, {
         loadPaths: [path.dirname(id), path.resolve('node_modules')],
-        url: pathToFileURL(id),
       });
 
       let exportedClasses: Record<string, string> = {};
