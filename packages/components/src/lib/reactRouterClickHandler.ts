@@ -13,7 +13,6 @@ export const isModifiedEvent = (
  *    https://github.com/ReactTraining/react-router/issues/7727
  *    https://github.com/ReactTraining/react-router/issues/7761
  * */
-// eslint-disable-next-line import/prefer-default-export
 export const handleReactRouterClick = (
   event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
   onClick:

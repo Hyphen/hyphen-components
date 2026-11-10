@@ -5,7 +5,6 @@ import { toast } from './toast';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useToasts = (toastOptions?: ExtendedToastOptions) => {
-  // eslint-disable-line import/prefer-default-export
   const { toasts, pausedAt } = useToastStore(toastOptions);
 
   useEffect(() => {

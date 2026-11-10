@@ -116,7 +116,6 @@ const renderDismissIcon = (
   );
 };
 
-// eslint-disable-next-line import/prefer-default-export
 export const ToastNotification: React.FC<ToastNotificationProps> = React.memo(
   ({ toast, position = 'top-center', style, children, onDismiss }) => {
     const message = (

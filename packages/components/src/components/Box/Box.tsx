@@ -567,9 +567,7 @@ const BoxBaseComponent = <T extends BoxElement = 'div'>(
         key: BreakpointSizeWithBase
       ): string => {
         const index = breakpoints.findIndex((breakpoint) => breakpoint === key);
-        let value = '';
-
-        value = responsiveObj[key];
+        const value = responsiveObj[key];
 
         if (!value)
           return findMatchingBreakpoint(responsiveObj, breakpoints[index + 1]);

@@ -68,7 +68,6 @@ export interface TableHeaderCellProps<TRow extends object = Row> {
   width?: number;
 }
 
-// eslint-disable-line import/prefer-default-export
 export const TableHeaderCell = <TRow extends object = Row,>({
   column,
   align = 'left',

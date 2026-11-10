@@ -99,4 +99,4 @@ toast.async = function <T>(
   return promise;
 };
 
-export { toast }; // eslint-disable-line import/prefer-default-export
+export { toast };

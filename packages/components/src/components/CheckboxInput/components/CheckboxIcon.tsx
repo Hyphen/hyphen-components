@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, BoxProps } from '../../Box/Box';
 import { Icon } from '../../Icon/Icon';
 import { FontColor } from '../../../types';
-import { CheckboxProps } from './Checkbox'; // eslint-disable-line import/no-cycle
+import { CheckboxProps } from './Checkbox';
 
 export interface CheckboxIconProps extends BoxProps {
   /**
@@ -43,7 +43,6 @@ export const CheckboxIcon: React.FC<CheckboxIconProps> = ({
     | 'checkbox-btn-indeterminate' = 'checkbox-btn';
 
   if (isChecked) name = 'checkbox-btn-checked';
-  else name = 'checkbox-btn';
 
   if (isIndeterminate) name = 'checkbox-btn-indeterminate';
 

@@ -7,7 +7,7 @@ export const HEADING_LEVELS: HEADING_LEVELS_TYPE[] = [
   'h4',
   'h5',
   'h6',
-]; // eslint-disable-line import/prefer-default-export
+];
 
 export const HEADING_DEFAULT_SIZE_MAP = {
   h1: '3xl',

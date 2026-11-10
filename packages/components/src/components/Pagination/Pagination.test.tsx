@@ -149,10 +149,7 @@ describe('Pagination', () => {
         />
       );
 
-      let ellipsisFound: HTMLElement[] = [];
-
-      ellipsisFound = screen.queryAllByText('...');
-      expect(ellipsisFound.length).toBe(1);
+      expect(screen.queryAllByText('...')).toHaveLength(1);
 
       rerender(
         <Pagination
@@ -165,8 +162,8 @@ describe('Pagination', () => {
         />
       );
 
-      ellipsisFound = screen.queryAllByText('...');
-      expect(ellipsisFound.length).toBe(2);
+      const ellipsisFound = screen.queryAllByText('...');
+      expect(ellipsisFound).toHaveLength(2);
 
       const buttonsFound = screen.queryAllByRole('button');
       expect(buttonsFound.length).toBe(8);

@@ -10,8 +10,8 @@ export const generatePages = (
 ): Page[] => {
   const pageRange = Math.min(pageTotal, Math.max(1, numberOfPagesDisplayed));
   const pages: Page[] = [];
-  let startingPage = 1;
-  let endingPage = pageRange;
+  let startingPage: number;
+  let endingPage: number;
 
   if (activePage + Math.floor(pageRange / 2) >= pageTotal) {
     startingPage = Math.max(1, pageTotal - pageRange + 1);

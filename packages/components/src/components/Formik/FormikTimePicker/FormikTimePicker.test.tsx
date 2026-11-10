@@ -152,13 +152,12 @@ describe('FormikTimePicker', () => {
   describe('Callback Handling', () => {
     describe('onChange', () => {
       test("Custom onChange event fires callback function, overwriting Formik's onChange", async () => {
-        let value: string | undefined;
         const mockedHandleChange = jest.fn((event) => {
           event.persist();
         });
 
         const { getByLabelText } = render(
-          renderForm(value, { onChange: mockedHandleChange })
+          renderForm(undefined, { onChange: mockedHandleChange })
         );
         const selectInput = getByLabelText(testLabelName);
         fireEvent.change(selectInput, { target: { value: 'hello' } });
