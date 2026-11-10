@@ -76,7 +76,9 @@ const MessageScrollerRoot = ({
   const following = useRef(false);
   const initialized = useRef(false);
   const history = useRef<{ ids: string[]; anchor?: string }>({ ids: [] });
-  const visibleRef = useRef<{ id: string; top: number; scrollTop: number }>();
+  const visibleRef = useRef<
+    { id: string; top: number; scrollTop: number } | undefined
+  >(undefined);
   const [scrollable, setScrollable] = useState({ start: false, end: false });
   const refresh = useRef<() => void>(() => undefined);
 

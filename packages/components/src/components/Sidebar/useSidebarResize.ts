@@ -28,7 +28,7 @@ export function useSidebarResize({
   side: 'left' | 'right';
   isMobile: boolean;
   expanded: boolean;
-  rootRef: React.RefObject<HTMLDivElement>;
+  rootRef: React.RefObject<HTMLDivElement | null>;
 }) {
   const initialWidth = defaultWidth ?? (side === 'left' ? 256 : 384);
   const [preferredWidth, setPreferredWidth] = useState(initialWidth);

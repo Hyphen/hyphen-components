@@ -38,7 +38,7 @@ interface ModalOwnProps {
    * By default, Modals are inserted in the document.body, but if need be they can
    * be scoped as necessary.
    */
-  containerRef?: React.RefObject<Node>;
+  containerRef?: RefObject<Node | null>;
   /**
    * At mobile viewport widths, the modal will take up the fullscreen
    */
@@ -53,7 +53,7 @@ interface ModalOwnProps {
    *
    * @see Docs https://reach.tech/dialog#dialog-initialfocusref
    */
-  initialFocusRef?: RefObject<HTMLDivElement>;
+  initialFocusRef?: RefObject<HTMLDivElement | null>;
   /**
    * Whether the modal is visible or not
    */

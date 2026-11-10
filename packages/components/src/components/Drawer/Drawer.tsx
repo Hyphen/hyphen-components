@@ -173,7 +173,7 @@ export interface DrawerProps {
    * By default, drawers are inserted in the document.body, but if need be they can
    * be scoped as necessary.
    */
-  containerRef?: React.RefObject<Node>;
+  containerRef?: RefObject<Node | null>;
   /**
    * By default, focus is trapped within the drawer.
    * If true, focus will not be trapped within the contents of the drawer.
@@ -195,7 +195,7 @@ export interface DrawerProps {
    *
    * @see Docs https://reach.tech/dialog#dialog-initialfocusref
    */
-  initialFocusRef?: RefObject<HTMLDivElement>;
+  initialFocusRef?: RefObject<HTMLDivElement | null>;
   /**
    * Which edge of the viewport should the drawer appear from
    */

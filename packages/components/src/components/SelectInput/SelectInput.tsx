@@ -194,7 +194,7 @@ export type SyncSelectInputProps = SelectInputBaseProps & {
 
 export type SelectInputProps = AsyncSelectInputProps | SyncSelectInputProps;
 
-export function SelectInput(props: SelectInputProps): JSX.Element {
+export function SelectInput(props: SelectInputProps): React.ReactElement {
   const {
     id,
     label,

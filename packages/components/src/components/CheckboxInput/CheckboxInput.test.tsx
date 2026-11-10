@@ -4,10 +4,11 @@ import { CheckboxInput } from './CheckboxInput';
 import { FormLabel } from '../FormLabel/FormLabel';
 import { CheckboxSize } from './components/Checkbox';
 jest.mock('../FormLabel/FormLabel');
+const mockedFormLabel = jest.mocked(FormLabel);
 
 describe('CheckboxInput', () => {
   beforeEach(() => {
-    (FormLabel as jest.Mock).mockReturnValue(<div />);
+    mockedFormLabel.mockReturnValue(<div />);
   });
 
   afterEach(() => {
@@ -41,19 +42,16 @@ describe('CheckboxInput', () => {
       />
     );
     expect(getByLabelText('test checkbox')).toBeDefined();
-    expect(FormLabel).toHaveBeenCalledTimes(1);
-    expect(FormLabel).toHaveBeenCalledWith(
-      {
-        inputId: 'testCheckbox',
-        helpText: 'i am help text',
-        children: 'test checkbox',
-        className: 'm-top-xs m-right-0 m-bottom-0 m-left-0',
-        isDisabled: false,
-        isFieldRequired: false,
-        requiredIndicator: ' *',
-      },
-      {}
-    );
+    expect(mockedFormLabel).toHaveBeenCalledTimes(1);
+    expect(mockedFormLabel.mock.calls[0][0]).toEqual({
+      inputId: 'testCheckbox',
+      helpText: 'i am help text',
+      children: 'test checkbox',
+      className: 'm-top-xs m-right-0 m-bottom-0 m-left-0',
+      isDisabled: false,
+      isFieldRequired: false,
+      requiredIndicator: ' *',
+    });
   });
 
   test('it calls FormLabel with the correct props when checkbox is required', () => {
@@ -67,19 +65,16 @@ describe('CheckboxInput', () => {
       />
     );
     expect(getByLabelText('test checkbox')).toBeDefined();
-    expect(FormLabel).toHaveBeenCalledTimes(1);
-    expect(FormLabel).toHaveBeenCalledWith(
-      {
-        inputId: 'testCheckbox',
-        helpText: undefined,
-        children: 'test checkbox',
-        className: 'm-top-xs m-right-0 m-bottom-0 m-left-0',
-        isDisabled: false,
-        isFieldRequired: true,
-        requiredIndicator: ' *',
-      },
-      {}
-    );
+    expect(mockedFormLabel).toHaveBeenCalledTimes(1);
+    expect(mockedFormLabel.mock.calls[0][0]).toEqual({
+      inputId: 'testCheckbox',
+      helpText: undefined,
+      children: 'test checkbox',
+      className: 'm-top-xs m-right-0 m-bottom-0 m-left-0',
+      isDisabled: false,
+      isFieldRequired: true,
+      requiredIndicator: ' *',
+    });
   });
 
   test('input is checked when isChecked is true', () => {
@@ -183,19 +178,16 @@ describe('CheckboxInput', () => {
           error="This is the error message"
         />
       );
-      expect(FormLabel).toHaveBeenCalledTimes(1);
-      expect(FormLabel).toHaveBeenCalledWith(
-        {
-          inputId: 'testCheckbox',
-          helpText: undefined,
-          children: 'test checkbox',
-          className: 'm-top-xs m-right-0 m-bottom-0 m-left-0',
-          isDisabled: false,
-          isFieldRequired: false,
-          requiredIndicator: ' *',
-        },
-        {}
-      );
+      expect(mockedFormLabel).toHaveBeenCalledTimes(1);
+      expect(mockedFormLabel.mock.calls[0][0]).toEqual({
+        inputId: 'testCheckbox',
+        helpText: undefined,
+        children: 'test checkbox',
+        className: 'm-top-xs m-right-0 m-bottom-0 m-left-0',
+        isDisabled: false,
+        isFieldRequired: false,
+        requiredIndicator: ' *',
+      });
     });
 
     test('calls FormLabel with the correct properties when error is a true', () => {
@@ -208,19 +200,16 @@ describe('CheckboxInput', () => {
           error
         />
       );
-      expect(FormLabel).toHaveBeenCalledTimes(1);
-      expect(FormLabel).toHaveBeenCalledWith(
-        {
-          inputId: 'testCheckbox',
-          helpText: undefined,
-          children: 'test checkbox',
-          className: 'm-top-xs m-right-0 m-bottom-0 m-left-0',
-          isDisabled: false,
-          isFieldRequired: false,
-          requiredIndicator: ' *',
-        },
-        {}
-      );
+      expect(mockedFormLabel).toHaveBeenCalledTimes(1);
+      expect(mockedFormLabel.mock.calls[0][0]).toEqual({
+        inputId: 'testCheckbox',
+        helpText: undefined,
+        children: 'test checkbox',
+        className: 'm-top-xs m-right-0 m-bottom-0 m-left-0',
+        isDisabled: false,
+        isFieldRequired: false,
+        requiredIndicator: ' *',
+      });
     });
   });
 
@@ -234,19 +223,16 @@ describe('CheckboxInput', () => {
         isDisabled
       />
     );
-    expect(FormLabel).toHaveBeenCalledTimes(1);
-    expect(FormLabel).toHaveBeenCalledWith(
-      {
-        inputId: 'testCheckbox',
-        helpText: undefined,
-        children: 'test checkbox',
-        className: 'm-top-xs m-right-0 m-bottom-0 m-left-0',
-        isDisabled: true,
-        isFieldRequired: false,
-        requiredIndicator: ' *',
-      },
-      {}
-    );
+    expect(mockedFormLabel).toHaveBeenCalledTimes(1);
+    expect(mockedFormLabel.mock.calls[0][0]).toEqual({
+      inputId: 'testCheckbox',
+      helpText: undefined,
+      children: 'test checkbox',
+      className: 'm-top-xs m-right-0 m-bottom-0 m-left-0',
+      isDisabled: true,
+      isFieldRequired: false,
+      requiredIndicator: ' *',
+    });
   });
 
   describe('Size', () => {
@@ -260,19 +246,16 @@ describe('CheckboxInput', () => {
           size="sm"
         />
       );
-      expect(FormLabel).toHaveBeenCalledTimes(1);
-      expect(FormLabel).toHaveBeenCalledWith(
-        {
-          inputId: 'testCheckbox',
-          helpText: undefined,
-          children: 'test checkbox',
-          className: 'm-top-2xs m-right-0 m-bottom-0 m-left-0',
-          isDisabled: false,
-          isFieldRequired: false,
-          requiredIndicator: ' *',
-        },
-        {}
-      );
+      expect(mockedFormLabel).toHaveBeenCalledTimes(1);
+      expect(mockedFormLabel.mock.calls[0][0]).toEqual({
+        inputId: 'testCheckbox',
+        helpText: undefined,
+        children: 'test checkbox',
+        className: 'm-top-2xs m-right-0 m-bottom-0 m-left-0',
+        isDisabled: false,
+        isFieldRequired: false,
+        requiredIndicator: ' *',
+      });
     });
     test('calls FormLabel with the correct properties when size is large', () => {
       render(
@@ -284,19 +267,16 @@ describe('CheckboxInput', () => {
           size="lg"
         />
       );
-      expect(FormLabel).toHaveBeenCalledTimes(1);
-      expect(FormLabel).toHaveBeenCalledWith(
-        {
-          inputId: 'testCheckbox',
-          helpText: undefined,
-          children: 'test checkbox',
-          className: 'm-top-sm m-right-0 m-bottom-0 m-left-0',
-          isDisabled: false,
-          isFieldRequired: false,
-          requiredIndicator: ' *',
-        },
-        {}
-      );
+      expect(mockedFormLabel).toHaveBeenCalledTimes(1);
+      expect(mockedFormLabel.mock.calls[0][0]).toEqual({
+        inputId: 'testCheckbox',
+        helpText: undefined,
+        children: 'test checkbox',
+        className: 'm-top-sm m-right-0 m-bottom-0 m-left-0',
+        isDisabled: false,
+        isFieldRequired: false,
+        requiredIndicator: ' *',
+      });
     });
 
     const mockedHandleChange = jest.fn();
@@ -401,7 +381,7 @@ describe('CheckboxInput', () => {
       );
       const checkbox = getByLabelText('test checkbox');
       fireEvent.click(checkbox);
-      expect(mockedHandleChange).toBeCalledTimes(1);
+      expect(mockedHandleChange).toHaveBeenCalledTimes(1);
       expect(value).toBe(false);
     });
   });

@@ -488,7 +488,7 @@ describe('Modal', () => {
               isOpen
               onDismiss={() => {}}
               ariaLabel="Custom Container Modal"
-              containerRef={containerRef as React.RefObject<Node>}
+              containerRef={containerRef}
             >
               Modal content
             </Modal>
