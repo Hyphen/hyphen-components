@@ -37,9 +37,11 @@ async function createLogoComponents() {
     const logoName = Object.keys(logos)[i];
     const componentName = pascalCase(logoName);
 
-    const reactComponent = await transform(logos[logoName], {
-      plugins: ['@svgr/plugin-jsx'],
-    });
+    const reactComponent = await transform(
+      logos[logoName],
+      { plugins: ['@svgr/plugin-jsx'] },
+      { componentName },
+    );
 
     try {
       fs.readdirSync(buildLogosDir);
