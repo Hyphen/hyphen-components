@@ -25,9 +25,14 @@ describe('Icon', () => {
   test('forwards its ref to the svg element', () => {
     const ref = React.createRef<SVGSVGElement>();
 
-    render(<Icon name="user" ref={ref} />);
+    const { unmount } = render(<Icon name="user" ref={ref} />);
 
-    expect(ref.current).toBe(screen.getByTestId('icon-testid--user'));
+    const icon = screen.getByTestId('icon-testid--user');
+    expect(icon).toBeInstanceOf(SVGSVGElement);
+    expect(ref.current).toBe(icon);
+
+    unmount();
+    expect(ref.current).toBeNull();
   });
 
   test('fallback', () => {

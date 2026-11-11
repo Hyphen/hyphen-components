@@ -1,4 +1,4 @@
-const svgr = require('@svgr/core').default;
+const { transform } = require('@svgr/core');
 const fs = require('fs');
 const path = require('path');
 const babel = require('@babel/core');
@@ -37,9 +37,9 @@ async function createIconComponents() {
     const iconName = Object.keys(icons)[i];
     const componentName = pascalCase(iconName);
 
-    const reactComponent = await svgr(
+    const reactComponent = await transform(
       icons[iconName],
-      { icon: true, ref: true },
+      { icon: true, ref: true, plugins: ['@svgr/plugin-jsx'] },
       { componentName },
     );
 

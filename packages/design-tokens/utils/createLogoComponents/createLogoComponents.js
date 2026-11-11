@@ -1,4 +1,4 @@
-const svgr = require('@svgr/core').default;
+const { transform } = require('@svgr/core');
 const fs = require('fs');
 const path = require('path');
 const babel = require('@babel/core');
@@ -37,7 +37,9 @@ async function createLogoComponents() {
     const logoName = Object.keys(logos)[i];
     const componentName = pascalCase(logoName);
 
-    const reactComponent = await svgr(logos[logoName], { componentName });
+    const reactComponent = await transform(logos[logoName], {
+      plugins: ['@svgr/plugin-jsx'],
+    });
 
     try {
       fs.readdirSync(buildLogosDir);

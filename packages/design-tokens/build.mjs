@@ -261,12 +261,12 @@ const styleDictionary = new StyleDictionary({
 await styleDictionary.buildAllPlatforms();
 
 // Create React components based on SVG icons.
-createIconComponents();
+await createIconComponents();
 console.log("\n==============================================");
 console.log("\nReact icons created!");
 
 // Create React logos based on SVG logos.
-createLogoComponents();
+await createLogoComponents();
 console.log("\n==============================================");
 console.log("\nReact logos created!");
 
